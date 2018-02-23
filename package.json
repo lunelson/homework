@@ -1,0 +1,46 @@
+{
+  "name": "@lunelson/homework",
+  "version": "0.8.0",
+  "description": "A utility-first Sass CSS framework",
+  "keywords": [],
+  "homepage": "https://github.com/lunelson/homework#readme",
+  "bugs": {
+    "url": "https://github.com/lunelson/homework/issues"
+  },
+  "license": "MIT",
+  "author": "Lu Nelson",
+  "main": "_index.scss",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunelson/homework.git"
+  },
+  "scripts": {
+    "start": "gulp",
+    "test": "gulp test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@lunelson/sass-calc": "^0.9.1",
+    "@lunelson/sass-m": "^0.9.0",
+    "@lunelson/sass-maps-plus": "^0.9.0",
+    "@lunelson/sass-throw": "^1.0.1",
+    "@lunelson/sass-u": "^0.9.1",
+    "gulp": "^3.9.1",
+    "gulp-diff": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  },
+  "peerDependencies": {
+    "@lunelson/sass-calc": "^0.9.1",
+    "@lunelson/sass-m": "^0.9.0",
+    "@lunelson/sass-maps-plus": "^0.9.0",
+    "@lunelson/sass-throw": "^1.0.1",
+    "@lunelson/sass-u": "^0.9.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
