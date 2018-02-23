@@ -1,0 +1,83 @@
+/*
+   _     _            _
+  | |   | |          | |
+  | |__ | | ___   ___| | __
+  | '_ \| |/ _ \ / __| |/ /
+  | |_) | | (_) | (__|   <
+  |_.__/|_|\___/ \___|_|\_\
+
+  [html5]
+
+  article
+  aside
+  details
+  dialog
+  figcaption
+  figure
+  footer
+  header
+  main
+  menu
+  menuitem
+  nav
+  section
+  summary
+
+  [html4]
+
+  address
+  blockquote
+  dd
+  div
+  dl
+  dt
+  h1
+  h2
+  h3
+  h4
+  h5
+  h6
+  hgroup
+  hr
+  li
+  ol
+  p
+  pre
+  ul
+
+*/
+
+// html5, html4
+article, aside, details, dialog, figcaption, figure, footer, header, main, menu, menuitem, nav, section, summary,
+address, blockquote, dd, div, dl, dt, h1, h2, h3, h4, h5, h6, hgroup, hr, li, ol, p, pre, ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  height: 0; // OK, for border-box sizing
+  overflow: visible; // Show the overflow in Edge and IE.
+  border: none;
+  border-top: 1px solid #cccccc;
+}
+
+ol, ul {
+  list-style: none; // remove bullet / numbering style
+}
+
+blockquote, q {
+  quotes: none; // remove quotes
+  &:before, &:after { // remove pseudo element styles
+    content: '';
+    content: none;
+  }
+}
+
+pre {
+  // Don't allow content to break outside
+  overflow: auto;
+  // We have @viewport set which causes scrollbars to overlap content in IE11 and Edge, so
+  // we force a non-overlapping, non-auto-hiding scrollbar to counteract.
+  -ms-overflow-style: scrollbar;
+}

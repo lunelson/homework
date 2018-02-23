@@ -1,0 +1,38 @@
+//
+// stack setup
+//
+
+#{base-class('stack')} {
+  padding-top: 0.1px;
+  padding-bottom: 0.1px;
+  // &>{ #{base-class('sans')} { margin-left: calc(1.3px - (1.3/16)*1em); } }
+}
+
+
+@each $y in map-keys(map-get($base, 'inner-y-mults')) {
+
+  #{mod-class('stack', $y, (m, md, med))} {
+
+    @include mm2-for(inner-y, inner-y-mults $y) { @include stack($y); }
+
+    @each $f, $font in $fonts {
+
+      @each $s in map-keys(__get($base, 'copy-sizes', $f)) {
+
+        @include mm2-for(inner-y, inner-y-mults $y, copy-sizes $f $s) {
+
+          @include stack($y, false) {
+
+            $size: __get(medium-var('copy-sizes'), $f, $s);
+            $line: nth($size, 2) / nth($size, 1);
+            #{mod-class($f, $s)} {
+              @at-root #{insert-parents(null, '>')} {
+                @include adjacent-to('*') { margin-top: trim-top-margin($curr-inner-y, $line, $f); }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

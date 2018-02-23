@@ -1,0 +1,39 @@
+// globals
+
+$fonts: () !default;
+
+$curr-line: 1; // key | value
+$curr-font: null; // key
+
+// for the trim mixin
+$trim-parent: 'stack' !default;
+$trim-except: 'block' !default;
+$curr-stack: null !default; // also declared in sass-oo
+
+$done-t-init: false;
+$done-t-setup: false;
+
+//
+// default for any font
+//
+
+$font-default: (
+  family: (arial, sans-serif),
+  size-adjust: 1,
+  spacing-max: 0.5,
+  spacing-end: 50,
+  trim-top: 0,
+  trim-bottom: 0,
+  line-min: 1.2,
+  line-div: 2
+);
+
+//
+// default families for $fonts
+//
+
+$fonts-defaults: (
+  base: ( family: (arial, sans-serif) ),
+  serif: ( family: (georgia, serif) ),
+  mono: ( family: (monaco, consolas, "lucida console", monospace) )
+);

@@ -1,0 +1,226 @@
+/*
+                                    _
+                                   | |
+     __ _  ___ _ __   ___ _ __ __ _| |
+    / _` |/ _ \ '_ \ / _ \ '__/ _` | |
+   | (_| |  __/ | | |  __/ | | (_| | |
+    \__, |\___|_| |_|\___|_|  \__,_|_|
+     __/ |
+    |___/
+
+    strong, em, fs-, fw-,
+    hold, stop, clip, hide
+    ratio, aspect
+*/
+
+
+// style control
+
+.strong, strong { font-weight: bold; }
+.em, em { font-style: italic; }
+
+//
+// display control
+//
+
+.block { display: block; width: 100%; }
+.iblock { display: inline-block; }
+.inline { display: inline; }
+
+// 2017 clearfix https://css-tricks.com/snippets/css/clear-fix/
+// very latest clearfix http://cssmojo.com/the-very-latest-clearfix-reloaded/
+// flow-root https://helloanselm.com/2017/flow-root-supports/
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+// @supports (display: flow-root) {
+//   .clearfix {
+//     display: flow-root;
+//     &::after { content: none; }
+//   }
+// }
+
+// DISABLE POINTER EVENTS ON SCROLL
+.is-scrolling,
+.is-scrolling * {
+  pointer-events: none !important;
+}
+
+//
+// hiding content
+// http://a11yproject.com/posts/how-to-hide-content/
+//
+
+// http://www.456bereastreet.com/archive/200711/screen_readers_sometimes_ignore_displaynone/
+.really-hidden, .hide {
+  display:none;
+  visibility:hidden;
+}
+
+// https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html
+.visually-hidden, .vhide {
+  position: absolute !important;
+  clip: rect(0 0 0 0); // IE6, IE7
+  clip: rect(0, 0, 0, 0);
+  flex: 0 0 0%;
+  // clip: rect(1px 1px 1px 1px); // IE6, IE7
+  // clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+body:hover .visually-hidden a,
+body:hover .visually-hidden input,
+body:hover .visually-hidden button { display: none !important; }
+
+// H5BP 2014 Image Replacement method
+// from https://css-tricks.com/the-image-replacement-museum/
+.replaced {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+//
+// OO utility classes
+//
+
+// .flex { @include flex; }
+#{base-class('flex')} { @include flex; }
+.flex--end { justify-content: flex-end; }
+.flex--start { justify-content: flex-start; }
+.flex--between { justify-content: space-between; }
+.flex--baseline { align-items: baseline; }
+.flex--center { align-items: center; }
+
+.flex-y { @include flex-y; }
+
+// proportional flex classes
+@for $n from 1 through 20 {
+  .fx#{$n} {
+    flex-grow: $n !important;
+    flex-shrink: $n !important;
+  }
+}
+
+/*
+  flex-by-
+
+ */
+
+.inset { padding: 1.5rem 1.25rem !important; }
+.inset--s { padding: 1rem 0.75rem !important; }
+
+#{base-class('hold')},
+#{base-class('stop')},
+#{base-class('shim')},
+#{base-class('clip')} { position: relative; }
+
+#{base-class('stop')},
+#{base-class('shim')} { padding: 0.1px; }
+
+#{base-class('clip')} { overflow: hidden !important; }
+
+#{base-class('hide')} { @include hide; }
+#{base-class('show')} { @include show; }
+
+//
+// clip
+//
+
+.clip--circle { border-radius: 50%; }
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+//
+// hold
+//
+
+.hold--abs, .hold--center, .hold--ratio {
+  z-index: 0; // make sure container can clip
+  & > * {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    &:not(img) {
+      height: 100%;
+    }
+  }
+}
+
+.hold--ratio {
+  height: 0;
+  overflow: hidden;
+  padding: 0 0 100%;
+}
+
+.hold--center {
+  & > * {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.hold--fit {
+  & > * {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+#{base-class('aspect')} {
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+  }
+  & > * {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    object-fit: cover;
+    &:not(.fit) {
+      height: 100%;
+    }
+  }
+}
+
+.aspect--std:before { padding-top: percentage(9/16); }
+.aspect--hero:before { padding-top: percentage(9/16); }
+.aspect--mega:before { padding-top: percentage(9/16); }
+@include m(m,l) {
+  .aspect--hero:before { padding-top: percentage(1/2); }
+  .aspect--mega:before { padding-top: percentage(1/2); }
+}
+@include m(l) {
+  .aspect--mega:before { padding-top: percentage(1/3); }
+}
+// .aspect--4-1:before { padding-top: percentage(1/4); }
+// .aspect--5-1:before { padding-top: percentage(1/5); }
+// .aspect--6-1:before { padding-top: percentage(1/6); }
+// .aspect--7-1:before { padding-top: percentage(1/7); }
+
+
+
+[data-bg-size='cover'] { background-size: cover; }
+[data-bg-size='contain'] { background-size: contain; }
+
+@each $ratio, $class in aspect-classes('hold') { #{$class} { padding-bottom: 1/$ratio * 100%; } }

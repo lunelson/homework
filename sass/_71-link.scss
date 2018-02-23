@@ -1,0 +1,36 @@
+//  _ _       _
+// | (_)     | |
+// | |_ _ __ | | __
+// | | | '_ \| |/ /
+// | | | | | |   <
+// |_|_|_| |_|_|\_\
+
+
+// TODO: add focus styles, supporess outlines http://a11yproject.com/posts/never-remove-css-outlines/
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: none;
+  &.block { display: block; }
+  &.inline { display: inline-block; }
+  &.passive, & .passive { color: color(nevada); }
+  &[disabled] { pointer-events: none; color: color(pumice) !important; }
+
+  .flow & { border-bottom: 1px solid color(hwr); }
+
+  //
+  // theme related
+  //
+  // #middle {
+
+  //   .flow & { border-bottom: 1px solid color(hwr); }
+  //   &:visited { color: color(text-gray); }
+  //   &.target, & .target { color: color(hwr); }
+  //   &:hover, &:active {
+  //     &.target, & .target { color: color(hwr-hover); }
+  //   }
+  // }
+}
+
+

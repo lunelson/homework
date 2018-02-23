@@ -1,0 +1,54 @@
+//
+// stack-setup
+//
+
+
+@mixin stack-setup(){
+
+  #{_base-class('stack')} { @include stack(null); }
+
+  @include mm-for('stack') {
+    $mults: medium-var('inner-y-mults');
+
+    @each $m, $mult in map-merge((base: 1), $mults) {
+      $inner-y: $mult * medium-var('inner-y');
+
+      #{_mult-class('stack', $m)},
+      #{_mult-class('fstack', $m)} {
+        margin-left: $inner-y / -2;
+        margin-right: $inner-y / -2;
+        width: calc(100% + #{$inner-y});
+        & > * {
+          padding-left: $inner-y / 2;
+          padding-right: $inner-y / 2;
+        }
+      }
+    }
+  }
+  $done-stack-setup: true !global;
+}
+
+//      _             _
+// //     | |           | |
+// //  ___| |_ __ _  ___| | __
+// // / __| __/ _` |/ __| |/ /
+// // \__ \ || (_| | (__|   <
+// // |___/\__\__,_|\___|_|\_\
+
+// @mixin class--stack($ns: '') {
+//   $ns: if(str-length($ns)>0, '#{$ns}-', '');
+
+//   #{base-class('#{$ns}stack')} {
+//     padding-top: 0.1px;
+//     padding-bottom: 0.1px;
+//     // & > * { margin-top: 0; margin-bottom: 0; }
+//   }
+
+//   @include mm-for('margin-y') {
+//     $mults: medium-var('mults-y') or medium-var('mults');
+
+//     @each $m, $mult in map-merge((base: 1), $mults) {
+//       #{mult-class('#{$ns}stack', $m)} { & > * + * { margin-top: $mult * medium-var('margin-y'); } }
+//     }
+//   }
+// }

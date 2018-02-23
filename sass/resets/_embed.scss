@@ -1,0 +1,72 @@
+/*
+                  _              _
+                 | |            | |
+    ___ _ __ ___ | |__   ___  __| |
+   / _ \ '_ ` _ \| '_ \ / _ \/ _` |
+  |  __/ | | | | | |_) |  __/ (_| |
+   \___|_| |_| |_|_.__/ \___|\__,_|
+
+  applet
+  audio
+  canvas
+  embed
+  iframe
+  img
+  map
+  noembed
+  object
+  picture
+  svg
+  video
+
+  source
+  area
+  track
+  param
+
+*/
+
+applet,
+audio,
+canvas,
+embed,
+iframe,
+img,
+map,
+noembed,
+object,
+picture,
+svg,
+video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-style: none;
+  border: 0;
+
+  // do not capture pointer events when inside clickable elements
+  a &,
+  button &,
+  label & {
+    pointer-events: none;
+  }
+}
+
+
+svg {
+  &:not(:root) {
+    overflow: hidden; // Hide the overflow in IE.
+  }
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+iframe {
+  frameborder: 0;
+}
+
+// HIDDEN ELEMENTS
+[hidden], template, slot, script, noscript, link, title, meta { display: none }

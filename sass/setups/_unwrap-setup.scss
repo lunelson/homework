@@ -1,0 +1,63 @@
+//
+//
+//  _   _ _ ____      ___ __ __ _ _ __
+// | | | | '_ \ \ /\ / / '__/ _` | '_ \
+// | |_| | | | \ V  V /| | | (_| | |_) |
+//  \__,_|_| |_|\_/\_/ |_|  \__,_| .__/
+//                               | |
+//                               |_|
+
+
+@mixin class--unwrap($ns: '') {
+  $ns: if(str-length($ns)>0, '#{$ns}-', '');
+
+  .#{$ns}unwrap {
+    margin-right: 0;
+    margin-left: 0;
+    max-width: none;
+    width: 100vw;
+  }
+
+  @include mm-for('outer') {
+
+    $outer-right: medium-var('outer-right');
+    $outer-left: medium-var('outer-left');
+    $wrap-offset: subtract($outer-right, $outer-left);
+    $unwrap-margin: subtract(100%, 100vw);
+    $unwrap-margin-right: divide(subtract($unwrap-margin, $wrap-offset), 2);
+    $unwrap-margin-left: divide(add($unwrap-margin, $wrap-offset), 2);
+
+    .#{$ns}unwrap {
+      &--right { width: add(100vw, $unwrap-margin-left);}
+      &--left { width: add(100vw, $unwrap-margin-right);}
+      &, &--right { margin-right: $unwrap-margin-right; }
+      &, &--left { margin-left: $unwrap-margin-left; }
+    }
+
+    .#{$ns}unwrap--from-right {
+      &, &.#{$ns}unwrap--right { margin-right: - $outer-right;}
+      &, &.#{$ns}unwrap--left { margin-left: add($unwrap-margin, $outer-right); }
+      &.#{$ns}unwrap--right {
+        width: add(100%, $outer-right);
+        margin-left: 0;
+      }
+      &.#{$ns}unwrap--left {
+        width: subtract(100vw, $outer-right);
+        margin-right: 0;
+      }
+    }
+
+    .#{$ns}unwrap--from-left {
+      &, &.#{$ns}unwrap--right { margin-right: add($unwrap-margin, $outer-left); }
+      &, &.#{$ns}unwrap--left { margin-left: - $outer-left; }
+      &.#{$ns}unwrap--right {
+        width: subtract(100vw, $outer-left);
+        margin-left: 0;
+      }
+      &.#{$ns}unwrap--left {
+        width: add(100%, $outer-left);
+        margin-right: 0;
+      }
+    }
+  }
+}

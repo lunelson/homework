@@ -1,0 +1,96 @@
+// rule
+// hold
+// push
+// pull
+// null
+// flex
+// clear
+
+@mixin clearfix {
+  &:after {
+    content:"";
+    display:table;
+    clear:both;
+  }
+}
+
+@mixin clearfix-legacy {
+  & { *zoom: 1; }
+  &:before, &:after { content: ""; display: table; }
+  &:after { clear: both; }
+}
+
+
+@mixin clip {
+  overflow: hidden !important;
+}
+
+@mixin hide {
+  display: none;
+  visibility: hidden;
+}
+
+@mixin show($display: block) {
+  display: $display;
+  visibility: visible;
+}
+
+/////////////
+// flexbox //
+/////////////
+
+@mixin flex($cell: '*') {
+  display: flex;
+  & > #{$cell} {
+    flex: 1 1 auto;
+    min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+    width: 0%;
+    overflow-wrap: break-word;
+  }
+}
+
+@mixin flex-y($cell: '*') {
+  display: flex;
+  flex-direction: column;
+  & > #{$cell} {
+    flex: 1 0 auto; // best for column direction
+    min-height: auto;
+    height: auto;
+    max-width: 100%; // fix overflow in IE
+    overflow-wrap: break-word;
+  }
+}
+
+//////////////////////
+// margin & padding //
+//////////////////////
+
+@mixin margin($args: $curr-mult-y-key $curr-mult-x-key) {
+  $t: nth($args, 1);
+  $r: if(length($args)>1, nth($args, 2), $t);
+  $b: if(length($args)>2, nth($args, 3), $t);
+  $l: if(length($args)>3, nth($args, 4), $r);
+  @if not index($t $r $b $l, null) {
+    margin: margin-y($t) inner-x($r) margin-y($b) inner-x($l); }
+  @else {
+    margin-top: if($t, margin-y($t), null);
+    margin-right: if($r, inner-x($r), null);
+    margin-bottom: if($b, margin-y($b), null);
+    margin-left: if($l, inner-x($l), null);
+  }
+}
+
+@mixin padding($args: $curr-mult-y-key $curr-mult-x-key) {
+  $t: nth($args, 1);
+  $r: if(length($args)>1, nth($args, 2), $t);
+  $b: if(length($args)>2, nth($args, 3), $t);
+  $l: if(length($args)>3, nth($args, 4), $r);
+  @if not index($t $r $b $l, null) {
+    padding: margin-y($t) inner-x($r) margin-y($b) inner-x($l); }
+  @else {
+    padding-top: if($t, margin-y($t), null);
+    padding-right: if($r, inner-x($r), null);
+    padding-bottom: if($b, margin-y($b), null);
+    padding-left: if($l, inner-x($l), null);
+  }
+}

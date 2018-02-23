@@ -1,0 +1,99 @@
+//
+// grid-setup
+//
+
+
+@mixin grid-setup(){
+
+  #{_base-class('grid')} { @include grid(null); }
+  #{_base-class('fgrid')} { @include float-grid(null); }
+
+  .grid--null,
+  .fgrid--null {
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    & > * {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  @include mm-for('grid') {
+    $mults: medium-var('inner-x-mults');
+
+    @each $m, $mult in map-merge((base: 1), $mults) {
+      $inner-x: $mult * medium-var('inner-x');
+
+      #{_mult-class('grid', $m)},
+      #{_mult-class('fgrid', $m)} {
+        margin-left: $inner-x / -2;
+        margin-right: $inner-x / -2;
+        width: calc(100% + #{$inner-x});
+        & > * {
+          padding-left: $inner-x / 2;
+          padding-right: $inner-x / 2;
+        }
+      }
+    }
+  }
+  $done-grid-setup: true !global;
+}
+
+//
+// grid-debug
+//
+
+@mixin grid-debug($color: rgba(0,200,200,0.08)) {
+
+  body::after {
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    position: fixed;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
+    z-index: 999;
+    display: block;
+
+    $grid-columns: medium-var('grid-columns') or 8;
+    $inner-x: medium-var('inner-x');
+    $outer-right: medium-var('outer-right');
+    $outer-left: medium-var('outer-left');
+    $outer-sum: $outer-right + $outer-left;
+    $outer-diff: $outer-right - $outer-left;
+
+    width: calc(100% - #{$outer-sum} + #{$inner-x});
+    margin-left: calc((100% - #{$outer-sum - $outer-diff} + #{$inner-x} * 2) / -2);
+    background: linear-gradient(to right,
+      rgba(0,0,0,0) $inner-x,
+      $color $inner-x,
+      $color calc((100% - #{$outer-sum} + #{$inner-x}) / #{$grid-columns} - #{$inner-x})
+    );
+    background-size: calc((100% - #{$outer-sum} + #{$inner-x} * 3) / #{$grid-columns});
+  }
+
+  @each $alias in map-keys($media) {
+    @include m($alias) {
+      $grid-columns: medium-var('grid-columns') or 8;
+      $inner-x: medium-var('inner-x');
+      $outer-right: medium-var('outer-right');
+      $outer-left: medium-var('outer-left');
+      $outer-diff: $outer-right - $outer-left;
+      $inner-width: medium-var('inner-width') + $inner-x;
+
+      body:after {
+        width: $inner-width;
+        margin-left: ($inner-width + $outer-diff + $inner-x)/-2;
+        background: linear-gradient(to right,
+          rgba(0,0,0,0) $inner-x,
+          $color $inner-x,
+          $color $inner-width / $grid-columns - $inner-x
+        );
+        background-size: $inner-width / $grid-columns;
+      }
+    }
+  }
+}

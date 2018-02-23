@@ -1,0 +1,21 @@
+//
+// OUTER X
+//
+
+@include mm-for('outer-x') {
+  .outer, .outer--right { padding-right: outer-right(); }
+  .outer, .outer--left { padding-left: outer-left(); }
+}
+
+@include m(l) { .area--main .outer { padding-right: 0; } }
+
+
+//
+// OUTER Y
+//
+
+@include mm-for('outer-y') {
+  .outer-y, .outer--top { padding-top: outer-top(); }
+  .outer-y, .outer--bottom { padding-bottom: outer-bottom(); }
+}
+
