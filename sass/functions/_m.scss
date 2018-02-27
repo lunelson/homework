@@ -1,0 +1,104 @@
+// //
+// // default for base
+// //
+
+// $medium-default: (
+//   font-size: 16px,
+//   inner-x: 2rem,
+//   inner-x-mults: (),
+//   inner-y: 2rem,
+//   inner-y-mults: (),
+//   outer-top: 2rem,
+//   outer-bottom: 2rem,
+//   outer-y-mults: (),
+//   outer-right: 2rem,
+//   outer-left: 2rem,
+//   outer-x-mults: (),
+//   copy-width: 30rem,
+//   copy-columns: 6,
+//   grid-columns: 6,
+// );
+
+// //
+// // defaults for media, per basis
+// //
+
+// $media-defaults: (
+//   grid-columns: (
+//     c4: ( grid-columns: 4 ),
+//     c6: ( grid-columns: 6 ),
+//     c8: ( grid-columns: 8 ),
+//     c10: ( grid-columns: 10 ),
+//     c12: ( grid-columns: 12 ),
+//   ),
+//   breakpoint: (
+//     a: (breakpoint: 32em),
+//     b: (breakpoint: 48em),
+//     c: (breakpoint: 64em),
+//     d: (breakpoint: 80em),
+//   ),
+// );
+
+//
+// M-SUFFIX
+//
+
+@function m-suffix($m: $curr-m) {
+  @return if($m, '__#{$m}', '');
+}
+
+//
+// INNER-X/-Y
+//
+
+@function inner-x($x: 1, $m: $curr-m) {
+  $inner-x: m-var('inner-x', $m);
+  @if type-of($inner-x) == 'map' {
+    @return if(is-unitless($x), $x * map-get($inner-x, 'm'), map-get($inner-x, $x));
+  }
+  @return if(is-unitless($x), $x * $inner-x, $inner-x);
+}
+
+@function inner-y($y: 1, $m: $curr-m) {
+  $inner-y: m-var('inner-y', $m);
+  @if type-of($inner-y) == 'map' {
+    @return if(is-unitless($y), $y * map-get($inner-y, 'm'), map-get($inner-y, $y));
+  }
+  @return if(is-unitless($y), $y * $inner-y, $inner-y);
+}
+
+//
+// OUTER-TOP/-BOTTOM/-RIGHT/-LEFT
+//
+
+@function outer-top($n: 1, $m: $curr-m) {
+  $outer-top: m-var('outer-top', $m);
+  @if type-of($outer-top) == 'map' {
+    @return if(is-unitless($n), $n * map-get($outer-top, 'm'), map-get($outer-top, $n));
+  }
+  @return if(is-unitless($n), $n * $outer-top, $outer-top);
+}
+
+@function outer-right($n: 1, $m: $curr-m) {
+  $outer-right: m-var('outer-right', $m);
+  @if type-of($outer-right) == 'map' {
+    @return if(is-unitless($n), $n * map-get($outer-right, 'm'), map-get($outer-right, $n));
+  }
+  @return if(is-unitless($n), $n * $outer-right, $outer-right);
+}
+
+@function outer-bottom($n: 1, $m: $curr-m) {
+  $outer-bottom: m-var('outer-bottom', $m);
+  @if type-of($outer-bottom) == 'map' {
+    @return if(is-unitless($n), $n * map-get($outer-bottom, 'm'), map-get($outer-bottom, $n));
+  }
+  @return if(is-unitless($n), $n * $outer-bottom, $outer-bottom);
+}
+
+@function outer-left($n: 1, $m: $curr-m) {
+  $outer-left: m-var('outer-left', $m);
+  @if type-of($outer-left) == 'map' {
+    @return if(is-unitless($n), $n * map-get($outer-left, 'm'), map-get($outer-left, $n));
+  }
+  @return if(is-unitless($n), $n * $outer-left, $outer-left);
+}

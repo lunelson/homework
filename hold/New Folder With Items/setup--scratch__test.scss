@@ -27,14 +27,21 @@ $gcd-ratios: ();
 
 $all-ratios: join-all(map-values($gcd-ratios)...);
 
-@each $m in join(null, map-keys($media)) {
-  @include m($m) {
-    $mfix: m-suffix();
-    .test#{$mfix} {
-      color: blue;
-    }
-  }
-}
+// @each $m in join(null, map-keys($media)) {
+//   @include m($m) {
+//     $mfix: m-suffix();
+//     .test#{$mfix} {
+//       color: blue;
+//     }
+//   }
+// }
+
+/* TODO
+
+- atomic classes
+
+*/
+
 
 /* #{map-stringify($gcd-ratios)} */
 /* #{map-stringify($all-ratios)} */

@@ -35,3 +35,12 @@
   @if $b == 0 { @return abs($a); }
   @return gcd($b, $a % $b);
 }
+
+@function list-transform($list, $func, $args...) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $n from 1 through length($list) {
+    $result: append($result, call($func, nth($list, $n), $n, $list, $args...), 'comma');
+  }
+  @return $result;
+}

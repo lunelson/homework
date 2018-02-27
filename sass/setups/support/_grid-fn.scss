@@ -1,0 +1,91 @@
+//
+// GRID
+//
+// trying to make it work in both directions https://jsfiddle.net/ys7w1786/
+
+//
+// NEW FUNCTIONS
+//
+// grid
+// - cell-span(n,d)
+// - cell-push(l,r,d)
+
+// cell
+// - function cell-column(n, d)
+// - mixin intra-span(n, d)
+//   ...subtract columns from 100%
+//   ...intra-span(4, 6) -> width: 100% - cell-column(2, 6)
+// - mixin intra-push(l, r, d)
+//   ...push the width of 1 column; refernce: 100% + inner-x()
+//   ...intra-push(1, 0, 6) ->
+
+//
+// grid inner widths and spans
+//
+
+@function column-width($n, $d) {
+  @return multiply(add(100%, inner-x()), $n/$d);
+}
+
+@function intra-push($n, $d) {
+  @return multiply(add(100%, inner-x()), $n/$d);
+}
+
+@function intra-span($n, $d) {
+  @return subtract(column-width($n, $d), inner-x());
+}
+
+@mixin intra-span($n, $d) {
+  width: subtract(100%, column-width($d - $n, $d));
+}
+
+@mixin intra-push($l, $r, $d) {
+  @if $l { margin-left: column-width($l, $d); }
+  @if $r { margin-right: column-width($r, $d); }
+}
+
+
+//
+// third revision
+//
+
+@function intra-column($n, $d) {
+  @return multiply(add(100%, inner-x()), $n/$d);
+}
+
+@mixin intra-span($n, $d) {
+  width: subtract(100%, intra-column($d - $n, $d));
+}
+
+@mixin intra-push($l, $r, $d) {
+  @if $l { margin-left: intra-column($l, $d); }
+  @if $r { margin-right: intra-column($r, $d); }
+}
+
+//
+// second revision
+//
+
+@function inner-push($n, $d) {
+  @return multiply(add(100%, inner-x()), $n/$d);
+}
+
+@function inner-span($n, $d) {
+  @return subtract(percentage($n/$d), inner-x(($d - $n)/($d - 1)));
+}
+
+//
+// older shit
+//
+
+@function grid-calc($m: $curr-m) {
+  @return add((medium-var('inner-width', $m) or 100%), medium-var('inner-x', $m));
+}
+
+@function push-calc($n: 1, $m: $curr-m) {
+  @return multiply(divide(grid-calc($m), medium-var('grid-columns', $m)), $n);
+}
+
+@function span-calc($n: 1, $m: $curr-m) {
+  @return subtract(push-calc($n, $m), medium-var('inner-x'));
+}

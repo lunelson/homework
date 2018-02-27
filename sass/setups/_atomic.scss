@@ -1,0 +1,103 @@
+/*
+        _                  _
+        | |                (_)
+    __ _| |_ ___  _ __ ___  _  ___
+  / _` | __/ _ \| '_ ` _ \| |/ __|
+  | (_| | || (_) | | | | | | | (__
+  \__,_|\__\___/|_| |_| |_|_|\___|
+
+  display
+  margin
+  padding
+  width
+  height
+
+  none
+  block
+  max-width?
+  inline
+  vertical-align: baseline
+  inline-block
+
+  flex
+    ...
+  flex-y
+    ...
+  grid
+
+  display: d- none, flex, block, iblock, inline __[m]
+
+  margin: mx, mr, ml
+    -gap
+    -n-d
+    -neg-n-d
+    -col-n-d
+    -neg-col-n-d
+
+    margin: my, mt, mb
+    -[mult]
+
+  padding
+
+  width
+
+*/
+
+$grid-columns: 12; // could be parsed out of $media
+
+$reduced-ratios: ();
+@for $d from 1 through $grid-columns {
+  @for $n from 1 through $d {
+    $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+    $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
+    $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
+  }
+}
+
+$all-ratios: join-all(map-values($reduced-ratios)...);
+
+
+@function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
+@function ratio-val($ratio)    { @return percentage(nth($ratio,1) / nth($ratio,2)); }
+@function ratio-class($ratio, $index, $list, $base, $fx) { @return '#{$base}-#{ratio-str($ratio)}#{$fx}'; }
+
+@each $m in join(null, map-keys($media)) {
+  @include m($m) {
+    $fx: m-suffix();
+
+    //
+    // DISPLAY
+    //
+
+    .d-none#{$fx} { display: none; }
+    .d-flex#{$fx} { display: flex; }
+    .d-flex-y#{$fx} { display: flex; }
+    .d-grid#{$fx} { display: grid; }
+    .d-block#{$fx} { display: block; width: 100%; }
+    .d-iblock#{$fx} { display: inline-block; vertical-align: baseline; }
+    .d-inline#{$fx} { display: inline; vertical-align: baseline; }
+
+    //
+    // VISIBILITY
+    //
+    // http://a11yproject.com/posts/how-to-hide-content/
+    // http://www.456bereastreet.com/archive/200711/screen_readers_sometimes_ignore_displaynone/
+
+    .v-hide#{$fx} { visibility: hidden; }
+    .v-show#{$fx} { visibility: visible; }
+
+    //
+    // WIDTH, MARGIN, PADDING
+    //
+
+    @each $reduction, $ratio-list in $reduced-ratios {
+      #{list-transform($ratio-list, 'ratio-class', 'w', $fx)} { width: ratio-val($reduction) }
+      #{list-transform($ratio-list, 'ratio-class', 'pr', $fx)} { padding-right: ratio-val($reduction) }
+      #{list-transform($ratio-list, 'ratio-class', 'pl', $fx)} { padding-left: ratio-val($reduction) }
+      #{list-transform($ratio-list, 'ratio-class', 'mr', $fx)} { margin-right: ratio-val($reduction) }
+      #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fx)} { margin-right: ratio-val($reduction)/-1 }
+      #{list-transform($ratio-list, 'ratio-class', 'ml', $fx)} { margin-left: ratio-val($reduction) }
+      #{list-transform($ratio-list, 'ratio-class', 'ml-neg', $fx)} { margin-left: ratio-val($reduction)/-1 }
+    }
+  }
+}

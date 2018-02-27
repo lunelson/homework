@@ -13,12 +13,12 @@ const testGlob = './test/**/*.scss';
 const sassIncl = path.join(__dirname, 'node_modules');
 
 gulp.task('work', function () {
-  return watch(testGlob, { ignoreInitial: true })
-    .pipe(plumber())
+  return gulp.src(testGlob)
+    .pipe(plumber(sass.logError))
     .pipe(sass({
       outputStyle: 'expanded',
       includePaths: [sassIncl]
-    }).on('error', sass.logError))
+    }))
     .pipe(gulp.dest(testDest));
 });
 
@@ -32,4 +32,8 @@ gulp.task('test', function(){
     .pipe(rename({extname: '.css'}))
     .pipe(diff())
     .pipe(diff.reporter({ fail: true }));
+});
+
+gulp.task('default', function () {
+  return gulp.watch(testGlob, ['work']);
 });

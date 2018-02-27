@@ -1,18 +1,17 @@
 # homework
 
-util-classes, per medium
-  display: d- none, flex, block, iblock, inline __[m]
-  margin: m-, m-neg- [mult] [ratio] [col] __[m]
-  padding
-  width
-  height
-
-base-classes, global
-  strong, em
-  hold, stop, clip, hide
-  ratio|aspect
-  icon
-  ? show, flex-y, clip-x, hide-v, show-v
+functions
+mixins
+resets
+setups
+  support
+    atomic-support
+    stack-support
+    general-support
+  atomic
+  general
+  grid
+  stack
 
 
 ## abstract

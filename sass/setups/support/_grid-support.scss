@@ -1,0 +1,42 @@
+@mixin col {
+  flex: 1 1 auto;
+  width: 0%;
+  min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+  background-clip: content-box;
+  overflow-wrap: break-word;
+}
+
+//
+// degrid
+//
+
+@mixin degrid($mult: $curr-inner-x, $cell: '*', $span: 1, $left: 0){
+  $inner-x: inner-x($mult);
+  $grid-margin: divide($inner-x, -2);
+  $span-width: add(100%, $inner-x);
+  $cols: _nth($span, 2) or medium-var('grid-columns') or 4;
+  $right: $cols - $left - $span;
+  width: multiply($span-width, $cols);
+  margin-left: subtract($grid-margin, if($left == 0, 0, multiply($span-width, $left)));
+  margin-right: subtract($grid-margin, if($right == 0, 0, multiply($span-width, $right)));
+}
+
+//
+// regrid
+//
+
+@mixin regrid($mult: $curr-inner-x, $cell: '*', $span: 1, $left: 0){
+  @include degrid($mult, $cell, $span, $left);
+  @include grid(null, null);
+  @if $cell { & > #{$cell} { @include cell($mult); } }
+}
+
+//
+// ungrid
+//
+
+@mixin ungrid($mult: $curr-inner-x, $span: 1, $left: 0){
+  @include degrid($mult, null, $span, $left);
+  @include grid(null, null);
+  @include cell-padding($mult);
+}

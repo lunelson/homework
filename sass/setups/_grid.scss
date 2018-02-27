@@ -1,0 +1,53 @@
+//             _     _
+//            (_)   | |
+//   __ _ _ __ _  __| |
+//  / _` | '__| |/ _` |
+// | (_| | |  | | (_| |
+//  \__, |_|  |_|\__,_|
+//   __/ |
+//  |___/
+
+
+@import 'support/grid-support';
+
+@if map-get($setups, 'grid') {
+
+  #{base-class('row')},
+  #{base-class('grid')} {
+    display: flex;
+    flex-wrap: wrap;
+    & > * { @include col; }
+  }
+
+  @include mm-for('inner-x') {
+    $inner-x: inner-x();
+    #{base-class('row')},
+    #{base-class('grid')} {
+      margin-left: $inner-x / -2;
+      margin-right: $inner-x / -2;
+      width: add(100%, $inner-x);
+      & > * {
+        padding-left: $inner-x / 2;
+        padding-right: $inner-x / 2;
+      }
+    }
+  }
+
+  @include mm-for('inner-y') {
+    $inner-y: m-var('inner-y');
+    @if $inner-y {
+      @each $y, $inner-y in if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y)) {
+        #{mod-class('grid', $y, 'm')} {
+          margin-top: $inner-y / -2;
+          margin-bottom: $inner-y / -2;
+          & > * {
+            padding-top: $inner-y / 2;
+            padding-bottom: $inner-y / 2;
+          }
+        }
+      }
+    }
+  }
+
+  $setups: map-merge($setups, ('grid': false)) !global;
+}

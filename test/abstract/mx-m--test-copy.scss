@@ -10,3 +10,12 @@ $media: (
 @include m-init(false);
 
 $grid-columns: 12; // could be parsed out of $media
+
+@each $m in join(null, map-keys($media)) {
+  @include m($m) {
+    $mfix: m-suffix();
+    .test#{$mfix} {
+      color: blue;
+    }
+  }
+}

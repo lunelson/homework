@@ -1,0 +1,30 @@
+@import '../peers';
+@import '../../index';
+
+$base: (
+  inner-x: 2rem,
+  inner-y: (
+    s: 1rem,
+    m: 2rem
+  )
+);
+
+// $base: (
+//   inner-x: 2rem,
+//   inner-y: 2rem,
+// );
+
+$media: (
+  a: (breakpoint: 20em),
+  b: (
+    inner-x: 3rem,
+    breakpoint: 30em
+  ),
+  c: (breakpoint: 40em),
+);
+
+// $setups: map-merge($setups, (grid: false));
+
+@include m-init(false);
+
+@import '../../sass/setups/grid';

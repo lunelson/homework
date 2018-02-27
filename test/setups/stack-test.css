@@ -1,0 +1,12 @@
+.stack, [class^="stack--"], [class*=" stack--"] {
+  padding-top: 0.1px;
+  padding-bottom: 0.1px;
+}
+
+.stack--s > * + * {
+  margin-top: 1rem;
+}
+
+.stack > * + *, .stack--m > * + * {
+  margin-top: 2rem;
+}
