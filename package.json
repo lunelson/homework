@@ -18,7 +18,7 @@
     "url": "git+https://github.com/lunelson/homework.git"
   },
   "scripts": {
-    "start": "gulp",
+    "start": "gulp work",
     "test": "gulp test"
   },
   "dependencies": {},
@@ -30,8 +30,10 @@
     "@lunelson/sass-u": "^0.9.1",
     "gulp": "^3.9.1",
     "gulp-diff": "^1.0.0",
+    "gulp-plumber": "^1.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "gulp-watch": "^5.0.0"
   },
   "peerDependencies": {
     "@lunelson/sass-calc": "^0.9.1",

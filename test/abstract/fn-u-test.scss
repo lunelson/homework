@@ -1,0 +1,12 @@
+@import '../peers';
+@import '../../index';
+
+$media: (
+  a: (breakpoint: 20em),
+  b: (breakpoint: 30em),
+  c: (breakpoint: 40em),
+);
+
+@include m-init(false);
+
+$grid-columns: 12; // could be parsed out of $media

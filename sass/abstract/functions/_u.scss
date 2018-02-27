@@ -1,0 +1,37 @@
+// class
+
+@function _base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
+@function _mult-class($base, $m) { @return selector-parse(if($m=='base', '.#{$base}', '.#{$base}--#{$m}')); }
+
+@function join-all($lists...) {
+  $result: ();
+  @each $list in $lists {
+    $result: join($result, $list, list-separator($list));
+  }
+  @return $result;
+}
+
+@function map-items($list, $func, $sep: list-separator($list)) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $result: append($result, call($func, nth($list, $i), $i, $list), $sep);
+  }
+  @return $result;
+}
+
+@function filter-items($list, $func, $sep: list-separator($list)) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $value: nth($list, $i);
+    $test: call($func, $value, $i, $list);
+    $result: if($test, append($result, $value, $sep), $result);
+  }
+  @return $result;
+}
+
+@function gcd($a, $b) {
+  @if $b == 0 { @return abs($a); }
+  @return gcd($b, $a % $b);
+}

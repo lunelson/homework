@@ -1,4 +1,0 @@
-// class
-
-@function _base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
-@function _mult-class($base, $m) { @return selector-parse(if($m=='base', '.#{$base}', '.#{$base}--#{$m}')); }
