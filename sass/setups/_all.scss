@@ -1,36 +1,72 @@
-// atomic
-// general
-// debug
-// modal (layer, scroll)
-// outer, spread
+//           _
+//          | |
+//  ___  ___| |_ _   _ _ __
+// / __|/ _ \ __| | | | '_ \
+// \__ \  __/ |_| |_| | |_) |
+// |___/\___|\__|\__,_| .__/
+//                    | |
+//                    |_|
+
+// atomic, basic
+@import 'atomic';
+@import 'basic';
+
+// debug, outer, spread
+@import 'debug';
+@import 'outer';
+
+// modal, layer, scroll
 // wrap, peel
-// grid, cell
-// row, col
+@import 'wrap';
+@import 'peel';
+
+// grid, cell, row, col
 // inset, outset, chain
+@import 'grid';
+
 // font, stack, trim
-// icon
+@import 'font';
+@import 'stack';
 
+// color, theme, icon ?
+@import 'theme';
 
+@mixin homework-setup($setups...) {
 
-/*
-init-m
+  // run sass-m setup if not done
+  @if not $done-m { @include setup-m(); }
 
-base
-media
-fonts
-colors
-layers
-setups
-  grid-cell
-  row-col
-  outer-spread
-  wrap
-  peel
-  stack
-  font-trim
-  theme
-  debug
-  atomic
-  basic
-themes
-*/
+  // compute the gcd-columns/ratios thing, from max-columns in the $base|$media
+  // ???
+
+  // set $setups to ALL setups, if none provided
+  @if length($setups) == 0 {
+    $setups: (
+      'atomic',
+      'basic',
+      'debug',
+      'outer',
+      'wrap',
+      'peel',
+      'grid',
+      'font',
+      'stack',
+      'theme',
+    );
+  }
+
+  // run indicated setups
+  @if index($setups, 'atomic') { @include setup-atomic; }
+  @if index($setups, 'basic') { @include setup-basic; }
+  @if index($setups, 'debug') { @include setup-debug; }
+  @if index($setups, 'outer') { @include setup-outer; }
+  @if index($setups, 'wrap') { @include setup-wrap; }
+  @if index($setups, 'peel') { @include setup-peel; }
+  @if index($setups, 'grid') { @include setup-grid; }
+  @if index($setups, 'font') { @include setup-font; }
+  @if index($setups, 'stack') { @include setup-stack; }
+  @if index($setups, 'theme') { @include setup-theme; }
+
+  // set $done-homework to true
+  // ???
+}

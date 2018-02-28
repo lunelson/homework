@@ -1,3 +1,24 @@
+homework-setup
+
+- run m-setup, if not done-m
+- calculate the gcd-columns thing
+- set $done-homework to true, at end
+-
+
+defaults/index
+
+- factor out the stack and typo mixins, so they can work with WYSIWYG custom defs
+- bring all globals back to defaults, or setup-index
+- run a setup mixin, which inits sass-m, then runs all local setups
+
+    curr-m
+
+    curr-font
+    curr-size
+    curr-line
+    curr-stack
+
+
 # homework
 
 functions
