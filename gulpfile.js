@@ -8,22 +8,20 @@ const rename = require('gulp-rename');
 const watch = require('gulp-watch');
 const plumber = require('gulp-plumber');
 
-const testDest = './test';
-const testGlob = './test/**/*.scss';
 const sassIncl = path.join(__dirname, 'node_modules');
 
 gulp.task('work', function () {
-  return gulp.src(testGlob)
+  return gulp.src('./test/**/*.scss')
     .pipe(plumber(sass.logError))
     .pipe(sass({
       outputStyle: 'expanded',
       includePaths: [sassIncl]
     }))
-    .pipe(gulp.dest(testDest));
+    .pipe(gulp.dest('./test'));
 });
 
 gulp.task('test', function(){
-  return gulp.src(testGlob)
+  return gulp.src('./test/**/*.scss')
     .pipe(plumber())
     .pipe(sass({
       outputStyle: 'expanded',
@@ -35,5 +33,5 @@ gulp.task('test', function(){
 });
 
 gulp.task('default', function () {
-  return gulp.watch(testGlob, ['work']);
+  return gulp.watch('./**/*.scss', ['work']);
 });

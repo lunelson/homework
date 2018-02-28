@@ -1,0 +1,203 @@
+body, body * {
+  font-family: arial, sans-serif;
+  letter-spacing: calc(0.5px - 0.01em);
+}
+
+.sans, [class^="sans--"], [class*=" sans--"] {
+  font-family: arial, sans-serif;
+  letter-spacing: calc(0.5px - 0.01em);
+}
+
+@media screen and (max-width: 29.999em) {
+  .sans--s {
+    font-size: 0.875rem;
+    line-height: 1.42857;
+  }
+  .sans--s.trim, .sans--s .stack > .sans--s, .sans--s [class^="stack--"] > .sans--s, .sans--s [class*=" stack--"] > .sans--s {
+    margin-top: 0.21429em;
+    margin-bottom: 0.21429em;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .sans--s {
+    font-size: 0.875rem;
+    line-height: 1.42857;
+  }
+  .sans--s.trim, .sans--s .stack > .sans--s, .sans--s [class^="stack--"] > .sans--s, .sans--s [class*=" stack--"] > .sans--s {
+    margin-top: 0.21429em;
+    margin-bottom: 0.21429em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack--s > *:not(.unstack) + .sans--s {
+    margin-top: calc(1rem - 0.21429em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack--s > *:not(.unstack) + .sans--s {
+    margin-top: calc(1rem - 0.21429em);
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack > *:not(.unstack) + .sans--s, .stack--m > *:not(.unstack) + .sans--s {
+    margin-top: calc(2rem - 0.21429em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack > *:not(.unstack) + .sans--s, .stack--m > *:not(.unstack) + .sans--s {
+    margin-top: calc(2rem - 0.21429em);
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .sans--m {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .sans--m.trim, .sans--m .stack > .sans--m, .sans--m [class^="stack--"] > .sans--m, .sans--m [class*=" stack--"] > .sans--m {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .sans--m {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .sans--m.trim, .sans--m .stack > .sans--m, .sans--m [class^="stack--"] > .sans--m, .sans--m [class*=" stack--"] > .sans--m {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack--s > *:not(.unstack) + .sans--m {
+    margin-top: calc(1rem - 0.25em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack--s > *:not(.unstack) + .sans--m {
+    margin-top: calc(1rem - 0.25em);
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack > *:not(.unstack) + .sans--m, .stack--m > *:not(.unstack) + .sans--m {
+    margin-top: calc(2rem - 0.25em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack > *:not(.unstack) + .sans--m, .stack--m > *:not(.unstack) + .sans--m {
+    margin-top: calc(2rem - 0.25em);
+  }
+}
+
+.serif, [class^="serif--"], [class*=" serif--"] {
+  font-family: georgia, serif;
+  letter-spacing: calc(0.5px - 0.01em);
+}
+
+@media screen and (max-width: 29.999em) {
+  .serif--s {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  .serif--s.trim, .serif--s .stack > .serif--s, .serif--s [class^="stack--"] > .serif--s, .serif--s [class*=" stack--"] > .serif--s {
+    margin-top: 0.125em;
+    margin-bottom: 0.125em;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .serif--s {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  .serif--s.trim, .serif--s .stack > .serif--s, .serif--s [class^="stack--"] > .serif--s, .serif--s [class*=" stack--"] > .serif--s {
+    margin-top: 0.125em;
+    margin-bottom: 0.125em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack--s > *:not(.unstack) + .serif--s {
+    margin-top: calc(1rem - 0.125em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack--s > *:not(.unstack) + .serif--s {
+    margin-top: calc(1rem - 0.125em);
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack > *:not(.unstack) + .serif--s, .stack--m > *:not(.unstack) + .serif--s {
+    margin-top: calc(2rem - 0.125em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack > *:not(.unstack) + .serif--s, .stack--m > *:not(.unstack) + .serif--s {
+    margin-top: calc(2rem - 0.125em);
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .serif--m {
+    font-size: 1.125rem;
+    line-height: 1.33333;
+  }
+  .serif--m.trim, .serif--m .stack > .serif--m, .serif--m [class^="stack--"] > .serif--m, .serif--m [class*=" stack--"] > .serif--m {
+    margin-top: 0.16667em;
+    margin-bottom: 0.16667em;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .serif--m {
+    font-size: 1.125rem;
+    line-height: 1.33333;
+  }
+  .serif--m.trim, .serif--m .stack > .serif--m, .serif--m [class^="stack--"] > .serif--m, .serif--m [class*=" stack--"] > .serif--m {
+    margin-top: 0.16667em;
+    margin-bottom: 0.16667em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack--s > *:not(.unstack) + .serif--m {
+    margin-top: calc(1rem - 0.16667em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack--s > *:not(.unstack) + .serif--m {
+    margin-top: calc(1rem - 0.16667em);
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack > *:not(.unstack) + .serif--m, .stack--m > *:not(.unstack) + .serif--m {
+    margin-top: calc(2rem - 0.16667em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack > *:not(.unstack) + .serif--m, .stack--m > *:not(.unstack) + .serif--m {
+    margin-top: calc(2rem - 0.16667em);
+  }
+}
+
+.mono, [class^="mono--"], [class*=" mono--"] {
+  font-family: monaco, consolas, "lucida console", monospace;
+  letter-spacing: calc(0.5px - 0.01em);
+}

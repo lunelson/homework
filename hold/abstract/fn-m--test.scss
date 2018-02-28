@@ -1,5 +1,4 @@
 @import '../peers';
-@import '../../index';
 
 $base: (
   inner-x: 1rem,
@@ -34,6 +33,8 @@ $media: (
 );
 
 @include m-init();
+
+@import '../../index';
 
 .test {
   out: inspect(mm(null, null, inner-x));

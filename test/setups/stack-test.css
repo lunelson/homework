@@ -3,10 +3,23 @@
   padding-bottom: 0.1px;
 }
 
-.stack--s > * + * {
+.stack > *, [class^="stack--"] > *, [class*=" stack--"] > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack--s > *:not(.unstack) + * {
   margin-top: 1rem;
 }
 
-.stack > * + *, .stack--m > * + * {
+.stack > *:not(.unstack) + *, .stack--m > *:not(.unstack) + * {
+  margin-top: 2rem;
+}
+
+.stack--s > *:not(.unstack) + * {
+  margin-top: 1rem;
+}
+
+.stack > *:not(.unstack) + *, .stack--m > *:not(.unstack) + * {
   margin-top: 2rem;
 }

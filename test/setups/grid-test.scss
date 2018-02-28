@@ -1,5 +1,4 @@
 @import '../peers';
-@import '../../index';
 
 $base: (
   inner-x: 2rem,
@@ -23,8 +22,19 @@ $media: (
   c: (breakpoint: 40em),
 );
 
-// $setups: map-merge($setups, (grid: false));
-
 @include m-init(false);
 
-@import '../../sass/setups/grid';
+$setups: (
+  atomic: false,
+  basic: false,
+  debug: false,
+  outer: false,
+  wrap: false,
+  peel: false,
+  grid: true,
+  font: false,
+  stack: false,
+  theme: false,
+);
+
+@import '../../index';

@@ -31,47 +31,47 @@ html {
   out: true;
   out: false;
   out: 1rem;
+  out: inner-x(l);
+  out: inner-y(l);
   out: 1rem;
   out: 2rem;
-  out: 1rem;
-  out: 2rem;
-  out: 1rem;
-  out: 2rem;
+  out: inner-y(m);
+  out: inner-y(2);
 }
 
 @media screen and (max-width: 19.999em) {
   .test {
-    margin-top: 1rem;
+    margin-top: inner-y(m);
   }
 }
 
 @media screen and (min-width: 20em) {
   .test {
-    margin-top: 2rem;
+    margin-top: inner-y(m);
   }
 }
 
 @media screen and (max-width: 19.999em) {
   .test {
-    out: 2rem;
+    out: inner-y(l);
   }
 }
 
 @media screen and (min-width: 20em) and (max-width: 29.999em) {
   .test {
-    out: 3rem;
+    out: inner-y(l);
   }
 }
 
 @media screen and (min-width: 30em) and (max-width: 39.999em) {
   .test {
-    out: 4rem;
+    out: inner-y(l);
   }
 }
 
 @media screen and (min-width: 40em) {
   .test {
-    out: 5rem;
+    out: inner-y(l);
   }
 }
 

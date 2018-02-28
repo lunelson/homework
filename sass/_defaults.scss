@@ -8,9 +8,9 @@
 // $done-page-setup: false !default;
 // $done-trim-setup: false !default;
 
-$base: () !default;
+// $base: () !default;
 
-$media: () !default;
+// $media: () !default;
 
 $fonts: () !default;
 
@@ -26,7 +26,6 @@ $setups: (
   wrap: true,
   peel: false,
   grid: true,
-  // row-col: true,
   font: true,
   stack: true,
   theme: true,

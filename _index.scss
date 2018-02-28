@@ -6,7 +6,8 @@
 // |_| |_|\___/|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
 
 
-// @import "sass/abstract/all";
+// check our dependency on the setup of sass-m
+@if not $done-m { @include error('sass-m must be initialized before homework'); }
 
 // defaults
 @import "sass/defaults";
@@ -18,4 +19,6 @@
 // mixins
 
 // setups
-// @import "sass/setups/grid";
+@import "sass/setups/grid";
+@import "sass/setups/font";
+@import "sass/setups/stack";

@@ -5,6 +5,16 @@ $base: (
   inner-y: (
     s: 1rem,
     m: 2rem
+  ),
+  copy-sizes: (
+    sans: (
+      s: 14 20,
+      m: 16 24,
+    ),
+    serif: (
+      s: 16 20,
+      m: 18 24,
+    ),
   )
 );
 
@@ -16,8 +26,18 @@ $base: (
 $media: (
   a: (breakpoint: 20em),
   b: (
+    breakpoint: 30em,
     inner-x: 3rem,
-    breakpoint: 30em
+    copy-sizes: (
+      sans: (
+        s: 20 30,
+        m: 24 36,
+      ),
+      serif: (
+        s: 22 32,
+        m: 26 40,
+      ),
+    )
   ),
   c: (breakpoint: 40em),
 );
@@ -25,15 +45,15 @@ $media: (
 @include m-init(false);
 
 $setups: (
-  debug: false,
   atomic: false,
   basic: false,
+  debug: false,
   outer: false,
   wrap: false,
   peel: false,
   grid: false,
-  font: false,
-  stack: true,
+  font: true,
+  stack: false,
   theme: false,
 );
 
