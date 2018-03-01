@@ -12,8 +12,7 @@
 
 @mixin setup-grid {
 
-  #{base-class('row')},
-  #{base-class('grid')} {
+  .row, #{base-class('grid')} {
     display: flex;
     flex-wrap: wrap;
     & > * { @include col; }
@@ -21,8 +20,7 @@
 
   @include mm-for('inner-x') {
     $inner-x: inner-x();
-    #{base-class('row')},
-    #{base-class('grid')} {
+    .row, #{base-class('grid')} {
       margin-left: $inner-x / -2;
       margin-right: $inner-x / -2;
       width: add(100%, $inner-x);

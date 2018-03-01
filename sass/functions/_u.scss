@@ -3,7 +3,8 @@
 //
 
 @function base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
-@function mod-class($base, $mod, $except: ('m')) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
+@function mod-class($base, $mod, $except: ()) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
+@function var-class($base, $var, $except: ()) { @return selector-parse(if(index($except, $var), '.#{$base}, .#{$base}-#{$var}', '.#{$base}-#{$var}')); }
 
 @mixin base-class($args...) { #{base-class($args...)} { @content; } }
 @mixin mod-class($args...) { #{mod-class($args...)} { @content; } }

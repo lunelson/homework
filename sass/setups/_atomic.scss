@@ -11,7 +11,7 @@
 
 @function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
 @function ratio-val($ratio)    { @return percentage(nth($ratio,1) / nth($ratio,2)); }
-@function ratio-class($ratio, $index, $list, $base, $fx) { @return '#{$base}-#{ratio-str($ratio)}#{$fx}'; }
+@function ratio-class($ratio, $index, $list, $base, $fx) { @return '.#{$base}--#{ratio-str($ratio)}#{$fx}'; }
 
 @mixin setup-atomic {
 
