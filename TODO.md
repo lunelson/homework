@@ -1,6 +1,5 @@
 ## basic, wrap, outer
 
-- outer/spread belongs to margin/padding; needs media-specific overrides
 - margin/padding need a 'zero' version e.g. `mr-0` or `mr-zero`
 - grid/row need grid--null and row--null classes (no gutter)
 - review the grid functions for "inside" of columns, create m-/p- classes

@@ -1,0 +1,22 @@
+@import '../peers';
+@import '../../index';
+
+$base: (
+  outer-right: 1rem,
+  outer-left: 2rem,
+  outer-top: 1rem,
+  outer-bottom: 1rem
+);
+
+$media: (
+  a: (breakpoint: 20em),
+  b: (
+    breakpoint: 30em,
+    outer-right: 2rem,
+    outer-left: 3rem
+  ),
+  c: (breakpoint: 40em),
+);
+
+@include m-init(false);
+@include homework-setup('outer');

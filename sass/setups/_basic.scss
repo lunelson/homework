@@ -17,152 +17,124 @@
 // icon
 // ? show, flex-y, clip-x, hide-v, show-v
 
+@import 'support/basic-support';
+
 @mixin setup-basic {
 
-  // style control
-
+  // bold, italic
   .strong, strong, b { font-weight: bold; }
   .em, em, i { font-style: italic; }
 
-  // 2017 clearfix https://css-tricks.com/snippets/css/clear-fix/
-  // very latest clearfix http://cssmojo.com/the-very-latest-clearfix-reloaded/
-  // flow-root https://helloanselm.com/2017/flow-root-supports/
-  .clearfix:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
+  // clearfix
+  .cf, .clearfix { @include clearfix; }
 
-  @supports (display: flow-root) {
-    .clearfix {
-      display: flow-root;
-      &::after { content: none; }
-    }
-  }
-
-  // DISABLE POINTER EVENTS ON SCROLL
+  // disable pointer on scrolling
   .is-scrolling,
   .is-scrolling * {
     pointer-events: none !important;
   }
 
-  // VISUALLY HIDE / IMAGE REPLACEMENT
-  // https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html
-  // https://css-tricks.com/the-image-replacement-museum/
-
-  .mask {
-    position: absolute !important;
-    clip: rect(0 0 0 0); // IE6, IE7
-    clip: rect(0, 0, 0, 0);
-    flex: 0 0 0%;
-    padding: 0 !important;
-    border: 0 !important;
-    height: 1px !important;
-    width: 1px !important;
-    overflow: hidden;
-    body:hover & a,
-    body:hover & input,
-    body:hover & button { display: none !important; }
-  }
-
+  // hold, stop, clip
   #{base-class('hold')},
   #{base-class('stop')},
   #{base-class('clip')} { position: relative; }
-
   #{base-class('stop')} { padding: 0.1px; }
-
   #{base-class('clip')} { overflow: hidden !important; }
-
-  #{base-class('hide')} { @include hide; }
-  #{base-class('show')} { @include show; }
-
-  //
-  // clip
-  //
-
   .clip--circle { border-radius: 50%; }
 
-  .ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  //
-  // hold
-  //
+  .mask, .vhide { @include vhide; }
 
-  .hold--abs, .hold--center, .hold--ratio {
-    z-index: 0; // make sure container can clip
-    & > * {
-      display: block;
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      &:not(img) {
-        height: 100%;
-      }
+  @each $m in join(null, map-keys($media)) {
+    @include m($m) {
+      $fix: m-suffix();
+
+      //
+      // hide n show
+      //
+
+      .hide#{$fix} { @include hide; }
+      .show#{$fix} { @include show; }
+
     }
   }
 
-  .hold--ratio {
-    height: 0;
-    overflow: hidden;
-    padding: 0 0 100%;
-  }
 
-  .hold--center {
-    & > * {
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
+  // //
+  // // hold
+  // //
 
-  .hold--fit {
-    & > * {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
+  // .hold--abs, .hold--center, .hold--ratio {
+  //   z-index: 0; // make sure container can clip
+  //   & > * {
+  //     display: block;
+  //     position: absolute;
+  //     top: 0; left: 0;
+  //     width: 100%;
+  //     &:not(img) {
+  //       height: 100%;
+  //     }
+  //   }
+  // }
 
-  #{base-class('aspect')} {
-    position: relative;
-    &:before {
-      content: '';
-      display: block;
-      width: 100%;
-    }
-    & > * {
-      display: block;
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      object-fit: cover;
-      &:not(.fit) {
-        height: 100%;
-      }
-    }
-  }
+  // .hold--ratio {
+  //   height: 0;
+  //   overflow: hidden;
+  //   padding: 0 0 100%;
+  // }
 
-  .aspect--std:before { padding-top: percentage(9/16); }
-  .aspect--hero:before { padding-top: percentage(9/16); }
-  .aspect--mega:before { padding-top: percentage(9/16); }
-  @include m(m,l) {
-    .aspect--hero:before { padding-top: percentage(1/2); }
-    .aspect--mega:before { padding-top: percentage(1/2); }
-  }
-  @include m(l) {
-    .aspect--mega:before { padding-top: percentage(1/3); }
-  }
-  // .aspect--4-1:before { padding-top: percentage(1/4); }
-  // .aspect--5-1:before { padding-top: percentage(1/5); }
-  // .aspect--6-1:before { padding-top: percentage(1/6); }
-  // .aspect--7-1:before { padding-top: percentage(1/7); }
+  // .hold--center {
+  //   & > * {
+  //     top: 50%; left: 50%;
+  //     transform: translate(-50%, -50%);
+  //   }
+  // }
+
+  // .hold--fit {
+  //   & > * {
+  //     width: 100%;
+  //     height: 100%;
+  //     object-fit: contain;
+  //   }
+  // }
+
+  // #{base-class('aspect')} {
+  //   position: relative;
+  //   &:before {
+  //     content: '';
+  //     display: block;
+  //     width: 100%;
+  //   }
+  //   & > * {
+  //     display: block;
+  //     position: absolute;
+  //     top: 0; left: 0;
+  //     width: 100%;
+  //     object-fit: cover;
+  //     &:not(.fit) {
+  //       height: 100%;
+  //     }
+  //   }
+  // }
+
+  // .aspect--std:before { padding-top: percentage(9/16); }
+  // .aspect--hero:before { padding-top: percentage(9/16); }
+  // .aspect--mega:before { padding-top: percentage(9/16); }
+  // @include m(m,l) {
+  //   .aspect--hero:before { padding-top: percentage(1/2); }
+  //   .aspect--mega:before { padding-top: percentage(1/2); }
+  // }
+  // @include m(l) {
+  //   .aspect--mega:before { padding-top: percentage(1/3); }
+  // }
+  // // .aspect--4-1:before { padding-top: percentage(1/4); }
+  // // .aspect--5-1:before { padding-top: percentage(1/5); }
+  // // .aspect--6-1:before { padding-top: percentage(1/6); }
+  // // .aspect--7-1:before { padding-top: percentage(1/7); }
 
 
 
-  [data-bg-size='cover'] { background-size: cover; }
-  [data-bg-size='contain'] { background-size: contain; }
+  // [data-bg-size='cover'] { background-size: cover; }
+  // [data-bg-size='contain'] { background-size: contain; }
 
-  @each $ratio, $class in aspect-classes('hold') { #{$class} { padding-bottom: 1/$ratio * 100%; } }
+  // @each $ratio, $class in aspect-classes('hold') { #{$class} { padding-bottom: 1/$ratio * 100%; } }
 }

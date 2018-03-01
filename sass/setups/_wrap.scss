@@ -14,38 +14,43 @@
   $media-keys: map-keys($media);
   $media-length: length($media-keys);
 
+  // use ascending-only media queries
   @each $key in $media-keys {
     @include m($key) {
-      .wrap--each,
       .wrap--grid,
-      .wrap--#{$key} {
-        max-width: medium-var('inner-width', $key);
+      .wrap--inner-each,
+      .wrap--inner-#{$key} {
+        max-width: m-var('inner-width', $key);
+      }
+      .wrap--outer-each,
+      .wrap--outer-#{$key} {
+        max-width: m-var('outer-width', $key);
       }
     }
   }
 
-  // wrap--to-x, // wrap--x-to
-  @for $i from 1 through $media-length {
-    .wrap--#{nth($media-keys, $i)}-to {
-      @include mm(slice($media-keys, $i)) {
-        max-width: medium-var('inner-width') or 100%;
-      }
-    }
-    .wrap--to-#{nth($media-keys, $i)} {
-      @include mm(slice($media-keys, 1, $i)) {
-        max-width: medium-var('inner-width') or 100%;
-      }
-    }
-  }
+  // // wrap--to-x, // wrap--x-to
+  // @for $i from 1 through $media-length {
+  //   .wrap--#{nth($media-keys, $i)}-to {
+  //     @include mm(slice($media-keys, $i)) {
+  //       max-width: m-var('inner-width') or 100%;
+  //     }
+  //   }
+  //   .wrap--to-#{nth($media-keys, $i)} {
+  //     @include mm(slice($media-keys, 1, $i)) {
+  //       max-width: m-var('inner-width') or 100%;
+  //     }
+  //   }
+  // }
 
-  // wrap--x-to-y
-  @each $set in range-set($media-keys) {
-    $i: nth($set,1); $j: nth($set,2);
-    .wrap--#{nth($media-keys, $i)}-to-#{nth($media-keys, $j)} {
-      @include mm(slice($media-keys, $i, $j)) {
-        max-width: medium-var('inner-width') or 100%;
-      }
-    }
-  }
+  // // wrap--x-to-y
+  // @each $set in range-set($media-keys) {
+  //   $i: nth($set,1); $j: nth($set,2);
+  //   .wrap--#{nth($media-keys, $i)}-to-#{nth($media-keys, $j)} {
+  //     @include mm(slice($media-keys, $i, $j)) {
+  //       max-width: m-var('inner-width') or 100%;
+  //     }
+  //   }
+  // }
 
 }

@@ -29,6 +29,7 @@
 @import 'stack';
 
 // color, theme, icon ?
+@import 'colors';
 @import 'theme';
 
 @mixin homework-setup($setups...) {
@@ -43,7 +44,7 @@
   @if length($setups) == 0 {
     $setups: (
       'atomic',
-      'basic',
+      // 'basic',
       'colors',
       // 'debug',
       'outer',
@@ -59,7 +60,7 @@
   // run indicated setups
   @if index($setups, 'atomic') { @include setup-atomic; }
   @if index($setups, 'basic') { @include setup-basic; }
-  @if index($setups, 'colors') { @include setup-basic; }
+  @if index($setups, 'colors') { @include setup-colors; }
   @if index($setups, 'debug') { @include setup-debug; }
   @if index($setups, 'outer') { @include setup-outer; }
   @if index($setups, 'wrap') { @include setup-wrap; }

@@ -1,0 +1,47 @@
+.spread, [class^="spread--"], [class*=" spread--"] {
+  width: unset !important;
+}
+
+.outer--y, .outer--t {
+  padding-top: 1rem;
+}
+
+@media screen and (max-width: 29.999em) {
+  .outer, .outer--r {
+    padding-right: 1rem;
+  }
+  .spread, .spread--r {
+    margin-right: -1rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .outer, .outer--r {
+    padding-right: 2rem;
+  }
+  .spread, .spread--r {
+    margin-right: -2rem;
+  }
+}
+
+.outer--y, .outer--b {
+  padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 29.999em) {
+  .outer, .outer--l {
+    padding-left: 2rem;
+  }
+  .spread, .spread--l {
+    margin-left: -2rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .outer, .outer--l {
+    padding-left: 3rem;
+  }
+  .spread, .spread--l {
+    margin-left: -3rem;
+  }
+}

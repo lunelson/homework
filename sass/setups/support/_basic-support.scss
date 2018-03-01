@@ -6,20 +6,47 @@
 // flex
 // clear
 
+// 2017 clearfix https://css-tricks.com/snippets/css/clear-fix/
+// very latest clearfix http://cssmojo.com/the-very-latest-clearfix-reloaded/
+// flow-root https://helloanselm.com/2017/flow-root-supports/
+
 @mixin clearfix {
-  &:after {
+  &::after {
     content:"";
     display:table;
     clear:both;
+  }
+
+  @supports (display: flow-root) {
+    display: flow-root;
+    &::after { content: none; }
   }
 }
 
 @mixin clearfix-legacy {
   & { *zoom: 1; }
-  &:before, &:after { content: ""; display: table; }
-  &:after { clear: both; }
+  &::before, &::after { content: ""; display: table; }
+  &::after { clear: both; }
 }
 
+// VISUALLY HIDE / IMAGE REPLACEMENT
+// https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html
+// https://css-tricks.com/the-image-replacement-museum/
+
+@mixin vhide {
+  position: absolute !important;
+  clip: rect(0 0 0 0); // IE6, IE7
+  clip: rect(0, 0, 0, 0);
+  flex: 0 0 0%;
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+  body:hover & a,
+  body:hover & input,
+  body:hover & button { display: none !important; }
+}
 
 @mixin clip {
   overflow: hidden !important;
@@ -30,7 +57,7 @@
   visibility: hidden;
 }
 
-@mixin show($display: block) {
+@mixin show($display: 'block') {
   display: $display;
   visibility: visible;
 }
