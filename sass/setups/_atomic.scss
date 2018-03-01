@@ -68,18 +68,18 @@
       $inner-x: m-var('inner-x');
       @if $inner-x {
         @each $x, $inner-x in if(type-of($inner-x) == 'map', $inner-x, (m: $inner-x)) {
-          #{m-class(mod-class('px', $x), $m-depth...)},
-          #{m-class(mod-class('pr', $x), $m-depth...)} { padding-right: $inner-x; }
-          #{m-class(mod-class('px', $x), $m-depth...)},
-          #{m-class(mod-class('pl', $x), $m-depth...)} { padding-left: $inner-x; }
-          #{m-class(mod-class('mx', $x), $m-depth...)},
-          #{m-class(mod-class('mr', $x), $m-depth...)} { margin-right: $inner-x; }
-          #{m-class(mod-class('mx', $x), $m-depth...)},
-          #{m-class(mod-class('ml', $x), $m-depth...)} { margin-left: $inner-x; }
-          #{m-class(mod-class('mx-neg', $x), $m-depth...)},
-          #{m-class(mod-class('mr-neg', $x), $m-depth...)} { margin-right: $inner-x / -1; }
-          #{m-class(mod-class('mx-neg', $x), $m-depth...)},
-          #{m-class(mod-class('ml-neg', $x), $m-depth...)} { margin-left: $inner-x / -1; }
+          #{m-class(mod-class('px', $x, ''), $m-depth...)},
+          #{m-class(mod-class('pr', $x, ''), $m-depth...)} { padding-right: $inner-x; }
+          #{m-class(mod-class('px', $x, ''), $m-depth...)},
+          #{m-class(mod-class('pl', $x, ''), $m-depth...)} { padding-left: $inner-x; }
+          #{m-class(mod-class('mx', $x, ''), $m-depth...)},
+          #{m-class(mod-class('mr', $x, ''), $m-depth...)} { margin-right: $inner-x; }
+          #{m-class(mod-class('mx', $x, ''), $m-depth...)},
+          #{m-class(mod-class('ml', $x, ''), $m-depth...)} { margin-left: $inner-x; }
+          #{m-class(mod-class('mx-neg', $x, ''), $m-depth...)},
+          #{m-class(mod-class('mr-neg', $x, ''), $m-depth...)} { margin-right: $inner-x / -1; }
+          #{m-class(mod-class('mx-neg', $x, ''), $m-depth...)},
+          #{m-class(mod-class('ml-neg', $x, ''), $m-depth...)} { margin-left: $inner-x / -1; }
         }
       }
 
@@ -90,18 +90,18 @@
       $inner-y: m-var('inner-y');
       @if $inner-y {
         @each $y, $inner-y in if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y)) {
-          #{m-class(mod-class('py', $y), $m-depth...)},
-          #{m-class(mod-class('pt', $y), $m-depth...)} { padding-top: $inner-y; }
-          #{m-class(mod-class('py', $y), $m-depth...)},
-          #{m-class(mod-class('pb', $y), $m-depth...)} { padding-bottom: $inner-y; }
-          #{m-class(mod-class('my', $y), $m-depth...)},
-          #{m-class(mod-class('mt', $y), $m-depth...)} { margin-top: $inner-y; }
-          #{m-class(mod-class('my', $y), $m-depth...)},
-          #{m-class(mod-class('mb', $y), $m-depth...)} { margin-bottom: $inner-y; }
-          #{m-class(mod-class('my-neg', $y), $m-depth...)},
-          #{m-class(mod-class('mt-neg', $y), $m-depth...)} { margin-top: $inner-y / -1; }
-          #{m-class(mod-class('my-neg', $y), $m-depth...)},
-          #{m-class(mod-class('mb-neg', $y), $m-depth...)} { margin-bottom: $inner-y / -1; }
+          #{m-class(mod-class('py', $y, ''), $m-depth...)},
+          #{m-class(mod-class('pt', $y, ''), $m-depth...)} { padding-top: $inner-y; }
+          #{m-class(mod-class('py', $y, ''), $m-depth...)},
+          #{m-class(mod-class('pb', $y, ''), $m-depth...)} { padding-bottom: $inner-y; }
+          #{m-class(mod-class('my', $y, ''), $m-depth...)},
+          #{m-class(mod-class('mt', $y, ''), $m-depth...)} { margin-top: $inner-y; }
+          #{m-class(mod-class('my', $y, ''), $m-depth...)},
+          #{m-class(mod-class('mb', $y, ''), $m-depth...)} { margin-bottom: $inner-y; }
+          #{m-class(mod-class('my-neg', $y, ''), $m-depth...)},
+          #{m-class(mod-class('mt-neg', $y, ''), $m-depth...)} { margin-top: $inner-y / -1; }
+          #{m-class(mod-class('my-neg', $y, ''), $m-depth...)},
+          #{m-class(mod-class('mb-neg', $y, ''), $m-depth...)} { margin-bottom: $inner-y / -1; }
         }
       }
 

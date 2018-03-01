@@ -1,3 +1,15 @@
+//
+// base and mult
+//
+
+@function base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
+@function mod-class($base, $mod, $except: ('m')) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
+
+@mixin base-class($args...) { #{base-class($args...)} { @content; } }
+@mixin mod-class($args...) { #{mod-class($args...)} { @content; } }
+
+
+
 // class
 
 @function _base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
