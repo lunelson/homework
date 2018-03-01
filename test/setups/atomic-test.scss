@@ -41,4 +41,4 @@ $media: (
 );
 
 @include m-init(false);
-@include homework-setup('atomic');
+@include homework-setup(false, 'atomic');

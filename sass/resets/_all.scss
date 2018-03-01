@@ -8,6 +8,19 @@
 @import "root";
 @import "block";
 @import "embed";
-@import "table";
 @import "inline";
-@import "form-ui";
+@import "table";
+@import "ui";
+
+$done-homework-reset: false;
+
+@mixin homework-reset {
+  @include reset-root;
+  @include reset-block;
+  @include reset-embed;
+  @include reset-inline;
+  @include reset-table;
+  @include reset-ui;
+
+  $done-homework-reset: true !global;
+}

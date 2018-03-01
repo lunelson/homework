@@ -52,13 +52,19 @@
       //
 
       @each $reduction, $ratio-list in $reduced-ratios {
-        #{list-transform($ratio-list, 'ratio-class', 'w', $fx)} { width: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class', 'w', $fx)},
+        #{list-transform($ratio-list, 'ratio-class', 'col', $fx)},
+        #{list-transform($ratio-list, 'ratio-class', 'cell', $fx)} { width: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pr', $fx)} { padding-right: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pl', $fx)} { padding-left: ratio-val($reduction) }
-        #{list-transform($ratio-list, 'ratio-class', 'mr', $fx)} { margin-right: ratio-val($reduction) }
-        #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fx)} { margin-right: ratio-val($reduction)/-1 }
-        #{list-transform($ratio-list, 'ratio-class', 'ml', $fx)} { margin-left: ratio-val($reduction) }
-        #{list-transform($ratio-list, 'ratio-class', 'ml-neg', $fx)} { margin-left: ratio-val($reduction)/-1 }
+        #{list-transform($ratio-list, 'ratio-class', 'mr', $fx)},
+        #{list-transform($ratio-list, 'ratio-class', 'push-r', $fx)} { margin-right: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class', 'ml', $fx)},
+        #{list-transform($ratio-list, 'ratio-class', 'push-l', $fx)} { margin-left: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fx)},
+        #{list-transform($ratio-list, 'ratio-class', 'pull-r', $fx)} { margin-right: ratio-val($reduction)/-1 }
+        #{list-transform($ratio-list, 'ratio-class', 'ml-neg', $fx)},
+        #{list-transform($ratio-list, 'ratio-class', 'pull-l', $fx)} { margin-left: ratio-val($reduction)/-1 }
       }
 
       //

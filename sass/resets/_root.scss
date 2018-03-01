@@ -1,71 +1,71 @@
-/*
-                   _
-                  | |
-   _ __ ___   ___ | |_
-  | '__/ _ \ / _ \| __|
-  | | | (_) | (_) | |_
-  |_|  \___/ \___/ \__|
+//                  _
+//                 | |
+//  _ __ ___   ___ | |_
+// | '__/ _ \ / _ \| __|
+// | | | (_) | (_) | |_
+// |_|  \___/ \___/ \__|
 
 
-*/
+@mixin reset-root {
 
-body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, *, *:before, *:after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0 none;
-  outline: 0 none;
-  background: transparent;
-  text-align: inherit;
-  direction: inherit;
-  font: inherit;
-}
+  body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video, *, *:before, *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    outline: 0 none;
+    background: transparent;
+    text-align: inherit;
+    direction: inherit;
+    font: inherit;
+  }
 
-/*
-  set border-box sizing at root
-  better default
-  better default? alt: normal
-  prevent adjustments of font size after orientation changes in IE and iOS
-  ^
-  unify font rendering
-  ^
-  faster and stabler than optimizeLegibility
-  remove webkit tap highlight color
-  5
- */
-html, :root {
-  box-sizing: border-box; // 1
-  font-family: sans-serif; // 2
-  font-weight: normal; // 2
-  font-style: normal; // 2
-  font-size: 1em;
-  line-height: 1.25;
-  text-align: left;
-  direction: ltr;
-  text-rendering: auto;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -ms-overflow-style: scrollbar;
-}
+  /*
+    set border-box sizing at root
+    better default
+    better default? alt: normal
+    prevent adjustments of font size after orientation changes in IE and iOS
+    ^
+    unify font rendering
+    ^
+    faster and stabler than optimizeLegibility
+    remove webkit tap highlight color
+    5
+   */
+  html, :root {
+    box-sizing: border-box; // 1
+    font-family: sans-serif; // 2
+    font-weight: normal; // 2
+    font-style: normal; // 2
+    font-size: 1em;
+    line-height: 1.25;
+    text-align: left;
+    direction: ltr;
+    text-rendering: auto;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -ms-overflow-style: scrollbar;
+  }
 
-// IE10+ doesn't honor `<meta name="viewport">` in some cases.
-@at-root {
-  @-ms-viewport {
-    width: device-width;
+  // IE10+ doesn't honor `<meta name="viewport">` in some cases.
+  @at-root {
+    @-ms-viewport {
+      width: device-width;
+    }
   }
 }

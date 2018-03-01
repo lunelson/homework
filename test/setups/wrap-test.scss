@@ -8,4 +8,4 @@ $media: (
 );
 
 @include m-init(false);
-@include homework-setup('wrap');
+@include homework-setup(false, 'wrap');

@@ -24,7 +24,7 @@ $media: (
 );
 
 @include m-init(false);
-@include homework-setup('grid');
+@include homework-setup(false, 'grid');
 
 // $setups: (
 //   atomic: false,

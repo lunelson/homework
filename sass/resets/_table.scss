@@ -1,40 +1,39 @@
-/*
-   _        _     _
-  | |      | |   | |
-  | |_ __ _| |__ | | ___
-  | __/ _` | '_ \| |/ _ \
-  | || (_| | |_) | |  __/
-   \__\__,_|_.__/|_|\___|
+// _        _     _
+// | |      | |   | |
+// | |_ __ _| |__ | | ___
+// | __/ _` | '_ \| |/ _ \
+// | || (_| | |_) | |  __/
+// \__\__,_|_.__/|_|\___|
 
-  table
+// table
 
-  caption
-  col
-  colgroup
-  tbody
-  td
-  th
-  thead
-  tr
-  tfoot
+// caption
+// col
+// colgroup
+// tbody
+// td
+// th
+// thead
+// tr
+// tfoot
 
-*/
+@mixin reset-table {
 
+  table {
+    display: block;
+    width: 100%;
+    border: 0; // strongest way of overriding
+    table-layout: fixed; // faster, more predictable
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
 
-table {
-  display: block;
-  width: 100%;
-  border: 0; // strongest way of overriding
-  table-layout: fixed; // faster, more predictable
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+  caption {
+    text-align: inherit;
+    caption-side: bottom;
+  }
 
-caption {
-  text-align: inherit;
-  caption-side: bottom;
-}
-
-th {
-  text-align: inherit;
+  th {
+    text-align: inherit;
+  }
 }

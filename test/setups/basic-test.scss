@@ -8,4 +8,4 @@ $media: (
 );
 
 @include m-init(false);
-@include homework-setup('basic');
+@include homework-setup(false, 'basic');

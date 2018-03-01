@@ -14,8 +14,19 @@
 
   .row, #{base-class('grid')} {
     display: flex;
-    flex-wrap: wrap;
-    & > * { @include col; }
+    & > * {
+      flex: 1 1 0%; // explicit basis
+      min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+      overflow-wrap: break-word; // break long words
+      background-clip: content-box;
+    }
+  }
+
+  #{base-class('grid')} { flex-wrap: wrap; }
+
+  #{base-class('col')},
+  #{base-class('cell')} {
+    flex: 0 0 auto;
   }
 
   @include mm-for('inner-x') {

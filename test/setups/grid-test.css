@@ -1,14 +1,21 @@
 .row, .grid, [class^="grid--"], [class*=" grid--"] {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .row > *, .grid > *, [class^="grid--"] > *, [class*=" grid--"] > * {
-  flex: 1 1 auto;
-  width: 0%;
+  flex: 1 1 0%;
   min-width: 0%;
-  background-clip: content-box;
   overflow-wrap: break-word;
+  background-clip: content-box;
+}
+
+.grid, [class^="grid--"], [class*=" grid--"] {
+  flex-wrap: wrap;
+}
+
+.col, [class^="col--"], [class*=" col--"],
+.cell, [class^="cell--"], [class*=" cell--"] {
+  flex: 0 0 auto;
 }
 
 @media screen and (max-width: 29.999em) {

@@ -24,7 +24,7 @@ $media: (
 );
 
 @include m-init(false);
-@include homework-setup('stack');
+@include homework-setup(false, 'stack');
 
 // $setups: (
 //   debug: false,

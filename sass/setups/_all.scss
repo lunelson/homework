@@ -32,13 +32,15 @@
 @import 'colors';
 @import 'theme';
 
-@mixin homework-setup($setups...) {
+$done-homework-setup: false;
+
+@mixin homework-setup($reset: true, $setups...) {
+
+  // run homework reset, if not done
+  @if $reset and not $done-homework-reset { @include homework-reset; }
 
   // run sass-m setup if not done
   @if not $done-m { @include m-init(); }
-
-  // compute the gcd-columns/ratios thing, from max-columns in the $base|$media
-  // ???
 
   // set $setups to ALL setups, if none provided
   @if length($setups) == 0 {
@@ -58,7 +60,6 @@
   }
 
   // run indicated setups
-  @if index($setups, 'atomic') { @include setup-atomic; }
   @if index($setups, 'basic') { @include setup-basic; }
   @if index($setups, 'colors') { @include setup-colors; }
   @if index($setups, 'debug') { @include setup-debug; }
@@ -69,7 +70,8 @@
   @if index($setups, 'typo') { @include setup-typo; }
   @if index($setups, 'stack') { @include setup-stack; }
   @if index($setups, 'theme') { @include setup-theme; }
+  @if index($setups, 'atomic') { @include setup-atomic; }
 
   // set $done-homework to true
-  // ???
+  $done-homework-setup: true !global;
 }

@@ -44,7 +44,7 @@ $media: (
 );
 
 @include m-init(false);
-@include homework-setup('typo');
+@include homework-setup(false, 'typo');
 
 // $setups: (
 //   atomic: false,

@@ -33,4 +33,4 @@ $media: (
 );
 
 @include m-init(false);
-@include homework-setup('outer');
+@include homework-setup(false, 'outer');

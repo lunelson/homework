@@ -1,6 +1,5 @@
 @mixin col {
-  flex: 1 1 auto;
-  width: 0%;
+  flex: 1 1 0%;
   min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
   background-clip: content-box;
   overflow-wrap: break-word;
