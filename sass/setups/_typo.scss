@@ -1,14 +1,15 @@
-//   __            _
-//  / _|          | |
-// | |_ ___  _ __ | |_
-// |  _/ _ \| '_ \| __|
-// | || (_) | | | | |_
-// |_| \___/|_| |_|\__|
+//  _
+// | |
+// | |_ _   _ _ __   ___
+// | __| | | | '_ \ / _ \
+// | |_| |_| | |_) | (_) |
+//  \__|\__, | .__/ \___/
+//       __/ | |
+//      |___/|_|
 
+@import 'support/typo-support';
 
-@import 'support/font-support';
-
-@if map-get($setups, 'font') {
+@mixin setup-typo {
 
 
   // if length of fonts is 0, merge fonts-default against it;
@@ -117,6 +118,4 @@
     }
   }
 
-
-  $setups: map-merge($setups, ('font': false)) !global;
 }

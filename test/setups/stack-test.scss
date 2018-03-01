@@ -1,4 +1,5 @@
 @import '../peers';
+@import '../../index';
 
 $base: (
   inner-x: 2rem,
@@ -23,18 +24,17 @@ $media: (
 );
 
 @include m-init(false);
+@include homework-setup('stack');
 
-$setups: (
-  debug: false,
-  atomic: false,
-  basic: false,
-  outer: false,
-  wrap: false,
-  peel: false,
-  grid: false,
-  font: false,
-  stack: true,
-  theme: false,
-);
-
-@import '../../index';
+// $setups: (
+//   debug: false,
+//   atomic: false,
+//   basic: false,
+//   outer: false,
+//   wrap: false,
+//   peel: false,
+//   grid: false,
+//   font: false,
+//   stack: true,
+//   theme: false,
+// );

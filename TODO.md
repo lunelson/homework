@@ -1,3 +1,45 @@
+## basic, wrap, outer
+
+- outer/spread belongs to margin/padding; needs media-specific overrides
+- margin/padding need a 'zero' version e.g. `mr-0` or `mr-zero`
+- grid/row need grid--null and row--null classes (no gutter)
+- review the grid functions for "inside" of columns, create m-/p- classes
+- differentiate a classed .cell/.col behaviour from that of unclassed direct child
+- try to abstract mixins back out, so they are usable without classes
+  - wrap(w), outer(l,r), spread(l,r)
+  - grid(y), cell, row, col
+  - stack(y), font(f), typo(t), trim?
+
+- utility classes
+  - inset-r/-l, outset-r/-l -- 1,2
+  - push-r/-l, pull-r/-l, span -- n-d
+
+- atomic classes
+  - n-d
+  - col-n-d
+  - inner, outer
+
+# grid, typo|type|font, stack
+
+potential mixins
+
+grid
+cell
+row
+col
+
+
+```scss
+.stack--foo {
+  @include stack('foo') {
+    h3 { @include typo(xl); }
+    h4 { @include typo(l); }
+    p { @include typo(m); }
+  }
+}
+
+```
+
 ## take over from sass-m
 
 inner-x($mult)

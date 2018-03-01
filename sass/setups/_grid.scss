@@ -10,7 +10,7 @@
 
 @import 'support/grid-support';
 
-@if map-get($setups, 'grid') {
+@mixin setup-grid {
 
   #{base-class('row')},
   #{base-class('grid')} {
@@ -49,5 +49,4 @@
     }
   }
 
-  $setups: map-merge($setups, ('grid': false)) !global;
 }

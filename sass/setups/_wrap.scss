@@ -1,8 +1,11 @@
-//
-// wrap-setup
-//
+// __      ___ __ __ _ _ __
+// \ \ /\ / / '__/ _` | '_ \
+//  \ V  V /| | | (_| | |_) |
+//   \_/\_/ |_|  \__,_| .__/
+//                    | |
+//                    |_|
 
-@mixin wrap-setup() {
+@mixin setup-wrap {
 
   #{base-class('wrap')} { margin-right: auto; margin-left: auto; }
   .wrap--left { margin-left: 0; }
@@ -44,4 +47,5 @@
       }
     }
   }
+
 }

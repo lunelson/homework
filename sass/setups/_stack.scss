@@ -8,7 +8,7 @@
 
 @import 'support/stack-support';
 
-@if map-get($setups, 'stack') {
+@mixin setup-stack {
 
   #{base-class('stack')} {
     padding-top: 0.1px;
@@ -74,5 +74,4 @@
     }
   }
 
-  $setups: map-merge($setups, ('stack': false)) !global;
 }

@@ -12,7 +12,7 @@
 @import 'basic';
 
 // debug, outer, spread
-@import 'debug';
+// @import 'debug';
 @import 'outer';
 
 // modal, layer, scroll
@@ -24,8 +24,8 @@
 // inset, outset, chain
 @import 'grid';
 
-// font, stack, trim
-@import 'font';
+// typo, stack, trim
+@import 'typo';
 @import 'stack';
 
 // color, theme, icon ?
@@ -34,7 +34,7 @@
 @mixin homework-setup($setups...) {
 
   // run sass-m setup if not done
-  @if not $done-m { @include setup-m(); }
+  @if not $done-m { @include m-init(); }
 
   // compute the gcd-columns/ratios thing, from max-columns in the $base|$media
   // ???
@@ -44,12 +44,13 @@
     $setups: (
       'atomic',
       'basic',
-      'debug',
+      'colors',
+      // 'debug',
       'outer',
       'wrap',
       'peel',
       'grid',
-      'font',
+      'typo',
       'stack',
       'theme',
     );
@@ -58,12 +59,13 @@
   // run indicated setups
   @if index($setups, 'atomic') { @include setup-atomic; }
   @if index($setups, 'basic') { @include setup-basic; }
+  @if index($setups, 'colors') { @include setup-basic; }
   @if index($setups, 'debug') { @include setup-debug; }
   @if index($setups, 'outer') { @include setup-outer; }
   @if index($setups, 'wrap') { @include setup-wrap; }
   @if index($setups, 'peel') { @include setup-peel; }
   @if index($setups, 'grid') { @include setup-grid; }
-  @if index($setups, 'font') { @include setup-font; }
+  @if index($setups, 'typo') { @include setup-typo; }
   @if index($setups, 'stack') { @include setup-stack; }
   @if index($setups, 'theme') { @include setup-theme; }
 
