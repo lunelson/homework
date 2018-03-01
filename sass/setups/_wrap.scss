@@ -12,7 +12,7 @@
   .wrap--right { margin-right: 0; }
 
   $media-keys: map-keys($media);
-  $media-length: length($media-keys);
+  // $media-length: length($media-keys);
 
   // use ascending-only media queries
   @each $key in $media-keys {
