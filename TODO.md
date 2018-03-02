@@ -172,3 +172,9 @@ stylesheets/
       setup-wrap
       setup-unwrap
       setup-hold
+
+
+## libsass error tracing
+
+- "invalid null operation" -- no backtrace
+-

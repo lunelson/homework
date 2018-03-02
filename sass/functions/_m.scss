@@ -63,6 +63,7 @@
 //
 
 @function inner-x($x: 1, $m: $curr-m) {
+  @if $x == 0 { @return 0; }
   $inner-x: m-var('inner-x', $m);
   @if type-of($inner-x) == 'map' {
     @return if(is-unitless($x), $x * map-get($inner-x, 'm'), map-get($inner-x, $x));
@@ -71,6 +72,7 @@
 }
 
 @function inner-y($y: 1, $m: $curr-m) {
+  @if $y == 0 { @return 0; }
   $inner-y: m-var('inner-y', $m);
   @if type-of($inner-y) == 'map' {
     @return if(is-unitless($y), $y * map-get($inner-y, 'm'), map-get($inner-y, $y));

@@ -46,7 +46,7 @@ $done-homework-setup: false;
   @if length($setups) == 0 {
     $setups: (
       'atomic',
-      // 'basic',
+      'basic',
       'colors',
       'debug',
       'outer',

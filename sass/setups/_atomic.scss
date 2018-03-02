@@ -12,13 +12,17 @@
 @function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
 @function ratio-val($ratio)    { @return percentage(nth($ratio,1) / nth($ratio,2)); }
 @function ratio-class($ratio, $index, $list, $base, $fx) { @return '.#{$base}-#{ratio-str($ratio)}#{$fx}'; }
+@function ratio-class2($ratio, $index, $list, $base, $fx) { @return '.#{$base}--#{ratio-str($ratio)}#{$fx}'; }
 
 @mixin setup-atomic {
 
-  $grid-columns: 12; // could be parsed out of $media
+  $grid-column-counts: ();
+  @each $m, $medium in $media {
+    $grid-column-counts: append($grid-column-counts, map-get($medium, 'grid-columns'));
+  }
 
   $reduced-ratios: ();
-  @for $d from 1 through $grid-columns {
+  @for $d from 1 through max($grid-column-counts...) {
     @for $n from 1 through $d {
       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
       $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
@@ -67,19 +71,19 @@
 
       @each $reduction, $ratio-list in $reduced-ratios {
         #{list-transform($ratio-list, 'ratio-class', 'w', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'col', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'cell', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'span', $fx)} { width: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class2', 'col', $fx)},
+        #{list-transform($ratio-list, 'ratio-class2', 'cell', $fx)},
+        #{list-transform($ratio-list, 'ratio-class2', 'span', $fx)} { width: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pr', $fx)} { padding-right: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pl', $fx)} { padding-left: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'mr', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'push-r', $fx)} { margin-right: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class2', 'push-r', $fx)} { margin-right: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'ml', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'push-l', $fx)} { margin-left: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class2', 'push-l', $fx)} { margin-left: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'pull-r', $fx)} { margin-right: ratio-val($reduction)/-1 }
+        #{list-transform($ratio-list, 'ratio-class2', 'pull-r', $fx)} { margin-right: ratio-val($reduction)/-1 }
         #{list-transform($ratio-list, 'ratio-class', 'ml-neg', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'pull-l', $fx)} { margin-left: ratio-val($reduction)/-1 }
+        #{list-transform($ratio-list, 'ratio-class2', 'pull-l', $fx)} { margin-left: ratio-val($reduction)/-1 }
       }
 
       //

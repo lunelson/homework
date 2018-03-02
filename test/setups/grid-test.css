@@ -1,6 +1,7 @@
 .row, [class^="row--"], [class*=" row--"],
 .grid, [class^="grid--"], [class*=" grid--"] {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .row > *, [class^="row--"] > *, [class*=" row--"] > *,
@@ -11,13 +12,10 @@
   background-clip: content-box;
 }
 
-.grid, [class^="grid--"], [class*=" grid--"] {
-  flex-wrap: wrap;
-}
-
 .col, [class^="col--"], [class*=" col--"],
 .cell, [class^="cell--"], [class*=" cell--"] {
   flex: 0 0 auto;
+  width: 100%;
 }
 
 @media screen and (max-width: 29.999em) {

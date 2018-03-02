@@ -7,14 +7,14 @@ $base: (
     s: 1rem,
     m: 2rem
   ),
-  copy-sizes: (
+  typos: (
     sans: (
-      s: 14 20,
-      m: 16 24,
+      s: 14 1.4,
+      m: 16 1.4,
     ),
     serif: (
-      s: 16 20,
-      m: 18 24,
+      s: 16 1.4,
+      m: 18 1.4,
     ),
   )
 );
@@ -29,14 +29,14 @@ $media: (
   b: (
     breakpoint: 30em,
     inner-x: 3rem,
-    copy-sizes: (
+    typos: (
       sans: (
-        s: 20 30,
-        m: 24 36,
+        s: 20 1.4,
+        m: 24 1.4,
       ),
       serif: (
-        s: 22 32,
-        m: 26 40,
+        s: 22 1.4,
+        m: 26 1.4,
       ),
     )
   ),
