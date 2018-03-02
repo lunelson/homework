@@ -3,46 +3,48 @@
   margin-left: auto;
 }
 
-.wrap--left {
+.wrap-left {
   margin-left: 0;
 }
 
-.wrap--right {
+.wrap-right {
   margin-right: 0;
 }
 
 @media screen and (min-width: 20em) {
-  .wrap--grid,
-  .wrap--inner-each,
-  .wrap--inner-a {
+  .wrap-grid,
+  .wrap-inner,
+  .wrap-inner__a {
     max-width: 16rem;
   }
-  .wrap--outer-each,
-  .wrap--outer-a {
+  .wrap-outer,
+  .wrap-outer__a {
     max-width: 20rem;
   }
 }
 
 @media screen and (min-width: 30em) {
-  .wrap--grid,
-  .wrap--inner-each,
-  .wrap--inner-b {
+  .wrap-grid,
+  .wrap-inner,
+  .wrap-inner__b {
     max-width: 26rem;
   }
-  .wrap--outer-each,
-  .wrap--outer-b {
+  .wrap-outer,
+  .wrap-outer__b {
     max-width: 30rem;
   }
 }
 
 @media screen and (min-width: 40em) {
-  .wrap--grid,
-  .wrap--inner-each,
-  .wrap--inner-c {
+  .wrap-grid,
+  .wrap-inner,
+  .wrap-inner__c,
+  .wrap-inner__last {
     max-width: 36rem;
   }
-  .wrap--outer-each,
-  .wrap--outer-c {
+  .wrap-outer,
+  .wrap-outer__c,
+  .wrap-inner__last {
     max-width: 40rem;
   }
 }

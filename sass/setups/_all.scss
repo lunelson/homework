@@ -12,7 +12,7 @@
 @import 'basic';
 
 // debug, outer, spread
-// @import 'debug';
+@import 'debug';
 @import 'outer';
 
 // modal, layer, scroll
@@ -48,7 +48,7 @@ $done-homework-setup: false;
       'atomic',
       // 'basic',
       'colors',
-      // 'debug',
+      'debug',
       'outer',
       'wrap',
       'peel',

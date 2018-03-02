@@ -2,89 +2,113 @@
   width: unset !important;
 }
 
-.outer--y, .outer--t {
+.frame-y, .frame-t,
+.outer-y, .outer-t {
   padding-top: 1rem;
 }
 
-.outer, .outer--r {
+.frame, .frame-r,
+.outer, .outer-r {
   padding-right: 1rem;
 }
 
-.spread, .spread--r {
-  margin-right: -1rem;
-}
-
-.outer--y, .outer--b {
+.frame-y, .frame-b,
+.outer-y, .outer-b {
   padding-bottom: 1rem;
 }
 
-.outer, .outer--l {
+.frame, .frame-l,
+.outer, .outer-l {
   padding-left: 1rem;
 }
 
-.spread, .spread--l {
+.bleed, .bleed-r,
+.spread, .spread-r {
+  margin-right: -1rem;
+}
+
+.bleed, .bleed-l,
+.spread, .spread-l {
   margin-left: -1rem;
 }
 
 @media screen and (min-width: 20em) {
-  .outer--y, .outer--t, .outer--y__a, .outer--t__a {
+  .frame-y, .frame-t, .frame-y__a, .frame-t__a,
+  .outer-y, .outer-t, .outer-y__a, .outer-t__a {
     padding-top: 2rem;
   }
-  .outer, .outer--r, .outer__a, .outer--r__a {
+  .frame, .frame-r, .frame__a, .frame-r__a,
+  .outer, .outer-r, .outer__a, .outer-r__a {
     padding-right: 2rem;
   }
-  .spread, .spread--r, .spread__a, .spread--r__a {
-    margin-right: -2rem;
-  }
-  .outer--y, .outer--b, .outer--y__a, .outer--b__a {
+  .frame-y, .frame-b, .frame-y__a, .frame-b__a,
+  .outer-y, .outer-b, .outer-y__a, .outer-b__a {
     padding-bottom: 2rem;
   }
-  .outer, .outer--l, .outer__a, .outer--l__a {
+  .frame, .frame-l, .frame__a, .frame-l__a,
+  .outer, .outer-l, .outer__a, .outer-l__a {
     padding-left: 2rem;
   }
-  .spread, .spread--l, .spread__a, .spread--l__a {
+  .bleed, .bleed-r, .bleed__a, .bleed-r__a,
+  .spread, .spread-r, .spread__a, .spread-r__a {
+    margin-right: -2rem;
+  }
+  .bleed, .bleed-l, .bleed__a, .bleed-l__a,
+  .spread, .spread-l, .spread__a, .spread-l__a {
     margin-left: -2rem;
   }
 }
 
 @media screen and (min-width: 30em) {
-  .outer--y, .outer--t, .outer--y__a, .outer--t__a, .outer--y__b, .outer--t__b {
+  .frame-y, .frame-t, .frame-y__a, .frame-t__a, .frame-y__b, .frame-t__b,
+  .outer-y, .outer-t, .outer-y__a, .outer-t__a, .outer-y__b, .outer-t__b {
     padding-top: 3rem;
   }
-  .outer, .outer--r, .outer__a, .outer--r__a, .outer__b, .outer--r__b {
+  .frame, .frame-r, .frame__a, .frame-r__a, .frame__b, .frame-r__b,
+  .outer, .outer-r, .outer__a, .outer-r__a, .outer__b, .outer-r__b {
     padding-right: 3rem;
   }
-  .spread, .spread--r, .spread__a, .spread--r__a, .spread__b, .spread--r__b {
-    margin-right: -3rem;
-  }
-  .outer--y, .outer--b, .outer--y__a, .outer--b__a, .outer--y__b, .outer--b__b {
+  .frame-y, .frame-b, .frame-y__a, .frame-b__a, .frame-y__b, .frame-b__b,
+  .outer-y, .outer-b, .outer-y__a, .outer-b__a, .outer-y__b, .outer-b__b {
     padding-bottom: 3rem;
   }
-  .outer, .outer--l, .outer__a, .outer--l__a, .outer__b, .outer--l__b {
+  .frame, .frame-l, .frame__a, .frame-l__a, .frame__b, .frame-l__b,
+  .outer, .outer-l, .outer__a, .outer-l__a, .outer__b, .outer-l__b {
     padding-left: 3rem;
   }
-  .spread, .spread--l, .spread__a, .spread--l__a, .spread__b, .spread--l__b {
+  .bleed, .bleed-r, .bleed__a, .bleed-r__a, .bleed__b, .bleed-r__b,
+  .spread, .spread-r, .spread__a, .spread-r__a, .spread__b, .spread-r__b {
+    margin-right: -3rem;
+  }
+  .bleed, .bleed-l, .bleed__a, .bleed-l__a, .bleed__b, .bleed-l__b,
+  .spread, .spread-l, .spread__a, .spread-l__a, .spread__b, .spread-l__b {
     margin-left: -3rem;
   }
 }
 
 @media screen and (min-width: 40em) {
-  .outer--y, .outer--t, .outer--y__a, .outer--t__a, .outer--y__b, .outer--t__b, .outer--y__c, .outer--t__c {
+  .frame-y, .frame-t, .frame-y__a, .frame-t__a, .frame-y__b, .frame-t__b, .frame-y__c, .frame-t__c,
+  .outer-y, .outer-t, .outer-y__a, .outer-t__a, .outer-y__b, .outer-t__b, .outer-y__c, .outer-t__c {
     padding-top: 4rem;
   }
-  .outer, .outer--r, .outer__a, .outer--r__a, .outer__b, .outer--r__b, .outer__c, .outer--r__c {
+  .frame, .frame-r, .frame__a, .frame-r__a, .frame__b, .frame-r__b, .frame__c, .frame-r__c,
+  .outer, .outer-r, .outer__a, .outer-r__a, .outer__b, .outer-r__b, .outer__c, .outer-r__c {
     padding-right: 4rem;
   }
-  .spread, .spread--r, .spread__a, .spread--r__a, .spread__b, .spread--r__b, .spread__c, .spread--r__c {
-    margin-right: -4rem;
-  }
-  .outer--y, .outer--b, .outer--y__a, .outer--b__a, .outer--y__b, .outer--b__b, .outer--y__c, .outer--b__c {
+  .frame-y, .frame-b, .frame-y__a, .frame-b__a, .frame-y__b, .frame-b__b, .frame-y__c, .frame-b__c,
+  .outer-y, .outer-b, .outer-y__a, .outer-b__a, .outer-y__b, .outer-b__b, .outer-y__c, .outer-b__c {
     padding-bottom: 4rem;
   }
-  .outer, .outer--l, .outer__a, .outer--l__a, .outer__b, .outer--l__b, .outer__c, .outer--l__c {
+  .frame, .frame-l, .frame__a, .frame-l__a, .frame__b, .frame-l__b, .frame__c, .frame-l__c,
+  .outer, .outer-l, .outer__a, .outer-l__a, .outer__b, .outer-l__b, .outer__c, .outer-l__c {
     padding-left: 4rem;
   }
-  .spread, .spread--l, .spread__a, .spread--l__a, .spread__b, .spread--l__b, .spread__c, .spread--l__c {
+  .bleed, .bleed-r, .bleed__a, .bleed-r__a, .bleed__b, .bleed-r__b, .bleed__c, .bleed-r__c,
+  .spread, .spread-r, .spread__a, .spread-r__a, .spread__b, .spread-r__b, .spread__c, .spread-r__c {
+    margin-right: -4rem;
+  }
+  .bleed, .bleed-l, .bleed__a, .bleed-l__a, .bleed__b, .bleed-l__b, .bleed__c, .bleed-l__c,
+  .spread, .spread-l, .spread__a, .spread-l__a, .spread__b, .spread-l__b, .spread__c, .spread-l__c {
     margin-left: -4rem;
   }
 }

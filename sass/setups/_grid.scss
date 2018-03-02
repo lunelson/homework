@@ -12,7 +12,8 @@
 
 @mixin setup-grid {
 
-  .row, #{base-class('grid')} {
+  #{base-class('row')},
+  #{base-class('grid')} {
     display: flex;
     & > * {
       flex: 1 1 0%; // explicit basis
@@ -31,14 +32,25 @@
 
   @include mm-for('inner-x') {
     $inner-x: inner-x();
-    .row, #{base-class('grid')} {
+    #{base-class('row')},
+    #{base-class('grid')} {
       margin-left: $inner-x / -2;
       margin-right: $inner-x / -2;
-      width: add(100%, $inner-x);
+      width: add(100%, $inner-x); // unset??
       & > * {
         padding-left: $inner-x / 2;
         padding-right: $inner-x / 2;
       }
+    }
+  }
+
+  .row--null, .grid--null {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: unset !important;
+    & > * {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
   }
 
@@ -55,6 +67,15 @@
           }
         }
       }
+    }
+  }
+
+  .grid--null {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    & > * {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
     }
   }
 

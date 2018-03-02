@@ -8,23 +8,27 @@
 @mixin setup-wrap {
 
   #{base-class('wrap')} { margin-right: auto; margin-left: auto; }
-  .wrap--left { margin-left: 0; }
-  .wrap--right { margin-right: 0; }
+  .wrap-left { margin-left: 0; }
+  .wrap-right { margin-right: 0; }
 
   $media-keys: map-keys($media);
+  $last-m: last($media-keys);
   // $media-length: length($media-keys);
 
   // use ascending-only media queries
-  @each $key in $media-keys {
-    @include m($key) {
-      .wrap--grid,
-      .wrap--inner-each,
-      .wrap--inner-#{$key} {
-        max-width: m-var('inner-width', $key);
+  @each $m in $media-keys {
+    @include m($m) {
+      $fix: m-suffix($m);
+      .wrap-grid,
+      .wrap-inner,
+      .wrap-inner#{$fix},
+      #{if($m == $last-m, ".wrap-inner__last", "")}, {
+        max-width: m-var('inner-width', $m);
       }
-      .wrap--outer-each,
-      .wrap--outer-#{$key} {
-        max-width: m-var('outer-width', $key);
+      .wrap-outer,
+      .wrap-outer#{$fix},
+      #{if($m == $last-m, ".wrap-inner__last", "")}, {
+        max-width: m-var('outer-width', $m);
       }
     }
   }

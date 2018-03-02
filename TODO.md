@@ -1,9 +1,46 @@
+inset-r__m
+hang-r__m
+tuck
+slip
+edge
+shim
+
+drop
+slide
+lip
+rim
+lap
+well
+dent
+bump
+hump
+rise
+card
+bind
+bound
+
+lead
+
+
+wrap
+edge
+slip
+
+shift
+spread
+fringe
+verge
+skirt
+
+
+## util
+
+- move atomic and basic to 'util'
+-
+
 ## basic, wrap, outer
 
-- margin/padding need a 'zero' version e.g. `mr-0` or `mr-zero`
-- grid/row need grid--null and row--null classes (no gutter)
 - review the grid functions for "inside" of columns, create m-/p- classes
-- differentiate a classed .cell/.col behaviour from that of unclassed direct child
 - try to abstract mixins back out, so they are usable without classes
   - wrap(w), outer(l,r), spread(l,r)
   - grid(y), cell, row, col

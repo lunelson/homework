@@ -11,7 +11,7 @@
 
 @function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
 @function ratio-val($ratio)    { @return percentage(nth($ratio,1) / nth($ratio,2)); }
-@function ratio-class($ratio, $index, $list, $base, $fx) { @return '.#{$base}--#{ratio-str($ratio)}#{$fx}'; }
+@function ratio-class($ratio, $index, $list, $base, $fx) { @return '.#{$base}-#{ratio-str($ratio)}#{$fx}'; }
 
 @mixin setup-atomic {
 
@@ -48,13 +48,28 @@
       .d-inline#{$fx} { display: inline; vertical-align: baseline; }
 
       //
+      // dimensions: zero
+      //
+
+      .w-0#{$fx} { width: 0; }
+      .my-0#{$fx}, .mt-0#{$fx} { margin-top: 0; }
+      .mx-0#{$fx}, .mr-0#{$fx} { margin-right: 0; }
+      .my-0#{$fx}, .mb-0#{$fx} { margin-bottom: 0; }
+      .mx-0#{$fx}, .ml-0#{$fx} { margin-left: 0; }
+      .py-0#{$fx}, .pt-0#{$fx} { padding-top: 0; }
+      .px-0#{$fx}, .pr-0#{$fx} { padding-right: 0; }
+      .py-0#{$fx}, .pb-0#{$fx} { padding-bottom: 0; }
+      .px-0#{$fx}, .pl-0#{$fx} { padding-left: 0; }
+
+      //
       // dimensions: percentage ratios
       //
 
       @each $reduction, $ratio-list in $reduced-ratios {
         #{list-transform($ratio-list, 'ratio-class', 'w', $fx)},
         #{list-transform($ratio-list, 'ratio-class', 'col', $fx)},
-        #{list-transform($ratio-list, 'ratio-class', 'cell', $fx)} { width: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class', 'cell', $fx)},
+        #{list-transform($ratio-list, 'ratio-class', 'span', $fx)} { width: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pr', $fx)} { padding-right: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pl', $fx)} { padding-left: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'mr', $fx)},
