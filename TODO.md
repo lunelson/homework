@@ -177,4 +177,38 @@ stylesheets/
 ## libsass error tracing
 
 - "invalid null operation" -- no backtrace
--
+
+
+## class names
+
+inset-r__m
+hang-r__m
+
+tuck
+slip
+edge
+shim
+drop
+slide
+lip
+lap
+rise
+bind
+bound
+
+lead
+
+
+wrap
+edge
+slip
+
+frame
+bleed
+
+shift
+spread
+fringe
+verge
+rim
+skirt
