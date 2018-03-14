@@ -59,22 +59,22 @@
   }
 
 
-  // //
-  // // hold
-  // //
+  //
+  // hold
+  //
 
-  // .hold--abs, .hold--center, .hold--ratio {
-  //   z-index: 0; // make sure container can clip
-  //   & > * {
-  //     display: block;
-  //     position: absolute;
-  //     top: 0; left: 0;
-  //     width: 100%;
-  //     &:not(img) {
-  //       height: 100%;
-  //     }
-  //   }
-  // }
+  .hold--abs, .hold--center, .hold--ratio {
+    z-index: 0; // make sure container can clip
+    & > * {
+      display: block;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      &:not(img) {
+        height: 100%;
+      }
+    }
+  }
 
   // .hold--ratio {
   //   height: 0;
