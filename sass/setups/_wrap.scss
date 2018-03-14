@@ -19,15 +19,15 @@
   @each $m in $media-keys {
     @include m($m) {
       $fix: m-suffix($m);
-      .wrap-grid,
-      .wrap-inner,
-      .wrap-inner#{$fix},
-      #{if($m == $last-m, ".wrap-inner__last", "")}, {
+      .wrap--grid,
+      .wrap--inner,
+      .wrap--inner#{$fix},
+      #{if($m == $last-m, ".wrap--inner__last", "")}, {
         max-width: m-var('inner-width', $m);
       }
-      .wrap-outer,
-      .wrap-outer#{$fix},
-      #{if($m == $last-m, ".wrap-inner__last", "")}, {
+      .wrap--outer,
+      .wrap--outer#{$fix},
+      #{if($m == $last-m, ".wrap--outer__last", "")}, {
         max-width: m-var('outer-width', $m);
       }
     }
