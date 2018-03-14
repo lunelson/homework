@@ -27,6 +27,7 @@
 // typo, stack, trim
 @import 'typo';
 @import 'stack';
+@import 'chain';
 
 // color, theme, icon ?
 @import 'colors';
@@ -55,6 +56,7 @@ $done-homework-setup: false;
       'grid',
       'typo',
       'stack',
+      'chain',
       'theme',
     );
   }
@@ -69,6 +71,7 @@ $done-homework-setup: false;
   @if index($setups, 'grid') { @include setup-grid; }
   @if index($setups, 'typo') { @include setup-typo; }
   @if index($setups, 'stack') { @include setup-stack; }
+  @if index($setups, 'chain') { @include setup-chain; }
   @if index($setups, 'theme') { @include setup-theme; }
   @if index($setups, 'atomic') { @include setup-atomic; }
 
