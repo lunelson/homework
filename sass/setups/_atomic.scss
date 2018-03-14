@@ -52,6 +52,16 @@
       .d-inline#{$fx} { display: inline; vertical-align: baseline; }
 
       //
+      // dimensions: auto
+      //
+
+      .w-auto#{$fx} { width: auto; }
+      .my-auto#{$fx}, .mt-auto#{$fx} { margin-top: auto; }
+      .mx-auto#{$fx}, .mr-auto#{$fx} { margin-right: auto; }
+      .my-auto#{$fx}, .mb-auto#{$fx} { margin-bottom: auto; }
+      .mx-auto#{$fx}, .ml-auto#{$fx} { margin-left: auto; }
+
+      //
       // dimensions: zero
       //
 

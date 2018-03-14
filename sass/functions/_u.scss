@@ -28,7 +28,7 @@
   @if length($list) == 0 { @return (); }
   $result: ();
   @for $i from 1 through length($list) {
-    $result: append($result, call($func, nth($list, $i), $i, $list), $sep);
+    $result: append($result, call(get-function($func), nth($list, $i), $i, $list), $sep);
   }
   @return $result;
 }
@@ -38,7 +38,7 @@
   $result: ();
   @for $i from 1 through length($list) {
     $value: nth($list, $i);
-    $test: call($func, $value, $i, $list);
+    $test: call(get-function($func), $value, $i, $list);
     $result: if($test, append($result, $value, $sep), $result);
   }
   @return $result;
@@ -53,7 +53,7 @@
   @if length($list) == 0 { @return (); }
   $result: ();
   @for $n from 1 through length($list) {
-    $result: append($result, call($func, nth($list, $n), $n, $list, $args...), 'comma');
+    $result: append($result, call(get-function($func), nth($list, $n), $n, $list, $args...), 'comma');
   }
   @return $result;
 }
