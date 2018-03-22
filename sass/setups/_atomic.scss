@@ -86,8 +86,10 @@
         #{list-transform($ratio-list, 'ratio-class2', 'span', $fx)} { width: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pr', $fx)} { padding-right: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'pl', $fx)} { padding-left: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class', 'mx', $fx)},
         #{list-transform($ratio-list, 'ratio-class', 'mr', $fx)},
         #{list-transform($ratio-list, 'ratio-class2', 'push-r', $fx)} { margin-right: ratio-val($reduction) }
+        #{list-transform($ratio-list, 'ratio-class', 'mx', $fx)},
         #{list-transform($ratio-list, 'ratio-class', 'ml', $fx)},
         #{list-transform($ratio-list, 'ratio-class2', 'push-l', $fx)} { margin-left: ratio-val($reduction) }
         #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fx)},
