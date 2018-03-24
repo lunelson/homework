@@ -1,3 +1,44 @@
+// $test-spans: (
+//   s: (w: 4, l: 1, d: 8),
+//   m: (w: 4, l: 0, d: 10),
+//   l: (w: 4, l: 0),
+// );
+
+@mixin __span($d, $w: $d, $l: null, $r: null) {
+  width: calc(100% * #{$w} / #{$d});
+  @if $r { margin-right: calc(100% * #{$r} / #{$d});}
+  @if $l { margin-left: calc(100% * #{$l} / #{$d});}
+}
+
+@mixin m-spans($m-spans) {
+  @each $m, $span in $m-spans {
+    @if $m == 'base' {
+      $span: map-merge((d: m-var('grid-columns')), $span);
+      @include __span($span...);
+    } @else {
+      @include m($m) {
+        $span: map-merge((d: m-var('grid-columns')), $span);
+        @include __span($span...);
+      }
+    }
+  }
+}
+
+// @mixin m-spans($spans) {
+//   @each $s, $span in $spans {
+//     @if $s == 'base' {
+//       $span: map-merge((d: $curr-d), $span);
+//       @include __span($span...);
+//     } @else {
+//       .medium-#{$s} {
+//         $span: map-merge((d: $curr-d), $span);
+//         @include __span($span...);
+//       }
+//     }
+//   }
+// }
+
+
 // @mixin col {
 //   flex: 1 1 0%;
 //   min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
