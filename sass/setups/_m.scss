@@ -59,8 +59,8 @@ $root-defaults: (
     }
     @each $f, $font in map-get($root, 'font-defs') or () {
       @each $s, $def in $font {
-        --font-#{$f}--#{$s}--size: nth($def, 1) / 16px * 1rem;
-        --font-#{$f}--#{$s}--line: nth($def, 2);
+        --font-size--#{$f}--#{$s}: nth($def, 1) / 16px * 1rem;
+        --line-height--#{$f}--#{$s}: nth($def, 2);
       }
     }
     // font-size: calc(var(--root-scale) * 1em);
@@ -96,8 +96,8 @@ $root-defaults: (
         }
         @each $f, $font in map-get($medium, 'font-defs') or () {
           @each $s, $def in $font {
-            --font-#{$f}--#{$s}--size: nth($def, 1) / 16px * 1rem;
-            --font-#{$f}--#{$s}--line: nth($def, 2);
+            --font-size--#{$f}--#{$s}: nth($def, 1) / 16px * 1rem;
+            --line-height--#{$f}--#{$s}: nth($def, 2);
           }
         }
       }

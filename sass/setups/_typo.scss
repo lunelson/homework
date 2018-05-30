@@ -11,6 +11,42 @@
 
 @mixin setup-typo {
 
+  :root {
+    --font-family: sans-serif; // should be first font
+    --font-size: 1rem;
+    --line-height: 1.25;
+    --trim-x: 0;
+    --trim-top: 0;
+    --trim-bottom: 0;
+    --trim-capline: 0;
+    --trim-xline: 0;
+    --trim-baseline: 0;
+  }
+
+  #{base-class('sans')},
+  #{base-class('serif')} {
+    font-family: --font-family;
+    font-size: --font-size;
+    line-height: --line-height;
+    #{base-class('stack')} > &, &.trim {
+      margin-top: calc(0px);
+      margin-bottom: calc(0px);
+      margin-right: --trim-x;
+      margin-left: --trim-x;
+    }
+    #{base-class('stack')} > * + & {
+      margin-top: calc(var(--stack-gap));
+    }
+  }
+
+  @each $f, $font in map-get($root, 'font-defs') or () {
+    @each $s, $def in $font {
+      .#{$f}--#{$s} {
+        --font-size: --font-size--#{$f}--#{$s};
+        --line-height: --line-height--#{$f}--#{$s};
+      }
+    }
+  }
 
   // if length of fonts is 0, merge fonts-default against it;
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;

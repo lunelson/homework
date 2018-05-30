@@ -15,9 +15,9 @@
   :root {
     --row-gap: var(--inner-y);
     --column-gap: var(--inner-x);
+    --column-width: calc(var(--grid-columns)); // needs calculation!!
     --column-span-n: var(--grid-columns);
     --column-span-d: var(--grid-columns);
-    --column-width: calc(var(--grid-columns)); // needs calculation!!
   }
 
   #{base-class('row')} {

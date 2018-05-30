@@ -22,7 +22,7 @@
   }
 
   @each $y, $mult in map-get($root, 'inner-y-mults') or () {
-    .stack--#{$y} { --stack-gap: var(--inner-y--#{$y}); }
+    .stack--#{$y} > * { --stack-gap: var(--inner-y--#{$y}); }
   }
 
 
