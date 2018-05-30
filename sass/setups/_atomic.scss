@@ -62,7 +62,7 @@
       .d-flex#{$fx} { display: flex; }
       // .d-flex-y#{$fx} { display: flex; }
       .d-grid#{$fx} { display: grid; }
-      .d-block#{$fx} { display: block; width: 100%; }
+      .d-block#{$fx} { display: block; }
       .d-iblock#{$fx} { display: inline-block; vertical-align: baseline; }
       .d-inline#{$fx} { display: inline; vertical-align: baseline; }
 

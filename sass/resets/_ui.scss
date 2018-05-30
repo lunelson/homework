@@ -34,7 +34,9 @@
     }
   }
 
-  button {}
+  button {
+    cursor: pointer;
+  }
 
   // Suppress the focus outline on elements that cannot be accessed via keyboard.
   // This prevents an unwanted focus outline from appearing around elements that

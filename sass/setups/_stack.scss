@@ -17,9 +17,9 @@
   }
 
   @include mm-for('inner-y') {
-    $inner-y: m-var('inner-y');
-    @if $inner-y {
-      @each $y, $inner-y in if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y)) {
+    $inner-ys: m-var('inner-y');
+    @if $inner-ys {
+      @each $y, $inner-y in if(type-of($inner-ys) == 'map', $inner-ys, (m: $inner-ys)) {
         #{mod-class('stack', $y, 'm')} {
           // & > * + * { margin-top: $inner-y; }
           & > *:not(.unstack) + * { margin-top: $inner-y; }
@@ -45,7 +45,7 @@
     }
   }
 
-  @include mm-for('inner-y', 'copy-sizes') {
+  @include mm-for('inner-y') {
     $inner-y: m-var('inner-y');
     @if $inner-y {
       @each $y, $inner-y in if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y)) {
