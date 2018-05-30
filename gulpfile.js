@@ -11,7 +11,7 @@ const plumber = require('gulp-plumber');
 const sassIncl = path.join(__dirname, 'node_modules');
 
 gulp.task('work', function () {
-  return gulp.src('./test/**/*.scss')
+  return gulp.src('./test/*.scss')
     .pipe(plumber(sass.logError))
     .pipe(sass({
       outputStyle: 'expanded',
@@ -21,7 +21,7 @@ gulp.task('work', function () {
 });
 
 gulp.task('test', function(){
-  return gulp.src('./test/**/*.scss')
+  return gulp.src('./test/*.scss')
     .pipe(plumber())
     .pipe(sass({
       outputStyle: 'expanded',

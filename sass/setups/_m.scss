@@ -1,0 +1,108 @@
+@import 'support/m-private';
+@import 'support/m-public';
+
+
+$root: () !default;
+$media: () !default;
+
+$root-orig: ();
+$media-orig: ();
+
+$curr-m: null;
+
+$root-defaults: (
+  font-size: 16px,
+  line-height: 1.5,
+  inner-x: 1rem,
+  inner-x-mults: (),
+  inner-y: 1.5rem,
+  inner-y-mults: (),
+  outer-top: 2rem,
+  outer-right: 2rem,
+  outer-bottom: 2rem,
+  outer-left: 2rem,
+  grid-columns: 12,
+);
+
+// $medium-default: (
+//   font-size: 16px,
+//   outer-right: 2rem,
+//   outer-left: 2rem,
+//   grid-columns: 12,
+// );
+
+//
+// INIT by BREAKPOINT
+//
+
+@mixin setup-m() {
+
+  // init base
+
+  $root-orig: $root !global;
+  $media-orig: $media !global;
+  $root: __normalize-medium(map-merge($root-defaults, $root), 16px) !global;
+
+  :root {
+    @each $key, $val in $root {
+      @if not index('list' 'map', type-of($val)) {
+        --#{$key}: $val;
+      }
+    }
+    --outer-width: 100%;
+    --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+    @each $y, $mult in map-get($root, 'inner-y-mults') or () {
+      --inner-y--#{$y}: if(unitless($mult), calc(var(--inner-y) * #{$mult}), $mult);
+    }
+    @each $x, $mult in map-get($root, 'inner-x-mults') or () {
+      --inner-x--#{$x}: if(unitless($mult), calc(var(--inner-x) * #{$mult}), $mult);
+    }
+    @each $f, $font in map-get($root, 'font-defs') or () {
+      @each $s, $def in $font {
+        --font-#{$f}--#{$s}--size: nth($def, 1) / 16px * 1rem;
+        --font-#{$f}--#{$s}--line: nth($def, 2);
+      }
+    }
+    // font-size: calc(var(--root-scale) * 1em);
+    // line-height: var(--line-height);
+  }
+
+  // init media
+
+  $curr-medium: $root;
+  @each $m, $medium in $media {
+    @if not index(map-keys($medium), 'breakpoint') {
+      @include error('homework: one of your $media does not have a breakpoint key');
+    }
+
+    // $curr-medium: __normalize-medium(__deep-merge($curr-medium, $medium));
+    $curr-medium: __populate-medium(__normalize-medium(__deep-merge($curr-medium, $medium)));
+
+    // output @media rule
+    @media #{__query-string(map-get($medium, 'breakpoint'))} {
+      $medium-keys: map-keys($medium);
+      :root {
+        @each $key in join($medium-keys, ('outer-width', 'root-scale')) {
+          $val: map-get($curr-medium, $key);
+          @if not index('list' 'map', type-of($val)) {
+            --#{$key}: $val;
+          }
+        }
+        @each $y, $mult in map-get($medium, 'inner-y-mults') or () {
+          --inner-y--#{$y}: if(unitless($mult), calc(var(--inner-y) * #{$mult}), $mult);
+        }
+        @each $x, $mult in map-get($medium, 'inner-x-mults') or () {
+          --inner-x--#{$x}: if(unitless($mult), calc(var(--inner-x) * #{$mult}), $mult);
+        }
+        @each $f, $font in map-get($medium, 'font-defs') or () {
+          @each $s, $def in $font {
+            --font-#{$f}--#{$s}--size: nth($def, 1) / 16px * 1rem;
+            --font-#{$f}--#{$s}--line: nth($def, 2);
+          }
+        }
+      }
+    }
+
+    $media: map-merge($media, ($m: $curr-medium)) !global;
+  }
+}

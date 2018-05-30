@@ -12,67 +12,66 @@
 
 @mixin setup-grid {
 
-  #{base-class('row')},
-  #{base-class('grid')} {
-    display: flex;
+  :root {
+    --row-gap: var(--inner-y);
+    --column-gap: var(--inner-x);
+    --column-span-n: var(--grid-columns);
+    --column-span-d: var(--grid-columns);
+    --column-width: calc(var(--grid-columns)); // needs calculation!!
+  }
+
+  #{base-class('row')} {
     flex-wrap: wrap;
+    margin-top: calc(var(--row-gap) / -2);
+    margin-bottom: calc(var(--row-gap) / -2);
     & > * {
-      flex: 1 1 0%; // explicit basis
-      min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
-      overflow-wrap: break-word; // break long words
-      background-clip: content-box;
+      padding-top: calc(var(--row-gap) / 2);
+      padding-bottom: calc(var(--row-gap) / 2);
     }
   }
 
-  // #{base-class('grid')} { flex-wrap: wrap; }
+  #{base-class('row')} {
+    display: flex;
+    flex-direction: row;
+    margin-left: calc(var(--column-gap) / -2);
+    margin-right: calc(var(--column-gap) / -2);
+    // width: calc(100% + var(--column-gap)); // unset??
+    & > * {
+      flex: 1 1 0%; // explicit basis
+      min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+      min-height: 1px;
+      overflow-wrap: break-word; // break long words
+      background-clip: content-box;
+      padding-left: calc(var(--column-gap) / 2);
+      padding-right: calc(var(--column-gap) / 2);
+    }
+  }
 
-  #{base-class('col')},
-  #{base-class('cell')} {
+  @each $y, $mult in map-get($root, 'inner-y-mults') or () {
+    .row--#{$y} { --row-gap: var(--inner-y--#{$y}); }
+  }
+  @each $x, $mult in map-get($root, 'inner-x-mults') or () {
+    .row-x--#{$x} { --column-gap: var(--inner-x--#{$x}); }
+  }
+
+  #{base-class('col')} {
+    display: flex;
+    flex-direction: column;
     flex: 0 0 auto;
     width: 100%;
   }
 
-  @include mm-for('inner-x') {
-    $inner-x: inner-x();
-    #{base-class('row')},
-    #{base-class('grid')} {
-      margin-left: $inner-x / -2;
-      margin-right: $inner-x / -2;
-      width: add(100%, $inner-x); // unset??
-      & > * {
-        padding-left: $inner-x / 2;
-        padding-right: $inner-x / 2;
-      }
-    }
-  }
-
-  .row--null, .grid--null {
+  .row-x--null, .row-x--0 {
     margin-left: 0 !important;
     margin-right: 0 !important;
-    width: unset !important;
+    // width: unset !important;
     & > * {
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
   }
 
-  @include mm-for('inner-y') {
-    $inner-y: m-var('inner-y');
-    @if $inner-y {
-      @each $y, $inner-y in if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y)) {
-        #{mod-class('grid', $y, 'm')} {
-          margin-top: $inner-y / -2;
-          margin-bottom: $inner-y / -2;
-          & > * {
-            padding-top: $inner-y / 2;
-            padding-bottom: $inner-y / 2;
-          }
-        }
-      }
-    }
-  }
-
-  .grid--null {
+  .row--null, .row--0 {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     & > * {
@@ -81,4 +80,47 @@
     }
   }
 
+  $reduced-ratios: ();
+  @for $d from 1 through 12 {
+    @for $n from 1 through $d {
+      $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+      $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
+      $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
+    }
+  }
+  $media-columns: ();
+  @each $m, $medium in $media {
+    $media-columns: append($media-columns, map-get-z($media, $m, grid-columns));
+  }
+
+  $max-columns: max($media-columns...);
+
+  #{base-class('cell')} { width: calc(100% * var(--column-span-n) / var(--column-span-d)); }
+
+  @for $n from 1 through $max-columns {
+    .cell--#{$n} {
+      --column-span-n: $n;
+      * { --grid-columns: $n; } //?
+    }
+  }
+
+
+  @each $reduced, $ratio-list in $reduced-ratios {
+    $n: nth($reduced,1);
+    $d: nth($reduced,2);
+    .col--#{$n}-#{$d} {
+      --column-span-n: $n;
+      --column-span-d: $d;
+    }
+
+    $col-selectors: map-items($ratio-list, 'col-n-d-class', 'comma');
+    $cell-selectors: map-items($ratio-list, 'cell-n-d-class', 'comma');
+    @if length($col-selectors) > 0 {
+      #{$col-selectors},
+      #{$cell-selectors} {
+        content: 'hello'
+        // @include make-col(nth($reduced,1), nth($reduced,2));
+      }
+    }
+  }
 }

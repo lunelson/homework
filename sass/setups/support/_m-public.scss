@@ -1,0 +1,108 @@
+//
+// value getters, base
+//
+
+
+@function m($m: $curr-m) {
+  // @if not $done-m { @return error("m not initialized; please '@include m-init()'"); }
+  // @if $m { @return map-get($media, $m) or error("medium '#{$m}' not found in $media"); }
+  @if $m { @return map-get($media, $m); }
+  @return $root;
+}
+
+
+@function m-orig($m: $curr-m) {
+  // @if not $done-m { @return error("m not initialized; please '@include m-init()'"); }
+  // @if $m { @return map-get($media-orig, $m) or error("original medium '#{$m}' not found in $media"); }
+  @if $m { @return map-get($media-orig, $m); }
+  @return $root-orig;
+}
+
+
+//
+// value getters, generic
+//
+
+@function map-has-z($map, $keys...) {
+  @each $key in $keys {
+    @if not map-has-key($map, $key) { @return false; }
+    $map: map-get($map, $key);
+  }
+  @return true;
+}
+
+@function key-path($keys...) {
+  @return if(length($keys) > 0,'->#{nth(keys, 1)}','');
+}
+
+// @function medium-has($key, $m: $curr-m) {
+//   @return map-has-key(medium($m), $key);
+// }
+
+@function m-var($key, $m: $curr-m) {
+  $medium: m($m);
+  // $m-name: if($m, '$media->#{$m}', '$root');
+  // @if not map-has-z($medium, $key...) { @warn '#{$key} is not present in #{$m-name}'; }
+  @return map-get-z($medium, $key...);
+}
+
+// @function medium-orig-has($key, $m: $curr-m) {
+//   @return map-has-key(m-orig($m), $key);
+// }
+
+@function m-orig-var($key, $m: $curr-m) {
+  @return map-get-z(m-orig($m), $key...);
+}
+
+
+//
+// aliases of above
+//
+
+@function m-var-orig($args...) { @return m-orig-var($args...);}
+
+// @function m($args...) { @return medium($args...);}
+// @function m-orig($args...) { @return m-orig($args...);}
+
+// @function m-var($args...) { @return m-var($args...);}
+
+//
+// M -- single query
+//
+
+
+@mixin m($min, $max: null) {
+  $prev-m: $curr-m;
+  $curr-m: $min !global;
+  @if not $min and not $max { @content; }
+  @else { @media #{__query-string($min, $max)} { @content } }
+  $curr-m: $prev-m !global;
+}
+
+
+@mixin mm($args...) {
+  $m-pairs: mm($args...);
+  @if length($m-pairs) == 0 { @content; }
+  @else {
+    @each $pair in $m-pairs {
+      @include m($pair...) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin mm-for($props...) {
+  @include mm(null,null,$props...) {
+    @content;
+  }
+}
+
+//
+// ALIASES
+//
+
+
+// @mixin medium($args...) { @include m($args...) { @content; } }
+// @mixin media($args...) { @include mm($args...) { @content; } }
+// @mixin media-for($args...) { @include mm-for($args...) { @content; } }

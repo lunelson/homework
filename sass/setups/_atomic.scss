@@ -31,13 +31,13 @@
 
 @mixin setup-atomic {
 
-  $grid-column-counts: ();
+  $grid-grid-columnss: ();
   @each $m, $medium in $media {
-    $grid-column-counts: append($grid-column-counts, map-get($medium, 'grid-columns'));
+    $grid-grid-columnss: append($grid-grid-columnss, map-get($medium, 'grid-columns'));
   }
 
   $reduced-ratios: ();
-  @for $d from 1 through max($grid-column-counts...) {
+  @for $d from 1 through max($grid-grid-columnss...) {
     @for $n from 1 through $d {
       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
       $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);

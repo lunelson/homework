@@ -1,0 +1,27 @@
+@import '../peers';
+@import '../index';
+
+$root: (
+  inner-x: 2rem,
+  inner-x-mults: (
+    s: 0.5,
+    form: 10px,
+  ),
+  inner-y-mults: (
+    s: 1,
+    m: 2,
+    l: 4rem
+  )
+);
+
+$media: (
+  a: (breakpoint: 20em),
+  b: (
+    inner-x: 3rem,
+    breakpoint: 30em
+  ),
+  c: (breakpoint: 40em),
+);
+
+@include setup-m();
+@include setup-grid();
