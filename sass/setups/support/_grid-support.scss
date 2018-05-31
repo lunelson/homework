@@ -1,3 +1,127 @@
+//       _                  __
+//      | |                / _|
+//   ___| | __ _ ___ ___  | |_ _ __  ___
+//  / __| |/ _` / __/ __| |  _| '_ \/ __|
+// | (__| | (_| \__ \__ \ | | | | | \__ \
+//  \___|_|\__,_|___/___/ |_| |_| |_|___/
+
+@function m-suffix($m: $curr-m) {
+  @return if($m, '__#{$m}', '');
+}
+
+@function cell-n-d-class($ratio, $rest...) {
+  $n: nth($ratio,1); $d: nth($ratio,2);
+  @return ".cell--#{$n}-#{$d}#{m-suffix()}";
+}
+
+@function col-n-d-class($ratio, $rest...) {
+  $n: nth($ratio,1); $d: nth($ratio,2);
+  @return ".col--#{$n}-#{$d}#{m-suffix()}";
+}
+
+@function span-n-d-class($ratio, $rest...) {
+  $n: nth($ratio,1); $d: nth($ratio,2);
+  @return ".span--#{$n}-#{$d}#{m-suffix()}";
+}
+
+@function push-n-d-class($ratio, $rest...) {
+  $n: nth($ratio,1); $d: nth($ratio,2);
+  @return ".push--#{$n}-#{$d}#{m-suffix()}";
+}
+
+@function pull-n-d-class($ratio, $rest...) {
+  $n: nth($ratio,1); $d: nth($ratio,2);
+  @return ".push--#{$n}-#{$d}#{m-suffix()}";
+}
+
+
+//  _          _
+// | |        | |
+// | |__   ___| |_ __   ___ _ __ ___
+// | '_ \ / _ \ | '_ \ / _ \ '__/ __|
+// | | | |  __/ | |_) |  __/ |  \__ \
+// |_| |_|\___|_| .__/ \___|_|  |___/
+//              | |
+//              |_|
+
+@function join-all($lists...) {
+  $result: ();
+  @each $list in $lists {
+    $result: join($result, $list, list-separator($list));
+  }
+  @return $result;
+}
+
+@function list-map($list, $func, $sep: list-separator($list)) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $result: append($result, call($func, nth($list, $i), $i, $list), $sep);
+  }
+  @return $result;
+}
+
+@function list-filter($list, $func, $sep: list-separator($list)) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $value: nth($list, $i);
+    $test: call($func, $value, $i, $list);
+    $result: if($test, append($result, $value, $sep), $result);
+  }
+  @return $result;
+}
+
+@function gcd($a, $b) {
+  @if $b == 0 { @return abs($a); }
+  @return gcd($b, $a % $b);
+}
+
+@function max-columns() {
+  $column-counts: ();
+  @each $m, $medium in $media {
+    $column-counts: append($column-counts, map-get-z($media, $m, grid-columns));
+  }
+  @return max($column-counts...);
+}
+
+@function reduction-set($max-d) {
+  // $reduction-set: ();
+  // @for $d from 1 through $max-d {
+  //   @for $n from 1 through $d {
+  //     $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+  //     $expansion-set: append(map-get($reduction-set, $reduction) or (), $n $d);
+  //     $reduction-set: map-merge($reduction-set, ($reduction: $expansion-set));
+  //   }
+  // }
+  // @return $reduction-set;
+  $reduced-ratios: ();
+  @for $d from 1 through 12 {
+    @for $n from 1 through $d {
+      $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+      // $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
+      $set: append(map-get($reduced-ratios, $reduction) or (), $d d);
+      $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
+    }
+  }
+  @return $reduced-ratios;
+}
+
+
+// RATIOS for .col/.cell widths
+
+// $all-ratios: join-all(map-values($reduced-ratios)...);
+
+
+//                                    _      _
+//                                   (_)    (_)
+//  ___ _ __   __ _ _ __    _ __ ___  ___  ___ _ __
+// / __| '_ \ / _` | '_ \  | '_ ` _ \| \ \/ / | '_ \
+// \__ \ |_) | (_| | | | | | | | | | | |>  <| | | | |
+// |___/ .__/ \__,_|_| |_| |_| |_| |_|_/_/\_\_|_| |_|
+//     | |
+//     |_|
+
 // $test-spans: (
 //   s: (w: 4, l: 1, d: 8),
 //   m: (w: 4, l: 0, d: 10),

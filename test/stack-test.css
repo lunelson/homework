@@ -10,8 +10,11 @@
   --grid-columns: 12;
   --outer-width: 100%;
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-  --inner-y--m: 1rem;
-  --inner-x--m: 1rem;
+  --inner-y--s: calc(var(--inner-y) * 1);
+  --inner-y--m: calc(var(--inner-y) * 2);
+  --inner-y--l: 4rem;
+  --inner-x--s: calc(var(--inner-x) * 0.5);
+  --inner-x--form: 10px;
 }
 
 @media screen and (min-width: 20em) {
@@ -54,6 +57,14 @@
   margin-top: var(--stack-gap);
 }
 
+.stack--s > * {
+  --stack-gap: var(--inner-y--s);
+}
+
 .stack--m > * {
   --stack-gap: var(--inner-y--m);
+}
+
+.stack--l > * {
+  --stack-gap: var(--inner-y--l);
 }

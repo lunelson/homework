@@ -10,117 +10,106 @@
 
 @import 'support/grid-support';
 
-@mixin setup-grid {
+@mixin setup-grid($modern: true) {
 
-  :root {
-    --row-gap: var(--inner-y);
-    --column-gap: var(--inner-x);
-    --column-width: calc(var(--grid-columns)); // needs calculation!!
-    --column-span-n: var(--grid-columns);
-    --column-span-d: var(--grid-columns);
-  }
-
-  #{base-class('row')} {
-    flex-wrap: wrap;
-    margin-top: calc(var(--row-gap) / -2);
-    margin-bottom: calc(var(--row-gap) / -2);
-    & > * {
-      padding-top: calc(var(--row-gap) / 2);
-      padding-bottom: calc(var(--row-gap) / 2);
-    }
-  }
-
-  #{base-class('row')} {
-    display: flex;
-    flex-direction: row;
-    margin-left: calc(var(--column-gap) / -2);
-    margin-right: calc(var(--column-gap) / -2);
-    // width: calc(100% + var(--column-gap)); // unset??
-    & > * {
-      flex: 1 1 0%; // explicit basis
-      min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
-      min-height: 1px;
-      overflow-wrap: break-word; // break long words
-      background-clip: content-box;
-      padding-left: calc(var(--column-gap) / 2);
-      padding-right: calc(var(--column-gap) / 2);
-    }
-  }
-
-  @each $y, $mult in map-get($root, 'inner-y-alts') or () {
-    .row--#{$y} { --row-gap: var(--inner-y--#{$y}); }
-  }
-  @each $x, $mult in map-get($root, 'inner-x-alts') or () {
-    .row-x--#{$x} { --column-gap: var(--inner-x--#{$x}); }
-  }
-
-  #{base-class('col')} {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
-    width: 100%;
-  }
-
-  .row-x--null, .row-x--0 {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    // width: unset !important;
-    & > * {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-  }
-
-  .row--null, .row--0 {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    & > * {
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-    }
-  }
-
-  $reduced-ratios: ();
-  @for $d from 1 through 12 {
+  $max-columns: max-columns();
+  $reduction-set: ();
+  @for $d from 1 through $max-columns {
     @for $n from 1 through $d {
       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
-      $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
-      $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
-    }
-  }
-  $media-columns: ();
-  @each $m, $medium in $media {
-    $media-columns: append($media-columns, map-get-z($media, $m, grid-columns));
-  }
-
-  $max-columns: max($media-columns...);
-
-  #{base-class('cell')} { width: calc(100% * var(--column-span-n) / var(--column-span-d)); }
-
-  @for $n from 1 through $max-columns {
-    .cell--#{$n} {
-      --column-span-n: $n;
-      * { --grid-columns: $n; } //?
+      $expansion-set: append(map-get($reduction-set, $reduction) or (), $n $d);
+      $reduction-set: map-merge($reduction-set, ($reduction: $expansion-set));
     }
   }
 
+  @if $modern {
 
-  @each $reduced, $ratio-list in $reduced-ratios {
-    $n: nth($reduced,1);
-    $d: nth($reduced,2);
-    .col--#{$n}-#{$d} {
-      --column-span-n: $n;
-      --column-span-d: $d;
+    :root {
+      --row-gap: var(--inner-y);
+      --column-gap: var(--inner-x);
+      --column-width: calc(var(--grid-columns)); // needs calculation!!
+      --span-n: var(--grid-columns);
+      --span-d: var(--grid-columns);
     }
 
-    $col-selectors: map-items($ratio-list, 'col-n-d-class', 'comma');
-    $cell-selectors: map-items($ratio-list, 'cell-n-d-class', 'comma');
-    @if length($col-selectors) > 0 {
-      #{$col-selectors},
-      #{$cell-selectors} {
-        content: 'hello'
-        // @include make-col(nth($reduced,1), nth($reduced,2));
+    #{base-class('grid')} {
+      flex-wrap: wrap;
+      margin-top: calc(var(--row-gap) / -2);
+      margin-bottom: calc(var(--row-gap) / -2);
+      & > * {
+        padding-top: calc(var(--row-gap) / 2);
+        padding-bottom: calc(var(--row-gap) / 2);
       }
     }
+
+    #{base-class('row')},
+    #{base-class('grid')} {
+      display: flex;
+      flex-direction: row;
+      margin-left: calc(var(--column-gap) / -2);
+      margin-right: calc(var(--column-gap) / -2);
+      // width: calc(100% + var(--column-gap)); // unset??
+      & > * {
+        flex: 1 1 0%; // explicit basis
+        min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+        min-height: 1px;
+        overflow-wrap: break-word; // break long words
+        background-clip: content-box;
+        padding-left: calc(var(--column-gap) / 2);
+        padding-right: calc(var(--column-gap) / 2);
+      }
+      &.null {
+        margin: 0;
+        & > * { padding: 0; }
+      }
+    }
+
+    @each $y, $mult in map-get($root, 'inner-y-alts') or () {
+      .grid--#{$y} { --row-gap: var(--inner-y--#{$y}); }
+    }
+    @each $x, $mult in map-get($root, 'inner-x-alts') or () {
+      .row--#{$x},
+      .grid-x--#{$x} { --column-gap: var(--inner-x--#{$x}); }
+    }
+
+    // #{base-class('col')},
+    // #{base-class('cell')},
+    #{base-class('span')} {
+      // display: flex;
+      // flex-direction: column;
+      flex: 0 0 auto;
+      width: calc(100% * var(--span-n) / var(--span-d));
+    }
+
+    @each $m in join((null), map-keys($media)) {
+      @include m($m) {
+
+        @for $n from 1 through $max-columns {
+          // .col--#{$n}#{m-suffix()},
+          // .cell--#{$n}#{m-suffix()},
+          .span--#{$n}#{m-suffix()} {
+            --span-n: $n;
+            * { --grid-columns: $n; } //?
+          }
+        }
+
+        @each $reduction, $expansion-set in $reduction-set {
+          $n: nth($reduction,1);
+          $d: nth($reduction,2);
+          // $col-selectors: list-map($expansion-set, 'col-n-d-class', 'comma');
+          // $cell-selectors: list-map($expansion-set, 'cell-n-d-class', 'comma');
+          $span-selectors: list-map($expansion-set, 'span-n-d-class', 'comma');
+          @if length($span-selectors) > 0 {
+            // #{$col-selectors},
+            // #{$cell-selectors},
+            #{$span-selectors} {
+              --span-n: $n;
+              --span-d: $d;
+            }
+          }
+        }
+      }
+    }
+
   }
 }
