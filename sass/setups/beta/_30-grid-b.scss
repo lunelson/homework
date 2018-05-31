@@ -20,7 +20,7 @@
   }
 
   @include mm-for('grid') {
-    $mults: medium-var('inner-x-mults');
+    $mults: medium-var('inner-x-alts');
 
     @each $m, $mult in map-merge((base: 1), $mults) {
       $inner-x: $mult * medium-var('inner-x');

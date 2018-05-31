@@ -28,7 +28,7 @@
       margin-top: trim-top-margin(0, $line, $font);
       margin-bottom: trim-bottom-margin(0, $line, $font);
     }
-    @each $key, $mult in map-merge((base: 1), medium-var('inner-y-mults')) {
+    @each $key, $mult in map-merge((base: 1), medium-var('inner-y-alts')) {
       @at-root #{insert-parents(mult-class($trim-parent, $key),'>')} {
         @include adjacent-to('*') { margin-top: trim-top-margin($mult, $line, $font); }
         @content;

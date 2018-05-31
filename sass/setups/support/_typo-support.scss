@@ -116,7 +116,7 @@ $body-font: null !default;
 //       margin-top: trim-top-margin(0, $line, $font);
 //       margin-bottom: trim-bottom-margin(0, $line, $font);
 //     }
-//     @each $key, $mult in map-merge((base: 1), medium-var('inner-y-mults')) {
+//     @each $key, $mult in map-merge((base: 1), medium-var('inner-y-alts')) {
 //       @at-root #{insert-parents(mult-class($trim-parent, $key),'>')} {
 //         @include adjacent-to('*') { margin-top: trim-top-margin($mult, $line, $font); }
 //         @content;
@@ -159,10 +159,10 @@ $body-font: null !default;
 
 // }
 
-// @mixin trims($f, $s, $y-mults: ()) {
+// @mixin trims($f, $s, $y-alts: ()) {
 //   $mults: ();
-//   @each $y in $y-mults { $mults: append($mults, inner-y-mults $y); }
-//   $props: join($mults, (inner-y, inner-y-mults $curr-inner-y copy-sizes $f $s));
+//   @each $y in $y-alts { $mults: append($mults, inner-y-alts $y); }
+//   $props: join($mults, (inner-y, inner-y-alts $curr-inner-y copy-sizes $f $s));
 //   @include mm-for($props) {
 //     $copy-size: get(medium-var('copy-sizes'), $f, $s);
 //     $px-base: strip(medium-var('font-size'));

@@ -9,17 +9,17 @@
 }
 
 
-@each $y in map-keys(map-get($base, 'inner-y-mults')) {
+@each $y in map-keys(map-get($base, 'inner-y-alts')) {
 
   #{mod-class('stack', $y, (m, md, med))} {
 
-    @include mm2-for(inner-y, inner-y-mults $y) { @include stack($y); }
+    @include mm2-for(inner-y, inner-y-alts $y) { @include stack($y); }
 
     @each $f, $font in $fonts {
 
       @each $s in map-keys(__get($base, 'copy-sizes', $f)) {
 
-        @include mm2-for(inner-y, inner-y-mults $y, copy-sizes $f $s) {
+        @include mm2-for(inner-y, inner-y-alts $y, copy-sizes $f $s) {
 
           @include stack($y, false) {
 

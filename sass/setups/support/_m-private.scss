@@ -3,6 +3,20 @@
 //
 
 
+@function __normalize2($medium, $root-size: null) {
+
+  // font-size: conform to px
+  $root-size: $root-size or map-get($root, 'font-size') or 16px;
+  $curr-size: map-get($medium, 'font-size') or $root-size;
+  @if unit($curr-size) != 'px' { $curr-size: strip($curr-size) * $root-size; }
+
+  // outer-width: breakpoint, in rems
+  $breakpoint: map-get($medium, 'breakpoint');
+  $outer-width: if($breakpoint, assert($breakpoint / ($curr-size / 16px), rem), 100%);
+
+  @return map-merge($medium, ( 'font-size': $curr-size, 'outer-width': $outer-width ));
+}
+
 @function __normalize-medium($medium, $root-font-size: null) {
 
   // get reference font size

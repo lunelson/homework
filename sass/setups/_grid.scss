@@ -47,10 +47,10 @@
     }
   }
 
-  @each $y, $mult in map-get($root, 'inner-y-mults') or () {
+  @each $y, $mult in map-get($root, 'inner-y-alts') or () {
     .row--#{$y} { --row-gap: var(--inner-y--#{$y}); }
   }
-  @each $x, $mult in map-get($root, 'inner-x-mults') or () {
+  @each $x, $mult in map-get($root, 'inner-x-alts') or () {
     .row-x--#{$x} { --column-gap: var(--inner-x--#{$x}); }
   }
 
