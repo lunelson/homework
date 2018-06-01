@@ -42,7 +42,7 @@ $all-ratios: join-all(map-values($gcd-ratios)...);
 */
 @function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
 @function ratio-val($ratio)    { @return percentage(nth($ratio,1) / nth($ratio,2)); }
-@function ratio-class($ratio, $index, $list, $base, $fx) { @return '#{$base}-#{ratio-str($ratio)}#{$fx}'; }
+@function ratio-class($ratio, $index, $list, $root, $fx) { @return '#{$root}-#{ratio-str($ratio)}#{$fx}'; }
 // @function span--N-D($ratio, $rest...)       { @return mod-class('span', ratio-str($ratio)); }
 
 @function list-transform($list, $func, $args...) {

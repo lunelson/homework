@@ -2,9 +2,9 @@
 // base and mult
 //
 
-@function base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
-@function mod-class($base, $mod, $except: ()) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
-@function var-class($base, $var, $except: ()) { @return selector-parse(if(index($except, $var), '.#{$base}, .#{$base}-#{$var}', '.#{$base}-#{$var}')); }
+@function base-class($root) { @return selector-parse('.#{$root}, [class^="#{$root}--"], [class*=" #{$root}--"]'); }
+@function mod-class($root, $mod, $except: ()) { @return selector-parse(if(index($except, $mod), '.#{$root}, .#{$root}--#{$mod}', '.#{$root}--#{$mod}')); }
+@function var-class($root, $var, $except: ()) { @return selector-parse(if(index($except, $var), '.#{$root}, .#{$root}-#{$var}', '.#{$root}-#{$var}')); }
 
 @mixin base-class($args...) { #{base-class($args...)} { @content; } }
 @mixin mod-class($args...) { #{mod-class($args...)} { @content; } }
@@ -13,8 +13,8 @@
 
 // class
 
-@function _base-class($base) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
-@function _mult-class($base, $m) { @return selector-parse(if($m=='base', '.#{$base}', '.#{$base}--#{$m}')); }
+@function _base-class($root) { @return selector-parse('.#{$root}, [class^="#{$root}--"], [class*=" #{$root}--"]'); }
+@function _mult-class($root, $m) { @return selector-parse(if($m=='base', '.#{$root}', '.#{$root}--#{$m}')); }
 
 @function join-all($lists...) {
   $result: ();

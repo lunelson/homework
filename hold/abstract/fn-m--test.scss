@@ -1,6 +1,6 @@
 @import '../peers';
 
-$base: (
+$root: (
   inner-x: 1rem,
   inner-y: (
     m: 1rem,
@@ -60,5 +60,5 @@ $media: (
   }
 }
 
-/* #{map-stringify($base)} */
+/* #{map-stringify($root)} */
 /* #{map-stringify($media)} */

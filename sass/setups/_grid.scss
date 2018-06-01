@@ -27,13 +27,12 @@
     :root {
       --row-gap: var(--inner-y);
       --column-gap: var(--inner-x);
-      --column-width: calc(var(--grid-columns)); // needs calculation!!
+      --column-width: calc((var(--outer-width) + var(--column-gap)) / var(--grid-columns));
       --span-n: var(--grid-columns);
       --span-d: var(--grid-columns);
     }
 
     #{base-class('grid')} {
-      flex-wrap: wrap;
       margin-top: calc(var(--row-gap) / -2);
       margin-bottom: calc(var(--row-gap) / -2);
       & > * {
@@ -42,10 +41,18 @@
       }
     }
 
+    #{base-class('row')} {
+      & > * {
+        padding-top: 0.1px;
+        padding-bottom: 0.1px;
+      }
+    }
+
     #{base-class('row')},
     #{base-class('grid')} {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       margin-left: calc(var(--column-gap) / -2);
       margin-right: calc(var(--column-gap) / -2);
       // width: calc(100% + var(--column-gap)); // unset??
@@ -81,6 +88,12 @@
       width: calc(100% * var(--span-n) / var(--span-d));
     }
 
+    /* TODO
+      - remove double spacing in class names !
+      - add push-l/-r and pull-r/-l classes
+      - consider reversion from span/push/pull to col/mr/ml
+    */
+
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
 
@@ -88,26 +101,26 @@
           // .col--#{$n}#{m-suffix()},
           // .cell--#{$n}#{m-suffix()},
           .span--#{$n}#{m-suffix()} {
-            --span-n: $n;
-            * { --grid-columns: $n; } //?
+            --span-n: #{$n};
+            & > * { --span-d: #{$n}; } //?
           }
         }
 
-        @each $reduction, $expansion-set in $reduction-set {
-          $n: nth($reduction,1);
-          $d: nth($reduction,2);
-          // $col-selectors: list-map($expansion-set, 'col-n-d-class', 'comma');
-          // $cell-selectors: list-map($expansion-set, 'cell-n-d-class', 'comma');
-          $span-selectors: list-map($expansion-set, 'span-n-d-class', 'comma');
-          @if length($span-selectors) > 0 {
-            // #{$col-selectors},
-            // #{$cell-selectors},
-            #{$span-selectors} {
-              --span-n: $n;
-              --span-d: $d;
-            }
-          }
-        }
+        // @each $reduction, $expansion-set in $reduction-set {
+        //   $n: nth($reduction,1);
+        //   $d: nth($reduction,2);
+        //   // $col-selectors: list-map($expansion-set, 'col-n-d-class', 'comma');
+        //   // $cell-selectors: list-map($expansion-set, 'cell-n-d-class', 'comma');
+        //   $span-selectors: list-map($expansion-set, 'span-n-d-class', 'comma');
+        //   @if length($span-selectors) > 0 {
+        //     // #{$col-selectors},
+        //     // #{$cell-selectors},
+        //     #{$span-selectors} {
+        //       --span-n: $n;
+        //       --span-d: $d;
+        //     }
+        //   }
+        // }
       }
     }
 

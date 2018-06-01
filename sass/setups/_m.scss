@@ -41,23 +41,26 @@ $root-defaults: (
     :root {
       @each $key, $val in $root {
         @if not index('list' 'map', type-of($val)) {
-          --#{$key}: $val;
+          --#{$key}: #{$val};
         }
       }
-      // --outer-width: 100%;
       --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-      @each $y, $mult in map-get($root, 'inner-y-alts') or () {
-        --inner-y--#{$y}: if(unitless($mult), calc(var(--inner-y) * #{$mult}), $mult);
-      }
-      @each $x, $mult in map-get($root, 'inner-x-alts') or () {
-        --inner-x--#{$x}: if(unitless($mult), calc(var(--inner-x) * #{$mult}), $mult);
-      }
-      @each $f, $font in map-get($root, 'font-defs') or () {
-        @each $s, $def in $font {
-          --font-size--#{$f}--#{$s}: nth($def, 1) / 16px * 1rem;
-          --line-height--#{$f}--#{$s}: nth($def, 2);
-        }
-      }
+
+      @include __mods-output($root);
+      // @each $y, $mod in map-get($root, 'inner-y-alts') or () {
+      //   @if unitless($mod) { --inner-y--#{$y}: calc(var(--inner-y) * #{$mod}); }
+      //   @else { --inner-y--#{$y}: #{$mod}; }
+      // }
+      // @each $x, $mod in map-get($root, 'inner-x-alts') or () {
+      //   @if unitless($mod) { --inner-x--#{$x}: calc(var(--inner-x) * #{$mod}); }
+      //   @else { --inner-x--#{$x}: #{$mod}; }
+      // }
+      // @each $f, $font in map-get($root, 'font-alts') or () {
+      //   @each $s, $def in $font {
+      //     --font-size--#{$f}--#{$s}: #{nth($def, 1) / 16px * 1rem};
+      //     --line-height--#{$f}--#{$s}: #{nth($def, 2)};
+      //   }
+      // }
       // font-size: calc(var(--root-scale) * 1em);
       // line-height: var(--line-height);
     }
@@ -70,31 +73,32 @@ $root-defaults: (
         @include error('homework: one of your $media does not have a breakpoint key');
       }
 
-      // $curr-medium: __normalize-medium(__deep-merge($curr-medium, $medium));
       $curr-medium: __normalize2(__deep-merge($curr-medium, $medium));
 
-      // output @media rule
       @media #{__query-string(map-get($medium, 'breakpoint'))} {
-        $medium-keys: map-keys($medium);
+
         :root {
-          @each $key in join($medium-keys, ('outer-width', 'root-scale')) {
+          @each $key in join(map-keys($medium), ('outer-width')) {
             $val: map-get($curr-medium, $key);
             @if not index('list' 'map', type-of($val)) {
-              --#{$key}: $val;
+              --#{$key}: #{$val};
             }
           }
-          @each $y, $mult in map-get($medium, 'inner-y-alts') or () {
-            --inner-y--#{$y}: if(unitless($mult), calc(var(--inner-y) * #{$mult}), $mult);
-          }
-          @each $x, $mult in map-get($medium, 'inner-x-alts') or () {
-            --inner-x--#{$x}: if(unitless($mult), calc(var(--inner-x) * #{$mult}), $mult);
-          }
-          @each $f, $font in map-get($medium, 'font-defs') or () {
-            @each $s, $def in $font {
-              --font-size--#{$f}--#{$s}: nth($def, 1) / 16px * 1rem;
-              --line-height--#{$f}--#{$s}: nth($def, 2);
-            }
-          }
+          @include __mods-output($medium);
+          // @each $y, $mod in map-get($medium, 'inner-y-alts') or () {
+          //   @if unitless($mod) { --inner-y--#{$y}: calc(var(--inner-y) * #{$mod}); }
+          //   @else { --inner-y--#{$y}: #{$mod}; }
+          // }
+          // @each $x, $mod in map-get($medium, 'inner-x-alts') or () {
+          //   @if unitless($mod) { --inner-x--#{$x}: calc(var(--inner-x) * #{$mod}); }
+          //   @else { --inner-x--#{$x}: #{$mod}; }
+          // }
+          // @each $f, $font in map-get($medium, 'font-alts') or () {
+          //   @each $s, $def in $font {
+          //     --font-size--#{$f}--#{$s}: #{nth($def, 1) / 16px * 1rem};
+          //     --line-height--#{$f}--#{$s}: #{nth($def, 2)};
+          //   }
+          // }
         }
       }
 

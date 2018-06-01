@@ -1,0 +1,101 @@
+:root {
+  --font-size: 16px;
+  --line-height: 1.25;
+  --inner-x: 2rem;
+  --inner-y: 1.25rem;
+  --outer-top: 2rem;
+  --outer-right: 2rem;
+  --outer-bottom: 2rem;
+  --outer-left: 2rem;
+  --grid-columns: 12;
+  --outer-width: 100%;
+  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+  --inner-y--m: 1rem;
+  --inner-x--m: 1rem;
+  --font-size--sans--m: 1rem;
+  --line-height--sans--m: 1.25;
+}
+
+@media screen and (min-width: 20em) {
+  :root {
+    --breakpoint: 20em;
+    --outer-width: 20rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  :root {
+    --breakpoint: 30em;
+    --inner-x: 3rem;
+    --outer-width: 30rem;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  :root {
+    --breakpoint: 40em;
+    --outer-width: 40rem;
+  }
+}
+
+:root {
+  --font-family: sans-serif;
+  --font-size: 1rem;
+  --line-height: 1.25;
+  --trim-x: 0;
+  --trim-top: 0;
+  --trim-bottom: 0;
+  --trim-capline: 0;
+  --trim-xline: 0;
+  --trim-baseline: 0;
+}
+
+.sans, [class^="sans--"], [class*=" sans--"],
+.serif, [class^="serif--"], [class*=" serif--"] {
+  font-family: --font-family;
+  font-size: --font-size;
+  line-height: --line-height;
+}
+
+.sans .stack, .sans [class^="stack--"], [class*=" stack--"] > .sans, .sans.trim, [class^="sans--"] .stack, [class^="sans--"] [class^="stack--"], [class*=" stack--"] > [class^="sans--"], [class^="sans--"].trim, [class*=" sans--"] .stack, [class*=" sans--"] [class^="stack--"], [class*=" stack--"] > [class*=" sans--"], [class*=" sans--"].trim,
+.serif .stack,
+.serif [class^="stack--"], [class*=" stack--"] >
+.serif,
+.serif.trim, [class^="serif--"] .stack, [class^="serif--"] [class^="stack--"], [class*=" stack--"] > [class^="serif--"], [class^="serif--"].trim, [class*=" serif--"] .stack, [class*=" serif--"] [class^="stack--"], [class*=" stack--"] > [class*=" serif--"], [class*=" serif--"].trim {
+  margin-top: calc(0px);
+  margin-bottom: calc(0px);
+  margin-right: --trim-x;
+  margin-left: --trim-x;
+}
+
+.sans .stack, .sans [class^="stack--"], [class*=" stack--"] > * + .sans, [class^="sans--"] .stack, [class^="sans--"] [class^="stack--"], [class*=" stack--"] > * + [class^="sans--"], [class*=" sans--"] .stack, [class*=" sans--"] [class^="stack--"], [class*=" stack--"] > * + [class*=" sans--"],
+.serif .stack,
+.serif [class^="stack--"], [class*=" stack--"] > * +
+.serif, [class^="serif--"] .stack, [class^="serif--"] [class^="stack--"], [class*=" stack--"] > * + [class^="serif--"], [class*=" serif--"] .stack, [class*=" serif--"] [class^="stack--"], [class*=" stack--"] > * + [class*=" serif--"] {
+  margin-top: calc(var(--stack-gap));
+}
+
+.sans--m {
+  --font-size: --font-size--sans--m;
+  --line-height: --line-height--sans--m;
+}
+
+body, body * {
+  font-family: arial, sans-serif;
+  letter-spacing: calc(0.5px - 0.01em);
+}
+
+.sans, [class^="sans--"], [class*=" sans--"] {
+  font-family: arial, sans-serif;
+  letter-spacing: calc(0.5px - 0.01em);
+}
+
+.serif, [class^="serif--"], [class*=" serif--"] {
+  font-family: georgia, serif;
+  letter-spacing: calc(0.5px - 0.01em);
+}
+
+.mono, [class^="mono--"], [class*=" mono--"] {
+  font-family: monaco, consolas, "lucida console", monospace;
+  letter-spacing: calc(0.5px - 0.01em);
+}

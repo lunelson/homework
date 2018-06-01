@@ -39,7 +39,7 @@
     }
   }
 
-  @each $f, $font in map-get($root, 'font-defs') or () {
+  @each $f, $font in map-get($root, 'font-alts') or () {
     @each $s, $def in $font {
       .#{$f}--#{$s} {
         --font-size: --font-size--#{$f}--#{$s};
@@ -89,7 +89,7 @@
     // LOOP: typos
     //
 
-    $typos: m-var('typos' $f, null); // from $base
+    $typos: m-var('typos' $f, null); // from $root
     @if $typos {
       @each $t in map-keys($typos) {
 
@@ -122,7 +122,7 @@
         // LOOP: INNER-Y
         //
 
-        $inner-y: m-var('inner-y', null); // from $base
+        $inner-y: m-var('inner-y', null); // from $root
         // $y-map: if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y));
         $y-keys: if(type-of($inner-y) == 'map', map-keys($inner-y), (m));
         @each $y in $y-keys {

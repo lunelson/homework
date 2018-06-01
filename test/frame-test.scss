@@ -1,7 +1,7 @@
 @import '../peers';
-@import '../../index';
+@import '../index';
 
-$base: (
+$root: (
   outer-top: 1rem,
   outer-right: 1rem,
   outer-bottom: 1rem,
@@ -32,5 +32,5 @@ $media: (
     ),
 );
 
-@include m-init(false);
-@include homework-setup(false, 'outer');
+@include setup-m();
+@include setup-frame();

@@ -2,6 +2,22 @@
 // init helpers
 //
 
+@mixin __mods-output($medium) {
+  @each $y, $mod in map-get($medium, 'inner-y-alts') or () {
+    @if unitless($mod) { --inner-y--#{$y}: calc(var(--inner-y) * #{$mod}); }
+    @else { --inner-y--#{$y}: #{$mod}; }
+  }
+  @each $x, $mod in map-get($medium, 'inner-x-alts') or () {
+    @if unitless($mod) { --inner-x--#{$x}: calc(var(--inner-x) * #{$mod}); }
+    @else { --inner-x--#{$x}: #{$mod}; }
+  }
+  @each $f, $font in map-get($medium, 'font-alts') or () {
+    @each $s, $def in $font {
+      --font-size--#{$f}--#{$s}: #{nth($def, 1) / 16px * 1rem};
+      --line-height--#{$f}--#{$s}: #{nth($def, 2)};
+    }
+  }
+}
 
 @function __normalize2($medium, $root-size: null) {
 

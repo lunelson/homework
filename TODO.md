@@ -1,36 +1,73 @@
-inset-r__m
-hang-r__m
-tuck
-slip
-edge
-shim
+## curr
+classnames
+  frame, bleed
+  frame-l__bp
+  bleed-l__bp
+  mx-0__bp
 
-drop
-slide
-lip
-rim
-lap
-well
-dent
-bump
-hump
-rise
-card
-bind
-bound
+  grid
+  row
+  row-m
+  grid-s
+  grid-x-l
 
-lead
+  stack-s
+  chain-l
+
+  span
+  span-2
+  ml-2
+  mr-neg-1.mr-0__l
+  push-2
+  pull-1
+  push-n
+  push-r-neg-n__bp
+  push-r-1
+
+  pull-n__bp
 
 
-wrap
-edge
-slip
 
-shift
-spread
-fringe
-verge
-skirt
+renames
+  font-mods
+  inner-y-mods
+  inner-x-mods
+  column-count (not 'grid-columns')
+
+othernames
+  inset-r__m
+  hang-r__m
+  tuck
+  slip
+  edge
+  shim
+
+  drop
+  slide
+  lip
+  rim
+  lap
+  well
+  dent
+  bump
+  hump
+  rise
+  card
+  bind
+  bound
+
+  lead
+
+
+  wrap
+  edge
+  slip
+
+  shift
+  spread
+  fringe
+  verge
+  skirt
 
 
 ## util
@@ -90,7 +127,7 @@ auto-line
 
 ```scss
 // output media and base as json
-@include set-css-data((media: $media, base: $base));
+@include set-css-data((media: $media, base: $root));
 ```
 
 ## removals: these belong in 'homework'

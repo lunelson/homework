@@ -26,8 +26,8 @@
 
 @function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
 @function ratio-val($ratio)    { @return floor-to(percentage(nth($ratio,1) / nth($ratio,2)), 3); }
-@function ratio-class($ratio, $index, $list, $base, $fx) { @return '.#{$base}-#{ratio-str($ratio)}#{$fx}'; }
-@function ratio-class2($ratio, $index, $list, $base, $fx) { @return '.#{$base}--#{ratio-str($ratio)}#{$fx}'; }
+@function ratio-class($ratio, $index, $list, $root, $fx) { @return '.#{$root}-#{ratio-str($ratio)}#{$fx}'; }
+@function ratio-class2($ratio, $index, $list, $root, $fx) { @return '.#{$root}--#{ratio-str($ratio)}#{$fx}'; }
 
 @mixin setup-atomic {
 

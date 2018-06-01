@@ -46,10 +46,10 @@
     }
 
     // mod-classes for all media
-    // $base-size: strip(medium-var('font-size'));
+    // $root-size: strip(medium-var('font-size'));
     // @each $s, $size in map-get(medium-var('copy-sizes'), $f) {
     //   #{mod-class($f, $s, (m, md, med))} {
-    //     font-size: nth($size, 1) / $base-size * 1rem;
+    //     font-size: nth($size, 1) / $root-size * 1rem;
     //     line-height: nth($size, 2) / nth($size, 1);
     //     @include trim(nth($size, 2) / nth($size, 1), $f);
     //   }
@@ -57,10 +57,10 @@
 
     // verbose output but WTF
     @include mm-for('copy-sizes' 'inner-y') {
-      $base-size: strip(medium-var('font-size'));
+      $root-size: strip(medium-var('font-size'));
       @each $s, $size in get(medium(), 'copy-sizes', $f) {
         #{mod-class($f, $s, (m, md, med))} {
-          font-size: nth($size, 1) / $base-size * 1rem;
+          font-size: nth($size, 1) / $root-size * 1rem;
           line-height: nth($size, 2) / nth($size, 1);
           @include trim(nth($size, 2) / nth($size, 1), $f);
         }
@@ -74,10 +74,10 @@
     //     @if $f-sizes {
     //       @include medium($m) {
     //         // TODO: check if size or line-height have changed, or both
-    //         $base-size: strip(medium-var('font-size'));
+    //         $root-size: strip(medium-var('font-size'));
     //         @each $s, $size in $f-sizes {
     //           #{mod-class($f, $s, (m, md, med))} {
-    //             font-size: nth($size, 1) / $base-size * 1rem;
+    //             font-size: nth($size, 1) / $root-size * 1rem;
     //             line-height: nth($size, 2) / nth($size, 1);
     //             @include trim(nth($size, 2) / nth($size, 1), $f);
     //           }

@@ -12,14 +12,8 @@
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
   --inner-y--m: 1rem;
   --inner-x--m: 1rem;
-  --font-size--sans--m: 1.125rem;
-  --line-height--sans--m: 1.3;
-  --font-size--sans--l: 1.5rem;
-  --line-height--sans--l: 1.2;
-  --font-size--serif--m: 1.125rem;
-  --line-height--serif--m: 1.3;
-  --font-size--serif--l: 1.5rem;
-  --line-height--serif--l: 1.2;
+  --font-size--sans--m: 1rem;
+  --line-height--sans--m: 1.25;
 }
 
 @media screen and (min-width: 30em) {
@@ -33,8 +27,6 @@
   :root {
     --breakpoint: 40em;
     --outer-width: 40rem;
-    --font-size--serif--l: 1.875rem;
-    --line-height--serif--l: 1.1;
   }
 }
 
