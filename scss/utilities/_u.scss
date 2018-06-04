@@ -1,0 +1,148 @@
+//
+// base and mult
+//
+
+@function base-class($base, $_...) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
+@function mod-class($base, $mod, $except: ()) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
+@function var-class($base, $var, $except: ()) { @return selector-parse(if(index($except, $var), '.#{$base}, .#{$base}-#{$var}', '.#{$base}-#{$var}')); }
+
+@mixin base-class($args...) { #{base-class($args...)} { @content; } }
+@mixin mod-class($args...) { #{mod-class($args...)} { @content; } }
+
+
+
+// class
+
+@function _base-class($root) { @return selector-parse('.#{$root}, [class^="#{$root}--"], [class*=" #{$root}--"]'); }
+@function _mult-class($root, $m) { @return selector-parse(if($m=='base', '.#{$root}', '.#{$root}--#{$m}')); }
+
+@function join-all($lists...) {
+  $result: ();
+  @each $list in $lists {
+    $result: join($result, $list, list-separator($list));
+  }
+  @return $result;
+}
+
+@function map-items($list, $func, $sep: list-separator($list)) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $result: append($result, call(get-function($func), nth($list, $i), $i, $list), $sep);
+  }
+  @return $result;
+}
+
+@function filter-items($list, $func, $sep: list-separator($list)) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $value: nth($list, $i);
+    $test: call(get-function($func), $value, $i, $list);
+    $result: if($test, append($result, $value, $sep), $result);
+  }
+  @return $result;
+}
+
+@function gcd($a, $b) {
+  @if $b == 0 { @return abs($a); }
+  @return gcd($b, $a % $b);
+}
+
+@function list-transform($list, $func, $args...) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $n from 1 through length($list) {
+    $result: append($result, call(get-function($func), nth($list, $n), $n, $list, $args...), 'comma');
+  }
+  @return $result;
+}
+
+//
+// utilities
+//
+
+
+@function __nth($list, $n) {
+  // TODO allow it to handle strings; create str-nth
+  @if length($list) == 0 or $n < 1 or $n > length($list) { @return null; }
+  @return nth($list, $n);
+}
+
+@function __first($list) {
+  @return __nth($list, 1);
+}
+
+@function __last($list) {
+  @return __nth($list, length($list));
+}
+
+@function __contains-any($list, $items) {
+  @each $item in $items { @if index($list, $item) { @return true; } }
+  @return false;
+}
+
+@function __slice($list, $start: 1, $end: length($list), $sep: list-separator($list)) {
+  $output: ();
+  @if $start >= 1 and $end >= $start {
+    @for $i from $start through $end {
+      $output: append($output, nth($list, $i), $sep);
+    }
+  }
+  // @return if(length($output)==1,nth($output,1),$output);
+  @return $output;
+}
+
+@function __normalize-arglist($arglist...) {
+  @if length($arglist) == 1 and type-of(nth($arglist, 1)) == list {
+    $arglist: join((), nth($arglist, 1), 'comma');
+  }
+  @return $arglist;
+}
+
+@function __range-pairs($list, $head: true, $tail: true) {
+  @if length($list) == 0 { @return $list; }
+  $result: ();
+  @for $n from 1 through length($list) + 1 {
+    $m: $n - 1; $a: if($m == 0, null, nth($list, $m));
+    $b: if($n > length($list), null, nth($list, $n));
+    $result: append($result, ($a $b), 'comma');
+  }
+  $length: length($result);
+  $start: if($head, 1, 2);
+  $end: if($tail, $length, $length - 1);
+  @return __slice($result, $start, $end);
+}
+
+@function __get($map, $keys...) {
+  @if type-of($map) != 'map' or length($map) == 0 { @error 'non-map or zero-length-map passed to __get'; }
+  @each $key in $keys {
+    @if type-of($map) != 'map' { @return $map; }
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+@function __deep-merge($target, $source) {
+  $source: $source or ();
+  $target: $target or ();
+  $result: ();
+
+  // if both source and target are map-compatible
+  @if is-map($source) and is-map($target) {
+    $result: $target;
+    @each $key, $s-value in $source {
+      $t-value: map-get($target, $key);
+      @if index('list' 'map', type-of($s-value)) or index('list' 'map', type-of($t-value)) {
+        $result: map-merge($result, ($key: __deep-merge($t-value, $s-value)));
+      } @else {
+        $result: map-merge($result, ($key: $s-value));
+      }
+    }
+  }
+
+  // else source overwrites target
+  @else { $result: $source; }
+
+  @return $result;
+}

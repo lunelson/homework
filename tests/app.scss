@@ -1,0 +1,13 @@
+@import '../scss/peers';
+@import '../scss/index';
+
+$media: (
+  s: ( breakpoint: 20em ),
+  m: ( breakpoint: 30em ),
+  l: ( breakpoint: 40em ),
+);
+
+
+@include setup-m;
+@include setup-grid;
+@include setup-frame;

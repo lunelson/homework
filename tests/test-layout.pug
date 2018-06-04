@@ -1,0 +1,15 @@
+extends /_templates/layouts/default
+
+append defs
+  - title = 'Test: Layout'
+
+append head
+  link(href="/assets/test.css", rel="stylesheet")
+
+block body
+
+  .wrap--last
+    .frame
+      .grid--l
+        .cell
+          h1 Is this thing on?

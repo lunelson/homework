@@ -1,0 +1,110 @@
+@import 'support/m-private';
+@import 'support/m-public';
+
+
+$root: () !default;
+$media: () !default;
+
+$root-orig: ();
+$media-orig: ();
+
+$curr-m: null;
+
+$root-defaults: (
+
+  // bases
+  font-size: 16px,
+  line-height: 1.25,
+  inner-x: 1rem,
+  inner-y: 1.25rem,
+  outer-top: 2rem,
+  outer-right: 2rem,
+  outer-bottom: 2rem,
+  outer-left: 2rem,
+  grid-columns: 12,
+
+  // variations
+  font-mods: ( sans: ( m: 16px 1.25 ) ),
+  inner-x-mods: ( m: 1rem ),
+  inner-y-mods: ( m: 1rem ),
+);
+
+@mixin homework-core-setup($modern: true) {
+
+  @if $modern {
+    // init base
+
+    $root-orig: $root !global;
+    $media-orig: $media !global;
+    $root: __normalize2(map-merge($root-defaults, $root), 16px) !global;
+
+    :root {
+      @each $key, $val in $root {
+        @if not index('list' 'map', type-of($val)) {
+          --#{$key}: #{$val};
+        }
+      }
+      --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+
+      @include __mods-output($root);
+      // @each $y, $mod in map-get($root, 'inner-y-mods') or () {
+      //   @if unitless($mod) { --inner-y--#{$y}: calc(var(--inner-y) * #{$mod}); }
+      //   @else { --inner-y--#{$y}: #{$mod}; }
+      // }
+      // @each $x, $mod in map-get($root, 'inner-x-mods') or () {
+      //   @if unitless($mod) { --inner-x--#{$x}: calc(var(--inner-x) * #{$mod}); }
+      //   @else { --inner-x--#{$x}: #{$mod}; }
+      // }
+      // @each $f, $font in map-get($root, 'font-mods') or () {
+      //   @each $s, $def in $font {
+      //     --font-size--#{$f}--#{$s}: #{nth($def, 1) / 16px * 1rem};
+      //     --line-height--#{$f}--#{$s}: #{nth($def, 2)};
+      //   }
+      // }
+      // font-size: calc(var(--root-scale) * 1em);
+      // line-height: var(--line-height);
+    }
+
+    // init media
+
+    $curr-medium: $root;
+    @each $m, $medium in $media {
+      @if not index(map-keys($medium), 'breakpoint') {
+        @include error('homework: one of your $media does not have a breakpoint key');
+      }
+
+      $curr-medium: __normalize2(__deep-merge($curr-medium, $medium));
+
+      @media #{__query-string(map-get($medium, 'breakpoint'))} {
+
+        :root {
+          @each $key in join(map-keys($medium), ('outer-width')) {
+            $val: map-get($curr-medium, $key);
+            @if not index('list' 'map', type-of($val)) {
+              --#{$key}: #{$val};
+            }
+          }
+          @include __mods-output($medium);
+          // @each $y, $mod in map-get($medium, 'inner-y-mods') or () {
+          //   @if unitless($mod) { --inner-y--#{$y}: calc(var(--inner-y) * #{$mod}); }
+          //   @else { --inner-y--#{$y}: #{$mod}; }
+          // }
+          // @each $x, $mod in map-get($medium, 'inner-x-mods') or () {
+          //   @if unitless($mod) { --inner-x--#{$x}: calc(var(--inner-x) * #{$mod}); }
+          //   @else { --inner-x--#{$x}: #{$mod}; }
+          // }
+          // @each $f, $font in map-get($medium, 'font-mods') or () {
+          //   @each $s, $def in $font {
+          //     --font-size--#{$f}--#{$s}: #{nth($def, 1) / 16px * 1rem};
+          //     --line-height--#{$f}--#{$s}: #{nth($def, 2)};
+          //   }
+          // }
+        }
+      }
+
+      $media: map-merge($media, ($m: $curr-medium)) !global;
+    }
+  } @else {
+    // legacy init?
+  }
+}

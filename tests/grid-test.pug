@@ -1,0 +1,69 @@
+extends _app
+
+append defs
+  - title = 'Test: Grid'
+
+append head
+  style.
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    .label::before {
+      font-family: monospace;
+      counter-reset: cp var(--span-n);
+      content: counter(cp);
+      display: block;
+      width: 100%;
+      padding: 1em;
+      background-color: #ddd;
+    }
+
+    .colwidth {
+      width: calc(var(--column-width) * 4);
+      height: 30px;
+      background-color: blue;
+    }
+
+    :root {
+      --column-width: calc((100% + var(--column-gap)) / var(--grid-columns) - var(--column-gap));
+    }
+
+block body
+
+  .wrap--last
+    .frame
+      .colwidth
+      .grid
+        .span
+          .label
+        .span.span--6__m
+          .label
+        .span.span--6__m
+          .grid
+            .span
+              .label
+            .span--4
+              .label
+        .span.span--3__l
+          .label
+        .span.span--9__l
+          .grid
+            .span
+              .label
+            .span--4
+              .label
+            .span--5
+              .grid
+                .span: .label
+                .span--3
+                  .grid
+                    .span: .label
+                    .span--2: .label
+                    .span--1: .label
+                .span--2
+                  .grid
+                    .span: .label
+                    .span--1: .label
+                    .span--1: .label
