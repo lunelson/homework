@@ -3,6 +3,11 @@
   - handle non-px values in font-mods
 
 */
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
 :root {
   --font-size: 16px;
   --line-height: 1.25;
@@ -51,8 +56,8 @@
 }
 
 .stack, [class^="stack--"], [class*=" stack--"] {
-  padding-top: 0.1px;
-  padding-bottom: 0.1px;
+  padding-top: 0.01px;
+  padding-bottom: 0.01px;
 }
 
 .stack > *, [class^="stack--"] > *, [class*=" stack--"] > * {

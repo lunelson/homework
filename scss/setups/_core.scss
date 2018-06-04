@@ -37,7 +37,10 @@ $root-defaults: (
     $root-orig: $root !global;
     $media-orig: $media !global;
     $root: __normalize2(map-merge($root-defaults, $root), 16px) !global;
-
+    html {
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+    }
     :root {
       @each $key, $val in $root {
         @if not index('list' 'map', type-of($val)) {

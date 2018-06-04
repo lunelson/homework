@@ -73,7 +73,7 @@ $done-homework-setup: false;
   @if index($setups, 'peel') { @include setup-peel; }
   @if index($setups, 'grid') { @include homework-grid-setup; }
   @if index($setups, 'typo') { @include homework-typo-setup; }
-  @if index($setups, 'stack') { @include setup-stack; }
+  @if index($setups, 'stack') { @include homework-stack-setup; }
   @if index($setups, 'chain') { @include setup-chain; }
   @if index($setups, 'theme') { @include setup-theme; }
   @if index($setups, 'atomic') { @include setup-atomic; }

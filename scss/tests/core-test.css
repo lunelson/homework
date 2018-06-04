@@ -3,6 +3,11 @@
   - handle non-px values in font-mods
 
 */
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
 :root {
   --font-size: 16px;
   --line-height: 1.25;
@@ -48,9 +53,10 @@
 
 @media screen and (min-width: 60em) {
   :root {
+    --font-size: 18px;
     --breakpoint: 60em;
     --outer-right: 80px;
-    --outer-width: 60rem;
+    --outer-width: 53.33333rem;
   }
 }
 
@@ -127,7 +133,7 @@
     )
   ),
   c: (
-    font-size: 16px,
+    font-size: 18px,
     line-height: 1.25,
     inner-x: 1rem,
     inner-y: 1.5rem,
@@ -156,7 +162,7 @@
       m: 3.5rem,
       l: 4px
     ),
-    outer-width: 60rem,
+    outer-width: 53.33333rem,
     breakpoint: 60em,
     font-defs: (
       serif: (
@@ -171,5 +177,5 @@
   */
   margin-right: 0.5;
   margin-right: var(--inner-x--s);
-  max-width: 60rem;
+  max-width: 53.33333rem;
 }

@@ -43,19 +43,20 @@ $fonts-defaults: (
 
     :root {
       --font-family: #{map-get-z($fonts, nth(map-keys($fonts), 1), 'family')};
-      --font-size: 1rem;
-      --line-height: 1.25;
-      --spacing-max: 0;
-      --spacing-end: 0;
-      --trim-x: 0;
-      --trim-top: 0;
-      --trim-bottom: 0;
-      --trim-capline: 0;
-      --trim-xline: 0;
-      --trim-baseline: 0;
+      // --font-size: 1rem;
+      // --line-height: 1.25;
+      --line-fat: calc((var(--line-height) - 1) * 1em);
+      // --spacing-max: 0;
+      // --spacing-end: 0;
+      // --trim-x: 0;
+      // --trim-top: 0;
+      // --trim-bottom: 0;
+      // --trim-capline: 0;
+      // --trim-xline: 0;
+      // --trim-baseline: 0;
     }
 
-    body, body * {
+    html * {
       font-family: var(--font-family);
       font-size: var(--font-size);
       line-height: var(--line-height);
@@ -67,12 +68,15 @@ $fonts-defaults: (
       letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
       margin-right: var(--trim-x);
       margin-left: var(--trim-x);
-      #{base-class('stack')} > &, &.trim {
-        margin-top: calc(0px);
-        margin-bottom: calc(0px);
+      $is-trim: selector-parse('&.trim');
+      $in-stack: insert-parents(base-class('stack'), '>');
+      @at-root #{$is-trim}, #{$in-stack} {
+        margin-top: calc(0px - var(--line-fat) / 2 - var(--trim-top));
+        margin-bottom: calc(0px - var(--line-fat) / 2 - var(--trim-bottom));
       }
-      #{base-class('stack')} > * + & {
-        margin-top: calc(var(--stack-gap));
+      $adj-in-stack: insert-parents(base-class('stack'), '> * +');
+      @at-root #{$adj-in-stack} {
+        margin-top: calc(var(--stack-gap) - var(--line-fat) / 2 - var(--trim-top));
       }
     }
 
@@ -82,8 +86,8 @@ $fonts-defaults: (
         --spacing-max: #{map-get($font, 'spacing-max')};
         --spacing-end: #{map-get($font, 'spacing-end')};
         --trim-x: #{map-get($font, 'trim-x')};
-        --trim-top: #{map-get($font, 'trim-top')};
-        --trim-bottom: #{map-get($font, 'trim-bottom')};
+        --trim-top: #{map-get($font, 'trim-top') * 1em};
+        --trim-bottom: #{map-get($font, 'trim-bottom') * 1em};
       }
     }
 

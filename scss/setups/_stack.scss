@@ -8,7 +8,7 @@
 
 @import 'support/stack-support';
 
-@mixin setup-stack($modern: true) {
+@mixin homework-stack-setup($modern: true) {
 
   @if $modern {
 
@@ -17,8 +17,8 @@
     }
 
     #{base-class('stack')} {
-      padding-top: 0.1px;
-      padding-bottom: 0.1px;
+      padding-top: 0.01px;
+      padding-bottom: 0.01px;
       & > * { margin-top: 0; margin-bottom: 0; }
       & > * + * { margin-top: var(--stack-gap); }
     }
@@ -29,7 +29,7 @@
 
   } @else {
 
-    // @include setup-stack-legacy();
+    // @include homework-stack-setup-legacy();
 
 
     // @each $y, $inner-y in if(type-of($inner-ys) == 'map', $inner-ys, (m: $inner-ys)) {
