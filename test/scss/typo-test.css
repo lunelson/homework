@@ -1,0 +1,64 @@
+/*
+  TODO
+  - handle non-px values in font-mods
+
+*/
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+:root {
+  --font-size: 16px;
+  --line-height: 1.25;
+  --inner-x: 2rem;
+  --inner-y: 1.25rem;
+  --outer-top: 2rem;
+  --outer-right: 2rem;
+  --outer-bottom: 2rem;
+  --outer-left: 2rem;
+  --grid-columns: 12;
+  --outer-width: 100%;
+  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+  --inner-y--s: 1rem;
+  --inner-y--m: 2rem;
+  --inner-x--m: 1rem;
+  --font-size--sans--s: 0.875rem;
+  --line-height--sans--s: 1.4;
+  --font-size--sans--m: 1rem;
+  --line-height--sans--m: 1.4;
+  --font-size--serif--s: 1rem;
+  --line-height--serif--s: 1.4;
+  --font-size--serif--m: 1.125rem;
+  --line-height--serif--m: 1.4;
+}
+
+@media screen and (min-width: 20em) {
+  :root {
+    --breakpoint: 20em;
+    --outer-width: 20rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  :root {
+    --breakpoint: 30em;
+    --inner-x: 3rem;
+    --outer-width: 30rem;
+    --font-size--sans--s: 1.25rem;
+    --line-height--sans--s: 1.4;
+    --font-size--sans--m: 1.5rem;
+    --line-height--sans--m: 1.4;
+    --font-size--serif--s: 1.375rem;
+    --line-height--serif--s: 1.4;
+    --font-size--serif--m: 1.625rem;
+    --line-height--serif--m: 1.4;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  :root {
+    --breakpoint: 40em;
+    --outer-width: 40rem;
+  }
+}

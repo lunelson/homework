@@ -1,0 +1,138 @@
+//  _               _
+// | |             (_)
+// | |__   __ _ ___ _  ___
+// | '_ \ / _` / __| |/ __|
+// | |_) | (_| \__ \ | (__
+// |_.__/ \__,_|___/_|\___|
+
+
+//   strong, em, fs-, fw-,
+//   hold, stop, clip, hide
+//   ratio, aspect
+
+//   base-classes, global
+// strong, em
+// hold, stop, clip, hide
+// ratio|aspect
+// icon
+// ? show, flex-y, clip-x, hide-v, show-v
+
+@mixin setup-basic {
+
+  // bold, italic
+  .strong, strong, b { font-weight: bold; }
+  .em, em, i { font-style: italic; }
+
+  // clearfix
+  .cf, .clearfix { @include clearfix; }
+
+  // disable pointer on scrolling
+  .is-scrolling,
+  .is-scrolling * {
+    pointer-events: none !important;
+  }
+
+  // hold, stop, clip
+  #{base-class('hold')},
+  #{base-class('stop')},
+  #{base-class('clip')} { position: relative; }
+  #{base-class('stop')} { padding: 0.1px; }
+  #{base-class('clip')} { overflow: hidden !important; }
+  .clip--circle { border-radius: 50%; }
+
+  .mask, .vhide { @include vhide; }
+
+  @each $m in join(null, map-keys($media)) {
+    @include m($m) {
+      $fix: m-suffix();
+
+      //
+      // hide n show
+      //
+
+      .hide#{$fix} { @include hide; }
+      .show#{$fix} { @include show; }
+
+    }
+  }
+
+
+  //
+  // hold
+  //
+
+  .hold--abs, .hold--center, .hold--ratio {
+    z-index: 0; // make sure container can clip
+    & > * {
+      display: block;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      &:not(img) {
+        height: 100%;
+      }
+    }
+  }
+
+  // .hold--ratio {
+  //   height: 0;
+  //   overflow: hidden;
+  //   padding: 0 0 100%;
+  // }
+
+  // .hold--center {
+  //   & > * {
+  //     top: 50%; left: 50%;
+  //     transform: translate(-50%, -50%);
+  //   }
+  // }
+
+  // .hold--fit {
+  //   & > * {
+  //     width: 100%;
+  //     height: 100%;
+  //     object-fit: contain;
+  //   }
+  // }
+
+  // #{base-class('aspect')} {
+  //   position: relative;
+  //   &:before {
+  //     content: '';
+  //     display: block;
+  //     width: 100%;
+  //   }
+  //   & > * {
+  //     display: block;
+  //     position: absolute;
+  //     top: 0; left: 0;
+  //     width: 100%;
+  //     object-fit: cover;
+  //     &:not(.fit) {
+  //       height: 100%;
+  //     }
+  //   }
+  // }
+
+  // .aspect--std:before { padding-top: percentage(9/16); }
+  // .aspect--hero:before { padding-top: percentage(9/16); }
+  // .aspect--mega:before { padding-top: percentage(9/16); }
+  // @include m(m,l) {
+  //   .aspect--hero:before { padding-top: percentage(1/2); }
+  //   .aspect--mega:before { padding-top: percentage(1/2); }
+  // }
+  // @include m(l) {
+  //   .aspect--mega:before { padding-top: percentage(1/3); }
+  // }
+  // // .aspect--4-1:before { padding-top: percentage(1/4); }
+  // // .aspect--5-1:before { padding-top: percentage(1/5); }
+  // // .aspect--6-1:before { padding-top: percentage(1/6); }
+  // // .aspect--7-1:before { padding-top: percentage(1/7); }
+
+
+
+  // [data-bg-size='cover'] { background-size: cover; }
+  // [data-bg-size='contain'] { background-size: contain; }
+
+  // @each $ratio, $class in aspect-classes('hold') { #{$class} { padding-bottom: 1/$ratio * 100%; } }
+}

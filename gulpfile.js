@@ -11,17 +11,17 @@ const plumber = require('gulp-plumber');
 const sassIncl = path.join(__dirname, 'node_modules');
 
 gulp.task('work', function () {
-  return gulp.src('./scss/tests/*.scss')
+  return gulp.src('./test/scss/*.scss')
     .pipe(plumber(sass.logError))
     .pipe(sass({
       outputStyle: 'expanded',
       includePaths: [sassIncl]
     }))
-    .pipe(gulp.dest('./scss/tests'));
+    .pipe(gulp.dest('./test/scss'));
 });
 
 gulp.task('test', function(){
-  return gulp.src('./scss/tests/*.scss')
+  return gulp.src('./test/scss/*.scss')
     .pipe(plumber())
     .pipe(sass({
       outputStyle: 'expanded',

@@ -18,8 +18,8 @@
     "url": "git+https://github.com/lunelson/homework.git"
   },
   "scripts": {
-    "docs:build": "penny build tests docs",
-    "docs:serve": "penny serve tests",
+    "docs:build": "penny build src docs",
+    "docs:serve": "penny serve src",
     "start": "gulp",
     "test": "gulp test"
   },

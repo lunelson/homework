@@ -1,0 +1,54 @@
+//           _
+//          | |
+//  ___  ___| |_ _   _ _ __
+// / __|/ _ \ __| | | | '_ \
+// \__ \  __/ |_| |_| | |_) |
+// |___/\___|\__|\__,_| .__/
+//                    | |
+//                    |_|
+
+@import 'core';
+@import 'wrap';
+@import 'frame';
+@import 'stack';
+@import 'font';
+@import 'grid';
+@import 'debug';
+@import 'atomic';
+@import 'misc';
+
+$done-homework-setup: false;
+
+@mixin homework-setup($modern: true, $setups...) {
+
+  // run homework reset, if not done
+  @if not $done-homework-reset { @include homework-reset; }
+
+  // default to all setups
+  @if length($setups) == 0 {
+    $setups: (
+      'core',
+      'wrap',
+      'frame',
+      'stack',
+      'font',
+      'grid',
+      'debug',
+      'atomic',
+      'misc',
+    );
+  }
+
+  @if index($setups, 'core') { @include homework-core-setup($modern); }
+  @if index($setups, 'wrap') { @include homework-wrap-setup($modern); }
+  @if index($setups, 'frame') { @include homework-frame-setup($modern); }
+  @if index($setups, 'stack') { @include homework-stack-setup($modern); }
+  @if index($setups, 'font') { @include homework-font-setup($modern); }
+  @if index($setups, 'grid') { @include homework-grid-setup($modern); }
+  @if index($setups, 'debug') { @include homework-debug-setup($modern); }
+  @if index($setups, 'atomic') { @include homework-atomic-setup($modern); }
+  @if index($setups, 'misc') { @include homework-misc-setup($modern); }
+
+  // set $done-homework to true
+  $done-homework-setup: true !global;
+}
