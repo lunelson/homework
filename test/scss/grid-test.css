@@ -1,7 +1,8 @@
 /*
   TODO
   - handle non-px values in font-mods
-
+  - convert to f-[font]-[size] pattern
+  - add the new adjacency condition
 */
 html {
   font-size: var(--font-size);
@@ -59,23 +60,23 @@ html {
   --span-d: var(--grid-columns);
 }
 
-.grid, [class^="grid--"], [class*=" grid--"] {
+.grid, [class^="grid-"], [class*=" grid-"] {
   margin-top: calc(var(--row-gap) / -2);
   margin-bottom: calc(var(--row-gap) / -2);
 }
 
-.grid > *, [class^="grid--"] > *, [class*=" grid--"] > * {
+.grid > *, [class^="grid-"] > *, [class*=" grid-"] > * {
   padding-top: calc(var(--row-gap) / 2);
   padding-bottom: calc(var(--row-gap) / 2);
 }
 
-.row > *, [class^="row--"] > *, [class*=" row--"] > * {
+.row > *, [class^="row-"] > *, [class*=" row-"] > * {
   padding-top: 0.01px;
   padding-bottom: 0.01px;
 }
 
-.row, [class^="row--"], [class*=" row--"],
-.grid, [class^="grid--"], [class*=" grid--"] {
+.row, [class^="row-"], [class*=" row-"],
+.grid, [class^="grid-"], [class*=" grid-"] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -83,8 +84,8 @@ html {
   margin-right: calc(var(--column-gap) / -2);
 }
 
-.row > *, [class^="row--"] > *, [class*=" row--"] > *,
-.grid > *, [class^="grid--"] > *, [class*=" grid--"] > * {
+.row > *, [class^="row-"] > *, [class*=" row-"] > *,
+.grid > *, [class^="grid-"] > *, [class*=" grid-"] > * {
   flex: 1 1 0%;
   min-width: 0%;
   min-height: 1px;
@@ -94,457 +95,457 @@ html {
   padding-right: calc(var(--column-gap) / 2);
 }
 
-.row.null, [class^="row--"].null, [class*=" row--"].null,
-.grid.null, [class^="grid--"].null, [class*=" grid--"].null {
+.row.null, [class^="row-"].null, [class*=" row-"].null,
+.grid.null, [class^="grid-"].null, [class*=" grid-"].null {
   margin: 0;
 }
 
-.row.null > *, [class^="row--"].null > *, [class*=" row--"].null > *,
-.grid.null > *, [class^="grid--"].null > *, [class*=" grid--"].null > * {
+.row.null > *, [class^="row-"].null > *, [class*=" row-"].null > *,
+.grid.null > *, [class^="grid-"].null > *, [class*=" grid-"].null > * {
   padding: 0;
 }
 
-.grid--s {
+.grid-s {
   --row-gap: var(--inner-y--s);
 }
 
-.grid--m {
+.grid-m {
   --row-gap: var(--inner-y--m);
 }
 
-.grid--l {
+.grid-l {
   --row-gap: var(--inner-y--l);
 }
 
-.row--s,
-.grid-x--s {
+.row-s,
+.grid-x-s {
   --column-gap: var(--inner-x--s);
 }
 
-.row--form,
-.grid-x--form {
+.row-form,
+.grid-x-form {
   --column-gap: var(--inner-x--form);
 }
 
-.cell, [class^="cell--"], [class*=" cell--"],
-.span, [class^="span--"], [class*=" span--"] {
+.cell, [class^="cell-"], [class*=" cell-"],
+.span, [class^="span-"], [class*=" span-"] {
   flex: 0 0 auto;
   width: calc(100% * var(--span-n) / var(--span-d));
 }
 
-.cell--1,
-.span--1 {
+.cell-1,
+.span-1 {
   --span-n: 1;
 }
 
-.cell--1 > *,
-.span--1 > * {
+.cell-1 > *,
+.span-1 > * {
   --span-d: 1;
 }
 
-.cell--2,
-.span--2 {
+.cell-2,
+.span-2 {
   --span-n: 2;
 }
 
-.cell--2 > *,
-.span--2 > * {
+.cell-2 > *,
+.span-2 > * {
   --span-d: 2;
 }
 
-.cell--3,
-.span--3 {
+.cell-3,
+.span-3 {
   --span-n: 3;
 }
 
-.cell--3 > *,
-.span--3 > * {
+.cell-3 > *,
+.span-3 > * {
   --span-d: 3;
 }
 
-.cell--4,
-.span--4 {
+.cell-4,
+.span-4 {
   --span-n: 4;
 }
 
-.cell--4 > *,
-.span--4 > * {
+.cell-4 > *,
+.span-4 > * {
   --span-d: 4;
 }
 
-.cell--5,
-.span--5 {
+.cell-5,
+.span-5 {
   --span-n: 5;
 }
 
-.cell--5 > *,
-.span--5 > * {
+.cell-5 > *,
+.span-5 > * {
   --span-d: 5;
 }
 
-.cell--6,
-.span--6 {
+.cell-6,
+.span-6 {
   --span-n: 6;
 }
 
-.cell--6 > *,
-.span--6 > * {
+.cell-6 > *,
+.span-6 > * {
   --span-d: 6;
 }
 
-.cell--7,
-.span--7 {
+.cell-7,
+.span-7 {
   --span-n: 7;
 }
 
-.cell--7 > *,
-.span--7 > * {
+.cell-7 > *,
+.span-7 > * {
   --span-d: 7;
 }
 
-.cell--8,
-.span--8 {
+.cell-8,
+.span-8 {
   --span-n: 8;
 }
 
-.cell--8 > *,
-.span--8 > * {
+.cell-8 > *,
+.span-8 > * {
   --span-d: 8;
 }
 
-.cell--9,
-.span--9 {
+.cell-9,
+.span-9 {
   --span-n: 9;
 }
 
-.cell--9 > *,
-.span--9 > * {
+.cell-9 > *,
+.span-9 > * {
   --span-d: 9;
 }
 
-.cell--10,
-.span--10 {
+.cell-10,
+.span-10 {
   --span-n: 10;
 }
 
-.cell--10 > *,
-.span--10 > * {
+.cell-10 > *,
+.span-10 > * {
   --span-d: 10;
 }
 
-.cell--11,
-.span--11 {
+.cell-11,
+.span-11 {
   --span-n: 11;
 }
 
-.cell--11 > *,
-.span--11 > * {
+.cell-11 > *,
+.span-11 > * {
   --span-d: 11;
 }
 
-.cell--12,
-.span--12 {
+.cell-12,
+.span-12 {
   --span-n: 12;
 }
 
-.cell--12 > *,
-.span--12 > * {
+.cell-12 > *,
+.span-12 > * {
   --span-d: 12;
 }
 
 @media screen and (min-width: 20em) {
-  .cell--1__a,
-  .span--1__a {
+  .cell-1__a,
+  .span-1__a {
     --span-n: 1;
   }
-  .cell--1__a > *,
-  .span--1__a > * {
+  .cell-1__a > *,
+  .span-1__a > * {
     --span-d: 1;
   }
-  .cell--2__a,
-  .span--2__a {
+  .cell-2__a,
+  .span-2__a {
     --span-n: 2;
   }
-  .cell--2__a > *,
-  .span--2__a > * {
+  .cell-2__a > *,
+  .span-2__a > * {
     --span-d: 2;
   }
-  .cell--3__a,
-  .span--3__a {
+  .cell-3__a,
+  .span-3__a {
     --span-n: 3;
   }
-  .cell--3__a > *,
-  .span--3__a > * {
+  .cell-3__a > *,
+  .span-3__a > * {
     --span-d: 3;
   }
-  .cell--4__a,
-  .span--4__a {
+  .cell-4__a,
+  .span-4__a {
     --span-n: 4;
   }
-  .cell--4__a > *,
-  .span--4__a > * {
+  .cell-4__a > *,
+  .span-4__a > * {
     --span-d: 4;
   }
-  .cell--5__a,
-  .span--5__a {
+  .cell-5__a,
+  .span-5__a {
     --span-n: 5;
   }
-  .cell--5__a > *,
-  .span--5__a > * {
+  .cell-5__a > *,
+  .span-5__a > * {
     --span-d: 5;
   }
-  .cell--6__a,
-  .span--6__a {
+  .cell-6__a,
+  .span-6__a {
     --span-n: 6;
   }
-  .cell--6__a > *,
-  .span--6__a > * {
+  .cell-6__a > *,
+  .span-6__a > * {
     --span-d: 6;
   }
-  .cell--7__a,
-  .span--7__a {
+  .cell-7__a,
+  .span-7__a {
     --span-n: 7;
   }
-  .cell--7__a > *,
-  .span--7__a > * {
+  .cell-7__a > *,
+  .span-7__a > * {
     --span-d: 7;
   }
-  .cell--8__a,
-  .span--8__a {
+  .cell-8__a,
+  .span-8__a {
     --span-n: 8;
   }
-  .cell--8__a > *,
-  .span--8__a > * {
+  .cell-8__a > *,
+  .span-8__a > * {
     --span-d: 8;
   }
-  .cell--9__a,
-  .span--9__a {
+  .cell-9__a,
+  .span-9__a {
     --span-n: 9;
   }
-  .cell--9__a > *,
-  .span--9__a > * {
+  .cell-9__a > *,
+  .span-9__a > * {
     --span-d: 9;
   }
-  .cell--10__a,
-  .span--10__a {
+  .cell-10__a,
+  .span-10__a {
     --span-n: 10;
   }
-  .cell--10__a > *,
-  .span--10__a > * {
+  .cell-10__a > *,
+  .span-10__a > * {
     --span-d: 10;
   }
-  .cell--11__a,
-  .span--11__a {
+  .cell-11__a,
+  .span-11__a {
     --span-n: 11;
   }
-  .cell--11__a > *,
-  .span--11__a > * {
+  .cell-11__a > *,
+  .span-11__a > * {
     --span-d: 11;
   }
-  .cell--12__a,
-  .span--12__a {
+  .cell-12__a,
+  .span-12__a {
     --span-n: 12;
   }
-  .cell--12__a > *,
-  .span--12__a > * {
+  .cell-12__a > *,
+  .span-12__a > * {
     --span-d: 12;
   }
 }
 
 @media screen and (min-width: 30em) {
-  .cell--1__b,
-  .span--1__b {
+  .cell-1__b,
+  .span-1__b {
     --span-n: 1;
   }
-  .cell--1__b > *,
-  .span--1__b > * {
+  .cell-1__b > *,
+  .span-1__b > * {
     --span-d: 1;
   }
-  .cell--2__b,
-  .span--2__b {
+  .cell-2__b,
+  .span-2__b {
     --span-n: 2;
   }
-  .cell--2__b > *,
-  .span--2__b > * {
+  .cell-2__b > *,
+  .span-2__b > * {
     --span-d: 2;
   }
-  .cell--3__b,
-  .span--3__b {
+  .cell-3__b,
+  .span-3__b {
     --span-n: 3;
   }
-  .cell--3__b > *,
-  .span--3__b > * {
+  .cell-3__b > *,
+  .span-3__b > * {
     --span-d: 3;
   }
-  .cell--4__b,
-  .span--4__b {
+  .cell-4__b,
+  .span-4__b {
     --span-n: 4;
   }
-  .cell--4__b > *,
-  .span--4__b > * {
+  .cell-4__b > *,
+  .span-4__b > * {
     --span-d: 4;
   }
-  .cell--5__b,
-  .span--5__b {
+  .cell-5__b,
+  .span-5__b {
     --span-n: 5;
   }
-  .cell--5__b > *,
-  .span--5__b > * {
+  .cell-5__b > *,
+  .span-5__b > * {
     --span-d: 5;
   }
-  .cell--6__b,
-  .span--6__b {
+  .cell-6__b,
+  .span-6__b {
     --span-n: 6;
   }
-  .cell--6__b > *,
-  .span--6__b > * {
+  .cell-6__b > *,
+  .span-6__b > * {
     --span-d: 6;
   }
-  .cell--7__b,
-  .span--7__b {
+  .cell-7__b,
+  .span-7__b {
     --span-n: 7;
   }
-  .cell--7__b > *,
-  .span--7__b > * {
+  .cell-7__b > *,
+  .span-7__b > * {
     --span-d: 7;
   }
-  .cell--8__b,
-  .span--8__b {
+  .cell-8__b,
+  .span-8__b {
     --span-n: 8;
   }
-  .cell--8__b > *,
-  .span--8__b > * {
+  .cell-8__b > *,
+  .span-8__b > * {
     --span-d: 8;
   }
-  .cell--9__b,
-  .span--9__b {
+  .cell-9__b,
+  .span-9__b {
     --span-n: 9;
   }
-  .cell--9__b > *,
-  .span--9__b > * {
+  .cell-9__b > *,
+  .span-9__b > * {
     --span-d: 9;
   }
-  .cell--10__b,
-  .span--10__b {
+  .cell-10__b,
+  .span-10__b {
     --span-n: 10;
   }
-  .cell--10__b > *,
-  .span--10__b > * {
+  .cell-10__b > *,
+  .span-10__b > * {
     --span-d: 10;
   }
-  .cell--11__b,
-  .span--11__b {
+  .cell-11__b,
+  .span-11__b {
     --span-n: 11;
   }
-  .cell--11__b > *,
-  .span--11__b > * {
+  .cell-11__b > *,
+  .span-11__b > * {
     --span-d: 11;
   }
-  .cell--12__b,
-  .span--12__b {
+  .cell-12__b,
+  .span-12__b {
     --span-n: 12;
   }
-  .cell--12__b > *,
-  .span--12__b > * {
+  .cell-12__b > *,
+  .span-12__b > * {
     --span-d: 12;
   }
 }
 
 @media screen and (min-width: 40em) {
-  .cell--1__c,
-  .span--1__c {
+  .cell-1__c,
+  .span-1__c {
     --span-n: 1;
   }
-  .cell--1__c > *,
-  .span--1__c > * {
+  .cell-1__c > *,
+  .span-1__c > * {
     --span-d: 1;
   }
-  .cell--2__c,
-  .span--2__c {
+  .cell-2__c,
+  .span-2__c {
     --span-n: 2;
   }
-  .cell--2__c > *,
-  .span--2__c > * {
+  .cell-2__c > *,
+  .span-2__c > * {
     --span-d: 2;
   }
-  .cell--3__c,
-  .span--3__c {
+  .cell-3__c,
+  .span-3__c {
     --span-n: 3;
   }
-  .cell--3__c > *,
-  .span--3__c > * {
+  .cell-3__c > *,
+  .span-3__c > * {
     --span-d: 3;
   }
-  .cell--4__c,
-  .span--4__c {
+  .cell-4__c,
+  .span-4__c {
     --span-n: 4;
   }
-  .cell--4__c > *,
-  .span--4__c > * {
+  .cell-4__c > *,
+  .span-4__c > * {
     --span-d: 4;
   }
-  .cell--5__c,
-  .span--5__c {
+  .cell-5__c,
+  .span-5__c {
     --span-n: 5;
   }
-  .cell--5__c > *,
-  .span--5__c > * {
+  .cell-5__c > *,
+  .span-5__c > * {
     --span-d: 5;
   }
-  .cell--6__c,
-  .span--6__c {
+  .cell-6__c,
+  .span-6__c {
     --span-n: 6;
   }
-  .cell--6__c > *,
-  .span--6__c > * {
+  .cell-6__c > *,
+  .span-6__c > * {
     --span-d: 6;
   }
-  .cell--7__c,
-  .span--7__c {
+  .cell-7__c,
+  .span-7__c {
     --span-n: 7;
   }
-  .cell--7__c > *,
-  .span--7__c > * {
+  .cell-7__c > *,
+  .span-7__c > * {
     --span-d: 7;
   }
-  .cell--8__c,
-  .span--8__c {
+  .cell-8__c,
+  .span-8__c {
     --span-n: 8;
   }
-  .cell--8__c > *,
-  .span--8__c > * {
+  .cell-8__c > *,
+  .span-8__c > * {
     --span-d: 8;
   }
-  .cell--9__c,
-  .span--9__c {
+  .cell-9__c,
+  .span-9__c {
     --span-n: 9;
   }
-  .cell--9__c > *,
-  .span--9__c > * {
+  .cell-9__c > *,
+  .span-9__c > * {
     --span-d: 9;
   }
-  .cell--10__c,
-  .span--10__c {
+  .cell-10__c,
+  .span-10__c {
     --span-n: 10;
   }
-  .cell--10__c > *,
-  .span--10__c > * {
+  .cell-10__c > *,
+  .span-10__c > * {
     --span-d: 10;
   }
-  .cell--11__c,
-  .span--11__c {
+  .cell-11__c,
+  .span-11__c {
     --span-n: 11;
   }
-  .cell--11__c > *,
-  .span--11__c > * {
+  .cell-11__c > *,
+  .span-11__c > * {
     --span-d: 11;
   }
-  .cell--12__c,
-  .span--12__c {
+  .cell-12__c,
+  .span-12__c {
     --span-n: 12;
   }
-  .cell--12__c > *,
-  .span--12__c > * {
+  .cell-12__c > *,
+  .span-12__c > * {
     --span-d: 12;
   }
 }

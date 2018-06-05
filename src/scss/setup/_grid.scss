@@ -61,11 +61,11 @@
     }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or () {
-      .grid--#{$y} { --row-gap: var(--inner-y--#{$y}); }
+      .grid-#{$y} { --row-gap: var(--inner-y--#{$y}); }
     }
     @each $x, $mult in map-get($root, 'inner-x-mods') or () {
-      .row--#{$x},
-      .grid-x--#{$x} { --column-gap: var(--inner-x--#{$x}); }
+      .row-#{$x},
+      .grid-x-#{$x} { --column-gap: var(--inner-x--#{$x}); }
     }
 
     #{base-class('cell')},
@@ -79,8 +79,8 @@
 
         @for $n from 1 through $max-columns {
 
-          .cell--#{$n}#{m-suffix()},
-          .span--#{$n}#{m-suffix()} {
+          .cell-#{$n}#{m-suffix()},
+          .span-#{$n}#{m-suffix()} {
             --span-n: #{$n};
             & > * { --span-d: #{$n}; }
           }

@@ -2,7 +2,7 @@
 // base and mult
 //
 
-@function base-class($base, $_...) { @return selector-parse('.#{$base}, [class^="#{$base}--"], [class*=" #{$base}--"]'); }
+@function base-class($base, $_...) { @return selector-parse('.#{$base}, [class^="#{$base}-"], [class*=" #{$base}-"]'); }
 @function mod-class($base, $mod, $except: ()) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
 @function var-class($base, $var, $except: ()) { @return selector-parse(if(index($except, $var), '.#{$base}, .#{$base}-#{$var}', '.#{$base}-#{$var}')); }
 

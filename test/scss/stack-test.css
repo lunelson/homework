@@ -1,7 +1,8 @@
 /*
   TODO
   - handle non-px values in font-mods
-
+  - convert to f-[font]-[size] pattern
+  - add the new adjacency condition
 */
 html {
   font-size: var(--font-size);
@@ -56,55 +57,55 @@ html {
   --chain-gap: var(--inner-x);
 }
 
-.stack, [class^="stack--"], [class*=" stack--"] {
+.stack, [class^="stack-"], [class*=" stack-"] {
   display: flex;
   flex-direction: column;
   padding-top: 0.01px;
   padding-bottom: 0.01px;
 }
 
-.stack > *, [class^="stack--"] > *, [class*=" stack--"] > * {
+.stack > *, [class^="stack-"] > *, [class*=" stack-"] > * {
   flex: 0 1 auto;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.stack > * + *, [class^="stack--"] > * + *, [class*=" stack--"] > * + * {
+.stack > * + *, [class^="stack-"] > * + *, [class*=" stack-"] > * + * {
   margin-top: var(--stack-gap);
 }
 
-.stack--s > * {
+.stack-s > * {
   --stack-gap: var(--inner-y--s);
 }
 
-.stack--m > * {
+.stack-m > * {
   --stack-gap: var(--inner-y--m);
 }
 
-.stack--l > * {
+.stack-l > * {
   --stack-gap: var(--inner-y--l);
 }
 
-.chain, [class^="chain--"], [class*=" chain--"] {
+.chain, [class^="chain-"], [class*=" chain-"] {
   display: flex;
   flex-direction: row;
 }
 
-.chain > *, [class^="chain--"] > *, [class*=" chain--"] > * {
+.chain > *, [class^="chain-"] > *, [class*=" chain-"] > * {
   flex: 0 1 auto;
   margin-left: 0;
   margin-right: 0;
   text-overflow: ellipsis;
 }
 
-.chain > * + *, [class^="chain--"] > * + *, [class*=" chain--"] > * + * {
+.chain > * + *, [class^="chain-"] > * + *, [class*=" chain-"] > * + * {
   margin-left: var(--chain-gap);
 }
 
-.chain--s > * {
+.chain-s > * {
   --stack-gap: var(--inner-x--s);
 }
 
-.chain--form > * {
+.chain-form > * {
   --stack-gap: var(--inner-x--form);
 }

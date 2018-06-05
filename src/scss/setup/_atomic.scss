@@ -1,55 +1,12 @@
-// // WIDTH !!
+//        _                  _
+//       | |                (_)
+//   __ _| |_ ___  _ __ ___  _  ___
+//  / _` | __/ _ \| '_ ` _ \| |/ __|
+// | (_| | || (_) | | | | | | | (__
+//  \__,_|\__\___/|_| |_| |_|_|\___|
 
-// $max-columns: if(length($media) > 0, max-columns(), map-get($root, 'grid-columns'));
-// $reduction-set: ();
-// @for $d from 1 through $max-columns {
-//   @for $n from 1 through $d {
-//     $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
-//     $expansion-set: append(map-get($reduction-set, $reduction) or (), $n $d);
-//     $reduction-set: map-merge($reduction-set, ($reduction: $expansion-set));
-//   }
-// }
 
-// @each $m in join((null), map-keys($media)) {
-//   @include m($m) {
 
-//     @for $n from 1 through $max-columns {
-
-//       .cell--#{$n}#{m-suffix()},
-//       .span--#{$n}#{m-suffix()} {
-//         --span-n: #{$n};
-//         & > * { --span-d: #{$n}; }
-//       }
-//     }
-
-//     // @each $reduction, $expansion-set in $reduction-set {
-//     //   $n: nth($reduction,1);
-//     //   $d: nth($reduction,2);
-//     //   // $col-selectors: list-map($expansion-set, 'col-n-d-class', 'comma');
-//     //   // $cell-selectors: list-map($expansion-set, 'cell-n-d-class', 'comma');
-//     //   $span-selectors: list-map($expansion-set, 'span-n-d-class', 'comma');
-//     //   @if length($span-selectors) > 0 {
-//     //     // #{$col-selectors},
-//     //     // #{$cell-selectors},
-//     //     #{$span-selectors} {
-//     //       --span-n: $n;
-//     //       --span-d: $d;
-//     //     }
-//     //   }
-//     // }
-//   }
-// }
-
-// // _                  _
-// // | |                (_)
-// // __ _| |_ ___  _ __ ___  _  ___
-// // / _` | __/ _ \| '_ ` _ \| |/ __|
-// // | (_| | || (_) | | | | | | | (__
-// // \__,_|\__\___/|_| |_| |_|_|\___|
-
-// // -inner, -outer
-// // -col-n-d
-// // -neg-col-n-d
 // @function floor-to($n, $dec) {
 //   $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
 //   @return floor($n * $fac) / $fac;
@@ -66,139 +23,150 @@
 // }
 
 
-// @function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
-// @function ratio-val($ratio)    { @return floor-to(percentage(nth($ratio,1) / nth($ratio,2)), 3); }
-// @function ratio-class($ratio, $index, $list, $root, $fx) { @return '.#{$root}-#{ratio-str($ratio)}#{$fx}'; }
-// @function ratio-class2($ratio, $index, $list, $root, $fx) { @return '.#{$root}--#{ratio-str($ratio)}#{$fx}'; }
+@function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
+@function ratio-val($ratio)    { @return floor-to(percentage(nth($ratio,1) / nth($ratio,2)), 3); }
+@function ratio-val($ratio)    { @return calc(100% * (#{nth($ratio,1)} / #{nth($ratio,2)})); }
+@function ratio-class($ratio, $index, $list, $root, $fix) { @return '.#{$root}-#{ratio-str($ratio)}#{$fix}'; }
+// @function ratio-class($ratio, $index, $list, $root, $fix) { @return '.#{$root}--#{ratio-str($ratio)}#{$fix}'; }
 
-// @mixin setup-atomic {
+@mixin homework-atomic-setup($modern: true) {
 
-//   $grid-grid-columnss: ();
-//   @each $m, $medium in $media {
-//     $grid-grid-columnss: append($grid-grid-columnss, map-get($medium, 'grid-columns'));
-//   }
+  $grid-grid-columnss: ();
+  @each $m, $medium in $media {
+    $grid-grid-columnss: append($grid-grid-columnss, map-get($medium, 'grid-columns'));
+  }
 
-//   $reduced-ratios: ();
-//   @for $d from 1 through max($grid-grid-columnss...) {
-//     @for $n from 1 through $d {
-//       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
-//       $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
-//       $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
-//     }
-//   }
+  $reduced-ratios: ();
+  @for $d from 1 through max($grid-grid-columnss...) {
+    @for $n from 1 through $d {
+      $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+      $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
+      $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
+    }
+  }
 
-//   $all-ratios: join-all(map-values($reduced-ratios)...);
+  $all-ratios: join-all(map-values($reduced-ratios)...);
 
-//   $m-depth: ();
-//   @each $m in join(null, map-keys($media)) {
-//     $m-depth: append($m-depth, $m);
+  @if $modern {
 
-//     @include m($m) {
-//       $fx: m-suffix();
+    :root {
+      --atomic-x: 0;
+      --atomic-y: 0;
+    }
 
-//       //
-//       // display
-//       //
+    /*
+      TODO:
+      - change the following to 'var-class'; you don't need bare .px classes, for instance
+      - add implicit ratio classes, using the --span-[n]/[d] classes
+    */
 
-//       .d-none#{$fx} { display: none; }
-//       .d-flex#{$fx} { display: flex; }
-//       // .d-flex-y#{$fx} { display: flex; }
-//       .d-grid#{$fx} { display: grid; }
-//       .d-block#{$fx} { display: block; }
-//       .d-iblock#{$fx} { display: inline-block; vertical-align: baseline; }
-//       .d-inline#{$fx} { display: inline; vertical-align: baseline; }
+    #{base-class('py')},
+    #{base-class('pt')} { padding-top: var(--atomic-y); }
+    #{base-class('py')},
+    #{base-class('pb')} { padding-bottom: var(--atomic-y); }
 
-//       //
-//       // dimensions: auto
-//       //
+    #{base-class('px')},
+    #{base-class('pr')} { padding-right: var(--atomic-x); }
+    #{base-class('px')},
+    #{base-class('pl')} { padding-left: var(--atomic-x); }
 
-//       .w-auto#{$fx} { width: auto; }
-//       .my-auto#{$fx}, .mt-auto#{$fx} { margin-top: auto; }
-//       .mx-auto#{$fx}, .mr-auto#{$fx} { margin-right: auto; }
-//       .my-auto#{$fx}, .mb-auto#{$fx} { margin-bottom: auto; }
-//       .mx-auto#{$fx}, .ml-auto#{$fx} { margin-left: auto; }
+    #{base-class('my')},
+    #{base-class('mt')} { margin-top: var(--atomic-y); }
+    #{base-class('my')},
+    #{base-class('mb')} { margin-bottom: var(--atomic-y); }
 
-//       //
-//       // dimensions: zero
-//       //
+    #{base-class('mx')},
+    #{base-class('mr')} { margin-right: var(--atomic-x); }
+    #{base-class('mx')},
+    #{base-class('ml')} { margin-left: var(--atomic-x); }
 
-//       .w-0#{$fx} { width: 0; }
-//       .my-0#{$fx}, .mt-0#{$fx} { margin-top: 0; }
-//       .mx-0#{$fx}, .mr-0#{$fx} { margin-right: 0; }
-//       .my-0#{$fx}, .mb-0#{$fx} { margin-bottom: 0; }
-//       .mx-0#{$fx}, .ml-0#{$fx} { margin-left: 0; }
-//       .py-0#{$fx}, .pt-0#{$fx} { padding-top: 0; }
-//       .px-0#{$fx}, .pr-0#{$fx} { padding-right: 0; }
-//       .py-0#{$fx}, .pb-0#{$fx} { padding-bottom: 0; }
-//       .px-0#{$fx}, .pl-0#{$fx} { padding-left: 0; }
+    #{base-class('my-neg')},
+    #{base-class('mt-neg')} { margin-top: calc(-1 * var(--atomic-y)); }
+    #{base-class('my-neg')},
+    #{base-class('mb-neg')} { margin-bottom: calc(-1 * var(--atomic-y)); }
 
-//       //
-//       // dimensions: percentage ratios
-//       //
+    #{base-class('mx-neg')},
+    #{base-class('mr-neg')} { margin-right: calc(-1 * var(--atomic-x)); }
+    #{base-class('mx-neg')},
+    #{base-class('ml-neg')} { margin-left: calc(-1 * var(--atomic-x)); }
 
-//       @each $reduction, $ratio-list in $reduced-ratios {
-//         #{list-transform($ratio-list, 'ratio-class', 'w', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class2', 'col', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class2', 'cell', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class2', 'span', $fx)} { width: ratio-val($reduction) }
-//         #{list-transform($ratio-list, 'ratio-class', 'pr', $fx)} { padding-right: ratio-val($reduction) }
-//         #{list-transform($ratio-list, 'ratio-class', 'pl', $fx)} { padding-left: ratio-val($reduction) }
-//         #{list-transform($ratio-list, 'ratio-class', 'mx', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class', 'mr', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class2', 'push-r', $fx)} { margin-right: ratio-val($reduction) }
-//         #{list-transform($ratio-list, 'ratio-class', 'mx', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class', 'ml', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class2', 'push-l', $fx)} { margin-left: ratio-val($reduction) }
-//         #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class2', 'pull-r', $fx)} { margin-right: ratio-val($reduction)/-1 }
-//         #{list-transform($ratio-list, 'ratio-class', 'ml-neg', $fx)},
-//         #{list-transform($ratio-list, 'ratio-class2', 'pull-l', $fx)} { margin-left: ratio-val($reduction)/-1 }
-//       }
+    @each $m in join(null, map-keys($media)) {
 
-//       //
-//       // dimensions: inner-x
-//       //
+      @include m($m) {
 
-//       $inner-x: m-var('inner-x');
-//       @if $inner-x {
-//         @each $x, $inner-x in if(type-of($inner-x) == 'map', $inner-x, (m: $inner-x)) {
-//           #{m-class(mod-class('px', $x, ''), $m-depth...)},
-//           #{m-class(mod-class('pr', $x, ''), $m-depth...)} { padding-right: $inner-x; }
-//           #{m-class(mod-class('px', $x, ''), $m-depth...)},
-//           #{m-class(mod-class('pl', $x, ''), $m-depth...)} { padding-left: $inner-x; }
-//           #{m-class(mod-class('mx', $x, ''), $m-depth...)},
-//           #{m-class(mod-class('mr', $x, ''), $m-depth...)} { margin-right: $inner-x; }
-//           #{m-class(mod-class('mx', $x, ''), $m-depth...)},
-//           #{m-class(mod-class('ml', $x, ''), $m-depth...)} { margin-left: $inner-x; }
-//           #{m-class(mod-class('mx-neg', $x, ''), $m-depth...)},
-//           #{m-class(mod-class('mr-neg', $x, ''), $m-depth...)} { margin-right: $inner-x / -1; }
-//           #{m-class(mod-class('mx-neg', $x, ''), $m-depth...)},
-//           #{m-class(mod-class('ml-neg', $x, ''), $m-depth...)} { margin-left: $inner-x / -1; }
-//         }
-//       }
+        $fix: m-suffix();
 
-//       //
-//       // dimensions: inner-y
-//       //
+        @each $y, $mod in map-get($root, 'inner-y-mods') or () {
+          .py-#{$y}#{$fix}, .pt-#{$y}#{$fix}, .pb-#{$y}#{$fix},
+          .my-#{$y}#{$fix}, .mt-#{$y}#{$fix}, .mb-#{$y}#{$fix},
+          .my-neg-#{$y}#{$fix}, .mt-neg-#{$y}#{$fix}, .mb-neg-#{$y}#{$fix} { --atomic-y: var(--inner-y--#{$y}); }
+        }
+        @each $x, $mod in map-get($root, 'inner-x-mods') or () {
+          .px-#{$x}#{$fix}, .pr-#{$x}#{$fix}, .pl-#{$x}#{$fix},
+          .mx-#{$x}#{$fix}, .mr-#{$x}#{$fix}, .ml-#{$x}#{$fix},
+          .mx-neg-#{$x}#{$fix}, .mr-neg-#{$x}#{$fix}, .ml-neg-#{$x}#{$fix} { --atomic-x: var(--inner-x--#{$x}); }
+        }
 
-//       $inner-y: m-var('inner-y');
-//       @if $inner-y {
-//         @each $y, $inner-y in if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y)) {
-//           #{m-class(mod-class('py', $y, ''), $m-depth...)},
-//           #{m-class(mod-class('pt', $y, ''), $m-depth...)} { padding-top: $inner-y; }
-//           #{m-class(mod-class('py', $y, ''), $m-depth...)},
-//           #{m-class(mod-class('pb', $y, ''), $m-depth...)} { padding-bottom: $inner-y; }
-//           #{m-class(mod-class('my', $y, ''), $m-depth...)},
-//           #{m-class(mod-class('mt', $y, ''), $m-depth...)} { margin-top: $inner-y; }
-//           #{m-class(mod-class('my', $y, ''), $m-depth...)},
-//           #{m-class(mod-class('mb', $y, ''), $m-depth...)} { margin-bottom: $inner-y; }
-//           #{m-class(mod-class('my-neg', $y, ''), $m-depth...)},
-//           #{m-class(mod-class('mt-neg', $y, ''), $m-depth...)} { margin-top: $inner-y / -1; }
-//           #{m-class(mod-class('my-neg', $y, ''), $m-depth...)},
-//           #{m-class(mod-class('mb-neg', $y, ''), $m-depth...)} { margin-bottom: $inner-y / -1; }
-//         }
-//       }
+        //
+        // dimensions: explicit ratios
+        //
 
-//     }
-//   }
-// }
+        // @each $reduction, $ratio-list in $reduced-ratios {
+        //   #{list-transform($ratio-list, 'ratio-class', 'w', $fix)} { width: ratio-val($reduction) }
+        //   #{list-transform($ratio-list, 'ratio-class', 'px', $fix)},
+        //   #{list-transform($ratio-list, 'ratio-class', 'pr', $fix)} { padding-right: ratio-val($reduction) }
+        //   #{list-transform($ratio-list, 'ratio-class', 'px', $fix)},
+        //   #{list-transform($ratio-list, 'ratio-class', 'pl', $fix)} { padding-left: ratio-val($reduction) }
+        //   #{list-transform($ratio-list, 'ratio-class', 'mx', $fix)},
+        //   #{list-transform($ratio-list, 'ratio-class', 'mr', $fix)} { margin-right: ratio-val($reduction) }
+        //   #{list-transform($ratio-list, 'ratio-class', 'mx', $fix)},
+        //   #{list-transform($ratio-list, 'ratio-class', 'ml', $fix)} { margin-left: ratio-val($reduction) }
+        //   #{list-transform($ratio-list, 'ratio-class', 'mx-neg', $fix)},
+        //   #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fix)} { margin-right: calc(#{ratio-val($reduction)} * -1) }
+        //   #{list-transform($ratio-list, 'ratio-class', 'mx-neg', $fix)},
+        //   #{list-transform($ratio-list, 'ratio-class', 'ml-neg', $fix)} { margin-left: calc(#{ratio-val($reduction)} * -1) }
+        // }
+
+
+        //
+        // display
+        //
+
+        .d-none#{$fix} { display: none; }
+        .d-flex#{$fix} { display: flex; }
+        .d-grid#{$fix} { display: grid; }
+        .d-block#{$fix} { display: block; }
+        .d-iblock#{$fix} { display: inline-block; vertical-align: baseline; }
+        .d-inline#{$fix} { display: inline; vertical-align: baseline; }
+
+        //
+        // dimensions: auto
+        //
+
+        .w-auto#{$fix} { width: auto; }
+        .my-auto#{$fix}, .mt-auto#{$fix} { margin-top: auto; }
+        .mx-auto#{$fix}, .mr-auto#{$fix} { margin-right: auto; }
+        .my-auto#{$fix}, .mb-auto#{$fix} { margin-bottom: auto; }
+        .mx-auto#{$fix}, .ml-auto#{$fix} { margin-left: auto; }
+
+        //
+        // dimensions: zero
+        //
+
+        .w-0#{$fix} { width: 0; }
+        .my-0#{$fix}, .mt-0#{$fix} { margin-top: 0 !important; }
+        .mx-0#{$fix}, .mr-0#{$fix} { margin-right: 0 !important; }
+        .my-0#{$fix}, .mb-0#{$fix} { margin-bottom: 0 !important; }
+        .mx-0#{$fix}, .ml-0#{$fix} { margin-left: 0 !important; }
+        .py-0#{$fix}, .pt-0#{$fix} { padding-top: 0 !important; }
+        .px-0#{$fix}, .pr-0#{$fix} { padding-right: 0 !important; }
+        .py-0#{$fix}, .pb-0#{$fix} { padding-bottom: 0 !important; }
+        .px-0#{$fix}, .pl-0#{$fix} { padding-left: 0 !important; }
+
+      }
+    }
+  } @else {
+
+    // do legacy setup
+  }
+}

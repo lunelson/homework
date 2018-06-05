@@ -29,7 +29,7 @@
     }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or () {
-      .stack--#{$y} > * { --stack-gap: var(--inner-y--#{$y}); }
+      .stack-#{$y} > * { --stack-gap: var(--inner-y--#{$y}); }
     }
 
     #{base-class('chain')} {
@@ -45,7 +45,7 @@
     }
 
     @each $x, $mult in map-get($root, 'inner-x-mods') or () {
-      .chain--#{$x} > * { --stack-gap: var(--inner-x--#{$x}); }
+      .chain-#{$x} > * { --stack-gap: var(--inner-x--#{$x}); }
     }
 
   } @else {

@@ -9,7 +9,8 @@
 /*
   TODO
   - handle non-px values in font-mods
-
+  - convert to f-[font]-[size] pattern
+  - add the new adjacency condition
 */
 
 $fonts: () !default;
@@ -19,8 +20,8 @@ $font-default: (
   spacing-max: 0,
   spacing-end: 50,
   trim-x: 0,
-  trim-top: 0,
-  trim-bottom: 0,
+  trim-capline: 0,
+  trim-baseline: 0,
 );
 
 $fonts-defaults: (
@@ -66,6 +67,10 @@ $fonts-defaults: (
       @at-root #{$adj-in-stack} {
         margin-top: calc(var(--stack-gap) - var(--trim-top));
       }
+      // increase trim-top value, if adjacent to another font
+      // @at-root #{$adj-font-in-stack} {
+      //   --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
+      // }
     }
 
     /*
@@ -90,11 +95,13 @@ $fonts-defaults: (
 
     @each $f, $mod in map-get($root, 'font-mods') or () {
       @each $s, $def in $mod {
-        .#{$f}--#{$s} {
+        .#{$f}-#{$s} {
           --font-size: var(--font-size--#{$f}--#{$s});
           --line-height: var(--line-height--#{$f}--#{$s});
         }
       }
     }
-  } @else { @include legacy-homework-font-setup(); }
+  } @else {
+    // @include legacy-homework-font-setup();
+  }
 }
