@@ -7,16 +7,15 @@
 //                    | |             | |
 //                    |_|             |_|
 
-
 @mixin homework-wrap-setup($modern: true) {
 
   @if $modern {
 
     :root {
-      wrap-width: 100%;
+      --wrap-width: 100%;
     }
 
-    #{base-class('wrap')} {
+    #{base-class('wrap', false)} {
       margin-right: auto;
       margin-left: auto;
       max-width: var(--wrap-width);
@@ -87,7 +86,6 @@
 
   }
 }
-
 
 // @mixin setup-peel {
 
