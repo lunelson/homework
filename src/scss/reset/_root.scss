@@ -5,7 +5,6 @@
 // | | | (_) | (_) | |_
 // |_|  \___/ \___/ \__|
 
-
 @mixin reset-root {
 
   body, div, span, applet, object, iframe,
@@ -29,7 +28,7 @@
     background: transparent;
     text-align: inherit;
     direction: inherit;
-    font: inherit;
+    font-family: inherit;
   }
 
   /*
@@ -44,7 +43,7 @@
     remove webkit tap highlight color
     5
    */
-  html, :root {
+  html {
     box-sizing: border-box; // 1
     font-family: sans-serif; // 2
     font-weight: normal; // 2

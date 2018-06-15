@@ -7,7 +7,7 @@
 //              | |
 //              |_|
 
-@mixin homework-helper-setup {
+@mixin homework-helper-setup($modern: true) {
 
   // bold, italic
   .strong, .bold { font-weight: bold; }

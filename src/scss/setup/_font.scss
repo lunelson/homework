@@ -43,11 +43,11 @@ $fonts-defaults: (
     :root {
       --font-family: #{map-get-z($fonts, nth(map-keys($fonts), 1), 'family')};
       --line-xtra: calc((var(--line-height) - 1) * 1em);
-    }
-    * {
-      font-family: var(--font-family);
-      font-size: var(--font-size);
-      line-height: var(--line-height);
+      * {
+        font-family: var(--font-family);
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+      }
     }
 
     #{base-class('f', false)} {

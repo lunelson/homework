@@ -1,3 +1,5 @@
+@import 'index';
+
 @function slice($list, $start-at: 1, $end-at: -1, $sep: list-separator($list)) {
   $out: ();
   @if $end-at < 0 { $end-at: $end-at + length($list) + 1; }
@@ -22,7 +24,6 @@
   @return if($lasts!=(), selector-parse($lasts), null);
 }
 
-
 @function selector-initial($parents: null) {
   $out: ();
   $parents: selector-parse($parents or &);
@@ -34,7 +35,6 @@
   }
   @return if($out!=(), selector-parse($out), null);
 }
-
 
 @function selector-insert($selectors, $combinator: '', $parents: null) {
   $parents: selector-parse($parents or &); $out: ();
@@ -59,10 +59,8 @@
   @return selector-parse($out);
 }
 
-
 @function base-class($base, $_...) {
   @return selector-parse('.#{$base}, [class^="#{$base}-"], [class*=" #{$base}-"]'); }
-
 
 #{base-class('stack')} {
 

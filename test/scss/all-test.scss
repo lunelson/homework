@@ -1,5 +1,4 @@
-@import '../../src/scss/peers';
-@import '../../src/scss/index';
+@import 'index';
 
 $root: (
   inner-x: 2rem,
@@ -29,6 +28,7 @@ $media: (
 @include homework-font-setup()
 @include homework-frame-setup()
 @include homework-fgrid-setup()
-@include homework-debug-setup()
 @include homework-atomic-setup()
-// @include homework-misc-setup()
+@include homework-helper-setup()
+
+@include homework-debug-setup()

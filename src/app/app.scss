@@ -1,5 +1,12 @@
-@import '../scss/peers';
-@import '../scss/index';
+@import '@lunelson/sass-calc/index';
+@import '@lunelson/sass-throw/index';
+@import '@lunelson/sass-maps-plus/index';
+@import '@lunelson/sass-u/index';
+
+@import "../scss/utils/all";
+@import "../scss/reset/all";
+@import "../scss/setup/all";
+@import "../scss/theme/all";
 
 $root: (
   inner-x: 2rem,
@@ -42,16 +49,3 @@ $fonts: (
 @include homework-debug-setup;
 @include homework-atomic-setup;
 @include homework-helper-setup;
-
-/*
-
-@import 'core';
-@import 'wrap';
-@import 'frame';
-@import 'stack';
-@import 'font';
-@import 'fgrid';
-@import 'debug';
-@import 'atomic';
-@import 'misc';
-*/
