@@ -13,7 +13,6 @@
 @import 'stack';
 @import 'font';
 @import 'fgrid';
-@import 'debug';
 @import 'atomic';
 @import 'helper';
 
@@ -33,7 +32,6 @@ $done-homework-setup: false;
       'stack',
       'font',
       'fgrid',
-      'debug',
       'atomic',
       'helper',
     );
@@ -45,7 +43,6 @@ $done-homework-setup: false;
   @if index($setups, 'stack') { @include homework-stack-setup($modern); }
   @if index($setups, 'font') { @include homework-font-setup($modern); }
   @if index($setups, 'fgrid') { @include homework-fgrid-setup($modern); }
-  @if index($setups, 'debug') { @include homework-debug-setup($modern); }
   @if index($setups, 'atomic') { @include homework-atomic-setup($modern); }
   @if index($setups, 'helper') { @include homework-helper-setup($modern); }
 

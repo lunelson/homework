@@ -7,7 +7,7 @@
 //                          __/ |
 //                         |___/
 
-@mixin homework-debug-setup($modern: true, $wrap-last: true, $color: rgba(185,185,185,0.2)) {
+@mixin homework-debug($modern: true, $wrap-last: true, $color: rgba(185,185,185,0.2)) {
 
   $media-keys: join(null, map-keys($media));
   $last-m: last($media-keys);
