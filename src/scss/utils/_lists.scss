@@ -1,0 +1,62 @@
+///
+/// LISTS
+///
+
+@function __nth($list, $n) {
+  // TODO allow it to handle strings; create str-nth
+  @if length($list) == 0 or $n < 1 or $n > length($list) { @return null; }
+  @return nth($list, $n);
+}
+
+@function __first($list) {
+  @return __nth($list, 1);
+}
+
+@function __last($list) {
+  @return __nth($list, length($list));
+}
+
+@function __contains-any($list, $items) {
+  @each $item in $items { @if index($list, $item) { @return true; } }
+  @return false;
+}
+
+@function __slice($list, $start-at: 1, $end-at: -1, $sep: list-separator($list)) {
+  $out: ();
+  @if $end-at < 0 { $end-at: $end-at + length($list) + 1; }
+  @if $start-at > length($list) { @return (); }
+  @if $start-at > 0 and $end-at >= $start-at {
+    @for $i from $start-at through $end-at {
+      $out: append($out, nth($list, $i), $sep);
+    }
+  }
+  @return $out;
+}
+
+@function join-all($lists...) {
+  $result: ();
+  @each $list in $lists {
+    $result: join($result, $list, list-separator($list));
+  }
+  @return $result;
+}
+
+@function __map($list, $func, $args...) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $result: append($result, call(get-function($func), nth($list, $i), $i, $list, $args...), 'comma');
+  }
+  @return $result;
+}
+
+@function __filter($list, $func, $args...) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $value: nth($list, $i);
+    $test: call(get-function($func), $value, $i, $list, $args...);
+    $result: if($test, append($result, $value, 'comma'), $result);
+  }
+  @return $result;
+}

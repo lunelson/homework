@@ -18,13 +18,13 @@
   @return if($m, '__#{$m}', '');
 }
 
-@function m-class($sel, $ms...) {
-  $sel: selector-parse($sel); $out: ();
-  @each $m in $ms {
-    $fix: m-suffix($m);
-    @each $sub in $sel {
-      $out: append($out, selector-parse('#{$sub}#{$fix}'), 'comma');
-    }
-  }
-  @return $out;
-}
+// @function m-class($sel, $ms...) {
+//   $sel: selector-parse($sel); $out: ();
+//   @each $m in $ms {
+//     $fix: m-suffix($m);
+//     @each $sub in $sel {
+//       $out: append($out, selector-parse('#{$sub}#{$fix}'), 'comma');
+//     }
+//   }
+//   @return $out;
+// }

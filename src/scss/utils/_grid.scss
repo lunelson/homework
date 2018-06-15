@@ -71,19 +71,6 @@
 //   @return $result;
 // }
 
-// @function gcd($a, $b) {
-//   @if $b == 0 { @return abs($a); }
-//   @return gcd($b, $a % $b);
-// }
-
-@function max-columns() {
-  $column-counts: ();
-  @each $m, $medium in $media {
-    $column-counts: append($column-counts, map-get-z($media, $m, grid-columns));
-  }
-  @return max($column-counts...);
-}
-
 // @function reduction-set($max-d) {
 //   // $reduction-set: ();
 //   // @for $d from 1 through $max-d {

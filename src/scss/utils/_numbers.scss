@@ -1,0 +1,23 @@
+///
+/// NUMBERS
+///
+
+@function gcd($a, $b) {
+  @if $b == 0 { @return abs($a); }
+  @return gcd($b, $a % $b);
+}
+
+@function floor-to($n, $dec) {
+  $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
+  @return floor($n * $fac) / $fac;
+}
+
+@function ceil-to($n, $dec) {
+  $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
+  @return ceil($n * $fac) / $fac;
+}
+
+@function round-to($n, $dec) {
+  $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
+  @return round($n * $fac) / $fac;
+}
