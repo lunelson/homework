@@ -1,3 +1,5 @@
+@mixin homework-legacy-stack-setup {
+
     // @each $y, $inner-y in if(type-of($inner-ys) == 'map', $inner-ys, (m: $inner-ys)) {
     //   #{mod-class('stack', $y, 'm')} {
     //     & > * + * { margin-top: $inner-y; }
@@ -16,7 +18,6 @@
     //     //     }
     //     //   }
     //     // }
-
 
     //   }
     // }
@@ -42,7 +43,6 @@
     //         //     }
     //         //   }
     //         // }
-
 
     //       }
     //     }
@@ -72,7 +72,6 @@
   //           //   }
   //           // }
 
-
   //         }
   //       }
   //     }
@@ -89,9 +88,9 @@
     margin-left: 0;
     margin-right: 0;
   }
-}
+  }
 
-@include mm-for('inner-x') {
+  @include mm-for('inner-x') {
   $inner-x: m-var('inner-x');
   @if $inner-x {
     @each $x, $inner-x in if(type-of($inner-x) == 'map', $inner-x, (m: $inner-x)) {
@@ -113,8 +112,8 @@
         //   }
         // }
 
-
       }
     }
+  }
   }
 }

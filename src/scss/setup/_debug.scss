@@ -48,7 +48,7 @@
         margin-right: auto;
         margin-left: auto;
         pointer-events: none;
-        width: subtract(100%, var(--outer));
+        width: subtract(100%, var(--outer-x));
         @if $wrap-last { max-width: subtract(m-var('breakpoint', $last-m), var(--outer-x)); }
         background-image: repeating-linear-gradient(
           to right,
@@ -58,8 +58,6 @@
           transparent var(--repeat-width)
         );
         background-size: calc(100% + var(--inner-x)) 100%;
-
-
 
         // @each $m in $media-keys {
         //   @include m($m) {

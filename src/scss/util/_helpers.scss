@@ -50,16 +50,20 @@
 
 @mixin clip {
   overflow: hidden !important;
+  position: relative;
+  z-index: 0; // make sure container can clip
 }
 
 @mixin hide {
-  display: none;
+  pointer-events: none;
   visibility: hidden;
+  opacity: 0;
 }
 
-@mixin show($display: 'block') {
-  display: $display;
+@mixin show {
+  pointer-events: initial;
   visibility: visible;
+  opacity: 1;
 }
 
 /////////////

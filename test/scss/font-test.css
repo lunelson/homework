@@ -1,0 +1,138 @@
+/*
+  TODO
+  - handle non-px values in font-mods
+  - convert to f-[font]-[size] pattern
+  - add the new adjacency condition
+*/
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+:root {
+  --font-size: 16px;
+  --line-height: 1.25;
+  --inner-x: 2rem;
+  --inner-y: 1.25rem;
+  --outer-top: 2rem;
+  --outer-right: 2rem;
+  --outer-bottom: 2rem;
+  --outer-left: 2rem;
+  --grid-columns: 12;
+  --outer-width: 100%;
+  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+  --inner-y--s: 1rem;
+  --inner-y--m: 2rem;
+  --inner-x--m: 1rem;
+  --font-size--sans--s: 0.875rem;
+  --line-height--sans--s: 1.4;
+  --font-size--sans--m: 1rem;
+  --line-height--sans--m: 1.4;
+  --font-size--serif--s: 1rem;
+  --line-height--serif--s: 1.4;
+  --font-size--serif--m: 1.125rem;
+  --line-height--serif--m: 1.4;
+}
+
+@media screen and (min-width: 20em) {
+  :root {
+    --breakpoint: 20em;
+    --outer-width: 20rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  :root {
+    --breakpoint: 30em;
+    --inner-x: 3rem;
+    --outer-width: 30rem;
+    --font-size--sans--s: 1.25rem;
+    --line-height--sans--s: 1.4;
+    --font-size--sans--m: 1.5rem;
+    --line-height--sans--m: 1.4;
+    --font-size--serif--s: 1.375rem;
+    --line-height--serif--s: 1.4;
+    --font-size--serif--m: 1.625rem;
+    --line-height--serif--m: 1.4;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  :root {
+    --breakpoint: 40em;
+    --outer-width: 40rem;
+  }
+}
+
+:root {
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif;
+  --line-xtra: calc((var(--line-height) - 1) * 1em);
+}
+
+* {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+[class^="f-"], [class*=" f-"] {
+  letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
+}
+
+[class^="f-"].trim,
+.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"], [class*=" f-"].trim {
+  margin-right: var(--trim-x);
+  margin-left: var(--trim-x);
+  margin-top: calc(0px - var(--trim-top));
+  margin-bottom: calc(0px - var(--trim-bottom));
+}
+
+.stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"] {
+  margin-top: calc(var(--stack-gap) - var(--trim-top));
+}
+
+.stack > [class^="f-"] + [class^="f-"], .stack > [class^="f-"] + [class*=" f-"], .stack > [class*=" f-"] + [class^="f-"], .stack > [class*=" f-"] + [class*=" f-"], [class^="stack-"] > [class^="f-"] + [class^="f-"], [class^="stack-"] > [class^="f-"] + [class*=" f-"], [class^="stack-"] > [class*=" f-"] + [class^="f-"], [class^="stack-"] > [class*=" f-"] + [class*=" f-"], [class*=" stack-"] > [class^="f-"] + [class^="f-"], [class*=" stack-"] > [class^="f-"] + [class*=" f-"], [class*=" stack-"] > [class*=" f-"] + [class^="f-"], [class*=" stack-"] > [class*=" f-"] + [class*=" f-"] {
+  margin-top: calc(var(--stack-gap) - var(--trim-top));
+}
+
+.f-sans, [class^="f-sans-"], [class*=" f-sans-"] {
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif;
+  --spacing-max: 0;
+  --spacing-end: 50;
+  --trim-x: 0;
+  --trim-capline: 0em;
+  --trim-baseline: 0em;
+  --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
+  --trim-bottom: var(--line-xtra) / 2 + var(--trim-baseline);
+}
+
+.f-serif, [class^="f-serif-"], [class*=" f-serif-"] {
+  --font-family: serif;
+  --spacing-max: 0;
+  --spacing-end: 50;
+  --trim-x: 0;
+  --trim-capline: 0em;
+  --trim-baseline: 0em;
+  --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
+  --trim-bottom: var(--line-xtra) / 2 + var(--trim-baseline);
+}
+
+.f-sans-s {
+  --font-size: var(--font-size--sans--s);
+  --line-height: var(--line-height--sans--s);
+}
+
+.f-sans-m {
+  --font-size: var(--font-size--sans--m);
+  --line-height: var(--line-height--sans--m);
+}
+
+.f-serif-s {
+  --font-size: var(--font-size--serif--s);
+  --line-height: var(--line-height--serif--s);
+}
+
+.f-serif-m {
+  --font-size: var(--font-size--serif--m);
+  --line-height: var(--line-height--serif--m);
+}

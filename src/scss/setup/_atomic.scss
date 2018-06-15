@@ -5,90 +5,35 @@
 // | (_| | || (_) | | | | | | | (__
 //  \__,_|\__\___/|_| |_| |_|_|\___|
 
-
-
-// @function floor-to($n, $dec) {
-//   $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
-//   @return floor($n * $fac) / $fac;
-// }
-
-// @function ceil-to($n, $dec) {
-//   $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
-//   @return ceil($n * $fac) / $fac;
-// }
-
-// @function round-to($n, $dec) {
-//   $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
-//   @return round($n * $fac) / $fac;
-// }
-
-
 @function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
-@function ratio-val($ratio)    { @return floor-to(percentage(nth($ratio,1) / nth($ratio,2)), 3); }
-@function ratio-val($ratio)    { @return calc(100% * (#{nth($ratio,1)} / #{nth($ratio,2)})); }
 @function ratio-class($ratio, $index, $list, $root, $fix) { @return '.#{$root}-#{ratio-str($ratio)}#{$fix}'; }
-// @function ratio-class($ratio, $index, $list, $root, $fix) { @return '.#{$root}--#{ratio-str($ratio)}#{$fix}'; }
+@function ratio-calc($ratio)    { @return calc(100% * (#{nth($ratio,1)} / #{nth($ratio,2)})); }
 
 @mixin homework-atomic-setup($modern: true) {
 
-  $grid-grid-columnss: ();
+  $media-grid-columns: ();
+  $reduction-ratio-lists: ();
+
   @each $m, $medium in $media {
-    $grid-grid-columnss: append($grid-grid-columnss, map-get($medium, 'grid-columns'));
+    $media-grid-columns: append($media-grid-columns, map-get($medium, 'grid-columns'));
   }
 
-  $reduced-ratios: ();
-  @for $d from 1 through max($grid-grid-columnss...) {
+  @for $d from 1 through max($media-grid-columns...) {
     @for $n from 1 through $d {
       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
-      $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
-      $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
+      $set: append(map-get($reduction-ratio-lists, $reduction) or (), $n $d);
+      $reduction-ratio-lists: map-merge($reduction-ratio-lists, ($reduction: $set));
     }
   }
-
-  $all-ratios: join-all(map-values($reduced-ratios)...);
 
   @if $modern {
 
     :root {
-      --atomic-x: 0;
-      --atomic-y: 0;
+      --atomic-top: 0;
+      --atomic-right: 0;
+      --atomic-bottom: 0;
+      --atomic-left: 0;
     }
-
-    /*
-      TODO:
-      - change the following to 'var-class'; you don't need bare .px classes, for instance
-      - add implicit ratio classes, using the --span-[n]/[d] classes
-    */
-
-    #{base-class('py')},
-    #{base-class('pt')} { padding-top: var(--atomic-y); }
-    #{base-class('py')},
-    #{base-class('pb')} { padding-bottom: var(--atomic-y); }
-
-    #{base-class('px')},
-    #{base-class('pr')} { padding-right: var(--atomic-x); }
-    #{base-class('px')},
-    #{base-class('pl')} { padding-left: var(--atomic-x); }
-
-    #{base-class('my')},
-    #{base-class('mt')} { margin-top: var(--atomic-y); }
-    #{base-class('my')},
-    #{base-class('mb')} { margin-bottom: var(--atomic-y); }
-
-    #{base-class('mx')},
-    #{base-class('mr')} { margin-right: var(--atomic-x); }
-    #{base-class('mx')},
-    #{base-class('ml')} { margin-left: var(--atomic-x); }
-
-    #{base-class('my-neg')},
-    #{base-class('mt-neg')} { margin-top: calc(-1 * var(--atomic-y)); }
-    #{base-class('my-neg')},
-    #{base-class('mb-neg')} { margin-bottom: calc(-1 * var(--atomic-y)); }
-
-    #{base-class('mx-neg')},
-    #{base-class('mr-neg')} { margin-right: calc(-1 * var(--atomic-x)); }
-    #{base-class('mx-neg')},
-    #{base-class('ml-neg')} { margin-left: calc(-1 * var(--atomic-x)); }
 
     @each $m in join(null, map-keys($media)) {
 
@@ -97,40 +42,41 @@
         $fix: m-suffix();
 
         @each $y, $mod in map-get($root, 'inner-y-mods') or () {
-          .py-#{$y}#{$fix}, .pt-#{$y}#{$fix}, .pb-#{$y}#{$fix},
-          .my-#{$y}#{$fix}, .mt-#{$y}#{$fix}, .mb-#{$y}#{$fix},
-          .my-neg-#{$y}#{$fix}, .mt-neg-#{$y}#{$fix}, .mb-neg-#{$y}#{$fix} { --atomic-y: var(--inner-y--#{$y}); }
+          .py-#{$y}#{$fix}, .pt-#{$y}#{$fix} { padding-top: var(--inner-y--#{$y}); }
+          .py-#{$y}#{$fix}, .pb-#{$y}#{$fix} { padding-bottom: var(--inner-y--#{$y}); }
+          .my-#{$y}#{$fix}, .mt-#{$y}#{$fix} { margin-top: var(--inner-y--#{$y}); }
+          .my-#{$y}#{$fix}, .mb-#{$y}#{$fix} { margin-bottom: var(--inner-y--#{$y}); }
+          .my-neg-#{$y}#{$fix}, .mt-neg-#{$y}#{$fix} { margin-top: calc(-1 * var(--inner-y--#{$y})); }
+          .my-neg-#{$y}#{$fix}, .mb-neg-#{$y}#{$fix} { margin-bottom: calc(-1 * var(--inner-y--#{$y})); }
         }
         @each $x, $mod in map-get($root, 'inner-x-mods') or () {
-          .px-#{$x}#{$fix}, .pr-#{$x}#{$fix}, .pl-#{$x}#{$fix},
-          .mx-#{$x}#{$fix}, .mr-#{$x}#{$fix}, .ml-#{$x}#{$fix},
-          .mx-neg-#{$x}#{$fix}, .mr-neg-#{$x}#{$fix}, .ml-neg-#{$x}#{$fix} { --atomic-x: var(--inner-x--#{$x}); }
+          .px-#{$x}#{$fix}, .pr-#{$x}#{$fix} { padding-right: var(--inner-x--#{$x}); }
+          .px-#{$x}#{$fix}, .pl-#{$x}#{$fix} { padding-left: var(--inner-x--#{$x}); }
+          .mx-#{$x}#{$fix}, .mr-#{$x}#{$fix} { margin-right: var(--inner-x--#{$x}); }
+          .mx-#{$x}#{$fix}, .ml-#{$x}#{$fix} { margin-left: var(--inner-x--#{$x}); }
+          .mx-neg-#{$x}#{$fix}, .mr-neg-#{$x}#{$fix} { margin-right: calc(-1 * var(--inner-x--#{$x})); }
+          .mx-neg-#{$x}#{$fix}, .ml-neg-#{$x}#{$fix} { margin-left: calc(-1 * var(--inner-x--#{$x})); }
         }
 
-        //
         // dimensions: explicit ratios
-        //
 
-        // @each $reduction, $ratio-list in $reduced-ratios {
-        //   #{list-transform($ratio-list, 'ratio-class', 'w', $fix)} { width: ratio-val($reduction) }
-        //   #{list-transform($ratio-list, 'ratio-class', 'px', $fix)},
-        //   #{list-transform($ratio-list, 'ratio-class', 'pr', $fix)} { padding-right: ratio-val($reduction) }
-        //   #{list-transform($ratio-list, 'ratio-class', 'px', $fix)},
-        //   #{list-transform($ratio-list, 'ratio-class', 'pl', $fix)} { padding-left: ratio-val($reduction) }
-        //   #{list-transform($ratio-list, 'ratio-class', 'mx', $fix)},
-        //   #{list-transform($ratio-list, 'ratio-class', 'mr', $fix)} { margin-right: ratio-val($reduction) }
-        //   #{list-transform($ratio-list, 'ratio-class', 'mx', $fix)},
-        //   #{list-transform($ratio-list, 'ratio-class', 'ml', $fix)} { margin-left: ratio-val($reduction) }
-        //   #{list-transform($ratio-list, 'ratio-class', 'mx-neg', $fix)},
-        //   #{list-transform($ratio-list, 'ratio-class', 'mr-neg', $fix)} { margin-right: calc(#{ratio-val($reduction)} * -1) }
-        //   #{list-transform($ratio-list, 'ratio-class', 'mx-neg', $fix)},
-        //   #{list-transform($ratio-list, 'ratio-class', 'ml-neg', $fix)} { margin-left: calc(#{ratio-val($reduction)} * -1) }
-        // }
+        @each $reduction, $ratio-list in $reduction-ratio-lists {
+          #{__map($ratio-list, 'ratio-class', 'w', $fix)} { width: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'px', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'pr', $fix)} { padding-right: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'px', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'pl', $fix)} { padding-left: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'mx', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'mr', $fix)} { margin-right: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'mx', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'ml', $fix)} { margin-left: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'mx-neg', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'mr-neg', $fix)} { margin-right: multiply(#{ratio-calc($reduction)}, -1) }
+          #{__map($ratio-list, 'ratio-class', 'mx-neg', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'ml-neg', $fix)} { margin-left: multiply(#{ratio-calc($reduction)}, -1) }
+        }
 
-
-        //
         // display
-        //
 
         .d-none#{$fix} { display: none; }
         .d-flex#{$fix} { display: flex; }
@@ -139,21 +85,19 @@
         .d-iblock#{$fix} { display: inline-block; vertical-align: baseline; }
         .d-inline#{$fix} { display: inline; vertical-align: baseline; }
 
-        //
         // dimensions: auto
-        //
 
         .w-auto#{$fix} { width: auto; }
+        .h-auto#{$fix} { height: auto; }
         .my-auto#{$fix}, .mt-auto#{$fix} { margin-top: auto; }
         .mx-auto#{$fix}, .mr-auto#{$fix} { margin-right: auto; }
         .my-auto#{$fix}, .mb-auto#{$fix} { margin-bottom: auto; }
         .mx-auto#{$fix}, .ml-auto#{$fix} { margin-left: auto; }
 
-        //
         // dimensions: zero
-        //
 
         .w-0#{$fix} { width: 0; }
+        .h-0#{$fix} { height: 0; }
         .my-0#{$fix}, .mt-0#{$fix} { margin-top: 0 !important; }
         .mx-0#{$fix}, .mr-0#{$fix} { margin-right: 0 !important; }
         .my-0#{$fix}, .mb-0#{$fix} { margin-bottom: 0 !important; }
@@ -163,10 +107,13 @@
         .py-0#{$fix}, .pb-0#{$fix} { padding-bottom: 0 !important; }
         .px-0#{$fix}, .pl-0#{$fix} { padding-left: 0 !important; }
 
+        // dimensions: 100%
+
+        .w-100#{$fix} { width: 0; }
+        .h-100#{$fix} { height: 0; }
       }
     }
   } @else {
-
-    // do legacy setup
+    // @include homework-legacy-atomic-setup;
   }
 }

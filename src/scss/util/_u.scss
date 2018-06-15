@@ -1,67 +1,6 @@
-//
-// base and mult
-//
-
-@function base-class($base, $_...) { @return selector-parse('.#{$base}, [class^="#{$base}-"], [class*=" #{$base}-"]'); }
-@function mod-class($base, $mod, $except: ()) { @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}--#{$mod}', '.#{$base}--#{$mod}')); }
-@function var-class($base, $var, $except: ()) { @return selector-parse(if(index($except, $var), '.#{$base}, .#{$base}-#{$var}', '.#{$base}-#{$var}')); }
-
-@mixin base-class($args...) { #{base-class($args...)} { @content; } }
-@mixin mod-class($args...) { #{mod-class($args...)} { @content; } }
-
-
-
-// class
-
-@function _base-class($root) { @return selector-parse('.#{$root}, [class^="#{$root}--"], [class*=" #{$root}--"]'); }
-@function _mult-class($root, $m) { @return selector-parse(if($m=='base', '.#{$root}', '.#{$root}--#{$m}')); }
-
-@function join-all($lists...) {
-  $result: ();
-  @each $list in $lists {
-    $result: join($result, $list, list-separator($list));
-  }
-  @return $result;
-}
-
-@function map-items($list, $func, $sep: list-separator($list)) {
-  @if length($list) == 0 { @return (); }
-  $result: ();
-  @for $i from 1 through length($list) {
-    $result: append($result, call(get-function($func), nth($list, $i), $i, $list), $sep);
-  }
-  @return $result;
-}
-
-@function filter-items($list, $func, $sep: list-separator($list)) {
-  @if length($list) == 0 { @return (); }
-  $result: ();
-  @for $i from 1 through length($list) {
-    $value: nth($list, $i);
-    $test: call(get-function($func), $value, $i, $list);
-    $result: if($test, append($result, $value, $sep), $result);
-  }
-  @return $result;
-}
-
-@function gcd($a, $b) {
-  @if $b == 0 { @return abs($a); }
-  @return gcd($b, $a % $b);
-}
-
-@function list-transform($list, $func, $args...) {
-  @if length($list) == 0 { @return (); }
-  $result: ();
-  @for $n from 1 through length($list) {
-    $result: append($result, call(get-function($func), nth($list, $n), $n, $list, $args...), 'comma');
-  }
-  @return $result;
-}
-
-//
-// utilities
-//
-
+///
+/// LISTS
+///
 
 @function __nth($list, $n) {
   // TODO allow it to handle strings; create str-nth
@@ -82,16 +21,82 @@
   @return false;
 }
 
-@function __slice($list, $start: 1, $end: length($list), $sep: list-separator($list)) {
-  $output: ();
-  @if $start >= 1 and $end >= $start {
-    @for $i from $start through $end {
-      $output: append($output, nth($list, $i), $sep);
+@function __slice($list, $start-at: 1, $end-at: -1, $sep: list-separator($list)) {
+  $out: ();
+  @if $end-at < 0 { $end-at: $end-at + length($list) + 1; }
+  @if $start-at > length($list) { @return (); }
+  @if $start-at > 0 and $end-at >= $start-at {
+    @for $i from $start-at through $end-at {
+      $out: append($out, nth($list, $i), $sep);
     }
   }
-  // @return if(length($output)==1,nth($output,1),$output);
-  @return $output;
+  @return $out;
 }
+
+@function join-all($lists...) {
+  $result: ();
+  @each $list in $lists {
+    $result: join($result, $list, list-separator($list));
+  }
+  @return $result;
+}
+
+@function __map($list, $func, $args...) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $result: append($result, call(get-function($func), nth($list, $i), $i, $list, $args...), 'comma');
+  }
+  @return $result;
+}
+
+@function __filter($list, $func, $args...) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $i from 1 through length($list) {
+    $value: nth($list, $i);
+    $test: call(get-function($func), $value, $i, $list, $args...);
+    $result: if($test, append($result, $value, 'comma'), $result);
+  }
+  @return $result;
+}
+
+@function gcd($a, $b) {
+  @if $b == 0 { @return abs($a); }
+  @return gcd($b, $a % $b);
+}
+
+@function list-transform($list, $func, $args...) {
+  @if length($list) == 0 { @return (); }
+  $result: ();
+  @for $n from 1 through length($list) {
+    $result: append($result, call(get-function($func), nth($list, $n), $n, $list, $args...), 'comma');
+  }
+  @return $result;
+}
+
+///
+/// NUMBERS
+///
+
+@function floor-to($n, $dec) {
+  $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
+  @return floor($n * $fac) / $fac;
+}
+
+@function ceil-to($n, $dec) {
+  $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
+  @return ceil($n * $fac) / $fac;
+}
+
+@function round-to($n, $dec) {
+  $fac: 10; @for $d from 1 to $dec { $fac: $fac * 10; }
+  @return round($n * $fac) / $fac;
+}
+
+///
+/// CUSTOM
+///
 
 @function __normalize-arglist($arglist...) {
   @if length($arglist) == 1 and type-of(nth($arglist, 1)) == list {

@@ -1,64 +1,63 @@
-#{base-class('wrap')} { margin-right: auto; margin-left: auto; }
-.wrap-left { margin-left: 0; }
-.wrap-right { margin-right: 0; }
+@mixin homework-legacy-wrap-setup {
 
-$media-keys: map-keys($media);
-$last-m: last($media-keys);
-// $media-length: length($media-keys);
+  #{base-class('wrap')} { margin-right: auto; margin-left: auto; }
+  .wrap-left { margin-left: 0; }
+  .wrap-right { margin-right: 0; }
 
-// use ascending-only media queries
-@each $m in $media-keys {
-  @include m($m) {
-    $fix: m-suffix($m);
-    .wrap--grid,
-    .wrap--inner,
-    .wrap--inner#{$fix},
-    #{if($m == $last-m, ".wrap--inner__last", "")}, {
-      max-width: m-var('inner-width', $m);
-    }
-    .wrap--outer,
-    .wrap--outer#{$fix},
-    #{if($m == $last-m, ".wrap--outer__last", "")}, {
-      max-width: m-var('outer-width', $m);
+  $media-keys: map-keys($media);
+  $last-m: last($media-keys);
+  // $media-length: length($media-keys);
+
+  // use ascending-only media queries
+  @each $m in $media-keys {
+    @include m($m) {
+      $fix: m-suffix($m);
+      .wrap--grid,
+      .wrap--inner,
+      .wrap--inner#{$fix},
+      #{if($m == $last-m, ".wrap--inner__last", "")}, {
+        max-width: m-var('inner-width', $m);
+      }
+      .wrap--outer,
+      .wrap--outer#{$fix},
+      #{if($m == $last-m, ".wrap--outer__last", "")}, {
+        max-width: m-var('outer-width', $m);
+      }
     }
   }
-}
 
-// // wrap--to-x, // wrap--x-to
-// @for $i from 1 through $media-length {
-//   .wrap--#{nth($media-keys, $i)}-to {
-//     @include mm(slice($media-keys, $i)) {
-//       max-width: m-var('inner-width') or 100%;
-//     }
-//   }
-//   .wrap--to-#{nth($media-keys, $i)} {
-//     @include mm(slice($media-keys, 1, $i)) {
-//       max-width: m-var('inner-width') or 100%;
-//     }
-//   }
-// }
+  // // wrap--to-x, // wrap--x-to
+  // @for $i from 1 through $media-length {
+  //   .wrap--#{nth($media-keys, $i)}-to {
+  //     @include mm(slice($media-keys, $i)) {
+  //       max-width: m-var('inner-width') or 100%;
+  //     }
+  //   }
+  //   .wrap--to-#{nth($media-keys, $i)} {
+  //     @include mm(slice($media-keys, 1, $i)) {
+  //       max-width: m-var('inner-width') or 100%;
+  //     }
+  //   }
+  // }
 
-// // wrap--x-to-y
-// @each $set in range-set($media-keys) {
-//   $i: nth($set,1); $j: nth($set,2);
-//   .wrap--#{nth($media-keys, $i)}-to-#{nth($media-keys, $j)} {
-//     @include mm(slice($media-keys, $i, $j)) {
-//       max-width: m-var('inner-width') or 100%;
-//     }
-//   }
-// }
+  // // wrap--x-to-y
+  // @each $set in range-set($media-keys) {
+  //   $i: nth($set,1); $j: nth($set,2);
+  //   .wrap--#{nth($media-keys, $i)}-to-#{nth($media-keys, $j)} {
+  //     @include mm(slice($media-keys, $i, $j)) {
+  //       max-width: m-var('inner-width') or 100%;
+  //     }
+  //   }
+  // }
 
-
-//                  _
-//                 | |
-//  _ __   ___  ___| |
-// | '_ \ / _ \/ _ \ |
-// | |_) |  __/  __/ |
-// | .__/ \___|\___|_|
-// | |
-// |_|
-
-@mixin setup-peel {
+  //                  _
+  //                 | |
+  //  _ __   ___  ___| |
+  // | '_ \ / _ \/ _ \ |
+  // | |_) |  __/  __/ |
+  // | .__/ \___|\___|_|
+  // | |
+  // |_|
 
   .peel {
     margin-right: 0;
@@ -108,5 +107,4 @@ $last-m: last($media-keys);
         margin-right: 0;
       }
     }
-  }
-}
+  }}

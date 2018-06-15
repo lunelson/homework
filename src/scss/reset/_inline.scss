@@ -54,10 +54,13 @@
     font-style: italic; // add the correct font style in android 4.3-.
   }
 
-  b,
-  strong {
+  b, strong {
     font-weight: inherit; // prevent the duplicate application of `bolder` by the next rule in safari 6.
-    font-weight: bolder; // add the correct font weight in chrome, edge, and safari.
+    font-weight: bold; // add the correct font weight in chrome, edge, and safari.
+  }
+
+  em, i {
+    font-style: italic;
   }
 
   ins {

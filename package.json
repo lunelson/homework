@@ -23,14 +23,11 @@
     "start": "gulp",
     "test": "gulp test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "serve": "^8.2.0"
+  },
   "devDependencies": {
     "@lunelson/penny": "^1.1.6",
-    "@lunelson/sass-calc": "^0.9.1",
-    "@lunelson/sass-m": "^0.9.0",
-    "@lunelson/sass-maps-plus": "^0.9.0",
-    "@lunelson/sass-throw": "^1.0.1",
-    "@lunelson/sass-u": "^0.9.1",
     "gulp": "^3.9.1",
     "gulp-diff": "^1.0.0",
     "gulp-plumber": "^1.2.0",

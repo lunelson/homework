@@ -1,0 +1,37 @@
+///
+/// CLASSES
+///
+
+@function base-class($base, $solo: true, $_...) {
+  @if $solo {
+    @return selector-parse('.#{$base}, [class^="#{$base}-"], [class*=" #{$base}-"]');
+  } @else {
+    @return selector-parse('[class^="#{$base}-"], [class*=" #{$base}-"]');
+  }
+}
+
+@function mod-class($base, $mod, $except: ()) {
+  @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}-#{$mod}', '.#{$base}-#{$mod}'));
+}
+
+
+@function aspect-classes($base) {
+  $aspects: (
+    1: 1 2,
+    2: 1 2 3 4,
+    3: 2 3 4 5,
+    4: 2 3 4 5 6,
+    5: 3 4 5 8,
+    16: 9
+  );
+  $classes: ();
+  @each $n, $d-list in $aspects {
+    @each $d in $d-list {
+      $key: $n/$d;
+      $val: map-get($classes, $key) or ();
+      $val: append($val, '.#{$base}-#{$n}-#{$d}', 'comma');
+      $classes: map-merge($classes, ($key: $val));
+    }
+  }
+  @return $classes
+}

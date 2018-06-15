@@ -1,0 +1,16 @@
+extends app/_app
+
+append defs
+  - title = 'Test: Layout'
+
+append head
+  link(href="/assets/test.css", rel="stylesheet")
+
+block body
+
+  .wrap-last
+    .frame-right.frame__m
+      .bleed-right.mr-0__m
+      .fgrid-l
+        .w-1-4.ml-1-2__s.ml-0__m.h-100
+          h1.f-sans-xl Is this thing on?

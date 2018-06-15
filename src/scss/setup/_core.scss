@@ -39,11 +39,12 @@ $media-defaults: (
 
 @mixin homework-core-setup($modern: true) {
 
-  @if $modern {
+  // backup origs; merge defaults
+  $root-orig: $root !global;
+  $media-orig: $media !global;
+  $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
 
-    $root-orig: $root !global;
-    $media-orig: $media !global;
-    $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
+  @if $modern {
 
     html {
       font-size: var(--font-size);

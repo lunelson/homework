@@ -5,7 +5,6 @@
 // | || (_) | | | | |_
 // |_| \___/|_| |_|\__|
 
-
 /*
   TODO
   - handle non-px values in font-mods
@@ -27,13 +26,13 @@ $font-default: (
 $fonts-defaults: (
   sans: ( family: (arial, sans-serif) ),
   serif: ( family: (georgia, serif) ),
-  mono: ( family: (monaco, consolas, "lucida console", monospace) )
+  mono: ( family: (monaco, consolas, monospace) )
 );
 
 @mixin homework-font-setup($modern: true) {
 
+  // merge defaults
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
-
   @each $f, $font in $fonts {
     $font: map-merge($font-default, $font);
     $fonts: map-merge($fonts, ($f: $font)) !global;
@@ -45,43 +44,56 @@ $fonts-defaults: (
       --font-family: #{map-get-z($fonts, nth(map-keys($fonts), 1), 'family')};
       --line-xtra: calc((var(--line-height) - 1) * 1em);
     }
-
-    html * {
+    * {
       font-family: var(--font-family);
       font-size: var(--font-size);
       line-height: var(--line-height);
     }
 
-    $base-classes: list-map(map-keys($fonts), 'base-class', 'comma');
-    #{$base-classes} {
+    #{base-class('f', false)} {
       letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
-      margin-right: var(--trim-x);
-      margin-left: var(--trim-x);
       $is-trim: selector-parse('&.trim');
       $in-stack: insert-parents(base-class('stack'), '>');
-      @at-root #{$is-trim}, #{$in-stack} {
+      @at-root #{selector-parse('&.trim')},
+      #{selector-insert(#{base-class('stack')}, '>')} {
+        margin-right: var(--trim-x);
+        margin-left: var(--trim-x);
         margin-top: calc(0px - var(--trim-top));
         margin-bottom: calc(0px - var(--trim-bottom));
       }
-      $adj-in-stack: insert-parents(base-class('stack'), '> * +');
-      @at-root #{$adj-in-stack} {
+      @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
         margin-top: calc(var(--stack-gap) - var(--trim-top));
       }
-      // increase trim-top value, if adjacent to another font
-      // @at-root #{$adj-font-in-stack} {
-      //   --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
-      // }
+      @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('f', false)}), '+')} {
+        margin-top: calc(var(--stack-gap) - var(--trim-top));
+      }
     }
 
-    /*
-      #{base-class('f')} {...}
-      #{base-class('stack')} > #{base-class('f')} {...}
-      #{base-class('stack')} > * + #{base-class('f')} {...}
-      #{base-class('stack')} > #{base-class('f')} + #{base-class('f')} {...}
-    */
+    // $base-classes: list-map(map-keys($fonts), 'base-class', 'comma');
+    // #{$base-classes} {
+    // [class^="f-"], [class*=" f-"] {
+    //   letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
+    //   margin-right: var(--trim-x);
+    //   margin-left: var(--trim-x);
+    //   $is-trim: selector-parse('&.trim');
+    //   $in-stack: insert-parents(base-class('stack'), '>');
+    //   @at-root #{$is-trim}, #{$in-stack} {
+    //     margin-top: calc(0px - var(--trim-top));
+    //     margin-bottom: calc(0px - var(--trim-bottom));
+    //   }
+    //   $adj-in-stack: insert-parents(base-class('stack'), '> * +');
+    //   @at-root #{$adj-in-stack} {
+    //     margin-top: calc(var(--stack-gap) - var(--trim-top));
+    //   }
+    //   // increase trim-top value, if adjacent to another font
+    //   // $adj-font-in-stack: insert-parents(base-class('stack'), '> * +');
+    //   // @at-root #{$adj-font-in-stack} {
+    //   //   --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
+    //   // }
+    // }
 
     @each $f, $font in $fonts {
-      #{base-class($f)} {
+      #{base-class('f-#{$f}')} {
         --font-family: #{map-get($font, 'family')};
         --spacing-max: #{map-get($font, 'spacing-max')};
         --spacing-end: #{map-get($font, 'spacing-end')};
@@ -95,13 +107,13 @@ $fonts-defaults: (
 
     @each $f, $mod in map-get($root, 'font-mods') or () {
       @each $s, $def in $mod {
-        .#{$f}-#{$s} {
+        .f-#{$f}-#{$s} {
           --font-size: var(--font-size--#{$f}--#{$s});
           --line-height: var(--line-height--#{$f}--#{$s});
         }
       }
     }
   } @else {
-    // @include legacy-homework-font-setup();
+    // @include homework-legacy-font-setup;
   }
 }

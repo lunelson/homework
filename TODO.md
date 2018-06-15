@@ -1,3 +1,35 @@
+## name system revisions
+
+// grid -> fgrid
+// frame/bleed-t,r,b,l -> top, right, bottom, left
+// [font] -> f-[font]
+// span -> 'n' classes only
+// atomic
+//   w, w-0, w-100, -n-d
+//   h, h-0, h-100
+//   m, mx, my, mt, mr, mb, ml, -0, -auto, -n-d
+//   m-neg, mx-neg, my-neg, mt-neg, mr-neg, mb-neg, ml-neg, -n-d
+//   p, px, py, pt, pr, pb, pl, -0
+//   none, flex, grid, block, iblock, inline
+helper
+  hold, stop, clip, hide, show,
+  aspect
+
+frame [& bleed], -top, -right, -bottom, left __bp
+wrap [& peel], -right, -left -bp, -each __bp
+stack, -y, chain, -x
+[font], -fz
+fgrid (flow-grid), -y, -x-x
+ggrid (grid-grid), -y, -x-x
+span, -n
+
+w, w-0, w-100, -n-d
+h, h-0, h-100
+m, mx, my, mt, mr, mb, ml, -0, -auto, -n-d
+m-neg, mx-neg, my-neg, mt-neg, mr-neg, mb-neg, ml-neg, -n-d
+p, px, py, pt, pr, pb, pl, -0
+
+
 ## curr
 classnames
   frame, bleed
@@ -8,6 +40,8 @@ classnames
   grid
   row
   row-m
+  flow
+  flow-m
   grid-s
   grid-x-l
 
