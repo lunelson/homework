@@ -14,24 +14,17 @@
   @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}-#{$mod}', '.#{$base}-#{$mod}'));
 }
 
+@function m-suffix($m: $curr-m) {
+  @return if($m, '__#{$m}', '');
+}
 
-@function aspect-classes($base) {
-  $aspects: (
-    1: 1 2,
-    2: 1 2 3 4,
-    3: 2 3 4 5,
-    4: 2 3 4 5 6,
-    5: 3 4 5 8,
-    16: 9
-  );
-  $classes: ();
-  @each $n, $d-list in $aspects {
-    @each $d in $d-list {
-      $key: $n/$d;
-      $val: map-get($classes, $key) or ();
-      $val: append($val, '.#{$base}-#{$n}-#{$d}', 'comma');
-      $classes: map-merge($classes, ($key: $val));
+@function m-class($sel, $ms...) {
+  $sel: selector-parse($sel); $out: ();
+  @each $m in $ms {
+    $fix: m-suffix($m);
+    @each $sub in $sel {
+      $out: append($out, selector-parse('#{$sub}#{$fix}'), 'comma');
     }
   }
-  @return $classes
+  @return $out;
 }
