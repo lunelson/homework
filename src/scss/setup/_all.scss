@@ -15,6 +15,7 @@
 @import 'fgrid';
 @import 'atomic';
 @import 'helper';
+@import 'theme';
 
 $done-homework-setup: false;
 
@@ -34,6 +35,7 @@ $done-homework-setup: false;
       'fgrid',
       'atomic',
       'helper',
+      'theme',
     );
   }
 
@@ -45,6 +47,7 @@ $done-homework-setup: false;
   @if index($setups, 'fgrid') { @include homework-fgrid-setup($modern); }
   @if index($setups, 'atomic') { @include homework-atomic-setup($modern); }
   @if index($setups, 'helper') { @include homework-helper-setup($modern); }
+  @if index($setups, 'theme') { @include homework-theme-setup($modern); }
 
   // set $done-homework to true
   $done-homework-setup: true !global;

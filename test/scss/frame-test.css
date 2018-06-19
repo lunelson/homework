@@ -1,9 +1,3 @@
-/*
-  TODO
-  - handle non-px values in font-mods
-  - convert to f-[font]-[size] pattern
-  - add the new adjacency condition
-*/
 html {
   font-size: var(--font-size);
   line-height: var(--line-height);

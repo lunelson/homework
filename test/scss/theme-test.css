@@ -1,0 +1,180 @@
+.test {
+  out: 80.5024;
+}
+
+body {
+  color: #111;
+  background-color: #eee;
+}
+
+[class^="color-"], [class*=" color-"] {
+  color: var(--key-color);
+}
+
+[class^="bg-"], [class*=" bg-"] {
+  background-color: var(--key-bg-color);
+}
+
+.color-yiq, [class^="color-yiq-"], [class*=" color-yiq-"] {
+  color: var(--yiq-color);
+}
+
+.bg-yiq, [class^="bg-yiq-"], [class*=" bg-yiq-"] {
+  background-color: var(--yiq-bg-color);
+}
+
+.theme-dark {
+  --theme-key: #111;
+  --theme-yiq: #eee;
+}
+
+.color-dark {
+  --key-color: #111;
+  --yiq-bg-color: #eee;
+}
+
+.bg-dark {
+  --key-bg-color: #111;
+  --yiq-color: #eee;
+}
+
+.theme-lite {
+  --theme-key: #eee;
+  --theme-yiq: #111;
+}
+
+.color-lite {
+  --key-color: #eee;
+  --yiq-bg-color: #111;
+}
+
+.bg-lite {
+  --key-bg-color: #eee;
+  --yiq-color: #111;
+}
+
+.theme-foo {
+  --theme-key: #508021;
+  --theme-yiq: #eee;
+}
+
+.color-foo {
+  --key-color: #508021;
+  --yiq-bg-color: #eee;
+}
+
+.bg-foo {
+  --key-bg-color: #508021;
+  --yiq-color: #eee;
+}
+
+.theme-bar {
+  --theme-key: #da50c9;
+  --theme-yiq: #111;
+}
+
+.color-bar {
+  --key-color: #da50c9;
+  --yiq-bg-color: #111;
+}
+
+.bg-bar {
+  --key-bg-color: #da50c9;
+  --yiq-color: #111;
+}
+
+.theme-baz {
+  --theme-key: #4741ff;
+  --theme-yiq: #eee;
+}
+
+.color-baz {
+  --key-color: #4741ff;
+  --yiq-bg-color: #eee;
+}
+
+.bg-baz {
+  --key-bg-color: #4741ff;
+  --yiq-color: #eee;
+}
+
+.theme-fiz {
+  --theme-key: #da9b30;
+  --theme-yiq: #111;
+}
+
+.color-fiz {
+  --key-color: #da9b30;
+  --yiq-bg-color: #111;
+}
+
+.bg-fiz {
+  --key-bg-color: #da9b30;
+  --yiq-color: #111;
+}
+
+.color-key {
+  --key-color: var(--theme-key);
+  --yiq-bg-color: var(--theme-yiq);
+}
+
+.bg-key {
+  --key-bg-color: var(--theme-key);
+  --yiq-color: var(--theme-yiq);
+}
+
+.color-yiq-dark {
+  --yiq-color: #eee;
+}
+
+.bg-yiq-dark {
+  --yiq-bg-color: #eee;
+}
+
+.color-yiq-lite {
+  --yiq-color: #111;
+}
+
+.bg-yiq-lite {
+  --yiq-bg-color: #111;
+}
+
+.color-yiq-foo {
+  --yiq-color: #eee;
+}
+
+.bg-yiq-foo {
+  --yiq-bg-color: #eee;
+}
+
+.color-yiq-bar {
+  --yiq-color: #111;
+}
+
+.bg-yiq-bar {
+  --yiq-bg-color: #111;
+}
+
+.color-yiq-baz {
+  --yiq-color: #eee;
+}
+
+.bg-yiq-baz {
+  --yiq-bg-color: #eee;
+}
+
+.color-yiq-fiz {
+  --yiq-color: #111;
+}
+
+.bg-yiq-fiz {
+  --yiq-bg-color: #111;
+}
+
+.color-yiq-key {
+  --yiq-color: var(--theme-yiq);
+}
+
+.bg-yiq-key {
+  --yiq-bg-color: var(--theme-yiq);
+}

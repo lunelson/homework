@@ -28,12 +28,29 @@
 
   @if $modern {
 
-    :root {
-      --atomic-top: 0;
-      --atomic-right: 0;
-      --atomic-bottom: 0;
-      --atomic-left: 0;
-    }
+    // :root {
+    //   --atomic-pt: 0;
+    //   --atomic-pr: 0;
+    //   --atomic-pb: 0;
+    //   --atomic-pl: 0;
+    //   --atomic-mt: 0;
+    //   --atomic-mr: 0;
+    //   --atomic-mb: 0;
+    //   --atomic-ml: 0;
+    //   --atomic-w: 100%;
+    //   --atomic-h: auto;
+    // }
+
+    // #{base-class('py', false)}, #{base-class('pt', false)} { padding-top: var(--atomic-pt); }
+    // #{base-class('py', false)}, #{base-class('pb', false)} { padding-bottom: var(--atomic-pb); }
+    // #{base-class('my', false)}, #{base-class('mt', false)} { margin-top: var(--atomic-mt); }
+    // #{base-class('my', false)}, #{base-class('mb', false)} { margin-bottom: var(--atomic-mb); }
+    // #{base-class('px', false)}, #{base-class('pr', false)} { padding-right: var(--atomic-pr); }
+    // #{base-class('px', false)}, #{base-class('pl', false)} { padding-left: var(--atomic-pl); }
+    // #{base-class('mx', false)}, #{base-class('mr', false)} { margin-right: var(--atomic-mr); }
+    // #{base-class('mx', false)}, #{base-class('ml', false)} { margin-left: var(--atomic-ml); }
+    // #{base-class('w', false)} { width: var(--atomic-w); }
+    // #{base-class('h', false)} { height: var(--atomic-h); }
 
     @each $m in join(null, map-keys($media)) {
 
@@ -76,15 +93,6 @@
           #{__map($ratio-list, 'ratio-class', 'ml-neg', $fix)} { margin-left: multiply(#{ratio-calc($reduction)}, -1) }
         }
 
-        // display
-
-        .d-none#{$fix} { display: none; }
-        .d-flex#{$fix} { display: flex; }
-        .d-grid#{$fix} { display: grid; }
-        .d-block#{$fix} { display: block; }
-        .d-iblock#{$fix} { display: inline-block; vertical-align: baseline; }
-        .d-inline#{$fix} { display: inline; vertical-align: baseline; }
-
         // dimensions: auto
 
         .w-auto#{$fix} { width: auto; }
@@ -111,6 +119,16 @@
 
         .w-100#{$fix} { width: 0; }
         .h-100#{$fix} { height: 0; }
+
+        // display
+
+        .d-none#{$fix} { display: none; }
+        .d-flex#{$fix} { display: flex; }
+        .d-grid#{$fix} { display: grid; }
+        .d-block#{$fix} { display: block; }
+        .d-iblock#{$fix} { display: inline-block; vertical-align: baseline; }
+        .d-inline#{$fix} { display: inline; vertical-align: baseline; }
+
       }
     }
   } @else {

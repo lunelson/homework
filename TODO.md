@@ -1,3 +1,10 @@
+## co-incident classes
+
+.fgrid > *.stack
+fgrid -> flow?
+
+
+
 ## name system revisions
 
 // grid -> fgrid
@@ -22,6 +29,13 @@ stack, -y, chain, -x
 fgrid (flow-grid), -y, -x-x
 ggrid (grid-grid), -y, -x-x
 span, -n
+
+stack
+  .stop
+    .flow-l.flow-x-custom
+      span-1
+      span-3
+  grid
 
 w, w-0, w-100, -n-d
 h, h-0, h-100

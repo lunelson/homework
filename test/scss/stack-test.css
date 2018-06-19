@@ -1,9 +1,3 @@
-/*
-  TODO
-  - handle non-px values in font-mods
-  - convert to f-[font]-[size] pattern
-  - add the new adjacency condition
-*/
 html {
   font-size: var(--font-size);
   line-height: var(--line-height);
@@ -65,7 +59,8 @@ html {
 }
 
 .stack > *, [class^="stack-"] > *, [class*=" stack-"] > * {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
+  height: auto;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -92,7 +87,8 @@ html {
 }
 
 .chain > *, [class^="chain-"] > *, [class*=" chain-"] > * {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
+  width: auto;
   margin-left: 0;
   margin-right: 0;
   text-overflow: ellipsis;

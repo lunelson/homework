@@ -1,0 +1,19 @@
+extends app/_app
+
+append defs
+  - title = 'Test: Aspect'
+
+mixin ph(aspect, text, color='#eee')
+  .aspect(style=`background-color: ${color}; --aspect: ${aspect};`)
+    div= text
+
+block body
+  .wrap-last
+    .frame
+      .fgrid
+        .span-3
+          +ph(3, 'hello world')
+        .span-5
+          +ph(3, 'hello world')
+        .span-11
+          +ph(3, 'hello world')

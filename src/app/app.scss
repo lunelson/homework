@@ -2,11 +2,12 @@
 @import '@lunelson/sass-throw/index';
 @import '@lunelson/sass-maps-plus/index';
 @import '@lunelson/sass-u/index';
+@import 'mathsass/dist/math';
 
 @import "../scss/utils/all";
 @import "../scss/reset/all";
 @import "../scss/setup/all";
-@import "../scss/theme/all";
+@import "../scss/debug/all";
 
 $root: (
   inner-x: 2rem,
@@ -38,6 +39,13 @@ $fonts: (
   )
 );
 
+$colors: (
+  foo: #508021,
+  bar: #da50c9,
+  baz: #4741ff,
+  fiz: #da9b30,
+);
+
 @include homework-reset;
 
 @include homework-core-setup;
@@ -46,6 +54,8 @@ $fonts: (
 @include homework-stack-setup;
 @include homework-font-setup;
 @include homework-fgrid-setup;
-@include homework-debug-setup;
 @include homework-atomic-setup;
 @include homework-helper-setup;
+@include homework-theme-setup;
+
+@include homework-debug;
