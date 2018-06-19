@@ -1,0 +1,64 @@
+@import '../peers';
+
+$root: (
+  inner-x: 1rem,
+  inner-y: (
+    m: 1rem,
+    l: 2rem,
+  )
+);
+
+$media: (
+  a: (
+    breakpoint: 20em,
+    inner-x: 2rem,
+    inner-y: (
+      l: 3rem
+    )
+  ),
+  b: (
+    breakpoint: 30em,
+    inner-y: (
+      m: 2rem,
+      l: 4rem
+    )
+  ),
+  c: (
+    breakpoint: 40em,
+    inner-x: 3rem,
+    inner-y: (
+      l: 5rem
+    )
+  ),
+);
+
+@include m-init();
+
+@import '../../index';
+
+.test {
+  out: inspect(mm(null, null, inner-x));
+  out: inspect(mm(null, null, inner-y));
+  out: inspect(mm(null, null, inner-y m));
+  out: inspect(mm(null, null, inner-y l));
+
+  out: type-of(map-get-z($media, a)) == 'map';
+  out: type-of(map-get-z($media, a, inner-x)) == 'map';
+  out: inspect(m-var(inner-x));
+  out: inner-x(l);
+  out: inner-y(l);
+  out: inspect(m-var(inner-y m));
+  out: inspect(m-var(inner-y l));
+  out: inner-y(m);
+  out: inner-y(2);
+
+  @include mm-for(inner-y m) {
+    margin-top: inner-y(m);
+  }
+  @include mm() {
+    out: inner-y(l);
+  }
+}
+
+/* #{map-stringify($root)} */
+/* #{map-stringify($media)} */

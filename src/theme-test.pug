@@ -1,0 +1,23 @@
+extends app/_app
+
+append defs
+  - title = 'Test: Theme'
+
+mixin ph(aspect, text, color='#eee')
+  .aspect(style=`background-color: ${color}; --aspect: ${aspect};`)
+    div= text
+
+block body
+  .wrap-last
+    .frame
+      .fgrid
+        each key in 'foo,bar,baz,fiz'.split(',')
+          div(class=`theme-${key}`)
+            p.color-key HELLO WORLD
+            .bg-key
+              p.color-yiq HELLO WORLD
+              p.color-yiq-key HELLO WORLD
+        each key in 'foo,bar,baz,fiz'.split(',')
+          div(class=`bg-${key}`)
+            p.color-yiq HELLO WORLD
+            p.color-yiq-key HELLO WORLD

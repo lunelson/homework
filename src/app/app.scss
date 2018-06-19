@@ -1,0 +1,61 @@
+@import '@lunelson/sass-calc/index';
+@import '@lunelson/sass-throw/index';
+@import '@lunelson/sass-maps-plus/index';
+@import '@lunelson/sass-u/index';
+@import 'mathsass/dist/math';
+
+@import "../scss/utils/all";
+@import "../scss/reset/all";
+@import "../scss/setup/all";
+@import "../scss/debug/all";
+
+$root: (
+  inner-x: 2rem,
+  inner-y-mods: (
+    s: 1,
+    m: 2,
+    l: 4
+  ),
+  font-mods: (
+    sans: (
+      s: 16px 1.3,
+      m: 32px 1.2,
+      l: 48px 1.1,
+    )
+  )
+);
+
+$media: (
+  s: ( breakpoint: 30em ),
+  m: ( breakpoint: 50em ),
+  l: ( breakpoint: 70em ),
+);
+
+$fonts: (
+  sans: (
+    family: (system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue),
+    trim-top: 0.1,
+    trim-bottom: 0.1,
+  )
+);
+
+$colors: (
+  foo: #508021,
+  bar: #da50c9,
+  baz: #4741ff,
+  fiz: #da9b30,
+);
+
+@include homework-reset;
+
+@include homework-core-setup;
+@include homework-wrap-setup;
+@include homework-frame-setup;
+@include homework-stack-setup;
+@include homework-font-setup;
+@include homework-fgrid-setup;
+@include homework-atomic-setup;
+@include homework-helper-setup;
+@include homework-theme-setup;
+
+@include homework-debug;

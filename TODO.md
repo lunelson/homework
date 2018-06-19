@@ -1,36 +1,121 @@
-inset-r__m
-hang-r__m
-tuck
-slip
-edge
-shim
+## co-incident classes
 
-drop
-slide
-lip
-rim
-lap
-well
-dent
-bump
-hump
-rise
-card
-bind
-bound
-
-lead
+.fgrid > *.stack
+fgrid -> flow?
 
 
-wrap
-edge
-slip
 
-shift
-spread
-fringe
-verge
-skirt
+## name system revisions
+
+// grid -> fgrid
+// frame/bleed-t,r,b,l -> top, right, bottom, left
+// [font] -> f-[font]
+// span -> 'n' classes only
+// atomic
+//   w, w-0, w-100, -n-d
+//   h, h-0, h-100
+//   m, mx, my, mt, mr, mb, ml, -0, -auto, -n-d
+//   m-neg, mx-neg, my-neg, mt-neg, mr-neg, mb-neg, ml-neg, -n-d
+//   p, px, py, pt, pr, pb, pl, -0
+//   none, flex, grid, block, iblock, inline
+helper
+  hold, stop, clip, hide, show,
+  aspect
+
+frame [& bleed], -top, -right, -bottom, left __bp
+wrap [& peel], -right, -left -bp, -each __bp
+stack, -y, chain, -x
+[font], -fz
+fgrid (flow-grid), -y, -x-x
+ggrid (grid-grid), -y, -x-x
+span, -n
+
+stack
+  .stop
+    .flow-l.flow-x-custom
+      span-1
+      span-3
+  grid
+
+w, w-0, w-100, -n-d
+h, h-0, h-100
+m, mx, my, mt, mr, mb, ml, -0, -auto, -n-d
+m-neg, mx-neg, my-neg, mt-neg, mr-neg, mb-neg, ml-neg, -n-d
+p, px, py, pt, pr, pb, pl, -0
+
+
+## curr
+classnames
+  frame, bleed
+  frame-l__bp
+  bleed-l__bp
+  mx-0__bp
+
+  grid
+  row
+  row-m
+  flow
+  flow-m
+  grid-s
+  grid-x-l
+
+  stack-s
+  chain-l
+
+  span
+  span-2
+  ml-2
+  mr-neg-1.mr-0__l
+  push-2
+  pull-1
+  push-n
+  push-r-neg-n__bp
+  push-r-1
+
+  pull-n__bp
+
+
+
+renames
+  font-mods
+  inner-y-mods
+  inner-x-mods
+  column-count (not 'grid-columns')
+
+othernames
+  inset-r__m
+  hang-r__m
+  tuck
+  slip
+  edge
+  shim
+
+  drop
+  slide
+  lip
+  rim
+  lap
+  well
+  dent
+  bump
+  hump
+  rise
+  card
+  bind
+  bound
+
+  lead
+
+
+  wrap
+  edge
+  slip
+
+  shift
+  spread
+  fringe
+  verge
+  skirt
 
 
 ## util
@@ -90,7 +175,7 @@ auto-line
 
 ```scss
 // output media and base as json
-@include set-css-data((media: $media, base: $base));
+@include set-css-data((media: $media, base: $root));
 ```
 
 ## removals: these belong in 'homework'

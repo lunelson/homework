@@ -1,0 +1,137 @@
+//        _                  _
+//       | |                (_)
+//   __ _| |_ ___  _ __ ___  _  ___
+//  / _` | __/ _ \| '_ ` _ \| |/ __|
+// | (_| | || (_) | | | | | | | (__
+//  \__,_|\__\___/|_| |_| |_|_|\___|
+
+@function ratio-str($ratio)    { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
+@function ratio-class($ratio, $index, $list, $root, $fix) { @return '.#{$root}-#{ratio-str($ratio)}#{$fix}'; }
+@function ratio-calc($ratio)    { @return calc(100% * (#{nth($ratio,1)} / #{nth($ratio,2)})); }
+
+@mixin homework-atomic-setup($modern: true) {
+
+  $media-grid-columns: ();
+  $reduction-ratio-lists: ();
+
+  @each $m, $medium in $media {
+    $media-grid-columns: append($media-grid-columns, map-get($medium, 'grid-columns'));
+  }
+
+  @for $d from 1 through max($media-grid-columns...) {
+    @for $n from 1 through $d {
+      $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+      $set: append(map-get($reduction-ratio-lists, $reduction) or (), $n $d);
+      $reduction-ratio-lists: map-merge($reduction-ratio-lists, ($reduction: $set));
+    }
+  }
+
+  @if $modern {
+
+    // :root {
+    //   --atomic-pt: 0;
+    //   --atomic-pr: 0;
+    //   --atomic-pb: 0;
+    //   --atomic-pl: 0;
+    //   --atomic-mt: 0;
+    //   --atomic-mr: 0;
+    //   --atomic-mb: 0;
+    //   --atomic-ml: 0;
+    //   --atomic-w: 100%;
+    //   --atomic-h: auto;
+    // }
+
+    // #{base-class('py', false)}, #{base-class('pt', false)} { padding-top: var(--atomic-pt); }
+    // #{base-class('py', false)}, #{base-class('pb', false)} { padding-bottom: var(--atomic-pb); }
+    // #{base-class('my', false)}, #{base-class('mt', false)} { margin-top: var(--atomic-mt); }
+    // #{base-class('my', false)}, #{base-class('mb', false)} { margin-bottom: var(--atomic-mb); }
+    // #{base-class('px', false)}, #{base-class('pr', false)} { padding-right: var(--atomic-pr); }
+    // #{base-class('px', false)}, #{base-class('pl', false)} { padding-left: var(--atomic-pl); }
+    // #{base-class('mx', false)}, #{base-class('mr', false)} { margin-right: var(--atomic-mr); }
+    // #{base-class('mx', false)}, #{base-class('ml', false)} { margin-left: var(--atomic-ml); }
+    // #{base-class('w', false)} { width: var(--atomic-w); }
+    // #{base-class('h', false)} { height: var(--atomic-h); }
+
+    @each $m in join(null, map-keys($media)) {
+
+      @include m($m) {
+
+        $fix: m-suffix();
+
+        @each $y, $mod in map-get($root, 'inner-y-mods') or () {
+          .py-#{$y}#{$fix}, .pt-#{$y}#{$fix} { padding-top: var(--inner-y--#{$y}); }
+          .py-#{$y}#{$fix}, .pb-#{$y}#{$fix} { padding-bottom: var(--inner-y--#{$y}); }
+          .my-#{$y}#{$fix}, .mt-#{$y}#{$fix} { margin-top: var(--inner-y--#{$y}); }
+          .my-#{$y}#{$fix}, .mb-#{$y}#{$fix} { margin-bottom: var(--inner-y--#{$y}); }
+          .my-neg-#{$y}#{$fix}, .mt-neg-#{$y}#{$fix} { margin-top: calc(-1 * var(--inner-y--#{$y})); }
+          .my-neg-#{$y}#{$fix}, .mb-neg-#{$y}#{$fix} { margin-bottom: calc(-1 * var(--inner-y--#{$y})); }
+        }
+        @each $x, $mod in map-get($root, 'inner-x-mods') or () {
+          .px-#{$x}#{$fix}, .pr-#{$x}#{$fix} { padding-right: var(--inner-x--#{$x}); }
+          .px-#{$x}#{$fix}, .pl-#{$x}#{$fix} { padding-left: var(--inner-x--#{$x}); }
+          .mx-#{$x}#{$fix}, .mr-#{$x}#{$fix} { margin-right: var(--inner-x--#{$x}); }
+          .mx-#{$x}#{$fix}, .ml-#{$x}#{$fix} { margin-left: var(--inner-x--#{$x}); }
+          .mx-neg-#{$x}#{$fix}, .mr-neg-#{$x}#{$fix} { margin-right: calc(-1 * var(--inner-x--#{$x})); }
+          .mx-neg-#{$x}#{$fix}, .ml-neg-#{$x}#{$fix} { margin-left: calc(-1 * var(--inner-x--#{$x})); }
+        }
+
+        // dimensions: explicit ratios
+
+        @each $reduction, $ratio-list in $reduction-ratio-lists {
+          #{__map($ratio-list, 'ratio-class', 'w', $fix)} { width: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'px', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'pr', $fix)} { padding-right: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'px', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'pl', $fix)} { padding-left: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'mx', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'mr', $fix)} { margin-right: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'mx', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'ml', $fix)} { margin-left: ratio-calc($reduction) }
+          #{__map($ratio-list, 'ratio-class', 'mx-neg', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'mr-neg', $fix)} { margin-right: multiply(#{ratio-calc($reduction)}, -1) }
+          #{__map($ratio-list, 'ratio-class', 'mx-neg', $fix)},
+          #{__map($ratio-list, 'ratio-class', 'ml-neg', $fix)} { margin-left: multiply(#{ratio-calc($reduction)}, -1) }
+        }
+
+        // dimensions: auto
+
+        .w-auto#{$fix} { width: auto; }
+        .h-auto#{$fix} { height: auto; }
+        .my-auto#{$fix}, .mt-auto#{$fix} { margin-top: auto; }
+        .mx-auto#{$fix}, .mr-auto#{$fix} { margin-right: auto; }
+        .my-auto#{$fix}, .mb-auto#{$fix} { margin-bottom: auto; }
+        .mx-auto#{$fix}, .ml-auto#{$fix} { margin-left: auto; }
+
+        // dimensions: zero
+
+        .w-0#{$fix} { width: 0; }
+        .h-0#{$fix} { height: 0; }
+        .my-0#{$fix}, .mt-0#{$fix} { margin-top: 0 !important; }
+        .mx-0#{$fix}, .mr-0#{$fix} { margin-right: 0 !important; }
+        .my-0#{$fix}, .mb-0#{$fix} { margin-bottom: 0 !important; }
+        .mx-0#{$fix}, .ml-0#{$fix} { margin-left: 0 !important; }
+        .py-0#{$fix}, .pt-0#{$fix} { padding-top: 0 !important; }
+        .px-0#{$fix}, .pr-0#{$fix} { padding-right: 0 !important; }
+        .py-0#{$fix}, .pb-0#{$fix} { padding-bottom: 0 !important; }
+        .px-0#{$fix}, .pl-0#{$fix} { padding-left: 0 !important; }
+
+        // dimensions: 100%
+
+        .w-100#{$fix} { width: 0; }
+        .h-100#{$fix} { height: 0; }
+
+        // display
+
+        .d-none#{$fix} { display: none; }
+        .d-flex#{$fix} { display: flex; }
+        .d-grid#{$fix} { display: grid; }
+        .d-block#{$fix} { display: block; }
+        .d-iblock#{$fix} { display: inline-block; vertical-align: baseline; }
+        .d-inline#{$fix} { display: inline; vertical-align: baseline; }
+
+      }
+    }
+  } @else {
+    // @include homework-legacy-atomic-setup;
+  }
+}

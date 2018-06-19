@@ -1,0 +1,11 @@
+@import '../../src/scss/peers';
+@import '../../src/scss/../index';
+
+$media: (
+  a: (breakpoint: 20em),
+  b: (breakpoint: 30em),
+  c: (breakpoint: 40em),
+);
+
+@include m-init(false);
+@include homework-setup(false, 'wrap');

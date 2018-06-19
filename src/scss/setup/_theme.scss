@@ -1,0 +1,96 @@
+//  _   _
+// | | | |
+// | |_| |__   ___ _ __ ___   ___
+// | __| '_ \ / _ \ '_ ` _ \ / _ \
+// | |_| | | |  __/ | | | | |  __/
+//  \__|_| |_|\___|_| |_| |_|\___|
+
+$colors: (
+  dark: #111,
+  lite: #eee,
+) !default;
+
+// srgb gamma correction, per spec: https://en.wikipedia.org/wiki/srgb
+@function re-gamma($n) { @if $n <= 0.0031308 { @return $n * 12.92; } @else { @return 1.055 * pow($n, 1/2.4) - 0.055; } }
+@function de-gamma($n) { @if $n <= 0.04045 { @return $n / 12.92; } @else { @return pow((($n + 0.055)/1.055), 2.4); } }
+
+// srgb bt-709 luma
+@function luma($c) {
+  $rlin: de-gamma(red($c)/255);
+  $glin: de-gamma(green($c)/255);
+  $blin: de-gamma(blue($c)/255);
+  @return re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
+}
+
+// @function yiq($color) {
+//   $r: red($color);
+//   $g: green($color);
+//   $b: blue($color);
+//   $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+//   @return map-get($colors, if($yiq >= 128, 'dark', 'lite'));
+// }
+
+@function yiq($c) {
+  $rlin: de-gamma(red($c)/255);
+  $glin: de-gamma(green($c)/255);
+  $blin: de-gamma(blue($c)/255);
+  $yiq: re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
+  @return map-get($colors, if($yiq >= 50, 'dark', 'lite'));
+}
+
+@mixin homework-theme-setup($modern: true, $lite: true) {
+
+  $colors: map-merge((
+    dark: #111,
+    lite: #eee,
+  ), $colors) !global;
+
+  body {
+    color: map-get($colors, if($lite, 'dark', 'lite'));
+    background-color: map-get($colors, if($lite, 'lite', 'dark'));
+  }
+
+  @if $modern {
+
+    #{base-class('color', false)} { color: var(--key-color); }
+    #{base-class('bg', false)} { background-color: var(--bg-key-color); }
+
+    #{base-class('color-yiq')} { color: var(--yiq-color); }
+    #{base-class('bg-yiq')} { background-color: var(--bg-yiq-color); }
+
+    @each $c, $color in $colors {
+      .theme-#{$c} {
+        --theme-key: #{$color};
+        --theme-yiq: #{yiq($color)};
+      }
+      .color-#{$c} {
+        --key-color: #{$color};
+        --bg-yiq-color: #{yiq($color)};
+      }
+      .bg-#{$c} {
+        --bg-key-color: #{$color};
+        --yiq-color: #{yiq($color)};
+      }
+    }
+
+    .color-key {
+      --key-color: var(--theme-key);
+      --bg-yiq-color: var(--theme-yiq);
+    }
+    .bg-key {
+      --bg-key-color: var(--theme-key);
+      --yiq-color: var(--theme-yiq);
+    }
+
+    @each $c, $color in $colors {
+      .color-yiq-#{$c} { --yiq-color: #{yiq($color)}; }
+      .bg-yiq-#{$c} { --bg-yiq-color: #{yiq($color)}; }
+    }
+
+    .color-yiq-key { --yiq-color: var(--theme-yiq); }
+    .bg-yiq-key { --bg-yiq-color: var(--theme-yiq); }
+
+  } @else {
+    @include homework-legacy-theme-setup;
+  }
+}

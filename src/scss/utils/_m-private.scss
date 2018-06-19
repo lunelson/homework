@@ -1,0 +1,106 @@
+//
+// init helpers
+//
+
+@mixin --output-mods($medium) {
+  @each $y, $mod in map-get($medium, 'inner-y-mods') or () {
+    @if unitless($mod) { --inner-y--#{$y}: calc(var(--inner-y) * #{$mod}); }
+    @else { --inner-y--#{$y}: #{$mod}; }
+  }
+  @each $x, $mod in map-get($medium, 'inner-x-mods') or () {
+    @if unitless($mod) { --inner-x--#{$x}: calc(var(--inner-x) * #{$mod}); }
+    @else { --inner-x--#{$x}: #{$mod}; }
+  }
+  @each $f, $mod in map-get($medium, 'font-mods') or () {
+    @each $s, $def in $mod {
+      --font-size--#{$f}--#{$s}: #{nth($def, 1) / 16px * 1rem};
+      --line-height--#{$f}--#{$s}: #{nth($def, 2)};
+    }
+  }
+}
+
+@function --parse-medium($medium, $root-size: null) {
+
+  // font-size: conform to px
+  $root-size: $root-size or map-get($root, 'font-size') or 16px;
+  $curr-size: map-get($medium, 'font-size') or $root-size;
+  @if unit($curr-size) != 'px' { $curr-size: strip($curr-size) * $root-size; }
+
+  // outer-width: breakpoint, in rems
+  $breakpoint: map-get($medium, 'breakpoint');
+  $outer-width: if($breakpoint, assert($breakpoint / ($curr-size / 16px), rem), 100%);
+
+  @return map-merge($medium, ( 'font-size': $curr-size, 'outer-width': $outer-width ));
+}
+
+@function --query-string($min: null, $max: null) {
+  $min: if(map-has-key($media, $min), map-get-z($media, $min, 'breakpoint'), $min);
+  $max: if(map-has-key($media, $max), map-get-z($media, $max, 'breakpoint'), $max);
+  @return 'screen'
+    + if($min, ' and (min-width: #{$min})', '')
+    + if($max, ' and (max-width: #{$max - 0.001})', '');
+}
+
+//
+// mm helpers
+//
+
+
+@function --mm-filter-orig($media-keys, $props...) {
+  @if length($props) < 1 { @return (); }
+  $result: ();
+  @each $m in $media-keys {
+    $test: false;
+    @each $prop in $props { $test: if(get(m-orig($m), $prop...), true, $test); }
+    $result: if($test, append($result, $m), $result);
+  }
+  @return if(length($result) > 0, $result, ());
+}
+
+@function --mm-pairs($list:()) {
+  @if length($list) == 0 { @return $list; }
+  $result: ();
+  @for $n from 1 through length($list) - 1 {
+    $result: append($result, (nth($list, $n) nth($list, $n + 1)), 'comma');
+  }
+  @return $result;
+}
+
+@function --mm-slice($lo: null, $hi: null) {
+  $keys: join(join(null, map-keys($media)), null);
+  $index1: if($lo, index($keys, $lo), 1);
+  $index2: if($hi, index($keys, $hi), length($keys));
+  @return if($index1 and $index2, --slice($keys, $index1, $index2), ());
+}
+
+// @function --mm-filter($props...) {
+//   @if length($props) < 1 { @return (); }
+//   $result: ();
+//   @each $m, $medium-orig in $media-orig {
+//     $test: false;
+//     @each $prop in $props { $test: if(get($medium-orig, $prop...), true, $test); }
+//     $result: if($test, append($result, $m), $result);
+//   }
+//   @return if(length($result) > 0, join(join(null, $result), null), ());
+// }
+
+@function --mm-where($props...) {
+  $result: --mm-filter-orig(map-keys($media), $props...);
+  @return if(length($result) > 0, join(join(null, $result), null), ());
+}
+
+
+@function mm($lo: null, $hi: null, $props...) {
+  $m-list: --mm-slice($lo, $hi);
+  @if length($props) > 0 and length($m-list) > 2 {
+    $len: length($m-list);
+    $m-list: join(
+      join(
+        --slice($m-list, 1, 1),
+        --mm-filter-orig(--slice($m-list, 2, $len - 1), $props...)
+      ),
+      --slice($m-list, $len, $len)
+    );
+  }
+  @return --mm-pairs($m-list);
+}

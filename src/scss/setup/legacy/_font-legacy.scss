@@ -1,0 +1,95 @@
+@mixin homework-legacy-font-setup() {
+
+  //
+  // LOOP: FONTS
+  //
+
+  @each $f, $font in $fonts {
+
+    #{base-class($f)} {
+
+      // base definition
+      @include font($f);
+
+      // trim-x conditions
+      $trim-x: map-get-z($fonts, $f, 'trim-x');
+      @if $trim-x and $trim-x != 0 {
+        $is-trim-x: selector-parse('&.trim-x');
+        $is-in-stack: insert-parents(base-class('stack'), '>');
+        @at-root #{$is-trim-x}, #{$is-in-stack} {
+          margin-right: $trim-x;
+          margin-left: $trim-x;
+        }
+      }
+    }
+
+    //
+    // LOOP: typos
+    //
+
+    $typos: m-var('typos' $f, null); // from $root
+    @if $typos {
+      @each $t in map-keys($typos) {
+
+        //
+        // MEDIA FOR: copy size, font
+        //
+        @include mm-for('typos' $f $t) {
+          $typo: m-var('typos' $f $t);
+          $px-base: strip(m-var('font-size'));
+          $px-size: nth($typo, 1);
+          $line: nth($typo, 2);
+
+          #{mod-class($f, $t, '')} {
+            font-size: $px-size / $px-base * 1rem;
+            line-height: $line;
+
+            //
+            // TRIM: top/bottom wrt .stack
+            //
+            $is-trim: selector-parse('&.trim');
+            $is-in-stack: insert-parents(base-class('stack'), '>');
+            @at-root #{$is-trim}, #{$is-in-stack} {
+              margin-top: trim-top-margin(0, $line, $f);
+              margin-bottom: trim-bottom-margin(0, $line, $f);
+            }
+          }
+        }
+
+        //
+        // LOOP: INNER-Y
+        //
+
+        $inner-y: m-var('inner-y', null); // from $root
+        // $y-map: if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y));
+        $y-keys: if(type-of($inner-y) == 'map', map-keys($inner-y), (m));
+        @each $y in $y-keys {
+          $y-path: if(type-of($inner-y) == 'map', 'inner-y' $y, 'inner-y');
+
+          //
+          // MEDIA-FOR: inner-y || copy-size, font
+          //
+          @include mm-for($y-path, 'typos' $f $t) {
+            $typo: m-var('typos' $f $t);
+            $px-base: strip(m-var('font-size'));
+            $px-size: nth($typo, 1);
+            $line: nth($typo, 2);
+
+            // stack--[mult] mod-class
+            @at-root #{mod-class('stack', $y, 'm')} {
+
+              // direct-child font--[size] mod-class
+              & > *:not(.unstack) + #{mod-class($f, $t, '')} {
+
+                // trimmed margin-top value
+                margin-top: trim-top-margin($y, $line, $f);
+              }
+            }
+
+          }
+        }
+
+      }
+    }
+  }
+}

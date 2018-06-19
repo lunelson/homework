@@ -1,0 +1,280 @@
+// //       _                  __
+// //      | |                / _|
+// //   ___| | __ _ ___ ___  | |_ _ __  ___
+// //  / __| |/ _` / __/ __| |  _| '_ \/ __|
+// // | (__| | (_| \__ \__ \ | | | | | \__ \
+// //  \___|_|\__,_|___/___/ |_| |_| |_|___/
+
+// @function m-suffix($m: $curr-m) {
+//   @return if($m, '__#{$m}', '');
+// }
+
+// @function cell-n-d-class($ratio, $rest...) {
+//   $n: nth($ratio,1); $d: nth($ratio,2);
+//   @return ".cell--#{$n}-#{$d}#{m-suffix()}";
+// }
+
+// @function col-n-d-class($ratio, $rest...) {
+//   $n: nth($ratio,1); $d: nth($ratio,2);
+//   @return ".col--#{$n}-#{$d}#{m-suffix()}";
+// }
+
+// @function span-n-d-class($ratio, $rest...) {
+//   $n: nth($ratio,1); $d: nth($ratio,2);
+//   @return ".span--#{$n}-#{$d}#{m-suffix()}";
+// }
+
+// @function push-n-d-class($ratio, $rest...) {
+//   $n: nth($ratio,1); $d: nth($ratio,2);
+//   @return ".push--#{$n}-#{$d}#{m-suffix()}";
+// }
+
+// @function pull-n-d-class($ratio, $rest...) {
+//   $n: nth($ratio,1); $d: nth($ratio,2);
+//   @return ".push--#{$n}-#{$d}#{m-suffix()}";
+// }
+
+// //  _          _
+// // | |        | |
+// // | |__   ___| |_ __   ___ _ __ ___
+// // | '_ \ / _ \ | '_ \ / _ \ '__/ __|
+// // | | | |  __/ | |_) |  __/ |  \__ \
+// // |_| |_|\___|_| .__/ \___|_|  |___/
+// //              | |
+// //              |_|
+
+// @function join-all($lists...) {
+//   $result: ();
+//   @each $list in $lists {
+//     $result: join($result, $list, list-separator($list));
+//   }
+//   @return $result;
+// }
+
+// @function list-map($list, $func, $sep: list-separator($list)) {
+//   @if length($list) == 0 { @return (); }
+//   $result: ();
+//   @for $i from 1 through length($list) {
+//     $result: append($result, call(get-function($func), nth($list, $i), $i, $list), $sep);
+//   }
+//   @return $result;
+// }
+
+// @function list-filter($list, $func, $sep: list-separator($list)) {
+//   @if length($list) == 0 { @return (); }
+//   $result: ();
+//   @for $i from 1 through length($list) {
+//     $value: nth($list, $i);
+//     $test: call(get-function($func), $value, $i, $list);
+//     $result: if($test, append($result, $value, $sep), $result);
+//   }
+//   @return $result;
+// }
+
+// @function reduction-set($max-d) {
+//   // $reduction-set: ();
+//   // @for $d from 1 through $max-d {
+//   //   @for $n from 1 through $d {
+//   //     $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+//   //     $expansion-set: append(map-get($reduction-set, $reduction) or (), $n $d);
+//   //     $reduction-set: map-merge($reduction-set, ($reduction: $expansion-set));
+//   //   }
+//   // }
+//   // @return $reduction-set;
+//   $reduced-ratios: ();
+//   @for $d from 1 through 12 {
+//     @for $n from 1 through $d {
+//       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+//       // $set: append(map-get($reduced-ratios, $reduction) or (), $n $d);
+//       $set: append(map-get($reduced-ratios, $reduction) or (), $d d);
+//       $reduced-ratios: map-merge($reduced-ratios, ($reduction: $set));
+//     }
+//   }
+//   @return $reduced-ratios;
+// }
+
+// // RATIOS for .col/.cell widths
+
+// // $all-ratios: join-all(map-values($reduced-ratios)...);
+
+// //                                    _      _
+// //                                   (_)    (_)
+// //  ___ _ __   __ _ _ __    _ __ ___  ___  ___ _ __
+// // / __| '_ \ / _` | '_ \  | '_ ` _ \| \ \/ / | '_ \
+// // \__ \ |_) | (_| | | | | | | | | | | |>  <| | | | |
+// // |___/ .__/ \__,_|_| |_| |_| |_| |_|_/_/\_\_|_| |_|
+// //     | |
+// //     |_|
+
+// // $test-spans: (
+// //   s: (w: 4, l: 1, d: 8),
+// //   m: (w: 4, l: 0, d: 10),
+// //   l: (w: 4, l: 0),
+// // );
+
+// @mixin __span($d, $w: $d, $l: null, $r: null) {
+//   width: calc(100% * #{$w} / #{$d});
+//   @if $r { margin-right: calc(100% * #{$r} / #{$d});}
+//   @if $l { margin-left: calc(100% * #{$l} / #{$d});}
+// }
+
+// @mixin m-spans($m-spans) {
+//   @each $m, $span in $m-spans {
+//     @if $m == 'base' {
+//       $span: map-merge((d: m-var('grid-columns')), $span);
+//       @include __span($span...);
+//     } @else {
+//       @include m($m) {
+//         $span: map-merge((d: m-var('grid-columns')), $span);
+//         @include __span($span...);
+//       }
+//     }
+//   }
+// }
+
+// // @mixin m-spans($spans) {
+// //   @each $s, $span in $spans {
+// //     @if $s == 'base' {
+// //       $span: map-merge((d: $curr-d), $span);
+// //       @include __span($span...);
+// //     } @else {
+// //       .medium-#{$s} {
+// //         $span: map-merge((d: $curr-d), $span);
+// //         @include __span($span...);
+// //       }
+// //     }
+// //   }
+// // }
+
+// // @mixin col {
+// //   flex: 1 1 0%;
+// //   min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+// //   background-clip: content-box;
+// //   overflow-wrap: break-word;
+// // }
+
+// //
+// // degrid
+// //
+
+// @mixin degrid($mult: $curr-inner-x, $cell: '*', $span: 1, $left: 0){
+//   $inner-x: inner-x($mult);
+//   $grid-margin: divide($inner-x, -2);
+//   $span-width: add(100%, $inner-x);
+//   $cols: _nth($span, 2) or medium-var('grid-columns') or 4;
+//   $right: $cols - $left - $span;
+//   width: multiply($span-width, $cols);
+//   margin-left: subtract($grid-margin, if($left == 0, 0, multiply($span-width, $left)));
+//   margin-right: subtract($grid-margin, if($right == 0, 0, multiply($span-width, $right)));
+// }
+
+// //
+// // regrid
+// //
+
+// @mixin regrid($mult: $curr-inner-x, $cell: '*', $span: 1, $left: 0){
+//   @include degrid($mult, $cell, $span, $left);
+//   @include grid(null, null);
+//   @if $cell { & > #{$cell} { @include cell($mult); } }
+// }
+
+// //
+// // ungrid
+// //
+
+// @mixin ungrid($mult: $curr-inner-x, $span: 1, $left: 0){
+//   @include degrid($mult, null, $span, $left);
+//   @include grid(null, null);
+//   @include cell-padding($mult);
+// }
+
+// //
+// // GRID
+// //
+// // trying to make it work in both directions https://jsfiddle.net/ys7w1786/
+
+// //
+// // NEW FUNCTIONS
+// //
+// // grid
+// // - cell-span(n,d)
+// // - cell-push(l,r,d)
+
+// // cell
+// // - function cell-column(n, d)
+// // - mixin intra-span(n, d)
+// //   ...subtract columns from 100%
+// //   ...intra-span(4, 6) -> width: 100% - cell-column(2, 6)
+// // - mixin intra-push(l, r, d)
+// //   ...push the width of 1 column; refernce: 100% + inner-x()
+// //   ...intra-push(1, 0, 6) ->
+
+// //
+// // grid inner widths and spans
+// //
+
+// @function column-width($n, $d) {
+//   @return multiply(add(100%, inner-x()), $n/$d);
+// }
+
+// @function intra-push($n, $d) {
+//   @return multiply(add(100%, inner-x()), $n/$d);
+// }
+
+// @function intra-span($n, $d) {
+//   @return subtract(column-width($n, $d), inner-x());
+// }
+
+// @mixin intra-span($n, $d) {
+//   width: subtract(100%, column-width($d - $n, $d));
+// }
+
+// @mixin intra-push($l, $r, $d) {
+//   @if $l { margin-left: column-width($l, $d); }
+//   @if $r { margin-right: column-width($r, $d); }
+// }
+
+// //
+// // third revision
+// //
+
+// @function intra-column($n, $d) {
+//   @return multiply(add(100%, inner-x()), $n/$d);
+// }
+
+// @mixin intra-span($n, $d) {
+//   width: subtract(100%, intra-column($d - $n, $d));
+// }
+
+// @mixin intra-push($l, $r, $d) {
+//   @if $l { margin-left: intra-column($l, $d); }
+//   @if $r { margin-right: intra-column($r, $d); }
+// }
+
+// //
+// // second revision
+// //
+
+// @function inner-push($n, $d) {
+//   @return multiply(add(100%, inner-x()), $n/$d);
+// }
+
+// @function inner-span($n, $d) {
+//   @return subtract(percentage($n/$d), inner-x(($d - $n)/($d - 1)));
+// }
+
+// //
+// // older shit
+// //
+
+// @function grid-calc($m: $curr-m) {
+//   @return add((medium-var('inner-width', $m) or 100%), medium-var('inner-x', $m));
+// }
+
+// @function push-calc($n: 1, $m: $curr-m) {
+//   @return multiply(divide(grid-calc($m), medium-var('grid-columns', $m)), $n);
+// }
+
+// @function span-calc($n: 1, $m: $curr-m) {
+//   @return subtract(push-calc($n, $m), medium-var('inner-x'));
+// }

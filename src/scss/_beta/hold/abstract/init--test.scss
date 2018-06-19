@@ -1,0 +1,114 @@
+@import '../peers';
+
+.hello-world {
+  content: 'is this thing still on?';
+}
+
+$root: (
+  inner-x: 1rem,
+  inner-y: (
+    m: 1rem,
+    l: 2rem,
+  )
+);
+$media: (
+  a: (
+    breakpoint: 20em,
+    inner-x: 2rem,
+    inner-y: (
+      m: 2rem,
+      l: 3rem
+    )
+  ),
+  b: (
+    breakpoint: 30em,
+    // inner-x: 2rem,
+    inner-y: (
+      // m: 2rem,
+      l: 4rem
+    )
+  ),
+  c: (
+    breakpoint: 40em,
+    inner-x: 3rem,
+    inner-y: (
+      // m: 2rem,
+      l: 5rem
+    )
+  ),
+);
+
+@include m-init();
+
+@import '../../index';
+
+.test {
+  out: map-has-z($media, a);
+  out: map-has-z($media, a, inner-y);
+  out: map-has-z($media, a, inner-y, md);
+  out: map-has-z($media, b);
+  out: map-has-z($media, a, z);
+}
+
+/*
+   _       _ _
+  (_)     (_) |
+   _ _ __  _| |_
+  | | '_ \| | __|
+  | | | | | | |_
+  |_|_| |_|_|\__|
+
+*/
+
+// @function inner-y($y: 1, $m: $curr-m) {
+//   @if not $y { @return null; }
+//   // @if is-unitless($y) {
+//   //   $inner-y: m-var('inner-y' 'm', $m);
+//   //   @return $y * $inner-y;
+//   // }
+//   // @return m-var('inner-y' $y, $m);
+//   @return if(is-unitless($y), $y * m-var('inner-y' 'm', $m), m-var('inner-y' $y, $m));
+// }
+
+// @function inner-x($x: 1, $m: $curr-m) {
+//   @if not $x { @return null; }
+//   $inner-x: m-var('inner-x', $m);
+//   @if type-of($inner-x) == 'map' {
+//     @return if(is-unitless($x), $x * map-get($inner-x, 'm'), map-get($inner-x, $x));
+//   }
+//   @return if(is-unitless($x), $x * $inner-x, $inner-x);
+// }
+
+// @function map-get-some($map, $keys...) {
+//   @each $key in $keys {
+//     @if not type-of($map) == 'map' { @return $map; }
+//     $map: map-get($map, $key);
+//   }
+//   @return $map;
+// }
+
+.test {
+  out: inspect(mm(null, null, inner-x));
+  out: inspect(mm(null, null, inner-y));
+  out: inspect(mm(null, null, inner-y m));
+  out: inspect(mm(null, null, inner-y l));
+
+  out: type-of(map-get-z($media, a)) == 'map';
+  out: type-of(map-get-z($media, a, inner-x)) == 'map';
+  out: inspect(m-var(inner-x));
+  out: inner-x(l);
+  out: inner-y(l);
+  out: inspect(m-var(inner-y m));
+  out: inspect(m-var(inner-y l));
+  out: inner-y(m);
+  out: inner-y(2);
+  @include mm-for(inner-y m) {
+    margin-top: inner-y(m);
+  }
+  @include mm() {
+    out: inner-y(l);
+  }
+}
+
+/* #{map-stringify($root)} */
+/* #{map-stringify($media)} */

@@ -1,0 +1,119 @@
+@mixin homework-legacy-stack-setup {
+
+    // @each $y, $inner-y in if(type-of($inner-ys) == 'map', $inner-ys, (m: $inner-ys)) {
+    //   #{mod-class('stack', $y, 'm')} {
+    //     & > * + * { margin-top: $inner-y; }
+
+    //     // @each $f, $font in $fonts {
+    //     //   @each $t, $typo in $typos {
+    //     //     .#{$f}-#{$t} {
+    //     //       @at-root #{insert-parents(null, '>')} {
+
+    //     //         $line: nth($typo, 2);
+    //     //         $trim: divide($line - 1em, 2);
+    //     //         @include adjacent-to('*:not(.no-stack)') {
+    //     //           margin-top: subtract($length, $trim);
+    //     //         }
+    //     //       }
+    //     //     }
+    //     //   }
+    //     // }
+
+    //   }
+    // }
+
+    // @include mm-for('inner-y') {
+    //   $inner-ys: m-var('inner-y');
+    //   @if $inner-ys {
+    //     @each $y, $inner-y in if(type-of($inner-ys) == 'map', $inner-ys, (m: $inner-ys)) {
+    //       #{mod-class('stack', $y, 'm')} {
+    //         // & > * + * { margin-top: $inner-y; }
+
+    //         // @each $f, $font in $fonts {
+    //         //   @each $t, $typo in $typos {
+    //         //     .#{$f}-#{$t} {
+    //         //       @at-root #{insert-parents(null, '>')} {
+
+    //         //         $line: nth($typo, 2);
+    //         //         $trim: divide($line - 1em, 2);
+    //         //         @include adjacent-to('*:not(.no-stack)') {
+    //         //           margin-top: subtract($length, $trim);
+    //         //         }
+    //         //       }
+    //         //     }
+    //         //   }
+    //         // }
+
+    //       }
+    //     }
+    //   }
+    // }
+
+  //   @include mm-for('inner-y') {
+  //     $inner-y: m-var('inner-y');
+  //     @if $inner-y {
+  //       @each $y, $inner-y in if(type-of($inner-y) == 'map', $inner-y, (m: $inner-y)) {
+  //         #{mod-class('stack', $y, 'm')} {
+  //           // & > * + * { margin-top: $inner-y; }
+  //           & > *:not(.unstack) + * { margin-top: $inner-y; }
+
+  //           // @each $f, $font in $fonts {
+  //           //   @each $t, $typo in $typos {
+  //           //     .#{$f}-#{$t} {
+  //           //       @at-root #{insert-parents(null, '>')} {
+
+  //           //         $line: nth($typo, 2);
+  //           //         $trim: divide($line - 1em, 2);
+  //           //         @include adjacent-to('*:not(.no-stack)') {
+  //           //           margin-top: subtract($length, $trim);
+  //           //         }
+  //           //       }
+  //           //     }
+  //           //   }
+  //           // }
+
+  //         }
+  //       }
+  //     }
+  //   }
+
+  #{base-class('chain')} {
+  display: flex;
+
+  // padding-top: 0.1px;
+  // padding-bottom: 0.1px;
+  & > * {
+    flex: 0 0 auto;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  }
+
+  @include mm-for('inner-x') {
+  $inner-x: m-var('inner-x');
+  @if $inner-x {
+    @each $x, $inner-x in if(type-of($inner-x) == 'map', $inner-x, (m: $inner-x)) {
+      #{mod-class('chain', $x, 'm')} {
+        & > *:not(.unchain) + * { margin-left: $inner-x; }
+
+        // @each $f, $font in $fonts {
+        //   @each $t, $typo in $typos {
+        //     .#{$f}-#{$t} {
+        //       @at-root #{insert-parents(null, '>')} {
+
+        //         $line: nth($typo, 2);
+        //         $trim: divide($line - 1em, 2);
+        //         @include adjacent-to('*:not(.no-chain)') {
+        //           margin-top: subtract($length, $trim);
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+
+      }
+    }
+  }
+  }
+}

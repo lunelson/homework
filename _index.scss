@@ -5,17 +5,7 @@
 // | | | | (_) | | | | | |  __/\ V  V / (_) | |  |   <
 // |_| |_|\___/|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
 
-
-// defaults
-@import "sass/defaults";
-
-// functions
-@import "sass/functions/all";
-
-// mixins
-
-// resets
-@import "sass/resets/all";
-
-// setups
-@import "sass/setups/all";
+@import "src/scss/utils/all";
+@import "src/scss/reset/all";
+@import "src/scss/setup/all";
+@import "src/scss/debug/all";

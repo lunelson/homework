@@ -1,0 +1,115 @@
+//   __            _
+//  / _|          | |
+// | |_ ___  _ __ | |_
+// |  _/ _ \| '_ \| __|
+// | || (_) | | | | |_
+// |_| \___/|_| |_|\__|
+
+// TODO
+// - handle non-px values in font-mods
+
+$fonts: () !default;
+
+$font-default: (
+  family: (arial, sans-serif),
+  spacing-max: 0,
+  spacing-end: 50,
+  trim-x: 0,
+  trim-capline: 0,
+  trim-baseline: 0,
+);
+
+$fonts-defaults: (
+  sans: ( family: (arial, sans-serif) ),
+  serif: ( family: (georgia, serif) ),
+  mono: ( family: (monaco, consolas, monospace) )
+);
+
+@mixin homework-font-setup($modern: true) {
+
+  // merge defaults
+  $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
+  @each $f, $font in $fonts {
+    $font: map-merge($font-default, $font);
+    $fonts: map-merge($fonts, ($f: $font)) !global;
+  }
+
+  @if $modern {
+
+    :root {
+      --font-family: #{map-get-z($fonts, nth(map-keys($fonts), 1), 'family')};
+      --line-xtra: calc((var(--line-height) - 1) * 1em);
+      * {
+        font-family: var(--font-family);
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+      }
+    }
+
+    #{base-class('f', false)} {
+      letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
+      $is-trim: selector-parse('&.trim');
+      $in-stack: insert-parents(base-class('stack'), '>');
+      @at-root #{selector-parse('&.trim')},
+      #{selector-insert(#{base-class('stack')}, '>')} {
+        margin-right: var(--trim-x);
+        margin-left: var(--trim-x);
+        margin-top: calc(0px - var(--trim-top));
+        margin-bottom: calc(0px - var(--trim-bottom));
+      }
+      @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
+        margin-top: calc(var(--stack-gap) - var(--trim-top));
+      }
+      @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('f', false)}), '+')} {
+        margin-top: calc(var(--stack-gap) - var(--trim-top));
+      }
+    }
+
+    // $base-classes: list-map(map-keys($fonts), 'base-class', 'comma');
+    // #{$base-classes} {
+    // [class^="f-"], [class*=" f-"] {
+    //   letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
+    //   margin-right: var(--trim-x);
+    //   margin-left: var(--trim-x);
+    //   $is-trim: selector-parse('&.trim');
+    //   $in-stack: insert-parents(base-class('stack'), '>');
+    //   @at-root #{$is-trim}, #{$in-stack} {
+    //     margin-top: calc(0px - var(--trim-top));
+    //     margin-bottom: calc(0px - var(--trim-bottom));
+    //   }
+    //   $adj-in-stack: insert-parents(base-class('stack'), '> * +');
+    //   @at-root #{$adj-in-stack} {
+    //     margin-top: calc(var(--stack-gap) - var(--trim-top));
+    //   }
+    //   // increase trim-top value, if adjacent to another font
+    //   // $adj-font-in-stack: insert-parents(base-class('stack'), '> * +');
+    //   // @at-root #{$adj-font-in-stack} {
+    //   //   --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
+    //   // }
+    // }
+
+    @each $f, $font in $fonts {
+      #{base-class('f-#{$f}')} {
+        --font-family: #{map-get($font, 'family')};
+        --spacing-max: #{map-get($font, 'spacing-max')};
+        --spacing-end: #{map-get($font, 'spacing-end')};
+        --trim-x: #{map-get($font, 'trim-x')};
+        --trim-capline: #{map-get($font, 'trim-capline') * 1em};
+        --trim-baseline: #{map-get($font, 'trim-baseline') * 1em};
+        --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
+        --trim-bottom: var(--line-xtra) / 2 + var(--trim-baseline);
+      }
+    }
+
+    @each $f, $mod in map-get($root, 'font-mods') or () {
+      @each $s, $def in $mod {
+        .f-#{$f}-#{$s} {
+          --font-size: var(--font-size--#{$f}--#{$s});
+          --line-height: var(--line-height--#{$f}--#{$s});
+        }
+      }
+    }
+  } @else {
+    // @include homework-legacy-font-setup;
+  }
+}

@@ -1,0 +1,54 @@
+//
+// value getters, base
+//
+
+@function m($m: $curr-m) {
+  @if not $m { @return $root; }
+  $medium: map-get($media, $m);
+  @if $medium { @return $medium; }
+  @error 'medium '#{$m}' not found in $media';
+}
+
+@function m-orig($m: $curr-m) {
+  @if not $m { @return $root-orig; }
+  $medium: map-get($media-orig, $m);
+  @if $medium { @return $medium; }
+  @error 'original medium '#{$m}' not found in $media';
+}
+
+@function m-var($key, $m: $curr-m) {
+  $medium: m($m);
+  @return map-get-z($medium, $key...);
+}
+
+@function m-orig-var($key, $m: $curr-m) {
+  @return map-get-z(m-orig($m), $key...);
+}
+
+@function m-var-orig($args...) { @return m-orig-var($args...);}
+
+@mixin m($min, $max: null) {
+  $prev-m: $curr-m;
+  $curr-m: $min !global;
+  @if not $min and not $max { @content; }
+  @else { @media #{__query-string($min, $max)} { @content } }
+  $curr-m: $prev-m !global;
+}
+
+@mixin mm($args...) {
+  $m-pairs: mm($args...);
+  @if length($m-pairs) == 0 { @content; }
+  @else {
+    @each $pair in $m-pairs {
+      @include m($pair...) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin mm-for($props...) {
+  @include mm(null,null,$props...) {
+    @content;
+  }
+}

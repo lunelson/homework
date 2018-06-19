@@ -1,0 +1,29 @@
+block defs
+  -
+    let title = 'Novamondo'
+    let layout = 'default';
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    link(href="/app/app.css", rel="stylesheet", type="text/css")
+
+    title= title
+    block head
+
+  body.debug(class=`layout-${layout}`)
+
+    //- DEBUG
+    //- .debug
+      pre current locale: #{locale}
+      pre= filename
+      pre= dirname
+      pre= pathname
+      pre= basename
+
+    //- CONTENT
+    block body
+    script(src="/app/app.js", type="text/javascript")
