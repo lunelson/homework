@@ -37,25 +37,38 @@ $fonts-defaults: (
   @if $modern {
 
     :root {
-      --font-family: #{map-get-z($fonts, nth(map-keys($fonts), 1), 'family')};
-      --line-xtra: calc((var(--line-height) - 1) * 1em);
-      * {
-        font-family: var(--font-family);
-        font-size: var(--font-size);
-        line-height: var(--line-height);
+      @each $f, $font in $fonts {
+        --font-family-#{$f}: #{map-get($font, 'family')};
+        --letter-spacing-#{$f}: calc(#{map-get($font, 'spacing-max')} * 1px - #{map-get($font, 'spacing-max')} / #{map-get($font, 'spacing-end')} * 1em);
+        --trim-top-#{$f}: calc((var(--line-height) - 1) * 1em / 2 + #{map-get($font, 'trim-capline') * 1em});
+        --trim-bottom-#{$f}: calc((var(--line-height) - 1) * 1em / 2 + #{map-get($font, 'trim-baseline') * 1em});
+        --trim-x-#{$f}: #{map-get($font, 'trim-x')};
+      }
+    }
+
+    $ff: nth(map-keys($fonts), 1);
+
+    body {
+      font-family: var(--font-family-#{$ff});
+      @each $s, $def in map-get-z($root, 'font-mods', $ff) or () {
+        --font-size-#{$s}: var(--font-size-#{$ff}-#{$s});
+        --line-height-#{$s}: var(--line-height-#{$ff}-#{$s});
       }
     }
 
     #{base-class('f', false)} {
-      letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
-      $is-trim: selector-parse('&.trim');
-      $in-stack: insert-parents(base-class('stack'), '>');
-      @at-root #{selector-parse('&.trim')},
-      #{selector-insert(#{base-class('stack')}, '>')} {
-        margin-right: var(--trim-x);
-        margin-left: var(--trim-x);
-        margin-top: calc(0px - var(--trim-top));
-        margin-bottom: calc(0px - var(--trim-bottom));
+      font-family: var(--font-family);
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+      letter-spacing: var(--letter-spacing);
+
+      @at-root #{selector-insert('.trim', '>')},
+      #{selector-insert(base-class('stack'), '>')} {
+        // margin-right: var(--trim-x);
+        // margin-left: var(--trim-x);
+        // margin-top: calc(0px - var(--trim-top));
+        // margin-bottom: calc(0px - var(--trim-bottom));
+        margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
       }
       @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
         margin-top: calc(var(--stack-gap) - var(--trim-top));
@@ -65,50 +78,40 @@ $fonts-defaults: (
       }
     }
 
-    // $base-classes: list-map(map-keys($fonts), 'base-class', 'comma');
-    // #{$base-classes} {
-    // [class^="f-"], [class*=" f-"] {
-    //   letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
-    //   margin-right: var(--trim-x);
-    //   margin-left: var(--trim-x);
-    //   $is-trim: selector-parse('&.trim');
-    //   $in-stack: insert-parents(base-class('stack'), '>');
-    //   @at-root #{$is-trim}, #{$in-stack} {
-    //     margin-top: calc(0px - var(--trim-top));
-    //     margin-bottom: calc(0px - var(--trim-bottom));
-    //   }
-    //   $adj-in-stack: insert-parents(base-class('stack'), '> * +');
-    //   @at-root #{$adj-in-stack} {
-    //     margin-top: calc(var(--stack-gap) - var(--trim-top));
-    //   }
-    //   // increase trim-top value, if adjacent to another font
-    //   // $adj-font-in-stack: insert-parents(base-class('stack'), '> * +');
-    //   // @at-root #{$adj-font-in-stack} {
-    //   //   --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
-    //   // }
-    // }
-
     @each $f, $font in $fonts {
+      // :root {
+      //   --font-family-#{$f}: #{map-get($font, 'family')};
+      //   --letter-spacing-#{$f}: calc(#{map-get($font, 'spacing-max')} * 1px - #{map-get($font, 'spacing-max')} / #{map-get($font, 'spacing-end')} * 1em);
+      //   --trim-top-#{$f}: calc((var(--line-height) - 1) * 1em / 2 + #{map-get($font, 'trim-capline') * 1em});
+      //   --trim-bottom-#{$f}: calc((var(--line-height) - 1) * 1em / 2 + #{map-get($font, 'trim-baseline') * 1em});
+      //   --trim-x-#{$f}: #{map-get($font, 'trim-x')};
+      // }
       #{base-class('f-#{$f}')} {
-        --font-family: #{map-get($font, 'family')};
-        --spacing-max: #{map-get($font, 'spacing-max')};
-        --spacing-end: #{map-get($font, 'spacing-end')};
-        --trim-x: #{map-get($font, 'trim-x')};
-        --trim-capline: #{map-get($font, 'trim-capline') * 1em};
-        --trim-baseline: #{map-get($font, 'trim-baseline') * 1em};
-        --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
-        --trim-bottom: var(--line-xtra) / 2 + var(--trim-baseline);
+        --font-family: var(--font-family-#{$f});
+        --letter-spacing: var(--letter-spacing-#{$f});
+        --trim-top: var(--trim-top-#{$f});
+        --trim-bottom: var(--trim-bottom-#{$f});
+        --trim-x: var(--trim-x-#{$f});
+        @each $s, $def in map-get-z($root, 'font-mods', $f) or () {
+          --font-size-#{$s}: var(--font-size-#{$f}-#{$s});
+          --line-height-#{$s}: var(--line-height-#{$f}-#{$s});
+        }
       }
     }
 
     @each $f, $mod in map-get($root, 'font-mods') or () {
-      @each $s, $def in $mod {
+      @each $s in map-keys($mod) {
+        .f-#{$s} {
+          --font-size: var(--font-size-#{$s});
+          --line-height: var(--line-height-#{$s});
+        }
         .f-#{$f}-#{$s} {
-          --font-size: var(--font-size--#{$f}--#{$s});
-          --line-height: var(--line-height--#{$f}--#{$s});
+          --font-size: var(--font-size-#{$f}-#{$s});
+          --line-height: var(--line-height-#{$f}-#{$s});
         }
       }
     }
+
   } @else {
     // @include homework-legacy-font-setup;
   }

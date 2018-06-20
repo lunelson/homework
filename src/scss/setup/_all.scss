@@ -12,10 +12,11 @@
 @import 'frame';
 @import 'stack';
 @import 'font';
-@import 'fgrid';
+@import 'grid';
 @import 'atomic';
 @import 'helper';
 @import 'theme';
+@import 'debug';
 
 $done-homework-setup: false;
 
@@ -32,10 +33,11 @@ $done-homework-setup: false;
       'frame',
       'stack',
       'font',
-      'fgrid',
+      'grid',
       'atomic',
       'helper',
       'theme',
+      'debug',
     );
   }
 
@@ -44,10 +46,11 @@ $done-homework-setup: false;
   @if index($setups, 'frame') { @include homework-frame-setup($modern); }
   @if index($setups, 'stack') { @include homework-stack-setup($modern); }
   @if index($setups, 'font') { @include homework-font-setup($modern); }
-  @if index($setups, 'fgrid') { @include homework-fgrid-setup($modern); }
+  @if index($setups, 'grid') { @include homework-grid-setup($modern); }
   @if index($setups, 'atomic') { @include homework-atomic-setup($modern); }
   @if index($setups, 'helper') { @include homework-helper-setup($modern); }
   @if index($setups, 'theme') { @include homework-theme-setup($modern); }
+  @if index($setups, 'debug') { @include homework-debug-setup($modern); }
 
   // set $done-homework to true
   $done-homework-setup: true !global;

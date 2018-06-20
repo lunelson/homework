@@ -3,7 +3,6 @@
 // | (_| (_) | | |  __/
 //  \___\___/|_|  \___|
 
-
 $root: () !default;
 $media: () !default;
 
@@ -51,14 +50,15 @@ $media-defaults: (
       line-height: var(--line-height);
     }
     :root {
+      // shallow outputs
       @each $key, $val in $root {
         @if not index('list' 'map', type-of($val)) {
           --#{$key}: #{$val};
         }
       }
       --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-
-      @include --output-mods($root);
+      // deep outputs
+      @include __mod-properties($root);
     }
 
     $curr-medium: $root;
@@ -78,7 +78,7 @@ $media-defaults: (
               --#{$key}: #{$val};
             }
           }
-          @include --output-mods($medium);
+          @include __mod-properties($medium);
         }
       }
 

@@ -10,12 +10,12 @@
 @function max-columns() {
   $column-counts: ();
   @each $m, $medium in $media {
-    $column-counts: append($column-counts, map-get-z($media, $m, grid-columns));
+    $column-counts: append($column-counts, map-get-z($media, $m, 'grid-columns'));
   }
   @return max($column-counts...);
 }
 
-@mixin homework-fgrid-setup($modern: true) {
+@mixin homework-grid-setup($modern: true) {
 
   $max-columns: if(length($media) > 0, max-columns(), map-get($root, 'grid-columns'));
 
@@ -24,12 +24,12 @@
     :root {
       --row-gap: var(--inner-y);
       --column-gap: var(--inner-x);
-      --column-width: calc((var(--outer-width) + var(--column-gap)) / var(--grid-columns));
+      // --column-width: calc((var(--outer-width) + var(--column-gap)) / var(--grid-columns));
       --span-n: var(--grid-columns);
       --span-d: var(--grid-columns);
     }
 
-    #{base-class('fgrid')} {
+    #{base-class('flow')} {
       margin-top: calc(var(--row-gap) / -2);
       margin-bottom: calc(var(--row-gap) / -2);
       & > * {
@@ -38,12 +38,11 @@
       }
     }
 
-    // allow stack objects as direct descendant of fgrid !! (workaround libsass bug)
-    .fgrid > .stack, .fgrid > [class^="stack-"], .fgrid > [class*=" stack-"], [class^="fgrid-"] > .stack, [class^="fgrid-"] > [class^="stack-"], [class^="fgrid-"] > [class*=" stack-"], [class*=" fgrid-"] > .stack, [class*=" fgrid-"] > [class^="stack-"], [class*=" fgrid-"] > [class*=" stack-"] {
+    // allow stack objects as direct descendant of flow !! (workaround libsass bug)
+    .flow > .stack, .flow > [class^="stack-"], .flow > [class*=" stack-"], [class^="flow-"] > .stack, [class^="flow-"] > [class^="stack-"], [class^="flow-"] > [class*=" stack-"], [class*=" flow-"] > .stack, [class*=" flow-"] > [class^="stack-"], [class*=" flow-"] > [class*=" stack-"] {
       padding-top: calc(var(--row-gap) / 2);
       padding-bottom: calc(var(--row-gap) / 2);
     }
-
 
     #{base-class('row')} {
       & > * {
@@ -53,7 +52,7 @@
     }
 
     #{base-class('row')},
-    #{base-class('fgrid')} {
+    #{base-class('flow')} {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -75,16 +74,21 @@
     }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or () {
-      .fgrid-#{$y} { --row-gap: var(--inner-y--#{$y}); }
+      .flow-#{$y} { --row-gap: var(--inner-y-#{$y}); }
     }
     @each $x, $mult in map-get($root, 'inner-x-mods') or () {
       .row-#{$x},
-      .fgrid-x-#{$x} { --column-gap: var(--inner-x--#{$x}); }
+      .flow-x-#{$x} { --column-gap: var(--inner-x-#{$x}); }
     }
 
     #{base-class('span')} {
       flex: 0 0 auto;
       width: calc(100% * var(--span-n) / var(--span-d));
+    }
+
+    #{base-class('push')},
+    #{base-class('pull')} {
+      margin-left: calc(100% * var(--push-n, 0) / var(--span-d));
     }
 
     @each $m in join((null), map-keys($media)) {
@@ -94,8 +98,12 @@
 
           .span-#{$n}#{m-suffix()} {
             --span-n: #{$n};
-            & > * { --span-d: #{$n}; }
+            & > * {
+              --span-d: #{$n};
+            }
           }
+          .push-#{$n}#{m-suffix()} { --push-n: #{$n}; }
+          .pull-#{$n}#{m-suffix()} { --push-n: -#{$n}; }
         }
 
       }

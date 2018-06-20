@@ -2,19 +2,19 @@
 // init helpers
 //
 
-@mixin --output-mods($medium) {
+@mixin __mod-properties($medium) {
   @each $y, $mod in map-get($medium, 'inner-y-mods') or () {
-    @if unitless($mod) { --inner-y--#{$y}: calc(var(--inner-y) * #{$mod}); }
-    @else { --inner-y--#{$y}: #{$mod}; }
+    @if unitless($mod) { --inner-y-#{$y}: calc(var(--inner-y) * #{$mod}); }
+    @else { --inner-y-#{$y}: #{$mod}; }
   }
   @each $x, $mod in map-get($medium, 'inner-x-mods') or () {
-    @if unitless($mod) { --inner-x--#{$x}: calc(var(--inner-x) * #{$mod}); }
-    @else { --inner-x--#{$x}: #{$mod}; }
+    @if unitless($mod) { --inner-x-#{$x}: calc(var(--inner-x) * #{$mod}); }
+    @else { --inner-x-#{$x}: #{$mod}; }
   }
   @each $f, $mod in map-get($medium, 'font-mods') or () {
     @each $s, $def in $mod {
-      --font-size--#{$f}--#{$s}: #{nth($def, 1) / 16px * 1rem};
-      --line-height--#{$f}--#{$s}: #{nth($def, 2)};
+      --font-size-#{$f}-#{$s}: #{nth($def, 1) / 16px * 1rem};
+      --line-height-#{$f}-#{$s}: #{nth($def, 2)};
     }
   }
 }
@@ -44,7 +44,6 @@
 //
 // mm helpers
 //
-
 
 @function --mm-filter-orig($media-keys, $props...) {
   @if length($props) < 1 { @return (); }
@@ -88,7 +87,6 @@
   $result: --mm-filter-orig(map-keys($media), $props...);
   @return if(length($result) > 0, join(join(null, $result), null), ());
 }
-
 
 @function mm($lo: null, $hi: null, $props...) {
   $m-list: --mm-slice($lo, $hi);

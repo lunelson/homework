@@ -15,17 +15,17 @@ html {
   --grid-columns: 12;
   --outer-width: 100%;
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-  --inner-y--s: 1rem;
-  --inner-y--m: 2rem;
-  --inner-x--m: 1rem;
-  --font-size--sans--s: 0.875rem;
-  --line-height--sans--s: 1.4;
-  --font-size--sans--m: 1rem;
-  --line-height--sans--m: 1.4;
-  --font-size--serif--s: 1rem;
-  --line-height--serif--s: 1.4;
-  --font-size--serif--m: 1.125rem;
-  --line-height--serif--m: 1.4;
+  --inner-y-s: 1rem;
+  --inner-y-m: 2rem;
+  --inner-x-m: 1rem;
+  --font-size-sans-s: 0.875rem;
+  --line-height-sans-s: 1.4;
+  --font-size-sans-m: 1rem;
+  --line-height-sans-m: 1.4;
+  --font-size-serif-s: 1rem;
+  --line-height-serif-s: 1.4;
+  --font-size-serif-m: 1.125rem;
+  --line-height-serif-m: 1.4;
 }
 
 @media screen and (min-width: 20em) {
@@ -40,14 +40,14 @@ html {
     --breakpoint: 30em;
     --inner-x: 3rem;
     --outer-width: 30rem;
-    --font-size--sans--s: 1.25rem;
-    --line-height--sans--s: 1.4;
-    --font-size--sans--m: 1.5rem;
-    --line-height--sans--m: 1.4;
-    --font-size--serif--s: 1.375rem;
-    --line-height--serif--s: 1.4;
-    --font-size--serif--m: 1.625rem;
-    --line-height--serif--m: 1.4;
+    --font-size-sans-s: 1.25rem;
+    --line-height-sans-s: 1.4;
+    --font-size-sans-m: 1.5rem;
+    --line-height-sans-m: 1.4;
+    --font-size-serif-s: 1.375rem;
+    --line-height-serif-s: 1.4;
+    --font-size-serif-m: 1.625rem;
+    --line-height-serif-m: 1.4;
   }
 }
 
@@ -59,26 +59,36 @@ html {
 }
 
 :root {
-  --font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif;
-  --line-xtra: calc((var(--line-height) - 1) * 1em);
+  --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif;
+  --letter-spacing-sans: calc(0 * 1px - 0 / 50 * 1em);
+  --trim-top-sans: calc((var(--line-height) - 1) * 1em / 2 + 0em);
+  --trim-bottom-sans: calc((var(--line-height) - 1) * 1em / 2 + 0em);
+  --trim-x-sans: 0;
+  --font-family-serif: serif;
+  --letter-spacing-serif: calc(0 * 1px - 0 / 50 * 1em);
+  --trim-top-serif: calc((var(--line-height) - 1) * 1em / 2 + 0em);
+  --trim-bottom-serif: calc((var(--line-height) - 1) * 1em / 2 + 0em);
+  --trim-x-serif: 0;
 }
 
-:root * {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+body {
+  font-family: var(--font-family-sans);
+  --font-size-s: var(--font-size-sans-s);
+  --line-height-s: var(--line-height-sans-s);
+  --font-size-m: var(--font-size-sans-m);
+  --line-height-m: var(--line-height-sans-m);
 }
 
 [class^="f-"], [class*=" f-"] {
-  letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
 }
 
-[class^="f-"].trim,
-.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"], [class*=" f-"].trim {
-  margin-right: var(--trim-x);
-  margin-left: var(--trim-x);
-  margin-top: calc(0px - var(--trim-top));
-  margin-bottom: calc(0px - var(--trim-bottom));
+.trim > [class^="f-"], .trim > [class*=" f-"],
+.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"] {
+  margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom));
 }
 
 .stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"] {
@@ -90,43 +100,65 @@ html {
 }
 
 .f-sans, [class^="f-sans-"], [class*=" f-sans-"] {
-  --font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif;
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
-  --trim-capline: 0em;
-  --trim-baseline: 0em;
-  --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
-  --trim-bottom: var(--line-xtra) / 2 + var(--trim-baseline);
+  --font-family: var(--font-family-sans);
+  --letter-spacing: var(--letter-spacing-sans);
+  --trim-top: var(--trim-top-sans);
+  --trim-bottom: var(--trim-bottom-sans);
+  --trim-x: var(--trim-x-sans);
+  --font-size-s: var(--font-size-sans-s);
+  --line-height-s: var(--line-height-sans-s);
+  --font-size-m: var(--font-size-sans-m);
+  --line-height-m: var(--line-height-sans-m);
 }
 
 .f-serif, [class^="f-serif-"], [class*=" f-serif-"] {
-  --font-family: serif;
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
-  --trim-capline: 0em;
-  --trim-baseline: 0em;
-  --trim-top: var(--line-xtra) / 2 + var(--trim-capline);
-  --trim-bottom: var(--line-xtra) / 2 + var(--trim-baseline);
+  --font-family: var(--font-family-serif);
+  --letter-spacing: var(--letter-spacing-serif);
+  --trim-top: var(--trim-top-serif);
+  --trim-bottom: var(--trim-bottom-serif);
+  --trim-x: var(--trim-x-serif);
+  --font-size-s: var(--font-size-serif-s);
+  --line-height-s: var(--line-height-serif-s);
+  --font-size-m: var(--font-size-serif-m);
+  --line-height-m: var(--line-height-serif-m);
+}
+
+.f-s {
+  --font-size: var(--font-size-s);
+  --line-height: var(--line-height-s);
 }
 
 .f-sans-s {
-  --font-size: var(--font-size--sans--s);
-  --line-height: var(--line-height--sans--s);
+  --font-size: var(--font-size-sans-s);
+  --line-height: var(--line-height-sans-s);
+}
+
+.f-m {
+  --font-size: var(--font-size-m);
+  --line-height: var(--line-height-m);
 }
 
 .f-sans-m {
-  --font-size: var(--font-size--sans--m);
-  --line-height: var(--line-height--sans--m);
+  --font-size: var(--font-size-sans-m);
+  --line-height: var(--line-height-sans-m);
+}
+
+.f-s {
+  --font-size: var(--font-size-s);
+  --line-height: var(--line-height-s);
 }
 
 .f-serif-s {
-  --font-size: var(--font-size--serif--s);
-  --line-height: var(--line-height--serif--s);
+  --font-size: var(--font-size-serif-s);
+  --line-height: var(--line-height-serif-s);
+}
+
+.f-m {
+  --font-size: var(--font-size-m);
+  --line-height: var(--line-height-m);
 }
 
 .f-serif-m {
-  --font-size: var(--font-size--serif--m);
-  --line-height: var(--line-height--serif--m);
+  --font-size: var(--font-size-serif-m);
+  --line-height: var(--line-height-serif-m);
 }

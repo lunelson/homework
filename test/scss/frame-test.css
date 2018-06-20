@@ -15,10 +15,10 @@ html {
   --grid-columns: 12;
   --outer-width: 100%;
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-  --inner-y--m: 1rem;
-  --inner-x--m: 1rem;
-  --font-size--sans--m: 1rem;
-  --line-height--sans--m: 1.25;
+  --inner-y-m: 1rem;
+  --inner-x-m: 1rem;
+  --font-size-sans-m: 1rem;
+  --line-height-sans-m: 1.25;
 }
 
 @media screen and (min-width: 20em) {
