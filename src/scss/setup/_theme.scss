@@ -34,8 +34,9 @@ $colors: (
   $rlin: de-gamma(red($c)/255);
   $glin: de-gamma(green($c)/255);
   $blin: de-gamma(blue($c)/255);
-  $yiq: re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
-  @return map-get($colors, if($yiq >= 50, 'dark', 'lite'));
+  // $yiq: re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin);
+  $yiq: 0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin;
+  @return map-get($colors, if($yiq >= 0.5, 'dark', 'lite'));
 }
 
 @mixin homework-theme-setup($modern: true, $lite: true) {
@@ -45,50 +46,59 @@ $colors: (
     lite: #eee,
   ), $colors) !global;
 
+  :root {
+    --color: #{map-get($colors, if($lite, 'dark', 'lite'))};
+    --bg-color: #{map-get($colors, if($lite, 'lite', 'dark'))};
+  }
+
   body {
-    color: map-get($colors, if($lite, 'dark', 'lite'));
-    background-color: map-get($colors, if($lite, 'lite', 'dark'));
+    color: var(--color);
+    background-color: var(--bg-color);
   }
 
   @if $modern {
 
-    #{base-class('color', false)} { color: var(--key-color); }
-    #{base-class('bg', false)} { background-color: var(--bg-key-color); }
+    #{base-class('color', false)} { color: var(--color); }
+    #{base-class('bg', false)} { background-color: var(--bg-color); }
 
     #{base-class('color-yiq')} { color: var(--yiq-color); }
     #{base-class('bg-yiq')} { background-color: var(--bg-yiq-color); }
 
     @each $c, $color in $colors {
+      :root {
+        --color-#{$c}: #{$color};
+        --yiq-color-#{$c}: #{yiq($color)};
+      }
       .theme-#{$c} {
-        --theme-key: #{$color};
-        --theme-yiq: #{yiq($color)};
+        --theme-color: var(--color-#{$c});
+        --theme-yiq-color: var(--yiq-color-#{$c});
       }
       .color-#{$c} {
-        --key-color: #{$color};
-        --bg-yiq-color: #{yiq($color)};
+        --color: var(--color-#{$c});
+        --bg-yiq-color: var(--yiq-color-#{$c});
       }
       .bg-#{$c} {
-        --bg-key-color: #{$color};
-        --yiq-color: #{yiq($color)};
+        --bg-color: var(--color-#{$c});
+        --yiq-color: var(--yiq-color-#{$c});
       }
     }
 
     .color-key {
-      --key-color: var(--theme-key);
-      --bg-yiq-color: var(--theme-yiq);
+      --color: var(--theme-color);
+      --bg-yiq-color: var(--theme-yiq-color);
     }
     .bg-key {
-      --bg-key-color: var(--theme-key);
-      --yiq-color: var(--theme-yiq);
+      --bg-color: var(--theme-color);
+      --yiq-color: var(--theme-yiq-color);
     }
 
     @each $c, $color in $colors {
-      .color-yiq-#{$c} { --yiq-color: #{yiq($color)}; }
-      .bg-yiq-#{$c} { --bg-yiq-color: #{yiq($color)}; }
+      .color-yiq-#{$c} { --yiq-color: var(--yiq-color-#{$c}); }
+      .bg-yiq-#{$c} { --bg-yiq-color: var(--yiq-color-#{$c}); }
     }
 
-    .color-yiq-key { --yiq-color: var(--theme-yiq); }
-    .bg-yiq-key { --bg-yiq-color: var(--theme-yiq); }
+    .color-yiq-key { --yiq-color: var(--theme-yiq-color); }
+    .bg-yiq-key { --bg-yiq-color: var(--theme-yiq-color); }
 
   } @else {
     @include homework-legacy-theme-setup;

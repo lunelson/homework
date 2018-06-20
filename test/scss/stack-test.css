@@ -70,15 +70,15 @@ html {
 }
 
 .stack-s > * {
-  --stack-gap: var(--inner-y--s);
+  --stack-gap: var(--inner-y-s);
 }
 
 .stack-m > * {
-  --stack-gap: var(--inner-y--m);
+  --stack-gap: var(--inner-y-m);
 }
 
 .stack-l > * {
-  --stack-gap: var(--inner-y--l);
+  --stack-gap: var(--inner-y-l);
 }
 
 .chain, [class^="chain-"], [class*=" chain-"] {
@@ -99,9 +99,9 @@ html {
 }
 
 .chain-s > * {
-  --stack-gap: var(--inner-x--s);
+  --stack-gap: var(--inner-x-s);
 }
 
 .chain-form > * {
-  --stack-gap: var(--inner-x--form);
+  --stack-gap: var(--inner-x-form);
 }

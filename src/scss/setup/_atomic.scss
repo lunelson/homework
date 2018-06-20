@@ -59,20 +59,20 @@
         $fix: m-suffix();
 
         @each $y, $mod in map-get($root, 'inner-y-mods') or () {
-          .py-#{$y}#{$fix}, .pt-#{$y}#{$fix} { padding-top: var(--inner-y--#{$y}); }
-          .py-#{$y}#{$fix}, .pb-#{$y}#{$fix} { padding-bottom: var(--inner-y--#{$y}); }
-          .my-#{$y}#{$fix}, .mt-#{$y}#{$fix} { margin-top: var(--inner-y--#{$y}); }
-          .my-#{$y}#{$fix}, .mb-#{$y}#{$fix} { margin-bottom: var(--inner-y--#{$y}); }
-          .my-neg-#{$y}#{$fix}, .mt-neg-#{$y}#{$fix} { margin-top: calc(-1 * var(--inner-y--#{$y})); }
-          .my-neg-#{$y}#{$fix}, .mb-neg-#{$y}#{$fix} { margin-bottom: calc(-1 * var(--inner-y--#{$y})); }
+          .py-#{$y}#{$fix}, .pt-#{$y}#{$fix} { padding-top: var(--inner-y-#{$y}); }
+          .py-#{$y}#{$fix}, .pb-#{$y}#{$fix} { padding-bottom: var(--inner-y-#{$y}); }
+          .my-#{$y}#{$fix}, .mt-#{$y}#{$fix} { margin-top: var(--inner-y-#{$y}); }
+          .my-#{$y}#{$fix}, .mb-#{$y}#{$fix} { margin-bottom: var(--inner-y-#{$y}); }
+          .my-neg-#{$y}#{$fix}, .mt-neg-#{$y}#{$fix} { margin-top: calc(-1 * var(--inner-y-#{$y})); }
+          .my-neg-#{$y}#{$fix}, .mb-neg-#{$y}#{$fix} { margin-bottom: calc(-1 * var(--inner-y-#{$y})); }
         }
         @each $x, $mod in map-get($root, 'inner-x-mods') or () {
-          .px-#{$x}#{$fix}, .pr-#{$x}#{$fix} { padding-right: var(--inner-x--#{$x}); }
-          .px-#{$x}#{$fix}, .pl-#{$x}#{$fix} { padding-left: var(--inner-x--#{$x}); }
-          .mx-#{$x}#{$fix}, .mr-#{$x}#{$fix} { margin-right: var(--inner-x--#{$x}); }
-          .mx-#{$x}#{$fix}, .ml-#{$x}#{$fix} { margin-left: var(--inner-x--#{$x}); }
-          .mx-neg-#{$x}#{$fix}, .mr-neg-#{$x}#{$fix} { margin-right: calc(-1 * var(--inner-x--#{$x})); }
-          .mx-neg-#{$x}#{$fix}, .ml-neg-#{$x}#{$fix} { margin-left: calc(-1 * var(--inner-x--#{$x})); }
+          .px-#{$x}#{$fix}, .pr-#{$x}#{$fix} { padding-right: var(--inner-x-#{$x}); }
+          .px-#{$x}#{$fix}, .pl-#{$x}#{$fix} { padding-left: var(--inner-x-#{$x}); }
+          .mx-#{$x}#{$fix}, .mr-#{$x}#{$fix} { margin-right: var(--inner-x-#{$x}); }
+          .mx-#{$x}#{$fix}, .ml-#{$x}#{$fix} { margin-left: var(--inner-x-#{$x}); }
+          .mx-neg-#{$x}#{$fix}, .mr-neg-#{$x}#{$fix} { margin-right: calc(-1 * var(--inner-x-#{$x})); }
+          .mx-neg-#{$x}#{$fix}, .ml-neg-#{$x}#{$fix} { margin-left: calc(-1 * var(--inner-x-#{$x})); }
         }
 
         // dimensions: explicit ratios

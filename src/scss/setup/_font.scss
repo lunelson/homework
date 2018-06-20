@@ -56,7 +56,7 @@ $fonts-defaults: (
       }
     }
 
-    #{base-class('f', false)} {
+    #{base-class('font', false)} {
       font-family: var(--font-family);
       font-size: var(--font-size);
       line-height: var(--line-height);
@@ -86,7 +86,7 @@ $fonts-defaults: (
       //   --trim-bottom-#{$f}: calc((var(--line-height) - 1) * 1em / 2 + #{map-get($font, 'trim-baseline') * 1em});
       //   --trim-x-#{$f}: #{map-get($font, 'trim-x')};
       // }
-      #{base-class('f-#{$f}')} {
+      #{base-class('font-#{$f}')} {
         --font-family: var(--font-family-#{$f});
         --letter-spacing: var(--letter-spacing-#{$f});
         --trim-top: var(--trim-top-#{$f});
@@ -101,11 +101,11 @@ $fonts-defaults: (
 
     @each $f, $mod in map-get($root, 'font-mods') or () {
       @each $s in map-keys($mod) {
-        .f-#{$s} {
+        .font-#{$s} {
           --font-size: var(--font-size-#{$s});
           --line-height: var(--line-height-#{$s});
         }
-        .f-#{$f}-#{$s} {
+        .font-#{$f}-#{$s} {
           --font-size: var(--font-size-#{$f}-#{$s});
           --line-height: var(--line-height-#{$f}-#{$s});
         }
@@ -113,6 +113,6 @@ $fonts-defaults: (
     }
 
   } @else {
-    // @include homework-legacy-font-setup;
+    @include homework-legacy-font-setup;
   }
 }

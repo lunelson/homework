@@ -86,14 +86,8 @@
       width: calc(100% * var(--span-n) / var(--span-d));
     }
 
-    #{base-class('push')},
-    #{base-class('pull')} {
-      margin-left: calc(100% * var(--push-n, 0) / var(--span-d));
-    }
-
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
-
         @for $n from 1 through $max-columns {
 
           .span-#{$n}#{m-suffix()} {
@@ -102,10 +96,14 @@
               --span-d: #{$n};
             }
           }
-          .push-#{$n}#{m-suffix()} { --push-n: #{$n}; }
-          .pull-#{$n}#{m-suffix()} { --push-n: -#{$n}; }
-        }
 
+          // span atomics
+          .ml-#{$n}#{m-suffix()} { margin-left: calc(100% * #{$n} / var(--span-d)); }
+          .ml-neg-#{$n}#{m-suffix()} { margin-left: calc(100% * #{$n} / var(--span-d)); }
+          .mr-#{$n}#{m-suffix()} { margin-right: calc(100% * #{$n} / var(--span-d)); }
+          .mr-neg-#{$n}#{m-suffix()} { margin-right: calc(100% * #{$n} / var(--span-d)); }
+
+        }
       }
     }
 

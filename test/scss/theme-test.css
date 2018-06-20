@@ -2,17 +2,22 @@
   out: 80.5024;
 }
 
+:root {
+  --color: #111;
+  --bg-color: #eee;
+}
+
 body {
-  color: #111;
-  background-color: #eee;
+  color: var(--color);
+  background-color: var(--bg-color);
 }
 
 [class^="color-"], [class*=" color-"] {
-  color: var(--key-color);
+  color: var(--color);
 }
 
 [class^="bg-"], [class*=" bg-"] {
-  background-color: var(--bg-key-color);
+  background-color: var(--bg-color);
 }
 
 .color-yiq, [class^="color-yiq-"], [class*=" color-yiq-"] {
@@ -23,158 +28,188 @@ body {
   background-color: var(--bg-yiq-color);
 }
 
+:root {
+  --color-dark: #111;
+  --yiq-color-dark: #eee;
+}
+
 .theme-dark {
-  --theme-key: #111;
-  --theme-yiq: #eee;
+  --theme-color: var(--color-dark);
+  --theme-yiq-color: var(--yiq-color-dark);
 }
 
 .color-dark {
-  --key-color: #111;
-  --bg-yiq-color: #eee;
+  --color: var(--color-dark);
+  --bg-yiq-color: var(--yiq-color-dark);
 }
 
 .bg-dark {
-  --bg-key-color: #111;
-  --yiq-color: #eee;
+  --bg-color: var(--color-dark);
+  --yiq-color: var(--yiq-color-dark);
+}
+
+:root {
+  --color-lite: #eee;
+  --yiq-color-lite: #111;
 }
 
 .theme-lite {
-  --theme-key: #eee;
-  --theme-yiq: #111;
+  --theme-color: var(--color-lite);
+  --theme-yiq-color: var(--yiq-color-lite);
 }
 
 .color-lite {
-  --key-color: #eee;
-  --bg-yiq-color: #111;
+  --color: var(--color-lite);
+  --bg-yiq-color: var(--yiq-color-lite);
 }
 
 .bg-lite {
-  --bg-key-color: #eee;
-  --yiq-color: #111;
+  --bg-color: var(--color-lite);
+  --yiq-color: var(--yiq-color-lite);
+}
+
+:root {
+  --color-foo: #508021;
+  --yiq-color-foo: #eee;
 }
 
 .theme-foo {
-  --theme-key: #508021;
-  --theme-yiq: #eee;
+  --theme-color: var(--color-foo);
+  --theme-yiq-color: var(--yiq-color-foo);
 }
 
 .color-foo {
-  --key-color: #508021;
-  --bg-yiq-color: #eee;
+  --color: var(--color-foo);
+  --bg-yiq-color: var(--yiq-color-foo);
 }
 
 .bg-foo {
-  --bg-key-color: #508021;
-  --yiq-color: #eee;
+  --bg-color: var(--color-foo);
+  --yiq-color: var(--yiq-color-foo);
+}
+
+:root {
+  --color-bar: #da50c9;
+  --yiq-color-bar: #eee;
 }
 
 .theme-bar {
-  --theme-key: #da50c9;
-  --theme-yiq: #111;
+  --theme-color: var(--color-bar);
+  --theme-yiq-color: var(--yiq-color-bar);
 }
 
 .color-bar {
-  --key-color: #da50c9;
-  --bg-yiq-color: #111;
+  --color: var(--color-bar);
+  --bg-yiq-color: var(--yiq-color-bar);
 }
 
 .bg-bar {
-  --bg-key-color: #da50c9;
-  --yiq-color: #111;
+  --bg-color: var(--color-bar);
+  --yiq-color: var(--yiq-color-bar);
+}
+
+:root {
+  --color-baz: #4741ff;
+  --yiq-color-baz: #eee;
 }
 
 .theme-baz {
-  --theme-key: #4741ff;
-  --theme-yiq: #eee;
+  --theme-color: var(--color-baz);
+  --theme-yiq-color: var(--yiq-color-baz);
 }
 
 .color-baz {
-  --key-color: #4741ff;
-  --bg-yiq-color: #eee;
+  --color: var(--color-baz);
+  --bg-yiq-color: var(--yiq-color-baz);
 }
 
 .bg-baz {
-  --bg-key-color: #4741ff;
-  --yiq-color: #eee;
+  --bg-color: var(--color-baz);
+  --yiq-color: var(--yiq-color-baz);
+}
+
+:root {
+  --color-fiz: #da9b30;
+  --yiq-color-fiz: #eee;
 }
 
 .theme-fiz {
-  --theme-key: #da9b30;
-  --theme-yiq: #111;
+  --theme-color: var(--color-fiz);
+  --theme-yiq-color: var(--yiq-color-fiz);
 }
 
 .color-fiz {
-  --key-color: #da9b30;
-  --bg-yiq-color: #111;
+  --color: var(--color-fiz);
+  --bg-yiq-color: var(--yiq-color-fiz);
 }
 
 .bg-fiz {
-  --bg-key-color: #da9b30;
-  --yiq-color: #111;
+  --bg-color: var(--color-fiz);
+  --yiq-color: var(--yiq-color-fiz);
 }
 
 .color-key {
-  --key-color: var(--theme-key);
-  --bg-yiq-color: var(--theme-yiq);
+  --color: var(--theme-color);
+  --bg-yiq-color: var(--theme-yiq-color);
 }
 
 .bg-key {
-  --bg-key-color: var(--theme-key);
-  --yiq-color: var(--theme-yiq);
+  --bg-color: var(--theme-color);
+  --yiq-color: var(--theme-yiq-color);
 }
 
 .color-yiq-dark {
-  --yiq-color: #eee;
+  --yiq-color: var(--yiq-color-dark);
 }
 
 .bg-yiq-dark {
-  --bg-yiq-color: #eee;
+  --bg-yiq-color: var(--yiq-color-dark);
 }
 
 .color-yiq-lite {
-  --yiq-color: #111;
+  --yiq-color: var(--yiq-color-lite);
 }
 
 .bg-yiq-lite {
-  --bg-yiq-color: #111;
+  --bg-yiq-color: var(--yiq-color-lite);
 }
 
 .color-yiq-foo {
-  --yiq-color: #eee;
+  --yiq-color: var(--yiq-color-foo);
 }
 
 .bg-yiq-foo {
-  --bg-yiq-color: #eee;
+  --bg-yiq-color: var(--yiq-color-foo);
 }
 
 .color-yiq-bar {
-  --yiq-color: #111;
+  --yiq-color: var(--yiq-color-bar);
 }
 
 .bg-yiq-bar {
-  --bg-yiq-color: #111;
+  --bg-yiq-color: var(--yiq-color-bar);
 }
 
 .color-yiq-baz {
-  --yiq-color: #eee;
+  --yiq-color: var(--yiq-color-baz);
 }
 
 .bg-yiq-baz {
-  --bg-yiq-color: #eee;
+  --bg-yiq-color: var(--yiq-color-baz);
 }
 
 .color-yiq-fiz {
-  --yiq-color: #111;
+  --yiq-color: var(--yiq-color-fiz);
 }
 
 .bg-yiq-fiz {
-  --bg-yiq-color: #111;
+  --bg-yiq-color: var(--yiq-color-fiz);
 }
 
 .color-yiq-key {
-  --yiq-color: var(--theme-yiq);
+  --yiq-color: var(--theme-yiq-color);
 }
 
 .bg-yiq-key {
-  --bg-yiq-color: var(--theme-yiq);
+  --bg-yiq-color: var(--theme-yiq-color);
 }
