@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "author": "Lu Nelson",
-  "main": "_index.scss",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },

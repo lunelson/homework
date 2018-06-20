@@ -10,12 +10,12 @@
         .frame#{m-suffix()}, .frame-x#{m-suffix()}, .frame-right#{m-suffix()} { padding-right: var(--outer-right); }
         .frame#{m-suffix()}, .frame-x#{m-suffix()}, .frame-left#{m-suffix()} { padding-left: var(--outer-left); }
         .frame-y#{m-suffix()}, .frame-top#{m-suffix()} { padding-top: var(--outer-top); }
-        .frame-y#{m-suffix()}, .frame-bottom#{m-suffix()} { padding-bottom: var(--outer-left); }
+        .frame-y#{m-suffix()}, .frame-bottom#{m-suffix()} { padding-bottom: var(--outer-bottom); }
 
         .bleed#{m-suffix()}, .bleed-x#{m-suffix()}, .bleed-right#{m-suffix()} { margin-right: calc(var(--outer-right) * -1); }
         .bleed#{m-suffix()}, .bleed-x#{m-suffix()}, .bleed-left#{m-suffix()} { margin-left: calc(var(--outer-left) * -1); }
         .bleed-y#{m-suffix()}, .bleed-top#{m-suffix()} { margin-top: calc(var(--outer-top) * -1); }
-        .bleed-y#{m-suffix()}, .bleed-bottom#{m-suffix()} { margin-bottom: calc(var(--outer-left) * -1); }
+        .bleed-y#{m-suffix()}, .bleed-bottom#{m-suffix()} { margin-bottom: calc(var(--outer-bottom) * -1); }
 
       }
     }

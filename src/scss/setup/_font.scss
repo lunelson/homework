@@ -46,10 +46,14 @@ $fonts-defaults: (
       }
     }
 
-    $ff: nth(map-keys($fonts), 1);
 
     body {
+      $ff: nth(map-keys($fonts), 1);
       font-family: var(--font-family-#{$ff});
+      --letter-spacing: var(--letter-spacing-#{$ff});
+      --trim-top: var(--trim-top-#{$ff});
+      --trim-bottom: var(--trim-bottom-#{$ff});
+      --trim-x: var(--trim-x-#{$ff});
       @each $s, $def in map-get-z($root, 'font-mods', $ff) or () {
         --font-size-#{$s}: var(--font-size-#{$ff}-#{$s});
         --line-height-#{$s}: var(--line-height-#{$ff}-#{$s});
@@ -73,7 +77,7 @@ $fonts-defaults: (
       @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
         margin-top: calc(var(--stack-gap) - var(--trim-top));
       }
-      @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('f', false)}), '+')} {
+      @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('font', false)}), '+')} {
         margin-top: calc(var(--stack-gap) - var(--trim-top));
       }
     }

@@ -73,6 +73,10 @@ html {
 
 body {
   font-family: var(--font-family-sans);
+  --letter-spacing: var(--letter-spacing-sans);
+  --trim-top: var(--trim-top-sans);
+  --trim-bottom: var(--trim-bottom-sans);
+  --trim-x: var(--trim-x-sans);
   --font-size-s: var(--font-size-sans-s);
   --line-height-s: var(--line-height-sans-s);
   --font-size-m: var(--font-size-sans-m);
@@ -95,7 +99,7 @@ body {
   margin-top: calc(var(--stack-gap) - var(--trim-top));
 }
 
-.stack > [class^="f-"] + [class^="font-"], .stack > [class^="f-"] + [class*=" font-"], .stack > [class*=" f-"] + [class^="font-"], .stack > [class*=" f-"] + [class*=" font-"], [class^="stack-"] > [class^="f-"] + [class^="font-"], [class^="stack-"] > [class^="f-"] + [class*=" font-"], [class^="stack-"] > [class*=" f-"] + [class^="font-"], [class^="stack-"] > [class*=" f-"] + [class*=" font-"], [class*=" stack-"] > [class^="f-"] + [class^="font-"], [class*=" stack-"] > [class^="f-"] + [class*=" font-"], [class*=" stack-"] > [class*=" f-"] + [class^="font-"], [class*=" stack-"] > [class*=" f-"] + [class*=" font-"] {
+.stack > [class^="font-"] + [class^="font-"], .stack > [class^="font-"] + [class*=" font-"], .stack > [class*=" font-"] + [class^="font-"], .stack > [class*=" font-"] + [class*=" font-"], [class^="stack-"] > [class^="font-"] + [class^="font-"], [class^="stack-"] > [class^="font-"] + [class*=" font-"], [class^="stack-"] > [class*=" font-"] + [class^="font-"], [class^="stack-"] > [class*=" font-"] + [class*=" font-"], [class*=" stack-"] > [class^="font-"] + [class^="font-"], [class*=" stack-"] > [class^="font-"] + [class*=" font-"], [class*=" stack-"] > [class*=" font-"] + [class^="font-"], [class*=" stack-"] > [class*=" font-"] + [class*=" font-"] {
   margin-top: calc(var(--stack-gap) - var(--trim-top));
 }
 
