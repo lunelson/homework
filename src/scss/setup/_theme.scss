@@ -22,6 +22,7 @@ $colors: (
   @return re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
 }
 
+// BOOTSTRAP VERSION, DUMB
 // @function yiq($color) {
 //   $r: red($color);
 //   $g: green($color);
@@ -47,58 +48,80 @@ $colors: (
   ), $colors) !global;
 
   :root {
-    --color: #{map-get($colors, if($lite, 'dark', 'lite'))};
+    --fg-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
     --bg-color: #{map-get($colors, if($lite, 'lite', 'dark'))};
   }
 
   body {
-    color: var(--color);
+    color: var(--fg-color);
     background-color: var(--bg-color);
   }
 
   @if $modern {
 
-    #{base-class('color', false)} { color: var(--color); }
+    #{base-class('fg', false)} { color: var(--fg-color); }
     #{base-class('bg', false)} { background-color: var(--bg-color); }
-
-    #{base-class('color-yiq')} { color: var(--yiq-color); }
-    #{base-class('bg-yiq')} { background-color: var(--bg-yiq-color); }
 
     @each $c, $color in $colors {
       :root {
         --color-#{$c}: #{$color};
-        --yiq-color-#{$c}: #{yiq($color)};
+        --contrast-color-#{$c}: #{yiq($color)};
       }
-      .theme-#{$c} {
-        --theme-color: var(--color-#{$c});
-        --theme-yiq-color: var(--yiq-color-#{$c});
+
+      ///
+      /// EXPLICIT COLORS
+      ///
+
+      .fg-#{$c} {
+        --fg-color: var(--color-#{$c});
+        --fg-contrast-color: var(--contrast-color-#{$c});
       }
-      .color-#{$c} {
-        --color: var(--color-#{$c});
-        --bg-yiq-color: var(--yiq-color-#{$c});
+      .fg-contrast-#{$c} {
+        --fg-color: var(--contrast-color-#{$c});
+      }
+      .bg-contrast-#{$c} {
+        --bg-color: var(--contrast-color-#{$c});
       }
       .bg-#{$c} {
         --bg-color: var(--color-#{$c});
-        --yiq-color: var(--yiq-color-#{$c});
+        --bg-contrast-color: var(--contrast-color-#{$c});
+      }
+      .theme-#{$c} {
+        --theme-color: var(--color-#{$c});
+        --theme-contrast-color: var(--contrast-color-#{$c});
       }
     }
 
-    .color-key {
-      --color: var(--theme-color);
-      --bg-yiq-color: var(--theme-yiq-color);
+    ///
+    /// THEME COLORS
+    ///
+
+    .fg-theme {
+      --fg-color: var(--theme-color);
+      --fg-contrast-color: var(--theme-contrast-color);
     }
-    .bg-key {
+    .bg-theme {
       --bg-color: var(--theme-color);
-      --yiq-color: var(--theme-yiq-color);
+      --bg-contrast-color: var(--theme-contrast-color);
+    }
+    .fg-contrast-theme {
+      --fg-color: var(--theme-contrast-color);
+    }
+    .bg-contrast-theme {
+      --bg-color: var(--theme-contrast-color);
     }
 
-    @each $c, $color in $colors {
-      .color-yiq-#{$c} { --yiq-color: var(--yiq-color-#{$c}); }
-      .bg-yiq-#{$c} { --bg-yiq-color: var(--yiq-color-#{$c}); }
+    ///
+    /// IMPLICIT COLORS
+    ///
+
+    .fg-contrast {
+      --fg-color: var(--bg-contrast-color);
     }
 
-    .color-yiq-key { --yiq-color: var(--theme-yiq-color); }
-    .bg-yiq-key { --bg-yiq-color: var(--theme-yiq-color); }
+    .bg-contrast {
+      --bg-color: var(--fg-contrast-color);
+    }
 
   } @else {
     @include homework-legacy-theme-setup;
