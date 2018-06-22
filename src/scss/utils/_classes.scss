@@ -10,6 +10,14 @@
   }
 }
 
+@function base-m-class($base, $solo: true, $_...) {
+  @if $solo {
+    @return selector-parse('.#{$base}, [class^="#{$base}__"], [class*=" #{$base}__"]');
+  } @else {
+    @return selector-parse('[class^="#{$base}__"], [class*=" #{$base}__"]');
+  }
+}
+
 @function mod-class($base, $mod, $except: ()) {
   @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}-#{$mod}', '.#{$base}-#{$mod}'));
 }

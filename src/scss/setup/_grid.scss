@@ -25,8 +25,8 @@
       --row-gap: var(--inner-y);
       --column-gap: var(--inner-x);
       // --column-width: calc((var(--outer-width) + var(--column-gap)) / var(--grid-columns));
-      --span-n: var(--grid-columns);
       --span-d: var(--grid-columns);
+      --span-n: var(--span-d);
     }
 
     #{base-class('flow')} {
@@ -81,7 +81,8 @@
       .flow-x-#{$x} { --column-gap: var(--inner-x-#{$x}); }
     }
 
-    #{base-class('span')} {
+    #{base-class('span')},
+    #{base-m-class('span', false)} {
       flex: 0 0 auto;
       width: calc(100% * var(--span-n) / var(--span-d));
     }
@@ -90,11 +91,12 @@
       @include m($m) {
         @for $n from 1 through $max-columns {
 
+          .span#{m-suffix()} {
+            --span-n: var(--span-d);
+          }
           .span-#{$n}#{m-suffix()} {
             --span-n: #{$n};
-            & > * {
-              --span-d: #{$n};
-            }
+            & > * { --span-d: #{$n}; }
           }
 
           // span atomics
