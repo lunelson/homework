@@ -5,6 +5,40 @@
 // \__ \ || (_| | (__|   <   / /    | (__| | | | (_| | | | | |
 // |___/\__\__,_|\___|_|\_\ /_/      \___|_| |_|\__,_|_|_| |_|
 
+@mixin stack {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-top: 0.01px;
+  padding-bottom: 0.01px;
+  & > * {
+    flex: 0 0 auto;
+    // width: 100%;
+    // height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  & > * + * {
+    margin-top: var(--stack-gap);
+  }
+}
+
+@mixin chain {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  & > * {
+    flex: 0 0 auto;
+    // width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    text-overflow: ellipsis;
+  }
+  & > * + * {
+    margin-left: var(--chain-gap);
+  }
+}
+
 @mixin homework-stack-setup($modern: true) {
 
   @if $modern {
@@ -14,39 +48,13 @@
       --chain-gap: var(--inner-x);
     }
 
-    #{base-class('stack')} {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      padding-top: 0.01px;
-      padding-bottom: 0.01px;
-      & > * {
-        flex: 0 0 auto;
-        // width: 100%;
-        // height: auto;
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-      & > * + * { margin-top: var(--stack-gap); }
-    }
+    #{base-class('stack')} { @include stack; }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or () {
       .stack-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
     }
 
-    #{base-class('chain')} {
-      display: flex;
-      width: 100%;
-      flex-direction: row;
-      & > * {
-        flex: 0 0 auto;
-        // width: auto;
-        margin-left: 0;
-        margin-right: 0;
-        text-overflow: ellipsis;
-      }
-      & > * + * { margin-left: var(--chain-gap); }
-    }
+    #{base-class('chain')} { @include chain; }
 
     @each $x, $mult in map-get($root, 'inner-x-mods') or () {
       .chain-#{$x} > * { --stack-gap: var(--inner-x-#{$x}); }

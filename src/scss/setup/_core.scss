@@ -50,15 +50,16 @@ $media-defaults: (
       line-height: var(--line-height);
     }
     :root {
-      // shallow outputs
+
       @each $key, $val in $root {
         @if not index('list' 'map', type-of($val)) {
           --#{$key}: #{$val};
         }
       }
       --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-      // deep outputs
-      @include __mod-properties($root);
+
+      @include medium-inner-mods($root);
+      @include medium-font-mods($root);
     }
 
     $curr-medium: $root;
@@ -78,7 +79,8 @@ $media-defaults: (
               --#{$key}: #{$val};
             }
           }
-          @include __mod-properties($medium);
+          @include medium-inner-mods($medium);
+          @include medium-font-mods($medium);
         }
       }
 
