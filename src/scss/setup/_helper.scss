@@ -125,7 +125,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    >* { flex: 0 0 auto; }
+    >* { flex: 0 0 auto; max-width: 100%; }
     &:before {
       content: '';
       display: block;
