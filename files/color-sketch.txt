@@ -1,0 +1,53 @@
+root
+  --color-[c]
+  --contrast-color-[c]
+  --fg-color dark?lite:dark
+  --fg-contrast-color: dark?dark:lite
+  --bg-color: dark?dark:lite
+  --bg-contrast-color: dark?lite:dark
+
+body
+  color: --fg-color
+  background-color: --bg-color
+
+--------
+
+base-class(fg)
+  color: --fg-color
+
+base-class(bg)
+  background-color: --bg-color
+
+--------
+
+bg-[c]
+  --bg-color: --color-[c]
+  --bg-contrast-color: --contrast-color-[c]
+
+bg-contrast-[c]
+  --bg-color: --contrast-color-[c]
+
+fg-[c]
+  --fg-color: --color-[c]
+  --fg-contrast-color: --contrast-color-[c]
+
+fg-contrast-[c]
+  --fg-color: --contrast-color-[c]
+
+bg-contrast
+  --bg-color: --fg-contrast-color
+
+fg-contrast
+  --fg-color: --bg-contrast-color
+
+theme-[c]
+  --theme-color: --color-[c]
+  --theme-contrast-color: --contrast-color-[c]
+
+fg-theme
+  --fg-color: --theme-color
+  --fg-contrast-color: --theme-contrast-color
+
+bg-theme
+  --bg-color: --theme-color
+  --bg-contrast-color: --theme-contrast-color
