@@ -4,10 +4,10 @@
 @import '@lunelson/sass-u/index';
 @import 'mathsass/dist/math';
 
-@import "../scss/utils/all";
-@import "../scss/reset/all";
-@import "../scss/setup/all";
-@import "../scss/debug/all";
+@import "../../index";
+// @import "../scss/reset/all";
+// @import "../scss/setup/all";
+// @import "../scss/debug/all";
 
 $root: (
   inner-x: 2rem,
@@ -48,14 +48,13 @@ $colors: (
 
 @include homework-reset;
 
-@include homework-core-setup;
-@include homework-wrap-setup;
-@include homework-frame-setup;
-@include homework-stack-setup;
-@include homework-font-setup;
-@include homework-fgrid-setup;
-@include homework-atomic-setup;
-@include homework-helper-setup;
-@include homework-theme-setup;
-
-@include homework-debug;
+@include homework-core-setup()
+@include homework-wrap-setup()
+@include homework-stack-setup()
+@include homework-font-setup()
+@include homework-frame-setup()
+@include homework-grid-setup()
+@include homework-atomic-setup()
+@include homework-helper-setup()
+@include homework-theme-setup()
+@include homework-debug-setup()

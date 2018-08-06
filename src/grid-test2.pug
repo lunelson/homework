@@ -1,0 +1,103 @@
+extends app/_app
+
+append defs
+  - title = 'Test: Grid'
+
+append head
+  style.
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body { font-family: sans-serif; }
+
+    .label::before {
+      font-family: monospace;
+      counter-reset: cp var(--span-n);
+      content: counter(cp);
+      display: block;
+      width: 100%;
+      padding: 1em;
+      background-color: #ddd;
+    }
+
+    .isp {
+      padding: 10px;
+      background-color: green;
+      color: white;
+    }
+
+    :root {
+      --iml: var(--span-d);
+      --ispan: var(--span-d);
+    }
+
+block body
+
+  .wrap-last
+    .frame
+      .flow-m
+        .span
+          .label
+          .isp.ispan-1: p test
+          .isp.ispan-2: p test
+          .isp.ispan-3: p test
+          .isp.ispan-4: p test
+          .isp.ispan-5: p test
+          .isp.ispan-6: p test
+          .isp.ispan-7: p test
+          .isp.ispan-8: p test
+          .isp.ispan-9: p test
+          .isp.ispan-10: p test
+          .isp.ispan-11: p test
+          .isp.ispan-12: p test
+          .isp.ispan-1.iml.iml-1: p test
+          .isp.ispan-1.iml.iml-2: p test
+          .isp.ispan-1.iml.iml-3: p test
+          .isp.ispan-1.iml.iml-4: p test
+          .isp.ispan-1.iml.iml-5: p test
+          .isp.ispan-1.iml.iml-6: p test
+          .isp.ispan-1.iml.iml-7: p test
+          .isp.ispan-1.iml.iml-8: p test
+          .isp.ispan-1.iml.iml-9: p test
+          .isp.ispan-1.iml.iml-10: p test
+          .isp.ispan-1.iml.iml-11: p test
+          .isp.ispan-1.iml.iml-12: p test
+
+      .flow-m
+        .span
+          .label
+        .span-6__m
+          .label
+        .span-6__m
+          .isp.ispan: p test
+          .isp.ispan-1: p test
+          .isp.ispan-2: p test
+          .isp.ispan-3: p test
+          .isp.ispan-4: p test
+          .flow-m
+            .span
+              .label
+            .span-4
+              .label
+        .span-3__l
+          .label
+        .span-9__l
+          .flow-m
+            .span
+              .label
+            .span-4
+              .label
+            .span-5
+              .flow-m
+                .span: .label
+                .span-3
+                  .flow-m
+                    .span: .label
+                    .span-2: .label
+                    .span-1: .label
+                .span-2
+                  .flow-m
+                    .span: .label
+                    .span-1: .label
+                    .span-1: .label

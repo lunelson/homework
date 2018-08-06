@@ -1,1 +1,1 @@
-import './src/js/debug.js';
+import './src/js/lib/debug.js';

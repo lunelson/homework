@@ -5,10 +5,11 @@ append defs
 
 append head
   style.
-
     *, *::before, *::after {
       box-sizing: border-box;
     }
+
+    body { font-family: sans-serif; }
 
     .label::before {
       font-family: monospace;
@@ -20,28 +21,100 @@ append head
       background-color: #ddd;
     }
 
-    .colwidth {
-      width: calc(var(--column-width) * 4);
-      height: 30px;
-      background-color: blue;
+    .ispan {
+      --ispan: var(--span-d);
+      width: calc((100% + var(--column-gap)) / var(--span-d) * var(--ispan) - var(--column-gap));
+      padding: 10px;
+      background-color: green;
+      color: white;
     }
 
+    .iml { margin-left: calc((100% + var(--column-gap)) / var(--span-d) * var(--iml)); }
+
+    .ispan-1 { --ispan: 1; }
+    .ispan-2 { --ispan: 2; }
+    .ispan-3 { --ispan: 3; }
+    .ispan-4 { --ispan: 4; }
+    .ispan-5 { --ispan: 5; }
+    .ispan-6 { --ispan: 6; }
+    .ispan-7 { --ispan: 7; }
+    .ispan-8 { --ispan: 8; }
+    .ispan-9 { --ispan: 9; }
+    .ispan-10 { --ispan: 10; }
+    .ispan-11 { --ispan: 11; }
+    .ispan-12 { --ispan: 12; }
+
+    .iml-1 { --iml: 1; }
+    .iml-2 { --iml: 2; }
+    .iml-3 { --iml: 3; }
+    .iml-4 { --iml: 4; }
+    .iml-5 { --iml: 5; }
+    .iml-6 { --iml: 6; }
+    .iml-7 { --iml: 7; }
+    .iml-8 { --iml: 8; }
+    .iml-9 { --iml: 9; }
+    .iml-10 { --iml: 10; }
+    .iml-11 { --iml: 11; }
+    .iml-12 { --iml: 12; }
+
     :root {
-      --column-width: calc((100% + var(--column-gap)) / var(--grid-columns) - var(--column-gap));
+      --iml: var(--span-d);
+      --ispan: var(--span-d);
     }
 
 block body
 
+  //-
+    flow
+    span
+    ml
+    mr
+    ispan
+    iml
+    imr
+
   .wrap-last
     .frame
-      //- .colwidth
-      .fgrid
+      .flow-m
+        .span
+          .label
+          .ispan.ispan-1: p test
+          .ispan.ispan-2: p test
+          .ispan.ispan-3: p test
+          .ispan.ispan-4: p test
+          .ispan.ispan-5: p test
+          .ispan.ispan-6: p test
+          .ispan.ispan-7: p test
+          .ispan.ispan-8: p test
+          .ispan.ispan-9: p test
+          .ispan.ispan-10: p test
+          .ispan.ispan-11: p test
+          .ispan.ispan-12: p test
+          .ispan.ispan-1.iml.iml-1: p test
+          .ispan.ispan-1.iml.iml-2: p test
+          .ispan.ispan-1.iml.iml-3: p test
+          .ispan.ispan-1.iml.iml-4: p test
+          .ispan.ispan-1.iml.iml-5: p test
+          .ispan.ispan-1.iml.iml-6: p test
+          .ispan.ispan-1.iml.iml-7: p test
+          .ispan.ispan-1.iml.iml-8: p test
+          .ispan.ispan-1.iml.iml-9: p test
+          .ispan.ispan-1.iml.iml-10: p test
+          .ispan.ispan-1.iml.iml-11: p test
+          .ispan.ispan-1.iml.iml-12: p test
+
+      .flow-m
         .span
           .label
         .span-6__m
           .label
         .span-6__m
-          .fgrid
+          .ispan: p test
+          .ispan.ispan-1: p test
+          .ispan.ispan-2: p test
+          .ispan.ispan-3: p test
+          .ispan.ispan-4: p test
+          .flow-m
             .span
               .label
             .span-4
@@ -49,21 +122,21 @@ block body
         .span-3__l
           .label
         .span-9__l
-          .fgrid
+          .flow-m
             .span
               .label
             .span-4
               .label
             .span-5
-              .fgrid
+              .flow-m
                 .span: .label
                 .span-3
-                  .fgrid
+                  .flow-m
                     .span: .label
                     .span-2: .label
                     .span-1: .label
                 .span-2
-                  .fgrid
+                  .flow-m
                     .span: .label
                     .span-1: .label
                     .span-1: .label

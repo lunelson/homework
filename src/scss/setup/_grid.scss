@@ -1,3 +1,38 @@
+@mixin span($n: null, $l: 0, $r: 0) {
+  @if $n {
+    width: calc(100% * var(--span-n) / var(--span-d));
+    --span-n: #{$n}; & > * { --span-d: #{$n}; }
+  }
+  @if $l != 0 { margin-left: calc(100% * #{$l} / var(--span-d)); }
+  @if $r != 0 { margin-right: calc(100% * #{$r} / var(--span-d)); }
+}
+
+@mixin m-span($m-span) {
+  @each $m, $span in $m-span {
+    @include m($m) {
+      @include span($span);
+    }
+  }
+}
+
+@mixin ispan($n: null, $l: 0, $r: 0) {
+  @if $n {
+    width: calc((100% + var(--column-gap)) * var(--ispan-n) / var(--span-d) - var(--column-gap));
+    --ispan-n: #{$n}; & > * { --span-d: #{$n}; }
+  }
+  @if $l != 0 { margin-left: calc((100% + var(--column-gap)) * #{$l} / var(--span-d)); }
+  @if $r != 0 { margin-right: calc((100% + var(--column-gap)) * #{$r} / var(--span-d)); }
+}
+
+@mixin m-ispan($m-span) {
+  @each $m, $span in $m-span {
+    @include m($m) {
+      @include ispan($span);
+    }
+  }
+}
+
+
 //   __           _     _
 //  / _|         (_)   | |
 // | |_ __ _ _ __ _  __| |
@@ -24,9 +59,9 @@
     :root {
       --row-gap: var(--inner-y);
       --column-gap: var(--inner-x);
-      // --column-width: calc((var(--outer-width) + var(--column-gap)) / var(--grid-columns));
       --span-d: var(--grid-columns);
       --span-n: var(--span-d);
+      --ispan-n: var(--span-d);
     }
 
     #{base-class('flow')} {
@@ -87,23 +122,34 @@
       width: calc(100% * var(--span-n) / var(--span-d));
     }
 
+    #{base-class('ispan')},
+    #{base-m-class('ispan', false)} {
+      width: calc((100% + var(--column-gap)) * var(--ispan-n) / var(--span-d) - var(--column-gap));
+    }
+
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
         @for $n from 1 through $max-columns {
 
-          .span#{m-suffix()} {
-            --span-n: var(--span-d);
-          }
-          .span-#{$n}#{m-suffix()} {
-            --span-n: #{$n};
-            & > * { --span-d: #{$n}; }
-          }
+          // span
+          // .span#{m-suffix()} { --span-n: var(--span-d); }
+          .span-#{$n}#{m-suffix()} { --span-n: #{$n}; & > * { --span-d: #{$n}; } }
+
+          // ispan
+          // .ispan#{m-suffix()} { --ispan-n: var(--span-d); }
+          .ispan-#{$n}#{m-suffix()} { --ispan-n: #{$n}; & > * { --span-d: #{$n}; } }
 
           // span atomics
           .ml-#{$n}#{m-suffix()} { margin-left: calc(100% * #{$n} / var(--span-d)); }
-          .ml-neg-#{$n}#{m-suffix()} { margin-left: calc(100% * #{$n} / var(--span-d)); }
           .mr-#{$n}#{m-suffix()} { margin-right: calc(100% * #{$n} / var(--span-d)); }
-          .mr-neg-#{$n}#{m-suffix()} { margin-right: calc(100% * #{$n} / var(--span-d)); }
+          .ml-neg-#{$n}#{m-suffix()} { margin-left: calc(-100% * #{$n} / var(--span-d)); }
+          .mr-neg-#{$n}#{m-suffix()} { margin-right: calc(-100% * #{$n} / var(--span-d)); }
+
+          // ispan atomics
+          .iml-#{$n}#{m-suffix()} { margin-left: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
+          .imr-#{$n}#{m-suffix()} { margin-right: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
+          .iml-neg-#{$n}#{m-suffix()} { margin-left: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
+          .imr-neg-#{$n}#{m-suffix()} { margin-right: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
 
         }
       }

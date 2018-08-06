@@ -421,6 +421,7 @@ body:hover .vhide button {
 
 .aspect > *, [class^="aspect-"] > *, [class*=" aspect-"] > * {
   flex: 0 0 auto;
+  max-width: 100%;
 }
 
 .aspect:before, [class^="aspect-"]:before, [class*=" aspect-"]:before {
