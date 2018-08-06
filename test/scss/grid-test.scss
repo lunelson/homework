@@ -24,3 +24,20 @@ $media: (
 
 @include homework-core-setup();
 @include homework-grid-setup();
+
+.test { @include span(1, -1, 2); }
+.test { @include span(2, -1, 2); }
+.test { @include span(3, -1, 2); }
+
+.m-test {
+  @include spans((
+    a: 2 0 -1,
+    b: 3 0 1
+  ));
+  .nest {
+    @include spans-i((
+      a: 3 1 1,
+      b: 4 2 2
+    ));
+  }
+}

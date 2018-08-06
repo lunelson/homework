@@ -1717,3 +1717,75 @@ html {
     margin-right: calc((100% + var(--column-gap)) * -1 * 12 / var(--span-d));
   }
 }
+
+.test {
+  width: calc(100% * 1 / var(--span-d));
+  margin-left: calc(100% * -1 / var(--span-d));
+  margin-right: calc(100% * 2 / var(--span-d));
+}
+
+.test > * {
+  --span-d: 1;
+}
+
+.test {
+  width: calc(100% * 2 / var(--span-d));
+  margin-left: calc(100% * -1 / var(--span-d));
+  margin-right: calc(100% * 2 / var(--span-d));
+}
+
+.test > * {
+  --span-d: 2;
+}
+
+.test {
+  width: calc(100% * 3 / var(--span-d));
+  margin-left: calc(100% * -1 / var(--span-d));
+  margin-right: calc(100% * 2 / var(--span-d));
+}
+
+.test > * {
+  --span-d: 3;
+}
+
+@media screen and (min-width: 20em) {
+  .m-test {
+    width: calc(100% * 2 / var(--span-d));
+    margin-right: calc(100% * -1 / var(--span-d));
+  }
+  .m-test > * {
+    --span-d: 2;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .m-test {
+    width: calc(100% * 3 / var(--span-d));
+    margin-right: calc(100% * 1 / var(--span-d));
+  }
+  .m-test > * {
+    --span-d: 3;
+  }
+}
+
+@media screen and (min-width: 20em) {
+  .m-test .nest {
+    width: calc((100% + var(--column-gap)) * 3 / var(--span-d) - var(--column-gap));
+    margin-left: calc((100% + var(--column-gap)) * 1 / var(--span-d));
+    margin-right: calc((100% + var(--column-gap)) * 1 / var(--span-d));
+  }
+  .m-test .nest > * {
+    --span-d: 3;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .m-test .nest {
+    width: calc((100% + var(--column-gap)) * 4 / var(--span-d) - var(--column-gap));
+    margin-left: calc((100% + var(--column-gap)) * 2 / var(--span-d));
+    margin-right: calc((100% + var(--column-gap)) * 2 / var(--span-d));
+  }
+  .m-test .nest > * {
+    --span-d: 4;
+  }
+}
