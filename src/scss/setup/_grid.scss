@@ -85,17 +85,26 @@
     #{base-m-class('span', false)} {
       flex: 0 0 auto;
       width: calc(100% * var(--span-n) / var(--span-d));
+      // --span-n: var(--span-d);
       & > * { --span-d: var(--span-n); }
     }
 
     #{base-class('span-i')},
     #{base-m-class('span-i', false)} {
       width: calc((100% + var(--column-gap)) * var(--span-i) / var(--span-d) - var(--column-gap));
+      // --span-n: var(--span-d);
       & > * { --span-d: var(--span-i); }
     }
 
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
+
+        // these are required to ensure that span__[bp] also counts
+        // consider using span-all and span-i-all instead;
+        // ...and eliminating base-m-class classes above
+        .span#{m-suffix()} { --span-n: var(--span-d); }
+        .span-i#{m-suffix()} { --span-i: var(--span-d); }
+
         @for $n from 1 through $max-columns {
 
           // span
@@ -128,6 +137,11 @@
 // | '_ ` _ \| \ \/ / | '_ \/ __|
 // | | | | | | |>  <| | | | \__ \
 // |_| |_| |_|_/_/\_\_|_| |_|___/
+
+@function span-width($n) { @return calc(100% * #{$n} / var(--span-d)); }
+@function span-i-width($n) { @return calc((100% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap)); }
+@function push-width($p) { @return calc(100% * #{$p} / var(--span-d)); }
+@function push-i-width($p) { @return calc((100% + var(--column-gap)) * #{$p} / var(--span-d)); }
 
 @mixin span($n: null, $l: 0, $r: 0) {
   @if $n {

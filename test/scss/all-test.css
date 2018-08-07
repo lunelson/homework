@@ -494,6 +494,14 @@ body,
   --span-d: var(--span-i);
 }
 
+.span {
+  --span-n: var(--span-d);
+}
+
+.span-i {
+  --span-i: var(--span-d);
+}
+
 .span-1 {
   --span-n: 1;
 }
@@ -975,6 +983,12 @@ body,
 }
 
 @media screen and (min-width: 20em) {
+  .span__a {
+    --span-n: var(--span-d);
+  }
+  .span-i__a {
+    --span-i: var(--span-d);
+  }
   .span-1__a {
     --span-n: 1;
   }
@@ -1338,6 +1352,12 @@ body,
 }
 
 @media screen and (min-width: 30em) {
+  .span__b {
+    --span-n: var(--span-d);
+  }
+  .span-i__b {
+    --span-i: var(--span-d);
+  }
   .span-1__b {
     --span-n: 1;
   }
@@ -1701,6 +1721,12 @@ body,
 }
 
 @media screen and (min-width: 40em) {
+  .span__c {
+    --span-n: var(--span-d);
+  }
+  .span-i__c {
+    --span-i: var(--span-d);
+  }
   .span-1__c {
     --span-n: 1;
   }
