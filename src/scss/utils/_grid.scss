@@ -97,20 +97,20 @@
 
 // // $all-ratios: join-all(map-values($reduced-ratios)...);
 
-// //                                    _      _
-// //                                   (_)    (_)
-// //  ___ _ __   __ _ _ __    _ __ ___  ___  ___ _ __
-// // / __| '_ \ / _` | '_ \  | '_ ` _ \| \ \/ / | '_ \
-// // \__ \ |_) | (_| | | | | | | | | | | |>  <| | | | |
-// // |___/ .__/ \__,_|_| |_| |_| |_| |_|_/_/\_\_|_| |_|
-// //     | |
-// //     |_|
+//                                    _      _
+//                                   (_)    (_)
+//  ___ _ __   __ _ _ __    _ __ ___  ___  ___ _ __
+// / __| '_ \ / _` | '_ \  | '_ ` _ \| \ \/ / | '_ \
+// \__ \ |_) | (_| | | | | | | | | | | |>  <| | | | |
+// |___/ .__/ \__,_|_| |_| |_| |_| |_|_/_/\_\_|_| |_|
+//     | |
+//     |_|
 
-// // $test-spans: (
-// //   s: (w: 4, l: 1, d: 8),
-// //   m: (w: 4, l: 0, d: 10),
-// //   l: (w: 4, l: 0),
-// // );
+// $test-spans: (
+//   s: (w: 4, l: 1, d: 8),
+//   m: (w: 4, l: 0, d: 10),
+//   l: (w: 4, l: 0),
+// );
 
 // @mixin __span($d, $w: $d, $l: null, $r: null) {
 //   width: calc(100% * #{$w} / #{$d});
@@ -132,19 +132,19 @@
 //   }
 // }
 
-// // @mixin m-spans($spans) {
-// //   @each $s, $span in $spans {
-// //     @if $s == 'base' {
-// //       $span: map-merge((d: $curr-d), $span);
-// //       @include __span($span...);
-// //     } @else {
-// //       .medium-#{$s} {
-// //         $span: map-merge((d: $curr-d), $span);
-// //         @include __span($span...);
-// //       }
-// //     }
-// //   }
-// // }
+// @mixin m-spans($spans) {
+//   @each $s, $span in $spans {
+//     @if $s == 'base' {
+//       $span: map-merge((d: $curr-d), $span);
+//       @include __span($span...);
+//     } @else {
+//       .medium-#{$s} {
+//         $span: map-merge((d: $curr-d), $span);
+//         @include __span($span...);
+//       }
+//     }
+//   }
+// }
 
 // // @mixin col {
 // //   flex: 1 1 0%;

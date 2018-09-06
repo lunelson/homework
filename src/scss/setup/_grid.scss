@@ -138,39 +138,38 @@
 // | | | | | | |>  <| | | | \__ \
 // |_| |_| |_|_/_/\_\_|_| |_|___/
 
-@function span-width($n) { @return calc(100% * #{$n} / var(--span-d)); }
-@function span-i-width($n) { @return calc((100% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap)); }
-@function push-width($p) { @return calc(100% * #{$p} / var(--span-d)); }
-@function push-i-width($p) { @return calc((100% + var(--column-gap)) * #{$p} / var(--span-d)); }
+@function span-width($n: 1) { @return calc(100% * #{$n} / var(--span-d)); }
+@function span-i-width($n: 1) { @return calc((100% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap)); }
+@function push-width($p: 1) { @return calc(100% * #{$p} / var(--span-d)); }
+@function push-i-width($p: 1) { @return calc((100% + var(--column-gap)) * #{$p} / var(--span-d)); }
 
-@mixin span($n: null, $l: 0, $r: 0) {
+@mixin span($n: null, $l: null, $r: null) {
   @if $n {
-    // --span-n: #{$n};
-    // width: calc(100% * var(--span-n) / var(--span-d));
     width: calc(100% * #{$n} / var(--span-d));
     & > * { --span-d: #{$n}; }
   }
-  @if $l != 0 { margin-left: calc(100% * #{$l} / var(--span-d)); }
-  @if $r != 0 { margin-right: calc(100% * #{$r} / var(--span-d)); }
+  @if $l { margin-left: calc(100% * #{$l} / var(--span-d)); }
+  @if $r { margin-right: calc(100% * #{$r} / var(--span-d)); }
 }
 
 @mixin spans($spans) {
   @each $m, $span in $spans {
+    @if $m == 'root' {
+      @include span($span...);
+    }
     @include m($m) {
       @include span($span...);
     }
   }
 }
 
-@mixin span-i($n: null, $l: 0, $r: 0) {
+@mixin span-i($n: null, $l: null, $r: null) {
   @if $n {
-    // --span-i: #{$n};
-    // width: calc((100% + var(--column-gap)) * var(--span-i) / var(--span-d) - var(--column-gap));
     width: calc((100% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap));
     & > * { --span-d: #{$n}; }
   }
-  @if $l != 0 { margin-left: calc((100% + var(--column-gap)) * #{$l} / var(--span-d)); }
-  @if $r != 0 { margin-right: calc((100% + var(--column-gap)) * #{$r} / var(--span-d)); }
+  @if $l { margin-left: calc((100% + var(--column-gap)) * #{$l} / var(--span-d)); }
+  @if $r { margin-right: calc((100% + var(--column-gap)) * #{$r} / var(--span-d)); }
 }
 
 @mixin spans-i($spans) {
@@ -180,3 +179,23 @@
     }
   }
 }
+
+// @mixin __span($d, $w: $d, $l: null, $r: null) {
+//   width: calc(100% * #{$w} / #{$d});
+//   @if $r { margin-right: calc(100% * #{$r} / #{$d});}
+//   @if $l { margin-left: calc(100% * #{$l} / #{$d});}
+// }
+
+// @mixin m-spans($m-spans) {
+//   @each $m, $span in $m-spans {
+//     @if $m == 'base' {
+//       $span: map-merge((d: m-var('grid-columns')), $span);
+//       @include __span($span...);
+//     } @else {
+//       @include m($m) {
+//         $span: map-merge((d: m-var('grid-columns')), $span);
+//         @include __span($span...);
+//       }
+//     }
+//   }
+// }

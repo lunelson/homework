@@ -1777,6 +1777,7 @@ html {
 @media screen and (min-width: 20em) {
   .m-test {
     width: calc(100% * 2 / var(--span-d));
+    margin-left: calc(100% * 0 / var(--span-d));
     margin-right: calc(100% * -1 / var(--span-d));
   }
   .m-test > * {
@@ -1787,6 +1788,7 @@ html {
 @media screen and (min-width: 30em) {
   .m-test {
     width: calc(100% * 3 / var(--span-d));
+    margin-left: calc(100% * 0 / var(--span-d));
     margin-right: calc(100% * 1 / var(--span-d));
   }
   .m-test > * {
