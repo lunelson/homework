@@ -7,7 +7,7 @@
 
 // TODO
 // - handle non-px values in font-mods
-// - handle a non-trimming workflow
+// - handle a non-trimming workflow (suppress trim related shit)
 
 $fonts: () !default;
 
@@ -42,19 +42,25 @@ $fonts-defaults: (
 @mixin medium-font-mods($medium) {
   @each $f, $mod in map-get($medium, 'font-mods') or () {
     @each $s, $def in $mod {
-      // --font-size-#{$f}-#{$s}: #{nth($def, 1) / 16px * 1rem};
-      // --line-height-#{$f}-#{$s}: #{nth($def, 2)};
-
       $size: strip(nth($def, 1));
       $line: nth($def, 2);
-      // $line: if($line > 6, $line/$size, $line);
+      // NB line-heights > 6 are assumed to be px values
       --font-size-#{$f}-#{$s}: #{$size / 16 * 1rem};
-      --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)}; // NB line-heights > 6 assumed to be px values
+      --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)};
       --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
       --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
     }
   }
 }
+
+//   __            _                   _
+//  / _|          | |                 | |
+// | |_ ___  _ __ | |_ ______ ___  ___| |_ _   _ _ __
+// |  _/ _ \| '_ \| __|______/ __|/ _ \ __| | | | '_ \
+// | || (_) | | | | |_       \__ \  __/ |_| |_| | |_) |
+// |_| \___/|_| |_|\__|      |___/\___|\__|\__,_| .__/
+//                                              | |
+//                                              |_|
 
 @mixin homework-font-setup($modern: true, $trim: true, $elements: p ul ol dl h3 h4 h5 h6) {
 
@@ -73,25 +79,7 @@ $fonts-defaults: (
         --trim-x-#{$f}: #{map-get($font, 'trim-x')};
         --trim-capline-#{$f}: #{map-get($font, 'trim-capline')};
         --trim-baseline-#{$f}: #{map-get($font, 'trim-baseline')};
-
-        // semi-fallback
-        // --trim-top-#{$f}: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
-        // --trim-bottom-#{$f}: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
       }
-
-      // @each $m in join(null, map-keys($media)) {
-      //   @include m($m) {
-      //     @each $f, $mod in map-get(m($m), 'font-mods') or () {
-      //       @each $s, $def in $mod {
-      //         --font-size-#{$f}-#{$s}: #{nth($def, 1) / 16px * 1rem};
-      //         --line-height-#{$f}-#{$s}: #{nth($def, 2)};
-      //         --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
-      //         --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
-      //       }
-      //     }
-      //   }
-      // }
-
     }
 
     // TODO: add other selectors here, to force font-family? e.g. input, textarea, :placeholder
@@ -105,6 +93,7 @@ $fonts-defaults: (
       line-height: var(--line-height);
       letter-spacing: var(--letter-spacing);
 
+      // IF TRIM
       @if $trim {
         @at-root #{selector-insert('.trim', '>')},
         #{selector-insert(base-class('stack'), '>')} {
@@ -116,7 +105,10 @@ $fonts-defaults: (
         @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('font', false)}), '+')} {
           margin-top: calc(var(--stack-gap) - var(--trim-top));
         }
-      } @else {
+      }
+
+      // IF NOT TRIM
+      @else {
         @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
           margin-top: calc(var(--stack-gap));
         }
@@ -129,10 +121,6 @@ $fonts-defaults: (
         --font-family: var(--font-family-#{$f});
         --letter-spacing: var(--letter-spacing-#{$f});
         --trim-x: var(--trim-x-#{$f});
-        // --trim-top: var(--trim-top-#{$f});
-        // --trim-bottom: var(--trim-bottom-#{$f});
-        // --trim-top: calc((var(--line-height) - 1) * 1em / 2 + #{map-get($font, 'trim-capline') * 1em});
-        // --trim-bottom: calc((var(--line-height) - 1) * 1em / 2 + #{map-get($font, 'trim-baseline') * 1em});
         @each $s, $def in map-get-z($root, 'font-mods', $f) or () {
           --font-size-#{$s}: var(--font-size-#{$f}-#{$s});
           --line-height-#{$s}: var(--line-height-#{$f}-#{$s});

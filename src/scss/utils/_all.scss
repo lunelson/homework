@@ -5,18 +5,17 @@
 // | |_| | |_| | |
 //  \__,_|\__|_|_|
 
-@import 'numbers';
+// utility
+@import 'functions';
+@import 'math';
 @import 'lists';
 @import 'maps';
 @import 'classes';
 @import 'selectors';
 @import 'u';
 
-@import 'm-private';
-@import 'm';
-@import 'helpers';
-@import 'stack-support';
-@import 'typo-support';
-@import 'unwrap';
-
-// @import 'grid';
+// support
+@import 'core-private';
+@import 'core-public';
+@import 'grid';
+// @import 'unwrap';

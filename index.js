@@ -1,7 +1,14 @@
-/* eslint-disable */
+//  _                                             _           _
+// | |                                           | |         (_)
+// | |__   ___  _ __ ___   _____      _____  _ __| | ________ _ ___
+// | '_ \ / _ \| '_ ` _ \ / _ \ \ /\ / / _ \| '__| |/ /______| / __|
+// | | | | (_) | | | | | |  __/\ V  V / (_) | |  |   <       | \__ \
+// |_| |_|\___/|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\      | |___/
+//                                                          _/ |
+//                                                         |__/
 
+/* eslint-disable */
 // CHECK ENV
 console.log(`the environment is ${process.env.NODE_ENV}`);
-
 // DO SETUPS
 import './src/js/setup/debug.js';

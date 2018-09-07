@@ -1,3 +1,19 @@
+@function font($f: $body-font) {
+  @return map-get($fonts, $f) or nth(nth($fonts, 1), 2);
+}
+
+@mixin font($f) {
+  $font: font($f);
+  font-family: map-get($font, 'family');
+  $spacing-max: map-get($font, 'spacing-max');
+  $spacing-end: map-get($font, 'spacing-end');
+  @if $spacing-max > 0 {
+    letter-spacing: calc(#{$spacing-max}px - #{$spacing-max/$spacing-end}em);
+    // &, & button, & input, & textarea {
+    // }
+  }
+}
+
 @mixin homework-legacy-font-setup() {
 
   //

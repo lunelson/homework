@@ -12,7 +12,7 @@
 @import 'frame';
 @import 'stack';
 @import 'font';
-@import 'grid';
+@import 'flow';
 @import 'atomic';
 @import 'helper';
 @import 'theme';
@@ -46,7 +46,7 @@ $done-homework-setup: false;
   @if index($setups, 'frame') { @include homework-frame-setup($modern); }
   @if index($setups, 'stack') { @include homework-stack-setup($modern); }
   @if index($setups, 'font') { @include homework-font-setup($modern); }
-  @if index($setups, 'grid') { @include homework-grid-setup($modern); }
+  @if index($setups, 'grid') { @include homework-flow-setup($modern); }
   @if index($setups, 'atomic') { @include homework-atomic-setup($modern); }
   @if index($setups, 'helper') { @include homework-helper-setup($modern); }
   @if index($setups, 'theme') { @include homework-theme-setup($modern); }

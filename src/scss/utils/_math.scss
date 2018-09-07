@@ -34,7 +34,11 @@
 //     pow(4, 2)   // 16
 //     pow(4, -2)  // 0.0625
 //     pow(4, 0.2) // 1.31951
+
+$pow-function: false;
+@if function-exists('pow') { $pow-function: get-function('pow'); }
 @function pow ($base, $exp) {
+  @if $pow-function { @return call($pow-function, $base, $exp); }
   @if $exp == floor($exp) {
       $r: 1;
       $s: 0;
@@ -59,8 +63,6 @@
       @return $r1 * $r2;
   }
 }
-
-// A good approximation for $x close to 0.
 @function _exp ($x) {
   $ret: 0;
   $i: 1;

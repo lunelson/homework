@@ -62,19 +62,19 @@ $media-defaults: (
       @include medium-font-mods($root);
     }
 
-    $curr-medium: $root;
+    $reference-medium: $root;
     @each $m, $medium in $media {
       @if not index(map-keys($medium), 'breakpoint') {
         @include error('homework: one of your $media does not have a breakpoint key');
       }
 
-      $curr-medium: --parse-medium(--deep-merge($curr-medium, $medium));
+      $reference-medium: --parse-medium(--deep-merge($reference-medium, $medium));
 
       @media #{--query-string(map-get($medium, 'breakpoint'))} {
 
         :root {
           @each $key in join(map-keys($medium), ('outer-width')) {
-            $val: map-get($curr-medium, $key);
+            $val: map-get($reference-medium, $key);
             @if not index('list' 'map', type-of($val)) {
               --#{$key}: #{$val};
             }
@@ -84,7 +84,7 @@ $media-defaults: (
         }
       }
 
-      $media: map-merge($media, ($m: $curr-medium)) !global;
+      $media: map-merge($media, ($m: $reference-medium)) !global;
     }
   } @else {
     // legacy init?

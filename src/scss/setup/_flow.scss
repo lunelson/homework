@@ -7,15 +7,7 @@
 //                                   | |
 //                                   |_|
 
-@function max-columns() {
-  $column-counts: ();
-  @each $m, $medium in $media {
-    $column-counts: append($column-counts, map-get-z($media, $m, 'grid-columns'));
-  }
-  @return max($column-counts...);
-}
-
-@mixin homework-grid-setup($modern: true) {
+@mixin homework-flow-setup($modern: true) {
 
   $max-columns: if(length($media) > 0, max-columns(), map-get($root, 'grid-columns'));
 
@@ -51,7 +43,7 @@
       }
     }
 
-    #{base-class('row')},
+    // #{base-class('row')},
     #{base-class('flow')} {
       display: flex;
       flex-direction: row;
@@ -76,10 +68,10 @@
     @each $y, $mult in map-get($root, 'inner-y-mods') or () {
       .flow-#{$y} { --row-gap: var(--inner-y-#{$y}); }
     }
-    @each $x, $mult in map-get($root, 'inner-x-mods') or () {
-      .row-#{$x},
-      .flow-x-#{$x} { --column-gap: var(--inner-x-#{$x}); }
-    }
+    // @each $x, $mult in map-get($root, 'inner-x-mods') or () {
+    //   .row-#{$x},
+    //   .flow-x-#{$x} { --column-gap: var(--inner-x-#{$x}); }
+    // }
 
     #{base-class('span')},
     #{base-m-class('span', false)} {
@@ -99,31 +91,33 @@
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
 
+        $bp: m-suffix();
+
         // these are required to ensure that span__[bp] also counts
         // consider using span-all and span-i-all instead;
         // ...and eliminating base-m-class classes above
-        .span#{m-suffix()} { --span-n: var(--span-d); }
-        .span-i#{m-suffix()} { --span-i: var(--span-d); }
+        .span#{$bp} { --span-n: var(--span-d); }
+        .span-i#{$bp} { --span-i: var(--span-d); }
 
         @for $n from 1 through $max-columns {
 
           // span
-          .span-#{$n}#{m-suffix()} { --span-n: #{$n}; }
+          .span-#{$n}#{$bp} { --span-n: #{$n}; }
 
           // span-i
-          .span-i-#{$n}#{m-suffix()} { --span-i: #{$n}; }
+          .span-i-#{$n}#{$bp} { --span-i: #{$n}; }
 
           // span atomics
-          .ml-#{$n}#{m-suffix()} { margin-left: calc(100% * #{$n} / var(--span-d)); }
-          .mr-#{$n}#{m-suffix()} { margin-right: calc(100% * #{$n} / var(--span-d)); }
-          .ml-neg-#{$n}#{m-suffix()} { margin-left: calc(-100% * #{$n} / var(--span-d)); }
-          .mr-neg-#{$n}#{m-suffix()} { margin-right: calc(-100% * #{$n} / var(--span-d)); }
+          .ml-#{$n}#{$bp} { margin-left: calc(100% * #{$n} / var(--span-d)); }
+          .mr-#{$n}#{$bp} { margin-right: calc(100% * #{$n} / var(--span-d)); }
+          .ml-neg-#{$n}#{$bp} { margin-left: calc(-100% * #{$n} / var(--span-d)); }
+          .mr-neg-#{$n}#{$bp} { margin-right: calc(-100% * #{$n} / var(--span-d)); }
 
           // span-i atomics
-          .ml-i-#{$n}#{m-suffix()} { margin-left: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
-          .mr-i-#{$n}#{m-suffix()} { margin-right: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
-          .ml-i-neg-#{$n}#{m-suffix()} { margin-left: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
-          .mr-i-neg-#{$n}#{m-suffix()} { margin-right: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
+          .ml-i-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
+          .mr-i-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
+          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
+          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
 
         }
       }

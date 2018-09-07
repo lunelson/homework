@@ -1,3 +1,58 @@
+## type (-) VS value/medium (--) ??
+
+.wrap
+.wrap-right
+.wrap-left
+.wrap-[m]
+.wrap-last
+.wrap-each __m
+
+.frame __[m]
+.frame-right __[m]
+.frame-left __[m]
+.frame-y __[m]
+.frame-top __[m]
+.frame-bottom __[m]
+
+.bleed __[m]
+.bleed-right __[m]
+.bleed-left __[m]
+.bleed-y __[m]
+.bleed-top __[m]
+.bleed-bottom __[m]
+
+.stack
+.stack-[y]
+
+.chain
+.chain-[y]
+
+(SHOULD THIS BE ATOMIC??)
+
+.font
+.font-[name]-[size/line]
+.[font-alias]-[size/line]
+
+.flow
+.flow-[y]
+
+.span
+.span-[n]
+.span-i
+.span-i-[n]
+
+.mr-[n]
+.mr-i-[n]
+.mr-neg-[n]
+.mr-i-neg-[n]
+
+## new refinements
+
+global conditions
+  - should we trim typography? (exclude all reference to trim values, if not)
+  - should we output explicit grid-span classes (hard spans)?
+  - should the font names be used as the class base, and not with .font-[name]
+
 ## co-incident classes
 
 .fgrid > *.stack

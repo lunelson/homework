@@ -76,7 +76,6 @@ html {
   padding-bottom: 0.01px;
 }
 
-.row, [class^="row-"], [class*=" row-"],
 .flow, [class^="flow-"], [class*=" flow-"] {
   display: flex;
   flex-direction: row;
@@ -85,7 +84,6 @@ html {
   margin-right: calc(var(--column-gap) / -2);
 }
 
-.row > *, [class^="row-"] > *, [class*=" row-"] > *,
 .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
   flex: 1 1 0%;
   min-width: 0%;
@@ -96,12 +94,10 @@ html {
   padding-right: calc(var(--column-gap) / 2);
 }
 
-.row.null, [class^="row-"].null, [class*=" row-"].null,
 .flow.null, [class^="flow-"].null, [class*=" flow-"].null {
   margin: 0;
 }
 
-.row.null > *, [class^="row-"].null > *, [class*=" row-"].null > *,
 .flow.null > *, [class^="flow-"].null > *, [class*=" flow-"].null > * {
   padding: 0;
 }
@@ -116,16 +112,6 @@ html {
 
 .flow-l {
   --row-gap: var(--inner-y-l);
-}
-
-.row-s,
-.flow-x-s {
-  --column-gap: var(--inner-x-s);
-}
-
-.row-form,
-.flow-x-form {
-  --column-gap: var(--inner-x-form);
 }
 
 .span, [class^="span-"], [class*=" span-"],

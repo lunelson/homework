@@ -1,54 +1,10 @@
 //
-// globals
-//
-
-
-$fonts: () !default;
-
-$font-default: (
-  family: (arial, sans-serif),
-  spacing-max: 0,
-  spacing-end: 50,
-  trim-x: 0,
-  trim-top: 0,
-  trim-bottom: 0,
-);
-
-$fonts-defaults: (
-  sans: ( family: (arial, sans-serif) ),
-  serif: ( family: (georgia, serif) ),
-  mono: ( family: (monaco, consolas, "lucida console", monospace) )
-);
-
-$body-font: null !default;
-
-
-//
 // functions
 //
-
-
-@function font($f: $body-font) {
-  @return map-get($fonts, $f) or nth(nth($fonts, 1), 2);
-}
-
-@mixin font($f) {
-  $font: font($f);
-  font-family: map-get($font, 'family');
-  $spacing-max: map-get($font, 'spacing-max');
-  $spacing-end: map-get($font, 'spacing-end');
-  @if $spacing-max > 0 {
-    letter-spacing: calc(#{$spacing-max}px - #{$spacing-max/$spacing-end}em);
-    // &, & button, & input, & textarea {
-    // }
-  }
-}
-
 
 @function font-var($key, $f: $curr-font) {
   @return map-get(font($f), $key) or error("key '#{$key}' not found in $font '#{$f or base}'");
 }
-
 
 // @function font-align($f: $curr-font) {
 //   @return (map-get(font($f), trim-top) - map-get(font($f), trim-bottom))/2*1em;
@@ -57,7 +13,6 @@ $body-font: null !default;
 //
 // trim functions
 //
-
 
 @function trim-top-abs($line: $curr-line, $font: $curr-font) {
   @return (strip($line) - 1) * 0.5em + font-var('trim-top', $font) * 1em;
@@ -74,10 +29,6 @@ $body-font: null !default;
 @function trim-bottom-margin($mult: $curr-inner-y, $line: $curr-line, $font: $curr-font) {
   @return subtract(inner-y($mult), trim-bottom-abs($line, $font));
 }
-
-
-
-
 
 // //
 // // mixins -- may still be needed for wysiwyg stuff
@@ -128,7 +79,6 @@ $body-font: null !default;
 //   $curr-line: $prev-line !global;
 //   $curr-font: $prev-font !global;
 // }
-
 
 // @mixin typo($f, $s) {
 //   $copy-size: get(medium-var('copy-sizes'), $f, $s);
