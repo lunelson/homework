@@ -7,6 +7,7 @@
 
 // TODO
 // - handle non-px values in font-mods
+// - handle a non-trimming workflow
 
 $fonts: () !default;
 
@@ -43,15 +44,19 @@ $fonts-defaults: (
     @each $s, $def in $mod {
       // --font-size-#{$f}-#{$s}: #{nth($def, 1) / 16px * 1rem};
       // --line-height-#{$f}-#{$s}: #{nth($def, 2)};
-      --font-size-#{$f}-#{$s}: #{nth($def, 1) / 16px * 1rem};
-      --line-height-#{$f}-#{$s}: #{nth($def, 2)};
+
+      $size: strip(nth($def, 1));
+      $line: nth($def, 2);
+      // $line: if($line > 6, $line/$size, $line);
+      --font-size-#{$f}-#{$s}: #{$size / 16 * 1rem};
+      --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)}; // NB line-heights > 6 assumed to be px values
       --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
       --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
     }
   }
 }
 
-@mixin homework-font-setup($modern: true, $elements: p ul ol dl h3 h4 h5 h6) {
+@mixin homework-font-setup($modern: true, $trim: true, $elements: p ul ol dl h3 h4 h5 h6) {
 
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
   @each $f, $font in $fonts {
@@ -91,18 +96,6 @@ $fonts-defaults: (
 
     // TODO: add other selectors here, to force font-family? e.g. input, textarea, :placeholder
     body {
-      // $df: nth(map-keys($fonts), 1);
-      // --font-family: var(--font-family-#{$df});
-      // --letter-spacing: var(--letter-spacing-#{$df});
-      // --trim-x: var(--trim-x-#{$df});
-      // // --trim-top: var(--trim-top-#{$df});
-      // // --trim-bottom: var(--trim-bottom-#{$df});
-      // @each $s, $def in map-get-z($root, 'font-mods', $df) or () {
-      //   --font-size-#{$s}: var(--font-size-#{$df}-#{$s});
-      //   --line-height-#{$s}: var(--line-height-#{$df}-#{$s});
-      //   --trim-top-#{$s}: var(--trim-top-#{$df}-#{$s});
-      //   --trim-bottom-#{$s}: var(--trim-bottom-#{$df}-#{$s});
-      // }
       font-family: var(--font-family);
     }
 
@@ -112,19 +105,23 @@ $fonts-defaults: (
       line-height: var(--line-height);
       letter-spacing: var(--letter-spacing);
 
-      @at-root #{selector-insert('.trim', '>')},
-      #{selector-insert(base-class('stack'), '>')} {
-        margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
-      }
-      @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
-        margin-top: calc(var(--stack-gap) - var(--trim-top));
-      }
-      @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('font', false)}), '+')} {
-        margin-top: calc(var(--stack-gap) - var(--trim-top));
+      @if $trim {
+        @at-root #{selector-insert('.trim', '>')},
+        #{selector-insert(base-class('stack'), '>')} {
+          margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
+        }
+        @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
+          margin-top: calc(var(--stack-gap) - var(--trim-top));
+        }
+        @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('font', false)}), '+')} {
+          margin-top: calc(var(--stack-gap) - var(--trim-top));
+        }
+      } @else {
+        @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
+          margin-top: calc(var(--stack-gap));
+        }
       }
     }
-
-    // $df: nth(map-keys($fonts), 1);
 
     @each $f, $font in $fonts {
       #{if($f == nth(map-keys($fonts), 1),'body,','')}
