@@ -77,15 +77,11 @@
     #{base-m-class('span', false)} {
       flex: 0 0 auto;
       width: calc(100% * var(--span-n) / var(--span-d));
-      // --span-n: var(--span-d);
-      & > * { --span-d: var(--span-n); }
     }
 
     #{base-class('span-i')},
     #{base-m-class('span-i', false)} {
       width: calc((100% + var(--column-gap)) * var(--span-i) / var(--span-d) - var(--column-gap));
-      // --span-n: var(--span-d);
-      & > * { --span-d: var(--span-i); }
     }
 
     @each $m in join((null), map-keys($media)) {
@@ -106,10 +102,10 @@
         @for $n from 1 through $max-columns {
 
           // span
-          .span-#{$n}#{$bp} { --span-n: #{$n}; }
+          .span-#{$n}#{$bp} { --span-n: #{$n}; & > * { --span-d: var(--span-n); } }
 
           // span-i
-          .span-i-#{$n}#{$bp} { --span-i: #{$n}; }
+          .span-i-#{$n}#{$bp} { --span-i: #{$n}; & > * { --span-d: var(--span-i); } }
 
           // span atomics
           .ml-#{$n}#{$bp} { margin-left: calc(100% * #{$n} / var(--span-d)); }
