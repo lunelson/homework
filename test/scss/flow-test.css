@@ -71,11 +71,6 @@ html {
   padding-bottom: calc(var(--row-gap) / 2);
 }
 
-.row > *, [class^="row-"] > *, [class*=" row-"] > * {
-  padding-top: 0.01px;
-  padding-bottom: 0.01px;
-}
-
 .flow, [class^="flow-"], [class*=" flow-"] {
   display: flex;
   flex-direction: row;
@@ -102,18 +97,6 @@ html {
   padding: 0;
 }
 
-.flow-s {
-  --row-gap: var(--inner-y-s);
-}
-
-.flow-m {
-  --row-gap: var(--inner-y-m);
-}
-
-.flow-l {
-  --row-gap: var(--inner-y-l);
-}
-
 .span, [class^="span-"], [class*=" span-"],
 [class^="span__"], [class*=" span__"] {
   flex: 0 0 auto;
@@ -133,6 +116,18 @@ html {
 .span-i > *, [class^="span-i-"] > *, [class*=" span-i-"] > *,
 [class^="span-i__"] > *, [class*=" span-i__"] > * {
   --span-d: var(--span-i);
+}
+
+.flow-s {
+  --row-gap: var(--inner-y-s);
+}
+
+.flow-m {
+  --row-gap: var(--inner-y-m);
+}
+
+.flow-l {
+  --row-gap: var(--inner-y-l);
 }
 
 .span {
@@ -624,6 +619,15 @@ html {
 }
 
 @media screen and (min-width: 20em) {
+  .flow-s__a {
+    --row-gap: var(--inner-y-s);
+  }
+  .flow-m__a {
+    --row-gap: var(--inner-y-m);
+  }
+  .flow-l__a {
+    --row-gap: var(--inner-y-l);
+  }
   .span__a {
     --span-n: var(--span-d);
   }
@@ -993,6 +997,15 @@ html {
 }
 
 @media screen and (min-width: 30em) {
+  .flow-s__b {
+    --row-gap: var(--inner-y-s);
+  }
+  .flow-m__b {
+    --row-gap: var(--inner-y-m);
+  }
+  .flow-l__b {
+    --row-gap: var(--inner-y-l);
+  }
   .span__b {
     --span-n: var(--span-d);
   }
@@ -1362,6 +1375,15 @@ html {
 }
 
 @media screen and (min-width: 40em) {
+  .flow-s__c {
+    --row-gap: var(--inner-y-s);
+  }
+  .flow-m__c {
+    --row-gap: var(--inner-y-m);
+  }
+  .flow-l__c {
+    --row-gap: var(--inner-y-l);
+  }
   .span__c {
     --span-n: var(--span-d);
   }

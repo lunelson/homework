@@ -6,8 +6,9 @@
 // |_| \___/|_| |_|\__|
 
 // TODO
-// - handle non-px values in font-mods
-// - handle a non-trimming workflow (suppress trim related shit)
+// handle non-px values in font-mods
+// figure out what HTML elements require explicitly applying --font-family
+// apply the increased --trim-top to cases where font is adjacent to font -- only to the custom property !
 
 $fonts: () !default;
 
@@ -32,14 +33,16 @@ $fonts-defaults: (
   --trim-x: var(--trim-x-#{$f});
 }
 
-@mixin font-mod($f, $s) {
+@mixin font-mod($f, $s, $trim: true) {
   --font-size: var(--font-size-#{$f}-#{$s});
   --line-height: var(--line-height-#{$f}-#{$s});
-  --trim-top: var(--trim-top-#{$f}-#{$s});
-  --trim-bottom: var(--trim-bottom-#{$f}-#{$s});
+  @if $trim {
+    --trim-top: var(--trim-top-#{$f}-#{$s});
+    --trim-bottom: var(--trim-bottom-#{$f}-#{$s});
+  }
 }
 
-@mixin medium-font-mods($medium) {
+@mixin medium-font-mods($medium, $trim: true) {
   @each $f, $mod in map-get($medium, 'font-mods') or () {
     @each $s, $def in $mod {
       $size: strip(nth($def, 1));
@@ -47,8 +50,10 @@ $fonts-defaults: (
       // NB line-heights > 6 are assumed to be px values
       --font-size-#{$f}-#{$s}: #{$size / 16 * 1rem};
       --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)};
-      --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
-      --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
+      @if $trim {
+        --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
+        --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
+      }
     }
   }
 }
@@ -62,6 +67,7 @@ $fonts-defaults: (
 //                                              | |
 //                                              |_|
 
+@function font-class($f, $i, $a) { @return base-class($f); }
 @mixin homework-font-setup($modern: true, $trim: true, $elements: p ul ol dl h3 h4 h5 h6) {
 
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
@@ -77,8 +83,10 @@ $fonts-defaults: (
         --font-family-#{$f}: #{map-get($font, 'family')};
         --letter-spacing-#{$f}: calc(#{map-get($font, 'spacing-max')} * 1px - #{map-get($font, 'spacing-max')} / #{map-get($font, 'spacing-end')} * 1em);
         --trim-x-#{$f}: #{map-get($font, 'trim-x')};
-        --trim-capline-#{$f}: #{map-get($font, 'trim-capline')};
-        --trim-baseline-#{$f}: #{map-get($font, 'trim-baseline')};
+        @if $trim {
+          --trim-capline-#{$f}: #{map-get($font, 'trim-capline')};
+          --trim-baseline-#{$f}: #{map-get($font, 'trim-baseline')};
+        }
       }
     }
 
@@ -87,28 +95,35 @@ $fonts-defaults: (
       font-family: var(--font-family);
     }
 
-    #{base-class('font', false)} {
-      font-family: var(--font-family);
+    $font-base-classes: __map(map-keys($fonts), 'base-class');
+
+    #{$font-base-classes} {
+      // font-family: var(--font-family);
+      // letter-spacing: var(--letter-spacing);
       font-size: var(--font-size);
       line-height: var(--line-height);
-      letter-spacing: var(--letter-spacing);
 
       // IF TRIM
       @if $trim {
-        @at-root #{selector-insert('.trim', '>')},
+        @at-root
+        // #{selector-insert('.trim', '>')},
         #{selector-insert(base-class('stack'), '>')} {
           margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
         }
         @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
           margin-top: calc(var(--stack-gap) - var(--trim-top));
         }
-        @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{base-class('font', false)}), '+')} {
-          margin-top: calc(var(--stack-gap) - var(--trim-top));
-        }
+        // TODO: re-implement this by making --trim-top a stronger value when font+font, under any circumstance
+        // @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{$font-base-classes}), '+')} {
+        //   margin-top: calc(var(--stack-gap) - var(--trim-top));
+        // }
       }
 
       // IF NOT TRIM
       @else {
+        @at-root #{selector-insert(base-class('stack'), '>')} {
+          margin: 0 var(--trim-x);
+        }
         @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
           margin-top: calc(var(--stack-gap));
         }
@@ -117,32 +132,39 @@ $fonts-defaults: (
 
     @each $f, $font in $fonts {
       #{if($f == nth(map-keys($fonts), 1),'body,','')}
-      #{base-class('font-#{$f}')} {
-        --font-family: var(--font-family-#{$f});
-        --letter-spacing: var(--letter-spacing-#{$f});
+      // #{base-class('font-#{$f}')} {
+      #{base-class($f)} {
+        font-family: var(--font-family-#{$f});
+        letter-spacing: var(--letter-spacing-#{$f});
         --trim-x: var(--trim-x-#{$f});
-        @each $s, $def in map-get-z($root, 'font-mods', $f) or () {
-          --font-size-#{$s}: var(--font-size-#{$f}-#{$s});
-          --line-height-#{$s}: var(--line-height-#{$f}-#{$s});
-          --trim-top-#{$s}: var(--trim-top-#{$f}-#{$s});
-          --trim-bottom-#{$s}: var(--trim-bottom-#{$f}-#{$s});
-        }
+        // @each $s, $def in map-get-z($root, 'font-mods', $f) or () {
+        //   --font-size-#{$s}: var(--font-size-#{$f}-#{$s});
+        //   --line-height-#{$s}: var(--line-height-#{$f}-#{$s});
+        //   @if $trim {
+        //     --trim-top-#{$s}: var(--trim-top-#{$f}-#{$s});
+        //     --trim-bottom-#{$s}: var(--trim-bottom-#{$f}-#{$s});
+        //   }
+        // }
       }
     }
 
     @each $f, $mod in map-get($root, 'font-mods') or () {
       @each $s in map-keys($mod) {
-        .font-#{$s} {
-          --font-size: var(--font-size-#{$s});
-          --line-height: var(--line-height-#{$s});
-          --trim-top: var(--trim-top-#{$s});
-          --trim-bottom: var(--trim-bottom-#{$s});
-        }
-        .font-#{$f}-#{$s} {
+        // .font-#{$s} {
+        //   --font-size: var(--font-size-#{$s});
+        //   --line-height: var(--line-height-#{$s});
+        //   @if $trim {
+        //     --trim-top: var(--trim-top-#{$s});
+        //     --trim-bottom: var(--trim-bottom-#{$s});
+        //   }
+        // }
+        .#{$f}-#{$s} {
           --font-size: var(--font-size-#{$f}-#{$s});
           --line-height: var(--line-height-#{$f}-#{$s});
-          --trim-top: var(--trim-top-#{$f}-#{$s});
-          --trim-bottom: var(--trim-bottom-#{$f}-#{$s});
+          @if $trim {
+            --trim-top: var(--trim-top-#{$f}-#{$s});
+            --trim-bottom: var(--trim-bottom-#{$f}-#{$s});
+          }
         }
       }
     }
@@ -155,14 +177,27 @@ $fonts-defaults: (
         line-height: var(--line-height);
         letter-spacing: var(--letter-spacing);
 
-        @at-root #{selector-insert('>')} {
-          margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
+        // IF TRIM
+        @if $trim {
+          @at-root #{selector-insert('>')} {
+            margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
+          }
+          @at-root #{selector-insert('> * +')} {
+            margin-top: calc(var(--stack-gap) - var(--trim-top));
+          }
+          @at-root #{selector-insert(selector-insert('>', '', #{zip($elements)}), '+')} {
+            margin-top: calc(var(--stack-gap) - var(--trim-top) - 0.25em);
+          }
         }
-        @at-root #{selector-insert('> * +')} {
-          margin-top: calc(var(--stack-gap) - var(--trim-top));
-        }
-        @at-root #{selector-insert(selector-insert('>', '', #{zip($elements)}), '+')} {
-          margin-top: calc(var(--stack-gap) - var(--trim-top) - 0.25em);
+
+        // IF NOT TRIM
+        @else {
+          @at-root #{selector-insert('>')} {
+            margin: 0 var(--trim-x);
+          }
+          @at-root #{selector-insert('> * +')} {
+            margin-top: calc(var(--stack-gap));
+          }
         }
       }
     }

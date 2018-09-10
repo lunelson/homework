@@ -20,20 +20,12 @@ html {
   --inner-x-m: 1rem;
   --font-size-sans-s: 0.875rem;
   --line-height-sans-s: 1.4;
-  --trim-top-sans-s: calc((var(--line-height-sans-s) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-  --trim-bottom-sans-s: calc((var(--line-height-sans-s) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
   --font-size-sans-m: 1rem;
   --line-height-sans-m: 1.4;
-  --trim-top-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-  --trim-bottom-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
   --font-size-serif-s: 1rem;
   --line-height-serif-s: 1.4;
-  --trim-top-serif-s: calc((var(--line-height-serif-s) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-  --trim-bottom-serif-s: calc((var(--line-height-serif-s) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
   --font-size-serif-m: 1.125rem;
   --line-height-serif-m: 1.4;
-  --trim-top-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-  --trim-bottom-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
 }
 
 @media screen and (min-width: 20em) {
@@ -50,20 +42,12 @@ html {
     --outer-width: 30rem;
     --font-size-sans-s: 1.25rem;
     --line-height-sans-s: 1.4;
-    --trim-top-sans-s: calc((var(--line-height-sans-s) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-    --trim-bottom-sans-s: calc((var(--line-height-sans-s) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
     --font-size-sans-m: 1.5rem;
     --line-height-sans-m: 1.4;
-    --trim-top-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-    --trim-bottom-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
     --font-size-serif-s: 1.375rem;
     --line-height-serif-s: 1.4;
-    --trim-top-serif-s: calc((var(--line-height-serif-s) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-    --trim-bottom-serif-s: calc((var(--line-height-serif-s) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
     --font-size-serif-m: 1.625rem;
     --line-height-serif-m: 1.4;
-    --trim-top-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-    --trim-bottom-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
   }
 }
 
@@ -78,123 +62,60 @@ html {
   --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif;
   --letter-spacing-sans: calc(0 * 1px - 0 / 50 * 1em);
   --trim-x-sans: 0;
-  --trim-capline-sans: 0;
-  --trim-baseline-sans: 0;
   --font-family-serif: serif;
   --letter-spacing-serif: calc(0 * 1px - 0 / 50 * 1em);
   --trim-x-serif: 0;
-  --trim-capline-serif: 0;
-  --trim-baseline-serif: 0;
 }
 
 body {
   font-family: var(--font-family);
 }
 
-[class^="font-"], [class*=" font-"] {
-  font-family: var(--font-family);
+.sans, [class^="sans-"], [class*=" sans-"], .serif, [class^="serif-"], [class*=" serif-"] {
   font-size: var(--font-size);
   line-height: var(--line-height);
-  letter-spacing: var(--letter-spacing);
 }
 
-.trim > [class^="font-"], .trim > [class*=" font-"],
-.stack > [class^="font-"], .stack > [class*=" font-"], [class^="stack-"] > [class^="font-"], [class^="stack-"] > [class*=" font-"], [class*=" stack-"] > [class^="font-"], [class*=" stack-"] > [class*=" font-"] {
-  margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom));
+.stack > .sans, .stack > [class^="sans-"], .stack > [class*=" sans-"], .stack > .serif, .stack > [class^="serif-"], .stack > [class*=" serif-"], [class^="stack-"] > .sans, [class^="stack-"] > [class^="sans-"], [class^="stack-"] > [class*=" sans-"], [class^="stack-"] > .serif, [class^="stack-"] > [class^="serif-"], [class^="stack-"] > [class*=" serif-"], [class*=" stack-"] > .sans, [class*=" stack-"] > [class^="sans-"], [class*=" stack-"] > [class*=" sans-"], [class*=" stack-"] > .serif, [class*=" stack-"] > [class^="serif-"], [class*=" stack-"] > [class*=" serif-"] {
+  margin: 0 var(--trim-x);
 }
 
-.stack > * + [class^="font-"], .stack > * + [class*=" font-"], [class^="stack-"] > * + [class^="font-"], [class^="stack-"] > * + [class*=" font-"], [class*=" stack-"] > * + [class^="font-"], [class*=" stack-"] > * + [class*=" font-"] {
-  margin-top: calc(var(--stack-gap) - var(--trim-top));
-}
-
-.stack > [class^="font-"] + [class^="font-"], .stack > [class^="font-"] + [class*=" font-"], .stack > [class*=" font-"] + [class^="font-"], .stack > [class*=" font-"] + [class*=" font-"], [class^="stack-"] > [class^="font-"] + [class^="font-"], [class^="stack-"] > [class^="font-"] + [class*=" font-"], [class^="stack-"] > [class*=" font-"] + [class^="font-"], [class^="stack-"] > [class*=" font-"] + [class*=" font-"], [class*=" stack-"] > [class^="font-"] + [class^="font-"], [class*=" stack-"] > [class^="font-"] + [class*=" font-"], [class*=" stack-"] > [class*=" font-"] + [class^="font-"], [class*=" stack-"] > [class*=" font-"] + [class*=" font-"] {
-  margin-top: calc(var(--stack-gap) - var(--trim-top));
+.stack > * + .sans, .stack > * + [class^="sans-"], .stack > * + [class*=" sans-"], .stack > * + .serif, .stack > * + [class^="serif-"], .stack > * + [class*=" serif-"], [class^="stack-"] > * + .sans, [class^="stack-"] > * + [class^="sans-"], [class^="stack-"] > * + [class*=" sans-"], [class^="stack-"] > * + .serif, [class^="stack-"] > * + [class^="serif-"], [class^="stack-"] > * + [class*=" serif-"], [class*=" stack-"] > * + .sans, [class*=" stack-"] > * + [class^="sans-"], [class*=" stack-"] > * + [class*=" sans-"], [class*=" stack-"] > * + .serif, [class*=" stack-"] > * + [class^="serif-"], [class*=" stack-"] > * + [class*=" serif-"] {
+  margin-top: calc(var(--stack-gap));
 }
 
 body,
-.font-sans, [class^="font-sans-"], [class*=" font-sans-"] {
-  --font-family: var(--font-family-sans);
-  --letter-spacing: var(--letter-spacing-sans);
+.sans, [class^="sans-"], [class*=" sans-"] {
+  font-family: var(--font-family-sans);
+  letter-spacing: var(--letter-spacing-sans);
   --trim-x: var(--trim-x-sans);
-  --font-size-s: var(--font-size-sans-s);
-  --line-height-s: var(--line-height-sans-s);
-  --trim-top-s: var(--trim-top-sans-s);
-  --trim-bottom-s: var(--trim-bottom-sans-s);
-  --font-size-m: var(--font-size-sans-m);
-  --line-height-m: var(--line-height-sans-m);
-  --trim-top-m: var(--trim-top-sans-m);
-  --trim-bottom-m: var(--trim-bottom-sans-m);
 }
 
 
-.font-serif, [class^="font-serif-"], [class*=" font-serif-"] {
-  --font-family: var(--font-family-serif);
-  --letter-spacing: var(--letter-spacing-serif);
+.serif, [class^="serif-"], [class*=" serif-"] {
+  font-family: var(--font-family-serif);
+  letter-spacing: var(--letter-spacing-serif);
   --trim-x: var(--trim-x-serif);
-  --font-size-s: var(--font-size-serif-s);
-  --line-height-s: var(--line-height-serif-s);
-  --trim-top-s: var(--trim-top-serif-s);
-  --trim-bottom-s: var(--trim-bottom-serif-s);
-  --font-size-m: var(--font-size-serif-m);
-  --line-height-m: var(--line-height-serif-m);
-  --trim-top-m: var(--trim-top-serif-m);
-  --trim-bottom-m: var(--trim-bottom-serif-m);
 }
 
-.font-s {
-  --font-size: var(--font-size-s);
-  --line-height: var(--line-height-s);
-  --trim-top: var(--trim-top-s);
-  --trim-bottom: var(--trim-bottom-s);
-}
-
-.font-sans-s {
+.sans-s {
   --font-size: var(--font-size-sans-s);
   --line-height: var(--line-height-sans-s);
-  --trim-top: var(--trim-top-sans-s);
-  --trim-bottom: var(--trim-bottom-sans-s);
 }
 
-.font-m {
-  --font-size: var(--font-size-m);
-  --line-height: var(--line-height-m);
-  --trim-top: var(--trim-top-m);
-  --trim-bottom: var(--trim-bottom-m);
-}
-
-.font-sans-m {
+.sans-m {
   --font-size: var(--font-size-sans-m);
   --line-height: var(--line-height-sans-m);
-  --trim-top: var(--trim-top-sans-m);
-  --trim-bottom: var(--trim-bottom-sans-m);
 }
 
-.font-s {
-  --font-size: var(--font-size-s);
-  --line-height: var(--line-height-s);
-  --trim-top: var(--trim-top-s);
-  --trim-bottom: var(--trim-bottom-s);
-}
-
-.font-serif-s {
+.serif-s {
   --font-size: var(--font-size-serif-s);
   --line-height: var(--line-height-serif-s);
-  --trim-top: var(--trim-top-serif-s);
-  --trim-bottom: var(--trim-bottom-serif-s);
 }
 
-.font-m {
-  --font-size: var(--font-size-m);
-  --line-height: var(--line-height-m);
-  --trim-top: var(--trim-top-m);
-  --trim-bottom: var(--trim-bottom-m);
-}
-
-.font-serif-m {
+.serif-m {
   --font-size: var(--font-size-serif-m);
   --line-height: var(--line-height-serif-m);
-  --trim-top: var(--trim-top-serif-m);
-  --trim-bottom: var(--trim-bottom-serif-m);
 }
 
 .wysiwyg, [class^="wysiwyg-"], [class*=" wysiwyg-"] {
@@ -223,13 +144,9 @@ body,
 }
 
 .wysiwyg > p, .wysiwyg > ul, .wysiwyg > ol, .wysiwyg > dl, .wysiwyg > h3, .wysiwyg > h4, .wysiwyg > h5, .wysiwyg > h6, [class^="wysiwyg-"] > p, [class^="wysiwyg-"] > ul, [class^="wysiwyg-"] > ol, [class^="wysiwyg-"] > dl, [class^="wysiwyg-"] > h3, [class^="wysiwyg-"] > h4, [class^="wysiwyg-"] > h5, [class^="wysiwyg-"] > h6, [class*=" wysiwyg-"] > p, [class*=" wysiwyg-"] > ul, [class*=" wysiwyg-"] > ol, [class*=" wysiwyg-"] > dl, [class*=" wysiwyg-"] > h3, [class*=" wysiwyg-"] > h4, [class*=" wysiwyg-"] > h5, [class*=" wysiwyg-"] > h6 {
-  margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom));
+  margin: 0 var(--trim-x);
 }
 
 .wysiwyg > * + p, .wysiwyg > * + ul, .wysiwyg > * + ol, .wysiwyg > * + dl, .wysiwyg > * + h3, .wysiwyg > * + h4, .wysiwyg > * + h5, .wysiwyg > * + h6, [class^="wysiwyg-"] > * + p, [class^="wysiwyg-"] > * + ul, [class^="wysiwyg-"] > * + ol, [class^="wysiwyg-"] > * + dl, [class^="wysiwyg-"] > * + h3, [class^="wysiwyg-"] > * + h4, [class^="wysiwyg-"] > * + h5, [class^="wysiwyg-"] > * + h6, [class*=" wysiwyg-"] > * + p, [class*=" wysiwyg-"] > * + ul, [class*=" wysiwyg-"] > * + ol, [class*=" wysiwyg-"] > * + dl, [class*=" wysiwyg-"] > * + h3, [class*=" wysiwyg-"] > * + h4, [class*=" wysiwyg-"] > * + h5, [class*=" wysiwyg-"] > * + h6 {
-  margin-top: calc(var(--stack-gap) - var(--trim-top));
-}
-
-.wysiwyg > p + p, .wysiwyg > p + ul, .wysiwyg > p + ol, .wysiwyg > p + dl, .wysiwyg > p + h3, .wysiwyg > p + h4, .wysiwyg > p + h5, .wysiwyg > p + h6, .wysiwyg > ul + p, .wysiwyg > ul + ul, .wysiwyg > ul + ol, .wysiwyg > ul + dl, .wysiwyg > ul + h3, .wysiwyg > ul + h4, .wysiwyg > ul + h5, .wysiwyg > ul + h6, .wysiwyg > ol + p, .wysiwyg > ol + ul, .wysiwyg > ol + ol, .wysiwyg > ol + dl, .wysiwyg > ol + h3, .wysiwyg > ol + h4, .wysiwyg > ol + h5, .wysiwyg > ol + h6, .wysiwyg > dl + p, .wysiwyg > dl + ul, .wysiwyg > dl + ol, .wysiwyg > dl + dl, .wysiwyg > dl + h3, .wysiwyg > dl + h4, .wysiwyg > dl + h5, .wysiwyg > dl + h6, .wysiwyg > h3 + p, .wysiwyg > h3 + ul, .wysiwyg > h3 + ol, .wysiwyg > h3 + dl, .wysiwyg > h3 + h3, .wysiwyg > h3 + h4, .wysiwyg > h3 + h5, .wysiwyg > h3 + h6, .wysiwyg > h4 + p, .wysiwyg > h4 + ul, .wysiwyg > h4 + ol, .wysiwyg > h4 + dl, .wysiwyg > h4 + h3, .wysiwyg > h4 + h4, .wysiwyg > h4 + h5, .wysiwyg > h4 + h6, .wysiwyg > h5 + p, .wysiwyg > h5 + ul, .wysiwyg > h5 + ol, .wysiwyg > h5 + dl, .wysiwyg > h5 + h3, .wysiwyg > h5 + h4, .wysiwyg > h5 + h5, .wysiwyg > h5 + h6, .wysiwyg > h6 + p, .wysiwyg > h6 + ul, .wysiwyg > h6 + ol, .wysiwyg > h6 + dl, .wysiwyg > h6 + h3, .wysiwyg > h6 + h4, .wysiwyg > h6 + h5, .wysiwyg > h6 + h6, [class^="wysiwyg-"] > p + p, [class^="wysiwyg-"] > p + ul, [class^="wysiwyg-"] > p + ol, [class^="wysiwyg-"] > p + dl, [class^="wysiwyg-"] > p + h3, [class^="wysiwyg-"] > p + h4, [class^="wysiwyg-"] > p + h5, [class^="wysiwyg-"] > p + h6, [class^="wysiwyg-"] > ul + p, [class^="wysiwyg-"] > ul + ul, [class^="wysiwyg-"] > ul + ol, [class^="wysiwyg-"] > ul + dl, [class^="wysiwyg-"] > ul + h3, [class^="wysiwyg-"] > ul + h4, [class^="wysiwyg-"] > ul + h5, [class^="wysiwyg-"] > ul + h6, [class^="wysiwyg-"] > ol + p, [class^="wysiwyg-"] > ol + ul, [class^="wysiwyg-"] > ol + ol, [class^="wysiwyg-"] > ol + dl, [class^="wysiwyg-"] > ol + h3, [class^="wysiwyg-"] > ol + h4, [class^="wysiwyg-"] > ol + h5, [class^="wysiwyg-"] > ol + h6, [class^="wysiwyg-"] > dl + p, [class^="wysiwyg-"] > dl + ul, [class^="wysiwyg-"] > dl + ol, [class^="wysiwyg-"] > dl + dl, [class^="wysiwyg-"] > dl + h3, [class^="wysiwyg-"] > dl + h4, [class^="wysiwyg-"] > dl + h5, [class^="wysiwyg-"] > dl + h6, [class^="wysiwyg-"] > h3 + p, [class^="wysiwyg-"] > h3 + ul, [class^="wysiwyg-"] > h3 + ol, [class^="wysiwyg-"] > h3 + dl, [class^="wysiwyg-"] > h3 + h3, [class^="wysiwyg-"] > h3 + h4, [class^="wysiwyg-"] > h3 + h5, [class^="wysiwyg-"] > h3 + h6, [class^="wysiwyg-"] > h4 + p, [class^="wysiwyg-"] > h4 + ul, [class^="wysiwyg-"] > h4 + ol, [class^="wysiwyg-"] > h4 + dl, [class^="wysiwyg-"] > h4 + h3, [class^="wysiwyg-"] > h4 + h4, [class^="wysiwyg-"] > h4 + h5, [class^="wysiwyg-"] > h4 + h6, [class^="wysiwyg-"] > h5 + p, [class^="wysiwyg-"] > h5 + ul, [class^="wysiwyg-"] > h5 + ol, [class^="wysiwyg-"] > h5 + dl, [class^="wysiwyg-"] > h5 + h3, [class^="wysiwyg-"] > h5 + h4, [class^="wysiwyg-"] > h5 + h5, [class^="wysiwyg-"] > h5 + h6, [class^="wysiwyg-"] > h6 + p, [class^="wysiwyg-"] > h6 + ul, [class^="wysiwyg-"] > h6 + ol, [class^="wysiwyg-"] > h6 + dl, [class^="wysiwyg-"] > h6 + h3, [class^="wysiwyg-"] > h6 + h4, [class^="wysiwyg-"] > h6 + h5, [class^="wysiwyg-"] > h6 + h6, [class*=" wysiwyg-"] > p + p, [class*=" wysiwyg-"] > p + ul, [class*=" wysiwyg-"] > p + ol, [class*=" wysiwyg-"] > p + dl, [class*=" wysiwyg-"] > p + h3, [class*=" wysiwyg-"] > p + h4, [class*=" wysiwyg-"] > p + h5, [class*=" wysiwyg-"] > p + h6, [class*=" wysiwyg-"] > ul + p, [class*=" wysiwyg-"] > ul + ul, [class*=" wysiwyg-"] > ul + ol, [class*=" wysiwyg-"] > ul + dl, [class*=" wysiwyg-"] > ul + h3, [class*=" wysiwyg-"] > ul + h4, [class*=" wysiwyg-"] > ul + h5, [class*=" wysiwyg-"] > ul + h6, [class*=" wysiwyg-"] > ol + p, [class*=" wysiwyg-"] > ol + ul, [class*=" wysiwyg-"] > ol + ol, [class*=" wysiwyg-"] > ol + dl, [class*=" wysiwyg-"] > ol + h3, [class*=" wysiwyg-"] > ol + h4, [class*=" wysiwyg-"] > ol + h5, [class*=" wysiwyg-"] > ol + h6, [class*=" wysiwyg-"] > dl + p, [class*=" wysiwyg-"] > dl + ul, [class*=" wysiwyg-"] > dl + ol, [class*=" wysiwyg-"] > dl + dl, [class*=" wysiwyg-"] > dl + h3, [class*=" wysiwyg-"] > dl + h4, [class*=" wysiwyg-"] > dl + h5, [class*=" wysiwyg-"] > dl + h6, [class*=" wysiwyg-"] > h3 + p, [class*=" wysiwyg-"] > h3 + ul, [class*=" wysiwyg-"] > h3 + ol, [class*=" wysiwyg-"] > h3 + dl, [class*=" wysiwyg-"] > h3 + h3, [class*=" wysiwyg-"] > h3 + h4, [class*=" wysiwyg-"] > h3 + h5, [class*=" wysiwyg-"] > h3 + h6, [class*=" wysiwyg-"] > h4 + p, [class*=" wysiwyg-"] > h4 + ul, [class*=" wysiwyg-"] > h4 + ol, [class*=" wysiwyg-"] > h4 + dl, [class*=" wysiwyg-"] > h4 + h3, [class*=" wysiwyg-"] > h4 + h4, [class*=" wysiwyg-"] > h4 + h5, [class*=" wysiwyg-"] > h4 + h6, [class*=" wysiwyg-"] > h5 + p, [class*=" wysiwyg-"] > h5 + ul, [class*=" wysiwyg-"] > h5 + ol, [class*=" wysiwyg-"] > h5 + dl, [class*=" wysiwyg-"] > h5 + h3, [class*=" wysiwyg-"] > h5 + h4, [class*=" wysiwyg-"] > h5 + h5, [class*=" wysiwyg-"] > h5 + h6, [class*=" wysiwyg-"] > h6 + p, [class*=" wysiwyg-"] > h6 + ul, [class*=" wysiwyg-"] > h6 + ol, [class*=" wysiwyg-"] > h6 + dl, [class*=" wysiwyg-"] > h6 + h3, [class*=" wysiwyg-"] > h6 + h4, [class*=" wysiwyg-"] > h6 + h5, [class*=" wysiwyg-"] > h6 + h6 {
-  margin-top: calc(var(--stack-gap) - var(--trim-top) - 0.25em);
+  margin-top: calc(var(--stack-gap));
 }

@@ -36,7 +36,7 @@ $media-defaults: (
   l: (breakpoint: 67.5em),
 );
 
-@mixin homework-core-setup($modern: true) {
+@mixin homework-core-setup($modern: true, $trim: true) {
 
   // backup origs; merge defaults
   $root-orig: $root !global;
@@ -59,7 +59,7 @@ $media-defaults: (
       --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 
       @include medium-inner-mods($root);
-      @include medium-font-mods($root);
+      @include medium-font-mods($root, $trim);
     }
 
     $reference-medium: $root;
@@ -80,7 +80,7 @@ $media-defaults: (
             }
           }
           @include medium-inner-mods($medium);
-          @include medium-font-mods($medium);
+          @include medium-font-mods($medium, $trim);
         }
       }
 

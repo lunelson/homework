@@ -46,5 +46,5 @@ $fonts: (
   )
 );
 
-@include homework-core-setup();
-@include homework-font-setup();
+@include homework-core-setup(true, false);
+@include homework-font-setup(true, false);
