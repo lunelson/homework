@@ -5,12 +5,16 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const diff = require('gulp-diff');
 const rename = require('gulp-rename');
-// const watch = require('gulp-watch');
 const plumber = require('gulp-plumber');
 
 const sassIncl = path.join(__dirname, 'node_modules');
 
-gulp.task('work', function () {
+/*
+  gulp 4
+  https://github.com/gulpjs/gulp
+*/
+
+function work() {
   return gulp.src('./test/scss/*.scss')
     .pipe(plumber(sass.logError))
     .pipe(sass({
@@ -18,9 +22,8 @@ gulp.task('work', function () {
       includePaths: [sassIncl]
     }))
     .pipe(gulp.dest('./test/scss'));
-});
-
-gulp.task('test', function(){
+}
+function test() {
   return gulp.src('./test/scss/*.scss')
     .pipe(plumber())
     .pipe(sass({
@@ -30,8 +33,11 @@ gulp.task('test', function(){
     .pipe(rename({extname: '.css'}))
     .pipe(diff())
     .pipe(diff.reporter({ fail: true }));
-});
+}
+function watch() {
+  gulp.watch('./**/*.scss', work);
+}
 
-gulp.task('default', function () {
-  return gulp.watch('./**/*.scss', ['work']);
-});
+gulp.task('test', test);
+gulp.task('work', work);
+gulp.task('default', watch);
