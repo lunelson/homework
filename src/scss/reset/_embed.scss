@@ -53,10 +53,11 @@
   }
 
 
-  svg {
-    &:not(:root) {
-      overflow: hidden; // Hide the overflow in IE.
-    }
+  svg, symbol {
+    overflow: visible;
+    // &:not(:root) {
+    //   overflow: hidden; // Hide the overflow in IE.
+    // }
   }
 
   audio:not([controls]) {
