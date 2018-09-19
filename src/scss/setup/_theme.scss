@@ -66,6 +66,8 @@ $colors: (
       :root {
         --color-#{$c}: #{$color};
         --contrast-color-#{$c}: #{yiq($color)};
+        --darkened-color-#{$c}: #{mix($color, #000, 90%)};
+        --lightened-color-#{$c}: #{mix($color, #fff, 75%)};
       }
 
       ///
@@ -89,6 +91,8 @@ $colors: (
       .theme-#{$c} {
         --theme-color: var(--color-#{$c});
         --theme-contrast-color: var(--contrast-color-#{$c});
+        --theme-darkened-color: var(--darkened-color-#{$c});
+        --theme-lightened-color: var(--lightened-color-#{$c});
       }
     }
 

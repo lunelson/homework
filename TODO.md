@@ -1,3 +1,17 @@
+## thoughts re custom props
+
+- consider placing globals on a .homework-root class rather than :root, to reduce recalc tree size
+- consider placing more font metrics in the .f-[alias] base, such as real-em-height and middle-align-offset
+-
+
+
+## create a $homework-options object
+
+  - use-root: true -- whether to set homework CPs on :root object or on .homework-root class
+  - do-trim: true -- whether to trim fonts
+
+## conform font classes to .f-[family]-[size/line] format
+
 ## type (-) VS value/medium (--) ??
 
 .wrap
@@ -27,11 +41,11 @@
 .chain
 .chain-[y]
 
-(SHOULD THIS BE ATOMIC??)
+ (SHOULD THIS BE ATOMIC??) YES, because it aligns with declaration syntax directly
+.f-[alias]-[size/line]
 
 .font
 .font-[name]-[size/line]
-.[font-alias]-[size/line]
 
 .flow
 .flow-[y]

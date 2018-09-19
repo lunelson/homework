@@ -63,6 +63,8 @@
   z-index: 0; // make sure container can clip
 }
 
+// BASIC FUNCTIONAL LAYOUT CLASSES
+
 @mixin hide {
   pointer-events: none;
   visibility: hidden;
@@ -117,7 +119,8 @@
   .em, .italic { font-style: italic; }
 
   // clearfix
-  .cf, .clearfix { @include clearfix; }
+  .clearfix { @include clearfix; }
+  .nobr { white-space: nowrap; text-overflow: ellipsis; }
 
   // disable pointer on scrolling
   .is-scrolling,
@@ -133,6 +136,8 @@
 
   // hide overflow
   #{base-class('clip')} { @include clip; }
+  .clip-x { overflow-x: hidden; overflow-y: visible }
+  .clip-y { overflow-y: hidden; overflow-x: visible }
   .clip-circle { border-radius: 50%; }
 
   // hide visually-only

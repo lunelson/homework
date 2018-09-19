@@ -118,6 +118,7 @@
 
         .d-none#{$bp} { display: none; }
         .d-flex#{$bp} { display: flex; }
+        .d-flex-y#{$bp} { display: flex; flex-direction: column }
         .d-grid#{$bp} { display: grid; }
         .d-block#{$bp} { display: block; }
         .d-iblock#{$bp} { display: inline-block; vertical-align: baseline; }
