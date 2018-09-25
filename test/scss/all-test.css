@@ -55,6 +55,7 @@ html {
 [class^="wrap-"], [class*=" wrap-"] {
   margin-right: auto;
   margin-left: auto;
+  width: 100%;
   max-width: var(--wrap-width);
 }
 
@@ -107,6 +108,7 @@ html {
   display: flex;
   width: 100%;
   flex-direction: column;
+  align-items: stretch;
   padding-top: 0.01px;
   padding-bottom: 0.01px;
 }
@@ -225,6 +227,7 @@ body,
   display: flex;
   width: 100%;
   flex-direction: column;
+  align-items: stretch;
   padding-top: 0.01px;
   padding-bottom: 0.01px;
 }
@@ -5341,6 +5344,11 @@ body,
   display: flex;
 }
 
+.d-flex-y {
+  display: flex;
+  flex-direction: column;
+}
+
 .d-grid {
   display: grid;
 }
@@ -7718,6 +7726,10 @@ body,
   .d-flex__a {
     display: flex;
   }
+  .d-flex-y__a {
+    display: flex;
+    flex-direction: column;
+  }
   .d-grid__a {
     display: grid;
   }
@@ -10092,6 +10104,10 @@ body,
   }
   .d-flex__b {
     display: flex;
+  }
+  .d-flex-y__b {
+    display: flex;
+    flex-direction: column;
   }
   .d-grid__b {
     display: grid;
@@ -12468,6 +12484,10 @@ body,
   .d-flex__c {
     display: flex;
   }
+  .d-flex-y__c {
+    display: flex;
+    flex-direction: column;
+  }
   .d-grid__c {
     display: grid;
   }
@@ -12492,19 +12512,24 @@ body,
   font-style: italic;
 }
 
-.cf::after, .clearfix::after {
+.clearfix::after {
   content: "";
   display: table;
   clear: both;
 }
 
 @supports (display: flow-root) {
-  .cf, .clearfix {
+  .clearfix {
     display: flow-root;
   }
-  .cf::after, .clearfix::after {
+  .clearfix::after {
     content: none;
   }
+}
+
+.nobr {
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .is-scrolling,
@@ -12524,6 +12549,16 @@ body,
   overflow: hidden !important;
   position: relative;
   z-index: 0;
+}
+
+.clip-x {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.clip-y {
+  overflow-y: hidden;
+  overflow-x: visible;
 }
 
 .clip-circle {
@@ -12934,6 +12969,8 @@ body {
 :root {
   --color-dark: #111;
   --contrast-color-dark: #eee;
+  --darkened-color-dark: #0f0f0f;
+  --lightened-color-dark: #4d4d4d;
 }
 
 .fg-dark {
@@ -12957,11 +12994,15 @@ body {
 .theme-dark {
   --theme-color: var(--color-dark);
   --theme-contrast-color: var(--contrast-color-dark);
+  --theme-darkened-color: var(--darkened-color-dark);
+  --theme-lightened-color: var(--lightened-color-dark);
 }
 
 :root {
   --color-lite: #eee;
   --contrast-color-lite: #111;
+  --darkened-color-lite: #d6d6d6;
+  --lightened-color-lite: #f2f2f2;
 }
 
 .fg-lite {
@@ -12985,6 +13026,8 @@ body {
 .theme-lite {
   --theme-color: var(--color-lite);
   --theme-contrast-color: var(--contrast-color-lite);
+  --theme-darkened-color: var(--darkened-color-lite);
+  --theme-lightened-color: var(--lightened-color-lite);
 }
 
 .fg-theme {

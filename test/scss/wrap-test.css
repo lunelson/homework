@@ -55,6 +55,7 @@ html {
 [class^="wrap-"], [class*=" wrap-"] {
   margin-right: auto;
   margin-left: auto;
+  width: 100%;
   max-width: var(--wrap-width);
 }
 

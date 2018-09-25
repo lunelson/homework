@@ -26,8 +26,9 @@ $root-defaults: (
 
   // variations
   font-mods: ( sans: ( m: 16px 1.25 ) ),
-  inner-x-mods: ( m: 1rem ),
-  inner-y-mods: ( m: 1rem ),
+  inner-mods: ( m: 1rem ),
+  // inner-x-mods: ( m: 1rem ),
+  // inner-y-mods: ( m: 1rem ),
 );
 
 $media-defaults: (

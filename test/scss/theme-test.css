@@ -23,6 +23,8 @@ body {
 :root {
   --color-dark: #111;
   --contrast-color-dark: #eee;
+  --darkened-color-dark: #0f0f0f;
+  --lightened-color-dark: #4d4d4d;
 }
 
 .fg-dark {
@@ -46,11 +48,15 @@ body {
 .theme-dark {
   --theme-color: var(--color-dark);
   --theme-contrast-color: var(--contrast-color-dark);
+  --theme-darkened-color: var(--darkened-color-dark);
+  --theme-lightened-color: var(--lightened-color-dark);
 }
 
 :root {
   --color-lite: #eee;
   --contrast-color-lite: #111;
+  --darkened-color-lite: #d6d6d6;
+  --lightened-color-lite: #f2f2f2;
 }
 
 .fg-lite {
@@ -74,11 +80,15 @@ body {
 .theme-lite {
   --theme-color: var(--color-lite);
   --theme-contrast-color: var(--contrast-color-lite);
+  --theme-darkened-color: var(--darkened-color-lite);
+  --theme-lightened-color: var(--lightened-color-lite);
 }
 
 :root {
   --color-foo: #508021;
   --contrast-color-foo: #eee;
+  --darkened-color-foo: #48731e;
+  --lightened-color-foo: #7ca059;
 }
 
 .fg-foo {
@@ -102,11 +112,15 @@ body {
 .theme-foo {
   --theme-color: var(--color-foo);
   --theme-contrast-color: var(--contrast-color-foo);
+  --theme-darkened-color: var(--darkened-color-foo);
+  --theme-lightened-color: var(--lightened-color-foo);
 }
 
 :root {
   --color-bar: #da50c9;
   --contrast-color-bar: #eee;
+  --darkened-color-bar: #c448b5;
+  --lightened-color-bar: #e37cd7;
 }
 
 .fg-bar {
@@ -130,11 +144,15 @@ body {
 .theme-bar {
   --theme-color: var(--color-bar);
   --theme-contrast-color: var(--contrast-color-bar);
+  --theme-darkened-color: var(--darkened-color-bar);
+  --theme-lightened-color: var(--lightened-color-bar);
 }
 
 :root {
   --color-baz: #4741ff;
   --contrast-color-baz: #eee;
+  --darkened-color-baz: #403be6;
+  --lightened-color-baz: #7571ff;
 }
 
 .fg-baz {
@@ -158,11 +176,15 @@ body {
 .theme-baz {
   --theme-color: var(--color-baz);
   --theme-contrast-color: var(--contrast-color-baz);
+  --theme-darkened-color: var(--darkened-color-baz);
+  --theme-lightened-color: var(--lightened-color-baz);
 }
 
 :root {
   --color-fiz: #da9b30;
   --contrast-color-fiz: #eee;
+  --darkened-color-fiz: #c48c2b;
+  --lightened-color-fiz: #e3b464;
 }
 
 .fg-fiz {
@@ -186,6 +208,8 @@ body {
 .theme-fiz {
   --theme-color: var(--color-fiz);
   --theme-contrast-color: var(--contrast-color-fiz);
+  --theme-darkened-color: var(--darkened-color-fiz);
+  --theme-lightened-color: var(--lightened-color-fiz);
 }
 
 .fg-theme {

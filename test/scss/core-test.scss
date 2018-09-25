@@ -12,17 +12,17 @@ $root: (
     ),
   ),
   inner-x: 1rem,
-  inner-x-mods: (
+  inner-mods: (
     s: 0.5,
     m: 1,
     l: 2
   ),
   inner-y: 1.5rem,
-  inner-y-mods: (
-    s: 0.5,
-    m: 3.5rem,
-    l: 2
-  ),
+  // inner-y-mods: (
+  //   s: 0.5,
+  //   m: 3.5rem,
+  //   l: 2
+  // ),
   outer-top: 2rem,
   outer-right: 2rem,
   outer-bottom: 2rem,
@@ -36,9 +36,9 @@ $media: (
   b: (
     breakpoint: 40em,
     // font-size: 20px,
-    inner-y-mods: (
-      l: 4px
-    ),
+    // inner-y-mods: (
+    //   l: 4px
+    // ),
     font-defs: (
       serif: (
         l: 30px 1.1

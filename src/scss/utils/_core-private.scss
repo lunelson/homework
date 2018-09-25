@@ -20,11 +20,11 @@
 // }
 
 @mixin medium-inner-mods($medium) {
-  @each $y, $mod in map-get($medium, 'inner-y-mods') or () {
+  @each $y, $mod in map-get($medium, 'inner-y-mods') or map-get($medium, 'inner-mods') or () {
     @if unitless($mod) { --inner-y-#{$y}: calc(var(--inner-y) * #{$mod}); }
     @else { --inner-y-#{$y}: #{$mod}; }
   }
-  @each $x, $mod in map-get($medium, 'inner-x-mods') or () {
+  @each $x, $mod in map-get($medium, 'inner-x-mods') or map-get($medium, 'inner-mods') or () {
     @if unitless($mod) { --inner-x-#{$x}: calc(var(--inner-x) * #{$mod}); }
     @else { --inner-x-#{$x}: #{$mod}; }
   }

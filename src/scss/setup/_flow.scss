@@ -65,10 +65,10 @@
       }
     }
 
-    // @each $y, $mult in map-get($root, 'inner-y-mods') or () {
+    // @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
     //   .flow-#{$y} { --row-gap: var(--inner-y-#{$y}); }
     // }
-    // @each $x, $mult in map-get($root, 'inner-x-mods') or () {
+    // @each $x, $mult in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
     //   .row-#{$x},
     //   .flow-x-#{$x} { --column-gap: var(--inner-x-#{$x}); }
     // }
@@ -89,7 +89,7 @@
 
         $bp: m-suffix();
 
-        @each $y, $mult in map-get($root, 'inner-y-mods') or () {
+        @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
           .flow-#{$y}#{$bp} { --row-gap: var(--inner-y-#{$y}); }
         }
 

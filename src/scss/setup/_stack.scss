@@ -51,13 +51,13 @@
 
     #{base-class('stack')} { @include stack; }
 
-    @each $y, $mult in map-get($root, 'inner-y-mods') or () {
+    @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
       .stack-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
     }
 
     #{base-class('chain')} { @include chain; }
 
-    @each $x, $mult in map-get($root, 'inner-x-mods') or () {
+    @each $x, $mult in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
       .chain-#{$x} > * { --stack-gap: var(--inner-x-#{$x}); }
     }
 

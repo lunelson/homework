@@ -71,19 +71,24 @@ html {
   font-style: italic;
 }
 
-.cf::after, .clearfix::after {
+.clearfix::after {
   content: "";
   display: table;
   clear: both;
 }
 
 @supports (display: flow-root) {
-  .cf, .clearfix {
+  .clearfix {
     display: flow-root;
   }
-  .cf::after, .clearfix::after {
+  .clearfix::after {
     content: none;
   }
+}
+
+.nobr {
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .is-scrolling,
@@ -103,6 +108,16 @@ html {
   overflow: hidden !important;
   position: relative;
   z-index: 0;
+}
+
+.clip-x {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.clip-y {
+  overflow-y: hidden;
+  overflow-x: visible;
 }
 
 .clip-circle {
