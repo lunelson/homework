@@ -38,7 +38,7 @@
 
         $bp: m-suffix();
 
-        @each $y, $mod in map-get($root, 'inner-y-mods') or () {
+        @each $y, $mod in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
           .py-#{$y}#{$bp}, .pt-#{$y}#{$bp} { padding-top: var(--inner-y-#{$y}); }
           .py-#{$y}#{$bp}, .pb-#{$y}#{$bp} { padding-bottom: var(--inner-y-#{$y}); }
           .my-#{$y}#{$bp}, .mt-#{$y}#{$bp} { margin-top: var(--inner-y-#{$y}); }
@@ -46,7 +46,7 @@
           .my-neg-#{$y}#{$bp}, .mt-neg-#{$y}#{$bp} { margin-top: calc(-1 * var(--inner-y-#{$y})); }
           .my-neg-#{$y}#{$bp}, .mb-neg-#{$y}#{$bp} { margin-bottom: calc(-1 * var(--inner-y-#{$y})); }
         }
-        @each $x, $mod in map-get($root, 'inner-x-mods') or () {
+        @each $x, $mod in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
           .px-#{$x}#{$bp}, .pr-#{$x}#{$bp} { padding-right: var(--inner-x-#{$x}); }
           .px-#{$x}#{$bp}, .pl-#{$x}#{$bp} { padding-left: var(--inner-x-#{$x}); }
           .mx-#{$x}#{$bp}, .mr-#{$x}#{$bp} { margin-right: var(--inner-x-#{$x}); }
