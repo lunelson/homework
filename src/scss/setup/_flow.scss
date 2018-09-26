@@ -24,6 +24,7 @@
     #{base-class('flow')} {
       margin-top: calc(var(--row-gap) / -2);
       margin-bottom: calc(var(--row-gap) / -2);
+      // height: calc(100% + var(--row-gap));
       & > * {
         padding-top: calc(var(--row-gap) / 2);
         padding-bottom: calc(var(--row-gap) / 2);
@@ -50,6 +51,7 @@
       flex-wrap: wrap;
       margin-left: calc(var(--column-gap) / -2);
       margin-right: calc(var(--column-gap) / -2);
+      width: calc(100% + var(--column-gap));
       & > * {
         flex: 1 1 0%; // explicit basis
         min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
@@ -108,16 +110,16 @@
           .span-i-#{$n}#{$bp} { --span-i: #{$n}; & > * { --span-d: var(--span-i); } }
 
           // span atomics
-          .ml-#{$n}#{$bp} { margin-left: calc(100% * #{$n} / var(--span-d)); }
-          .mr-#{$n}#{$bp} { margin-right: calc(100% * #{$n} / var(--span-d)); }
-          .ml-neg-#{$n}#{$bp} { margin-left: calc(-100% * #{$n} / var(--span-d)); }
-          .mr-neg-#{$n}#{$bp} { margin-right: calc(-100% * #{$n} / var(--span-d)); }
+          .ml-#{$n}#{$bp} { margin-left: calc(100% * #{$n} / var(--span-d)) !important; }
+          .mr-#{$n}#{$bp} { margin-right: calc(100% * #{$n} / var(--span-d)) !important; }
+          .ml-neg-#{$n}#{$bp} { margin-left: calc(-100% * #{$n} / var(--span-d)) !important; }
+          .mr-neg-#{$n}#{$bp} { margin-right: calc(-100% * #{$n} / var(--span-d)) !important; }
 
           // span-i atomics
-          .ml-i-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
-          .mr-i-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)); }
-          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
-          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)); }
+          .ml-i-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
+          .mr-i-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
+          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
+          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
 
         }
       }
