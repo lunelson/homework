@@ -42,10 +42,10 @@ $done-homework-setup: false;
   }
 
   @if index($setups, 'core') { @include homework-core-setup($modern); }
+  @if index($setups, 'font') { @include homework-font-setup($modern); }
   @if index($setups, 'wrap') { @include homework-wrap-setup($modern); }
   @if index($setups, 'frame') { @include homework-frame-setup($modern); }
   @if index($setups, 'stack') { @include homework-stack-setup($modern); }
-  @if index($setups, 'font') { @include homework-font-setup($modern); }
   @if index($setups, 'grid') { @include homework-flow-setup($modern); }
   @if index($setups, 'atomic') { @include homework-atomic-setup($modern); }
   @if index($setups, 'helper') { @include homework-helper-setup($modern); }
