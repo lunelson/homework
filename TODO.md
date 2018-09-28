@@ -1,9 +1,17 @@
+## refactor .flow class pattern
+
+.flow should apply base inner-x and -y values
+.flow-[y]-[x] would be new base pattern
+  - make base-class('flow') -- base styles, default spacings
+  - make .flow-[y] for each y
+  - make .flow-[y]-[x] for each y * each x
+.flow-0 would collapse any y spacing
+.flow-0-0 would collapse any x spacing as well
+
 ## thoughts re custom props
 
 - consider placing globals on a .homework-root class rather than :root, to reduce recalc tree size
 - consider placing more font metrics in the .f-[alias] base, such as real-em-height and middle-align-offset
--
-
 
 ## create a $homework-options object
 
