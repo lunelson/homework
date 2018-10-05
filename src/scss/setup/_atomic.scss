@@ -124,6 +124,27 @@
         .d-iblock#{$bp} { display: inline-block; vertical-align: baseline; }
         .d-inline#{$bp} { display: inline; vertical-align: baseline; }
 
+        // position
+
+        .static#{$bp} { position: static; }
+        .rel#{$bp} { position: relative; }
+
+        .fix#{$bp} { position: fixed; }
+        .fix-tl#{$bp} { top: 0; left: 0; }
+        .fix-tr#{$bp} { top: 0; right: 0; }
+        .fix-bl#{$bp} { bottom: 0; left: 0; }
+        .fix-br#{$bp} { bottom: 0; right: 0; }
+        .fix-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
+
+        .abs#{$bp} { position: absolute; }
+        .abs-tl#{$bp} { top: 0; left: 0; }
+        .abs-tr#{$bp} { top: 0; right: 0; }
+        .abs-bl#{$bp} { bottom: 0; left: 0; }
+        .abs-br#{$bp} { bottom: 0; right: 0; }
+        .abs-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
+        .abs-cover#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .abs-contain#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+
       }
     }
   } @else {

@@ -1,3 +1,7 @@
+## dispo: display, position, clip, hide/vhide, show
+
+- consider bringing all these to a single file and creating both base and per-breakpoint classes for them
+
 ## refactor .flow class pattern
 
 .flow should apply base inner-x and -y values
