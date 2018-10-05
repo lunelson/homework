@@ -51,6 +51,7 @@
 
     #{base-class('stack')},
     #{base-class('wysiwyg')} { @include stack; }
+    .stack-0 > * { --stack-gap: 0; }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
       #{base-class('stack')},
@@ -59,6 +60,7 @@
     }
 
     #{base-class('chain')} { @include chain; }
+    .chain-0 > * { --chain-gap: 0; }
 
     @each $x, $mult in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
       #{base-class('chain')} { > .push-#{$x} { --chain-gap: var(--inner-x-#{$x}); } }
