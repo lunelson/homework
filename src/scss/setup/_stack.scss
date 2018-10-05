@@ -49,16 +49,20 @@
       --chain-gap: var(--inner-x);
     }
 
-    #{base-class('stack')} { @include stack; }
+    #{base-class('stack')},
+    #{base-class('wysiwyg')} { @include stack; }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
+      #{base-class('stack')},
+      #{base-class('wysiwyg')} { > .push-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
       .stack-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
     }
 
     #{base-class('chain')} { @include chain; }
 
     @each $x, $mult in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
-      .chain-#{$x} > * { --stack-gap: var(--inner-x-#{$x}); }
+      #{base-class('chain')} { > .push-#{$x} { --chain-gap: var(--inner-x-#{$x}); } }
+      .chain-#{$x} > * { --chain-gap: var(--inner-x-#{$x}); }
     }
 
   } @else {
