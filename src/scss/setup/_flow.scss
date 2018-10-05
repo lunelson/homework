@@ -7,9 +7,9 @@
 //                                   | |
 //                                   |_|
 
-@mixin homework-flow-setup($modern: true) {
+@mixin homework-flow-setup($modern: true, $max-columns: null) {
 
-  $max-columns: if(length($media) > 0, max-columns(), map-get($root, 'grid-columns'));
+  $max-columns: $max-columns or if(length($media) > 0, max-columns(), map-get($root, 'grid-columns'));
 
   @if $modern {
 
