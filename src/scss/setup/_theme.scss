@@ -50,6 +50,7 @@ $colors: (
   :root {
     --fg-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
     --bg-color: #{map-get($colors, if($lite, 'lite', 'dark'))};
+    // --bd-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
   }
 
   body {
@@ -61,6 +62,7 @@ $colors: (
 
     #{base-class('fg', false)} { color: var(--fg-color); }
     #{base-class('bg', false)} { background-color: var(--bg-color); }
+    // #{base-class('bd', false)} { border-color: var(--bd-color); }
 
     @each $c, $color in $colors {
       :root {
