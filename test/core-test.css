@@ -1,3 +1,28 @@
+.try {
+  out: calc(62.5vw + -12.5em);
+}
+
+/* (
+  a: (
+    breakpoint: 30em,
+    outer-right: calc(31.25vw + -6.25rem),
+    outer-left: calc(31.25vw + -6.25rem)
+  ),
+  b: (
+    breakpoint: 40em,
+    font-defs: (
+      serif: (
+        l: 30px 1.1
+      )
+    )
+  ),
+  c: (
+    font-size: 18px,
+    breakpoint: 60em,
+    outer-right: 200px,
+    outer-left: 200px
+  )
+) */
 html {
   font-size: var(--font-size);
   line-height: var(--line-height);
@@ -9,9 +34,9 @@ html {
   --inner-x: 1rem;
   --inner-y: 1.5rem;
   --outer-top: 2rem;
-  --outer-right: 2rem;
+  --outer-right: 50px;
   --outer-bottom: 2rem;
-  --outer-left: 2rem;
+  --outer-left: 50px;
   --grid-columns: 12;
   --outer-width: 100%;
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
@@ -42,6 +67,8 @@ html {
 @media screen and (min-width: 30em) {
   :root {
     --breakpoint: 30em;
+    --outer-right: calc(31.25vw + -6.25rem);
+    --outer-left: calc(31.25vw + -6.25rem);
     --outer-width: 30rem;
   }
 }
@@ -57,7 +84,8 @@ html {
   :root {
     --font-size: 18px;
     --breakpoint: 60em;
-    --outer-right: 80px;
+    --outer-right: 200px;
+    --outer-left: 200px;
     --outer-width: 53.33333rem;
   }
 }
@@ -69,9 +97,9 @@ html {
     inner-x: 1rem,
     inner-y: 1.5rem,
     outer-top: 2rem,
-    outer-right: 2rem,
+    outer-right: calc(31.25vw + -6.25rem),
     outer-bottom: 2rem,
-    outer-left: 2rem,
+    outer-left: calc(31.25vw + -6.25rem),
     grid-columns: 12,
     font-mods: (
       sans: (
@@ -97,9 +125,9 @@ html {
     inner-x: 1rem,
     inner-y: 1.5rem,
     outer-top: 2rem,
-    outer-right: 2rem,
+    outer-right: calc(31.25vw + -6.25rem),
     outer-bottom: 2rem,
-    outer-left: 2rem,
+    outer-left: calc(31.25vw + -6.25rem),
     grid-columns: 12,
     font-mods: (
       sans: (
@@ -130,9 +158,9 @@ html {
     inner-x: 1rem,
     inner-y: 1.5rem,
     outer-top: 2rem,
-    outer-right: 80px,
+    outer-right: 200px,
     outer-bottom: 2rem,
-    outer-left: 2rem,
+    outer-left: 200px,
     grid-columns: 12,
     font-mods: (
       sans: (

@@ -333,90 +333,12 @@ body:hover .vhide button {
   flex: 0 0 auto;
 }
 
-.static {
-  position: static;
-}
-
-.rel {
-  position: relative;
-}
-
 .fix, [class^="fix-"], [class*=" fix-"] {
   position: fixed;
 }
 
-.fix-tl {
-  top: 0;
-  left: 0;
-}
-
-.fix-tr {
-  top: 0;
-  right: 0;
-}
-
-.fix-bl {
-  bottom: 0;
-  left: 0;
-}
-
-.fix-br {
-  bottom: 0;
-  right: 0;
-}
-
-.fix-trbl {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
 .abs, [class^="abs-"], [class*=" abs-"] {
   position: absolute;
-}
-
-.abs-tl {
-  top: 0;
-  left: 0;
-}
-
-.abs-tr {
-  top: 0;
-  right: 0;
-}
-
-.abs-bl {
-  bottom: 0;
-  left: 0;
-}
-
-.abs-br {
-  bottom: 0;
-  right: 0;
-}
-
-.abs-trbl {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.abs-cover {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.abs-contain {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 .fit-cover {
@@ -436,7 +358,7 @@ body:hover .vhide button {
 
 .aspect > *, [class^="aspect-"] > *, [class*=" aspect-"] > * {
   flex: 0 0 auto;
-  max-width: 100%;
+  width: 100%;
 }
 
 .aspect:before, [class^="aspect-"]:before, [class*=" aspect-"]:before {
