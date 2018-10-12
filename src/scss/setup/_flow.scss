@@ -37,14 +37,6 @@
       padding-bottom: calc(var(--row-gap) / 2);
     }
 
-    // #{base-class('row')} {
-    //   & > * {
-    //     padding-top: 0.01px;
-    //     padding-bottom: 0.01px;
-    //   }
-    // }
-
-    // #{base-class('row')},
     #{base-class('flow')} {
       display: flex;
       flex-direction: row;
@@ -67,23 +59,15 @@
       }
     }
 
-    // @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
-    //   .flow-#{$y} { --row-gap: var(--inner-y-#{$y}); }
-    // }
-    // @each $x, $mult in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
-    //   .row-#{$x},
-    //   .flow-x-#{$x} { --column-gap: var(--inner-x-#{$x}); }
-    // }
-
     #{base-class('span')},
     #{base-m-class('span', false)} {
       flex: 0 0 auto;
-      width: calc(100% * var(--span-n) / var(--span-d));
+      width: calc(99.99999% * var(--span-n) / var(--span-d));
     }
 
     #{base-class('span-i')},
     #{base-m-class('span-i', false)} {
-      width: calc((100% + var(--column-gap)) * var(--span-i) / var(--span-d) - var(--column-gap));
+      width: calc((99.99999% + var(--column-gap)) * var(--span-i) / var(--span-d) - var(--column-gap));
     }
 
     @each $m in join((null), map-keys($media)) {
@@ -110,16 +94,16 @@
           .span-i-#{$n}#{$bp} { --span-i: #{$n}; & > * { --span-d: var(--span-i); } }
 
           // span atomics
-          .ml-#{$n}#{$bp} { margin-left: calc(100% * #{$n} / var(--span-d)) !important; }
-          .mr-#{$n}#{$bp} { margin-right: calc(100% * #{$n} / var(--span-d)) !important; }
-          .ml-neg-#{$n}#{$bp} { margin-left: calc(-100% * #{$n} / var(--span-d)) !important; }
-          .mr-neg-#{$n}#{$bp} { margin-right: calc(-100% * #{$n} / var(--span-d)) !important; }
+          .ml-#{$n}#{$bp} { margin-left: calc(99.99999% * #{$n} / var(--span-d)) !important; }
+          .mr-#{$n}#{$bp} { margin-right: calc(99.99999% * #{$n} / var(--span-d)) !important; }
+          .ml-neg-#{$n}#{$bp} { margin-left: calc(-99.99999% * #{$n} / var(--span-d)) !important; }
+          .mr-neg-#{$n}#{$bp} { margin-right: calc(-99.99999% * #{$n} / var(--span-d)) !important; }
 
           // span-i atomics
-          .ml-i-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
-          .mr-i-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
-          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
-          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((100% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
+          .ml-i-#{$n}#{$bp} { margin-left: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
+          .mr-i-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
+          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((99.99999% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
+          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
 
         }
       }
@@ -134,18 +118,18 @@
 // | | | | | | |>  <| | | | \__ \
 // |_| |_| |_|_/_/\_\_|_| |_|___/
 
-@function span-width($n: 1) { @return calc(100% * #{$n} / var(--span-d)); }
-@function span-i-width($n: 1) { @return calc((100% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap)); }
-@function push-width($p: 1) { @return calc(100% * #{$p} / var(--span-d)); }
-@function push-i-width($p: 1) { @return calc((100% + var(--column-gap)) * #{$p} / var(--span-d)); }
+@function span-width($n: 1) { @return calc(99.99999% * #{$n} / var(--span-d)); }
+@function span-i-width($n: 1) { @return calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap)); }
+@function push-width($p: 1) { @return calc(99.99999% * #{$p} / var(--span-d)); }
+@function push-i-width($p: 1) { @return calc((99.99999% + var(--column-gap)) * #{$p} / var(--span-d)); }
 
 @mixin span($n: null, $l: null, $r: null) {
   @if $n {
-    width: calc(100% * #{$n} / var(--span-d));
+    width: calc(99.99999% * #{$n} / var(--span-d));
     & > * { --span-d: #{$n}; }
   }
-  @if $l { margin-left: calc(100% * #{$l} / var(--span-d)); }
-  @if $r { margin-right: calc(100% * #{$r} / var(--span-d)); }
+  @if $l { margin-left: calc(99.99999% * #{$l} / var(--span-d)); }
+  @if $r { margin-right: calc(99.99999% * #{$r} / var(--span-d)); }
 }
 
 @mixin spans($spans) {
@@ -161,11 +145,11 @@
 
 @mixin span-i($n: null, $l: null, $r: null) {
   @if $n {
-    width: calc((100% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap));
+    width: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d) - var(--column-gap));
     & > * { --span-d: #{$n}; }
   }
-  @if $l { margin-left: calc((100% + var(--column-gap)) * #{$l} / var(--span-d)); }
-  @if $r { margin-right: calc((100% + var(--column-gap)) * #{$r} / var(--span-d)); }
+  @if $l { margin-left: calc((99.99999% + var(--column-gap)) * #{$l} / var(--span-d)); }
+  @if $r { margin-right: calc((99.99999% + var(--column-gap)) * #{$r} / var(--span-d)); }
 }
 
 @mixin spans-i($spans) {

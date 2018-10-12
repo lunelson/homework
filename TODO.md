@@ -1,3 +1,8 @@
+## grid, flow, cols, row
+
+`.flow.rows-[x]`
+`.grid.cols-[y]`
+
 ## dispo: display, position, clip, hide/vhide, show
 
 - consider bringing all these to a single file and creating both base and per-breakpoint classes for them
