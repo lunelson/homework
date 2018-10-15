@@ -68,7 +68,7 @@ $fonts-defaults: (
 //                                              |_|
 
 @function font-class($f, $i, $a) { @return base-class($f); }
-@mixin homework-font-setup($modern: true, $trim: true, $elements: p ul ol dl h3 h4 h5 h6) {
+@mixin homework-font-setup($modern: true, $trim: true, $elements: p ul ol dl h3 h4 h5 h6 blockquote) {
 
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
   @each $f, $font in $fonts {
@@ -169,8 +169,8 @@ $fonts-defaults: (
       }
     }
 
-    #{base-class('wysiwyg')} {
-      @include stack;
+    #{base-class('plain')} {
+
       #{zip($elements)} {
         font-family: var(--font-family);
         font-size: var(--font-size);

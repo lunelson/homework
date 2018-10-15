@@ -15,7 +15,6 @@
   & > * {
     flex: 0 0 auto;
     // width: 100%;
-    // height: auto;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -25,12 +24,11 @@
 }
 
 @mixin chain {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
+  // display: flex;
+  // width: 100%;
+  // flex-direction: row;
   & > * {
-    flex: 0 0 auto;
-    // width: auto;
+    // flex: 0 0 auto;
     margin-left: 0;
     margin-right: 0;
     text-overflow: ellipsis;
@@ -49,13 +47,24 @@
       --chain-gap: var(--inner-x);
     }
 
-    #{base-class('stack')},
-    #{base-class('wysiwyg')} { @include stack; }
+    #{base-class('plain')} {
+      padding-top: 0.01px;
+      padding-bottom: 0.01px;
+      & > * {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      & > * + * {
+        margin-top: var(--stack-gap);
+      }
+    }
+
+    #{base-class('stack')} { @include stack; }
     .stack-0 > * { --stack-gap: 0; }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
       #{base-class('stack')},
-      #{base-class('wysiwyg')} { > .push-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
+      #{base-class('plain')} { > .push-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
       .stack-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
     }
 
