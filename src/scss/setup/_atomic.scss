@@ -111,8 +111,8 @@
 
         // dimensions: 100%
 
-        .w-100p#{$bp} { width: 0; }
-        .h-100p#{$bp} { height: 0; }
+        .w-100#{$bp} { width: 100%; }
+        .h-100#{$bp} { height: 100%; }
 
         // display
 
