@@ -40,6 +40,18 @@ $colors: (
   @return map-get($colors, if($yiq >= 0.5, 'dark', 'lite'));
 }
 
+
+@function rgbify($color) {
+  @return red($color), green($color), blue($color);
+}
+
+// override Sass' handling of these, let them pass through as CSS
+@function rgb($args...) { @return #{'rgb(#{$args})'}; }
+@function rgba($args...) { @return #{'rgba(#{$args})'}; }
+@function hsl($args...) { @return #{'hsl(#{$args})'}; }
+@function hsla($args...) { @return #{'hsla(#{$args})'}; }
+
+
 @mixin homework-theme-setup($modern: true, $lite: true) {
 
   $colors: map-merge((
@@ -48,28 +60,32 @@ $colors: (
   ), $colors) !global;
 
   :root {
-    --fg-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
-    --bg-color: #{map-get($colors, if($lite, 'lite', 'dark'))};
+    // NB: color custom props stored as RGB number list!!!!
+    // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
+
+    --fg-color: #{rgbify(map-get($colors, if($lite, 'dark', 'lite')))};
+    --bg-color: #{rgbify(map-get($colors, if($lite, 'lite', 'dark')))};
     // --bd-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
   }
 
   body {
-    color: var(--fg-color);
-    background-color: var(--bg-color);
+    color: rgb(var(--fg-color));
+    background-color: rgb(var(--bg-color));
   }
 
   @if $modern {
 
-    #{base-class('fg', false)} { color: var(--fg-color); }
-    #{base-class('bg', false)} { background-color: var(--bg-color); }
-    // #{base-class('bd', false)} { border-color: var(--bd-color); }
+    #{base-class('fg', false)} { color: rgb(var(--fg-color)); }
+    #{base-class('bg', false)} { background-color: rgb(var(--bg-color)); }
+    // #{base-class('bd', false)} { border-color: rgb(var(--bd-color)); }
 
     @each $c, $color in $colors {
       :root {
-        --color-#{$c}: #{$color};
-        --contrast-color-#{$c}: #{yiq($color)};
-        --darkened-color-#{$c}: #{mix($color, #000, 90%)};
-        --lightened-color-#{$c}: #{mix($color, #fff, 75%)};
+        // NB: color custom props stored as RGB number list!!!!
+        --color-#{$c}: #{rgbify($color)};
+        --contrast-color-#{$c}: #{rgbify(yiq($color))};
+        --darkened-color-#{$c}: #{rgbify(mix($color, #000, 90%))};
+        --lightened-color-#{$c}: #{rgbify(mix($color, #fff, 75%))};
       }
 
       ///

@@ -53,8 +53,21 @@ html {
   --chain-gap: var(--inner-x);
 }
 
-.stack, [class^="stack-"], [class*=" stack-"],
-.wysiwyg, [class^="wysiwyg-"], [class*=" wysiwyg-"] {
+.plain, [class^="plain-"], [class*=" plain-"] {
+  padding-top: 0.01px;
+  padding-bottom: 0.01px;
+}
+
+.plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.plain > * + *, [class^="plain-"] > * + *, [class*=" plain-"] > * + * {
+  margin-top: var(--stack-gap);
+}
+
+.stack, [class^="stack-"], [class*=" stack-"] {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -63,15 +76,13 @@ html {
   padding-bottom: 0.01px;
 }
 
-.stack > *, [class^="stack-"] > *, [class*=" stack-"] > *,
-.wysiwyg > *, [class^="wysiwyg-"] > *, [class*=" wysiwyg-"] > * {
+.stack > *, [class^="stack-"] > *, [class*=" stack-"] > * {
   flex: 0 0 auto;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.stack > * + *, [class^="stack-"] > * + *, [class*=" stack-"] > * + *,
-.wysiwyg > * + *, [class^="wysiwyg-"] > * + *, [class*=" wysiwyg-"] > * + * {
+.stack > * + *, [class^="stack-"] > * + *, [class*=" stack-"] > * + * {
   margin-top: var(--stack-gap);
 }
 
@@ -80,7 +91,7 @@ html {
 }
 
 .stack > .push-s, [class^="stack-"] > .push-s, [class*=" stack-"] > .push-s,
-.wysiwyg > .push-s, [class^="wysiwyg-"] > .push-s, [class*=" wysiwyg-"] > .push-s {
+.plain > .push-s, [class^="plain-"] > .push-s, [class*=" plain-"] > .push-s {
   --stack-gap: var(--inner-y-s);
 }
 
@@ -89,7 +100,7 @@ html {
 }
 
 .stack > .push-m, [class^="stack-"] > .push-m, [class*=" stack-"] > .push-m,
-.wysiwyg > .push-m, [class^="wysiwyg-"] > .push-m, [class*=" wysiwyg-"] > .push-m {
+.plain > .push-m, [class^="plain-"] > .push-m, [class*=" plain-"] > .push-m {
   --stack-gap: var(--inner-y-m);
 }
 
@@ -98,7 +109,7 @@ html {
 }
 
 .stack > .push-l, [class^="stack-"] > .push-l, [class*=" stack-"] > .push-l,
-.wysiwyg > .push-l, [class^="wysiwyg-"] > .push-l, [class*=" wysiwyg-"] > .push-l {
+.plain > .push-l, [class^="plain-"] > .push-l, [class*=" plain-"] > .push-l {
   --stack-gap: var(--inner-y-l);
 }
 
@@ -106,14 +117,7 @@ html {
   --stack-gap: var(--inner-y-l);
 }
 
-.chain, [class^="chain-"], [class*=" chain-"] {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-}
-
 .chain > *, [class^="chain-"] > *, [class*=" chain-"] > * {
-  flex: 0 0 auto;
   margin-left: 0;
   margin-right: 0;
   text-overflow: ellipsis;

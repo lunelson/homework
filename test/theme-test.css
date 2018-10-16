@@ -3,28 +3,28 @@
 }
 
 :root {
-  --fg-color: #111;
-  --bg-color: #eee;
+  --fg-color: 17, 17, 17;
+  --bg-color: 238, 238, 238;
 }
 
 body {
-  color: var(--fg-color);
-  background-color: var(--bg-color);
+  color: rgb(var(--fg-color));
+  background-color: rgb(var(--bg-color));
 }
 
 [class^="fg-"], [class*=" fg-"] {
-  color: var(--fg-color);
+  color: rgb(var(--fg-color));
 }
 
 [class^="bg-"], [class*=" bg-"] {
-  background-color: var(--bg-color);
+  background-color: rgb(var(--bg-color));
 }
 
 :root {
-  --color-dark: #111;
-  --contrast-color-dark: #eee;
-  --darkened-color-dark: #0f0f0f;
-  --lightened-color-dark: #4d4d4d;
+  --color-dark: 17, 17, 17;
+  --contrast-color-dark: 238, 238, 238;
+  --darkened-color-dark: 15, 15, 15;
+  --lightened-color-dark: 77, 77, 77;
 }
 
 .fg-dark {
@@ -53,10 +53,10 @@ body {
 }
 
 :root {
-  --color-lite: #eee;
-  --contrast-color-lite: #111;
-  --darkened-color-lite: #d6d6d6;
-  --lightened-color-lite: #f2f2f2;
+  --color-lite: 238, 238, 238;
+  --contrast-color-lite: 17, 17, 17;
+  --darkened-color-lite: 214, 214, 214;
+  --lightened-color-lite: 242, 242, 242;
 }
 
 .fg-lite {
@@ -85,10 +85,10 @@ body {
 }
 
 :root {
-  --color-foo: #508021;
-  --contrast-color-foo: #eee;
-  --darkened-color-foo: #48731e;
-  --lightened-color-foo: #7ca059;
+  --color-foo: 80, 128, 33;
+  --contrast-color-foo: 238, 238, 238;
+  --darkened-color-foo: 72, 115, 30;
+  --lightened-color-foo: 124, 160, 89;
 }
 
 .fg-foo {
@@ -117,10 +117,10 @@ body {
 }
 
 :root {
-  --color-bar: #da50c9;
-  --contrast-color-bar: #eee;
-  --darkened-color-bar: #c448b5;
-  --lightened-color-bar: #e37cd7;
+  --color-bar: 218, 80, 201;
+  --contrast-color-bar: 238, 238, 238;
+  --darkened-color-bar: 196, 72, 181;
+  --lightened-color-bar: 227, 124, 215;
 }
 
 .fg-bar {
@@ -149,10 +149,10 @@ body {
 }
 
 :root {
-  --color-baz: #4741ff;
-  --contrast-color-baz: #eee;
-  --darkened-color-baz: #403be6;
-  --lightened-color-baz: #7571ff;
+  --color-baz: 71, 65, 255;
+  --contrast-color-baz: 238, 238, 238;
+  --darkened-color-baz: 64, 59, 230;
+  --lightened-color-baz: 117, 113, 255;
 }
 
 .fg-baz {
@@ -181,10 +181,10 @@ body {
 }
 
 :root {
-  --color-fiz: #da9b30;
-  --contrast-color-fiz: #eee;
-  --darkened-color-fiz: #c48c2b;
-  --lightened-color-fiz: #e3b464;
+  --color-fiz: 218, 155, 48;
+  --contrast-color-fiz: 238, 238, 238;
+  --darkened-color-fiz: 196, 140, 43;
+  --lightened-color-fiz: 227, 180, 100;
 }
 
 .fg-fiz {

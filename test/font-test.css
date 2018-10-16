@@ -118,36 +118,17 @@ body,
   --line-height: var(--line-height-serif-m);
 }
 
-.wysiwyg, [class^="wysiwyg-"], [class*=" wysiwyg-"] {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: stretch;
-  padding-top: 0.01px;
-  padding-bottom: 0.01px;
-}
-
-.wysiwyg > *, [class^="wysiwyg-"] > *, [class*=" wysiwyg-"] > * {
-  flex: 0 0 auto;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.wysiwyg > * + *, [class^="wysiwyg-"] > * + *, [class*=" wysiwyg-"] > * + * {
-  margin-top: var(--stack-gap);
-}
-
-.wysiwyg p, .wysiwyg ul, .wysiwyg ol, .wysiwyg dl, .wysiwyg h3, .wysiwyg h4, .wysiwyg h5, .wysiwyg h6, [class^="wysiwyg-"] p, [class^="wysiwyg-"] ul, [class^="wysiwyg-"] ol, [class^="wysiwyg-"] dl, [class^="wysiwyg-"] h3, [class^="wysiwyg-"] h4, [class^="wysiwyg-"] h5, [class^="wysiwyg-"] h6, [class*=" wysiwyg-"] p, [class*=" wysiwyg-"] ul, [class*=" wysiwyg-"] ol, [class*=" wysiwyg-"] dl, [class*=" wysiwyg-"] h3, [class*=" wysiwyg-"] h4, [class*=" wysiwyg-"] h5, [class*=" wysiwyg-"] h6 {
+.plain p, .plain ul, .plain ol, .plain dl, .plain h3, .plain h4, .plain h5, .plain h6, .plain blockquote, [class^="plain-"] p, [class^="plain-"] ul, [class^="plain-"] ol, [class^="plain-"] dl, [class^="plain-"] h3, [class^="plain-"] h4, [class^="plain-"] h5, [class^="plain-"] h6, [class^="plain-"] blockquote, [class*=" plain-"] p, [class*=" plain-"] ul, [class*=" plain-"] ol, [class*=" plain-"] dl, [class*=" plain-"] h3, [class*=" plain-"] h4, [class*=" plain-"] h5, [class*=" plain-"] h6, [class*=" plain-"] blockquote {
   font-family: var(--font-family);
   font-size: var(--font-size);
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing);
 }
 
-.wysiwyg > p, .wysiwyg > ul, .wysiwyg > ol, .wysiwyg > dl, .wysiwyg > h3, .wysiwyg > h4, .wysiwyg > h5, .wysiwyg > h6, [class^="wysiwyg-"] > p, [class^="wysiwyg-"] > ul, [class^="wysiwyg-"] > ol, [class^="wysiwyg-"] > dl, [class^="wysiwyg-"] > h3, [class^="wysiwyg-"] > h4, [class^="wysiwyg-"] > h5, [class^="wysiwyg-"] > h6, [class*=" wysiwyg-"] > p, [class*=" wysiwyg-"] > ul, [class*=" wysiwyg-"] > ol, [class*=" wysiwyg-"] > dl, [class*=" wysiwyg-"] > h3, [class*=" wysiwyg-"] > h4, [class*=" wysiwyg-"] > h5, [class*=" wysiwyg-"] > h6 {
+.plain > p, .plain > ul, .plain > ol, .plain > dl, .plain > h3, .plain > h4, .plain > h5, .plain > h6, .plain > blockquote, [class^="plain-"] > p, [class^="plain-"] > ul, [class^="plain-"] > ol, [class^="plain-"] > dl, [class^="plain-"] > h3, [class^="plain-"] > h4, [class^="plain-"] > h5, [class^="plain-"] > h6, [class^="plain-"] > blockquote, [class*=" plain-"] > p, [class*=" plain-"] > ul, [class*=" plain-"] > ol, [class*=" plain-"] > dl, [class*=" plain-"] > h3, [class*=" plain-"] > h4, [class*=" plain-"] > h5, [class*=" plain-"] > h6, [class*=" plain-"] > blockquote {
   margin: 0 var(--trim-x);
 }
 
-.wysiwyg > * + p, .wysiwyg > * + ul, .wysiwyg > * + ol, .wysiwyg > * + dl, .wysiwyg > * + h3, .wysiwyg > * + h4, .wysiwyg > * + h5, .wysiwyg > * + h6, [class^="wysiwyg-"] > * + p, [class^="wysiwyg-"] > * + ul, [class^="wysiwyg-"] > * + ol, [class^="wysiwyg-"] > * + dl, [class^="wysiwyg-"] > * + h3, [class^="wysiwyg-"] > * + h4, [class^="wysiwyg-"] > * + h5, [class^="wysiwyg-"] > * + h6, [class*=" wysiwyg-"] > * + p, [class*=" wysiwyg-"] > * + ul, [class*=" wysiwyg-"] > * + ol, [class*=" wysiwyg-"] > * + dl, [class*=" wysiwyg-"] > * + h3, [class*=" wysiwyg-"] > * + h4, [class*=" wysiwyg-"] > * + h5, [class*=" wysiwyg-"] > * + h6 {
+.plain > * + p, .plain > * + ul, .plain > * + ol, .plain > * + dl, .plain > * + h3, .plain > * + h4, .plain > * + h5, .plain > * + h6, .plain > * + blockquote, [class^="plain-"] > * + p, [class^="plain-"] > * + ul, [class^="plain-"] > * + ol, [class^="plain-"] > * + dl, [class^="plain-"] > * + h3, [class^="plain-"] > * + h4, [class^="plain-"] > * + h5, [class^="plain-"] > * + h6, [class^="plain-"] > * + blockquote, [class*=" plain-"] > * + p, [class*=" plain-"] > * + ul, [class*=" plain-"] > * + ol, [class*=" plain-"] > * + dl, [class*=" plain-"] > * + h3, [class*=" plain-"] > * + h4, [class*=" plain-"] > * + h5, [class*=" plain-"] > * + h6, [class*=" plain-"] > * + blockquote {
   margin-top: calc(var(--stack-gap));
 }
