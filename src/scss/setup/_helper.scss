@@ -132,7 +132,10 @@
   #{base-class('hold')} { position: relative; }
 
   // stop margin collapse propagation
-  .stop, .trim { padding: 0.1px; }
+  .stop, .trim {
+    padding-top: 0.1px;
+    padding-bottom: 0.1px;
+  }
 
   // hide overflow
   #{base-class('clip')} { @include clip; }
