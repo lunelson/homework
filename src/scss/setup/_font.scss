@@ -42,7 +42,7 @@ $fonts-defaults: (
   }
 }
 
-@mixin medium-font-mods($medium, $trim: true) {
+@mixin --medium-font-mods($medium, $trim: true) {
   @each $f, $mod in map-get($medium, 'font-mods') or () {
     @each $s, $def in $mod {
       $size: strip(nth($def, 1));

@@ -15,7 +15,7 @@ const sassIncl = path.join(__dirname, 'node_modules');
 */
 
 function work() {
-  return gulp.src('./test/*.scss')
+  return gulp.src('./test/**/*.scss')
     .pipe(plumber(sass.logError))
     .pipe(sass({
       outputStyle: 'expanded',
@@ -24,7 +24,7 @@ function work() {
     .pipe(gulp.dest('./test'));
 }
 function test() {
-  return gulp.src('./test/*.scss')
+  return gulp.src('./test/**/*.scss')
     .pipe(plumber())
     .pipe(sass({
       outputStyle: 'expanded',

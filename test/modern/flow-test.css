@@ -1,8 +1,3 @@
-html {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
-}
-
 :root {
   --font-size: 16px;
   --line-height: 1.25;
@@ -24,6 +19,11 @@ html {
   --line-height-sans-m: 1.25;
   --trim-top-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
   --trim-bottom-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
+}
+
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
 }
 
 @media screen and (min-width: 20em) {

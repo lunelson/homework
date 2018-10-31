@@ -39,40 +39,45 @@ $media-defaults: (
 
 @mixin homework-core-setup($modern: true, $trim: true) {
 
-  // backup origs; merge defaults
   $root-orig: $root !global;
   $media-orig: $media !global;
   $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
 
+  //
+  // IF MODERN
+  //
+
   @if $modern {
-
-    html {
-      font-size: var(--font-size);
-      line-height: var(--line-height);
-    }
     :root {
-
       @each $key, $val in $root {
         @if not index('list' 'map', type-of($val)) {
           --#{$key}: #{$val};
         }
       }
       --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+      @include --medium-inner-mods($root);
+      @include --medium-font-mods($root, $trim);
+    }
+    html {
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+    }
+  }
 
-      @include medium-inner-mods($root);
-      @include medium-font-mods($root, $trim);
+  $reference-medium: $root;
+  @each $m, $medium in $media {
+    @if not index(map-keys($medium), 'breakpoint') {
+      @include error('homework: one of your $media does not have a breakpoint key');
     }
 
-    $reference-medium: $root;
-    @each $m, $medium in $media {
-      @if not index(map-keys($medium), 'breakpoint') {
-        @include error('homework: one of your $media does not have a breakpoint key');
-      }
+    $reference-medium: --parse-medium(--deep-merge($reference-medium, $medium));
 
-      $reference-medium: --parse-medium(--deep-merge($reference-medium, $medium));
+    //
+    // IF MODERN
+    //
 
-      @media #{--query-string(map-get($medium, 'breakpoint'))} {
-
+    @media #{--query-string(map-get($medium, 'breakpoint'))} {
+      @if $modern {
         :root {
           @each $key in join(map-keys($medium), ('outer-width')) {
             $val: map-get($reference-medium, $key);
@@ -80,14 +85,25 @@ $media-defaults: (
               --#{$key}: #{$val};
             }
           }
-          @include medium-inner-mods($medium);
-          @include medium-font-mods($medium, $trim);
+          @include --medium-inner-mods($medium);
+          @include --medium-font-mods($medium, $trim);
         }
       }
-
-      $media: map-merge($media, ($m: $reference-medium)) !global;
     }
-  } @else {
-    // legacy init?
+
+    $media: map-merge($media, ($m: $reference-medium)) !global;
+  }
+
+  //
+  // IF LEGACY
+  //
+
+  @if not $modern {
+    @include mm-for('font-size', 'line-height') {
+      html {
+        font-size: m-var(font-size);
+        line-height: m-var(line-height);
+      }
+    }
   }
 }

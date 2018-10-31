@@ -1,4 +1,4 @@
-@import 'index';
+@import '../index';
 
 $root: (
   inner-x: 2rem,
@@ -46,17 +46,5 @@ $fonts: (
   )
 );
 
-@include homework-core-setup();
-@include homework-font-setup();
-
-.wysiwyg-s {
-  --stack-gap: 2rem;
-  > h1, > h2, > h3, > p, > ul, > ol { @include font-base('sans'); }
-  > h4, > h5, > h6 { @include font-base('mono'); }
-  > p {
-    @include font-mod(sans, l);
-    @at-root #{selector-insert('h1, h2, h3, h4, h5, h6', '+')} {
-      --stack-gap: 3rem;
-    }
-  }
-}
+@include homework-core-setup(true, false);
+@include homework-font-setup(true, false);

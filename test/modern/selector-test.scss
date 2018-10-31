@@ -1,4 +1,4 @@
-@import 'index';
+@import '../index';
 
 @function slice($list, $start-at: 1, $end-at: -1, $sep: list-separator($list)) {
   $out: ();

@@ -1,0 +1,69 @@
+@import '../index';
+
+$root: (
+  outer-top: 1rem,
+  outer-right: 1rem,
+  outer-bottom: 1rem,
+  outer-left: 1rem,
+);
+
+$media: (
+  a: (
+    breakpoint: 20em,
+    outer-top: 2rem,
+    outer-right: 2rem,
+    outer-bottom: 2rem,
+    outer-left: 2rem,
+    ),
+  b: (
+    breakpoint: 30em,
+    outer-top: 3rem,
+    outer-right: 3rem,
+    outer-bottom: 3rem,
+    outer-left: 3rem,
+    ),
+  c: (
+    breakpoint: 40em,
+    outer-top: 4rem,
+    outer-right: 4rem,
+    outer-bottom: 4rem,
+    outer-left: 4rem,
+    ),
+);
+
+@include homework-core-setup(false);
+@include homework-frame-setup(false);
+
+// @function m-class($sel, $ms...) {
+//   $sel: selector-parse($sel); $out: ();
+//   @each $m in $ms {
+//     $fix: m-suffix($m);
+//     @each $sub in $sel {
+//       $out: append($out, selector-parse('#{$sub}#{$fix}'), 'comma');
+//     }
+//   }
+//   @return $out;
+// }
+
+// $m-depth: ();
+// @each $m in join(null, map-keys($media)) {
+//   $m-depth: append($m-depth, $m);
+
+//   @include m($m) {
+//     $fix: m-suffix();
+
+//     #{m-class('.frame-y, .frame-t', $m-depth...)},
+//     #{m-class('.outer-y, .outer-t', $m-depth...)} { padding-top: m-var('outer-top'); }
+//     #{m-class('.frame, .frame-r', $m-depth...)},
+//     #{m-class('.outer, .outer-r', $m-depth...)} { padding-right: m-var('outer-right'); }
+//     #{m-class('.frame-y, .frame-b', $m-depth...)},
+//     #{m-class('.outer-y, .outer-b', $m-depth...)} { padding-bottom: m-var('outer-bottom'); }
+//     #{m-class('.frame, .frame-l', $m-depth...)},
+//     #{m-class('.outer, .outer-l', $m-depth...)} { padding-left: m-var('outer-left'); }
+
+//     #{m-class('.bleed, .bleed-r', $m-depth...)},
+//     #{m-class('.spread, .spread-r', $m-depth...)} { margin-right: m-var('outer-right')/-1; }
+//     #{m-class('.bleed, .bleed-l', $m-depth...)},
+//     #{m-class('.spread, .spread-l', $m-depth...)} { margin-left: m-var('outer-left')/-1; }
+//   }
+// }

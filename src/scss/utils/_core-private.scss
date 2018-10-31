@@ -2,24 +2,7 @@
 // init helpers
 //
 
-// @mixin __mod-properties($medium) {
-//   @each $y, $mod in map-get($medium, 'inner-y-mods') or () {
-//     @if unitless($mod) { --inner-y-#{$y}: calc(var(--inner-y) * #{$mod}); }
-//     @else { --inner-y-#{$y}: #{$mod}; }
-//   }
-//   @each $x, $mod in map-get($medium, 'inner-x-mods') or () {
-//     @if unitless($mod) { --inner-x-#{$x}: calc(var(--inner-x) * #{$mod}); }
-//     @else { --inner-x-#{$x}: #{$mod}; }
-//   }
-//   @each $f, $mod in map-get($medium, 'font-mods') or () {
-//     @each $s, $def in $mod {
-//       --font-size-#{$f}-#{$s}: #{nth($def, 1) / 16px * 1rem};
-//       --line-height-#{$f}-#{$s}: #{nth($def, 2)};
-//     }
-//   }
-// }
-
-@mixin medium-inner-mods($medium) {
+@mixin --medium-inner-mods($medium) {
   @each $y, $mod in map-get($medium, 'inner-y-mods') or map-get($medium, 'inner-mods') or () {
     @if unitless($mod) { --inner-y-#{$y}: calc(var(--inner-y) * #{$mod}); }
     @else { --inner-y-#{$y}: #{$mod}; }
@@ -82,17 +65,6 @@
   $index2: if($hi, index($keys, $hi), length($keys));
   @return if($index1 and $index2, --slice($keys, $index1, $index2), ());
 }
-
-// @function --mm-filter($props...) {
-//   @if length($props) < 1 { @return (); }
-//   $result: ();
-//   @each $m, $medium-orig in $media-orig {
-//     $test: false;
-//     @each $prop in $props { $test: if(get($medium-orig, $prop...), true, $test); }
-//     $result: if($test, append($result, $m), $result);
-//   }
-//   @return if(length($result) > 0, join(join(null, $result), null), ());
-// }
 
 @function --mm-where($props...) {
   $result: --mm-filter-orig(map-keys($media), $props...);

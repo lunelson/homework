@@ -1,0 +1,53 @@
+@media screen and (max-width: 29.999em) {
+  html {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  html {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+}
+
+[class^="wrap-"], [class*=" wrap-"] {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+.wrap-left {
+  margin-left: 0;
+}
+
+.wrap-right {
+  margin-right: 0;
+}
+
+@media screen and (min-width: 20em) {
+  .wrap-a,
+  .wrap-each,
+  .wrap-each__a {
+    max-width: 20rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .wrap-b,
+  .wrap-each,
+  .wrap-each__a, .wrap-each__b {
+    max-width: 24rem;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  .wrap-c,
+  .wrap-each,
+  .wrap-each__a, .wrap-each__b, .wrap-each__c,
+  .wrap-last {
+    max-width: 32rem;
+  }
+}

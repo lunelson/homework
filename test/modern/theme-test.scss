@@ -1,4 +1,4 @@
-@import 'index';
+@import '../index';
 
 // srgb gamma correction, per spec: https://en.wikipedia.org/wiki/srgb
 @function re-gamma($n) { @if $n <= 0.0031308 { @return $n * 12.92; } @else { @return 1.055 * pow($n, 1/2.4) - 0.055; } }

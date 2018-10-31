@@ -1,4 +1,4 @@
-@import 'index';
+@import '../index';
 
 $root: (
   inner-x: 2rem,
@@ -16,11 +16,12 @@ $root: (
 $media: (
   a: (breakpoint: 20em),
   b: (
+    font-size: 20px,
     inner-x: 3rem,
     breakpoint: 30em
   ),
   c: (breakpoint: 40em),
 );
 
-@include homework-core-setup();
-@include homework-wrap-setup();
+@include homework-core-setup(false);
+@include homework-wrap-setup(false);
