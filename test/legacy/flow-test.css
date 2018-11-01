@@ -63,6 +63,87 @@ html {
   padding-bottom: calc(4rem / 2) !important;
 }
 
+@media screen and (min-width: 20em) {
+  .flow-s, .flow-s__a {
+    margin-top: calc(1.25rem / -2);
+    margin-bottom: calc(1.25rem / -2);
+  }
+  .flow-s > *, .flow-s__a > * {
+    padding-top: calc(1.25rem / 2) !important;
+    padding-bottom: calc(1.25rem / 2) !important;
+  }
+  .flow-m, .flow-m__a {
+    margin-top: calc(2.5rem / -2);
+    margin-bottom: calc(2.5rem / -2);
+  }
+  .flow-m > *, .flow-m__a > * {
+    padding-top: calc(2.5rem / 2) !important;
+    padding-bottom: calc(2.5rem / 2) !important;
+  }
+  .flow-l, .flow-l__a {
+    margin-top: calc(4rem / -2);
+    margin-bottom: calc(4rem / -2);
+  }
+  .flow-l > *, .flow-l__a > * {
+    padding-top: calc(4rem / 2) !important;
+    padding-bottom: calc(4rem / 2) !important;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .flow-s, .flow-s__a, .flow-s__b {
+    margin-top: calc(1.25rem / -2);
+    margin-bottom: calc(1.25rem / -2);
+  }
+  .flow-s > *, .flow-s__a > *, .flow-s__b > * {
+    padding-top: calc(1.25rem / 2) !important;
+    padding-bottom: calc(1.25rem / 2) !important;
+  }
+  .flow-m, .flow-m__a, .flow-m__b {
+    margin-top: calc(2.5rem / -2);
+    margin-bottom: calc(2.5rem / -2);
+  }
+  .flow-m > *, .flow-m__a > *, .flow-m__b > * {
+    padding-top: calc(2.5rem / 2) !important;
+    padding-bottom: calc(2.5rem / 2) !important;
+  }
+  .flow-l, .flow-l__a, .flow-l__b {
+    margin-top: calc(4rem / -2);
+    margin-bottom: calc(4rem / -2);
+  }
+  .flow-l > *, .flow-l__a > *, .flow-l__b > * {
+    padding-top: calc(4rem / 2) !important;
+    padding-bottom: calc(4rem / 2) !important;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  .flow-s, .flow-s__a, .flow-s__b, .flow-s__c {
+    margin-top: calc(1.25rem / -2);
+    margin-bottom: calc(1.25rem / -2);
+  }
+  .flow-s > *, .flow-s__a > *, .flow-s__b > *, .flow-s__c > * {
+    padding-top: calc(1.25rem / 2) !important;
+    padding-bottom: calc(1.25rem / 2) !important;
+  }
+  .flow-m, .flow-m__a, .flow-m__b, .flow-m__c {
+    margin-top: calc(2.5rem / -2);
+    margin-bottom: calc(2.5rem / -2);
+  }
+  .flow-m > *, .flow-m__a > *, .flow-m__b > *, .flow-m__c > * {
+    padding-top: calc(2.5rem / 2) !important;
+    padding-bottom: calc(2.5rem / 2) !important;
+  }
+  .flow-l, .flow-l__a, .flow-l__b, .flow-l__c {
+    margin-top: calc(4rem / -2);
+    margin-bottom: calc(4rem / -2);
+  }
+  .flow-l > *, .flow-l__a > *, .flow-l__b > *, .flow-l__c > * {
+    padding-top: calc(4rem / 2) !important;
+    padding-bottom: calc(4rem / 2) !important;
+  }
+}
+
 .test {
   width: calc(99.99999% * 1 / 6);
   margin-left: calc(99.99999% * -1 / 6);

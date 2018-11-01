@@ -245,20 +245,42 @@
     }
   } @else {
 
-    @include mm-for('inner-y', 'inner-y-mods') {
-      $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
-      @each $y,$mod in $inner-y-mods {
-        $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
-        .flow-#{$y} {
-          margin-top: calc(#{$inner-y} / -2);
-          margin-bottom: calc(#{$inner-y} / -2);
-          & > * {
-            padding-top: calc(#{$inner-y} / 2) !important;
-            padding-bottom: calc(#{$inner-y} / 2) !important;
+    $m-list: ();
+    @each $m in join(null, map-keys($media)) {
+      $m-list: append($m-list, $m);
+      @include m($m) {
+
+        $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
+        @each $y,$mod in $inner-y-mods {
+          $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
+          #{m-suffixize('.flow-#{$y}', $m-list...)} {
+            margin-top: calc(#{$inner-y} / -2);
+            margin-bottom: calc(#{$inner-y} / -2);
+            & > * {
+              padding-top: calc(#{$inner-y} / 2) !important;
+              padding-bottom: calc(#{$inner-y} / 2) !important;
+            }
           }
         }
+
       }
     }
+
+
+    // @include mm-for('inner-y', 'inner-y-mods') {
+    //   $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
+    //   @each $y,$mod in $inner-y-mods {
+    //     $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
+    //     .flow-#{$y} {
+    //       margin-top: calc(#{$inner-y} / -2);
+    //       margin-bottom: calc(#{$inner-y} / -2);
+    //       & > * {
+    //         padding-top: calc(#{$inner-y} / 2) !important;
+    //         padding-bottom: calc(#{$inner-y} / 2) !important;
+    //       }
+    //     }
+    //   }
+    // }
 
   }
 }

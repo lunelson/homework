@@ -14,7 +14,6 @@
       $bp: m-suffix();
 
       // dimensions: auto
-
       .w-auto#{$bp} { width: auto; }
       .h-auto#{$bp} { height: auto; }
       .my-auto#{$bp}, .mt-auto#{$bp} { margin-top: auto; }
@@ -23,7 +22,6 @@
       .mx-auto#{$bp}, .ml-auto#{$bp} { margin-left: auto; }
 
       // dimensions: zero
-
       .w-0#{$bp} { width: 0; }
       .h-0#{$bp} { height: 0; }
       .my-0#{$bp}, .mt-0#{$bp} { margin-top: 0 !important; }
@@ -36,40 +34,8 @@
       .px-0#{$bp}, .pl-0#{$bp} { padding-left: 0 !important; }
 
       // dimensions: 100%
-
       .w-100#{$bp} { width: 100%; }
       .h-100#{$bp} { height: 100%; }
-
-      // display
-
-      .d-none#{$bp} { display: none; }
-      .d-flex#{$bp} { display: flex; }
-      .d-flex-y#{$bp} { display: flex; flex-direction: column }
-      .d-grid#{$bp} { display: grid; }
-      .d-block#{$bp} { display: block; }
-      .d-iblock#{$bp} { display: inline-block; vertical-align: baseline; }
-      .d-inline#{$bp} { display: inline; vertical-align: baseline; }
-
-      // position
-
-      .static#{$bp} { position: static; }
-      .rel#{$bp} { position: relative; }
-
-      .fix#{$bp} { position: fixed; }
-      .fix-tl#{$bp} { top: 0; left: 0; }
-      .fix-tr#{$bp} { top: 0; right: 0; }
-      .fix-bl#{$bp} { bottom: 0; left: 0; }
-      .fix-br#{$bp} { bottom: 0; right: 0; }
-      .fix-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
-
-      .abs#{$bp} { position: absolute; }
-      .abs-tl#{$bp} { top: 0; left: 0; }
-      .abs-tr#{$bp} { top: 0; right: 0; }
-      .abs-bl#{$bp} { bottom: 0; left: 0; }
-      .abs-br#{$bp} { bottom: 0; right: 0; }
-      .abs-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
-      .abs-cover#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-      .abs-contain#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
 
     }
   }
@@ -99,40 +65,38 @@
           .mx-neg-#{$x}#{$bp}, .mr-neg-#{$x}#{$bp} { margin-right: calc(-1 * var(--inner-x-#{$x})); }
           .mx-neg-#{$x}#{$bp}, .ml-neg-#{$x}#{$bp} { margin-left: calc(-1 * var(--inner-x-#{$x})); }
         }
-
       }
+
     }
   } @else {
 
-    @include mm-for('inner-y', 'inner-y-mods') {
+    $m-list: ();
+    @each $m in join(null, map-keys($media)) {
+      $m-list: append($m-list, $m);
+      @include m($m) {
 
-      $bp: m-suffix();
-      $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
+        $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
+        @each $y,$mod in $inner-y-mods {
+          $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
+          #{m-suffixize('.py-#{$y}, .pt-#{$y}', $m-list...)} { padding-top: $inner-y; }
+          #{m-suffixize('.py-#{$y}, .pb-#{$y}', $m-list...)} { padding-bottom: $inner-y; }
+          #{m-suffixize('.my-#{$y}, .mt-#{$y}', $m-list...)} { margin-top: $inner-y; }
+          #{m-suffixize('.my-#{$y}, .mb-#{$y}', $m-list...)} { margin-bottom: $inner-y; }
+          #{m-suffixize('.my-neg-#{$y}, .mt-neg-#{$y}', $m-list...)} { margin-top: -1 * $inner-y; }
+          #{m-suffixize('.my-neg-#{$y}, .mb-neg-#{$y}', $m-list...)} { margin-bottom: -1 * $inner-y; }
+        }
 
-      @each $y,$mod in $inner-y-mods {
-        $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
-        .py-#{$y}#{$bp}, .pt-#{$y}#{$bp} { padding-top: $inner-y; }
-        .py-#{$y}#{$bp}, .pb-#{$y}#{$bp} { padding-bottom: $inner-y; }
-        .my-#{$y}#{$bp}, .mt-#{$y}#{$bp} { margin-top: $inner-y; }
-        .my-#{$y}#{$bp}, .mb-#{$y}#{$bp} { margin-bottom: $inner-y; }
-        .my-neg-#{$y}#{$bp}, .mt-neg-#{$y}#{$bp} { margin-top: -1 * $inner-y; }
-        .my-neg-#{$y}#{$bp}, .mb-neg-#{$y}#{$bp} { margin-bottom: -1 * $inner-y; }
-      }
-    }
+        $inner-x-mods: m-var('inner-x-mods') or m-var('inner-mods') or ();
+        @each $x,$mod in $inner-x-mods {
+          $inner-x: if(unitless($mod), m-var('inner-x') * $mod, $mod);
+          #{m-suffixize('.px-#{$x}, .pr-#{$x}', $m-list...)} { padding-right: $inner-x; }
+          #{m-suffixize('.px-#{$x}, .pl-#{$x}', $m-list...)} { padding-left: $inner-x; }
+          #{m-suffixize('.mx-#{$x}, .mr-#{$x}', $m-list...)} { margin-right: $inner-x; }
+          #{m-suffixize('.mx-#{$x}, .ml-#{$x}', $m-list...)} { margin-left: $inner-x; }
+          #{m-suffixize('.mx-neg-#{$x}, .mr-neg-#{$x}', $m-list...)} { margin-right: -1 * $inner-x; }
+          #{m-suffixize('.mx-neg-#{$x}, .ml-neg-#{$x}', $m-list...)} { margin-left: -1 * $inner-x; }
+        }
 
-    @include mm-for('inner-x', 'inner-x-mods') {
-
-      $bp: m-suffix();
-      $inner-x-mods: m-var('inner-x-mods') or m-var('inner-mods') or ();
-
-      @each $x,$mod in $inner-x-mods {
-        $inner-x: if(unitless($mod), m-var('inner-x') * $mod, $mod);
-        .px-#{$x}#{$bp}, .pr-#{$x}#{$bp} { padding-right: $inner-x; }
-        .px-#{$x}#{$bp}, .pl-#{$x}#{$bp} { padding-left: $inner-x; }
-        .mx-#{$x}#{$bp}, .mr-#{$x}#{$bp} { margin-right: $inner-x; }
-        .mx-#{$x}#{$bp}, .ml-#{$x}#{$bp} { margin-left: $inner-x; }
-        .mx-neg-#{$x}#{$bp}, .mr-neg-#{$x}#{$bp} { margin-right: -1 * $inner-x; }
-        .mx-neg-#{$x}#{$bp}, .ml-neg-#{$x}#{$bp} { margin-left: -1 * $inner-x; }
       }
     }
 

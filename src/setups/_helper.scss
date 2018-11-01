@@ -1,0 +1,246 @@
+//  _          _                                 _
+// | |        | |                               | |
+// | |__   ___| |_ __   ___ _ __ ______ ___  ___| |_ _   _ _ __
+// | '_ \ / _ \ | '_ \ / _ \ '__|______/ __|/ _ \ __| | | | '_ \
+// | | | |  __/ | |_) |  __/ |         \__ \  __/ |_| |_| | |_) |
+// |_| |_|\___|_| .__/ \___|_|         |___/\___|\__|\__,_| .__/
+//              | |                                       | |
+//              |_|                                       |_|
+
+@mixin homework-helper-setup($modern: $homework-is-modern) {
+
+  //
+  // STATIC
+  //
+
+  // bold, italic
+  .strong, .bold { font-weight: bold; }
+  .em, .italic { font-style: italic; }
+
+  // clearfix https://css-tricks.com/snippets/css/clear-fix/
+  .clearfix {
+    &::after {
+      content:"";
+      display:table;
+      clear:both;
+    }
+    @supports (display: flow-root) {
+      display: flow-root;
+      &::after { content: none; }
+    }
+  }
+
+  .nobr { white-space: nowrap; text-overflow: ellipsis; }
+
+  // disable pointer on scrolling
+  .is-scrolling,
+  .is-scrolling * {
+    pointer-events: none !important;
+  }
+
+  // hold for absolutes
+  #{base-class('hold')} { position: relative; }
+
+  // stop margin collapse propagation
+  .stop, .trim {
+    padding-top: 0.1px;
+    padding-bottom: 0.1px;
+  }
+
+  // hide overflow
+  #{base-class('clip')} {
+    overflow: hidden !important;
+    position: relative;
+    z-index: 0; // make sure container can clip
+  }
+  .clip-x { overflow-x: hidden; overflow-y: visible }
+  .clip-y { overflow-y: hidden; overflow-x: visible }
+  .clip-circle { border-radius: 50%; }
+
+  #{base-class('fix')} { position: fixed; }
+  #{base-class('abs')} { position: absolute; }
+  #{base-class('aspect')} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    >* { flex: 0 0 auto; width: 100%; }
+    &:before {
+      content: '';
+      display: block;
+      width: 0.01px;
+      height: 0;
+      padding-bottom: calc(1 / var(--aspect, 1) * 100%);
+    }
+  }
+
+  // $aspects: (
+  //   1: 1 2 3 4,
+  //   2: 1 3 5,
+  //   3: 1 2 4 5,
+  //   4: 1 3 5,
+  //   5: 3 4 8,
+  //   16: 9
+  // );
+
+  // $aspect-classes: ();
+  // @each $n, $d-list in $aspects {
+  //   @each $d in $d-list {
+  //     $key: $n/$d;
+  //     $val: map-get($aspect-classes, $key) or ();
+  //     $val: append($val, '.aspect-#{$n}-#{$d}', 'comma');
+  //     $aspect-classes: map-merge($aspect-classes, ($key: $val));
+  //   }
+  // }
+
+  // @each $aspect, $class in $aspect-classes {
+  //   #{$class} { --aspect: #{$aspect}; }
+  // }
+
+  //
+  // RESPONSIVE
+  //
+
+
+  @each $m in join(null, map-keys($media)) {
+
+    @include m($m) {
+
+      $bp: m-suffix();
+
+      // hide visually-only / img replacement
+      // https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html
+      // https://css-tricks.com/the-image-replacement-museum/
+      .vhide#{$bp} {
+        position: absolute !important;
+        clip: rect(0 0 0 0); // IE6, IE7
+        clip: rect(0, 0, 0, 0);
+        flex: 0 0 0%;
+        padding: 0 !important;
+        border: 0 !important;
+        height: 1px !important;
+        width: 1px !important;
+        overflow: hidden;
+        body:hover & a,
+        body:hover & input,
+        body:hover & button { display: none !important; }
+      }
+
+      // hide/show, without removing from DOM
+      .hide#{$bp} {
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+      }
+      .show#{$bp} {
+        pointer-events: initial;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      // display
+      .d-none#{$bp} { display: none; }
+      .d-flex#{$bp} {
+        display: flex;
+        & > * {
+          flex: 0 0 auto;
+          max-width: 100%;
+          min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+          overflow-wrap: break-word;
+        }
+      }
+      .d-flex-y#{$bp} {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        & > * {
+          flex: 0 0 auto; // best for column direction
+          // min-height: auto;
+          // height: auto;
+          max-width: 100%; // fix overflow in IE
+          overflow-wrap: break-word;
+        }
+      }
+      .d-grid#{$bp} { display: grid; }
+      .d-block#{$bp} { display: block; }
+      .d-iblock#{$bp} { display: inline-block; vertical-align: baseline; }
+      .d-inline#{$bp} { display: inline; vertical-align: baseline; }
+
+      // position
+      .static#{$bp} { position: static; }
+      .rel#{$bp} { position: relative; }
+      .fix#{$bp} { position: fixed; }
+      .fix-tl#{$bp} { top: 0; left: 0; }
+      .fix-tr#{$bp} { top: 0; right: 0; }
+      .fix-bl#{$bp} { bottom: 0; left: 0; }
+      .fix-br#{$bp} { bottom: 0; right: 0; }
+      .fix-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
+      .abs#{$bp} { position: absolute; }
+      .abs-tl#{$bp} { top: 0; left: 0; }
+      .abs-tr#{$bp} { top: 0; right: 0; }
+      .abs-bl#{$bp} { bottom: 0; left: 0; }
+      .abs-br#{$bp} { bottom: 0; right: 0; }
+      .abs-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
+      .abs-cover#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+      .abs-contain#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+
+      //  align / vertical-align
+      .a-left#{$bp} { text-align: left }
+      .a-center#{$bp} { text-align: center }
+      .a-right#{$bp} { text-align: right }
+      .a-top#{$bp} { vertical-align: top }
+      .a-middle#{$bp} { vertical-align: middle }
+      .a-baseline#{$bp} { vertical-align: baseline }
+      .a-bottom#{$bp} { vertical-align: bottom }
+
+      // align-items
+      .ai-stretch#{$bp} { align-items: stretch; }
+      .ai-center#{$bp} { align-items: center; }
+      .ai-baseline#{$bp} { align-items: baseline; }
+      .ai-start#{$bp} { align-items: flex-start; }
+      .ai-end#{$bp} { align-items: flex-end; }
+
+      // align-self
+      .as-stretch#{$bp} { align-self: stretch; }
+      .as-center#{$bp} { align-self: center; }
+      .as-baseline#{$bp} { align-self: baseline; }
+      .as-start#{$bp} { align-self: flex-start; }
+      .as-end#{$bp} { align-self: flex-end; }
+
+      // align-content
+      .ac-stretch#{$bp} { align-content: stretch; }
+      .ac-center#{$bp} { align-content: center; }
+      .ac-baseline#{$bp} { align-content: baseline; }
+      .ac-start#{$bp} { align-content: flex-start; }
+      .ac-end#{$bp} { align-content: flex-end; }
+      .ac-between#{$bp} { align-content: space-between; }
+      .ac-around#{$bp} { align-content: space-around; }
+
+      // justify-content
+      .jc-stretch#{$bp} { justify-content: stretch; }
+      .jc-center#{$bp} { justify-content: center; }
+      .jc-start#{$bp} { justify-content: flex-start; }
+      .jc-end#{$bp} { justify-content: flex-end; }
+      .jc-between#{$bp} { justify-content: space-between; }
+      .jc-around#{$bp} { justify-content: space-around; }
+      .jc-evenly#{$bp} { justify-content: space-evenly; }
+
+      // flex
+      .fx-1-0#{$bp} { flex: 1 0 auto; }
+      .fx-0-1#{$bp} { flex: 0 1 auto; }
+      .fx-1-1#{$bp} { flex: 1 1 auto; }
+      .fx-0-0#{$bp} { flex: 0 0 auto; }
+
+      // fitting
+
+      .fit-none#{$bp} { object-fit: none; }
+      .fit-fill#{$bp} { object-fit: fill; }
+      .fit-cover#{$bp} { object-fit: cover; }
+      .fit-contain#{$bp} { object-fit: contain; }
+      .fit-scale-down#{$bp} { object-fit: scale-down; }
+    }
+  }
+
+
+
+}

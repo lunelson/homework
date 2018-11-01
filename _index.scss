@@ -7,6 +7,6 @@
 
 $homework-is-modern: true !default;
 
-@import "src/scss/utils/all";
-@import "src/scss/resets/all";
-@import "src/scss/setups/all";
+@import "src/utils/all";
+@import "src/resets/all";
+@import "src/setups/all";

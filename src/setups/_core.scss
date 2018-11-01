@@ -251,11 +251,15 @@ $media-defaults: (
 
   $reference-medium: $root;
   @each $m, $medium in $media {
+
+    // throw if the medium does not have a breakpoint key
     @if not index(map-keys($medium), 'breakpoint') {
       @include error('homework: one of your $media does not have a breakpoint key');
     }
 
+    // parse, merge and merge-back
     $reference-medium: --parse-medium(--deep-merge($reference-medium, $medium));
+    $media: map-merge($media, ($m: $reference-medium)) !global;
 
     //
     // IF MODERN
@@ -276,7 +280,6 @@ $media-defaults: (
       }
     }
 
-    $media: map-merge($media, ($m: $reference-medium)) !global;
   }
 
   //

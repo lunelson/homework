@@ -10,57 +10,47 @@
 // TODO: consider the other forms of wrap-classes;, e.g. wrap-each__[m] is currently disabled
 // TODO: write set up for peel classes
 
-@mixin homework-wrap-setup($modern: true) {
+@mixin homework-wrap-setup($modern: $homework-is-modern) {
+
+  #{base-class('wrap', false)} {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: if($modern, var(--wrap-width), 100%);
+  }
+  .wrap-left { margin-left: 0; }
+  .wrap-right { margin-right: 0; }
+
+  $media-keys: map-keys($media);
+  $last-m: last($media-keys);
 
   @if $modern {
 
     :root { --wrap-width: 100%; }
 
-    #{base-class('wrap', false)} {
-      margin-right: auto;
-      margin-left: auto;
-      width: 100%;
-      max-width: var(--wrap-width);
-    }
-    .wrap-left { margin-left: 0; }
-    .wrap-right { margin-right: 0; }
-
-    $media-keys: map-keys($media);
-    $last-m: last($media-keys);
-
     .wrap-each { --wrap-width: var(--outer-width); }
 
     @each $m, $medium in $media {
      @include m($m) {
-       .wrap-#{$m},
-       #{if($m == $last-m, '.wrap-last', '')} {
-         --wrap-width: #{map-get($medium, 'outer-width')};
+        $bp: m-suffix();
+
+        .wrap-each#{$bp},
+        .wrap-#{$m},
+        #{if($m == $last-m, '.wrap-last', '')} {
+          --wrap-width: var(--outer-width);
         }
-        .wrap-each#{m-suffix()} { --wrap-width: var(--outer-width); }
       }
     }
+
   } @else {
 
-    #{base-class('wrap', false)} {
-      margin-right: auto;
-      margin-left: auto;
-      width: 100%;
-      max-width: 100%;
-    }
-    .wrap-left { margin-left: 0; }
-    .wrap-right { margin-right: 0; }
-
-    $media-keys: map-keys($media);
-    $last-m: last($media-keys);
-
     $m-list: ();
-    @each $m in map-keys($media) {
+    @each $m in join(null, map-keys($media)) {
       $m-list: append($m-list, $m);
+
       @include m($m) {
 
-        .wrap-#{$m},
-        .wrap-each,
         #{m-suffixize('.wrap-each', $m-list...)},
+        #{if($m, '.wrap-#{$m}', '')},
         #{if($m == $last-m, '.wrap-last', '')} {
           max-width: m-var('outer-width');
         }

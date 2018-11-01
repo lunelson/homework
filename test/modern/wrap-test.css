@@ -48,14 +48,9 @@ html {
   }
 }
 
-:root {
-  --wrap-width: 100%;
-}
-
 [class^="wrap-"], [class*=" wrap-"] {
   margin-right: auto;
   margin-left: auto;
-  width: 100%;
   max-width: var(--wrap-width);
 }
 
@@ -67,34 +62,32 @@ html {
   margin-right: 0;
 }
 
+:root {
+  --wrap-width: 100%;
+}
+
 .wrap-each {
   --wrap-width: var(--outer-width);
 }
 
 @media screen and (min-width: 20em) {
+  .wrap-each__a,
   .wrap-a {
-    --wrap-width: 20rem;
-  }
-  .wrap-each__a {
     --wrap-width: var(--outer-width);
   }
 }
 
 @media screen and (min-width: 30em) {
+  .wrap-each__b,
   .wrap-b {
-    --wrap-width: 30rem;
-  }
-  .wrap-each__b {
     --wrap-width: var(--outer-width);
   }
 }
 
 @media screen and (min-width: 40em) {
+  .wrap-each__c,
   .wrap-c,
   .wrap-last {
-    --wrap-width: 40rem;
-  }
-  .wrap-each__c {
     --wrap-width: var(--outer-width);
   }
 }
