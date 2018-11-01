@@ -2,7 +2,7 @@
 
   // // WIDTH !!
 
-  // $max-columns: if(length($media) > 0, max-columns(), map-get($root, 'grid-columns'));
+  // $max-columns: if(length($media) > 0, --max-columns(), map-get($root, 'grid-columns'));
   // $reduction-set: ();
   // @for $d from 1 through $max-columns {
   //   @for $n from 1 through $d {

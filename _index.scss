@@ -5,6 +5,8 @@
 // | | | | (_) | | | | | |  __/\ V  V / (_) | |  |   <       \__ \ (__\__ \__ \
 // |_| |_|\___/|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\      |___/\___|___/___/
 
+$homework-is-modern: true !default;
+
 @import "src/scss/utils/all";
-@import "src/scss/reset/all";
-@import "src/scss/setup/all";
+@import "src/scss/resets/all";
+@import "src/scss/setups/all";

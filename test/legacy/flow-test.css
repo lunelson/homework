@@ -1,0 +1,48 @@
+html {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.span-funcs {
+  d: var(--span-d);
+  width: calc(99.99999% * 4 / var(--span-d));
+  i-width: calc((99.99999% + var(--column-gap)) * 4 / var(--span-d) - var(--column-gap));
+}
+
+@media screen and (min-width: 30em) {
+  .span-funcs {
+    d: var(--span-d);
+    width: calc(99.99999% * 4 / var(--span-d));
+    i-width: calc((99.99999% + var(--column-gap)) * 4 / var(--span-d) - var(--column-gap));
+  }
+}
+
+.test {
+  width: calc(99.99999% * 1 / var(--span-d));
+  margin-left: calc(99.99999% * -1 / var(--span-d));
+  margin-right: calc(99.99999% * 2 / var(--span-d));
+}
+
+.test > * {
+  --span-d: 1;
+}
+
+.test {
+  width: calc(99.99999% * 2 / var(--span-d));
+  margin-left: calc(99.99999% * -1 / var(--span-d));
+  margin-right: calc(99.99999% * 2 / var(--span-d));
+}
+
+.test > * {
+  --span-d: 2;
+}
+
+.test {
+  width: calc(99.99999% * 3 / var(--span-d));
+  margin-left: calc(99.99999% * -1 / var(--span-d));
+  margin-right: calc(99.99999% * 2 / var(--span-d));
+}
+
+.test > * {
+  --span-d: 3;
+}

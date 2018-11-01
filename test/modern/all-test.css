@@ -116,25 +116,6 @@ html {
   }
 }
 
-:root {
-  --stack-gap: var(--inner-y);
-  --chain-gap: var(--inner-x);
-}
-
-.plain, [class^="plain-"], [class*=" plain-"] {
-  padding-top: 0.01px;
-  padding-bottom: 0.01px;
-}
-
-.plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.plain > * + *, [class^="plain-"] > * + *, [class*=" plain-"] > * + * {
-  margin-top: var(--stack-gap);
-}
-
 .stack, [class^="stack-"], [class*=" stack-"] {
   display: flex;
   width: 100%;
@@ -152,6 +133,42 @@ html {
 
 .stack > * + *, [class^="stack-"] > * + *, [class*=" stack-"] > * + * {
   margin-top: var(--stack-gap);
+}
+
+.plain, [class^="plain-"], [class*=" plain-"] {
+  padding-top: 0.01px;
+  padding-bottom: 0.01px;
+}
+
+.plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.plain > * + *, [class^="plain-"] > * + *, [class*=" plain-"] > * + * {
+  margin-top: var(--stack-gap);
+}
+
+.chain, [class^="chain-"], [class*=" chain-"] {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.chain > *, [class^="chain-"] > *, [class*=" chain-"] > * {
+  flex: 0 0 auto;
+  margin-left: 0;
+  margin-right: 0;
+  text-overflow: ellipsis;
+}
+
+.chain > * + *, [class^="chain-"] > * + *, [class*=" chain-"] > * + * {
+  margin-left: var(--chain-gap);
+}
+
+:root {
+  --stack-gap: var(--inner-y);
+  --chain-gap: var(--inner-x);
 }
 
 .stack-0 > * {
@@ -183,23 +200,6 @@ html {
 
 .stack-l > * {
   --stack-gap: var(--inner-y-l);
-}
-
-.chain, [class^="chain-"], [class*=" chain-"] {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-}
-
-.chain > *, [class^="chain-"] > *, [class*=" chain-"] > * {
-  flex: 0 0 auto;
-  margin-left: 0;
-  margin-right: 0;
-  text-overflow: ellipsis;
-}
-
-.chain > * + *, [class^="chain-"] > * + *, [class*=" chain-"] > * + * {
-  margin-left: var(--chain-gap);
 }
 
 .chain-0 > * {
@@ -248,37 +248,34 @@ html {
   --trim-baseline-mono: 0;
 }
 
-body {
-  font-family: var(--font-family);
-}
-
 .sans, [class^="sans-"], [class*=" sans-"], .serif, [class^="serif-"], [class*=" serif-"], .mono, [class^="mono-"], [class*=" mono-"] {
   font-size: var(--font-size);
   line-height: var(--line-height);
 }
 
 .stack > .sans, .stack > [class^="sans-"], .stack > [class*=" sans-"], .stack > .serif, .stack > [class^="serif-"], .stack > [class*=" serif-"], .stack > .mono, .stack > [class^="mono-"], .stack > [class*=" mono-"], [class^="stack-"] > .sans, [class^="stack-"] > [class^="sans-"], [class^="stack-"] > [class*=" sans-"], [class^="stack-"] > .serif, [class^="stack-"] > [class^="serif-"], [class^="stack-"] > [class*=" serif-"], [class^="stack-"] > .mono, [class^="stack-"] > [class^="mono-"], [class^="stack-"] > [class*=" mono-"], [class*=" stack-"] > .sans, [class*=" stack-"] > [class^="sans-"], [class*=" stack-"] > [class*=" sans-"], [class*=" stack-"] > .serif, [class*=" stack-"] > [class^="serif-"], [class*=" stack-"] > [class*=" serif-"], [class*=" stack-"] > .mono, [class*=" stack-"] > [class^="mono-"], [class*=" stack-"] > [class*=" mono-"] {
-  margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom));
+  margin-top: calc(0px - var(--trim-top));
+  margin-bottom: calc(0px - var(--trim-bottom));
+  margin-right: var(--trim-x);
+  margin-left: var(--trim-x);
 }
 
 .stack > * + .sans, .stack > * + [class^="sans-"], .stack > * + [class*=" sans-"], .stack > * + .serif, .stack > * + [class^="serif-"], .stack > * + [class*=" serif-"], .stack > * + .mono, .stack > * + [class^="mono-"], .stack > * + [class*=" mono-"], [class^="stack-"] > * + .sans, [class^="stack-"] > * + [class^="sans-"], [class^="stack-"] > * + [class*=" sans-"], [class^="stack-"] > * + .serif, [class^="stack-"] > * + [class^="serif-"], [class^="stack-"] > * + [class*=" serif-"], [class^="stack-"] > * + .mono, [class^="stack-"] > * + [class^="mono-"], [class^="stack-"] > * + [class*=" mono-"], [class*=" stack-"] > * + .sans, [class*=" stack-"] > * + [class^="sans-"], [class*=" stack-"] > * + [class*=" sans-"], [class*=" stack-"] > * + .serif, [class*=" stack-"] > * + [class^="serif-"], [class*=" stack-"] > * + [class*=" serif-"], [class*=" stack-"] > * + .mono, [class*=" stack-"] > * + [class^="mono-"], [class*=" stack-"] > * + [class*=" mono-"] {
   margin-top: calc(var(--stack-gap) - var(--trim-top));
 }
 
-body,
-.sans, [class^="sans-"], [class*=" sans-"] {
+.sans, [class^="sans-"], [class*=" sans-"],
+body {
   font-family: var(--font-family-sans);
   letter-spacing: var(--letter-spacing-sans);
   --trim-x: var(--trim-x-sans);
 }
-
 
 .serif, [class^="serif-"], [class*=" serif-"] {
   font-family: var(--font-family-serif);
   letter-spacing: var(--letter-spacing-serif);
   --trim-x: var(--trim-x-serif);
 }
-
 
 .mono, [class^="mono-"], [class*=" mono-"] {
   font-family: var(--font-family-mono);

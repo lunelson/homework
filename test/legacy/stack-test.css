@@ -1,0 +1,78 @@
+html {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.stack, [class^="stack-"], [class*=" stack-"] {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 0.01px;
+  padding-bottom: 0.01px;
+}
+
+.stack > *, [class^="stack-"] > *, [class*=" stack-"] > * {
+  flex: 0 0 auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack > * + *, [class^="stack-"] > * + *, [class*=" stack-"] > * + * {
+  margin-top: 1.25rem;
+}
+
+.plain, [class^="plain-"], [class*=" plain-"] {
+  padding-top: 0.01px;
+  padding-bottom: 0.01px;
+}
+
+.plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.plain > * + *, [class^="plain-"] > * + *, [class*=" plain-"] > * + * {
+  margin-top: 1.25rem;
+}
+
+.chain, [class^="chain-"], [class*=" chain-"] {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.chain > *, [class^="chain-"] > *, [class*=" chain-"] > * {
+  flex: 0 0 auto;
+  margin-left: 0;
+  margin-right: 0;
+  text-overflow: ellipsis;
+}
+
+.chain > * + *, [class^="chain-"] > * + *, [class*=" chain-"] > * + * {
+  margin-left: 2rem;
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack-s > * + * {
+    margin-top: 1.25rem;
+  }
+  .stack > * + *, .stack-m > * + * {
+    margin-top: 2.5rem;
+  }
+  .stack-l > * + * {
+    margin-top: 4rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack-s > * + * {
+    margin-top: 1.875rem;
+  }
+  .stack > * + *, .stack-m > * + * {
+    margin-top: 3.125rem;
+  }
+  .stack-l > * + * {
+    margin-top: 3.75rem;
+  }
+}

@@ -87,30 +87,28 @@ html {
   --trim-baseline-serif: 0;
 }
 
-body {
-  font-family: var(--font-family);
-}
-
 .sans, [class^="sans-"], [class*=" sans-"], .serif, [class^="serif-"], [class*=" serif-"] {
   font-size: var(--font-size);
   line-height: var(--line-height);
 }
 
 .stack > .sans, .stack > [class^="sans-"], .stack > [class*=" sans-"], .stack > .serif, .stack > [class^="serif-"], .stack > [class*=" serif-"], [class^="stack-"] > .sans, [class^="stack-"] > [class^="sans-"], [class^="stack-"] > [class*=" sans-"], [class^="stack-"] > .serif, [class^="stack-"] > [class^="serif-"], [class^="stack-"] > [class*=" serif-"], [class*=" stack-"] > .sans, [class*=" stack-"] > [class^="sans-"], [class*=" stack-"] > [class*=" sans-"], [class*=" stack-"] > .serif, [class*=" stack-"] > [class^="serif-"], [class*=" stack-"] > [class*=" serif-"] {
-  margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom));
+  margin-top: calc(0px - var(--trim-top));
+  margin-bottom: calc(0px - var(--trim-bottom));
+  margin-right: var(--trim-x);
+  margin-left: var(--trim-x);
 }
 
 .stack > * + .sans, .stack > * + [class^="sans-"], .stack > * + [class*=" sans-"], .stack > * + .serif, .stack > * + [class^="serif-"], .stack > * + [class*=" serif-"], [class^="stack-"] > * + .sans, [class^="stack-"] > * + [class^="sans-"], [class^="stack-"] > * + [class*=" sans-"], [class^="stack-"] > * + .serif, [class^="stack-"] > * + [class^="serif-"], [class^="stack-"] > * + [class*=" serif-"], [class*=" stack-"] > * + .sans, [class*=" stack-"] > * + [class^="sans-"], [class*=" stack-"] > * + [class*=" sans-"], [class*=" stack-"] > * + .serif, [class*=" stack-"] > * + [class^="serif-"], [class*=" stack-"] > * + [class*=" serif-"] {
   margin-top: calc(var(--stack-gap) - var(--trim-top));
 }
 
-body,
-.sans, [class^="sans-"], [class*=" sans-"] {
+.sans, [class^="sans-"], [class*=" sans-"],
+body {
   font-family: var(--font-family-sans);
   letter-spacing: var(--letter-spacing-sans);
   --trim-x: var(--trim-x-sans);
 }
-
 
 .serif, [class^="serif-"], [class*=" serif-"] {
   font-family: var(--font-family-serif);

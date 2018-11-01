@@ -1,0 +1,59 @@
+@import '../index';
+
+$root: (
+  inner-x: 2rem,
+  inner-x-mods: (
+    s: 0.5,
+    form: 10px,
+  ),
+  inner-y-mods: (
+    s: 1,
+    m: 2,
+    l: 4rem
+  ),
+  grid-columns: 6,
+);
+
+$media: (
+  a: (breakpoint: 20em),
+  b: (
+    inner-x: 3rem,
+    breakpoint: 30em,
+    grid-columns: 12,
+  ),
+  c: (breakpoint: 40em),
+);
+
+$homework-is-modern: true;
+@include homework-core-setup(false);
+@include homework-flow-setup(false);
+
+.span-funcs {
+  d: span-d();
+  width: span-width(4);
+  i-width: span-i-width(4);
+  @include m(b) {
+    d: span-d();
+    width: span-width(4);
+    i-width: span-i-width(4);
+  }
+
+}
+
+.test { @include span(1, -1, 2); }
+.test { @include span(2, -1, 2); }
+.test { @include span(3, -1, 2); }
+
+// .m-test {
+//   @include m-spans((
+//     null: 2 0 -1 12,
+//     a: 2 0 -1 12,
+//     b: 3 0 1 12,
+//   ));
+//   .nest {
+//     @include m-spans-i((
+//       a: 3 1 1 12,
+//       b: 4 2 2 12,
+//     ));
+//   }
+// }
