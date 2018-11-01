@@ -85,7 +85,7 @@
       @each $y,$mod in $inner-y-mods {
         $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
 
-        #{mod-class('stack', $y, 'm')} {
+        .stack-#{$y} {
           & > * + * { margin-top: $inner-y; }
         }
 

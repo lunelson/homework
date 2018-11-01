@@ -3,46 +3,74 @@ html {
   line-height: 1.25;
 }
 
-.span-funcs {
-  d: var(--span-d);
-  width: calc(99.99999% * 4 / var(--span-d));
-  i-width: calc((99.99999% + var(--column-gap)) * 4 / var(--span-d) - var(--column-gap));
+.flow, [class^="flow-"], [class*=" flow-"] {
+  margin-top: calc(1.25rem / -2);
+  margin-bottom: calc(1.25rem / -2);
 }
 
-@media screen and (min-width: 30em) {
-  .span-funcs {
-    d: var(--span-d);
-    width: calc(99.99999% * 4 / var(--span-d));
-    i-width: calc((99.99999% + var(--column-gap)) * 4 / var(--span-d) - var(--column-gap));
-  }
+.flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
+  padding-top: calc(1.25rem / 2) !important;
+  padding-bottom: calc(1.25rem / 2) !important;
+}
+
+.flow, [class^="flow-"], [class*=" flow-"] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: calc(2rem / -2);
+  margin-right: calc(2rem / -2);
+  width: calc(100% + 2rem);
+}
+
+.flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0%;
+  min-height: 1px;
+  overflow-wrap: break-word;
+  background-clip: content-box;
+  padding-left: calc(2rem / 2) !important;
+  padding-right: calc(2rem / 2) !important;
+}
+
+.flow-s {
+  margin-top: calc(1.25rem / -2);
+  margin-bottom: calc(1.25rem / -2);
+}
+
+.flow-s > * {
+  padding-top: calc(1.25rem / 2) !important;
+  padding-bottom: calc(1.25rem / 2) !important;
+}
+
+.flow-m {
+  margin-top: calc(2.5rem / -2);
+  margin-bottom: calc(2.5rem / -2);
+}
+
+.flow-m > * {
+  padding-top: calc(2.5rem / 2) !important;
+  padding-bottom: calc(2.5rem / 2) !important;
+}
+
+.flow-l {
+  margin-top: calc(4rem / -2);
+  margin-bottom: calc(4rem / -2);
+}
+
+.flow-l > * {
+  padding-top: calc(4rem / 2) !important;
+  padding-bottom: calc(4rem / 2) !important;
 }
 
 .test {
-  width: calc(99.99999% * 1 / var(--span-d));
-  margin-left: calc(99.99999% * -1 / var(--span-d));
-  margin-right: calc(99.99999% * 2 / var(--span-d));
-}
-
-.test > * {
-  --span-d: 1;
+  width: calc(99.99999% * 1 / 6);
+  margin-left: calc(99.99999% * -1 / 6);
+  margin-right: calc(99.99999% * 2 / 6);
 }
 
 .test {
-  width: calc(99.99999% * 2 / var(--span-d));
-  margin-left: calc(99.99999% * -1 / var(--span-d));
-  margin-right: calc(99.99999% * 2 / var(--span-d));
-}
-
-.test > * {
-  --span-d: 2;
-}
-
-.test {
-  width: calc(99.99999% * 3 / var(--span-d));
-  margin-left: calc(99.99999% * -1 / var(--span-d));
-  margin-right: calc(99.99999% * 2 / var(--span-d));
-}
-
-.test > * {
-  --span-d: 3;
+  width: calc((99.99999% + 2rem) * 1 / 6 - 2rem);
+  margin-left: calc((99.99999% + 2rem) * -1 / 6);
+  margin-right: calc((99.99999% + 2rem) * 2 / 6);
 }

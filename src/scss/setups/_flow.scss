@@ -9,6 +9,8 @@
 
 @function span-d() { @return if($homework-is-modern, var(--span-d), m-var('grid-columns')); }
 
+@function row-gap() { @return if($homework-is-modern, var(--row-gap), m-var('inner-y')); }
+
 @function column-gap() { @return if($homework-is-modern, var(--column-gap), m-var('inner-x')); }
 
 @function span-width($n: 1, $span-d: span-d()) {
@@ -28,10 +30,7 @@
 }
 
 @mixin span($n: null, $l: null, $r: null, $span-d: span-d()) {
-  @if $n and $homework-is-modern {
-    // --span-n: #{$n};
-    & > * { --span-d: #{$n}; }
-  }
+  @if $n and $homework-is-modern { & > * { --span-d: #{$n}; } }
   @if $n { width: span-width($n, $span-d); }
   @if $l { margin-left: push-width($l, $span-d); }
   @if $r { margin-right: push-width($r, $span-d); }
@@ -46,10 +45,7 @@
 }
 
 @mixin span-i($n: null, $l: null, $r: null, $span-d: span-d()) {
-  @if $n and $homework-is-modern {
-    // --span-n: #{$n};
-    & > * { --span-d: #{$n}; }
-  }
+  @if $n and $homework-is-modern { & > * { --span-d: #{$n}; } }
   @if $n { width: span-i-width($n, $span-d); }
   @if $l { margin-left: push-i-width($l, $span-d); }
   @if $r { margin-right: push-i-width($r, $span-d); }
@@ -78,6 +74,47 @@
 
   $max-columns: $max-columns or if(length($media) > 0, --max-columns(), map-get($root, 'grid-columns'));
 
+
+  #{base-class('flow')} {
+    margin-top: calc(#{row-gap()} / -2);
+    margin-bottom: calc(#{row-gap()} / -2);
+    & > * {
+      padding-top: calc(#{row-gap()} / 2) !important;
+      padding-bottom: calc(#{row-gap()} / 2) !important;
+    }
+  }
+
+  // // allow stack objects as direct descendant of flow !! (workaround libsass bug)
+  // .flow > .stack, .flow > [class^="stack-"], .flow > [class*=" stack-"], [class^="flow-"] > .stack, [class^="flow-"] > [class^="stack-"], [class^="flow-"] > [class*=" stack-"], [class*=" flow-"] > .stack, [class*=" flow-"] > [class^="stack-"], [class*=" flow-"] > [class*=" stack-"] {
+  //   padding-top: calc(#{row-gap()} / 2);
+  //   padding-bottom: calc(#{row-gap()} / 2);
+  // }
+
+  // #{base-class('row')},
+  #{base-class('flow')} {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: calc(#{column-gap()} / -2);
+    margin-right: calc(#{column-gap()} / -2);
+    width: calc(100% + #{column-gap()});
+    & > * {
+      // flex: 1 1 0%; // explicit basis
+      flex: 0 0 auto;
+      width: 100%;
+      min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+      min-height: 1px;
+      overflow-wrap: break-word; // break long words
+      background-clip: content-box;
+      padding-left: calc(#{column-gap()} / 2) !important;
+      padding-right: calc(#{column-gap()} / 2) !important;
+    }
+    // &.null {
+    //   margin: 0;
+    //   & > * { padding: 0; }
+    // }
+  }
+
   @if $modern {
 
     :root {
@@ -85,56 +122,19 @@
       --column-gap: var(--inner-x);
       --span-d: var(--grid-columns);
       --span-n: var(--span-d);
-      --span-i: var(--span-d);
+      // --span-n: var(--span-d);
     }
 
-    #{base-class('flow')} {
-      margin-top: calc(var(--row-gap) / -2);
-      margin-bottom: calc(var(--row-gap) / -2);
-      // height: calc(100% + var(--row-gap));
-      & > * {
-        padding-top: calc(var(--row-gap) / 2);
-        padding-bottom: calc(var(--row-gap) / 2);
-      }
-    }
-
-    // allow stack objects as direct descendant of flow !! (workaround libsass bug)
-    .flow > .stack, .flow > [class^="stack-"], .flow > [class*=" stack-"], [class^="flow-"] > .stack, [class^="flow-"] > [class^="stack-"], [class^="flow-"] > [class*=" stack-"], [class*=" flow-"] > .stack, [class*=" flow-"] > [class^="stack-"], [class*=" flow-"] > [class*=" stack-"] {
-      padding-top: calc(var(--row-gap) / 2);
-      padding-bottom: calc(var(--row-gap) / 2);
-    }
-
-    #{base-class('flow')} {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-left: calc(var(--column-gap) / -2);
-      margin-right: calc(var(--column-gap) / -2);
-      width: calc(100% + var(--column-gap));
-      & > * {
-        flex: 1 1 0%; // explicit basis
-        min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
-        min-height: 1px;
-        overflow-wrap: break-word; // break long words
-        background-clip: content-box;
-        padding-left: calc(var(--column-gap) / 2);
-        padding-right: calc(var(--column-gap) / 2);
-      }
-      &.null {
-        margin: 0;
-        & > * { padding: 0; }
-      }
-    }
 
     #{base-class('span')},
     #{base-m-class('span', false)} {
-      flex: 0 0 auto;
+      // flex: 0 0 auto;
       width: calc(99.99999% * var(--span-n) / var(--span-d));
     }
 
     #{base-class('span-i')},
     #{base-m-class('span-i', false)} {
-      width: calc((99.99999% + var(--column-gap)) * var(--span-i) / var(--span-d) - var(--column-gap));
+      width: calc((99.99999% + var(--column-gap)) * var(--span-n) / var(--span-d) - var(--column-gap));
     }
 
     @each $m in join((null), map-keys($media)) {
@@ -150,7 +150,7 @@
         // consider using span-all and span-i-all instead;
         // ...and eliminating base-m-class classes above
         .span#{$bp} { --span-n: var(--span-d); }
-        .span-i#{$bp} { --span-i: var(--span-d); }
+        .span-i#{$bp} { --span-n: var(--span-d); }
 
         @for $n from 1 through $max-columns {
 
@@ -158,22 +158,39 @@
           .span-#{$n}#{$bp} { --span-n: #{$n}; & > * { --span-d: var(--span-n); } }
 
           // span-i
-          .span-i-#{$n}#{$bp} { --span-i: #{$n}; & > * { --span-d: var(--span-i); } }
+          .span-i-#{$n}#{$bp} { --span-n: #{$n}; & > * { --span-d: var(--span-n); } }
 
           // span atomics
           .ml-#{$n}#{$bp} { margin-left: calc(99.99999% * #{$n} / var(--span-d)) !important; }
           .mr-#{$n}#{$bp} { margin-right: calc(99.99999% * #{$n} / var(--span-d)) !important; }
-          .ml-neg-#{$n}#{$bp} { margin-left: calc(-99.99999% * #{$n} / var(--span-d)) !important; }
-          .mr-neg-#{$n}#{$bp} { margin-right: calc(-99.99999% * #{$n} / var(--span-d)) !important; }
+          .ml-neg-#{$n}#{$bp} { margin-left: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
+          .mr-neg-#{$n}#{$bp} { margin-right: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
 
           // span-i atomics
           .ml-i-#{$n}#{$bp} { margin-left: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
           .mr-i-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
-          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((99.99999% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
-          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * -1 * #{$n} / var(--span-d)) !important; }
+          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
+          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
 
         }
       }
     }
+  } @else {
+
+    @include mm-for('inner-y', 'inner-y-mods') {
+      $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
+      @each $y,$mod in $inner-y-mods {
+        $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
+        .flow-#{$y} {
+          margin-top: calc(#{$inner-y} / -2);
+          margin-bottom: calc(#{$inner-y} / -2);
+          & > * {
+            padding-top: calc(#{$inner-y} / 2) !important;
+            padding-bottom: calc(#{$inner-y} / 2) !important;
+          }
+        }
+      }
+    }
+
   }
 }

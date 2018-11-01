@@ -57,7 +57,7 @@ html {
   .stack-s > * + * {
     margin-top: 1.25rem;
   }
-  .stack > * + *, .stack-m > * + * {
+  .stack-m > * + * {
     margin-top: 2.5rem;
   }
   .stack-l > * + * {
@@ -69,7 +69,7 @@ html {
   .stack-s > * + * {
     margin-top: 1.875rem;
   }
-  .stack > * + *, .stack-m > * + * {
+  .stack-m > * + * {
     margin-top: 3.125rem;
   }
   .stack-l > * + * {
