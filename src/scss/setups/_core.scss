@@ -89,13 +89,13 @@ $media-defaults: (
     + if($max, ' and (max-width: #{$max - 0.001})', '');
 }
 
-@function --max-columns() {
-  $column-counts: ();
-  @each $m, $medium in $media {
-    $column-counts: append($column-counts, map-get-z($media, $m, 'grid-columns'));
-  }
-  @return max($column-counts...);
-}
+// @function --max-columns() {
+//   $column-counts: ();
+//   @each $m, $medium in $media {
+//     $column-counts: append($column-counts, map-get-z($media, $m, 'grid-columns'));
+//   }
+//   @return max($column-counts...);
+// }
 
 //
 // mm helpers, private

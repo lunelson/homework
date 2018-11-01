@@ -7,11 +7,26 @@
 //                                | |                                  | |
 //                                |_|                                  |_|
 
-@function span-d() { @return if($homework-is-modern, var(--span-d), m-var('grid-columns')); }
+@function span-d() {
+  @return if($homework-is-modern, var(--span-d), m-var('grid-columns'));
+}
 
-@function row-gap() { @return if($homework-is-modern, var(--row-gap), m-var('inner-y')); }
+@function row-gap() {
+  @return if($homework-is-modern, var(--row-gap), m-var('inner-y'));
+}
 
-@function column-gap() { @return if($homework-is-modern, var(--column-gap), m-var('inner-x')); }
+@function column-gap() {
+  @return if($homework-is-modern, var(--column-gap), m-var('inner-x'));
+}
+
+@function max-columns() {
+  @if not (length($media) > 0) { @return m-var('grid-columns'); }
+  $column-counts: ();
+  @each $m, $medium in $media {
+    $column-counts: append($column-counts, map-get-z($media, $m, 'grid-columns'));
+  }
+  @return max($column-counts...);
+}
 
 @function span-width($n: 1, $span-d: span-d()) {
   @return calc(99.99999% * #{$n} / #{$span-d});
@@ -21,10 +36,6 @@
   @return calc((99.99999% + #{column-gap()}) * #{$n} / #{$span-d} - #{column-gap()});
 }
 
-@function push-width($p: 1, $span-d: span-d()) {
-  @return calc(99.99999% * #{$p} / #{$span-d});
-}
-
 @function push-i-width($p: 1, $span-d: span-d()) {
   @return calc((99.99999% + #{column-gap()}) * #{$p} / #{$span-d});
 }
@@ -32,8 +43,8 @@
 @mixin span($n: null, $l: null, $r: null, $span-d: span-d()) {
   @if $n and $homework-is-modern { & > * { --span-d: #{$n}; } }
   @if $n { width: span-width($n, $span-d); }
-  @if $l { margin-left: push-width($l, $span-d); }
-  @if $r { margin-right: push-width($r, $span-d); }
+  @if $l { margin-left: span-width($l, $span-d); }
+  @if $r { margin-right: span-width($r, $span-d); }
 }
 
 @mixin m-spans($spans) {
@@ -60,6 +71,14 @@
 }
 
 
+@function ratio-str($ratio) { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
+@function ratio-class($ratio, $index, $list, $root, $bp) { @return '.#{$root}-#{ratio-str($ratio)}#{$bp}'; }
+
+@function ratio-span-width($ratio) { @return span-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
+@function ratio-span-i-width($ratio) { @return span-i-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
+@function ratio-push-i-width($ratio) { @return push-i-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
+
+
 //   __ _                                                           _
 //  / _| |                                                         | |
 // | |_| | _____      ________ ___ _ __   __ _ _ __ ______ ___  ___| |_ _   _ _ __
@@ -70,10 +89,9 @@
 //                                |_|                                        |_|
 
 
-@mixin homework-flow-setup($modern: $homework-is-modern, $max-columns: null) {
+@mixin homework-flow-setup($modern: $homework-is-modern, $max-columns: max-columns(), $ratios: false) {
 
-  $max-columns: $max-columns or if(length($media) > 0, --max-columns(), map-get($root, 'grid-columns'));
-
+  // $max-columns: $max-columns or if(length($media) > 0, --max-columns(), map-get($root, 'grid-columns'));
 
   #{base-class('flow')} {
     margin-top: calc(#{row-gap()} / -2);
@@ -173,6 +191,56 @@
           .mr-i-neg-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
 
         }
+
+        // dimensions: explicit ratios
+        @if $ratios {
+
+          $media-grid-columns: ();
+          $reduction-ratio-lists: ();
+
+          @each $m, $medium in $media {
+            $media-grid-columns: append($media-grid-columns, map-get($medium, 'grid-columns'));
+          }
+
+          @for $d from 1 through max($media-grid-columns...) {
+            @for $n from 1 through $d {
+              $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+              $set: append(map-get($reduction-ratio-lists, $reduction) or (), $n $d);
+              $reduction-ratio-lists: map-merge($reduction-ratio-lists, ($reduction: $set));
+            }
+          }
+
+          @each $reduction, $ratio-list in $reduction-ratio-lists {
+            // explicit percentage ratios
+            #{__map($ratio-list, 'ratio-class', 'span', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'w', $bp)} { width: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'px', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'pr', $bp)} { padding-right: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'px', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'pl', $bp)} { padding-left: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'mr', $bp)} { margin-right: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'ml', $bp)} { margin-left: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-neg', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'mr-neg', $bp)} { margin-right: multiply(#{ratio-span-width($reduction)}, -1) }
+            #{__map($ratio-list, 'ratio-class', 'mx-neg', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'ml-neg', $bp)} { margin-left: multiply(#{ratio-span-width($reduction)}, -1) }
+
+            // explicit span-internal ratio classes
+            #{__map($ratio-list, 'ratio-class', 'span-i', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'w-i', $bp)} { width: ratio-span-i-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'mr-i', $bp)} { margin-right: ratio-push-i-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'ml-i', $bp)} { margin-left: ratio-push-i-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'mr-i-neg', $bp)} { margin-right: multiply(#{ratio-push-i-width($reduction)}, -1) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $bp)},
+            #{__map($ratio-list, 'ratio-class', 'ml-i-neg', $bp)} { margin-left: multiply(#{ratio-push-i-width($reduction)}, -1) }
+          }
+        }
+
       }
     }
   } @else {

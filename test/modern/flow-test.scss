@@ -30,12 +30,12 @@ $media: (
 .test { @include span(3, -1, 2); }
 
 .m-test {
-  @include spans((
+  @include m-spans((
     a: 2 0 -1,
     b: 3 0 1
   ));
   .nest {
-    @include spans-i((
+    @include m-spans-i((
       a: 3 1 1,
       b: 4 2 2
     ));
