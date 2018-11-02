@@ -3542,7 +3542,7 @@ body {
   width: 100%;
 }
 
-.aspect:before, [class^="aspect-"]:before, [class*=" aspect-"]:before {
+.aspect::before, [class^="aspect-"]::before, [class*=" aspect-"]::before {
   content: '';
   display: block;
   width: 0.01px;

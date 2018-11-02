@@ -65,7 +65,7 @@
     align-items: center;
     justify-content: center;
     >* { flex: 0 0 auto; width: 100%; }
-    &:before {
+    &::before {
       content: '';
       display: block;
       width: 0.01px;
