@@ -76,3 +76,21 @@ html {
     margin-top: 3.75rem;
   }
 }
+
+@media screen and (max-width: 29.999em) {
+  .chain-s > * + * {
+    margin-left: 1rem;
+  }
+  .chain-form > * + * {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .chain-s > * + * {
+    margin-left: 1.5rem;
+  }
+  .chain-form > * + * {
+    margin-left: 10px;
+  }
+}

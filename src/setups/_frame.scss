@@ -14,15 +14,18 @@
 
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
-        .frame#{m-suffix()}, .frame-x#{m-suffix()}, .frame-right#{m-suffix()} { padding-right: var(--outer-right); }
-        .frame#{m-suffix()}, .frame-x#{m-suffix()}, .frame-left#{m-suffix()} { padding-left: var(--outer-left); }
-        .frame-y#{m-suffix()}, .frame-top#{m-suffix()} { padding-top: var(--outer-top); }
-        .frame-y#{m-suffix()}, .frame-bottom#{m-suffix()} { padding-bottom: var(--outer-bottom); }
 
-        .bleed#{m-suffix()}, .bleed-x#{m-suffix()}, .bleed-right#{m-suffix()} { margin-right: calc(var(--outer-right) * -1); }
-        .bleed#{m-suffix()}, .bleed-x#{m-suffix()}, .bleed-left#{m-suffix()} { margin-left: calc(var(--outer-left) * -1); }
-        .bleed-y#{m-suffix()}, .bleed-top#{m-suffix()} { margin-top: calc(var(--outer-top) * -1); }
-        .bleed-y#{m-suffix()}, .bleed-bottom#{m-suffix()} { margin-bottom: calc(var(--outer-bottom) * -1); }
+        $bp: m-suffix();
+
+        .frame#{$bp}, .frame-x#{$bp}, .frame-right#{$bp} { padding-right: var(--outer-right); }
+        .frame#{$bp}, .frame-x#{$bp}, .frame-left#{$bp} { padding-left: var(--outer-left); }
+        .frame-y#{$bp}, .frame-top#{$bp} { padding-top: var(--outer-top); }
+        .frame-y#{$bp}, .frame-bottom#{$bp} { padding-bottom: var(--outer-bottom); }
+
+        .bleed#{$bp}, .bleed-x#{$bp}, .bleed-right#{$bp} { margin-right: calc(var(--outer-right) * -1); }
+        .bleed#{$bp}, .bleed-x#{$bp}, .bleed-left#{$bp} { margin-left: calc(var(--outer-left) * -1); }
+        .bleed-y#{$bp}, .bleed-top#{$bp} { margin-top: calc(var(--outer-top) * -1); }
+        .bleed-y#{$bp}, .bleed-bottom#{$bp} { margin-bottom: calc(var(--outer-bottom) * -1); }
       }
     }
 
@@ -32,8 +35,6 @@
     @each $m in join(null, map-keys($media)) {
       $m-list: append($m-list, $m);
       @include m($m) {
-
-        $fix: m-suffix();
 
         #{m-suffixize('.frame, .frame-x, .frame-right', $m-list...)} { padding-right: m-var('outer-right'); }
         #{m-suffixize('.frame, .frame-x, .frame-left', $m-list...)} { padding-left: m-var('outer-left'); }

@@ -35,7 +35,7 @@ function test() {
     .pipe(diff.reporter({ fail: true }));
 }
 function watch() {
-  gulp.watch('./**/*.scss', work);
+  return gulp.watch('./**/*.scss', work);
 }
 
 gulp.task('test', test);

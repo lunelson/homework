@@ -3,12 +3,12 @@ root
   --contrast-color-[c]
   --fg-color dark?lite:dark
   --fg-contrast-color: dark?dark:lite
-  --bg-color: dark?dark:lite
+  --color-bg: dark?dark:lite
   --bg-contrast-color: dark?lite:dark
 
 body
   color: --fg-color
-  background-color: --bg-color
+  background-color: --color-bg
 
 --------
 
@@ -16,16 +16,16 @@ base-class(fg)
   color: --fg-color
 
 base-class(bg)
-  background-color: --bg-color
+  background-color: --color-bg
 
 --------
 
 bg-[c]
-  --bg-color: --color-[c]
+  --color-bg: --color-[c]
   --bg-contrast-color: --contrast-color-[c]
 
 bg-contrast-[c]
-  --bg-color: --contrast-color-[c]
+  --color-bg: --contrast-color-[c]
 
 fg-[c]
   --fg-color: --color-[c]
@@ -35,7 +35,7 @@ fg-contrast-[c]
   --fg-color: --contrast-color-[c]
 
 bg-contrast
-  --bg-color: --fg-contrast-color
+  --color-bg: --fg-contrast-color
 
 fg-contrast
   --fg-color: --bg-contrast-color
@@ -49,5 +49,5 @@ fg-theme
   --fg-contrast-color: --theme-contrast-color
 
 bg-theme
-  --bg-color: --theme-color
+  --color-bg: --theme-color
   --bg-contrast-color: --theme-contrast-color

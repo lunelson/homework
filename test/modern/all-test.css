@@ -4330,111 +4330,100 @@ body:hover .vhide button {
 }
 
 :root {
-  --fg-color: 17, 17, 17;
-  --bg-color: 238, 238, 238;
-}
-
-body {
-  color: rgb(var(--fg-color));
-  background-color: rgb(var(--bg-color));
-}
-
-[class^="fg-"], [class*=" fg-"] {
-  color: rgb(var(--fg-color));
-}
-
-[class^="bg-"], [class*=" bg-"] {
-  background-color: rgb(var(--bg-color));
-}
-
-:root {
+  --color-fg: 17, 17, 17;
+  --color-bg: 238, 238, 238;
   --color-dark: 17, 17, 17;
-  --contrast-color-dark: 238, 238, 238;
-  --darkened-color-dark: 15, 15, 15;
-  --lightened-color-dark: 77, 77, 77;
+  --color-dark-contrast: 238, 238, 238;
+  --color-dark-darkened: 15, 15, 15;
+  --color-dark-lightened: 77, 77, 77;
+  --color-lite: 238, 238, 238;
+  --color-lite-contrast: 17, 17, 17;
+  --color-lite-darkened: 214, 214, 214;
+  --color-lite-lightened: 242, 242, 242;
+}
+
+body, [class^="fg-"], [class*=" fg-"] {
+  color: rgb(var(--color-fg));
+}
+
+body, [class^="bg-"], [class*=" bg-"] {
+  background-color: rgb(var(--color-bg));
+}
+
+.fg-contrast {
+  --color-fg: var(--color-bg-contrast);
+}
+
+.bg-contrast {
+  --color-bg: var(--color-fg-contrast);
 }
 
 .fg-dark {
-  --fg-color: var(--color-dark);
-  --fg-contrast-color: var(--contrast-color-dark);
-}
-
-.fg-contrast-dark {
-  --fg-color: var(--contrast-color-dark);
-}
-
-.bg-contrast-dark {
-  --bg-color: var(--contrast-color-dark);
+  --color-fg: var(--color-dark);
+  --color-fg-contrast: var(--color-dark-contrast);
 }
 
 .bg-dark {
-  --bg-color: var(--color-dark);
-  --bg-contrast-color: var(--contrast-color-dark);
+  --color-bg: var(--color-dark);
+  --color-bg-contrast: var(--color-dark-contrast);
+}
+
+.fg-dark-contrast {
+  --color-fg: var(--color-dark-contrast);
+}
+
+.bg-dark-contrast {
+  --color-bg: var(--color-dark-contrast);
 }
 
 .theme-dark {
   --theme-color: var(--color-dark);
-  --theme-contrast-color: var(--contrast-color-dark);
-  --theme-darkened-color: var(--darkened-color-dark);
-  --theme-lightened-color: var(--lightened-color-dark);
-}
-
-:root {
-  --color-lite: 238, 238, 238;
-  --contrast-color-lite: 17, 17, 17;
-  --darkened-color-lite: 214, 214, 214;
-  --lightened-color-lite: 242, 242, 242;
+  --theme-color-contrast: var(--color-dark-contrast);
+  --theme-color-darkened: var(--color-dark-darkened);
+  --theme-color-lightened: var(--color-dark-lightened);
 }
 
 .fg-lite {
-  --fg-color: var(--color-lite);
-  --fg-contrast-color: var(--contrast-color-lite);
-}
-
-.fg-contrast-lite {
-  --fg-color: var(--contrast-color-lite);
-}
-
-.bg-contrast-lite {
-  --bg-color: var(--contrast-color-lite);
+  --color-fg: var(--color-lite);
+  --color-fg-contrast: var(--color-lite-contrast);
 }
 
 .bg-lite {
-  --bg-color: var(--color-lite);
-  --bg-contrast-color: var(--contrast-color-lite);
+  --color-bg: var(--color-lite);
+  --color-bg-contrast: var(--color-lite-contrast);
+}
+
+.fg-lite-contrast {
+  --color-fg: var(--color-lite-contrast);
+}
+
+.bg-lite-contrast {
+  --color-bg: var(--color-lite-contrast);
 }
 
 .theme-lite {
   --theme-color: var(--color-lite);
-  --theme-contrast-color: var(--contrast-color-lite);
-  --theme-darkened-color: var(--darkened-color-lite);
-  --theme-lightened-color: var(--lightened-color-lite);
+  --theme-color-contrast: var(--color-lite-contrast);
+  --theme-color-darkened: var(--color-lite-darkened);
+  --theme-color-lightened: var(--color-lite-lightened);
 }
 
 .fg-theme {
-  --fg-color: var(--theme-color);
-  --fg-contrast-color: var(--theme-contrast-color);
+  --color-fg: var(--theme-color);
+  --color-fg-contrast: var(--theme-color-contrast);
 }
 
 .bg-theme {
-  --bg-color: var(--theme-color);
-  --bg-contrast-color: var(--theme-contrast-color);
+  --color-bg: var(--theme-color);
+  --color-bg-contrast: var(--theme-color-contrast);
 }
 
-.fg-contrast-theme {
-  --fg-color: var(--theme-contrast-color);
+.fg-theme-contrast {
+  --color-fg: var(--theme-color-contrast);
 }
 
-.bg-contrast-theme {
-  --bg-color: var(--theme-contrast-color);
-}
-
-.fg-contrast {
-  --fg-color: var(--bg-contrast-color);
-}
-
-.bg-contrast {
-  --bg-color: var(--fg-contrast-color);
+.bg-theme-contrast {
+  --color-bg: var(--theme-color-contrast);
 }
 
 body.debug:before, body.debug:after {

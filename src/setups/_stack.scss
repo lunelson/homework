@@ -80,49 +80,25 @@
 
   } @else {
 
-    @include mm-for('inner-y', 'inner-y-mods') {
+    @include mm-for('inner-y', 'inner-y-mods', 'inner-mods') {
       $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
-      @each $y,$mod in $inner-y-mods {
+      @each $y, $mod in $inner-y-mods {
         $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
 
-        .stack-#{$y} {
-          & > * + * { margin-top: $inner-y; }
-        }
+        .stack-#{$y} > * + * { margin-top: $inner-y; }
 
       }
     }
 
-    // @include mm-for('inner-x') {
-    //   $inner-x: m-var('inner-x');
+    @include mm-for('inner-x', 'inner-x-mods', 'inner-mods') {
+      $inner-x-mods: m-var('inner-x-mods') or m-var('inner-mods') or ();
+      @each $x, $mod in $inner-x-mods {
+        $inner-x: if(unitless($mod), m-var('inner-x') * $mod, $mod);
 
-    //   @if $inner-x {
+        .chain-#{$x} > * + * { margin-left: $inner-x; }
 
-    //     @each $x,
-    //     $inner-x in if(type-of($inner-x)=='map', $inner-x, (m: $inner-x)) {
-    //       #{mod-class('chain', $x, 'm')} {
-    //         &>*:not(.unchain)+* {
-    //           margin-left: $inner-x;
-    //         }
-
-    //         // @each $f, $font in $fonts {
-    //         //   @each $t, $typo in $typos {
-    //         //     .#{$f}-#{$t} {
-    //         //       @at-root #{insert-parents(null, '>')} {
-
-    //         //         $line: nth($typo, 2);
-    //         //         $trim: divide($line - 1em, 2);
-    //         //         @include adjacent-to('*:not(.no-chain)') {
-    //         //           margin-top: subtract($length, $trim);
-    //         //         }
-    //         //       }
-    //         //     }
-    //         //   }
-    //         // }
-
-    //       }
-    //     }
-    //   }
-    // }
+      }
+    }
 
   }
 }

@@ -241,7 +241,7 @@ $fonts-defaults: (
         }
 
         @if $trim {
-          @include mm-for('inner-y', 'inner-y-mods', 'font-mods'$f $s) {
+          @include mm-for('inner-y', 'inner-y-mods', 'inner-mods', 'font-mods'$f $s) {
             $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
 
             @each $y, $mod in $inner-y-mods {

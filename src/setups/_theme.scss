@@ -1,14 +1,26 @@
-//  _   _
-// | | | |
-// | |_| |__   ___ _ __ ___   ___
-// | __| '_ \ / _ \ '_ ` _ \ / _ \
-// | |_| | | |  __/ | | | | |  __/
-//  \__|_| |_|\___|_| |_| |_|\___|
+//  _   _                                   _       __            _ _
+// | | | |                                 | |     / _|          | | |
+// | |_| |__   ___ _ __ ___   ___ ______ __| | ___| |_ __ _ _   _| | |_ ___
+// | __| '_ \ / _ \ '_ ` _ \ / _ \______/ _` |/ _ \  _/ _` | | | | | __/ __|
+// | |_| | | |  __/ | | | | |  __/     | (_| |  __/ || (_| | |_| | | |_\__ \
+//  \__|_| |_|\___|_| |_| |_|\___|      \__,_|\___|_| \__,_|\__,_|_|\__|___/
+
 
 $colors: (
   dark: #111,
   lite: #eee,
 ) !default;
+
+
+//  _   _                                _          _
+// | | | |                              | |        | |
+// | |_| |__   ___ _ __ ___   ___ ______| |__   ___| |_ __   ___ _ __ ___
+// | __| '_ \ / _ \ '_ ` _ \ / _ \______| '_ \ / _ \ | '_ \ / _ \ '__/ __|
+// | |_| | | |  __/ | | | | |  __/      | | | |  __/ | |_) |  __/ |  \__ \
+//  \__|_| |_|\___|_| |_| |_|\___|      |_| |_|\___|_| .__/ \___|_|  |___/
+//                                                   | |
+//                                                   |_|
+
 
 // srgb gamma correction, per spec: https://en.wikipedia.org/wiki/srgb
 @function re-gamma($n) { @if $n <= 0.0031308 { @return $n * 12.92; } @else { @return 1.055 * pow($n, 1/2.4) - 0.055; } }
@@ -22,20 +34,12 @@ $colors: (
   @return re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
 }
 
-// BOOTSTRAP VERSION, DUMB
-// @function yiq($color) {
-//   $r: red($color);
-//   $g: green($color);
-//   $b: blue($color);
-//   $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
-//   @return map-get($colors, if($yiq >= 128, 'dark', 'lite'));
-// }
 
 @function yiq($c) {
+  // modified from bootstrap, which does not linearize the colors
   $rlin: de-gamma(red($c)/255);
   $glin: de-gamma(green($c)/255);
   $blin: de-gamma(blue($c)/255);
-  // $yiq: re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin);
   $yiq: 0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin;
   @return map-get($colors, if($yiq >= 0.5, 'dark', 'lite'));
 }
@@ -52,100 +56,154 @@ $colors: (
 @function hsla($args...) { @return #{'hsla(#{$args})'}; }
 
 
-@mixin homework-theme-setup($modern: true, $lite: true) {
+//  _   _                                         _
+// | | | |                                       | |
+// | |_| |__   ___ _ __ ___   ___ ______ ___  ___| |_ _   _ _ __
+// | __| '_ \ / _ \ '_ ` _ \ / _ \______/ __|/ _ \ __| | | | '_ \
+// | |_| | | |  __/ | | | | |  __/      \__ \  __/ |_| |_| | |_) |
+//  \__|_| |_|\___|_| |_| |_|\___|      |___/\___|\__|\__,_| .__/
+//                                                         | |
+//                                                         |_|
+
+
+@mixin homework-theme-setup($modern: $homework-is-modern, $lite: true) {
 
   $colors: map-merge((
     dark: #111,
     lite: #eee,
   ), $colors) !global;
 
-  :root {
-    // NB: color custom props stored as RGB number list!!!!
-    // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
-
-    --fg-color: #{rgbify(map-get($colors, if($lite, 'dark', 'lite')))};
-    --bg-color: #{rgbify(map-get($colors, if($lite, 'lite', 'dark')))};
-    // --bd-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
-  }
-
-  body {
-    color: rgb(var(--fg-color));
-    background-color: rgb(var(--bg-color));
-  }
-
   @if $modern {
 
-    #{base-class('fg', false)} { color: rgb(var(--fg-color)); }
-    #{base-class('bg', false)} { background-color: rgb(var(--bg-color)); }
-    // #{base-class('bd', false)} { border-color: rgb(var(--bd-color)); }
+    :root {
+      // NB: color custom props stored as RGB number list!!!!
+      // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
 
-    @each $c, $color in $colors {
-      :root {
+      --color-fg: #{rgbify(map-get($colors, if($lite, 'dark', 'lite')))};
+      --color-bg: #{rgbify(map-get($colors, if($lite, 'lite', 'dark')))};
+      // --bd-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
+
+      @each $c, $color in $colors {
         // NB: color custom props stored as RGB number list!!!!
         --color-#{$c}: #{rgbify($color)};
-        --contrast-color-#{$c}: #{rgbify(yiq($color))};
-        --darkened-color-#{$c}: #{rgbify(mix($color, #000, 90%))};
-        --lightened-color-#{$c}: #{rgbify(mix($color, #fff, 75%))};
+        --color-#{$c}-contrast: #{rgbify(yiq($color))};
+        --color-#{$c}-darkened: #{rgbify(mix($color, #000, 90%))};
+        --color-#{$c}-lightened: #{rgbify(mix($color, #fff, 75%))};
       }
+    }
+
+    body, #{base-class('fg', false)} { color: rgb(var(--color-fg)); }
+    body, #{base-class('bg', false)} { background-color: rgb(var(--color-bg)); }
+    // #{base-class('bd', false)} { border-color: rgb(var(--bd-color)); }
+
+    ///
+    /// IMPLICIT CONTRAST COLORS
+    ///
+
+    .fg-contrast { --color-fg: var(--color-bg-contrast); }
+    .bg-contrast { --color-bg: var(--color-fg-contrast); }
+
+    @each $c, $color in $colors {
 
       ///
       /// EXPLICIT COLORS
       ///
 
       .fg-#{$c} {
-        --fg-color: var(--color-#{$c});
-        --fg-contrast-color: var(--contrast-color-#{$c});
-      }
-      .fg-contrast-#{$c} {
-        --fg-color: var(--contrast-color-#{$c});
-      }
-      .bg-contrast-#{$c} {
-        --bg-color: var(--contrast-color-#{$c});
+        --color-fg: var(--color-#{$c});
+        --color-fg-contrast: var(--color-#{$c}-contrast);
       }
       .bg-#{$c} {
-        --bg-color: var(--color-#{$c});
-        --bg-contrast-color: var(--contrast-color-#{$c});
+        --color-bg: var(--color-#{$c});
+        --color-bg-contrast: var(--color-#{$c}-contrast);
+      }
+      .fg-#{$c}-contrast {
+        --color-fg: var(--color-#{$c}-contrast);
+      }
+      .bg-#{$c}-contrast {
+        --color-bg: var(--color-#{$c}-contrast);
       }
       .theme-#{$c} {
         --theme-color: var(--color-#{$c});
-        --theme-contrast-color: var(--contrast-color-#{$c});
-        --theme-darkened-color: var(--darkened-color-#{$c});
-        --theme-lightened-color: var(--lightened-color-#{$c});
+        --theme-color-contrast: var(--color-#{$c}-contrast);
+        --theme-color-darkened: var(--color-#{$c}-darkened);
+        --theme-color-lightened: var(--color-#{$c}-lightened);
       }
     }
 
     ///
-    /// THEME COLORS
+    /// IMPLICIT THEME COLORS
     ///
 
     .fg-theme {
-      --fg-color: var(--theme-color);
-      --fg-contrast-color: var(--theme-contrast-color);
+      --color-fg: var(--theme-color);
+      --color-fg-contrast: var(--theme-color-contrast);
     }
     .bg-theme {
-      --bg-color: var(--theme-color);
-      --bg-contrast-color: var(--theme-contrast-color);
+      --color-bg: var(--theme-color);
+      --color-bg-contrast: var(--theme-color-contrast);
     }
-    .fg-contrast-theme {
-      --fg-color: var(--theme-contrast-color);
+    .fg-theme-contrast {
+      --color-fg: var(--theme-color-contrast);
     }
-    .bg-contrast-theme {
-      --bg-color: var(--theme-contrast-color);
-    }
-
-    ///
-    /// IMPLICIT COLORS
-    ///
-
-    .fg-contrast {
-      --fg-color: var(--bg-contrast-color);
-    }
-
-    .bg-contrast {
-      --bg-color: var(--fg-contrast-color);
+    .bg-theme-contrast {
+      --color-bg: var(--theme-color-contrast);
     }
 
   } @else {
-    @include homework-legacy-theme-setup;
+
+    $color-fg: map-get($colors, if($lite, 'dark', 'lite'));
+    $color-bg: map-get($colors, if($lite, 'lite', 'dark'));
+
+    body { color: $color-fg; }
+    body { background-color: $color-bg; }
+
+    .bg-contrast { background-color: yiq($color-fg); }
+    .fg-contrast { color: yiq($color-bg); }
+
+    @each $c, $color in $colors {
+
+      .fg-#{$c} {
+        color: $color;
+        .bg-contrast {
+          background-color: yiq($color);
+        }
+      }
+      .bg-#{$c} {
+        background-color: $color;
+        .fg-contrast {
+          color: yiq($color);
+        }
+      }
+      .fg-contrast-#{$c} {
+        color: yiq($color);
+      }
+      .bg-contrast-#{$c} {
+        background-color: yiq($color);
+      }
+      .theme-#{$c} {
+
+        .fg-theme {
+          color: $color;
+          .bg-contrast {
+            background-color: yiq($color);
+          }
+        }
+        .bg-theme {
+          background-color: $color;
+          .fg-contrast {
+            color: yiq($color);
+          }
+        }
+        .fg-contrast-theme {
+          color: yiq($color);
+        }
+        .bg-contrast-theme {
+          background-color: yiq($color);
+        }
+
+      }
+    }
+
   }
 }
