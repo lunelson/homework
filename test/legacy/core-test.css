@@ -20,27 +20,6 @@
     outer-left: 200px
   )
 ) */
-@media screen and (max-width: 39.999em) {
-  html {
-    font-size: 16px;
-    line-height: 1.25;
-  }
-}
-
-@media screen and (min-width: 40em) and (max-width: 59.999em) {
-  html {
-    font-size: 20px;
-    line-height: 1.25;
-  }
-}
-
-@media screen and (min-width: 60em) {
-  html {
-    font-size: 18px;
-    line-height: 1.25;
-  }
-}
-
 /* (
   a: (
     font-size: 16px,

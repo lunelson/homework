@@ -72,8 +72,10 @@ $media: (
   out: vw-lerp((get($media, a, breakpoint): 100px, get($media, b, breakpoint): 200px, ));
 }
 
+/* #{map-stringify($root)} */
 /* #{map-stringify($media)} */
 @include homework-core-setup();
+/* #{map-stringify($root)} */
 /* #{map-stringify($media)} */
 .test {
   /*

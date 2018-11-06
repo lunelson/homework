@@ -9,18 +9,9 @@
   --outer-left: 1rem;
   --grid-columns: 12;
   --outer-width: 100%;
-  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
   --inner-y-m: 1rem;
   --inner-x-m: 1rem;
-  --font-size-sans-m: 1rem;
-  --line-height-sans-m: 1.25;
-  --trim-top-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-  --trim-bottom-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
-}
-
-html {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 }
 
 @media screen and (min-width: 20em) {

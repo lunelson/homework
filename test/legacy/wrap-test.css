@@ -1,17 +1,3 @@
-@media screen and (max-width: 29.999em) {
-  html {
-    font-size: 16px;
-    line-height: 1.25;
-  }
-}
-
-@media screen and (min-width: 30em) {
-  html {
-    font-size: 20px;
-    line-height: 1.25;
-  }
-}
-
 [class^="wrap-"], [class*=" wrap-"] {
   margin-right: auto;
   margin-left: auto;

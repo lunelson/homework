@@ -9,23 +9,10 @@
   --outer-left: 2rem;
   --grid-columns: 12;
   --outer-width: 100%;
-  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
   --inner-y-s: 1rem;
   --inner-y-m: 2rem;
   --inner-x-m: 1rem;
-  --font-size-sans-s: 0.875rem;
-  --line-height-sans-s: 1.4;
-  --font-size-sans-m: 1rem;
-  --line-height-sans-m: 1.4;
-  --font-size-serif-s: 1rem;
-  --line-height-serif-s: 1.4;
-  --font-size-serif-m: 1.125rem;
-  --line-height-serif-m: 1.4;
-}
-
-html {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 }
 
 @media screen and (min-width: 20em) {
@@ -40,14 +27,6 @@ html {
     --breakpoint: 30em;
     --inner-x: 3rem;
     --outer-width: 30rem;
-    --font-size-sans-s: 1.25rem;
-    --line-height-sans-s: 1.4;
-    --font-size-sans-m: 1.5rem;
-    --line-height-sans-m: 1.4;
-    --font-size-serif-s: 1.375rem;
-    --line-height-serif-s: 1.4;
-    --font-size-serif-m: 1.625rem;
-    --line-height-serif-m: 1.4;
   }
 }
 
@@ -65,6 +44,53 @@ html {
   --font-family-serif: serif;
   --letter-spacing-serif: calc(0 * 1px - 0 / 50 * 1em);
   --trim-x-serif: 0;
+  --font-size-sans-s: 0.875rem;
+  --line-height-sans-s: 1.4;
+  --font-size-sans-m: 1rem;
+  --line-height-sans-m: 1.4;
+  --font-size-serif-s: 1rem;
+  --line-height-serif-s: 1.4;
+  --font-size-serif-m: 1.125rem;
+  --line-height-serif-m: 1.4;
+}
+
+@media screen and (min-width: 20em) {
+  :root {
+    --font-size-sans-s: 0.875rem;
+    --line-height-sans-s: 1.4;
+    --font-size-sans-m: 1rem;
+    --line-height-sans-m: 1.4;
+    --font-size-serif-s: 1rem;
+    --line-height-serif-s: 1.4;
+    --font-size-serif-m: 1.125rem;
+    --line-height-serif-m: 1.4;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  :root {
+    --font-size-sans-s: 1.25rem;
+    --line-height-sans-s: 1.4;
+    --font-size-sans-m: 1.5rem;
+    --line-height-sans-m: 1.4;
+    --font-size-serif-s: 1.375rem;
+    --line-height-serif-s: 1.4;
+    --font-size-serif-m: 1.625rem;
+    --line-height-serif-m: 1.4;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  :root {
+    --font-size-sans-s: 1.25rem;
+    --line-height-sans-s: 1.4;
+    --font-size-sans-m: 1.5rem;
+    --line-height-sans-m: 1.4;
+    --font-size-serif-s: 1.375rem;
+    --line-height-serif-s: 1.4;
+    --font-size-serif-m: 1.625rem;
+    --line-height-serif-m: 1.4;
+  }
 }
 
 .sans, [class^="sans-"], [class*=" sans-"], .serif, [class^="serif-"], [class*=" serif-"] {
@@ -80,7 +106,7 @@ html {
 }
 
 .stack > * + .sans, .stack > * + [class^="sans-"], .stack > * + [class*=" sans-"], .stack > * + .serif, .stack > * + [class^="serif-"], .stack > * + [class*=" serif-"], [class^="stack-"] > * + .sans, [class^="stack-"] > * + [class^="sans-"], [class^="stack-"] > * + [class*=" sans-"], [class^="stack-"] > * + .serif, [class^="stack-"] > * + [class^="serif-"], [class^="stack-"] > * + [class*=" serif-"], [class*=" stack-"] > * + .sans, [class*=" stack-"] > * + [class^="sans-"], [class*=" stack-"] > * + [class*=" sans-"], [class*=" stack-"] > * + .serif, [class*=" stack-"] > * + [class^="serif-"], [class*=" stack-"] > * + [class*=" serif-"] {
-  margin-top: calc(var(--stack-gap) - 0);
+  margin-top: calc(var(--stack-gap) - 0%);
 }
 
 .sans, [class^="sans-"], [class*=" sans-"],

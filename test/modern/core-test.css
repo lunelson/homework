@@ -3,6 +3,29 @@
 }
 
 /* (
+  font-mods: (
+    sans: (
+      m: 18px 1.3,
+      l: 24px 1.2
+    ),
+    serif: (
+      m: 18px 1.3,
+      l: 24px 1.2
+    )
+  ),
+  inner-x: 1rem,
+  inner-mods: (
+    s: 0.5,
+    m: 1,
+    l: 2
+  ),
+  inner-y: 1.5rem,
+  outer-top: 2rem,
+  outer-bottom: 2rem,
+  outer-right: 50px,
+  outer-left: 50px
+) */
+/* (
   a: (
     breakpoint: 30em,
     outer-right: calc(31.25vw + -6.25rem),
@@ -34,34 +57,13 @@
   --outer-left: 50px;
   --grid-columns: 12;
   --outer-width: 100%;
-  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
   --inner-y-s: calc(var(--inner-y) * 0.5);
   --inner-y-m: calc(var(--inner-y) * 1);
   --inner-y-l: calc(var(--inner-y) * 2);
   --inner-x-s: calc(var(--inner-x) * 0.5);
   --inner-x-m: calc(var(--inner-x) * 1);
   --inner-x-l: calc(var(--inner-x) * 2);
-  --font-size-sans-m: 1.125rem;
-  --line-height-sans-m: 1.3;
-  --trim-top-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-  --trim-bottom-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
-  --font-size-sans-l: 1.5rem;
-  --line-height-sans-l: 1.2;
-  --trim-top-sans-l: calc((var(--line-height-sans-l) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-  --trim-bottom-sans-l: calc((var(--line-height-sans-l) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
-  --font-size-serif-m: 1.125rem;
-  --line-height-serif-m: 1.3;
-  --trim-top-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-  --trim-bottom-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
-  --font-size-serif-l: 1.5rem;
-  --line-height-serif-l: 1.2;
-  --trim-top-serif-l: calc((var(--line-height-serif-l) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-  --trim-bottom-serif-l: calc((var(--line-height-serif-l) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
-}
-
-html {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 }
 
 @media screen and (min-width: 30em) {
@@ -90,6 +92,33 @@ html {
   }
 }
 
+/* (
+  font-size: 16px,
+  line-height: 1.25,
+  inner-x: 1rem,
+  inner-y: 1.5rem,
+  outer-top: 2rem,
+  outer-right: 50px,
+  outer-bottom: 2rem,
+  outer-left: 50px,
+  grid-columns: 12,
+  font-mods: (
+    sans: (
+      m: 18px 1.3,
+      l: 24px 1.2
+    ),
+    serif: (
+      m: 18px 1.3,
+      l: 24px 1.2
+    )
+  ),
+  inner-mods: (
+    s: 0.5,
+    m: 1,
+    l: 2
+  ),
+  outer-width: 100%
+) */
 /* (
   a: (
     font-size: 16px,

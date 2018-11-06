@@ -1,8 +1,3 @@
-html {
-  font-size: 16px;
-  line-height: 1.25;
-}
-
 .flow, [class^="flow-"], [class*=" flow-"] {
   margin-top: calc(1.25rem / -2);
   margin-bottom: calc(1.25rem / -2);
@@ -19,7 +14,7 @@ html {
   flex-wrap: wrap;
   margin-left: calc(2rem / -2);
   margin-right: calc(2rem / -2);
-  width: calc(100% + 2rem);
+  width: unset;
 }
 
 .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
@@ -31,6 +26,16 @@ html {
   background-clip: content-box;
   padding-left: calc(2rem / 2) !important;
   padding-right: calc(2rem / 2) !important;
+}
+
+.flow-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.flow-0 > * {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .flow-s {
@@ -63,6 +68,28 @@ html {
   padding-bottom: calc(4rem / 2) !important;
 }
 
+@media screen and (max-width: 29.999em) {
+  .flow, [class^="flow-"], [class*=" flow-"] {
+    margin-left: calc(2rem / -2);
+    margin-right: calc(2rem / -2);
+  }
+  .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
+    padding-left: calc(2rem / 2) !important;
+    padding-right: calc(2rem / 2) !important;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .flow, [class^="flow-"], [class*=" flow-"] {
+    margin-left: calc(3rem / -2);
+    margin-right: calc(3rem / -2);
+  }
+  .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
+    padding-left: calc(3rem / 2) !important;
+    padding-right: calc(3rem / 2) !important;
+  }
+}
+
 .test {
   width: calc(99.99999% * 1 / 6);
   margin-left: calc(99.99999% * -1 / 6);
@@ -73,4 +100,42 @@ html {
   width: calc((99.99999% + 2rem) * 1 / 6 - 2rem);
   margin-left: calc((99.99999% + 2rem) * -1 / 6);
   margin-right: calc((99.99999% + 2rem) * 2 / 6);
+}
+
+.m-test {
+  width: calc(99.99999% * 2 / 6);
+  margin-left: calc(99.99999% * 0 / 6);
+  margin-right: calc(99.99999% * -1 / 6);
+}
+
+@media screen and (min-width: 20em) {
+  .m-test {
+    width: calc(99.99999% * 2 / 6);
+    margin-left: calc(99.99999% * 0 / 6);
+    margin-right: calc(99.99999% * -1 / 6);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .m-test {
+    width: calc(99.99999% * 3 / 12);
+    margin-left: calc(99.99999% * 0 / 12);
+    margin-right: calc(99.99999% * 1 / 12);
+  }
+}
+
+@media screen and (min-width: 20em) {
+  .m-test .nest {
+    width: calc((99.99999% + 2rem) * 3 / 6 - 2rem);
+    margin-left: calc((99.99999% + 2rem) * 1 / 6);
+    margin-right: calc((99.99999% + 2rem) * 1 / 6);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .m-test .nest {
+    width: calc((99.99999% + 3rem) * 4 / 12 - 3rem);
+    margin-left: calc((99.99999% + 3rem) * 2 / 12);
+    margin-right: calc((99.99999% + 3rem) * 2 / 12);
+  }
 }

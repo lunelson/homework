@@ -8,6 +8,7 @@
 //                    |_|
 
 @import 'core';
+@import 'root';
 @import 'wrap';
 @import 'frame';
 @import 'stack';
@@ -29,6 +30,7 @@ $done-homework-setup: false;
   @if length($setups) == 0 {
     $setups: (
       'core',
+      'root',
       'wrap',
       'frame',
       'stack',
@@ -42,6 +44,7 @@ $done-homework-setup: false;
   }
 
   @if index($setups, 'core') { @include homework-core-setup($modern); }
+  @if index($setups, 'root') { @include homework-root-setup($modern); }
   @if index($setups, 'font') { @include homework-font-setup($modern); }
   @if index($setups, 'wrap') { @include homework-wrap-setup($modern); }
   @if index($setups, 'frame') { @include homework-frame-setup($modern); }

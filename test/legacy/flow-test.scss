@@ -47,16 +47,16 @@ $homework-is-modern: false;
 // .test { @include span(3, -1, 2); }
 // .test { @include span-i(3, -1, 2); }
 
-// .m-test {
-//   @include m-spans((
-//     null: 2 0 -1 12,
-//     a: 2 0 -1 12,
-//     b: 3 0 1 12,
-//   ));
-//   .nest {
-//     @include m-spans-i((
-//       a: 3 1 1 12,
-//       b: 4 2 2 12,
-//     ));
-//   }
-// }
+.m-test {
+  @include m-spans((
+    null: 2 0 -1,
+    a: 2 0 -1,
+    b: 3 0 1,
+  ));
+  .nest {
+    @include m-spans-i((
+      a: 3 1 1,
+      b: 4 2 2,
+    ));
+  }
+}

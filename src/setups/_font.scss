@@ -54,21 +54,21 @@ $fonts-defaults: (
   }
 }
 
-@mixin --medium-font-mods($medium, $trim: true) {
-  @each $f, $mod in map-get($medium, 'font-mods') or () {
-    @each $s, $def in $mod {
-      $size: strip(nth($def, 1));
-      $line: nth($def, 2);
-      // NB line-heights > 6 are assumed to be px values
-      --font-size-#{$f}-#{$s}: #{$size / 16 * 1rem};
-      --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)};
-      @if $trim {
-        --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
-        --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
-      }
-    }
-  }
-}
+// @mixin --medium-font-mods($medium, $trim: true) {
+//   @each $f, $mod in map-get($medium, 'font-mods') or () {
+//     @each $s, $def in $mod {
+//       $size: strip(nth($def, 1));
+//       $line: nth($def, 2);
+//       // NB line-heights > 6 are assumed to be px values
+//       --font-size-#{$f}-#{$s}: #{$size / 16 * 1rem};
+//       --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)};
+//       @if $trim {
+//         --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
+//         --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
+//       }
+//     }
+//   }
+// }
 
 
 //   __            _                   _
@@ -97,6 +97,8 @@ $fonts-defaults: (
   @if $modern {
 
     :root {
+
+      // root font defs
       @each $f, $font in $fonts {
         --font-family-#{$f}: #{map-get($font, 'family')};
         --letter-spacing-#{$f}: calc(#{map-get($font, 'spacing-max')} * 1px - #{map-get($font, 'spacing-max')} / #{map-get($font, 'spacing-end')} * 1em);
@@ -104,6 +106,25 @@ $fonts-defaults: (
         @if $trim {
           --trim-capline-#{$f}: #{map-get($font, 'trim-capline')};
           --trim-baseline-#{$f}: #{map-get($font, 'trim-baseline')};
+        }
+      }
+
+      // per-medium font mods
+      @each $m in join((null), map-keys($media)) {
+        @include m($m) {
+          @each $f, $mod in m-var('font-mods') or () {
+            @each $s, $def in $mod {
+              $size: strip(nth($def, 1));
+              $line: nth($def, 2);
+              // NB line-heights > 6 are assumed to be px values
+              --font-size-#{$f}-#{$s}: #{$size / 16 * 1rem};
+              --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)};
+              @if $trim {
+                --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
+                --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
+              }
+            }
+          }
         }
       }
     }
@@ -121,7 +142,7 @@ $fonts-defaults: (
         margin-left: if($trim, var(--trim-x), 0);
       }
       @at-root #{selector-insert(#{base-class('stack')}, '> * +')} {
-        margin-top: calc(var(--stack-gap) - #{if($trim, var(--trim-top), 0)});
+        margin-top: calc(var(--stack-gap) - #{if($trim, var(--trim-top), 0%)});
       }
       // TODO: re-implement this by making --trim-top a stronger value when font+font, under any circumstance
       // @at-root #{selector-insert(selector-insert(#{base-class('stack')}, '>', #{$font-base-classes}), '+')} {
@@ -220,8 +241,8 @@ $fonts-defaults: (
     @each $f, $mod in map-get($root, 'font-mods') or () {
       @each $s in map-keys($mod) {
 
-        @include mm-for('font-mods'$f $s) {
-          $def: m-var('font-mods'$f $s);
+        @include mm-for('font-mods' $f $s) {
+          $def: m-var('font-mods' $f $s);
           $size: strip(nth($def, 1));
           $line: nth($def, 2);
 

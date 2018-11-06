@@ -9,34 +9,13 @@
   --outer-left: 2rem;
   --grid-columns: 12;
   --outer-width: 100%;
-  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
   --inner-y-s: calc(var(--inner-y) * 0.5);
   --inner-y-m: 3.5rem;
   --inner-y-l: calc(var(--inner-y) * 2);
   --inner-x-s: calc(var(--inner-x) * 0.5);
   --inner-x-m: calc(var(--inner-x) * 1);
   --inner-x-l: calc(var(--inner-x) * 2);
-  --font-size-sans-m: 1.125rem;
-  --line-height-sans-m: 1.3;
-  --trim-top-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-  --trim-bottom-sans-m: calc((var(--line-height-sans-m) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
-  --font-size-sans-l: 1.5rem;
-  --line-height-sans-l: 1.2;
-  --trim-top-sans-l: calc((var(--line-height-sans-l) - 1) * 1em / 2 + var(--trim-capline-sans) * 1em);
-  --trim-bottom-sans-l: calc((var(--line-height-sans-l) - 1) * 1em / 2 + var(--trim-baseline-sans) * 1em);
-  --font-size-serif-m: 1.125rem;
-  --line-height-serif-m: 1.3;
-  --trim-top-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-  --trim-bottom-serif-m: calc((var(--line-height-serif-m) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
-  --font-size-serif-l: 1.5rem;
-  --line-height-serif-l: 1.2;
-  --trim-top-serif-l: calc((var(--line-height-serif-l) - 1) * 1em / 2 + var(--trim-capline-serif) * 1em);
-  --trim-bottom-serif-l: calc((var(--line-height-serif-l) - 1) * 1em / 2 + var(--trim-baseline-serif) * 1em);
-}
-
-html {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 }
 
 @media screen and (min-width: 30em) {
@@ -49,8 +28,8 @@ html {
 @media screen and (min-width: 40em) {
   :root {
     --breakpoint: 40em;
-    --outer-width: 40rem;
     --inner-y-l: 4px;
+    --outer-width: 40rem;
   }
 }
 

@@ -12,82 +12,87 @@
   $media-keys: join(null, map-keys($media));
   $last-m: last($media-keys);
 
+  body {
+    &.debug {
+      &::before, &::after {
+        display: block;
+      }
+    }
+    &::before, &::after {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 112; // higher than all other layers ??
+    }
+    &::before {
+      background-color: $color;
+      padding: 1rem;
+
+      @each $m in $media-keys {
+        @include m($m) {
+          content: '#{$m or "root"}'
+        }
+      }
+    }
+    &::after {
+      content: '';
+      top: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      pointer-events: none;
+    }
+  }
+
   @if $modern {
 
-    body {
-      &.debug {
-        &:before, &:after {
-          display: block;
-        }
-      }
-      &:before, &:after {
-        display: none;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        z-index: 112; // higher than all other layers ??
-      }
-      &:before {
-        background-color: $color;
-        padding: 1rem;
-
-        @each $m in $media-keys {
-          @include m($m) {
-            content: '#{$m or "root"}'
-          }
-        }
-      }
-
-      &:after {
-        --outer-x: calc(var(--outer-right) + var(--outer-left));
-        --repeat-width: calc(100% / var(--grid-columns));
-        --column-width: calc(var(--repeat-width) - var(--inner-x));
-        content: '';
-        top: 0;
-        right: 0;
-        margin-right: auto;
-        margin-left: auto;
-        pointer-events: none;
-        width: subtract(100%, var(--outer-x));
-        @if $wrap-last { max-width: subtract(m-var('breakpoint', $last-m), var(--outer-x)); }
-        background-image: repeating-linear-gradient(
-          to right,
-          $color,
-          $color var(--column-width),
-          transparent var(--column-width),
-          transparent var(--repeat-width)
-        );
-        background-size: calc(100% + var(--inner-x)) 100%;
-
-        // @each $m in $media-keys {
-        //   @include m($m) {
-        //     $outer-right: m-var('outer-right');
-        //     $outer-left: m-var('outer-left');
-        //     $outer-x: add($outer-right, $outer-left);
-        //     // TODO: account for different outer-right/-left
-        //     // $outer-diff: subtract($outer-right, $outer-left);
-        //     $inner-x: m-var('inner-x') or 2rem;
-        //     $grid-columns: m-var('grid-columns') or 12;
-        //     $repeat-width: divide(100%, $grid-columns);
-        //     $column-width: subtract($repeat-width, $inner-x);
-        //     width: subtract(100%, $outer-x);
-        //     @if $wrap-last and $m == $last-m {
-        //       max-width: subtract(m-var('breakpoint', $last-m), $outer-x);
-        //     }
-        //     background-image: repeating-linear-gradient(
-        //       to right,
-        //       $color,
-        //       $color $column-width,
-        //       transparent $column-width,
-        //       transparent $repeat-width
-        //     );
-        //     background-size: add(100%, $inner-x) 100%;
-        //   }
-        // }
-      }
+    body::after {
+      --outer-x: calc(var(--outer-right) + var(--outer-left));
+      --repeat-width: calc(100% / var(--grid-columns));
+      --column-width: calc(var(--repeat-width) - var(--inner-x));
+      width: subtract(100%, var(--outer-x));
+      @if $wrap-last { max-width: subtract(m-var('breakpoint', $last-m), var(--outer-x)); }
+      background-image: repeating-linear-gradient(
+        to right,
+        $color,
+        $color var(--column-width),
+        transparent var(--column-width),
+        transparent var(--repeat-width)
+      );
+      background-size: calc(100% + var(--inner-x)) 100%;
     }
 
   } @else {
+
+    body::after {
+
+      @each $m in $media-keys {
+        @include m($m) {
+          $outer-right: m-var('outer-right');
+          $outer-left: m-var('outer-left');
+          $outer-x: add($outer-right, $outer-left);
+          // TODO: account for different outer-right/-left
+          // $outer-diff: subtract($outer-right, $outer-left);
+          $inner-x: m-var('inner-x') or 2rem;
+          $grid-columns: m-var('grid-columns') or 12;
+          $repeat-width: divide(100%, $grid-columns);
+          $column-width: subtract($repeat-width, $inner-x);
+          width: subtract(100%, $outer-x);
+          @if $wrap-last and $m == $last-m {
+            max-width: subtract(m-var('breakpoint', $last-m), $outer-x);
+          }
+          background-image: repeating-linear-gradient(
+            to right,
+            $color,
+            $color $column-width,
+            transparent $column-width,
+            transparent $repeat-width
+          );
+          background-size: add(100%, $inner-x) 100%;
+        }
+      }
+    }
 
   }
 }
