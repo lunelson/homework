@@ -12,9 +12,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: calc(100% + 2rem) !important;
   margin-left: calc(2rem / -2);
   margin-right: calc(2rem / -2);
-  width: unset;
 }
 
 .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
@@ -29,6 +29,7 @@
 }
 
 .flow-0 {
+  width: 100% !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
@@ -70,6 +71,7 @@
 
 @media screen and (max-width: 29.999em) {
   .flow, [class^="flow-"], [class*=" flow-"] {
+    width: calc(100% + 2rem) !important;
     margin-left: calc(2rem / -2);
     margin-right: calc(2rem / -2);
   }
@@ -81,6 +83,7 @@
 
 @media screen and (min-width: 30em) {
   .flow, [class^="flow-"], [class*=" flow-"] {
+    width: calc(100% + 3rem) !important;
     margin-left: calc(3rem / -2);
     margin-right: calc(3rem / -2);
   }

@@ -963,9 +963,9 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: calc(100% + var(--column-gap)) !important;
   margin-left: calc(var(--column-gap) / -2);
   margin-right: calc(var(--column-gap) / -2);
-  width: unset;
 }
 
 .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
@@ -980,6 +980,7 @@ body {
 }
 
 .flow-0 {
+  width: 100% !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
