@@ -4403,12 +4403,8 @@ body:hover .vhide button {
   --color-bg: 238, 238, 238;
   --color-dark: 17, 17, 17;
   --color-dark-contrast: 238, 238, 238;
-  --color-dark-darkened: 15, 15, 15;
-  --color-dark-lightened: 77, 77, 77;
   --color-lite: 238, 238, 238;
   --color-lite-contrast: 17, 17, 17;
-  --color-lite-darkened: 214, 214, 214;
-  --color-lite-lightened: 242, 242, 242;
 }
 
 body, [class^="fg-"], [class*=" fg-"] {
@@ -4448,8 +4444,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-dark {
   --theme-color: var(--color-dark);
   --theme-color-contrast: var(--color-dark-contrast);
-  --theme-color-darkened: var(--color-dark-darkened);
-  --theme-color-lightened: var(--color-dark-lightened);
 }
 
 .fg-lite {
@@ -4473,8 +4467,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-lite {
   --theme-color: var(--color-lite);
   --theme-color-contrast: var(--color-lite-contrast);
-  --theme-color-darkened: var(--color-lite-darkened);
-  --theme-color-lightened: var(--color-lite-lightened);
 }
 
 .fg-theme {

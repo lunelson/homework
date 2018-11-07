@@ -7,28 +7,16 @@
   --color-bg: 238, 238, 238;
   --color-dark: 17, 17, 17;
   --color-dark-contrast: 238, 238, 238;
-  --color-dark-darkened: 15, 15, 15;
-  --color-dark-lightened: 77, 77, 77;
   --color-lite: 238, 238, 238;
   --color-lite-contrast: 17, 17, 17;
-  --color-lite-darkened: 214, 214, 214;
-  --color-lite-lightened: 242, 242, 242;
   --color-foo: 80, 128, 33;
   --color-foo-contrast: 238, 238, 238;
-  --color-foo-darkened: 72, 115, 30;
-  --color-foo-lightened: 124, 160, 89;
   --color-bar: 218, 80, 201;
   --color-bar-contrast: 238, 238, 238;
-  --color-bar-darkened: 196, 72, 181;
-  --color-bar-lightened: 227, 124, 215;
   --color-baz: 71, 65, 255;
   --color-baz-contrast: 238, 238, 238;
-  --color-baz-darkened: 64, 59, 230;
-  --color-baz-lightened: 117, 113, 255;
   --color-fiz: 218, 155, 48;
   --color-fiz-contrast: 238, 238, 238;
-  --color-fiz-darkened: 196, 140, 43;
-  --color-fiz-lightened: 227, 180, 100;
 }
 
 body, [class^="fg-"], [class*=" fg-"] {
@@ -68,8 +56,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-dark {
   --theme-color: var(--color-dark);
   --theme-color-contrast: var(--color-dark-contrast);
-  --theme-color-darkened: var(--color-dark-darkened);
-  --theme-color-lightened: var(--color-dark-lightened);
 }
 
 .fg-lite {
@@ -93,8 +79,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-lite {
   --theme-color: var(--color-lite);
   --theme-color-contrast: var(--color-lite-contrast);
-  --theme-color-darkened: var(--color-lite-darkened);
-  --theme-color-lightened: var(--color-lite-lightened);
 }
 
 .fg-foo {
@@ -118,8 +102,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-foo {
   --theme-color: var(--color-foo);
   --theme-color-contrast: var(--color-foo-contrast);
-  --theme-color-darkened: var(--color-foo-darkened);
-  --theme-color-lightened: var(--color-foo-lightened);
 }
 
 .fg-bar {
@@ -143,8 +125,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-bar {
   --theme-color: var(--color-bar);
   --theme-color-contrast: var(--color-bar-contrast);
-  --theme-color-darkened: var(--color-bar-darkened);
-  --theme-color-lightened: var(--color-bar-lightened);
 }
 
 .fg-baz {
@@ -168,8 +148,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-baz {
   --theme-color: var(--color-baz);
   --theme-color-contrast: var(--color-baz-contrast);
-  --theme-color-darkened: var(--color-baz-darkened);
-  --theme-color-lightened: var(--color-baz-lightened);
 }
 
 .fg-fiz {
@@ -193,8 +171,6 @@ body, [class^="bg-"], [class*=" bg-"] {
 .theme-fiz {
   --theme-color: var(--color-fiz);
   --theme-color-contrast: var(--color-fiz-contrast);
-  --theme-color-darkened: var(--color-fiz-darkened);
-  --theme-color-lightened: var(--color-fiz-lightened);
 }
 
 .fg-theme {

@@ -301,3 +301,12 @@ body {
 .theme-fiz .bg-contrast-theme {
   background-color: #eee;
 }
+
+/* (
+  dark: #111,
+  lite: #eee,
+  foo: #508021,
+  bar: #da50c9,
+  baz: #4741ff,
+  fiz: #da9b30
+) */

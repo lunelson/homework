@@ -6,10 +6,7 @@
 //  \__|_| |_|\___|_| |_| |_|\___|      \__,_|\___|_| \__,_|\__,_|_|\__|___/
 
 
-$colors: (
-  dark: #111,
-  lite: #eee,
-) !default;
+$colors: ( dark: #111, lite: #eee, ) !default;
 
 
 //  _   _                                _          _
@@ -50,10 +47,10 @@ $colors: (
 }
 
 // override Sass' handling of these, let them pass through as CSS
-@function rgb($args...) { @return #{'rgb(#{$args})'}; }
-@function rgba($args...) { @return #{'rgba(#{$args})'}; }
-@function hsl($args...) { @return #{'hsl(#{$args})'}; }
-@function hsla($args...) { @return #{'hsla(#{$args})'}; }
+@function --rgb($args...) { @return #{'rgb(#{$args})'}; }
+@function --rgba($args...) { @return #{'rgba(#{$args})'}; }
+@function --hsl($args...) { @return #{'hsl(#{$args})'}; }
+@function --hsla($args...) { @return #{'hsla(#{$args})'}; }
 
 
 //  _   _                                         _
@@ -87,14 +84,14 @@ $colors: (
         // NB: color custom props stored as RGB number list!!!!
         --color-#{$c}: #{rgbify($color)};
         --color-#{$c}-contrast: #{rgbify(yiq($color))};
-        --color-#{$c}-darkened: #{rgbify(mix($color, #000, 90%))};
-        --color-#{$c}-lightened: #{rgbify(mix($color, #fff, 75%))};
+        // --color-#{$c}-darkened: #{rgbify(mix($color, #000, 90%))};
+        // --color-#{$c}-lightened: #{rgbify(mix($color, #fff, 75%))};
       }
     }
 
-    body, #{base-class('fg', false)} { color: rgb(var(--color-fg)); }
-    body, #{base-class('bg', false)} { background-color: rgb(var(--color-bg)); }
-    // #{base-class('bd', false)} { border-color: rgb(var(--bd-color)); }
+    body, #{base-class('fg', false)} { color: --rgb(var(--color-fg)); }
+    body, #{base-class('bg', false)} { background-color: --rgb(var(--color-bg)); }
+    // #{base-class('bd', false)} { border-color: --rgb(var(--bd-color)); }
 
     ///
     /// IMPLICIT CONTRAST COLORS
@@ -126,8 +123,8 @@ $colors: (
       .theme-#{$c} {
         --theme-color: var(--color-#{$c});
         --theme-color-contrast: var(--color-#{$c}-contrast);
-        --theme-color-darkened: var(--color-#{$c}-darkened);
-        --theme-color-lightened: var(--color-#{$c}-lightened);
+        // --theme-color-darkened: var(--color-#{$c}-darkened);
+        // --theme-color-lightened: var(--color-#{$c}-lightened);
       }
     }
 

@@ -54,22 +54,6 @@ $fonts-defaults: (
   }
 }
 
-// @mixin --medium-font-mods($medium, $trim: true) {
-//   @each $f, $mod in map-get($medium, 'font-mods') or () {
-//     @each $s, $def in $mod {
-//       $size: strip(nth($def, 1));
-//       $line: nth($def, 2);
-//       // NB line-heights > 6 are assumed to be px values
-//       --font-size-#{$f}-#{$s}: #{$size / 16 * 1rem};
-//       --line-height-#{$f}-#{$s}: #{if($line > 6, $line/$size, $line)};
-//       @if $trim {
-//         --trim-top-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-capline-#{$f}) * 1em);
-//         --trim-bottom-#{$f}-#{$s}: calc((var(--line-height-#{$f}-#{$s}) - 1) * 1em / 2 + var(--trim-baseline-#{$f}) * 1em);
-//       }
-//     }
-//   }
-// }
-
 
 //   __            _                   _
 //  / _|          | |                 | |
