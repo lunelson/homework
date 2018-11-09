@@ -264,5 +264,42 @@ $fonts-defaults: (
 
       }
     }
+
+    // TODO: generate plain styles
+
+    // #{base-class('plain')} {
+
+    //   #{zip($elements)} {
+    //     font-family: var(--font-family);
+    //     font-size: var(--font-size);
+    //     line-height: var(--line-height);
+    //     letter-spacing: var(--letter-spacing);
+
+    //     // IF TRIM
+    //     @if $trim {
+    //       @at-root #{selector-insert('>')} {
+    //         margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
+    //       }
+    //       @at-root #{selector-insert('> * +')} {
+    //         margin-top: calc(var(--stack-gap) - var(--trim-top));
+    //       }
+    //       @at-root #{selector-insert(selector-insert('>', '', #{zip($elements)}), '+')} {
+    //         margin-top: calc(var(--stack-gap) - var(--trim-top) - 0.25em);
+    //       }
+    //     }
+
+    //     // IF NOT TRIM
+    //     @else {
+    //       @at-root #{selector-insert('>')} {
+    //         margin: 0 var(--trim-x);
+    //       }
+    //       @at-root #{selector-insert('> * +')} {
+    //         margin-top: calc(var(--stack-gap));
+    //       }
+    //     }
+    //   }
+    // }
+
+
   }
 }

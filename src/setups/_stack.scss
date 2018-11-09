@@ -86,6 +86,7 @@
         $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
 
         .stack-#{$y} > * + * { margin-top: $inner-y; }
+        #{base-class('stack')} { .push-#{$y} { margin-top: $inner-y; } }
 
       }
     }
