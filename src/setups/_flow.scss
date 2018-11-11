@@ -7,17 +7,6 @@
 //                                | |                                  | |
 //                                |_|                                  |_|
 
-@function inner-y($y: null) {
-  $mod: map-get(m-var('inner-y-mods') or m-var('inner-mods') or (), $y);
-  @return if($mod, if(unitless($mod), m-var('inner-y') * $mod, $mod), m-var('inner-y'));
-}
-
-@function inner-x($x: null) {
-  $mod: map-get(m-var('inner-x-mods') or m-var('inner-mods') or (), $x);
-  @return if($mod, if(unitless($mod), m-var('inner-x') * $mod, $mod), m-var('inner-x'));
-}
-
-//
 
 @function span-d() {
   @return if($homework-is-modern, var(--span-d), m-var('grid-columns'));

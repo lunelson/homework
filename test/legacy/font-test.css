@@ -12,6 +12,10 @@ body {
     font-size: 0.875rem;
     line-height: 1.4;
   }
+  .stack > .sans-s, [class^="stack-"] > .sans-s, [class*=" stack-"] > .sans-s {
+    margin-top: -0.2em;
+    margin-bottom: -0.2em;
+  }
 }
 
 @media screen and (min-width: 30em) {
@@ -19,12 +23,38 @@ body {
     font-size: 1.25rem;
     line-height: 1.2;
   }
+  .stack > .sans-s, [class^="stack-"] > .sans-s, [class*=" stack-"] > .sans-s {
+    margin-top: -0.1em;
+    margin-bottom: -0.1em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack-s > * + .sans-s {
+    margin-top: calc(1rem - 0.2em);
+  }
+  .stack-m > * + .sans-s {
+    margin-top: calc(2rem - 0.2em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack-s > * + .sans-s {
+    margin-top: calc(1rem - 0.1em);
+  }
+  .stack-m > * + .sans-s {
+    margin-top: calc(2rem - 0.1em);
+  }
 }
 
 @media screen and (max-width: 29.999em) {
   .sans-m {
     font-size: 1rem;
     line-height: 1.4;
+  }
+  .stack > .sans-m, [class^="stack-"] > .sans-m, [class*=" stack-"] > .sans-m {
+    margin-top: -0.2em;
+    margin-bottom: -0.2em;
   }
 }
 
@@ -33,12 +63,38 @@ body {
     font-size: 1.5rem;
     line-height: 1.2;
   }
+  .stack > .sans-m, [class^="stack-"] > .sans-m, [class*=" stack-"] > .sans-m {
+    margin-top: -0.1em;
+    margin-bottom: -0.1em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack-s > * + .sans-m {
+    margin-top: calc(1rem - 0.2em);
+  }
+  .stack-m > * + .sans-m {
+    margin-top: calc(2rem - 0.2em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack-s > * + .sans-m {
+    margin-top: calc(1rem - 0.1em);
+  }
+  .stack-m > * + .sans-m {
+    margin-top: calc(2rem - 0.1em);
+  }
 }
 
 @media screen and (max-width: 29.999em) {
   .serif-s {
     font-size: 1rem;
     line-height: 1.4;
+  }
+  .stack > .serif-s, [class^="stack-"] > .serif-s, [class*=" stack-"] > .serif-s {
+    margin-top: -0.2em;
+    margin-bottom: -0.2em;
   }
 }
 
@@ -47,12 +103,38 @@ body {
     font-size: 1.375rem;
     line-height: 1.2;
   }
+  .stack > .serif-s, [class^="stack-"] > .serif-s, [class*=" stack-"] > .serif-s {
+    margin-top: -0.1em;
+    margin-bottom: -0.1em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack-s > * + .serif-s {
+    margin-top: calc(1rem - 0.2em);
+  }
+  .stack-m > * + .serif-s {
+    margin-top: calc(2rem - 0.2em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack-s > * + .serif-s {
+    margin-top: calc(1rem - 0.1em);
+  }
+  .stack-m > * + .serif-s {
+    margin-top: calc(2rem - 0.1em);
+  }
 }
 
 @media screen and (max-width: 29.999em) {
   .serif-m {
     font-size: 1.125rem;
     line-height: 1.4;
+  }
+  .stack > .serif-m, [class^="stack-"] > .serif-m, [class*=" stack-"] > .serif-m {
+    margin-top: -0.2em;
+    margin-bottom: -0.2em;
   }
 }
 
@@ -61,4 +143,41 @@ body {
     font-size: 1.625rem;
     line-height: 1.2;
   }
+  .stack > .serif-m, [class^="stack-"] > .serif-m, [class*=" stack-"] > .serif-m {
+    margin-top: -0.1em;
+    margin-bottom: -0.1em;
+  }
+}
+
+@media screen and (max-width: 29.999em) {
+  .stack-s > * + .serif-m {
+    margin-top: calc(1rem - 0.2em);
+  }
+  .stack-m > * + .serif-m {
+    margin-top: calc(2rem - 0.2em);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .stack-s > * + .serif-m {
+    margin-top: calc(1rem - 0.1em);
+  }
+  .stack-m > * + .serif-m {
+    margin-top: calc(2rem - 0.1em);
+  }
+}
+
+.plain p, .plain ul, .plain ol, .plain dl, .plain h3, .plain h4, .plain h5, .plain h6, .plain blockquote, [class^="plain-"] p, [class^="plain-"] ul, [class^="plain-"] ol, [class^="plain-"] dl, [class^="plain-"] h3, [class^="plain-"] h4, [class^="plain-"] h5, [class^="plain-"] h6, [class^="plain-"] blockquote, [class*=" plain-"] p, [class*=" plain-"] ul, [class*=" plain-"] ol, [class*=" plain-"] dl, [class*=" plain-"] h3, [class*=" plain-"] h4, [class*=" plain-"] h5, [class*=" plain-"] h6, [class*=" plain-"] blockquote {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.plain > p, .plain > ul, .plain > ol, .plain > dl, .plain > h3, .plain > h4, .plain > h5, .plain > h6, .plain > blockquote, [class^="plain-"] > p, [class^="plain-"] > ul, [class^="plain-"] > ol, [class^="plain-"] > dl, [class^="plain-"] > h3, [class^="plain-"] > h4, [class^="plain-"] > h5, [class^="plain-"] > h6, [class^="plain-"] > blockquote, [class*=" plain-"] > p, [class*=" plain-"] > ul, [class*=" plain-"] > ol, [class*=" plain-"] > dl, [class*=" plain-"] > h3, [class*=" plain-"] > h4, [class*=" plain-"] > h5, [class*=" plain-"] > h6, [class*=" plain-"] > blockquote {
+  margin-top: -0.125em;
+  margin-bottom: -0.125em;
+}
+
+.plain > * + p, .plain > * + ul, .plain > * + ol, .plain > * + dl, .plain > * + h3, .plain > * + h4, .plain > * + h5, .plain > * + h6, .plain > * + blockquote, [class^="plain-"] > * + p, [class^="plain-"] > * + ul, [class^="plain-"] > * + ol, [class^="plain-"] > * + dl, [class^="plain-"] > * + h3, [class^="plain-"] > * + h4, [class^="plain-"] > * + h5, [class^="plain-"] > * + h6, [class^="plain-"] > * + blockquote, [class*=" plain-"] > * + p, [class*=" plain-"] > * + ul, [class*=" plain-"] > * + ol, [class*=" plain-"] > * + dl, [class*=" plain-"] > * + h3, [class*=" plain-"] > * + h4, [class*=" plain-"] > * + h5, [class*=" plain-"] > * + h6, [class*=" plain-"] > * + blockquote {
+  margin-top: calc(1.25rem - 0.125em);
 }

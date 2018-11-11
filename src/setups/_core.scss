@@ -216,6 +216,45 @@ $media-defaults: (
   }
 }
 
+//
+// mod prop getters
+//
+
+@function inner-y-mods() {
+  @return m-var('inner-y-mods') or m-var('inner-mods') or ();
+}
+
+@function inner-x-mods() {
+  @return m-var('inner-x-mods') or m-var('inner-mods') or ();
+}
+
+@function inner-y($y: null) {
+  // @if not $y { @return m-var('inner-y'); }
+  $mod: map-get(inner-y-mods(), $y);
+  @return if($mod, if(unitless($mod), m-var('inner-y') * $mod, $mod), m-var('inner-y'));
+}
+
+@function inner-x($x: null) {
+  // @if not $x { @return m-var('inner-x'); }
+  $mod: map-get(inner-x-mods(), $x);
+  @return if($mod, if(unitless($mod), m-var('inner-x') * $mod, $mod), m-var('inner-x'));
+}
+
+@function font-size($f: null, $s: null) {
+  @if not ($f and $s) { @return m-var('font-size'); }
+  $mod: m-var('font-mods' $f $s);
+  // TODO: error if not $mod
+  $size: strip(nth($mod, 1));
+  @return $size / 16 * 1rem;
+}
+
+@function line-height($f: null, $s: null) {
+  @if not ($f and $s) { @return m-var('line-height'); }
+  $mod: m-var('font-mods' $f $s);
+  // TODO: error if not $mod
+  $line: nth($mod, 2);
+  @return if($line > 6, $line/$size, $line);
+}
 
 //                                     _
 //                                    | |

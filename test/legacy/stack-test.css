@@ -52,10 +52,19 @@
   .stack-s > * + * {
     margin-top: 1.25rem;
   }
+  .stack .push-s, [class^="stack-"] .push-s, [class*=" stack-"] .push-s {
+    margin-top: 1.25rem;
+  }
   .stack-m > * + * {
     margin-top: 2.5rem;
   }
+  .stack .push-m, [class^="stack-"] .push-m, [class*=" stack-"] .push-m {
+    margin-top: 2.5rem;
+  }
   .stack-l > * + * {
+    margin-top: 4rem;
+  }
+  .stack .push-l, [class^="stack-"] .push-l, [class*=" stack-"] .push-l {
     margin-top: 4rem;
   }
 }
@@ -64,10 +73,19 @@
   .stack-s > * + * {
     margin-top: 1.875rem;
   }
+  .stack .push-s, [class^="stack-"] .push-s, [class*=" stack-"] .push-s {
+    margin-top: 1.875rem;
+  }
   .stack-m > * + * {
     margin-top: 3.125rem;
   }
+  .stack .push-m, [class^="stack-"] .push-m, [class*=" stack-"] .push-m {
+    margin-top: 3.125rem;
+  }
   .stack-l > * + * {
+    margin-top: 3.75rem;
+  }
+  .stack .push-l, [class^="stack-"] .push-l, [class*=" stack-"] .push-l {
     margin-top: 3.75rem;
   }
 }
