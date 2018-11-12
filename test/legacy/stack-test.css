@@ -48,51 +48,71 @@
   margin-left: 2rem;
 }
 
+.stack-0 > * + * {
+  margin-top: 0;
+}
+
+.chain-0 > * + * {
+  margin-left: 0;
+}
+
 @media screen and (max-width: 29.999em) {
+  .plain .push-s, [class^="plain-"] .push-s, [class*=" plain-"] .push-s,
+  .stack .push-s, [class^="stack-"] .push-s, [class*=" stack-"] .push-s {
+    margin-top: 1.25rem;
+  }
   .stack-s > * + * {
     margin-top: 1.25rem;
   }
-  .stack .push-s, [class^="stack-"] .push-s, [class*=" stack-"] .push-s {
-    margin-top: 1.25rem;
+  .plain .push-m, [class^="plain-"] .push-m, [class*=" plain-"] .push-m,
+  .stack .push-m, [class^="stack-"] .push-m, [class*=" stack-"] .push-m {
+    margin-top: 2.5rem;
   }
   .stack-m > * + * {
     margin-top: 2.5rem;
   }
-  .stack .push-m, [class^="stack-"] .push-m, [class*=" stack-"] .push-m {
-    margin-top: 2.5rem;
-  }
-  .stack-l > * + * {
+  .plain .push-l, [class^="plain-"] .push-l, [class*=" plain-"] .push-l,
+  .stack .push-l, [class^="stack-"] .push-l, [class*=" stack-"] .push-l {
     margin-top: 4rem;
   }
-  .stack .push-l, [class^="stack-"] .push-l, [class*=" stack-"] .push-l {
+  .stack-l > * + * {
     margin-top: 4rem;
   }
 }
 
 @media screen and (min-width: 30em) {
+  .plain .push-s, [class^="plain-"] .push-s, [class*=" plain-"] .push-s,
+  .stack .push-s, [class^="stack-"] .push-s, [class*=" stack-"] .push-s {
+    margin-top: 1.875rem;
+  }
   .stack-s > * + * {
     margin-top: 1.875rem;
   }
-  .stack .push-s, [class^="stack-"] .push-s, [class*=" stack-"] .push-s {
-    margin-top: 1.875rem;
+  .plain .push-m, [class^="plain-"] .push-m, [class*=" plain-"] .push-m,
+  .stack .push-m, [class^="stack-"] .push-m, [class*=" stack-"] .push-m {
+    margin-top: 3.125rem;
   }
   .stack-m > * + * {
     margin-top: 3.125rem;
   }
-  .stack .push-m, [class^="stack-"] .push-m, [class*=" stack-"] .push-m {
-    margin-top: 3.125rem;
-  }
-  .stack-l > * + * {
+  .plain .push-l, [class^="plain-"] .push-l, [class*=" plain-"] .push-l,
+  .stack .push-l, [class^="stack-"] .push-l, [class*=" stack-"] .push-l {
     margin-top: 3.75rem;
   }
-  .stack .push-l, [class^="stack-"] .push-l, [class*=" stack-"] .push-l {
+  .stack-l > * + * {
     margin-top: 3.75rem;
   }
 }
 
 @media screen and (max-width: 29.999em) {
+  .chain .push-s, [class^="chain-"] .push-s, [class*=" chain-"] .push-s {
+    margin-top: 1rem;
+  }
   .chain-s > * + * {
     margin-left: 1rem;
+  }
+  .chain .push-form, [class^="chain-"] .push-form, [class*=" chain-"] .push-form {
+    margin-top: 10px;
   }
   .chain-form > * + * {
     margin-left: 10px;
@@ -100,8 +120,14 @@
 }
 
 @media screen and (min-width: 30em) {
+  .chain .push-s, [class^="chain-"] .push-s, [class*=" chain-"] .push-s {
+    margin-top: 1.5rem;
+  }
   .chain-s > * + * {
     margin-left: 1.5rem;
+  }
+  .chain .push-form, [class^="chain-"] .push-form, [class*=" chain-"] .push-form {
+    margin-top: 10px;
   }
   .chain-form > * + * {
     margin-left: 10px;

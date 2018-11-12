@@ -66,8 +66,8 @@
     .stack-0 > * { --stack-gap: 0; }
 
     @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
-      #{base-class('stack')},
-      #{base-class('plain')} { > .push-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
+      #{base-class('plain')},
+      #{base-class('stack')} { > .push-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
       .stack-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
     }
 
@@ -80,24 +80,21 @@
 
   } @else {
 
+    .stack-0 > * + * { margin-top: 0; }
+    .chain-0 > * + * { margin-left: 0; }
+
     @include mm-for('inner-y', 'inner-y-mods', 'inner-mods') {
-      $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
-      @each $y, $mod in $inner-y-mods {
-        $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
-
-        .stack-#{$y} > * + * { margin-top: $inner-y; }
-        #{base-class('stack')} { .push-#{$y} { margin-top: $inner-y; } }
-
+      @each $y in map-keys(inner-y-mods()) {
+        #{base-class('plain')},
+        #{base-class('stack')} { .push-#{$y} { margin-top: inner-y($y); } }
+        .stack-#{$y} > * + * { margin-top: inner-y($y); }
       }
     }
 
     @include mm-for('inner-x', 'inner-x-mods', 'inner-mods') {
-      $inner-x-mods: m-var('inner-x-mods') or m-var('inner-mods') or ();
-      @each $x, $mod in $inner-x-mods {
-        $inner-x: if(unitless($mod), m-var('inner-x') * $mod, $mod);
-
-        .chain-#{$x} > * + * { margin-left: $inner-x; }
-
+      @each $x in map-keys(inner-x-mods()) {
+        #{base-class('chain')} { .push-#{$x} { margin-top: inner-x($x); } }
+        .chain-#{$x} > * + * { margin-left: inner-x($x); }
       }
     }
 

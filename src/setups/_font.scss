@@ -38,6 +38,26 @@ $fonts-defaults: (
 //                                        | |
 //                                        |_|
 
+//
+// trim functions
+//
+
+@function font-value($f, $key) { @return map-get-z($fonts, $f, $key); }
+
+@function f-val($f, $key) { @return font-value($f, $key); }
+
+@function line-trim-top($f: null, $s: null) {
+  $trim: font-value('trim-capline') or 0;
+  $line: line-height($f, $s);
+  @return ($line - 1) * 0.5em + $trim * 1em;
+}
+
+@function line-trim-bottom($f: null, $s: null) {
+  $trim: font-value('trim-baseline') or 0;
+  $line: line-height($f, $s);
+  @return ($line - 1) * 0.5em + $trim * 1em;
+}
+
 
 @mixin font-base($f) {
   --font-family: var(--font-family-#{$f});
@@ -45,51 +65,74 @@ $fonts-defaults: (
   --trim-x: var(--trim-x-#{$f});
 }
 
-@mixin font-mod($f, $s, $trim: true) {
-  --font-size: var(--font-size-#{$f}-#{$s});
-  --line-height: var(--line-height-#{$f}-#{$s});
-  @if $trim {
-    --trim-top: var(--trim-top-#{$f}-#{$s});
-    --trim-bottom: var(--trim-bottom-#{$f}-#{$s});
+@mixin font-mod($f, $s, $y: null, $trim: true) {
+
+  @if $homework-is-modern {
+    --font-size: var(--font-size-#{$f}-#{$s});
+    --line-height: var(--line-height-#{$f}-#{$s});
+    @if $trim {
+      --trim-top: var(--trim-top-#{$f}-#{$s});
+      --trim-bottom: var(--trim-bottom-#{$f}-#{$s});
+    }
   }
+
+  @else {
+    @include mm-for('font-mods' $f $s) {
+      font-size: font-size($f, $s);
+      line-height: line-height($f, $s);
+    }
+  }
+
 }
 
 
-//
-// trim functions
-//
+@mixin stack-font($f, $s, $y: null, $trim: true) {
 
-// @function trim-top-abs($line: $curr-line, $font: $curr-font) {
-//   @return (strip($line) - 1) * 0.5em + font-var('trim-top', $font) * 1em;
-// }
+  $font: map-get($fonts, $f);
+  $spacing-max: map-get($font, 'spacing-max');
+  $spacing-end: map-get($font, 'spacing-end');
 
-// @function trim-bottom-abs($line: $curr-line, $font: $curr-font) {
-//   @return (strip($line) - 1) * 0.5em + font-var('trim-bottom', $font) * 1em;
-// }
+  font-family: map-get($font, 'family');
+  @if $spacing-max > 0 {
+    letter-spacing: calc(#{$spacing-max}px - #{$spacing-max/$spacing-end}em);
+  }
 
-// @function trim-top-margin($mult: $curr-inner-y, $line: $curr-line, $font: $curr-font) {
-//   @return subtract(inner-y($mult), trim-top-abs($line, $font));
-// }
+  @include mm-for('font-mods' $f $s) {
+    font-size: font-size($f, $s);
+    line-height: line-height($f, $s);
+  }
 
-// @function trim-bottom-margin($mult: $curr-inner-y, $line: $curr-line, $font: $curr-font) {
-//   @return subtract(inner-y($mult), trim-bottom-abs($line, $font));
-// }
+  // IF TRIM
+  @if $trim {
+
+    @at-root #{selector-insert('>')} {
+      // TODO: re-add trim-x values here
+      margin-top: subtract(0, line-trim-top($f, $s));
+      margin-bottom: subtract(0, line-trim-bottom($f, $s));
+    }
+    @at-root #{selector-insert('> * +')} {
+      margin-top: subtract(inner-y($y), line-trim-top($f, $s));
+    }
+    // @at-root #{selector-insert(selector-insert('>', '', #{zip($elements)}), '+')} {
+    //   // margin-top: calc(var(--stack-gap) - var(--trim-top) - 0.25em);
+    //   margin-top: subtract(inner-y(), line-trim-top());
+    // }
+
+  // IF NOT TRIM
+  } @else {
+
+    @at-root #{selector-insert('>')} {
+      // TODO: re-add trim-x values here
+      // margin: 0 var(--trim-x);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    @at-root #{selector-insert('> * +')} {
+      margin-top: inner-y($y);
+    }
 
 
-//
-// trim functions II
-//
-
-@function line-trim-top($f: null, $s: null) {
-  $trim: if($f, map-get-z($fonts, $f, 'trim-top'), 0) or 0;
-  $line: line-height($f, $s);
-  @return ($line - 1) * 0.5em + $trim * 1em;
-}
-
-@function line-trim-bottom($f: null, $s: null) {
-  $trim: if($f, map-get-z($fonts, $f, 'trim-bottom'), 0) or 0;
-  $line: line-height($f, $s);
-  @return ($line - 1) * 0.5em + $trim * 1em;
+  }
 }
 
 
@@ -301,49 +344,6 @@ $fonts-defaults: (
     // plain styles
     #{base-class('plain')} {
 
-      $font: map-get($fonts, nth(map-keys($fonts), 1));
-      $spacing-max: map-get($font, 'spacing-max');
-      $spacing-end: map-get($font, 'spacing-end');
-
-      #{zip($elements)} {
-        font-family: map-get($font, 'family');
-        @if $spacing-max > 0 {
-          letter-spacing: calc(#{$spacing-max}px - #{$spacing-max/$spacing-end}em);
-        }
-        @include mm-for('font-size', 'line-height') {
-          font-size: m-var(font-size);
-          line-height: m-var(line-height);
-        }
-
-        // IF TRIM
-        @if $trim {
-
-          @at-root #{selector-insert('>')} {
-            // TODO: re-add trim-x values here
-            margin-top: subtract(0, line-trim-top());
-            margin-bottom: subtract(0, line-trim-bottom());
-          }
-          @at-root #{selector-insert('> * +')} {
-            margin-top: subtract(inner-y(), line-trim-top());
-          }
-          // @at-root #{selector-insert(selector-insert('>', '', #{zip($elements)}), '+')} {
-          //   // margin-top: calc(var(--stack-gap) - var(--trim-top) - 0.25em);
-          //   margin-top: subtract(inner-y(), line-trim-top());
-          // }
-
-        // IF NOT TRIM
-        } @else {
-
-          @at-root #{selector-insert('>')} {
-            margin: 0 var(--trim-x);
-          }
-          @at-root #{selector-insert('> * +')} {
-            margin-top: calc(var(--stack-gap));
-          }
-
-
-        }
-      }
     }
   }
 }

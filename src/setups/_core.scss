@@ -252,6 +252,7 @@ $media-defaults: (
   @if not ($f and $s) { @return m-var('line-height'); }
   $mod: m-var('font-mods' $f $s);
   // TODO: error if not $mod
+  $size: strip(nth($mod, 1));
   $line: nth($mod, 2);
   @return if($line > 6, $line/$size, $line);
 }

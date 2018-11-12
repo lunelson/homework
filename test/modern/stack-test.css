@@ -98,8 +98,8 @@
   --stack-gap: 0;
 }
 
-.stack > .push-s, [class^="stack-"] > .push-s, [class*=" stack-"] > .push-s,
-.plain > .push-s, [class^="plain-"] > .push-s, [class*=" plain-"] > .push-s {
+.plain > .push-s, [class^="plain-"] > .push-s, [class*=" plain-"] > .push-s,
+.stack > .push-s, [class^="stack-"] > .push-s, [class*=" stack-"] > .push-s {
   --stack-gap: var(--inner-y-s);
 }
 
@@ -107,8 +107,8 @@
   --stack-gap: var(--inner-y-s);
 }
 
-.stack > .push-m, [class^="stack-"] > .push-m, [class*=" stack-"] > .push-m,
-.plain > .push-m, [class^="plain-"] > .push-m, [class*=" plain-"] > .push-m {
+.plain > .push-m, [class^="plain-"] > .push-m, [class*=" plain-"] > .push-m,
+.stack > .push-m, [class^="stack-"] > .push-m, [class*=" stack-"] > .push-m {
   --stack-gap: var(--inner-y-m);
 }
 
@@ -116,8 +116,8 @@
   --stack-gap: var(--inner-y-m);
 }
 
-.stack > .push-l, [class^="stack-"] > .push-l, [class*=" stack-"] > .push-l,
-.plain > .push-l, [class^="plain-"] > .push-l, [class*=" plain-"] > .push-l {
+.plain > .push-l, [class^="plain-"] > .push-l, [class*=" plain-"] > .push-l,
+.stack > .push-l, [class^="stack-"] > .push-l, [class*=" stack-"] > .push-l {
   --stack-gap: var(--inner-y-l);
 }
 
