@@ -74,6 +74,23 @@
     }
   }
 
+  // show on focus, stolen from github;
+  // see also: https://codepen.io/matuzo/pen/RZBNjP?editors=1000
+  .show-on-focus {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    &:focus {
+      z-index: 20;
+      width: auto;
+      height: auto;
+      clip: auto;
+    }
+  }
+
   // $aspects: (
   //   1: 1 2 3 4,
   //   2: 1 3 5,
@@ -139,9 +156,9 @@
       }
 
       // display
-      .d-none#{$bp} { display: none; }
+      .d-none#{$bp} { display: none !important; }
       .d-flex#{$bp} {
-        display: flex;
+        display: flex !important;
         & > * {
           flex: 0 0 auto;
           max-width: 100%;
@@ -150,7 +167,7 @@
         }
       }
       .d-flex-y#{$bp} {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         align-items: stretch;
         & > * {
@@ -161,10 +178,10 @@
           overflow-wrap: break-word;
         }
       }
-      .d-grid#{$bp} { display: grid; }
-      .d-block#{$bp} { display: block; }
-      .d-iblock#{$bp} { display: inline-block; vertical-align: baseline; }
-      .d-inline#{$bp} { display: inline; vertical-align: baseline; }
+      .d-grid#{$bp} { display: grid !important; }
+      .d-block#{$bp} { display: block !important; }
+      .d-iblock#{$bp} { display: inline-block !important; vertical-align: baseline; }
+      .d-inline#{$bp} { display: inline !important; vertical-align: baseline; }
 
       // position
       .static#{$bp} { position: static; }
