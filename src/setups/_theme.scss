@@ -162,13 +162,13 @@ $colors: ( dark: #111, lite: #eee, ) !default;
 
       .fg-#{$c} {
         color: $color;
-        .bg-contrast {
+        .bg-contrast, &.bg-contrast {
           background-color: yiq($color);
         }
       }
       .bg-#{$c} {
         background-color: $color;
-        .fg-contrast {
+        .fg-contrast, &.fg-contrast {
           color: yiq($color);
         }
       }
@@ -182,13 +182,13 @@ $colors: ( dark: #111, lite: #eee, ) !default;
 
         .fg-theme {
           color: $color;
-          .bg-contrast {
+          .bg-contrast, &.bg-contrast {
             background-color: yiq($color);
           }
         }
         .bg-theme {
           background-color: $color;
-          .fg-contrast {
+          .fg-contrast, &.fg-contrast {
             color: yiq($color);
           }
         }
