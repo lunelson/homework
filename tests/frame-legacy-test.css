@@ -18,6 +18,18 @@
   padding-bottom: 1rem;
 }
 
+.bleed, .bleed-x {
+  width: calc(100% + 2rem);
+}
+
+.bleed-right {
+  width: calc(100% + 1rem);
+}
+
+.bleed-left {
+  width: calc(100% + 1rem);
+}
+
 .bleed, .bleed-x, .bleed-right {
   margin-right: -1rem;
 }
@@ -47,6 +59,15 @@
   .frame-y, .frame-bottom, .frame-y__a, .frame-bottom__a {
     padding-bottom: 2rem;
   }
+  .bleed, .bleed-x, .bleed__a, .bleed-x__a {
+    width: calc(100% + 4rem);
+  }
+  .bleed-right, .bleed-right__a {
+    width: calc(100% + 2rem);
+  }
+  .bleed-left, .bleed-left__a {
+    width: calc(100% + 2rem);
+  }
   .bleed, .bleed-x, .bleed-right, .bleed__a, .bleed-x__a, .bleed-right__a {
     margin-right: -2rem;
   }
@@ -74,6 +95,15 @@
   .frame-y, .frame-bottom, .frame-y__a, .frame-bottom__a, .frame-y__b, .frame-bottom__b {
     padding-bottom: 3rem;
   }
+  .bleed, .bleed-x, .bleed__a, .bleed-x__a, .bleed__b, .bleed-x__b {
+    width: calc(100% + 6rem);
+  }
+  .bleed-right, .bleed-right__a, .bleed-right__b {
+    width: calc(100% + 3rem);
+  }
+  .bleed-left, .bleed-left__a, .bleed-left__b {
+    width: calc(100% + 3rem);
+  }
   .bleed, .bleed-x, .bleed-right, .bleed__a, .bleed-x__a, .bleed-right__a, .bleed__b, .bleed-x__b, .bleed-right__b {
     margin-right: -3rem;
   }
@@ -100,6 +130,15 @@
   }
   .frame-y, .frame-bottom, .frame-y__a, .frame-bottom__a, .frame-y__b, .frame-bottom__b, .frame-y__c, .frame-bottom__c {
     padding-bottom: 4rem;
+  }
+  .bleed, .bleed-x, .bleed__a, .bleed-x__a, .bleed__b, .bleed-x__b, .bleed__c, .bleed-x__c {
+    width: calc(100% + 8rem);
+  }
+  .bleed-right, .bleed-right__a, .bleed-right__b, .bleed-right__c {
+    width: calc(100% + 4rem);
+  }
+  .bleed-left, .bleed-left__a, .bleed-left__b, .bleed-left__c {
+    width: calc(100% + 4rem);
   }
   .bleed, .bleed-x, .bleed-right, .bleed__a, .bleed-x__a, .bleed-right__a, .bleed__b, .bleed-x__b, .bleed-right__b, .bleed__c, .bleed-x__c, .bleed-right__c {
     margin-right: -4rem;
