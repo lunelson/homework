@@ -7,18 +7,6 @@
 //                    | |
 //                    |_|
 
-@import 'core';
-@import 'root';
-@import 'wrap';
-@import 'frame';
-@import 'stack';
-@import 'font';
-@import 'flow';
-@import 'atomic';
-@import 'helper';
-@import 'theme';
-@import 'debug';
-
 $done-homework-setup: false;
 
 @mixin homework-setup($modern: true, $setups...) {
