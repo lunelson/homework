@@ -7,6 +7,31 @@
 
 $homework-is-modern: true !default;
 
-@import "src/utils/all";
-@import "src/resets/all";
-@import "src/setups/all";
+@import "src/u-functions";
+@import "src/u-math";
+@import "src/u-lists";
+@import "src/u-maps";
+@import "src/u-classes";
+@import "src/u-selectors";
+@import "src/u-misc";
+
+@import "src/reset-root";
+@import "src/reset-block";
+@import "src/reset-embed";
+@import "src/reset-inline";
+@import "src/reset-table";
+@import "src/reset-ui";
+@import "src/reset";
+
+@import "src/setup-core";
+@import "src/setup-root";
+@import "src/setup-wrap";
+@import "src/setup-frame";
+@import "src/setup-stack";
+@import "src/setup-font";
+@import "src/setup-flow";
+@import "src/setup-atomic";
+@import "src/setup-helper";
+@import "src/setup-theme";
+@import "src/setup-debug";
+@import "src/setup";
