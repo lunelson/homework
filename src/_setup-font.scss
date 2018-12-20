@@ -277,7 +277,7 @@ $fonts-defaults: (
     // font basees
     @each $f, $font in $fonts {
 
-      #{base-class($f)},
+      #{base-class('f-#{$f}')},
       #{if($f == nth(map-keys($fonts), 1),'body','')} {
 
         // base definition
@@ -311,7 +311,7 @@ $fonts-defaults: (
           $size: strip(nth($def, 1));
           $line: nth($def, 2);
 
-          .#{$f}-#{$s} {
+          .f-#{$f}-#{$s} {
 
             font-size: #{$size / 16 * 1rem};
             line-height: #{if($line > 6, $line/$size, $line)};
@@ -329,7 +329,7 @@ $fonts-defaults: (
         @if $trim {
           @include mm-for('inner-y', 'inner-y-mods', 'inner-mods', 'font-mods'$f $s) {
             @each $y in map-keys(inner-y-mods()) {
-              .stack-#{$y} > * + .#{$f}-#{$s} {
+              .stack-#{$y} > * + .f-#{$f}-#{$s} {
                 margin-top: subtract(inner-y($y), line-trim-top($f, $s));
               }
             }
