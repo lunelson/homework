@@ -7,98 +7,124 @@
 
 @mixin homework-atomic-setup($modern: $homework-is-modern) {
 
-  @each $m in join((null), map-keys($media)) {
+  // join with null, to also output suffix-less class
+  @each $m in join((null), media-keys()) {
 
     @include m($m) {
 
-      $bp: m-suffix();
+      $__m: m-suffix();
 
-      // dimensions: auto
-      .w-auto#{$bp} { width: auto; }
-      .h-auto#{$bp} { height: auto; }
-      .my-auto#{$bp}, .mt-auto#{$bp} { margin-top: auto; }
-      .mx-auto#{$bp}, .mr-auto#{$bp} { margin-right: auto; }
-      .my-auto#{$bp}, .mb-auto#{$bp} { margin-bottom: auto; }
-      .mx-auto#{$bp}, .ml-auto#{$bp} { margin-left: auto; }
+      // dimensions/margin: auto
+      .w-auto#{$__m} { width: auto; }
+      .h-auto#{$__m} { height: auto; }
+      .my-auto#{$__m}, .mt-auto#{$__m} { margin-top: auto; }
+      .mx-auto#{$__m}, .mr-auto#{$__m} { margin-right: auto; }
+      .my-auto#{$__m}, .mb-auto#{$__m} { margin-bottom: auto; }
+      .mx-auto#{$__m}, .ml-auto#{$__m} { margin-left: auto; }
 
-      // dimensions: zero
-      .w-0#{$bp} { width: 0; }
-      .h-0#{$bp} { height: 0; }
-      .my-0#{$bp}, .mt-0#{$bp} { margin-top: 0 !important; }
-      .mx-0#{$bp}, .mr-0#{$bp} { margin-right: 0 !important; }
-      .my-0#{$bp}, .mb-0#{$bp} { margin-bottom: 0 !important; }
-      .mx-0#{$bp}, .ml-0#{$bp} { margin-left: 0 !important; }
-      .py-0#{$bp}, .pt-0#{$bp} { padding-top: 0 !important; }
-      .px-0#{$bp}, .pr-0#{$bp} { padding-right: 0 !important; }
-      .py-0#{$bp}, .pb-0#{$bp} { padding-bottom: 0 !important; }
-      .px-0#{$bp}, .pl-0#{$bp} { padding-left: 0 !important; }
+      // dimensions/margin/padding: zero
+      .w-0#{$__m} { width: 0; }
+      .h-0#{$__m} { height: 0; }
+      .my-0#{$__m}, .mt-0#{$__m} { margin-top: 0 !important; }
+      .mx-0#{$__m}, .mr-0#{$__m} { margin-right: 0 !important; }
+      .my-0#{$__m}, .mb-0#{$__m} { margin-bottom: 0 !important; }
+      .mx-0#{$__m}, .ml-0#{$__m} { margin-left: 0 !important; }
+      .py-0#{$__m}, .pt-0#{$__m} { padding-top: 0 !important; }
+      .px-0#{$__m}, .pr-0#{$__m} { padding-right: 0 !important; }
+      .py-0#{$__m}, .pb-0#{$__m} { padding-bottom: 0 !important; }
+      .px-0#{$__m}, .pl-0#{$__m} { padding-left: 0 !important; }
 
       // dimensions: 100%
-      .w-100#{$bp} { width: 100%; }
-      .h-100#{$bp} { height: 100%; }
+      .w-100#{$__m} { width: 100%; }
+      .h-100#{$__m} { height: 100%; }
 
     }
   }
 
+  // get lists of inner-y/-x-mod keys
+  $inner-y-keys: map-keys(inner-y-mods());
+  $inner-x-keys: map-keys(inner-x-mods());
+
+
+  /////////////////////////////////////////////
+  /////////////////// modern //////////////////
+  /////////////////////////////////////////////
+
   @if $modern {
 
-    @each $m in join((null), map-keys($media)) {
+    // join with null, to also output suffix-less class
+    @each $m in join((null), media-keys()) {
 
       @include m($m) {
 
-        $bp: m-suffix();
+        $__m: m-suffix();
 
-        @each $y, $mod in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
-          .py-#{$y}#{$bp}, .pt-#{$y}#{$bp} { padding-top: var(--inner-y-#{$y}); }
-          .py-#{$y}#{$bp}, .pb-#{$y}#{$bp} { padding-bottom: var(--inner-y-#{$y}); }
-          .my-#{$y}#{$bp}, .mt-#{$y}#{$bp} { margin-top: var(--inner-y-#{$y}); }
-          .my-#{$y}#{$bp}, .mb-#{$y}#{$bp} { margin-bottom: var(--inner-y-#{$y}); }
-          .my-neg-#{$y}#{$bp}, .mt-neg-#{$y}#{$bp} { margin-top: calc(-1 * var(--inner-y-#{$y})); }
-          .my-neg-#{$y}#{$bp}, .mb-neg-#{$y}#{$bp} { margin-bottom: calc(-1 * var(--inner-y-#{$y})); }
+        // margin/padding: inner-y
+        @each $y in $inner-y-keys {
+          .my-#{$y}#{$__m}, .mt-#{$y}#{$__m} { margin-top: var(--inner-y-#{$y}); }
+          .my-#{$y}#{$__m}, .mb-#{$y}#{$__m} { margin-bottom: var(--inner-y-#{$y}); }
+          .my-neg-#{$y}#{$__m}, .mt-neg-#{$y}#{$__m} { margin-top: calc(-1 * var(--inner-y-#{$y})); }
+          .my-neg-#{$y}#{$__m}, .mb-neg-#{$y}#{$__m} { margin-bottom: calc(-1 * var(--inner-y-#{$y})); }
+          .py-#{$y}#{$__m}, .pt-#{$y}#{$__m} { padding-top: var(--inner-y-#{$y}); }
+          .py-#{$y}#{$__m}, .pb-#{$y}#{$__m} { padding-bottom: var(--inner-y-#{$y}); }
         }
 
-        @each $x, $mod in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
-          .px-#{$x}#{$bp}, .pr-#{$x}#{$bp} { padding-right: var(--inner-x-#{$x}); }
-          .px-#{$x}#{$bp}, .pl-#{$x}#{$bp} { padding-left: var(--inner-x-#{$x}); }
-          .mx-#{$x}#{$bp}, .mr-#{$x}#{$bp} { margin-right: var(--inner-x-#{$x}); }
-          .mx-#{$x}#{$bp}, .ml-#{$x}#{$bp} { margin-left: var(--inner-x-#{$x}); }
-          .mx-neg-#{$x}#{$bp}, .mr-neg-#{$x}#{$bp} { margin-right: calc(-1 * var(--inner-x-#{$x})); }
-          .mx-neg-#{$x}#{$bp}, .ml-neg-#{$x}#{$bp} { margin-left: calc(-1 * var(--inner-x-#{$x})); }
+        // margin/padding: inner-x
+        @each $x in $inner-x-keys {
+          .mx-#{$x}#{$__m}, .mr-#{$x}#{$__m} { margin-right: var(--inner-x-#{$x}); }
+          .mx-#{$x}#{$__m}, .ml-#{$x}#{$__m} { margin-left: var(--inner-x-#{$x}); }
+          .mx-neg-#{$x}#{$__m}, .mr-neg-#{$x}#{$__m} { margin-right: calc(-1 * var(--inner-x-#{$x})); }
+          .mx-neg-#{$x}#{$__m}, .ml-neg-#{$x}#{$__m} { margin-left: calc(-1 * var(--inner-x-#{$x})); }
+          .px-#{$x}#{$__m}, .pr-#{$x}#{$__m} { padding-right: var(--inner-x-#{$x}); }
+          .px-#{$x}#{$__m}, .pl-#{$x}#{$__m} { padding-left: var(--inner-x-#{$x}); }
         }
       }
-
     }
-  } @else {
+  }
 
+
+  /////////////////////////////////////////////
+  /////////////////// legacy //////////////////
+  /////////////////////////////////////////////
+
+  @else {
+
+    // list to collect suffix keys
     $m-list: ();
-    @each $m in join(null, map-keys($media)) {
+
+    // join with null, to also output suffix-less class
+    @each $m in join(null, media-keys()) {
+
+      // add suffix key to list, start MQ
       $m-list: append($m-list, $m);
       @include m($m) {
 
-        $inner-y-mods: m-var('inner-y-mods') or m-var('inner-mods') or ();
-        @each $y,$mod in $inner-y-mods {
-          $inner-y: if(unitless($mod), m-var('inner-y') * $mod, $mod);
-          #{m-suffixize('.py-#{$y}, .pt-#{$y}', $m-list...)} { padding-top: $inner-y; }
-          #{m-suffixize('.py-#{$y}, .pb-#{$y}', $m-list...)} { padding-bottom: $inner-y; }
+        @each $y in $inner-y-keys {
+          $inner-y: inner-y($y);
+
+          // margin/padding: inner-y [class list; grows with each loop]
           #{m-suffixize('.my-#{$y}, .mt-#{$y}', $m-list...)} { margin-top: $inner-y; }
           #{m-suffixize('.my-#{$y}, .mb-#{$y}', $m-list...)} { margin-bottom: $inner-y; }
           #{m-suffixize('.my-neg-#{$y}, .mt-neg-#{$y}', $m-list...)} { margin-top: -1 * $inner-y; }
           #{m-suffixize('.my-neg-#{$y}, .mb-neg-#{$y}', $m-list...)} { margin-bottom: -1 * $inner-y; }
+          #{m-suffixize('.py-#{$y}, .pt-#{$y}', $m-list...)} { padding-top: $inner-y; }
+          #{m-suffixize('.py-#{$y}, .pb-#{$y}', $m-list...)} { padding-bottom: $inner-y; }
         }
 
-        $inner-x-mods: m-var('inner-x-mods') or m-var('inner-mods') or ();
-        @each $x,$mod in $inner-x-mods {
-          $inner-x: if(unitless($mod), m-var('inner-x') * $mod, $mod);
-          #{m-suffixize('.px-#{$x}, .pr-#{$x}', $m-list...)} { padding-right: $inner-x; }
-          #{m-suffixize('.px-#{$x}, .pl-#{$x}', $m-list...)} { padding-left: $inner-x; }
+        @each $x in $inner-x-keys {
+          $inner-x: inner-x($x);
+
+          // margin/padding: inner-x [class list; grows with each loop]
           #{m-suffixize('.mx-#{$x}, .mr-#{$x}', $m-list...)} { margin-right: $inner-x; }
           #{m-suffixize('.mx-#{$x}, .ml-#{$x}', $m-list...)} { margin-left: $inner-x; }
           #{m-suffixize('.mx-neg-#{$x}, .mr-neg-#{$x}', $m-list...)} { margin-right: -1 * $inner-x; }
           #{m-suffixize('.mx-neg-#{$x}, .ml-neg-#{$x}', $m-list...)} { margin-left: -1 * $inner-x; }
+          #{m-suffixize('.px-#{$x}, .pr-#{$x}', $m-list...)} { padding-right: $inner-x; }
+          #{m-suffixize('.px-#{$x}, .pl-#{$x}', $m-list...)} { padding-left: $inner-x; }
         }
-
       }
-    }
 
+    }
   }
+
 }

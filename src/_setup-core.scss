@@ -42,19 +42,116 @@ $media-defaults: (
 );
 
 
-//                            _          _
-//                           | |        | |
-//   ___ ___  _ __ ___ ______| |__   ___| |_ __   ___ _ __ ___
-//  / __/ _ \| '__/ _ \______| '_ \ / _ \ | '_ \ / _ \ '__/ __|
-// | (_| (_) | | |  __/      | | | |  __/ | |_) |  __/ |  \__ \
-//  \___\___/|_|  \___|      |_| |_|\___|_| .__/ \___|_|  |___/
-//                                        | |
-//                                        |_|
+/////////////////////////////////////////////
+/////////////////// public //////////////////
+/////////////////////////////////////////////
 
+@function m($m: $curr-m) {
+  @if not $m { @return $root; }
+  $medium: map-get($media, $m);
+  @if $medium { @return $medium; }
+  @error 'medium '#{$m}' not found in $media';
+}
+
+@function m-orig($m: $curr-m) {
+  @if not $m { @return $root-orig; }
+  $medium: map-get($media-orig, $m);
+  @if $medium { @return $medium; }
+  @error 'original medium '#{$m}' not found in $media';
+}
+
+@function m-var($key, $m: $curr-m) {
+  @if $homework-is-modern {
+    @return map-get-z(m($m), $key...);
+  } @else {
+    @return map-get-z(m($m), $key...);
+  }
+}
+
+@function m-orig-var($key, $m: $curr-m) {
+  @if $homework-is-modern {
+    @return map-get-z(m-orig($m), $key...);
+  } @else {
+    @return map-get-z(m-orig($m), $key...);
+  }
+}
+
+@function media-keys() { @return map-keys($media); }
+
+// alias re name confusion
+@function m-var-orig($args...) { @return m-orig-var($args...);}
+
+@mixin m($min, $max: null) {
+  $prev-m: $curr-m;
+  $curr-m: $min !global;
+  @if not $min and not $max { @content; }
+  @else { @media #{__query-string($min, $max)} { @content } }
+  $curr-m: $prev-m !global;
+}
+
+@mixin mm($args...) {
+  $m-pairs: --mm($args...);
+  @if length($m-pairs) == 0 { @content; }
+  @else {
+    @each $pair in $m-pairs {
+      @include m($pair...) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin mm-for($props...) {
+  @include mm(null,null,$props...) {
+    @content;
+  }
+}
 
 //
-// init helpers, private
+// mod prop getters
 //
+
+@function inner-y-mods($m: $curr-m) {
+  @return m-var('inner-y-mods', $m) or m-var('inner-mods', $m) or ();
+}
+
+@function inner-x-mods($m: $curr-m) {
+  @return m-var('inner-x-mods', $m) or m-var('inner-mods', $m) or ();
+}
+
+@function inner-y($y: null) {
+  // @if not $y { @return m-var('inner-y'); }
+  $mod: map-get(inner-y-mods(), $y);
+  @return if($mod, if(unitless($mod), m-var('inner-y') * $mod, $mod), m-var('inner-y'));
+}
+
+@function inner-x($x: null) {
+  // @if not $x { @return m-var('inner-x'); }
+  $mod: map-get(inner-x-mods(), $x);
+  @return if($mod, if(unitless($mod), m-var('inner-x') * $mod, $mod), m-var('inner-x'));
+}
+
+@function font-size($f: null, $s: null) {
+  @if not ($f and $s) { @return m-var('font-size'); }
+  $mod: m-var('font-mods' $f $s);
+  // TODO: error if not $mod
+  $size: strip(nth($mod, 1));
+  @return $size / 16 * 1rem;
+}
+
+@function line-height($f: null, $s: null) {
+  @if not ($f and $s) { @return m-var('line-height'); }
+  $mod: m-var('font-mods' $f $s);
+  // TODO: error if not $mod
+  $size: strip(nth($mod, 1));
+  $line: nth($mod, 2);
+  @return if($line > 6, $line/$size, $line);
+}
+
+
+/////////////////////////////////////////////
+////////////////// private //////////////////
+/////////////////////////////////////////////
 
 @mixin --medium-properties($medium) {
   @each $key, $val in $medium {
@@ -102,10 +199,6 @@ $media-defaults: (
 //   @return max($column-counts...);
 // }
 
-//
-// mm helpers, private
-//
-
 @function --mm-filter-orig($media-keys, $props...) {
   @if length($props) < 1 { @return (); }
   $result: ();
@@ -127,14 +220,14 @@ $media-defaults: (
 }
 
 @function --mm-slice($lo: null, $hi: null) {
-  $keys: join(join(null, map-keys($media)), null);
+  $keys: join(join(null, media-keys()), null);
   $index1: if($lo, index($keys, $lo), 1);
   $index2: if($hi, index($keys, $hi), length($keys));
   @return if($index1 and $index2, --slice($keys, $index1, $index2), ());
 }
 
 @function --mm-where($props...) {
-  $result: --mm-filter-orig(map-keys($media), $props...);
+  $result: --mm-filter-orig(media-keys(), $props...);
   @return if(length($result) > 0, join(join(null, $result), null), ());
 }
 
@@ -153,119 +246,10 @@ $media-defaults: (
   @return --mm-pairs($m-list);
 }
 
-//
-// value getters, base
-//
 
-@function m($m: $curr-m) {
-  @if not $m { @return $root; }
-  $medium: map-get($media, $m);
-  @if $medium { @return $medium; }
-  @error 'medium '#{$m}' not found in $media';
-}
-
-@function m-orig($m: $curr-m) {
-  @if not $m { @return $root-orig; }
-  $medium: map-get($media-orig, $m);
-  @if $medium { @return $medium; }
-  @error 'original medium '#{$m}' not found in $media';
-}
-
-@function m-var($key, $m: $curr-m) {
-  @if $homework-is-modern {
-    @return map-get-z(m($m), $key...);
-  } @else {
-    @return map-get-z(m($m), $key...);
-  }
-}
-
-@function m-orig-var($key, $m: $curr-m) {
-  @if $homework-is-modern {
-    @return map-get-z(m-orig($m), $key...);
-  } @else {
-    @return map-get-z(m-orig($m), $key...);
-  }
-}
-
-// alias re name confusion
-@function m-var-orig($args...) { @return m-orig-var($args...);}
-
-@mixin m($min, $max: null) {
-  $prev-m: $curr-m;
-  $curr-m: $min !global;
-  @if not $min and not $max { @content; }
-  @else { @media #{__query-string($min, $max)} { @content } }
-  $curr-m: $prev-m !global;
-}
-
-@mixin mm($args...) {
-  $m-pairs: --mm($args...);
-  @if length($m-pairs) == 0 { @content; }
-  @else {
-    @each $pair in $m-pairs {
-      @include m($pair...) {
-        @content;
-      }
-    }
-  }
-}
-
-@mixin mm-for($props...) {
-  @include mm(null,null,$props...) {
-    @content;
-  }
-}
-
-//
-// mod prop getters
-//
-
-@function inner-y-mods() {
-  @return m-var('inner-y-mods') or m-var('inner-mods') or ();
-}
-
-@function inner-x-mods() {
-  @return m-var('inner-x-mods') or m-var('inner-mods') or ();
-}
-
-@function inner-y($y: null) {
-  // @if not $y { @return m-var('inner-y'); }
-  $mod: map-get(inner-y-mods(), $y);
-  @return if($mod, if(unitless($mod), m-var('inner-y') * $mod, $mod), m-var('inner-y'));
-}
-
-@function inner-x($x: null) {
-  // @if not $x { @return m-var('inner-x'); }
-  $mod: map-get(inner-x-mods(), $x);
-  @return if($mod, if(unitless($mod), m-var('inner-x') * $mod, $mod), m-var('inner-x'));
-}
-
-@function font-size($f: null, $s: null) {
-  @if not ($f and $s) { @return m-var('font-size'); }
-  $mod: m-var('font-mods' $f $s);
-  // TODO: error if not $mod
-  $size: strip(nth($mod, 1));
-  @return $size / 16 * 1rem;
-}
-
-@function line-height($f: null, $s: null) {
-  @if not ($f and $s) { @return m-var('line-height'); }
-  $mod: m-var('font-mods' $f $s);
-  // TODO: error if not $mod
-  $size: strip(nth($mod, 1));
-  $line: nth($mod, 2);
-  @return if($line > 6, $line/$size, $line);
-}
-
-//                                     _
-//                                    | |
-//   ___ ___  _ __ ___ ______ ___  ___| |_ _   _ _ __
-//  / __/ _ \| '__/ _ \______/ __|/ _ \ __| | | | '_ \
-// | (_| (_) | | |  __/      \__ \  __/ |_| |_| | |_) |
-//  \___\___/|_|  \___|      |___/\___|\__|\__,_| .__/
-//                                              | |
-//                                              |_|
-
+/////////////////////////////////////////////
+/////////////////// setup ///////////////////
+/////////////////////////////////////////////
 
 @mixin homework-core-setup($modern: $homework-is-modern, $trim: true) {
 
@@ -273,10 +257,7 @@ $media-defaults: (
   $media-orig: $media !global;
   $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
 
-  //
-  // IF MODERN, OUTPUT PROPERTIES
-  //
-
+  // modern only: custom props output
   @if $modern {
     :root {
       @include --medium-properties($root);
@@ -296,10 +277,7 @@ $media-defaults: (
     $outgoing-medium: --parse-medium(--deep-merge($outgoing-medium, $incoming-medium));
     $media: map-merge($media, ($m: $outgoing-medium)) !global;
 
-    //
-    // IF MODERN, OUTPUT PROPERTIES
-    //
-
+    // modern only: custom props output
     @if $modern {
       @media #{--query-string(map-get($incoming-medium, 'breakpoint'))} {
         :root {
