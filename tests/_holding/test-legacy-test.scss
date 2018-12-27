@@ -1,0 +1,26 @@
+@import 'index';
+
+$elements: p ul ol dl h3 h4 h5 h6 blockquote;
+
+$homework-is-modern: false;
+
+.test {
+
+  content: 'hello world';
+
+  @include font-base('sans');
+  @include font-mod('sans', 't2');
+
+  // @at-root #{selector-insert(zip($elements), '>')} {
+  //   color: blue;
+  //   margin: calc(0px - var(--trim-top)) var(--trim-x) calc(0px - var(--trim-bottom);
+  //   // @at-root #{selector-insert('>')} {
+  //   // }
+  //   @at-root #{selector-insert('* +')} {
+  //     margin-top: calc(var(--stack-gap) - var(--trim-top));
+  //   }
+  //   // @at-root #{selector-insert(selector-insert('>', '', #{zip($elements)}), '+')} {
+  //   //   margin-top: calc(var(--stack-gap) - var(--trim-top) - 0.25em);
+  //   // }
+  // }
+}

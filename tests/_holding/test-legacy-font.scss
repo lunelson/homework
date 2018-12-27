@@ -1,0 +1,51 @@
+@import 'index';
+
+$root: (
+  inner-x: 2rem,
+  inner-y-mods: (
+    s: 1rem,
+    m: 2rem
+  ),
+  font-mods: (
+    sans: (
+      s: 14px 1.4,
+      m: 16px 1.4,
+    ),
+    serif: (
+      s: 16px 1.4,
+      m: 18px 1.4,
+    ),
+  )
+);
+
+$media: (
+  a: (breakpoint: 20em),
+  b: (
+    breakpoint: 30em,
+    inner-x: 3rem,
+    font-mods: (
+      sans: (
+        s: 20px 1.2,
+        m: 24px 1.2,
+      ),
+      serif: (
+        s: 22px 1.2,
+        m: 26px 1.2,
+      ),
+    )
+  ),
+  c: (breakpoint: 40em),
+);
+
+$fonts: (
+  sans: (
+    family: (system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif),
+  ),
+  serif: (
+    family: serif,
+  )
+);
+
+$trim: true;
+@include homework-core-setup(false, $trim);
+@include homework-font-setup(false, $trim);
