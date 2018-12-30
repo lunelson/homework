@@ -39,13 +39,13 @@ $colors: (
 
 @include homework-reset;
 
-@include homework-core-setup();
-@include homework-wrap-setup();
-@include homework-stack-setup();
-@include homework-font-setup();
-@include homework-frame-setup();
-@include homework-flow-setup();
-@include homework-atomic-setup();
-@include homework-helper-setup();
-@include homework-theme-setup();
-@include homework-debug-setup();
+@include homework-setup-core();
+@include homework-setup-wrap();
+@include homework-setup-stack();
+@include homework-setup-font();
+@include homework-setup-frame();
+@include homework-setup-flow();
+@include homework-setup-atomic();
+@include homework-setup-helper();
+@include homework-setup-theme();
+@include homework-setup-debug();

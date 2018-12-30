@@ -46,8 +46,8 @@ $fonts: (
   )
 );
 
-@include homework-core-setup();
-@include homework-font-setup();
+@include homework-setup-core();
+@include homework-setup-font();
 
 .wysiwyg-s {
   --stack-gap: 2rem;

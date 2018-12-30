@@ -38,13 +38,7 @@ $fonts-defaults: (
 //                                        | |
 //                                        |_|
 
-//
-// trim functions
-//
-
-// font-value
 @function font-value($f, $key) { @return map-get($fonts, $f, $key); }
-@function f-val($f, $key) { @return font-value($f, $key); }
 
 @function line-trim-top($f: null, $s: null) {
   $line: line-height($f, $s);
@@ -153,7 +147,7 @@ $fonts-defaults: (
 //                                              |_|
 
 
-@mixin homework-font-setup(
+@mixin homework-setup-font(
   $modern: $homework-is-modern,
   $trim: true,
   $elements: p ul ol dl h3 h4 h5 h6 blockquote

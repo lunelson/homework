@@ -70,7 +70,7 @@ $colors: ( dark: #111, lite: #eee, ) !default;
 //                                                         |_|
 
 
-@mixin homework-theme-setup($modern: $homework-is-modern, $lite: true) {
+@mixin homework-setup-theme($modern: $homework-is-modern, $lite: true) {
 
   $colors: map-merge((
     dark: #111,

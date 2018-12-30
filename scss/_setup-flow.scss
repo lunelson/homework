@@ -90,7 +90,7 @@
 //                                |_|                                        |_|
 
 
-@mixin homework-flow-setup($modern: $homework-is-modern, $max-columns: max-columns(), $ratios: false) {
+@mixin homework-setup-flow($modern: $homework-is-modern, $max-columns: max-columns(), $ratios: false) {
 
   // #{base-class('flow')} {
   //   margin-top: calc(#{row-gap()} / -2);

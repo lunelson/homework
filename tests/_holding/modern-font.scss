@@ -47,5 +47,5 @@ $fonts: (
 );
 
 $trim: true;
-@include homework-core-setup(true, $trim);
-@include homework-font-setup(true, $trim);
+@include homework-setup-core(true, $trim);
+@include homework-setup-font(true, $trim);

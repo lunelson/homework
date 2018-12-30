@@ -1,4 +1,4 @@
-@mixin homework-root-setup($modern: $homework-is-modern) {
+@mixin homework-setup-root($modern: $homework-is-modern) {
   @if $modern {
     html {
       font-size: var(--font-size);

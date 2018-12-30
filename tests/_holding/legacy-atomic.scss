@@ -53,5 +53,5 @@ $media: (
 );
 
 $homework-is-modern: false;
-@include homework-core-setup();
-@include homework-atomic-setup();
+@include homework-setup-core();
+@include homework-setup-atomic();

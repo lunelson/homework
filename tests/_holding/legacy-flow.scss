@@ -25,8 +25,8 @@ $media: (
 );
 
 $homework-is-modern: false;
-@include homework-core-setup();
-@include homework-flow-setup();
+@include homework-setup-core();
+@include homework-setup-flow();
 
 // .span-funcs {
 //   d: span-d();

@@ -23,5 +23,5 @@ $media: (
   c: (breakpoint: 40em),
 );
 
-@include homework-core-setup(false);
-@include homework-wrap-setup(false);
+@include homework-setup-core(false);
+@include homework-setup-wrap(false);

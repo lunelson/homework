@@ -31,17 +31,17 @@ $done-homework-setup: false;
     );
   }
 
-  @if index($setups, 'core') { @include homework-core-setup($modern); }
-  @if index($setups, 'root') { @include homework-root-setup($modern); }
-  @if index($setups, 'font') { @include homework-font-setup($modern); }
-  @if index($setups, 'wrap') { @include homework-wrap-setup($modern); }
-  @if index($setups, 'frame') { @include homework-frame-setup($modern); }
-  @if index($setups, 'stack') { @include homework-stack-setup($modern); }
-  @if index($setups, 'grid') { @include homework-flow-setup($modern); }
-  @if index($setups, 'atomic') { @include homework-atomic-setup($modern); }
-  @if index($setups, 'helper') { @include homework-helper-setup($modern); }
-  @if index($setups, 'theme') { @include homework-theme-setup($modern); }
-  @if index($setups, 'debug') { @include homework-debug-setup($modern); }
+  @if index($setups, 'core') { @include homework-setup-core($modern); }
+  @if index($setups, 'root') { @include homework-setup-root($modern); }
+  @if index($setups, 'font') { @include homework-setup-font($modern); }
+  @if index($setups, 'wrap') { @include homework-setup-wrap($modern); }
+  @if index($setups, 'frame') { @include homework-setup-frame($modern); }
+  @if index($setups, 'stack') { @include homework-setup-stack($modern); }
+  @if index($setups, 'grid') { @include homework-setup-flow($modern); }
+  @if index($setups, 'atomic') { @include homework-setup-atomic($modern); }
+  @if index($setups, 'helper') { @include homework-setup-helper($modern); }
+  @if index($setups, 'theme') { @include homework-setup-theme($modern); }
+  @if index($setups, 'debug') { @include homework-setup-debug($modern); }
 
   // set $done-homework to true
   $done-homework-setup: true !global;

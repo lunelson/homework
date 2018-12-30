@@ -31,5 +31,5 @@ $media: (
     ),
 );
 
-@include homework-core-setup();
-@include homework-frame-setup();
+@include homework-setup-core();
+@include homework-setup-frame();

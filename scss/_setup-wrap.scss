@@ -10,7 +10,7 @@
 // TODO: consider the other forms of wrap-classes;, e.g. wrap-each__[m] is currently disabled
 // TODO: write set up for peel classes
 
-@mixin homework-wrap-setup($modern: $homework-is-modern) {
+@mixin homework-setup-wrap($modern: $homework-is-modern) {
 
   #{base-class('wrap', false)} {
     margin-right: auto;
@@ -104,7 +104,7 @@
   }
 }
 
-// @mixin homework-peel-setup($modern: true) {
+// @mixin homework-setup-peel($modern: true) {
 
 //   .peel {
 //     margin-right: 0;

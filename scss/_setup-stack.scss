@@ -50,7 +50,7 @@
   }
 }
 
-@mixin homework-stack-setup($modern: $homework-is-modern) {
+@mixin homework-setup-stack($modern: $homework-is-modern) {
 
   #{base-class('stack')} { @include stack($modern); }
   #{base-class('plain')} { @include plain($modern); }

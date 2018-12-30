@@ -251,7 +251,7 @@ $media-defaults: (
 /////////////////// setup ///////////////////
 /////////////////////////////////////////////
 
-@mixin homework-core-setup($modern: $homework-is-modern, $trim: true) {
+@mixin homework-setup-core($modern: $homework-is-modern, $trim: true) {
 
   $root-orig: $root !global;
   $media-orig: $media !global;

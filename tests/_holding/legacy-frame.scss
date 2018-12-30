@@ -31,8 +31,8 @@ $media: (
     ),
 );
 
-@include homework-core-setup(false);
-@include homework-frame-setup(false);
+@include homework-setup-core(false);
+@include homework-setup-frame(false);
 
 // @function m-class($sel, $ms...) {
 //   $sel: selector-parse($sel); $out: ();

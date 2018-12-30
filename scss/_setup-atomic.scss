@@ -5,7 +5,7 @@
 // | (_| | || (_) | | | | | | | (__
 //  \__,_|\__\___/|_| |_| |_|_|\___|
 
-@mixin homework-atomic-setup($modern: $homework-is-modern) {
+@mixin homework-setup-atomic($modern: $homework-is-modern) {
 
   // join with null, to also output suffix-less class
   @each $m in join((null), media-keys()) {
