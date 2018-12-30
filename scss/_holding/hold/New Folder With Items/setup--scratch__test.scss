@@ -43,8 +43,8 @@ $all-ratios: join-all(map-values($gcd-ratios)...);
 */
 
 
-/* #{map-stringify($gcd-ratios)} */
-/* #{map-stringify($all-ratios)} */
+/* #{map-inspect($gcd-ratios)} */
+/* #{map-inspect($all-ratios)} */
 
 .test {
   base: inspect(m(null));

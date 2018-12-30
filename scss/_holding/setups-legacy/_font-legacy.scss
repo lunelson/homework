@@ -28,7 +28,7 @@
       @include font($f);
 
       // trim-x conditions
-      $trim-x: map-get-z($fonts, $f, 'trim-x');
+      $trim-x: map-get($fonts, $f, 'trim-x');
       @if $trim-x and $trim-x != 0 {
         $is-trim-x: selector-parse('&.trim-x');
         $is-in-stack: insert-parents(base-class('stack'), '>');

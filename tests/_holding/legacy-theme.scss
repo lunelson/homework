@@ -25,4 +25,4 @@ $colors: (
 
 $homework-is-modern: false;
 @include homework-theme-setup();
-/* #{map-stringify($colors)} */
+/* #{map-inspect($colors)} */

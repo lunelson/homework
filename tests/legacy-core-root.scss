@@ -55,6 +55,7 @@ $media: (
   ),
 );
 
-/* #{map-stringify($media)} */
+/* #{map-inspect($media)} */
 @include homework-core-setup(false);
-/* #{map-stringify($media)} */
+@include homework-root-setup(false);
+/* #{map-inspect($media)} */

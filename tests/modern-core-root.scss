@@ -55,34 +55,10 @@ $media: (
   ),
 );
 
-// $new: (
-//   a: 50px,
-//   c: 200px,
-// );
 
-
-
-// @each $m, $medium in $media {
-//   $new: (
-
-//   );
-// }
-
-.try {
-  out: vw-lerp((get($media, a, breakpoint): 100px, get($media, b, breakpoint): 200px, ));
-}
-
-/* #{map-stringify($root)} */
-/* #{map-stringify($media)} */
+// /* #{map-inspect($root)} */
+/* #{map-inspect($media)} */
 @include homework-core-setup();
-/* #{map-stringify($root)} */
-/* #{map-stringify($media)} */
-.test {
-  /*
-    TODO: refactor m-var() to look in a '-mods' map if first arg is a list
-  */
-  margin-right: m-var(inner-x-mods s, b);
-  margin-right: var(--inner-x--s);
-  // max-width: map-get($media, 'outer-width')
-  max-width: m-var('outer-width','c');
-}
+@include homework-root-setup();
+// /* #{map-inspect($root)} */
+/* #{map-inspect($media)} */

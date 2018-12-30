@@ -81,7 +81,7 @@
 // }
 
 // @mixin typo($f, $s) {
-//   $copy-size: get(medium-var('copy-sizes'), $f, $s);
+//   $copy-size: map-get(medium-var('copy-sizes'), $f, $s);
 //   $px-base: strip(medium-var('font-size'));
 //   $px-size: nth($copy-size, 1);
 //   $px-line: nth($copy-size, 2);
@@ -114,7 +114,7 @@
 //   @each $y in $y-mods { $mults: append($mults, inner-y-mods $y); }
 //   $props: join($mults, (inner-y, inner-y-mods $curr-inner-y copy-sizes $f $s));
 //   @include mm-for($props) {
-//     $copy-size: get(medium-var('copy-sizes'), $f, $s);
+//     $copy-size: map-get(medium-var('copy-sizes'), $f, $s);
 //     $px-base: strip(medium-var('font-size'));
 //     $px-size: nth($copy-size, 1);
 //     $px-line: nth($copy-size, 2);

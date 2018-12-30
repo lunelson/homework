@@ -7,34 +7,32 @@
   "bugs": {
     "url": "https://github.com/lunelson/homework/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunelson/homework.git"
+  },
   "license": "MIT",
   "author": "Lu Nelson",
   "main": "index.js",
   "module": "index.js",
   "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lunelson/homework.git"
+    "test": "tests"
   },
   "scripts": {
-    "build": "penny build src docs",
-    "start": "penny serve src",
     "links": "npm link @lunelson/sass-calc @lunelson/sass-maps-plus @lunelson/sass-throw @lunelson/sass-u",
-    "gulp-dev": "gulp",
-    "gulp-test": "gulp test",
-    "test": "ava"
+    "browser": "penny serve tests/_browser",
+    "test": "ava",
+    "start": "ava --watch"
   },
   "devDependencies": {
+    "@lunelson/penny": "^1.2.1",
     "@lunelson/sass-calc": "^1.0.0",
     "@lunelson/sass-maps-plus": "^0.9.0",
     "@lunelson/sass-throw": "^1.0.2",
     "@lunelson/sass-u": "^0.10.1",
     "ava": "^1.0.1",
+    "del": "^3.0.0",
     "mathsass": "^0.10.1",
-    "micromatch": "^3.1.10",
-    "mz": "^2.7.0",
     "node-sass": "^4.11.0",
     "sass": "^1.15.2",
     "write": "^1.0.3"
@@ -54,7 +52,8 @@
       "tests/*{.js,.scss}"
     ],
     "sources": [
-      "src/**/*.scss",
+      "_index.scss",
+      "scss/**/*.scss",
       "!**/_*/**"
     ]
   }

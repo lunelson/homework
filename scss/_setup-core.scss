@@ -62,17 +62,17 @@ $media-defaults: (
 
 @function m-var($key, $m: $curr-m) {
   @if $homework-is-modern {
-    @return map-get-z(m($m), $key...);
+    @return map-get(m($m), $key...);
   } @else {
-    @return map-get-z(m($m), $key...);
+    @return map-get(m($m), $key...);
   }
 }
 
 @function m-orig-var($key, $m: $curr-m) {
   @if $homework-is-modern {
-    @return map-get-z(m-orig($m), $key...);
+    @return map-get(m-orig($m), $key...);
   } @else {
-    @return map-get-z(m-orig($m), $key...);
+    @return map-get(m-orig($m), $key...);
   }
 }
 
@@ -184,8 +184,8 @@ $media-defaults: (
 }
 
 @function --query-string($min: null, $max: null) {
-  $min: if(map-has-key($media, $min), map-get-z($media, $min, 'breakpoint'), $min);
-  $max: if(map-has-key($media, $max), map-get-z($media, $max, 'breakpoint'), $max);
+  $min: if(map-has-key($media, $min), map-get($media, $min, 'breakpoint'), $min);
+  $max: if(map-has-key($media, $max), map-get($media, $max, 'breakpoint'), $max);
   @return 'screen'
     + if($min, ' and (min-width: #{$min})', '')
     + if($max, ' and (max-width: #{$max - 0.001})', '');
@@ -194,7 +194,7 @@ $media-defaults: (
 // @function --max-columns() {
 //   $column-counts: ();
 //   @each $m, $medium in $media {
-//     $column-counts: append($column-counts, map-get-z($media, $m, 'grid-columns'));
+//     $column-counts: append($column-counts, map-get($media, $m, 'grid-columns'));
 //   }
 //   @return max($column-counts...);
 // }
@@ -204,7 +204,7 @@ $media-defaults: (
   $result: ();
   @each $m in $media-keys {
     $test: false;
-    @each $prop in $props { $test: if(get(m-orig($m), $prop...), true, $test); }
+    @each $prop in $props { $test: if(map-get(m-orig($m), $prop...), true, $test); }
     $result: if($test, append($result, $m), $result);
   }
   @return if(length($result) > 0, $result, ());

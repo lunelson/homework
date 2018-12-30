@@ -18,11 +18,11 @@
 
 @function m-var($key, $m: $curr-m) {
   $medium: m($m);
-  @return map-get-z($medium, $key...);
+  @return map-get($medium, $key...);
 }
 
 @function m-orig-var($key, $m: $curr-m) {
-  @return map-get-z(m-orig($m), $key...);
+  @return map-get(m-orig($m), $key...);
 }
 
 @function m-var-orig($args...) { @return m-orig-var($args...);}

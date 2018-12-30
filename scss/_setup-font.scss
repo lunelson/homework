@@ -43,7 +43,7 @@ $fonts-defaults: (
 //
 
 // font-value
-@function font-value($f, $key) { @return map-get-z($fonts, $f, $key); }
+@function font-value($f, $key) { @return map-get($fonts, $f, $key); }
 @function f-val($f, $key) { @return font-value($f, $key); }
 
 @function line-trim-top($f: null, $s: null) {
@@ -290,7 +290,7 @@ $fonts-defaults: (
         }
 
         // trim-x conditions
-        $trim-x: map-get-z($fonts, $f, 'trim-x');
+        $trim-x: map-get($fonts, $f, 'trim-x');
         @if $trim-x and $trim-x != 0 {
           $is-trim-x: selector-parse('&.trim-x');
           $is-in-stack: insert-parents(base-class('stack'), '>');

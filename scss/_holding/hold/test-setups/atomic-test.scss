@@ -1,13 +1,14 @@
 @import '../peers';
-@import '../../index';
 
 $media: (
   a: (breakpoint: 20em),
   b: (breakpoint: 30em),
   c: (breakpoint: 40em),
-);
+  );
 
 @include m-init(false);
+
+@import '../../index';
 
 $grid-columns: 12; // could be parsed out of $media
 
@@ -100,8 +101,8 @@ $all-ratios: join-all(map-values($gcd-ratios)...);
 */
 
 
-/* #{map-stringify($gcd-ratios)} */
-/* #{map-stringify($all-ratios)} */
+/* #{map-inspect($gcd-ratios)} */
+/* #{map-inspect($all-ratios)} */
 
 .test {
   base: inspect(m(null));

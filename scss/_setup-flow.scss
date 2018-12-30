@@ -24,7 +24,7 @@
   @if not (length($media) > 0) { @return m-var('grid-columns'); }
   $column-counts: ();
   @each $m, $medium in $media {
-    $column-counts: append($column-counts, map-get-z($media, $m, 'grid-columns'));
+    $column-counts: append($column-counts, map-get($media, $m, 'grid-columns'));
   }
   @return max($column-counts...);
 }

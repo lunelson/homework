@@ -58,7 +58,7 @@
     // verbose output but WTF
     @include mm-for('copy-sizes' 'inner-y') {
       $root-size: strip(medium-var('font-size'));
-      @each $s, $size in get(medium(), 'copy-sizes', $f) {
+      @each $s, $size in map-get(medium(), 'copy-sizes', $f) {
         #{mod-class($f, $s, (m, md, med))} {
           font-size: nth($size, 1) / $root-size * 1rem;
           line-height: nth($size, 2) / nth($size, 1);
