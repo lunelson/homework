@@ -41,11 +41,14 @@ $colors: (
 
 @include homework-setup-core();
 @include homework-setup-wrap();
-@include homework-setup-stack();
-@include homework-setup-font();
 @include homework-setup-frame();
 @include homework-setup-flow();
 @include homework-setup-atomic();
-@include homework-setup-helper();
-@include homework-setup-theme();
+
+// @include homework-setup-stack();
+// @include homework-setup-font();
+
+// @include homework-setup-helper();
+// @include homework-setup-theme();
+
 @include homework-setup-debug();

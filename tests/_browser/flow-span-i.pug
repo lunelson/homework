@@ -1,7 +1,7 @@
 extends _app
 
 append defs
-  - title = 'Test: Grid'
+  - title = 'flow/span-i'
 
 append head
   style.
@@ -33,14 +33,14 @@ block body
   .wrap-last
     .frame
       .flow-s
-        .span
+        .span-4.span-2__m: .label
+        .span-4: .label
+        .span-4.span-6__m: .label
+        .span-10.ml-2
           .label
-        .span
-          .label
-        .span
-          .label
-        .span
-          .label
+          h2.ml-i-neg-1 hello from the inside
+        .span-6.span-12__m: .label
+        .span-10: .label
           .itest.span-i-1: span .span-i-1
           .itest.span-i-2: span .span-i-2
           .itest.span-i-3: span .span-i-3
@@ -66,7 +66,7 @@ block body
           .itest.span-i-1.ml-i-11: span .span-i-1.ml-i-11
           .itest.span-i-1.ml-i-12: span .span-i-1.ml-i-12
 
-      .flow-m
+      //- .flow-m
         .span
           .label
         .span-6__m
