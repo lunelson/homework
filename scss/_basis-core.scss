@@ -1,0 +1,247 @@
+//                               _       __            _ _
+//                              | |     / _|          | | |
+//   ___ ___  _ __ ___ ______ __| | ___| |_ __ _ _   _| | |_ ___
+//  / __/ _ \| '__/ _ \______/ _` |/ _ \  _/ _` | | | | | __/ __|
+// | (_| (_) | | |  __/     | (_| |  __/ || (_| | |_| | | |_\__ \
+//  \___\___/|_|  \___|      \__,_|\___|_| \__,_|\__,_|_|\__|___/
+
+
+$root: () !default;
+$media: () !default;
+
+$root-orig: ();
+$media-orig: ();
+
+$curr-m: null;
+
+$root-defaults: (
+
+  // bases
+  font-size: 16px,
+  line-height: 1.25,
+  inner-x: 1rem,
+  inner-y: 1.25rem,
+  outer-top: 2rem,
+  outer-right: 2rem,
+  outer-bottom: 2rem,
+  outer-left: 2rem,
+  grid-columns: 12,
+
+  // mods
+  // NB: default to one set of mods for both axes
+  font-mods: ( sans: ( m: 16px 1.25 ) ),
+  inner-mods: ( m: 1rem ),
+  // inner-x-mods: ( m: 1rem ),
+  // inner-y-mods: ( m: 1rem ),
+);
+
+$media-defaults: (
+  s: (breakpoint: 30em),
+  m: (breakpoint: 45em),
+  l: (breakpoint: 67.5em),
+);
+
+
+/////////////////////////////////////////////
+/////////////////// public //////////////////
+/////////////////////////////////////////////
+
+@function m($m: $curr-m) {
+  @if not $m { @return $root; }
+  $medium: map-get($media, $m);
+  @if $medium { @return $medium; }
+  @error 'medium '#{$m}' not found in $media';
+}
+
+@function m-orig($m: $curr-m) {
+  @if not $m { @return $root-orig; }
+  $medium: map-get($media-orig, $m);
+  @if $medium { @return $medium; }
+  @error 'original medium '#{$m}' not found in $media';
+}
+
+@function m-var($key, $m: $curr-m) {
+  @if $homework-is-modern {
+    @return map-get(m($m), $key...);
+  } @else {
+    @return map-get(m($m), $key...);
+  }
+}
+
+@function m-orig-var($key, $m: $curr-m) {
+  @if $homework-is-modern {
+    @return map-get(m-orig($m), $key...);
+  } @else {
+    @return map-get(m-orig($m), $key...);
+  }
+}
+
+@function media-keys() { @return map-keys($media); }
+
+// alias re name confusion
+@function m-var-orig($args...) { @return m-orig-var($args...);}
+
+@mixin m($min, $max: null) {
+  $prev-m: $curr-m;
+  $curr-m: $min !global;
+  @if not $min and not $max { @content; }
+  @else { @media #{__query-string($min, $max)} { @content } }
+  $curr-m: $prev-m !global;
+}
+
+@mixin mm($args...) {
+  $m-pairs: --mm($args...);
+  @if length($m-pairs) == 0 { @content; }
+  @else {
+    @each $pair in $m-pairs {
+      @include m($pair...) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin mm-for($props...) {
+  @include mm(null,null,$props...) {
+    @content;
+  }
+}
+
+//
+// mod prop getters
+//
+
+@function inner-y-mods($m: $curr-m) {
+  @return m-var('inner-y-mods', $m) or m-var('inner-mods', $m) or ();
+}
+
+@function inner-x-mods($m: $curr-m) {
+  @return m-var('inner-x-mods', $m) or m-var('inner-mods', $m) or ();
+}
+
+@function inner-y($y: null) {
+  // @if not $y { @return m-var('inner-y'); }
+  $mod: map-get(inner-y-mods(), $y);
+  @return if($mod, if(unitless($mod), m-var('inner-y') * $mod, $mod), m-var('inner-y'));
+}
+
+@function inner-x($x: null) {
+  // @if not $x { @return m-var('inner-x'); }
+  $mod: map-get(inner-x-mods(), $x);
+  @return if($mod, if(unitless($mod), m-var('inner-x') * $mod, $mod), m-var('inner-x'));
+}
+
+@function font-size($f: null, $s: null) {
+  @if not ($f and $s) { @return m-var('font-size'); }
+  $mod: m-var('font-mods' $f $s);
+  // TODO: error if not $mod
+  $size: strip(nth($mod, 1));
+  @return $size / 16 * 1rem;
+}
+
+@function line-height($f: null, $s: null) {
+  @if not ($f and $s) { @return m-var('line-height'); }
+  $mod: m-var('font-mods' $f $s);
+  // TODO: error if not $mod
+  $size: strip(nth($mod, 1));
+  $line: nth($mod, 2);
+  @return if($line > 6, $line/$size, $line);
+}
+
+
+/////////////////////////////////////////////
+////////////////// private //////////////////
+/////////////////////////////////////////////
+
+@mixin --medium-properties($medium) {
+  @each $key, $val in $medium {
+    @if not index('list' 'map', type-of($val)) {
+      --#{$key}: #{$val};
+    }
+  }
+  @each $y, $mod in map-get($medium, 'inner-y-mods') or map-get($medium, 'inner-mods') or () {
+    @if unitless($mod) { --inner-y-#{$y}: calc(var(--inner-y) * #{$mod}); }
+    @else { --inner-y-#{$y}: #{$mod}; }
+  }
+  @each $x, $mod in map-get($medium, 'inner-x-mods') or map-get($medium, 'inner-mods') or () {
+    @if unitless($mod) { --inner-x-#{$x}: calc(var(--inner-x) * #{$mod}); }
+    @else { --inner-x-#{$x}: #{$mod}; }
+  }
+}
+
+@function --parse-medium($medium, $root-size: null) {
+
+  // font-size: conform to px
+  $root-size: $root-size or map-get($root, 'font-size') or 16px;
+  $curr-size: map-get($medium, 'font-size') or $root-size;
+  @if unit($curr-size) != 'px' { $curr-size: strip($curr-size) * $root-size; }
+
+  // outer-width: breakpoint, in rems
+  $breakpoint: map-get($medium, 'breakpoint');
+  $outer-width: if($breakpoint, assert($breakpoint / ($curr-size / 16px), rem), 100%);
+
+  @return map-merge($medium, ( 'font-size': $curr-size, 'outer-width': $outer-width ));
+}
+
+@function --query-string($min: null, $max: null) {
+  $min: if(map-has-key($media, $min), map-get($media, $min, 'breakpoint'), $min);
+  $max: if(map-has-key($media, $max), map-get($media, $max, 'breakpoint'), $max);
+  @return 'screen'
+    + if($min, ' and (min-width: #{$min})', '')
+    + if($max, ' and (max-width: #{$max - 0.001})', '');
+}
+
+// @function --max-columns() {
+//   $column-counts: ();
+//   @each $m, $medium in $media {
+//     $column-counts: append($column-counts, map-get($media, $m, 'grid-columns'));
+//   }
+//   @return max($column-counts...);
+// }
+
+@function --mm-filter-orig($media-keys, $props...) {
+  @if length($props) < 1 { @return (); }
+  $result: ();
+  @each $m in $media-keys {
+    $test: false;
+    @each $prop in $props { $test: if(map-get(m-orig($m), $prop...), true, $test); }
+    $result: if($test, append($result, $m), $result);
+  }
+  @return if(length($result) > 0, $result, ());
+}
+
+@function --mm-pairs($list:()) {
+  @if length($list) == 0 { @return $list; }
+  $result: ();
+  @for $n from 1 through length($list) - 1 {
+    $result: append($result, (nth($list, $n) nth($list, $n + 1)), 'comma');
+  }
+  @return $result;
+}
+
+@function --mm-slice($lo: null, $hi: null) {
+  $keys: join(join(null, media-keys()), null);
+  $index1: if($lo, index($keys, $lo), 1);
+  $index2: if($hi, index($keys, $hi), length($keys));
+  @return if($index1 and $index2, --slice($keys, $index1, $index2), ());
+}
+
+@function --mm-where($props...) {
+  $result: --mm-filter-orig(media-keys(), $props...);
+  @return if(length($result) > 0, join(join(null, $result), null), ());
+}
+
+@function --mm($lo: null, $hi: null, $props...) {
+  $m-list: --mm-slice($lo, $hi);
+  @if length($props) > 0 and length($m-list) > 2 {
+    $len: length($m-list);
+    $m-list: join(
+      join(
+        --slice($m-list, 1, 1),
+        --mm-filter-orig(--slice($m-list, 2, $len - 1), $props...)
+      ),
+      --slice($m-list, $len, $len)
+    );
+  }
+  @return --mm-pairs($m-list);
+}

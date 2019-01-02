@@ -119,33 +119,6 @@
 //   @if $l { margin-left: calc(100% * #{$l} / #{$d});}
 // }
 
-// @mixin m-spans($m-spans) {
-//   @each $m, $span in $m-spans {
-//     @if $m == 'base' {
-//       $span: map-merge((d: m-var('grid-columns')), $span);
-//       @include __span($span...);
-//     } @else {
-//       @include m($m) {
-//         $span: map-merge((d: m-var('grid-columns')), $span);
-//         @include __span($span...);
-//       }
-//     }
-//   }
-// }
-
-// @mixin m-spans($spans) {
-//   @each $s, $span in $spans {
-//     @if $s == 'base' {
-//       $span: map-merge((d: $curr-d), $span);
-//       @include __span($span...);
-//     } @else {
-//       .medium-#{$s} {
-//         $span: map-merge((d: $curr-d), $span);
-//         @include __span($span...);
-//       }
-//     }
-//   }
-// }
 
 // // @mixin col {
 // //   flex: 1 1 0%;

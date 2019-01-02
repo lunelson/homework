@@ -1,0 +1,13 @@
+extends _app
+
+append defs
+  - title = 'Test: Theme'
+
+mixin ph(aspect, text, color='#eee')
+  .aspect(style=`background-color: ${color}; --aspect: ${aspect};`)
+    div= text
+
+block body
+  .wrap-last
+    .frame
+      h1 OK so this shit seems to be working

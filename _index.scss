@@ -15,12 +15,18 @@ $homework-is-modern: true !default;
 @import "scss/u-selectors";
 @import "scss/u-misc";
 
+@import "scss/basis-core";
+@import "scss/basis-font";
+@import "scss/basis-grid";
+@import "scss/basis-theme";
+
 @import "scss/reset-root";
 @import "scss/reset-block";
 @import "scss/reset-embed";
 @import "scss/reset-inline";
 @import "scss/reset-table";
 @import "scss/reset-ui";
+
 @import "scss/reset";
 
 @import "scss/setup-core";
@@ -34,4 +40,5 @@ $homework-is-modern: true !default;
 @import "scss/setup-helper";
 @import "scss/setup-theme";
 @import "scss/setup-debug";
+
 @import "scss/setup";

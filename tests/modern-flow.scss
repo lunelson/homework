@@ -22,7 +22,7 @@ $media: (
   c: (breakpoint: 40em),
 );
 
-@include homework-setup-core();
+@include homework-setup-core($output: false);
 @include homework-setup-flow();
 
 .test { @include span(1, -1, 2); }
@@ -30,12 +30,12 @@ $media: (
 .test { @include span(3, -1, 2); }
 
 .m-test {
-  @include m-spans((
+  @include spans((
     a: 2 0 -1,
     b: 3 0 1
   ));
   .nest {
-    @include m-spans-i((
+    @include spans-i((
       a: 3 1 1,
       b: 4 2 2
     ));

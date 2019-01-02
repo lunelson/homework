@@ -1,9 +1,3 @@
-/*
-  NOTES
-  - $wrap-last should be changed to a more complex parameter:
-    - e.g. 'last' vs 'all' vs false, depending on whether design is responsive vs. adaptive, and/or wrapped at last mq
-
-*/
 /* (
   a: (
     breakpoint: 30em,

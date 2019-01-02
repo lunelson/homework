@@ -1,0 +1,42 @@
+[class^=wrap-], [class*=" wrap-"] {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: var(--wrap-width);
+}
+
+.wrap-left {
+  margin-left: 0;
+}
+
+.wrap-right {
+  margin-right: 0;
+}
+
+:root {
+  --wrap-width: 100%;
+}
+
+.wrap-each {
+  --wrap-width: var(--outer-width);
+}
+
+@media screen and (min-width: 20em) {
+  .wrap-each__a,
+.wrap-a {
+    --wrap-width: var(--outer-width);
+  }
+}
+@media screen and (min-width: 30em) {
+  .wrap-each__b,
+.wrap-b {
+    --wrap-width: var(--outer-width);
+  }
+}
+@media screen and (min-width: 40em) {
+  .wrap-each__c,
+.wrap-c,
+.wrap-last {
+    --wrap-width: var(--outer-width);
+  }
+}

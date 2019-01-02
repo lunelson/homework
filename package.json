@@ -22,10 +22,10 @@
     "links": "npm link @lunelson/sass-calc @lunelson/sass-maps-plus @lunelson/sass-throw @lunelson/sass-u",
     "browser": "penny serve tests/_browser",
     "test": "ava",
-    "start": "ava --watch"
+    "start": "ava --watch --serial"
   },
   "devDependencies": {
-    "@lunelson/penny": "^1.2.1",
+    "@lunelson/penny": "^2.0.0-alpha.5",
     "@lunelson/sass-calc": "^1.0.0",
     "@lunelson/sass-maps-plus": "^0.9.0",
     "@lunelson/sass-throw": "^1.0.2",

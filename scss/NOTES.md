@@ -33,9 +33,9 @@ flow
 
 ## file naming
 
-helpers-grid
-helpers-font
-helpers-core
+basis-grid
+basis-font
+basis-core
 
 reset-*
 setup-*
