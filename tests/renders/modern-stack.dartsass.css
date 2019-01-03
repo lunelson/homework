@@ -51,8 +51,8 @@
   --stack-gap: 0;
 }
 
-.plain > .push-s, [class^=plain-] > .push-s, [class*=" plain-"] > .push-s,
-.stack > .push-s, [class^=stack-] > .push-s, [class*=" stack-"] > .push-s {
+.plain > .shim-s, [class^=plain-] > .shim-s, [class*=" plain-"] > .shim-s,
+.stack > .shim-s, [class^=stack-] > .shim-s, [class*=" stack-"] > .shim-s {
   --stack-gap: var(--inner-y-s);
 }
 
@@ -60,8 +60,8 @@
   --stack-gap: var(--inner-y-s);
 }
 
-.plain > .push-m, [class^=plain-] > .push-m, [class*=" plain-"] > .push-m,
-.stack > .push-m, [class^=stack-] > .push-m, [class*=" stack-"] > .push-m {
+.plain > .shim-m, [class^=plain-] > .shim-m, [class*=" plain-"] > .shim-m,
+.stack > .shim-m, [class^=stack-] > .shim-m, [class*=" stack-"] > .shim-m {
   --stack-gap: var(--inner-y-m);
 }
 
@@ -69,8 +69,8 @@
   --stack-gap: var(--inner-y-m);
 }
 
-.plain > .push-l, [class^=plain-] > .push-l, [class*=" plain-"] > .push-l,
-.stack > .push-l, [class^=stack-] > .push-l, [class*=" stack-"] > .push-l {
+.plain > .shim-l, [class^=plain-] > .shim-l, [class*=" plain-"] > .shim-l,
+.stack > .shim-l, [class^=stack-] > .shim-l, [class*=" stack-"] > .shim-l {
   --stack-gap: var(--inner-y-l);
 }
 
@@ -82,7 +82,7 @@
   --chain-gap: 0;
 }
 
-.chain > .push-s, [class^=chain-] > .push-s, [class*=" chain-"] > .push-s {
+.chain > .shim-s, [class^=chain-] > .shim-s, [class*=" chain-"] > .shim-s {
   --chain-gap: var(--inner-x-s);
 }
 
@@ -90,7 +90,7 @@
   --chain-gap: var(--inner-x-s);
 }
 
-.chain > .push-form, [class^=chain-] > .push-form, [class*=" chain-"] > .push-form {
+.chain > .shim-form, [class^=chain-] > .shim-form, [class*=" chain-"] > .shim-form {
   --chain-gap: var(--inner-x-form);
 }
 

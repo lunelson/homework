@@ -18,9 +18,14 @@
   }
 }
 
-@function mod-class($base, $mod, $except: ()) {
-  @return selector-parse(if(index($except, $mod), '.#{$base}, .#{$base}-#{$mod}', '.#{$base}-#{$mod}'));
-}
+// @function base-class($str) {
+//   @return selector-parse("[class^='#{$str}-'], [class*=' #{$str}-']");
+// }
+
+// @function mod-class($str) {
+//   @return selector-parse("[class$='-#{$str}'], [class*='-#{$str} ']")
+// }
+
 
 @function m-suffix($m: $curr-m) {
   @return if($m, '__#{$m}', '');

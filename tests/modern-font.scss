@@ -8,12 +8,22 @@ $root: (
   ),
   font-mods: (
     sans: (
-      s: 14px 1.4,
-      m: 16px 1.4,
+      xs: 16 1.3,
+      s: 16 1.3,
+      m: 32 1.2,
+      l: 48 1.1,
     ),
     serif: (
-      s: 16px 1.4,
-      m: 18px 1.4,
+      xs: 16 1.3,
+      s: 16 1.3,
+      m: 32 1.2,
+      l: 48 1.1,
+    ),
+    modern: (
+      xs: 16 1.3,
+      s: 16 1.3,
+      m: 32 1.2,
+      l: 48 1.1,
     ),
   )
 );
@@ -23,28 +33,30 @@ $media: (
   b: (
     breakpoint: 30em,
     inner-x: 3rem,
-    font-mods: (
-      sans: (
-        s: 20px 1.4,
-        m: 24px 1.4,
-      ),
-      serif: (
-        s: 22px 1.4,
-        m: 26px 1.4,
-      ),
-    )
   ),
   c: (breakpoint: 40em),
 );
 
 $fonts: (
   sans: (
-    family: (system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Helvetica, sans-serif),
+    family: 'MessinaSans'
   ),
   serif: (
-    family: serif,
-  )
+    family: 'MessinaSerif'
+  ),
+  modern: (
+    family: 'MessinaModern'
+  ),
 );
 
 @include homework-setup-core($trim: true, $output: false);
 @include homework-setup-font($trim: true);
+
+.plain {
+
+  h6 { @include font-mod('sans', 'xs', null, true); }
+  h5, blockquote { @include font-mod('sans','s', null, true); }
+  h4, p, ul, ol, dl { @include font-mod('sans','m', null, true); }
+  h3 { @include font-mod('sans','l', null, true); }
+
+}

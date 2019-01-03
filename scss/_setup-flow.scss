@@ -34,9 +34,6 @@
   //   }
   // }
 
-  $inner-y-keys: map-keys(inner-y-mods());
-
-
   /////////////////////////////////////////////
   /////////////////// modern //////////////////
   /////////////////////////////////////////////
@@ -66,23 +63,34 @@
       }
     }
 
-    #{base-class('span')},
-    // #{base-m-class('span', false)}
-    {
+    #{base-class('w')},
+    #{base-class('span')} {
       width: calc(99.99999% * var(--span-n) / var(--span-d));
     }
 
-    #{base-class('span-i')},
-    // #{base-m-class('span-i', false)}
-    {
+    #{base-class('w-i')},
+    #{base-class('span-i')} {
       width: calc((99.99999% + var(--column-gap)) * var(--span-n) / var(--span-d) - var(--column-gap));
     }
 
-    // #{base-class('w')} { width: calc(99.99999% * var(--span-n) / var(--span-d)); }
-    #{base-class('ml', false)} { margin-left: calc(99.99999% * var(--push-l) / var(--span-d)); }
-    #{base-class('ml-i', false)} { margin-left: calc((99.99999% + var(--column-gap)) * var(--push-l) / var(--span-d)); }
-    #{base-class('mr', false)} { margin-right: calc(99.99999% * var(--push-r) / var(--span-d)); }
-    #{base-class('mr-i', false)} { margin-right: calc((99.99999% + var(--column-gap)) * var(--push-r) / var(--span-d)); }
+    #{base-class('ml', false)},
+    #{base-class('push-l', false)} {
+      margin-left: calc(99.99999% * var(--push-l) / var(--span-d));
+    }
+    #{base-class('ml-i', false)},
+    #{base-class('push-l-i', false)} {
+      margin-left: calc((99.99999% + var(--column-gap)) * var(--push-l) / var(--span-d));
+    }
+    #{base-class('mr', false)},
+    #{base-class('push-r', false)} {
+      margin-right: calc(99.99999% * var(--push-r) / var(--span-d));
+    }
+    #{base-class('mr-i', false)},
+    #{base-class('push-r-i', false)} {
+      margin-right: calc((99.99999% + var(--column-gap)) * var(--push-r) / var(--span-d));
+    }
+
+    $inner-y-keys: map-keys(inner-y-mods());
 
     @each $y in $inner-y-keys {
       .flow-#{$y} { --row-gap: var(--inner-y-#{$y}); }
@@ -93,52 +101,43 @@
 
         $__m: m-suffix();
 
-        // these are required to ensure that span__[bp] also counts
-        // consider using span-all and span-i-all instead;
-        // ...and eliminating base-m-class classes above
-        // .span#{$__m} { --span-n: var(--span-d); }
-        // .span-i#{$__m} { --span-n: var(--span-d); }
-
         @for $n from 1 through $max-columns {
 
           // span
+          .w-#{$n}#{$__m},
           .span-#{$n}#{$__m} {
             --span-n: #{$n};
             & > * { --span-d: var(--span-n); }
           }
 
           // span-i
+          .w-i-#{$n}#{$__m},
           .span-i-#{$n}#{$__m} {
             --span-n: #{$n};
             & > * { --span-d: var(--span-n); }
           }
 
-          // span atomics
-          .ml-#{$n}#{$__m} { --push-l: #{$n}; }
-          .mr-#{$n}#{$__m} { --push-r: #{$n}; }
-          .ml-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
-          .mr-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
+          // push atomics
+          .ml-#{$n}#{$__m},
+          .push-l-#{$n}#{$__m} { --push-l: #{$n}; }
+          .mr-#{$n}#{$__m},
+          .push-r-#{$n}#{$__m} { --push-r: #{$n}; }
+          .ml-neg-#{$n}#{$__m},
+          .push-l-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
+          .mr-neg-#{$n}#{$__m},
+          .push-r-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
 
-          // span-i atomics
-          .ml-i-#{$n}#{$__m} { --push-l: #{$n}; }
-          .mr-i-#{$n}#{$__m} { --push-r: #{$n}; }
-          .ml-i-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
-          .mr-i-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
-
-          // // span atomics
-          // .ml-#{$n}#{$__m} { margin-left: calc(99.99999% * #{$n} / var(--span-d)) !important; }
-          // .mr-#{$n}#{$__m} { margin-right: calc(99.99999% * #{$n} / var(--span-d)) !important; }
-          // .ml-neg-#{$n}#{$__m} { margin-left: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
-          // .mr-neg-#{$n}#{$__m} { margin-right: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
-
-          // // span-i atomics
-          // .ml-i-#{$n}#{$__m} { margin-left: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
-          // .mr-i-#{$n}#{$__m} { margin-right: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
-          // .ml-i-neg-#{$n}#{$__m} { margin-left: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
-          // .mr-i-neg-#{$n}#{$__m} { margin-right: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
+          // push-i atomics
+          .ml-i-#{$n}#{$__m},
+          .push-l-i-#{$n}#{$__m} { --push-l: #{$n}; }
+          .mr-i-#{$n}#{$__m},
+          .push-r-i-#{$n}#{$__m} { --push-r: #{$n}; }
+          .ml-i-neg-#{$n}#{$__m},
+          .push-l-i-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
+          .mr-i-neg-#{$n}#{$__m},
+          .push-r-i-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
 
         }
-
       }
     }
   }

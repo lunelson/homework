@@ -20,7 +20,13 @@ $font-default: (
   trim-x: 0,
   trim-capline: 0,
   trim-baseline: 0,
+  feature-settings: ('kern' 1,),
 );
+
+// NOTES re feature-settings
+// https://sparanoid.com/lab/opentype-features/
+// https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/OpenType_fonts_guide
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
 
 $fonts-defaults: (
   sans: ( family: (arial, sans-serif) ),
@@ -52,38 +58,48 @@ $fonts-defaults: (
   @return ($line - 1) * 0.5em + $trim * 1em;
 }
 
-@mixin font-base($f) {
-  --font-family: var(--font-family-#{$f});
-  --letter-spacing: var(--letter-spacing-#{$f});
-  --trim-x: var(--trim-x-#{$f});
-}
+@mixin font-mod($f, $s, $y: null, $trim: true, $modern: $homework-is-modern) {
 
-@mixin font-mod($f, $s, $y: null, $trim: true) {
+  /////////////////////////////////////////////
+  /////////////////// modern //////////////////
+  /////////////////////////////////////////////
 
-  @if $homework-is-modern {
-    --font-size: var(--font-size-#{$f}-#{$s});
-    --line-height: var(--line-height-#{$f}-#{$s});
+  @if $modern {
+
+    $font: map-get($fonts, $f);
+
+    --font-family: #{map-get($font, 'family')};
+    // --font-feature-settings: #{map-get($font, 'feature-settings')};
+    --font-feature-settings: "kern";
+    --spacing-max: #{map-get($font, 'spacing-max')};
+    --spacing-end: #{map-get($font, 'spacing-end')};
+    --trim-x: #{map-get($font, 'trim-x')};
+
     @if $trim {
-      // TODO: add a #{base-class('f')} + & condition, to modify trim-top
-      --trim-top: var(--trim-top-#{$f}-#{$s});
-      --trim-bottom: var(--trim-bottom-#{$f}-#{$s});
+      --trim-capline: #{map-get($font, 'trim-capline')};
+      --trim-baseline: #{map-get($font, 'trim-baseline')};
+    }
+
+    @include mm-for('font-mods' $f $s) {
+      $def: m-var('font-mods' $f $s);
+      $size: strip(nth($def, 1));
+      $line: nth($def, 2);
+      --font-size: #{$size / 16 * 1rem};
+      --line-height: #{if($line > 6, $line/$size, $line)};
     }
   }
+
+  /////////////////////////////////////////////
+  /////////////////// legacy //////////////////
+  /////////////////////////////////////////////
 
   @else {
-    @include mm-for('font-mods' $f $s) {
-      font-size: font-size($f, $s);
-      line-height: line-height($f, $s);
-
-      @at-root #{selector-insert('>')} {
-        // TODO: re-add trim-x values here
-        margin-top: subtract(0, line-trim-top($f, $s));
-        margin-bottom: subtract(0, line-trim-bottom($f, $s));
-      }
-    }
   }
 
 }
+
+
+// DEPRECATED, BELOW THIS LINE
 
 
 @mixin stack-font($f, $s, $y: null, $trim: true) {
