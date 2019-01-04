@@ -1,0 +1,71 @@
+extends _app
+
+append defs
+  - title = 'stack/font'
+
+append head
+  style.
+
+    .label::before {
+      font-family: monospace;
+      counter-reset: cp var(--span-n);
+      content: counter(cp);
+      display: block;
+      width: 100%;
+      padding: 1em;
+      background-color: #ddd;
+    }
+
+    .itest {
+      padding: 10px;
+      background-color: green;
+      color: white;
+      font-size: 10px;
+    }
+
+    .stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"] {
+      --trim-x: calc(1px - 0.1em);
+    }
+
+mixin ph2(aspect, color, text)
+  .hold(style=`background-color: ${color||'rgba(0,0,0,0.17)'}; padding-bottom: ${100/aspect}%;`)&attributes(attributes)
+    .abs-trbl.d-flex.jc-center.ai-center
+      if block
+        block
+      else
+        .a-center= text
+block body
+
+  .wrap-last
+    .frame.frame-y
+      .flow-l
+
+        // PLAIN ELEMENT TESTING
+        .span-6.plain
+          h3= _case.title(_chance.sentence({ words: 6 }))
+          h4= _case.title(_chance.sentence({ words: 6 }))
+          h5= _case.title(_chance.sentence({ words: 6 }))
+          h6= _case.title(_chance.sentence({ words: 6 }))
+          figure.stack-s
+            +ph2(2, 'lightgray')
+            .f-sans-xs= _casual.sentence
+          p= _chance.paragraph({ sentences: 3 })
+          p= _chance.paragraph({ sentences: 3 })
+          figure.stack-s
+            +ph2(2, 'lightgray')
+            .f-sans-xs= _casual.sentence
+          p= _chance.paragraph({ sentences: 3 })
+          p= _chance.paragraph({ sentences: 3 })
+
+        .span-6
+          .stack-ml
+            .f-sans-s= _casual.text
+            figure.stack-s
+              +ph2(2, 'lightgray')
+              .f-sans-xs= _casual.sentence
+            .f-sans-s= _casual.text
+            .f-sans-s= _casual.text
+            figure.stack-s
+              +ph2(2, 'lightgray')
+              .f-sans-xs= _casual.sentence
+            .f-sans-s= _casual.text

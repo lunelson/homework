@@ -28,7 +28,7 @@
 
     // throw if the medium does not have a breakpoint key
     @if not index(map-keys($incoming-medium), 'breakpoint') {
-      @include error('homework: one of your $media does not have a breakpoint key');
+      @include throw-error('homework: one of your $media does not have a breakpoint key');
     }
 
     // parse, merge and merge-back

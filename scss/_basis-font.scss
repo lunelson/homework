@@ -15,12 +15,11 @@ $fonts: () !default;
 
 $font-default: (
   family: (arial, sans-serif),
-  spacing-max: 0,
-  spacing-end: 50,
-  trim-x: 0,
+  spacing: calc(1px - 0.025em),
+  trim-x: calc(1px - 0.1em),
   trim-capline: 0,
   trim-baseline: 0,
-  feature-settings: ('kern' 1,),
+  feature-settings: ('kern' 1),
 );
 
 // NOTES re feature-settings
@@ -69,10 +68,8 @@ $fonts-defaults: (
     $font: map-get($fonts, $f);
 
     --font-family: #{map-get($font, 'family')};
-    // --font-feature-settings: #{map-get($font, 'feature-settings')};
-    --font-feature-settings: "kern";
-    --spacing-max: #{map-get($font, 'spacing-max')};
-    --spacing-end: #{map-get($font, 'spacing-end')};
+    --font-feature-settings: #{map-get($font, 'feature-settings')+''};
+    --letter-spacing: #{map-get($font, 'spacing')};
     --trim-x: #{map-get($font, 'trim-x')};
 
     @if $trim {
@@ -105,13 +102,9 @@ $fonts-defaults: (
 @mixin stack-font($f, $s, $y: null, $trim: true) {
 
   $font: map-get($fonts, $f);
-  $spacing-max: map-get($font, 'spacing-max');
-  $spacing-end: map-get($font, 'spacing-end');
 
   font-family: map-get($font, 'family');
-  @if $spacing-max > 0 {
-    letter-spacing: calc(#{$spacing-max}px - #{$spacing-max/$spacing-end}em);
-  }
+  letter-spacing: map-get($font, 'spacing');
 
   @include mm-for('font-mods' $f $s, inner-mods $y, inner-y-mods $y, inner-y) {
     font-size: font-size($f, $s);

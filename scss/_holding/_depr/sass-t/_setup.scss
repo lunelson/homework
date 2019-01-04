@@ -5,7 +5,7 @@
 @mixin t-init() {
 
   // check our dependency on the setup of sass-m
-  @if not $done-m-init { @include error('sass-f: sass-m must be initialized before sass-f'); }
+  @if not $done-m-init { @include throw-error('sass-f: sass-m must be initialized before sass-f'); }
 
   // if length of fonts is 0, merge fonts-default against it;
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;

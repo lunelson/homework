@@ -20,7 +20,7 @@
   },
   "scripts": {
     "links": "npm link @lunelson/sass-calc @lunelson/sass-maps-plus @lunelson/sass-throw @lunelson/sass-u",
-    "browse": "penny serve tests/_browser",
+    "visual": "penny serve tests/_visual",
     "test": "ava",
     "start": "ava --watch --serial"
   },

@@ -1,0 +1,122 @@
+@import '../index';
+
+// FONTS
+/*
+  colophon
+  milieugrotesque
+  lineto
+  commercialtype
+  luzia
+  grillitype
+*/
+
+
+@import 'fonts/messina-sans';
+@import 'fonts/messina-serif';
+@import 'fonts/messina-modern';
+
+@import 'fonts/google';
+@import 'fonts/neutral';
+@import 'fonts/gt-america';
+@import 'fonts/maison-neue';
+@import 'fonts/theinhardt';
+@import 'fonts/untitled-sans';
+
+
+
+// MAISON
+
+$root: (
+  inner-x: 2rem,
+  inner-y-mods: (
+    xs: 0.75,
+    s: 1,
+    m: 1.5,
+    ml: 2,
+    l: 3,
+  ),
+  font-mods: (
+    sans: (
+      xs: 16px 1.4,
+      s: 20px 1.3,
+      m: 32px 1.2,
+      l: 48px 1.1,
+      xl: 72px 1.1,
+    ),
+    serif: (
+      xs: 16px 1.4,
+      s: 20px 1.3,
+      m: 32px 1.2,
+      l: 48px 1.1,
+      xl: 72px 1.1,
+    ),
+    modern: (
+      xs: 16px 1.4,
+      s: 20px 1.3,
+      m: 32px 1.2,
+      l: 48px 1.1,
+      xl: 72px 1.1,
+    ),
+  )
+);
+
+$media: (
+  s: ( breakpoint: 30em ),
+  m: ( breakpoint: 50em ),
+  l: ( breakpoint: 70em ),
+);
+
+$fonts: (
+  // sans: $theinhardt,
+  sans: $neutral,
+  // sans: $messina-sans,
+  // sans: $source-sans-pro,
+  serif: $messina-serif,
+  // serif: $source-serif-pro,
+  modern: $messina-modern,
+  // mono: $source-code-pro
+);
+
+$colors: (
+  foo: #508021,
+  bar: #da50c9,
+  baz: #4741ff,
+  fiz: #da9b30,
+);
+
+@include homework-reset;
+
+@include homework-setup-core();
+@include homework-setup-wrap();
+@include homework-setup-frame();
+@include homework-setup-flow();
+@include homework-setup-atomic();
+
+@include homework-setup-stack();
+@include homework-setup-font($elements: p ul ol h3 h4 h5 h6);
+
+@include homework-setup-helper();
+// @include homework-setup-theme();
+
+@include homework-setup-debug();
+
+
+.plain {
+
+  --stack-gap: var(--inner-y-ml);
+
+  // STACK FONT STYLES
+  h6 { @include font-mod('sans', 'xs', null, true); }
+  h5, p, ul, ol, dl, blockquote { @include font-mod('sans','s', null, true); }
+  h4 { @include font-mod('sans','m', null, true); }
+  h3 { @include font-mod('sans','l', null, true); }
+
+  h3, h4, h5 {
+    --stack-gap: var(--inner-y-l);
+  }
+  // > p + p {
+  //   margin-top: add(0em, var(--trim-bottom));
+  //   text-indent: 2em;
+  // }
+
+}

@@ -1,0 +1,94 @@
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Black.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Black.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-Black.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-Black.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 900;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-BlackItalic.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-BlackItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-BlackItalic.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-BlackItalic.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 900;
+	font-style: italic;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Bold.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-Bold.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 700;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-BoldItalic.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-BoldItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-BoldItalic.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-BoldItalic.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 700;
+	font-style: italic;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Light.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-Light.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-Light.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-LightItalic.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-LightItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-LightItalic.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-LightItalic.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 300;
+	font-style: italic;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Regular.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-Regular.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+@font-face {
+	font-family:'MessinaSansCondensed';
+	src: url('/fonts/MessinaSansCondensedTrialWeb-RegularItalic.eot'); /* IE9 Compat Modes */
+	src: url('/fonts/MessinaSansCondensedTrialWeb-RegularItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('/fonts/MessinaSansCondensedTrialWeb-RegularItalic.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/fonts/MessinaSansCondensedTrialWeb-RegularItalic.woff') format('woff'); /* Pretty Modern Browsers */
+	font-weight: 400;
+	font-style: italic;
+	font-stretch: normal;
+	unicode-range: U+000D-FB04;
+}
+
+$messina-sans-condensed: (
+  family: 'MessinaSansCondensed',
+  trim-capline: 0.125,
+  trim-baseline: 0.1,
+);

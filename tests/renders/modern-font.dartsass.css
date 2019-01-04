@@ -9,8 +9,8 @@ body, [class^=f-], [class*=" f-"] {
   font-size: var(--font-size);
   line-height: var(--line-height);
   font-family: var(--font-family);
+  letter-spacing: var(--letter-spacing);
   font-feature-settings: var(--font-feature-settings);
-  letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
 }
 
 [class^=f-], [class*=" f-"] {
@@ -35,30 +35,27 @@ body, [class^=f-], [class*=" f-"] {
 
 .f-sans, [class^=f-sans-], [class*=" f-sans-"], body {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern";
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
+  --letter-spacing: calc(1px - 0.025em);
+  --font-feature-settings: "kern" 1;
+  --trim-x: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
 }
 
 .f-serif, [class^=f-serif-], [class*=" f-serif-"] {
   --font-family: MessinaSerif;
-  --font-feature-settings: "kern";
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
+  --letter-spacing: calc(1px - 0.025em);
+  --font-feature-settings: "kern" 1;
+  --trim-x: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
 }
 
 .f-modern, [class^=f-modern-], [class*=" f-modern-"] {
   --font-family: MessinaModern;
-  --font-feature-settings: "kern";
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
+  --letter-spacing: calc(1px - 0.025em);
+  --font-feature-settings: "kern" 1;
+  --trim-x: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
 }
@@ -150,10 +147,9 @@ body, [class^=f-], [class*=" f-"] {
 
 .plain h6 {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern";
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
+  --font-feature-settings: "kern" 1;
+  --letter-spacing: calc(1px - 0.025em);
+  --trim-x: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 1rem;
@@ -161,10 +157,9 @@ body, [class^=f-], [class*=" f-"] {
 }
 .plain h5, .plain blockquote {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern";
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
+  --font-feature-settings: "kern" 1;
+  --letter-spacing: calc(1px - 0.025em);
+  --trim-x: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 1rem;
@@ -172,10 +167,9 @@ body, [class^=f-], [class*=" f-"] {
 }
 .plain h4, .plain p, .plain ul, .plain ol, .plain dl {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern";
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
+  --font-feature-settings: "kern" 1;
+  --letter-spacing: calc(1px - 0.025em);
+  --trim-x: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 2rem;
@@ -183,10 +177,9 @@ body, [class^=f-], [class*=" f-"] {
 }
 .plain h3 {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern";
-  --spacing-max: 0;
-  --spacing-end: 50;
-  --trim-x: 0;
+  --font-feature-settings: "kern" 1;
+  --letter-spacing: calc(1px - 0.025em);
+  --trim-x: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 3rem;

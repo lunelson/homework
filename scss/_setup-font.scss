@@ -33,8 +33,8 @@
       line-height: var(--line-height);
       font-family: var(--font-family);
 
+      letter-spacing: var(--letter-spacing);
       font-feature-settings: var(--font-feature-settings);
-      letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
     }
 
     #{base-class('f', false)} {
@@ -60,10 +60,8 @@
     @each $f, $font in $fonts {
       #{base-class('f-#{$f}')}, #{if($f == nth(map-keys($fonts), 1),'body','')} {
         --font-family: #{map-get($font, 'family')};
-        // --font-feature-settings: #{map-get($font, 'feature-settings')};
-        --font-feature-settings: "kern";
-        --spacing-max: #{map-get($font, 'spacing-max')};
-        --spacing-end: #{map-get($font, 'spacing-end')};
+        --letter-spacing: #{map-get($font, 'spacing')};
+        --font-feature-settings: #{map-get($font, 'feature-settings')+''};
         --trim-x: #{map-get($font, 'trim-x')};
         @if $trim {
           --trim-capline: #{map-get($font, 'trim-capline')};

@@ -8,7 +8,7 @@
 
 
 @function font-var($key, $f: $curr-font) {
-  @return map-get(font($f), $key) or error("key '#{$key}' not found in $font '#{$f or base}'");
+  @return map-get(font($f), $key) or throw-error("key '#{$key}' not found in $font '#{$f or base}'");
 }
 
 

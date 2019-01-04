@@ -24,8 +24,8 @@ function sassRender(sass, file, outFile) {
   });
 }
 
-const srcFiles = globby.sync(['*.scss', '!**/_*', '!**/_*/**'], { cwd: __dirname });
-const outFiles = globby.sync(['*.css'], { cwd: path.resolve(__dirname, 'renders') });
+const srcFiles = globby.sync(['*.scss', '!**/_*', '!**/_*/**'], { cwd: __dirname, deep: 0 });
+const outFiles = globby.sync(['*.css'], { cwd: path.resolve(__dirname, 'renders'), deep: 0 });
 
 const delFiles = outFiles
   .filter(file => !~srcFiles.indexOf(file.replace(/\.(dartsass|libsass).css/,'.scss')))

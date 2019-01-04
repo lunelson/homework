@@ -1,3 +1,17 @@
+## refactoring
+
+stack
+  - no need for separate mixins;
+  - refactor for common stack/plain styles
+
+flow
+  - see setup-flow.md
+  - add span-all and span-auto classes
+  - add some basic css grid support
+
+font
+  - seems pretty much done
+
 ## setups
 
 core
