@@ -29,7 +29,7 @@
     "@lunelson/sass-calc": "^1.1.0",
     "@lunelson/sass-maps-next": "^1.0.0",
     "@lunelson/sass-throw": "^2.0.0-rc.4",
-    "@lunelson/sass-u": "^0.10.1",
+    "@lunelson/sass-u": "^0.11.0",
     "ava": "^1.0.1",
     "del": "^3.0.0",
     "markdown-it-container": "^2.0.0",
@@ -45,7 +45,7 @@
     "@lunelson/sass-calc": "^1.1.0",
     "@lunelson/sass-maps-next": "^1.0.0",
     "@lunelson/sass-throw": "^2.0.0-rc.4",
-    "@lunelson/sass-u": "^0.10.1",
+    "@lunelson/sass-u": "^0.11.0",
     "mathsass": "^0.10.1"
   },
   "publishConfig": {
