@@ -14,6 +14,9 @@
 
       $__m: m-suffix();
 
+      .w-unset#{$__m} { width: unset; }
+      .h-unset#{$__m} { height: unset; }
+
       // dimensions/margin: auto
       .w-auto#{$__m} { width: auto; }
       .h-auto#{$__m} { height: auto; }

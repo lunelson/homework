@@ -1,3 +1,36 @@
+    @function solo-span
+    @function solo-push
+
+    @function flow-span
+    @function flow-push
+
+    @mixin solo-cell($span, $push-l, $push-r) {}
+    @mixin solo-cells($span, $push-l, $push-r) {}
+
+    @mixin flow-cell($span, $push-l, $push-r) {}
+    @mixin flow-cells($span, $push-l, $push-r) {}
+
+    .span-[n]
+    .push-[l|r]-[n]
+
+    .flow-[y], .flow-x-[x]
+
+      .span-all
+      .span-auto
+      .span-[x]
+      .push-[l|r]-[x]
+
+    .grid-[y], .grid-x-[x]
+
+      .span-all
+      .span-auto
+      .span-[x]
+      .span-y-[y]
+      .row-[s]-[e],
+      .col-[s]-[e],
+
+
+
 ### thotz
 
 - use the match flag in ava to only run certain tests

@@ -39,6 +39,14 @@
     --outer-width: 53.3333333333rem;
   }
 }
+.w-unset {
+  width: unset;
+}
+
+.h-unset {
+  height: unset;
+}
+
 .w-auto {
   width: auto;
 }
@@ -112,6 +120,14 @@
 }
 
 @media screen and (min-width: 30em) {
+  .w-unset__a {
+    width: unset;
+  }
+
+  .h-unset__a {
+    height: unset;
+  }
+
   .w-auto__a {
     width: auto;
   }
@@ -185,6 +201,14 @@
   }
 }
 @media screen and (min-width: 40em) {
+  .w-unset__b {
+    width: unset;
+  }
+
+  .h-unset__b {
+    height: unset;
+  }
+
   .w-auto__b {
     width: auto;
   }
@@ -258,6 +282,14 @@
   }
 }
 @media screen and (min-width: 60em) {
+  .w-unset__c {
+    width: unset;
+  }
+
+  .h-unset__c {
+    height: unset;
+  }
+
   .w-auto__c {
     width: auto;
   }

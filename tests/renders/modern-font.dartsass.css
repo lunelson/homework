@@ -124,8 +124,8 @@ body, [class^=f-], [class*=" f-"] {
   font-size: var(--font-size);
   line-height: var(--line-height);
   font-family: var(--font-family);
+  letter-spacing: var(--letter-spacing);
   font-feature-settings: var(--font-feature-settings);
-  letter-spacing: calc(var(--spacing-max) * 1px - var(--spacing-max) / var(--spacing-end) * 1em);
   --trim-adjacent: 0em;
   --trim-top: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-capline) * 1em + var(--trim-adjacent));
   --trim-bottom: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-baseline) * 1em);

@@ -23,20 +23,61 @@ append head
     }
 
 block body
+  +ph({ aspect: 8 })
   .wrap-last
-    .frame
-      .stack-l
-        .stack-m
-          .f-sans-m= _chance.sentence()
-          .f-sans-m= _chance.sentence()
-          .f-sans-s= _chance.sentence()
-          .label
-          .label
-          .f-sans-m= _chance.sentence()
-          .f-sans-s= _chance.sentence()
-          .label
-          .label
-          .f-sans-m= _chance.sentence()
-          .f-sans-s= _chance.sentence()
-          .label
-          .label
+    .frame.py-l
+      .flow-l
+        .span-10.push-l-2
+          .stack-l
+            h1.f-sans-xl.ml-i-neg-1.mr-i-neg-1 A modern Sass testing setup.
+            p.f-sans-m= _chance.paragraph({ sentences: 3 })
+        .span-7.push-l-2
+          .plain
+            :markdown
+              Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus.
+
+              ::: figure {.pre-2up .stack-s}
+              ```scss
+              $color: blue;
+              .test {
+                color: $color;
+              }
+              ```
+              ```css
+              .test {
+                color: blue;
+              }
+              ```
+              <figcaption>hello world this is the caption</figcaption>
+              :::
+
+              Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Sed posuere consectetur est at lobortis.
+              ```scss
+              $settings: 'kern' 1, 'ss01' on;
+
+              .test {
+                font-feature-settings: $settings;
+                font-feature-settings: var(--font-feature-settings);
+                --font-feature-settings: #{inspect($settings)};
+                --font-family: #{inspect(('Hack', monospace))};
+              }
+              ```
+              ```js
+              setTimeout(() => {
+                console.log('hello city');
+              }, 200);
+
+              import './_hide/import-test';
+              ```
+        .span-7.push-l-2
+          .plain
+            figure.stack-s.ml-i-neg-1.mr-i-neg-1
+              +ph({ aspect: 2 })
+              .f-sans-xs= _casual.sentence
+            p= _chance.paragraph({ sentences: 3 })
+            p= _chance.paragraph({ sentences: 3 })
+            figure.stack-s.ml-i-neg-1.mr-i-neg-1
+              +ph({ aspect: 2 })
+              .f-sans-xs= _casual.sentence
+            p= _chance.paragraph({ sentences: 3 })
+            p= _chance.paragraph({ sentences: 3 })

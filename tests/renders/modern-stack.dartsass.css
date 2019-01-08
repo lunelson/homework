@@ -1,41 +1,33 @@
 .stack, [class^=stack-], [class*=" stack-"] {
   display: flex;
-  width: 100%;
   flex-direction: column;
   align-items: stretch;
-  padding-top: 0.01px;
-  padding-bottom: 0.01px;
 }
 .stack > *, [class^=stack-] > *, [class*=" stack-"] > * {
   flex: 0 0 auto;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.stack > * + *, [class^=stack-] > * + *, [class*=" stack-"] > * + * {
-  margin-top: var(--stack-gap);
 }
 
-.plain, [class^=plain-], [class*=" plain-"] {
+.stack, [class^=stack-], [class*=" stack-"], .plain, [class^=plain-], [class*=" plain-"] {
   padding-top: 0.01px;
   padding-bottom: 0.01px;
 }
-.plain > *, [class^=plain-] > *, [class*=" plain-"] > * {
+.stack > *, [class^=stack-] > *, [class*=" stack-"] > *, .plain > *, [class^=plain-] > *, [class*=" plain-"] > * {
   margin-top: 0;
   margin-bottom: 0;
 }
-.plain > * + *, [class^=plain-] > * + *, [class*=" plain-"] > * + * {
+.stack > * + *, [class^=stack-] > * + *, [class*=" stack-"] > * + *, .plain > * + *, [class^=plain-] > * + *, [class*=" plain-"] > * + * {
   margin-top: var(--stack-gap);
 }
 
 .chain, [class^=chain-], [class*=" chain-"] {
   display: flex;
-  width: 100%;
   flex-direction: row;
+  align-items: center;
 }
 .chain > *, [class^=chain-] > *, [class*=" chain-"] > * {
   flex: 0 0 auto;
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
   text-overflow: ellipsis;
 }
 .chain > * + *, [class^=chain-] > * + *, [class*=" chain-"] > * + * {

@@ -40,13 +40,16 @@
 
   @if $modern {
 
+    *, *:before, *:after {
+      --push-l: initial; // breaks inheritance
+      --push-r: initial; // breaks inheritance
+    }
+
     :root {
       --row-gap: var(--inner-y);
       --column-gap: var(--inner-x);
       --span-d: var(--grid-columns);
       --span-n: var(--span-d);
-      --push-l: initial; // breaks inheritance
-      --push-r: initial; // breaks inheritance
     }
 
     #{base-class('flow')} {
@@ -63,31 +66,31 @@
       }
     }
 
-    #{base-class('w')},
+    // #{base-class('w')},
     #{base-class('span')} {
-      width: calc(99.99999% * var(--span-n) / var(--span-d));
+      width: calc(99.99999% * var(--span-n) / var(--span-d)) !important;
     }
 
-    #{base-class('w-i')},
+    // #{base-class('w-i')},
     #{base-class('span-i')} {
-      width: calc((99.99999% + var(--column-gap)) * var(--span-n) / var(--span-d) - var(--column-gap));
+      width: calc((99.99999% + var(--column-gap)) * var(--span-n) / var(--span-d) - var(--column-gap)) !important;
     }
 
-    #{base-class('ml', false)},
+    // #{base-class('ml', false)},
     #{base-class('push-l', false)} {
-      margin-left: calc(99.99999% * var(--push-l) / var(--span-d));
+      margin-left: calc(99.99999% * var(--push-l) / var(--span-d)) !important;
     }
-    #{base-class('ml-i', false)},
+    // #{base-class('ml-i', false)},
     #{base-class('push-l-i', false)} {
-      margin-left: calc((99.99999% + var(--column-gap)) * var(--push-l) / var(--span-d));
+      margin-left: calc((99.99999% + var(--column-gap)) * var(--push-l) / var(--span-d)) !important;
     }
-    #{base-class('mr', false)},
+    // #{base-class('mr', false)},
     #{base-class('push-r', false)} {
-      margin-right: calc(99.99999% * var(--push-r) / var(--span-d));
+      margin-right: calc(99.99999% * var(--push-r) / var(--span-d)) !important;
     }
-    #{base-class('mr-i', false)},
+    // #{base-class('mr-i', false)},
     #{base-class('push-r-i', false)} {
-      margin-right: calc((99.99999% + var(--column-gap)) * var(--push-r) / var(--span-d));
+      margin-right: calc((99.99999% + var(--column-gap)) * var(--push-r) / var(--span-d)) !important;
     }
 
     $inner-y-keys: map-keys(inner-y-mods());
@@ -104,37 +107,37 @@
         @for $n from 1 through $max-columns {
 
           // span
-          .w-#{$n}#{$__m},
+          // .w-#{$n}#{$__m},
           .span-#{$n}#{$__m} {
             --span-n: #{$n};
             & > * { --span-d: var(--span-n); }
           }
 
           // span-i
-          .w-i-#{$n}#{$__m},
+          // .w-i-#{$n}#{$__m},
           .span-i-#{$n}#{$__m} {
             --span-n: #{$n};
             & > * { --span-d: var(--span-n); }
           }
 
           // push atomics
-          .ml-#{$n}#{$__m},
+          // .ml-#{$n}#{$__m},
           .push-l-#{$n}#{$__m} { --push-l: #{$n}; }
-          .mr-#{$n}#{$__m},
+          // .mr-#{$n}#{$__m},
           .push-r-#{$n}#{$__m} { --push-r: #{$n}; }
-          .ml-neg-#{$n}#{$__m},
+          // .ml-neg-#{$n}#{$__m},
           .push-l-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
-          .mr-neg-#{$n}#{$__m},
+          // .mr-neg-#{$n}#{$__m},
           .push-r-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
 
           // push-i atomics
-          .ml-i-#{$n}#{$__m},
+          // .ml-i-#{$n}#{$__m},
           .push-l-i-#{$n}#{$__m} { --push-l: #{$n}; }
-          .mr-i-#{$n}#{$__m},
+          // .mr-i-#{$n}#{$__m},
           .push-r-i-#{$n}#{$__m} { --push-r: #{$n}; }
-          .ml-i-neg-#{$n}#{$__m},
+          // .ml-i-neg-#{$n}#{$__m},
           .push-l-i-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
-          .mr-i-neg-#{$n}#{$__m},
+          // .mr-i-neg-#{$n}#{$__m},
           .push-r-i-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
 
         }

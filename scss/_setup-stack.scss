@@ -6,55 +6,82 @@
 // |___/\__\__,_|\___|_|\_\ /_/      \___|_| |_|\__,_|_|_| |_|
 
 
-@mixin stack($modern: $homework-is-modern) {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: stretch;
-  padding-top: 0.01px;
-  padding-bottom: 0.01px;
-  & > * {
-    flex: 0 0 auto;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  & > * + * {
-    margin-top: if($modern, var(--stack-gap), m-var(inner-y));
-  }
-}
+// @mixin stack($modern: $homework-is-modern) {
+//   display: flex;
+//   width: 100%;
+//   flex-direction: column;
+//   align-items: stretch;
+//   padding-top: 0.01px;
+//   padding-bottom: 0.01px;
+//   & > * {
+//     flex: 0 0 auto;
+//     margin-top: 0;
+//     margin-bottom: 0;
+//   }
+//   & > * + * {
+//     margin-top: if($modern, var(--stack-gap), m-var(inner-y));
+//   }
+// }
 
-@mixin plain($modern: $homework-is-modern) {
-  padding-top: 0.01px;
-  padding-bottom: 0.01px;
-  & > * {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  & > * + * {
-    margin-top: if($modern, var(--stack-gap), m-var(inner-y));
-  }
-}
+// @mixin plain($modern: $homework-is-modern) {
+//   padding-top: 0.01px;
+//   padding-bottom: 0.01px;
+//   & > * {
+//     margin-top: 0;
+//     margin-bottom: 0;
+//   }
+//   & > * + * {
+//     margin-top: if($modern, var(--stack-gap), m-var(inner-y));
+//   }
+// }
 
-@mixin chain($modern: $homework-is-modern) {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  & > * {
-    flex: 0 0 auto;
-    margin-left: 0;
-    margin-right: 0;
-    text-overflow: ellipsis;
-  }
-  & > * + * {
-    margin-left: if($modern, var(--chain-gap), m-var(inner-x));
-  }
-}
+// @mixin chain($modern: $homework-is-modern) {
+//   display: flex;
+//   width: 100%;
+//   flex-direction: row;
+//   & > * {
+//     flex: 0 0 auto;
+//     margin-left: 0;
+//     margin-right: 0;
+//     text-overflow: ellipsis;
+//   }
+//   & > * + * {
+//     margin-left: if($modern, var(--chain-gap), m-var(inner-x));
+//   }
+// }
 
 @mixin homework-setup-stack($modern: $homework-is-modern) {
 
-  #{base-class('stack')} { @include stack($modern); }
-  #{base-class('plain')} { @include plain($modern); }
-  #{base-class('chain')} { @include chain($modern); }
+  #{base-class('stack')} {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    & > * { flex: 0 0 auto; }
+  }
+
+  #{base-class('stack')}, #{base-class('plain')} {
+    padding-top: 0.01px;
+    padding-bottom: 0.01px;
+    & > * { margin-top: 0; margin-bottom: 0; }
+    & > * + * {
+      margin-top: if($modern, var(--stack-gap), m-var(inner-y));
+    }
+  }
+
+  #{base-class('chain')} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    & > * {
+      flex: 0 0 auto;
+      margin-right: 0;
+      margin-left: 0;
+      text-overflow: ellipsis;
+    }
+    & > * + * {
+      margin-left: if($modern, var(--chain-gap), m-var(inner-x));
+    }
+  }
 
   @if $modern {
 
@@ -86,14 +113,14 @@
     @include mm-for('inner-y', 'inner-y-mods', 'inner-mods') {
       @each $y in map-keys(inner-y-mods()) {
         #{base-class('plain')},
-        #{base-class('stack')} { .shim-#{$y} { margin-top: inner-y($y); } }
+        #{base-class('stack')} { > .shim-#{$y} { margin-top: inner-y($y); } }
         .stack-#{$y} > * + * { margin-top: inner-y($y); }
       }
     }
 
     @include mm-for('inner-x', 'inner-x-mods', 'inner-mods') {
       @each $x in map-keys(inner-x-mods()) {
-        #{base-class('chain')} { .shim-#{$x} { margin-top: inner-x($x); } }
+        #{base-class('chain')} { > .shim-#{$x} { margin-top: inner-x($x); } }
         .chain-#{$x} > * + * { margin-left: inner-x($x); }
       }
     }

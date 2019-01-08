@@ -26,22 +26,26 @@
   },
   "devDependencies": {
     "@lunelson/penny": "^2.0.0-alpha.5",
-    "@lunelson/sass-calc": "^1.0.0",
-    "@lunelson/sass-maps-plus": "^0.9.0",
-    "@lunelson/sass-throw": "^1.0.2",
+    "@lunelson/sass-calc": "^1.1.0",
+    "@lunelson/sass-maps-next": "^1.0.0",
+    "@lunelson/sass-throw": "^2.0.0-rc.4",
     "@lunelson/sass-u": "^0.10.1",
     "ava": "^1.0.1",
     "del": "^3.0.0",
+    "markdown-it-container": "^2.0.0",
+    "markdown-it-custom-block": "^0.1.1",
+    "markdown-it-mentions": "^1.0.0",
+    "markdown-it-prism": "^2.0.1",
     "mathsass": "^0.10.1",
     "node-sass": "^4.11.0",
     "sass": "^1.15.2",
     "write": "^1.0.3"
   },
   "peerDependencies": {
-    "@lunelson/sass-calc": "^1.0.0",
-    "@lunelson/sass-maps-plus": "^0.9.0",
-    "@lunelson/sass-throw": "^1.0.2",
-    "@lunelson/sass-u": "^0.10.0",
+    "@lunelson/sass-calc": "^1.1.0",
+    "@lunelson/sass-maps-next": "^1.0.0",
+    "@lunelson/sass-throw": "^2.0.0-rc.4",
+    "@lunelson/sass-u": "^0.10.1",
     "mathsass": "^0.10.1"
   },
   "publishConfig": {
