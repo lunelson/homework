@@ -28,8 +28,8 @@
 }
 
 @function --query-string($min: null, $max: null) {
-  $min: if(map-has-key($media, $min), map-get-z($media, $min, 'breakpoint'), $min);
-  $max: if(map-has-key($media, $max), map-get-z($media, $max, 'breakpoint'), $max);
+  $min: if(map-has-key($media, $min), map-get($media, $min, 'breakpoint'), $min);
+  $max: if(map-has-key($media, $max), map-get($media, $max, 'breakpoint'), $max);
   @return 'screen'
     + if($min, ' and (min-width: #{$min})', '')
     + if($max, ' and (max-width: #{$max - 0.001})', '');

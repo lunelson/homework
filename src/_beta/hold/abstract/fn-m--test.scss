@@ -42,8 +42,8 @@ $media: (
   out: inspect(mm(null, null, inner-y m));
   out: inspect(mm(null, null, inner-y l));
 
-  out: type-of(map-get-z($media, a)) == 'map';
-  out: type-of(map-get-z($media, a, inner-x)) == 'map';
+  out: type-of(map-get($media, a)) == 'map';
+  out: type-of(map-get($media, a, inner-x)) == 'map';
   out: inspect(m-var(inner-x));
   out: inner-x(l);
   out: inner-y(l);
