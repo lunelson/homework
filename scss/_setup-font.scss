@@ -43,18 +43,18 @@ $homework-plain-elements: p ul ol dl h3 h4 h5 h6 blockquote;
         --trim-adjacent: 0em;
         --trim-top: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-capline) * 1em + var(--trim-adjacent));
         --trim-bottom: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-baseline) * 1em);
-      }
-      @at-root #{selector-insert(base-class('stack'), '>')} {
-        margin-top: if($trim, calc(0px - var(--trim-top)), 0);
-        margin-bottom: if($trim, calc(0px - var(--trim-bottom)), 0);
-        margin-right: if($trim, var(--trim-x), 0);
-        margin-left: if($trim, var(--trim-x), 0);
-      }
-      @at-root #{selector-insert(base-class('stack'), '> * +')} {
-        margin-top: subtract(var(--stack-gap), if($trim, var(--trim-top), 0em));
-      }
-      @at-root #{selector-insert(selector-last(), '+')} {
-        --trim-adjacent: calc(1em - 1ex);
+        @at-root &.trim, #{selector-insert(base-class('stack'), '>')} {
+          margin-top: calc(0px - var(--trim-top));
+          margin-bottom: calc(0px - var(--trim-bottom));
+          margin-right: var(--trim-x);
+          margin-left: var(--trim-x);
+        }
+        @at-root #{selector-insert(base-class('stack'), '> * +')} {
+          margin-top: subtract(var(--stack-gap), var(--trim-top));
+        }
+        @at-root #{selector-insert(selector-last(), '+')} {
+          --trim-adjacent: calc(1em - 1ex);
+        }
       }
     }
 

@@ -18,7 +18,7 @@ body, [class^=f-], [class*=" f-"] {
   --trim-top: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-capline) * 1em + var(--trim-adjacent));
   --trim-bottom: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-baseline) * 1em);
 }
-.stack > [class^=f-], .stack > [class*=" f-"], [class^=stack-] > [class^=f-], [class^=stack-] > [class*=" f-"], [class*=" stack-"] > [class^=f-], [class*=" stack-"] > [class*=" f-"] {
+[class^=f-].trim, .stack > [class^=f-], .stack > [class*=" f-"], [class^=stack-] > [class^=f-], [class^=stack-] > [class*=" f-"], [class*=" stack-"] > [class^=f-], [class*=" stack-"] > [class*=" f-"], [class*=" f-"].trim {
   margin-top: calc(0px - var(--trim-top));
   margin-bottom: calc(0px - var(--trim-bottom));
   margin-right: var(--trim-x);
