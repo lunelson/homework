@@ -29,44 +29,48 @@
   @return max($column-counts...);
 }
 
-@function span-width($n: 1, $span-d: span-d()) {
+@function flow-span($n: 1, $span-d: span-d()) {
   @return calc(99.99999% * #{$n} / #{$span-d});
 }
 
-@function span-i-width($n: 1, $span-d: span-d()) {
+@function flow-push($n: 1, $span-d: span-d()) {
+  @return calc(99.99999% * #{$n} / #{$span-d});
+}
+
+@function solo-span($n: 1, $span-d: span-d()) {
   @return calc((99.99999% + #{column-gap()}) * #{$n} / #{$span-d} - #{column-gap()});
 }
 
-@function push-i-width($p: 1, $span-d: span-d()) {
+@function solo-push($p: 1, $span-d: span-d()) {
   @return calc((99.99999% + #{column-gap()}) * #{$p} / #{$span-d});
 }
 
-@mixin span($n: null, $l: null, $r: null, $span-d: span-d()) {
+@mixin flow-cell($n: null, $l: null, $r: null, $span-d: span-d()) {
   @if $n and $homework-is-modern { & > * { --span-d: #{$n}; } }
-  @if $n { width: span-width($n, $span-d); }
-  @if $l { margin-left: span-width($l, $span-d); }
-  @if $r { margin-right: span-width($r, $span-d); }
+  @if $n { width: flow-span($n, $span-d); }
+  @if $l { margin-left: flow-span($l, $span-d); }
+  @if $r { margin-right: flow-span($r, $span-d); }
 }
 
-@mixin spans($spans) {
-  @each $m, $span in $spans {
+@mixin flow-cells($cells) {
+  @each $m, $cell in $cells {
     @include m($m) {
-      @include span($span...);
+      @include flow-cell($cell...);
     }
   }
 }
 
-@mixin span-i($n: null, $l: null, $r: null, $span-d: span-d()) {
+@mixin solo-cell($n: null, $l: null, $r: null, $span-d: span-d()) {
   @if $n and $homework-is-modern { & > * { --span-d: #{$n}; } }
-  @if $n { width: span-i-width($n, $span-d); }
-  @if $l { margin-left: push-i-width($l, $span-d); }
-  @if $r { margin-right: push-i-width($r, $span-d); }
+  @if $n { width: solo-span($n, $span-d); }
+  @if $l { margin-left: solo-push($l, $span-d); }
+  @if $r { margin-right: solo-push($r, $span-d); }
 }
 
-@mixin spans-i($spans) {
-  @each $m, $span in $spans {
+@mixin solo-cells($cells) {
+  @each $m, $cell in $cells {
     @include m($m) {
-      @include span-i($span...);
+      @include solo-cell($cell...);
     }
   }
 }
@@ -75,6 +79,7 @@
 @function ratio-str($ratio) { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
 @function ratio-class($ratio, $index, $list, $root, $__m) { @return '.#{$root}-#{ratio-str($ratio)}#{$__m}'; }
 
-@function ratio-span-width($ratio) { @return span-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
-@function ratio-span-i-width($ratio) { @return span-i-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
-@function ratio-push-i-width($ratio) { @return push-i-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
+@function ratio-flow-span($ratio) { @return flow-span(#{nth($ratio,1)}, #{nth($ratio,2)}); }
+@function ratio-flow-push($ratio) { @return flow-span(#{nth($ratio,1)}, #{nth($ratio,2)}); }
+@function ratio-solo-span($ratio) { @return solo-span(#{nth($ratio,1)}, #{nth($ratio,2)}); }
+@function ratio-solo-push($ratio) { @return solo-push(#{nth($ratio,1)}, #{nth($ratio,2)}); }

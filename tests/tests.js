@@ -1,6 +1,7 @@
 const path = require('path');
 const writeFile = require('write');
 const globby = require('globby');
+const matcher = require('matcher');
 const del = require('del');
 const test = require('ava');
 
@@ -40,6 +41,7 @@ srcFiles.forEach(srcFile => {
     test(`${path.basename(srcFile, path.extname(srcFile))} [${compiler}]`, t => {
       return sassRender(compilers[compiler], file, outFile).then(css => {
         writeFile.sync(outFile, css);
+        // if (matcher.isMatch(path.basename(srcFile), 'scratch*')) return t.pass();
         t.snapshot(css);
       });
     });

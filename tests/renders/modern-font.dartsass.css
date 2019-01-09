@@ -30,7 +30,7 @@ body, [class^=f-], [class*=" f-"] {
 }
 
 [class^=f-] + [class^=f-], [class^=f-] + [class*=" f-"], [class*=" f-"] + [class^=f-], [class*=" f-"] + [class*=" f-"] {
-  --trim-adjacent: 1em/2;
+  --trim-adjacent: calc(1em - 1ex);
 }
 
 .f-sans, [class^=f-sans-], [class*=" f-sans-"], body {

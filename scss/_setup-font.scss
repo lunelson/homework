@@ -54,7 +54,7 @@ $homework-plain-elements: p ul ol dl h3 h4 h5 h6 blockquote;
         margin-top: subtract(var(--stack-gap), if($trim, var(--trim-top), 0em));
       }
       @at-root #{selector-insert(selector-last(), '+')} {
-        --trim-adjacent: 1em/2;
+        --trim-adjacent: calc(1em - 1ex);
       }
     }
 
