@@ -1,3 +1,33 @@
+.span, [class^="span-"], [class*=" span-"] {
+  width: calc(99.99999% * var(--span-n) / var(--span-d));
+}
+
+@media screen and (min-width: 20em) {
+  .a__span, [class^="a__span-"], [class*=" a__span-"] {
+    width: calc(99.99999% * var(--span-n) / var(--span-d));
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .b__span, [class^="b__span-"], [class*=" b__span-"] {
+    width: calc(99.99999% * var(--span-n) / var(--span-d));
+  }
+}
+
+@media screen and (min-width: 40em) {
+  .c__span, [class^="c__span-"], [class*=" c__span-"] {
+    width: calc(99.99999% * var(--span-n) / var(--span-d));
+  }
+}
+
+.span-2, [class$='__span-2'], [class*='__span-2 '] {
+  --span-n: 2;
+}
+
+.span-2 > *, [class$='__span-2'] > *, [class*='__span-2 '] > * {
+  --span-d: 2;
+}
+
 /*
     @function solo-span
     @function solo-push

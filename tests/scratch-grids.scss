@@ -24,6 +24,77 @@ $media: (
 
 @include homework-setup-core($output: false);
 
+@function m-suffix($m: $curr-m) {
+  @return if($m, '#{$m}__', '');
+}
+
+@function m-base-class($str, $solo: true, $m: $curr-m) {
+
+}
+
+@function m-mod-class($str) {
+  @return selector-parse(".#{$str}, [class$='__#{$str}'], [class*='__#{$str} ']")
+}
+
+@each $m in join((null), media-keys()) {
+
+  @include m($m) {
+
+    $m__: m-suffix();
+
+    #{base-class('#{$m__}span')} {
+      width: calc(99.99999% * var(--span-n) / var(--span-d));
+
+    }
+
+  }
+}
+
+// #{m-mod-class('span')} {
+//   & > * { --span-d: var(--span-n); }
+// }
+
+#{m-mod-class('span-2')} {
+  --span-n: 2;
+  & > * { --span-d: 2; }
+}
+
+// @each $m in join((null), media-keys()) {
+
+//   @include m($m) {
+
+//     $m__: m-suffix();
+
+//     .#{$m__}w-unset { width: unset; }
+//     .#{$m__}h-unset { height: unset; }
+
+//     // dimensions/margin: auto
+//     .#{$m__}w-auto { width: auto; }
+//     .#{$m__}h-auto { height: auto; }
+//     .#{$m__}my-auto, .#{$m__}mt-auto { margin-top: auto; }
+//     .#{$m__}mx-auto, .#{$m__}mr-auto { margin-right: auto; }
+//     .#{$m__}my-auto, .#{$m__}mb-auto { margin-bottom: auto; }
+//     .#{$m__}mx-auto, .#{$m__}ml-auto { margin-left: auto; }
+
+//     // dimensions/margin/padding: zero
+//     .#{$m__}w-0 { width: 0; }
+//     .#{$m__}h-0 { height: 0; }
+//     .#{$m__}my-0, .#{$m__}mt-0 { margin-top: 0 !important; }
+//     .#{$m__}mx-0, .#{$m__}mr-0 { margin-right: 0 !important; }
+//     .#{$m__}my-0, .#{$m__}mb-0 { margin-bottom: 0 !important; }
+//     .#{$m__}mx-0, .#{$m__}ml-0 { margin-left: 0 !important; }
+//     .#{$m__}py-0, .#{$m__}pt-0 { padding-top: 0 !important; }
+//     .#{$m__}px-0, .#{$m__}pr-0 { padding-right: 0 !important; }
+//     .#{$m__}py-0, .#{$m__}pb-0 { padding-bottom: 0 !important; }
+//     .#{$m__}px-0, .#{$m__}pl-0 { padding-left: 0 !important; }
+
+//     // dimensions: 100%
+//     .#{$m__}w-100 { width: 100%; }
+//     .#{$m__}h-100 { height: 100%; }
+
+//   }
+// }
+
 /*
     @function solo-span
     @function solo-push
