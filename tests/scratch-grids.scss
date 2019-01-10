@@ -166,8 +166,10 @@ $inner-x-keys: map-keys(inner-x-mods());
       }
     }
 
+    #{m-base-class('cols', false)} { grid-template-columns: var(--cols); }
+    #{m-base-class('rows', false)} { grid-template-rows: var(--rows); }
     #{m-base-class('col', false)} { grid-column-start: var(--col); }
-    #{m-base-class('row', false)} { grid-column-start: var(--row); }
+    #{m-base-class('row', false)} { grid-row-start: var(--row); }
     #{m-base-class('span-y', false)} { grid-row-end: span var(--span-y); }
   }
 }

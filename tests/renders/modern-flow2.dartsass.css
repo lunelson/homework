@@ -1,0 +1,1509 @@
+/*
+  grid flow cell II
+
+    @function solo-span
+    @function solo-push
+
+    @function flow-span
+    @function flow-push
+
+    @mixin solo-cell($span, $push-l, $push-r) {}
+    @mixin solo-cells($span, $push-l, $push-r) {}
+
+    @mixin flow-cell($span, $push-l, $push-r) {}
+    @mixin flow-cells($span, $push-l, $push-r) {}
+
+    .span-[n], .push-[l|r]-[n], .pull-[l|r]-[n]
+
+    .flow-[y], .flow-x-[x]
+
+      .span-[n], .push-[l|r]-[n], .pull-[l|r]-[n]
+
+    .grid-[y], .grid-x-[x]
+
+      .row-[s]-[e]
+      .col-[s]-[e]
+
+  REMINDERS:
+    - only span, push, pull, span-y, row, and col have media variants
+    - flow and grid need -x-[x] variants
+
+*/
+:root {
+  --row-gap: null;
+  --col-gap: null;
+  --row: initial;
+  --col: initial;
+  --cols: var(--grid-cols);
+  --rows: var(--grid-rows, --grid-cols);
+  --span: var(--cols);
+  --span-y: 1;
+  --push-r: initial;
+  --push-l: initial;
+}
+
+*, *:before, *:after {
+  --push-l: initial;
+  --push-r: initial;
+}
+
+:root {
+  --row-gap: var(--inner-y);
+  --column-gap: var(--inner-x);
+  --span-d: var(--grid-columns);
+  --span-n: var(--span-d);
+}
+
+.flow, [class^=flow-], [class*=" flow-"] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: calc(100% + var(--column-gap)) !important;
+  margin-left: calc(var(--column-gap) / -2);
+  margin-right: calc(var(--column-gap) / -2);
+  margin-top: calc(var(--row-gap) / -2);
+  margin-bottom: calc(var(--row-gap) / -2);
+}
+.flow > *, [class^=flow-] > *, [class*=" flow-"] > * {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0%;
+  min-height: 1px;
+  background-clip: content-box;
+  padding-left: calc(var(--column-gap) / 2) !important;
+  padding-right: calc(var(--column-gap) / 2) !important;
+  padding-top: calc(var(--row-gap) / 2) !important;
+  padding-bottom: calc(var(--row-gap) / 2) !important;
+}
+
+.grid, [class^=grid-], [class*=" grid-"] {
+  display: grid;
+  grid-template-columns: var(--cols);
+  grid-template-rows: var(--rows);
+}
+
+.flow-s, .grid-s {
+  --row-gap: var(--inner-y-s);
+}
+
+.flow-m, .grid-m {
+  --row-gap: var(--inner-y-m);
+}
+
+.flow-l, .grid-l {
+  --row-gap: var(--inner-y-l);
+}
+
+.flow-0, .grid-0 {
+  --row-gap: 0;
+}
+
+.flow-x-xs, .grid-x-xs {
+  --col-gap: var(--inner-x-xs);
+}
+
+.flow-x-s, .grid-x-s {
+  --col-gap: var(--inner-x-s);
+}
+
+.flow-x-m, .grid-x-m {
+  --col-gap: var(--inner-x-m);
+}
+
+.flow-x-0, .grid-x-0 {
+  --col-gap: 0;
+}
+
+.flow-0-0, .grid-0-0 {
+  --row-gap: 0;
+  --col-gap: 0;
+}
+
+.span, [class^=span-], [class*=" span-"] {
+  width: calc((99.99999% + var(--col-gap)) * var(--span) / var(--cols) - var(--col-gap)) !important;
+}
+.flow > .span, .flow > [class^=span-], .flow > [class*=" span-"], [class^=flow-] > .span, [class^=flow-] > [class^=span-], [class^=flow-] > [class*=" span-"], [class*=" flow-"] > .span, [class*=" flow-"] > [class^=span-], [class*=" flow-"] > [class*=" span-"] {
+  width: calc(99.99999% * var(--span) / var(--cols)) !important;
+}
+
+.grid > .span, .grid > [class^=span-], .grid > [class*=" span-"], [class^=grid-] > .span, [class^=grid-] > [class^=span-], [class^=grid-] > [class*=" span-"], [class*=" grid-"] > .span, [class*=" grid-"] > [class^=span-], [class*=" grid-"] > [class*=" span-"] {
+  grid-column-end: span var(--span);
+}
+
+[class^=pull-l-], [class*=" pull-l-"],
+[class^=push-l-], [class*=" push-l-"] {
+  margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--cols)) !important;
+}
+.flow > [class^=pull-l-], .flow > [class*=" pull-l-"], .flow > [class^=push-l-], .flow > [class*=" push-l-"], [class^=flow-] > [class^=pull-l-], [class^=flow-] > [class*=" pull-l-"], [class^=flow-] > [class^=push-l-], [class^=flow-] > [class*=" push-l-"], [class*=" flow-"] > [class^=pull-l-], [class*=" flow-"] > [class*=" pull-l-"], [class*=" flow-"] > [class^=push-l-], [class*=" flow-"] > [class*=" push-l-"] {
+  margin-left: calc(99.99999% * var(--push-l) / var(--cols)) !important;
+}
+
+[class^=pull-r-], [class*=" pull-r-"],
+[class^=push-r-], [class*=" push-r-"] {
+  margin-left: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--cols)) !important;
+}
+.flow > [class^=pull-r-], .flow > [class*=" pull-r-"], .flow > [class^=push-r-], .flow > [class*=" push-r-"], [class^=flow-] > [class^=pull-r-], [class^=flow-] > [class*=" pull-r-"], [class^=flow-] > [class^=push-r-], [class^=flow-] > [class*=" push-r-"], [class*=" flow-"] > [class^=pull-r-], [class*=" flow-"] > [class*=" pull-r-"], [class*=" flow-"] > [class^=push-r-], [class*=" flow-"] > [class*=" push-r-"] {
+  margin-left: calc(99.99999% * var(--push-r) / var(--cols)) !important;
+}
+
+[class^=cols-], [class*=" cols-"] {
+  grid-template-columns: var(--cols);
+}
+
+[class^=rows-], [class*=" rows-"] {
+  grid-template-rows: var(--rows);
+}
+
+[class^=col-], [class*=" col-"] {
+  grid-column-start: var(--col);
+}
+
+[class^=row-], [class*=" row-"] {
+  grid-row-start: var(--row);
+}
+
+[class^=span-y-], [class*=" span-y-"] {
+  grid-row-end: span var(--span-y);
+}
+
+@media screen and (min-width: 20em) {
+  .a__span, [class^=a__span-], [class*=" a__span-"] {
+    width: calc((99.99999% + var(--col-gap)) * var(--span) / var(--cols) - var(--col-gap)) !important;
+  }
+  .flow > .a__span, .flow > [class^=a__span-], .flow > [class*=" a__span-"], [class^=flow-] > .a__span, [class^=flow-] > [class^=a__span-], [class^=flow-] > [class*=" a__span-"], [class*=" flow-"] > .a__span, [class*=" flow-"] > [class^=a__span-], [class*=" flow-"] > [class*=" a__span-"] {
+    width: calc(99.99999% * var(--span) / var(--cols)) !important;
+  }
+
+  .grid > .a__span, .grid > [class^=a__span-], .grid > [class*=" a__span-"], [class^=grid-] > .a__span, [class^=grid-] > [class^=a__span-], [class^=grid-] > [class*=" a__span-"], [class*=" grid-"] > .a__span, [class*=" grid-"] > [class^=a__span-], [class*=" grid-"] > [class*=" a__span-"] {
+    grid-column-end: span var(--span);
+  }
+
+  [class^=a__pull-l-], [class*=" a__pull-l-"],
+[class^=a__push-l-], [class*=" a__push-l-"] {
+    margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--cols)) !important;
+  }
+  .flow > [class^=a__pull-l-], .flow > [class*=" a__pull-l-"], .flow > [class^=a__push-l-], .flow > [class*=" a__push-l-"], [class^=flow-] > [class^=a__pull-l-], [class^=flow-] > [class*=" a__pull-l-"], [class^=flow-] > [class^=a__push-l-], [class^=flow-] > [class*=" a__push-l-"], [class*=" flow-"] > [class^=a__pull-l-], [class*=" flow-"] > [class*=" a__pull-l-"], [class*=" flow-"] > [class^=a__push-l-], [class*=" flow-"] > [class*=" a__push-l-"] {
+    margin-left: calc(99.99999% * var(--push-l) / var(--cols)) !important;
+  }
+
+  [class^=a__pull-r-], [class*=" a__pull-r-"],
+[class^=a__push-r-], [class*=" a__push-r-"] {
+    margin-left: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--cols)) !important;
+  }
+  .flow > [class^=a__pull-r-], .flow > [class*=" a__pull-r-"], .flow > [class^=a__push-r-], .flow > [class*=" a__push-r-"], [class^=flow-] > [class^=a__pull-r-], [class^=flow-] > [class*=" a__pull-r-"], [class^=flow-] > [class^=a__push-r-], [class^=flow-] > [class*=" a__push-r-"], [class*=" flow-"] > [class^=a__pull-r-], [class*=" flow-"] > [class*=" a__pull-r-"], [class*=" flow-"] > [class^=a__push-r-], [class*=" flow-"] > [class*=" a__push-r-"] {
+    margin-left: calc(99.99999% * var(--push-r) / var(--cols)) !important;
+  }
+
+  [class^=a__cols-], [class*=" a__cols-"] {
+    grid-template-columns: var(--cols);
+  }
+
+  [class^=a__rows-], [class*=" a__rows-"] {
+    grid-template-rows: var(--rows);
+  }
+
+  [class^=a__col-], [class*=" a__col-"] {
+    grid-column-start: var(--col);
+  }
+
+  [class^=a__row-], [class*=" a__row-"] {
+    grid-row-start: var(--row);
+  }
+
+  [class^=a__span-y-], [class*=" a__span-y-"] {
+    grid-row-end: span var(--span-y);
+  }
+}
+@media screen and (min-width: 30em) {
+  .b__span, [class^=b__span-], [class*=" b__span-"] {
+    width: calc((99.99999% + var(--col-gap)) * var(--span) / var(--cols) - var(--col-gap)) !important;
+  }
+  .flow > .b__span, .flow > [class^=b__span-], .flow > [class*=" b__span-"], [class^=flow-] > .b__span, [class^=flow-] > [class^=b__span-], [class^=flow-] > [class*=" b__span-"], [class*=" flow-"] > .b__span, [class*=" flow-"] > [class^=b__span-], [class*=" flow-"] > [class*=" b__span-"] {
+    width: calc(99.99999% * var(--span) / var(--cols)) !important;
+  }
+
+  .grid > .b__span, .grid > [class^=b__span-], .grid > [class*=" b__span-"], [class^=grid-] > .b__span, [class^=grid-] > [class^=b__span-], [class^=grid-] > [class*=" b__span-"], [class*=" grid-"] > .b__span, [class*=" grid-"] > [class^=b__span-], [class*=" grid-"] > [class*=" b__span-"] {
+    grid-column-end: span var(--span);
+  }
+
+  [class^=b__pull-l-], [class*=" b__pull-l-"],
+[class^=b__push-l-], [class*=" b__push-l-"] {
+    margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--cols)) !important;
+  }
+  .flow > [class^=b__pull-l-], .flow > [class*=" b__pull-l-"], .flow > [class^=b__push-l-], .flow > [class*=" b__push-l-"], [class^=flow-] > [class^=b__pull-l-], [class^=flow-] > [class*=" b__pull-l-"], [class^=flow-] > [class^=b__push-l-], [class^=flow-] > [class*=" b__push-l-"], [class*=" flow-"] > [class^=b__pull-l-], [class*=" flow-"] > [class*=" b__pull-l-"], [class*=" flow-"] > [class^=b__push-l-], [class*=" flow-"] > [class*=" b__push-l-"] {
+    margin-left: calc(99.99999% * var(--push-l) / var(--cols)) !important;
+  }
+
+  [class^=b__pull-r-], [class*=" b__pull-r-"],
+[class^=b__push-r-], [class*=" b__push-r-"] {
+    margin-left: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--cols)) !important;
+  }
+  .flow > [class^=b__pull-r-], .flow > [class*=" b__pull-r-"], .flow > [class^=b__push-r-], .flow > [class*=" b__push-r-"], [class^=flow-] > [class^=b__pull-r-], [class^=flow-] > [class*=" b__pull-r-"], [class^=flow-] > [class^=b__push-r-], [class^=flow-] > [class*=" b__push-r-"], [class*=" flow-"] > [class^=b__pull-r-], [class*=" flow-"] > [class*=" b__pull-r-"], [class*=" flow-"] > [class^=b__push-r-], [class*=" flow-"] > [class*=" b__push-r-"] {
+    margin-left: calc(99.99999% * var(--push-r) / var(--cols)) !important;
+  }
+
+  [class^=b__cols-], [class*=" b__cols-"] {
+    grid-template-columns: var(--cols);
+  }
+
+  [class^=b__rows-], [class*=" b__rows-"] {
+    grid-template-rows: var(--rows);
+  }
+
+  [class^=b__col-], [class*=" b__col-"] {
+    grid-column-start: var(--col);
+  }
+
+  [class^=b__row-], [class*=" b__row-"] {
+    grid-row-start: var(--row);
+  }
+
+  [class^=b__span-y-], [class*=" b__span-y-"] {
+    grid-row-end: span var(--span-y);
+  }
+}
+@media screen and (min-width: 40em) {
+  .c__span, [class^=c__span-], [class*=" c__span-"] {
+    width: calc((99.99999% + var(--col-gap)) * var(--span) / var(--cols) - var(--col-gap)) !important;
+  }
+  .flow > .c__span, .flow > [class^=c__span-], .flow > [class*=" c__span-"], [class^=flow-] > .c__span, [class^=flow-] > [class^=c__span-], [class^=flow-] > [class*=" c__span-"], [class*=" flow-"] > .c__span, [class*=" flow-"] > [class^=c__span-], [class*=" flow-"] > [class*=" c__span-"] {
+    width: calc(99.99999% * var(--span) / var(--cols)) !important;
+  }
+
+  .grid > .c__span, .grid > [class^=c__span-], .grid > [class*=" c__span-"], [class^=grid-] > .c__span, [class^=grid-] > [class^=c__span-], [class^=grid-] > [class*=" c__span-"], [class*=" grid-"] > .c__span, [class*=" grid-"] > [class^=c__span-], [class*=" grid-"] > [class*=" c__span-"] {
+    grid-column-end: span var(--span);
+  }
+
+  [class^=c__pull-l-], [class*=" c__pull-l-"],
+[class^=c__push-l-], [class*=" c__push-l-"] {
+    margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--cols)) !important;
+  }
+  .flow > [class^=c__pull-l-], .flow > [class*=" c__pull-l-"], .flow > [class^=c__push-l-], .flow > [class*=" c__push-l-"], [class^=flow-] > [class^=c__pull-l-], [class^=flow-] > [class*=" c__pull-l-"], [class^=flow-] > [class^=c__push-l-], [class^=flow-] > [class*=" c__push-l-"], [class*=" flow-"] > [class^=c__pull-l-], [class*=" flow-"] > [class*=" c__pull-l-"], [class*=" flow-"] > [class^=c__push-l-], [class*=" flow-"] > [class*=" c__push-l-"] {
+    margin-left: calc(99.99999% * var(--push-l) / var(--cols)) !important;
+  }
+
+  [class^=c__pull-r-], [class*=" c__pull-r-"],
+[class^=c__push-r-], [class*=" c__push-r-"] {
+    margin-left: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--cols)) !important;
+  }
+  .flow > [class^=c__pull-r-], .flow > [class*=" c__pull-r-"], .flow > [class^=c__push-r-], .flow > [class*=" c__push-r-"], [class^=flow-] > [class^=c__pull-r-], [class^=flow-] > [class*=" c__pull-r-"], [class^=flow-] > [class^=c__push-r-], [class^=flow-] > [class*=" c__push-r-"], [class*=" flow-"] > [class^=c__pull-r-], [class*=" flow-"] > [class*=" c__pull-r-"], [class*=" flow-"] > [class^=c__push-r-], [class*=" flow-"] > [class*=" c__push-r-"] {
+    margin-left: calc(99.99999% * var(--push-r) / var(--cols)) !important;
+  }
+
+  [class^=c__cols-], [class*=" c__cols-"] {
+    grid-template-columns: var(--cols);
+  }
+
+  [class^=c__rows-], [class*=" c__rows-"] {
+    grid-template-rows: var(--rows);
+  }
+
+  [class^=c__col-], [class*=" c__col-"] {
+    grid-column-start: var(--col);
+  }
+
+  [class^=c__row-], [class*=" c__row-"] {
+    grid-row-start: var(--row);
+  }
+
+  [class^=c__span-y-], [class*=" c__span-y-"] {
+    grid-row-end: span var(--span-y);
+  }
+}
+.pull-l-0, [class$=__pull-l-0], [class*="__pull-l-0 "] {
+  --push-l: 0;
+}
+
+.pull-r-0, [class$=__pull-r-0], [class*="__pull-r-0 "] {
+  --push-r: 0;
+}
+
+.push-l-0, [class$=__push-l-0], [class*="__push-l-0 "] {
+  --push-l: 0;
+}
+
+.push-r-0, [class$=__push-r-0], [class*="__push-r-0 "] {
+  --push-r: 0;
+}
+
+.span-1, [class$=__span-1], [class*="__span-1 "] {
+  --span: 1;
+}
+.span-1 > *, [class$=__span-1] > *, [class*="__span-1 "] > * {
+  --cols: 1;
+}
+
+.span-y-1, [class$=__span-y-1], [class*="__span-y-1 "] {
+  --span-y: 1;
+}
+
+.pull-l-1, [class$=__pull-l-1], [class*="__pull-l-1 "] {
+  --push-l: -1;
+}
+
+.pull-r-1, [class$=__pull-r-1], [class*="__pull-r-1 "] {
+  --push-r: -1;
+}
+
+.push-l-1, [class$=__push-l-1], [class*="__push-l-1 "] {
+  --push-l: 1;
+}
+
+.push-r-1, [class$=__push-r-1], [class*="__push-r-1 "] {
+  --push-r: 1;
+}
+
+.span-2, [class$=__span-2], [class*="__span-2 "] {
+  --span: 2;
+}
+.span-2 > *, [class$=__span-2] > *, [class*="__span-2 "] > * {
+  --cols: 2;
+}
+
+.span-y-2, [class$=__span-y-2], [class*="__span-y-2 "] {
+  --span-y: 2;
+}
+
+.pull-l-2, [class$=__pull-l-2], [class*="__pull-l-2 "] {
+  --push-l: -2;
+}
+
+.pull-r-2, [class$=__pull-r-2], [class*="__pull-r-2 "] {
+  --push-r: -2;
+}
+
+.push-l-2, [class$=__push-l-2], [class*="__push-l-2 "] {
+  --push-l: 2;
+}
+
+.push-r-2, [class$=__push-r-2], [class*="__push-r-2 "] {
+  --push-r: 2;
+}
+
+.span-3, [class$=__span-3], [class*="__span-3 "] {
+  --span: 3;
+}
+.span-3 > *, [class$=__span-3] > *, [class*="__span-3 "] > * {
+  --cols: 3;
+}
+
+.span-y-3, [class$=__span-y-3], [class*="__span-y-3 "] {
+  --span-y: 3;
+}
+
+.pull-l-3, [class$=__pull-l-3], [class*="__pull-l-3 "] {
+  --push-l: -3;
+}
+
+.pull-r-3, [class$=__pull-r-3], [class*="__pull-r-3 "] {
+  --push-r: -3;
+}
+
+.push-l-3, [class$=__push-l-3], [class*="__push-l-3 "] {
+  --push-l: 3;
+}
+
+.push-r-3, [class$=__push-r-3], [class*="__push-r-3 "] {
+  --push-r: 3;
+}
+
+.span-4, [class$=__span-4], [class*="__span-4 "] {
+  --span: 4;
+}
+.span-4 > *, [class$=__span-4] > *, [class*="__span-4 "] > * {
+  --cols: 4;
+}
+
+.span-y-4, [class$=__span-y-4], [class*="__span-y-4 "] {
+  --span-y: 4;
+}
+
+.pull-l-4, [class$=__pull-l-4], [class*="__pull-l-4 "] {
+  --push-l: -4;
+}
+
+.pull-r-4, [class$=__pull-r-4], [class*="__pull-r-4 "] {
+  --push-r: -4;
+}
+
+.push-l-4, [class$=__push-l-4], [class*="__push-l-4 "] {
+  --push-l: 4;
+}
+
+.push-r-4, [class$=__push-r-4], [class*="__push-r-4 "] {
+  --push-r: 4;
+}
+
+.span-5, [class$=__span-5], [class*="__span-5 "] {
+  --span: 5;
+}
+.span-5 > *, [class$=__span-5] > *, [class*="__span-5 "] > * {
+  --cols: 5;
+}
+
+.span-y-5, [class$=__span-y-5], [class*="__span-y-5 "] {
+  --span-y: 5;
+}
+
+.pull-l-5, [class$=__pull-l-5], [class*="__pull-l-5 "] {
+  --push-l: -5;
+}
+
+.pull-r-5, [class$=__pull-r-5], [class*="__pull-r-5 "] {
+  --push-r: -5;
+}
+
+.push-l-5, [class$=__push-l-5], [class*="__push-l-5 "] {
+  --push-l: 5;
+}
+
+.push-r-5, [class$=__push-r-5], [class*="__push-r-5 "] {
+  --push-r: 5;
+}
+
+.span-6, [class$=__span-6], [class*="__span-6 "] {
+  --span: 6;
+}
+.span-6 > *, [class$=__span-6] > *, [class*="__span-6 "] > * {
+  --cols: 6;
+}
+
+.span-y-6, [class$=__span-y-6], [class*="__span-y-6 "] {
+  --span-y: 6;
+}
+
+.pull-l-6, [class$=__pull-l-6], [class*="__pull-l-6 "] {
+  --push-l: -6;
+}
+
+.pull-r-6, [class$=__pull-r-6], [class*="__pull-r-6 "] {
+  --push-r: -6;
+}
+
+.push-l-6, [class$=__push-l-6], [class*="__push-l-6 "] {
+  --push-l: 6;
+}
+
+.push-r-6, [class$=__push-r-6], [class*="__push-r-6 "] {
+  --push-r: 6;
+}
+
+.span-7, [class$=__span-7], [class*="__span-7 "] {
+  --span: 7;
+}
+.span-7 > *, [class$=__span-7] > *, [class*="__span-7 "] > * {
+  --cols: 7;
+}
+
+.span-y-7, [class$=__span-y-7], [class*="__span-y-7 "] {
+  --span-y: 7;
+}
+
+.pull-l-7, [class$=__pull-l-7], [class*="__pull-l-7 "] {
+  --push-l: -7;
+}
+
+.pull-r-7, [class$=__pull-r-7], [class*="__pull-r-7 "] {
+  --push-r: -7;
+}
+
+.push-l-7, [class$=__push-l-7], [class*="__push-l-7 "] {
+  --push-l: 7;
+}
+
+.push-r-7, [class$=__push-r-7], [class*="__push-r-7 "] {
+  --push-r: 7;
+}
+
+.span-8, [class$=__span-8], [class*="__span-8 "] {
+  --span: 8;
+}
+.span-8 > *, [class$=__span-8] > *, [class*="__span-8 "] > * {
+  --cols: 8;
+}
+
+.span-y-8, [class$=__span-y-8], [class*="__span-y-8 "] {
+  --span-y: 8;
+}
+
+.pull-l-8, [class$=__pull-l-8], [class*="__pull-l-8 "] {
+  --push-l: -8;
+}
+
+.pull-r-8, [class$=__pull-r-8], [class*="__pull-r-8 "] {
+  --push-r: -8;
+}
+
+.push-l-8, [class$=__push-l-8], [class*="__push-l-8 "] {
+  --push-l: 8;
+}
+
+.push-r-8, [class$=__push-r-8], [class*="__push-r-8 "] {
+  --push-r: 8;
+}
+
+.span-9, [class$=__span-9], [class*="__span-9 "] {
+  --span: 9;
+}
+.span-9 > *, [class$=__span-9] > *, [class*="__span-9 "] > * {
+  --cols: 9;
+}
+
+.span-y-9, [class$=__span-y-9], [class*="__span-y-9 "] {
+  --span-y: 9;
+}
+
+.pull-l-9, [class$=__pull-l-9], [class*="__pull-l-9 "] {
+  --push-l: -9;
+}
+
+.pull-r-9, [class$=__pull-r-9], [class*="__pull-r-9 "] {
+  --push-r: -9;
+}
+
+.push-l-9, [class$=__push-l-9], [class*="__push-l-9 "] {
+  --push-l: 9;
+}
+
+.push-r-9, [class$=__push-r-9], [class*="__push-r-9 "] {
+  --push-r: 9;
+}
+
+.span-10, [class$=__span-10], [class*="__span-10 "] {
+  --span: 10;
+}
+.span-10 > *, [class$=__span-10] > *, [class*="__span-10 "] > * {
+  --cols: 10;
+}
+
+.span-y-10, [class$=__span-y-10], [class*="__span-y-10 "] {
+  --span-y: 10;
+}
+
+.pull-l-10, [class$=__pull-l-10], [class*="__pull-l-10 "] {
+  --push-l: -10;
+}
+
+.pull-r-10, [class$=__pull-r-10], [class*="__pull-r-10 "] {
+  --push-r: -10;
+}
+
+.push-l-10, [class$=__push-l-10], [class*="__push-l-10 "] {
+  --push-l: 10;
+}
+
+.push-r-10, [class$=__push-r-10], [class*="__push-r-10 "] {
+  --push-r: 10;
+}
+
+.span-11, [class$=__span-11], [class*="__span-11 "] {
+  --span: 11;
+}
+.span-11 > *, [class$=__span-11] > *, [class*="__span-11 "] > * {
+  --cols: 11;
+}
+
+.span-y-11, [class$=__span-y-11], [class*="__span-y-11 "] {
+  --span-y: 11;
+}
+
+.pull-l-11, [class$=__pull-l-11], [class*="__pull-l-11 "] {
+  --push-l: -11;
+}
+
+.pull-r-11, [class$=__pull-r-11], [class*="__pull-r-11 "] {
+  --push-r: -11;
+}
+
+.push-l-11, [class$=__push-l-11], [class*="__push-l-11 "] {
+  --push-l: 11;
+}
+
+.push-r-11, [class$=__push-r-11], [class*="__push-r-11 "] {
+  --push-r: 11;
+}
+
+.span-12, [class$=__span-12], [class*="__span-12 "] {
+  --span: 12;
+}
+.span-12 > *, [class$=__span-12] > *, [class*="__span-12 "] > * {
+  --cols: 12;
+}
+
+.span-y-12, [class$=__span-y-12], [class*="__span-y-12 "] {
+  --span-y: 12;
+}
+
+.pull-l-12, [class$=__pull-l-12], [class*="__pull-l-12 "] {
+  --push-l: -12;
+}
+
+.pull-r-12, [class$=__pull-r-12], [class*="__pull-r-12 "] {
+  --push-r: -12;
+}
+
+.push-l-12, [class$=__push-l-12], [class*="__push-l-12 "] {
+  --push-l: 12;
+}
+
+.push-r-12, [class$=__push-r-12], [class*="__push-r-12 "] {
+  --push-r: 12;
+}
+
+.row-1-2 {
+  grid-row: 1/2;
+}
+
+.col-1-2 {
+  grid-column: 1/2;
+}
+.col-1-2 > * {
+  --span: 1;
+}
+
+.row-1-3 {
+  grid-row: 1/3;
+}
+
+.col-1-3 {
+  grid-column: 1/3;
+}
+.col-1-3 > * {
+  --span: 2;
+}
+
+.row-2-3 {
+  grid-row: 2/3;
+}
+
+.col-2-3 {
+  grid-column: 2/3;
+}
+.col-2-3 > * {
+  --span: 1;
+}
+
+.row-1-4 {
+  grid-row: 1/4;
+}
+
+.col-1-4 {
+  grid-column: 1/4;
+}
+.col-1-4 > * {
+  --span: 3;
+}
+
+.row-2-4 {
+  grid-row: 2/4;
+}
+
+.col-2-4 {
+  grid-column: 2/4;
+}
+.col-2-4 > * {
+  --span: 2;
+}
+
+.row-3-4 {
+  grid-row: 3/4;
+}
+
+.col-3-4 {
+  grid-column: 3/4;
+}
+.col-3-4 > * {
+  --span: 1;
+}
+
+.row-1-5 {
+  grid-row: 1/5;
+}
+
+.col-1-5 {
+  grid-column: 1/5;
+}
+.col-1-5 > * {
+  --span: 4;
+}
+
+.row-2-5 {
+  grid-row: 2/5;
+}
+
+.col-2-5 {
+  grid-column: 2/5;
+}
+.col-2-5 > * {
+  --span: 3;
+}
+
+.row-3-5 {
+  grid-row: 3/5;
+}
+
+.col-3-5 {
+  grid-column: 3/5;
+}
+.col-3-5 > * {
+  --span: 2;
+}
+
+.row-4-5 {
+  grid-row: 4/5;
+}
+
+.col-4-5 {
+  grid-column: 4/5;
+}
+.col-4-5 > * {
+  --span: 1;
+}
+
+.row-1-6 {
+  grid-row: 1/6;
+}
+
+.col-1-6 {
+  grid-column: 1/6;
+}
+.col-1-6 > * {
+  --span: 5;
+}
+
+.row-2-6 {
+  grid-row: 2/6;
+}
+
+.col-2-6 {
+  grid-column: 2/6;
+}
+.col-2-6 > * {
+  --span: 4;
+}
+
+.row-3-6 {
+  grid-row: 3/6;
+}
+
+.col-3-6 {
+  grid-column: 3/6;
+}
+.col-3-6 > * {
+  --span: 3;
+}
+
+.row-4-6 {
+  grid-row: 4/6;
+}
+
+.col-4-6 {
+  grid-column: 4/6;
+}
+.col-4-6 > * {
+  --span: 2;
+}
+
+.row-5-6 {
+  grid-row: 5/6;
+}
+
+.col-5-6 {
+  grid-column: 5/6;
+}
+.col-5-6 > * {
+  --span: 1;
+}
+
+.row-1-7 {
+  grid-row: 1/7;
+}
+
+.col-1-7 {
+  grid-column: 1/7;
+}
+.col-1-7 > * {
+  --span: 6;
+}
+
+.row-2-7 {
+  grid-row: 2/7;
+}
+
+.col-2-7 {
+  grid-column: 2/7;
+}
+.col-2-7 > * {
+  --span: 5;
+}
+
+.row-3-7 {
+  grid-row: 3/7;
+}
+
+.col-3-7 {
+  grid-column: 3/7;
+}
+.col-3-7 > * {
+  --span: 4;
+}
+
+.row-4-7 {
+  grid-row: 4/7;
+}
+
+.col-4-7 {
+  grid-column: 4/7;
+}
+.col-4-7 > * {
+  --span: 3;
+}
+
+.row-5-7 {
+  grid-row: 5/7;
+}
+
+.col-5-7 {
+  grid-column: 5/7;
+}
+.col-5-7 > * {
+  --span: 2;
+}
+
+.row-6-7 {
+  grid-row: 6/7;
+}
+
+.col-6-7 {
+  grid-column: 6/7;
+}
+.col-6-7 > * {
+  --span: 1;
+}
+
+.row-1-8 {
+  grid-row: 1/8;
+}
+
+.col-1-8 {
+  grid-column: 1/8;
+}
+.col-1-8 > * {
+  --span: 7;
+}
+
+.row-2-8 {
+  grid-row: 2/8;
+}
+
+.col-2-8 {
+  grid-column: 2/8;
+}
+.col-2-8 > * {
+  --span: 6;
+}
+
+.row-3-8 {
+  grid-row: 3/8;
+}
+
+.col-3-8 {
+  grid-column: 3/8;
+}
+.col-3-8 > * {
+  --span: 5;
+}
+
+.row-4-8 {
+  grid-row: 4/8;
+}
+
+.col-4-8 {
+  grid-column: 4/8;
+}
+.col-4-8 > * {
+  --span: 4;
+}
+
+.row-5-8 {
+  grid-row: 5/8;
+}
+
+.col-5-8 {
+  grid-column: 5/8;
+}
+.col-5-8 > * {
+  --span: 3;
+}
+
+.row-6-8 {
+  grid-row: 6/8;
+}
+
+.col-6-8 {
+  grid-column: 6/8;
+}
+.col-6-8 > * {
+  --span: 2;
+}
+
+.row-7-8 {
+  grid-row: 7/8;
+}
+
+.col-7-8 {
+  grid-column: 7/8;
+}
+.col-7-8 > * {
+  --span: 1;
+}
+
+.row-1-9 {
+  grid-row: 1/9;
+}
+
+.col-1-9 {
+  grid-column: 1/9;
+}
+.col-1-9 > * {
+  --span: 8;
+}
+
+.row-2-9 {
+  grid-row: 2/9;
+}
+
+.col-2-9 {
+  grid-column: 2/9;
+}
+.col-2-9 > * {
+  --span: 7;
+}
+
+.row-3-9 {
+  grid-row: 3/9;
+}
+
+.col-3-9 {
+  grid-column: 3/9;
+}
+.col-3-9 > * {
+  --span: 6;
+}
+
+.row-4-9 {
+  grid-row: 4/9;
+}
+
+.col-4-9 {
+  grid-column: 4/9;
+}
+.col-4-9 > * {
+  --span: 5;
+}
+
+.row-5-9 {
+  grid-row: 5/9;
+}
+
+.col-5-9 {
+  grid-column: 5/9;
+}
+.col-5-9 > * {
+  --span: 4;
+}
+
+.row-6-9 {
+  grid-row: 6/9;
+}
+
+.col-6-9 {
+  grid-column: 6/9;
+}
+.col-6-9 > * {
+  --span: 3;
+}
+
+.row-7-9 {
+  grid-row: 7/9;
+}
+
+.col-7-9 {
+  grid-column: 7/9;
+}
+.col-7-9 > * {
+  --span: 2;
+}
+
+.row-8-9 {
+  grid-row: 8/9;
+}
+
+.col-8-9 {
+  grid-column: 8/9;
+}
+.col-8-9 > * {
+  --span: 1;
+}
+
+.row-1-10 {
+  grid-row: 1/10;
+}
+
+.col-1-10 {
+  grid-column: 1/10;
+}
+.col-1-10 > * {
+  --span: 9;
+}
+
+.row-2-10 {
+  grid-row: 2/10;
+}
+
+.col-2-10 {
+  grid-column: 2/10;
+}
+.col-2-10 > * {
+  --span: 8;
+}
+
+.row-3-10 {
+  grid-row: 3/10;
+}
+
+.col-3-10 {
+  grid-column: 3/10;
+}
+.col-3-10 > * {
+  --span: 7;
+}
+
+.row-4-10 {
+  grid-row: 4/10;
+}
+
+.col-4-10 {
+  grid-column: 4/10;
+}
+.col-4-10 > * {
+  --span: 6;
+}
+
+.row-5-10 {
+  grid-row: 5/10;
+}
+
+.col-5-10 {
+  grid-column: 5/10;
+}
+.col-5-10 > * {
+  --span: 5;
+}
+
+.row-6-10 {
+  grid-row: 6/10;
+}
+
+.col-6-10 {
+  grid-column: 6/10;
+}
+.col-6-10 > * {
+  --span: 4;
+}
+
+.row-7-10 {
+  grid-row: 7/10;
+}
+
+.col-7-10 {
+  grid-column: 7/10;
+}
+.col-7-10 > * {
+  --span: 3;
+}
+
+.row-8-10 {
+  grid-row: 8/10;
+}
+
+.col-8-10 {
+  grid-column: 8/10;
+}
+.col-8-10 > * {
+  --span: 2;
+}
+
+.row-9-10 {
+  grid-row: 9/10;
+}
+
+.col-9-10 {
+  grid-column: 9/10;
+}
+.col-9-10 > * {
+  --span: 1;
+}
+
+.row-1-11 {
+  grid-row: 1/11;
+}
+
+.col-1-11 {
+  grid-column: 1/11;
+}
+.col-1-11 > * {
+  --span: 10;
+}
+
+.row-2-11 {
+  grid-row: 2/11;
+}
+
+.col-2-11 {
+  grid-column: 2/11;
+}
+.col-2-11 > * {
+  --span: 9;
+}
+
+.row-3-11 {
+  grid-row: 3/11;
+}
+
+.col-3-11 {
+  grid-column: 3/11;
+}
+.col-3-11 > * {
+  --span: 8;
+}
+
+.row-4-11 {
+  grid-row: 4/11;
+}
+
+.col-4-11 {
+  grid-column: 4/11;
+}
+.col-4-11 > * {
+  --span: 7;
+}
+
+.row-5-11 {
+  grid-row: 5/11;
+}
+
+.col-5-11 {
+  grid-column: 5/11;
+}
+.col-5-11 > * {
+  --span: 6;
+}
+
+.row-6-11 {
+  grid-row: 6/11;
+}
+
+.col-6-11 {
+  grid-column: 6/11;
+}
+.col-6-11 > * {
+  --span: 5;
+}
+
+.row-7-11 {
+  grid-row: 7/11;
+}
+
+.col-7-11 {
+  grid-column: 7/11;
+}
+.col-7-11 > * {
+  --span: 4;
+}
+
+.row-8-11 {
+  grid-row: 8/11;
+}
+
+.col-8-11 {
+  grid-column: 8/11;
+}
+.col-8-11 > * {
+  --span: 3;
+}
+
+.row-9-11 {
+  grid-row: 9/11;
+}
+
+.col-9-11 {
+  grid-column: 9/11;
+}
+.col-9-11 > * {
+  --span: 2;
+}
+
+.row-10-11 {
+  grid-row: 10/11;
+}
+
+.col-10-11 {
+  grid-column: 10/11;
+}
+.col-10-11 > * {
+  --span: 1;
+}
+
+.row-1-12 {
+  grid-row: 1/12;
+}
+
+.col-1-12 {
+  grid-column: 1/12;
+}
+.col-1-12 > * {
+  --span: 11;
+}
+
+.row-2-12 {
+  grid-row: 2/12;
+}
+
+.col-2-12 {
+  grid-column: 2/12;
+}
+.col-2-12 > * {
+  --span: 10;
+}
+
+.row-3-12 {
+  grid-row: 3/12;
+}
+
+.col-3-12 {
+  grid-column: 3/12;
+}
+.col-3-12 > * {
+  --span: 9;
+}
+
+.row-4-12 {
+  grid-row: 4/12;
+}
+
+.col-4-12 {
+  grid-column: 4/12;
+}
+.col-4-12 > * {
+  --span: 8;
+}
+
+.row-5-12 {
+  grid-row: 5/12;
+}
+
+.col-5-12 {
+  grid-column: 5/12;
+}
+.col-5-12 > * {
+  --span: 7;
+}
+
+.row-6-12 {
+  grid-row: 6/12;
+}
+
+.col-6-12 {
+  grid-column: 6/12;
+}
+.col-6-12 > * {
+  --span: 6;
+}
+
+.row-7-12 {
+  grid-row: 7/12;
+}
+
+.col-7-12 {
+  grid-column: 7/12;
+}
+.col-7-12 > * {
+  --span: 5;
+}
+
+.row-8-12 {
+  grid-row: 8/12;
+}
+
+.col-8-12 {
+  grid-column: 8/12;
+}
+.col-8-12 > * {
+  --span: 4;
+}
+
+.row-9-12 {
+  grid-row: 9/12;
+}
+
+.col-9-12 {
+  grid-column: 9/12;
+}
+.col-9-12 > * {
+  --span: 3;
+}
+
+.row-10-12 {
+  grid-row: 10/12;
+}
+
+.col-10-12 {
+  grid-column: 10/12;
+}
+.col-10-12 > * {
+  --span: 2;
+}
+
+.row-11-12 {
+  grid-row: 11/12;
+}
+
+.col-11-12 {
+  grid-column: 11/12;
+}
+.col-11-12 > * {
+  --span: 1;
+}
+
+.row-1-13 {
+  grid-row: 1/13;
+}
+
+.col-1-13 {
+  grid-column: 1/13;
+}
+.col-1-13 > * {
+  --span: 12;
+}
+
+.row-2-13 {
+  grid-row: 2/13;
+}
+
+.col-2-13 {
+  grid-column: 2/13;
+}
+.col-2-13 > * {
+  --span: 11;
+}
+
+.row-3-13 {
+  grid-row: 3/13;
+}
+
+.col-3-13 {
+  grid-column: 3/13;
+}
+.col-3-13 > * {
+  --span: 10;
+}
+
+.row-4-13 {
+  grid-row: 4/13;
+}
+
+.col-4-13 {
+  grid-column: 4/13;
+}
+.col-4-13 > * {
+  --span: 9;
+}
+
+.row-5-13 {
+  grid-row: 5/13;
+}
+
+.col-5-13 {
+  grid-column: 5/13;
+}
+.col-5-13 > * {
+  --span: 8;
+}
+
+.row-6-13 {
+  grid-row: 6/13;
+}
+
+.col-6-13 {
+  grid-column: 6/13;
+}
+.col-6-13 > * {
+  --span: 7;
+}
+
+.row-7-13 {
+  grid-row: 7/13;
+}
+
+.col-7-13 {
+  grid-column: 7/13;
+}
+.col-7-13 > * {
+  --span: 6;
+}
+
+.row-8-13 {
+  grid-row: 8/13;
+}
+
+.col-8-13 {
+  grid-column: 8/13;
+}
+.col-8-13 > * {
+  --span: 5;
+}
+
+.row-9-13 {
+  grid-row: 9/13;
+}
+
+.col-9-13 {
+  grid-column: 9/13;
+}
+.col-9-13 > * {
+  --span: 4;
+}
+
+.row-10-13 {
+  grid-row: 10/13;
+}
+
+.col-10-13 {
+  grid-column: 10/13;
+}
+.col-10-13 > * {
+  --span: 3;
+}
+
+.row-11-13 {
+  grid-row: 11/13;
+}
+
+.col-11-13 {
+  grid-column: 11/13;
+}
+.col-11-13 > * {
+  --span: 2;
+}
+
+.row-12-13 {
+  grid-row: 12/13;
+}
+
+.col-12-13 {
+  grid-column: 12/13;
+}
+.col-12-13 > * {
+  --span: 1;
+}
