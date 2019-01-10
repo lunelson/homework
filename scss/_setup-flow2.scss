@@ -19,6 +19,7 @@
       width: 100%;
       min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
       min-height: 1px;
+      // overflow-wrap: break-word; // break long words
       background-clip: content-box;
     }
   }

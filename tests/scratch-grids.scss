@@ -24,78 +24,44 @@ $media: (
 
 @include homework-setup-core($output: false);
 
+/////////////////////////////////////////////
+////////////////// NEW CODE /////////////////
+/////////////////////////////////////////////
+
+
+@function base-class($base, $solo: true, $_...) {
+  @if $solo {
+    @return selector-parse('.#{$base}, [class^="#{$base}-"], [class*=" #{$base}-"]');
+  } @else {
+    @return selector-parse('[class^="#{$base}-"], [class*=" #{$base}-"]');
+  }
+}
+
 @function m-suffix($m: $curr-m) {
   @return if($m, '#{$m}__', '');
 }
 
-@function m-base-class($str, $solo: true, $m: $curr-m) {
-
-}
-
-@function m-mod-class($str) {
-  @return selector-parse(".#{$str}, [class$='__#{$str}'], [class*='__#{$str} ']")
-}
-
-@each $m in join((null), media-keys()) {
-
-  @include m($m) {
-
-    $m__: m-suffix();
-
-    #{base-class('#{$m__}span')} {
-      width: calc(99.99999% * var(--span-n) / var(--span-d));
-
-    }
-
+@function m-base-class($base, $solo: true, $m: $curr-m, $_...) {
+  $sel: if($m, '#{$m}__#{$base}', $base);
+  @if $solo {
+    @return selector-parse('.#{$sel}, [class^="#{$sel}-"], [class*=" #{$sel}-"]');
+  } @else {
+    @return selector-parse('[class^="#{$sel}-"], [class*=" #{$sel}-"]');
   }
 }
 
-// #{m-mod-class('span')} {
-//   & > * { --span-d: var(--span-n); }
-// }
-
-#{m-mod-class('span-2')} {
-  --span-n: 2;
-  & > * { --span-d: 2; }
+@function m-mod-class($base, $mod, $solo: true) {
+  $sel: if($mod, '#{$base}-#{$mod}', #{$base});
+  @if $solo {
+    @return selector-parse(".#{$sel}, [class$='__#{$sel}'], [class*='__#{$sel} ']");
+  } @else {
+    @return selector-parse("[class$='__#{$sel}'], [class*='__#{$sel} ']");
+  }
 }
 
-// @each $m in join((null), media-keys()) {
-
-//   @include m($m) {
-
-//     $m__: m-suffix();
-
-//     .#{$m__}w-unset { width: unset; }
-//     .#{$m__}h-unset { height: unset; }
-
-//     // dimensions/margin: auto
-//     .#{$m__}w-auto { width: auto; }
-//     .#{$m__}h-auto { height: auto; }
-//     .#{$m__}my-auto, .#{$m__}mt-auto { margin-top: auto; }
-//     .#{$m__}mx-auto, .#{$m__}mr-auto { margin-right: auto; }
-//     .#{$m__}my-auto, .#{$m__}mb-auto { margin-bottom: auto; }
-//     .#{$m__}mx-auto, .#{$m__}ml-auto { margin-left: auto; }
-
-//     // dimensions/margin/padding: zero
-//     .#{$m__}w-0 { width: 0; }
-//     .#{$m__}h-0 { height: 0; }
-//     .#{$m__}my-0, .#{$m__}mt-0 { margin-top: 0 !important; }
-//     .#{$m__}mx-0, .#{$m__}mr-0 { margin-right: 0 !important; }
-//     .#{$m__}my-0, .#{$m__}mb-0 { margin-bottom: 0 !important; }
-//     .#{$m__}mx-0, .#{$m__}ml-0 { margin-left: 0 !important; }
-//     .#{$m__}py-0, .#{$m__}pt-0 { padding-top: 0 !important; }
-//     .#{$m__}px-0, .#{$m__}pr-0 { padding-right: 0 !important; }
-//     .#{$m__}py-0, .#{$m__}pb-0 { padding-bottom: 0 !important; }
-//     .#{$m__}px-0, .#{$m__}pl-0 { padding-left: 0 !important; }
-
-//     // dimensions: 100%
-//     .#{$m__}w-100 { width: 100%; }
-//     .#{$m__}h-100 { height: 100%; }
-
-//   }
-// }
-
 /*
+  grid flow cell II
+
     @function solo-span
     @function solo-push
 
@@ -108,91 +74,121 @@ $media: (
     @mixin flow-cell($span, $push-l, $push-r) {}
     @mixin flow-cells($span, $push-l, $push-r) {}
 
-    .span-[n], .push-[l|r]-[n]
+    .span-[n], .push-[l|r]-[n], .pull-[l|r]-[n]
 
     .flow-[y], .flow-x-[x]
 
-      .span-[n], .push-[l|r]-[n]
+      .span-[n], .push-[l|r]-[n], .pull-[l|r]-[n]
 
     .grid-[y], .grid-x-[x]
 
-      .row-[s]-[e], .row-span-[n]
-      .col-[s]-[e], .col-span-[n]
+      .row-[s]-[e]
+      .col-[s]-[e]
+
+  REMINDERS:
+    - only span, push, pull, span-y, row, and col have media variants
+    - flow and grid need -x-[x] variants
 
 */
 
 :root {
-  --span-max: --grid-columns;
-  --span-x: --span-max;
+  --row-gap: null;
+  --col-gap: null;
+  --row: initial;
+  --col: initial;
+  --cols: var(--grid-cols);
+  --rows: var(--grid-rows, --grid-cols);
+  --span: var(--cols);
   --span-y: 1;
   --push-r: initial;
   --push-l: initial;
 }
 
-#{base-class('span')} {
-  content: 'solo-span';
+//   __ _                            _     _
+//  / _| |                          (_)   | |
+// | |_| | _____      __   __ _ _ __ _  __| |
+// |  _| |/ _ \ \ /\ / /  / _` | '__| |/ _` |
+// | | | | (_) \ V  V /  | (_| | |  | | (_| |
+// |_| |_|\___/ \_/\_( )  \__, |_|  |_|\__,_|
+//                   |/    __/ |
+//                        |___/
+
+#{base-class('flow')} { content: 'flow'; }
+#{base-class('grid')} { content: 'grid'; }
+
+$inner-y-keys: map-keys(inner-y-mods());
+@each $y in $inner-y-keys {
+  .flow-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
 }
 
-#{base-class('push-l', false)} {
-  content: 'solo-push-l';
-}
-#{base-class('push-r', false)} {
-  content: 'solo-push-r';
+$inner-x-keys: map-keys(inner-x-mods());
+@each $x in $inner-x-keys {
+  .flow-x-#{$x}, .grid-x-#{$x} { --col-gap: var(--inner-x-#{$x}); }
 }
 
-#{base-class('flow', false)} {
-  content: 'flow';
+//           _ _
+//          | | |
+//   ___ ___| | |
+//  / __/ _ \ | |
+// | (_|  __/ | |
+//  \___\___|_|_|
 
-  #{base-class('span')} {
-    @at-root #{selector-insert('>')} {
-      content: 'flow-span';
+@each $m in join((null), media-keys()) {
+  @include m($m) {
+
+    #{m-base-class('span')} {
+      width: calc((99.99999% + var(--col-gap)) * var(--span) / var(--cols) - var(--col-gap)) !important;
+
+      @at-root #{selector-insert(base-class('flow'), '>')} {
+        width: calc(99.99999% * var(--span) / var(--cols)) !important;
+      }
+
+      @at-root #{selector-insert(base-class('grid'), '>')} {
+        grid-column-end: span var(--span);
+      }
     }
-  }
 
-  #{base-class('push-l', false)} {
-    @at-root #{selector-insert('>')} {
-      content: 'flow-push-l';
+    #{m-base-class('pull-l', false)},
+    #{m-base-class('push-l', false)} {
+      margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--cols)) !important;
+
+      @at-root #{selector-insert(base-class('flow'), '>')} {
+        margin-left: calc(99.99999% * var(--push-l) / var(--cols)) !important;
+      }
     }
-  }
 
-  #{base-class('push-r', false)} {
-    @at-root #{selector-insert('>')} {
-      content: 'flow-push-r';
+    #{m-base-class('pull-r', false)},
+    #{m-base-class('push-r', false)} {
+      margin-left: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--cols)) !important;
+
+      @at-root #{selector-insert(base-class('flow'), '>')} {
+        margin-left: calc(99.99999% * var(--push-r) / var(--cols)) !important;
+      }
     }
+
+    #{m-base-class('col', false)} { grid-column-start: var(--col); }
+    #{m-base-class('row', false)} { grid-column-start: var(--row); }
+    #{m-base-class('span-y', false)} { grid-row-end: span var(--span-y); }
   }
-}
-
-#{base-class('grid', false)} {
-  content: 'grid';
-
-  #{base-class('span', false)} {
-    @at-root #{selector-insert('>')} {
-      content: 'grid-span';
-    }
-  }
-
-  // #{base-class('row', false)} {
-  //   @at-root #{selector-insert('>')} {
-  //     content: 'grid-row';
-  //   }
-  // }
-
-  // #{base-class('col', false)} {
-  //   @at-root #{selector-insert('>')} {
-  //     content: 'grid-col';
-  //   }
-  // }
 }
 
 $max-columns: max-columns();
-$pairs: ();
-$map: ();
+// $pairs: ();
+// $map: ();
 
-
-@for $n from 1 through max-columns() {
-  .span-y-#{$n} { --span-y: #{$n}; }
-  // .col-span-#{$n} { grid-column: span #{$n}; }
+@for $n from 0 through max-columns() {
+  @if $n > 0 {
+    #{m-mod-class('span', $n)} { --span: #{$n}; & > * { --cols: #{$n}; } }
+    #{m-mod-class('span-y', $n)} { --span-y: #{$n}; }
+    // #{m-mod-class('push-l-neg', $n)} { --push-l: #{$n*-1}; }
+    // #{m-mod-class('push-r-neg', $n)} { --push-r: #{$n*-1}; }
+  }
+  #{m-mod-class('pull-l', $n)} { --push-l: #{$n*-1}; }
+  #{m-mod-class('pull-r', $n)} { --push-r: #{$n*-1}; }
+  #{m-mod-class('push-l', $n)} { --push-l: #{$n}; }
+  #{m-mod-class('push-r', $n)} { --push-r: #{$n}; }
 }
+
 
 @for $b from 2 through (max-columns() + 1) {
   @for $a from 1 through ($b - 1) {
@@ -201,16 +197,11 @@ $map: ();
 
     .row-#{$a}-#{$b} {
       grid-row: #{$a} / #{$b};
-      // > * { --span-n: #{$b - $a}; }
+      // > * { --span: #{$b - $a}; }
     }
     .col-#{$a}-#{$b} {
       grid-column: #{$a} / #{$b};
-      > * { --span-n: #{$b - $a}; }
+      > * { --span: #{$b - $a}; }
     }
   }
-}
-
-.debug {
-  out: inspect($pairs);
-  out: inspect($map);
 }
