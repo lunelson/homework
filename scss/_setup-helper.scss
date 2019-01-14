@@ -123,12 +123,12 @@
 
     @include m($m) {
 
-      $bp: m-suffix();
+      $m__: m-prefix();
 
       // hide visually-only / img replacement
       // https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html
       // https://css-tricks.com/the-image-replacement-museum/
-      .vhide#{$bp} {
+      .#{$m__}vhide {
         position: absolute !important;
         clip: rect(0 0 0 0); // IE6, IE7
         clip: rect(0, 0, 0, 0);
@@ -144,117 +144,118 @@
       }
 
       // hide/show, without removing from DOM
-      .hide#{$bp} {
+      .#{$m__}hide {
         pointer-events: none;
         visibility: hidden;
         opacity: 0;
       }
-      .show#{$bp} {
+      .#{$m__}show {
         pointer-events: initial;
         visibility: visible;
         opacity: 1;
       }
 
       // display
-      .d-none#{$bp} { display: none !important; }
-      .d-flex#{$bp} {
+      .#{$m__}d-none { display: none !important; }
+      .#{$m__}d-flex {
         display: flex !important;
-        & > * {
-          flex: 0 0 auto;
-          max-width: 100%;
-          min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
-          overflow-wrap: break-word;
-        }
+        // & > * {
+        //   flex: 0 0 auto;
+        //   max-width: 100%;
+        //   min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+        //   overflow-wrap: break-word;
+        // }
       }
-      .d-flex-y#{$bp} {
+      .#{$m__}d-flex-y {
         display: flex !important;
         flex-direction: column;
-        align-items: stretch;
-        & > * {
-          flex: 0 0 auto; // best for column direction
-          // min-height: auto;
-          // height: auto;
-          max-width: 100%; // fix overflow in IE
-          overflow-wrap: break-word;
-        }
+        // align-items: stretch;
+        // & > * {
+        //   flex: 0 0 auto; // best for column direction
+        //   // min-height: auto;
+        //   // height: auto;
+        //   max-width: 100%; // fix overflow in IE
+        //   overflow-wrap: break-word;
+        // }
       }
-      .d-grid#{$bp} { display: grid !important; }
-      .d-block#{$bp} { display: block !important; }
-      .d-iblock#{$bp} { display: inline-block !important; vertical-align: baseline; }
-      .d-inline#{$bp} { display: inline !important; vertical-align: baseline; }
+      .#{$m__}d-grid { display: grid !important; }
+      .#{$m__}d-grid-y { display: grid !important; grid-auto-flow: column; }
+      .#{$m__}d-block { display: block !important; }
+      .#{$m__}d-iblock { display: inline-block !important; vertical-align: baseline; }
+      .#{$m__}d-inline { display: inline !important; vertical-align: baseline; }
 
       // position
-      .static#{$bp} { position: static; }
-      .rel#{$bp} { position: relative; }
-      .fix#{$bp} { position: fixed; }
-      .fix-tl#{$bp} { top: 0; left: 0; }
-      .fix-tr#{$bp} { top: 0; right: 0; }
-      .fix-bl#{$bp} { bottom: 0; left: 0; }
-      .fix-br#{$bp} { bottom: 0; right: 0; }
-      .fix-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
-      .abs#{$bp} { position: absolute; }
-      .abs-tl#{$bp} { top: 0; left: 0; }
-      .abs-tr#{$bp} { top: 0; right: 0; }
-      .abs-bl#{$bp} { bottom: 0; left: 0; }
-      .abs-br#{$bp} { bottom: 0; right: 0; }
-      .abs-trbl#{$bp} { top: 0; right: 0; bottom: 0; left: 0; }
-      .abs-cover#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-      .abs-contain#{$bp} { top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+      .#{$m__}static { position: static; }
+      .#{$m__}rel { position: relative; }
+      .#{$m__}fix { position: fixed; }
+      .#{$m__}fix-tl { top: 0; left: 0; }
+      .#{$m__}fix-tr { top: 0; right: 0; }
+      .#{$m__}fix-bl { bottom: 0; left: 0; }
+      .#{$m__}fix-br { bottom: 0; right: 0; }
+      .#{$m__}fix-trbl { top: 0; right: 0; bottom: 0; left: 0; }
+      .#{$m__}abs { position: absolute; }
+      .#{$m__}abs-tl { top: 0; left: 0; }
+      .#{$m__}abs-tr { top: 0; right: 0; }
+      .#{$m__}abs-bl { bottom: 0; left: 0; }
+      .#{$m__}abs-br { bottom: 0; right: 0; }
+      .#{$m__}abs-trbl { top: 0; right: 0; bottom: 0; left: 0; }
+      .#{$m__}abs-cover { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+      .#{$m__}abs-contain { top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
 
       //  align / vertical-align
-      .a-left#{$bp} { text-align: left }
-      .a-center#{$bp} { text-align: center }
-      .a-right#{$bp} { text-align: right }
-      .a-top#{$bp} { vertical-align: top }
-      .a-middle#{$bp} { vertical-align: middle }
-      .a-baseline#{$bp} { vertical-align: baseline }
-      .a-bottom#{$bp} { vertical-align: bottom }
+      .#{$m__}a-left { text-align: left }
+      .#{$m__}a-center { text-align: center }
+      .#{$m__}a-right { text-align: right }
+      .#{$m__}a-top { vertical-align: top }
+      .#{$m__}a-middle { vertical-align: middle }
+      .#{$m__}a-baseline { vertical-align: baseline }
+      .#{$m__}a-bottom { vertical-align: bottom }
 
       // align-items
-      .ai-stretch#{$bp} { align-items: stretch; }
-      .ai-center#{$bp} { align-items: center; }
-      .ai-baseline#{$bp} { align-items: baseline; }
-      .ai-start#{$bp} { align-items: flex-start; }
-      .ai-end#{$bp} { align-items: flex-end; }
+      .#{$m__}ai-stretch { align-items: stretch; }
+      .#{$m__}ai-center { align-items: center; }
+      .#{$m__}ai-baseline { align-items: baseline; }
+      .#{$m__}ai-start { align-items: flex-start; }
+      .#{$m__}ai-end { align-items: flex-end; }
 
       // align-self
-      .as-stretch#{$bp} { align-self: stretch; }
-      .as-center#{$bp} { align-self: center; }
-      .as-baseline#{$bp} { align-self: baseline; }
-      .as-start#{$bp} { align-self: flex-start; }
-      .as-end#{$bp} { align-self: flex-end; }
+      .#{$m__}as-stretch { align-self: stretch; }
+      .#{$m__}as-center { align-self: center; }
+      .#{$m__}as-baseline { align-self: baseline; }
+      .#{$m__}as-start { align-self: flex-start; }
+      .#{$m__}as-end { align-self: flex-end; }
 
       // align-content
-      .ac-stretch#{$bp} { align-content: stretch; }
-      .ac-center#{$bp} { align-content: center; }
-      .ac-baseline#{$bp} { align-content: baseline; }
-      .ac-start#{$bp} { align-content: flex-start; }
-      .ac-end#{$bp} { align-content: flex-end; }
-      .ac-between#{$bp} { align-content: space-between; }
-      .ac-around#{$bp} { align-content: space-around; }
+      .#{$m__}ac-stretch { align-content: stretch; }
+      .#{$m__}ac-center { align-content: center; }
+      .#{$m__}ac-baseline { align-content: baseline; }
+      .#{$m__}ac-start { align-content: flex-start; }
+      .#{$m__}ac-end { align-content: flex-end; }
+      .#{$m__}ac-between { align-content: space-between; }
+      .#{$m__}ac-around { align-content: space-around; }
 
       // justify-content
-      .jc-stretch#{$bp} { justify-content: stretch; }
-      .jc-center#{$bp} { justify-content: center; }
-      .jc-start#{$bp} { justify-content: flex-start; }
-      .jc-end#{$bp} { justify-content: flex-end; }
-      .jc-between#{$bp} { justify-content: space-between; }
-      .jc-around#{$bp} { justify-content: space-around; }
-      .jc-evenly#{$bp} { justify-content: space-evenly; }
+      .#{$m__}jc-stretch { justify-content: stretch; }
+      .#{$m__}jc-center { justify-content: center; }
+      .#{$m__}jc-start { justify-content: flex-start; }
+      .#{$m__}jc-end { justify-content: flex-end; }
+      .#{$m__}jc-between { justify-content: space-between; }
+      .#{$m__}jc-around { justify-content: space-around; }
+      .#{$m__}jc-evenly { justify-content: space-evenly; }
 
       // flex
-      .fx-1-0#{$bp} { flex: 1 0 auto; }
-      .fx-0-1#{$bp} { flex: 0 1 auto; }
-      .fx-1-1#{$bp} { flex: 1 1 auto; }
-      .fx-0-0#{$bp} { flex: 0 0 auto; }
+      .#{$m__}fx-1-0 { flex: 1 0 auto; }
+      .#{$m__}fx-0-1 { flex: 0 1 auto; }
+      .#{$m__}fx-1-1 { flex: 1 1 auto; }
+      .#{$m__}fx-0-0 { flex: 0 0 auto; }
 
       // fitting
 
-      .fit-none#{$bp} { object-fit: none; }
-      .fit-fill#{$bp} { object-fit: fill; }
-      .fit-cover#{$bp} { object-fit: cover; }
-      .fit-contain#{$bp} { object-fit: contain; }
-      .fit-scale-down#{$bp} { object-fit: scale-down; }
+      .#{$m__}fit-none { object-fit: none; }
+      .#{$m__}fit-fill { object-fit: fill; }
+      .#{$m__}fit-cover { object-fit: cover; }
+      .#{$m__}fit-contain { object-fit: contain; }
+      .#{$m__}fit-scale-down { object-fit: scale-down; }
     }
   }
 

@@ -32,9 +32,9 @@
 
     @each $m, $medium in $media {
      @include m($m) {
-        $bp: m-suffix();
+        $m__: m-prefix();
 
-        .wrap-each#{$bp},
+        .#{$m__}wrap-each,
         .wrap-#{$m},
         #{if($m == $last-m, '.wrap-last', '')} {
           --wrap-width: var(--outer-width);

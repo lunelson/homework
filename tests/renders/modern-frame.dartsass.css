@@ -35,101 +35,113 @@
 }
 
 @media screen and (min-width: 20em) {
-  .frame__a, .frame-x__a, .frame-right__a {
+  .a__bleed, [class^=a__bleed-], [class*=" a__bleed-"] {
+    width: unset !important;
+  }
+
+  .a__frame, .a__frame-x, .a__frame-right {
     padding-right: var(--outer-right);
   }
 
-  .frame__a, .frame-x__a, .frame-left__a {
+  .a__frame, .a__frame-x, .a__frame-left {
     padding-left: var(--outer-left);
   }
 
-  .frame-y__a, .frame-top__a {
+  .a__frame-y, .a__frame-top {
     padding-top: var(--outer-top);
   }
 
-  .frame-y__a, .frame-bottom__a {
+  .a__frame-y, .a__frame-bottom {
     padding-bottom: var(--outer-bottom);
   }
 
-  .bleed__a, .bleed-x__a, .bleed-right__a {
+  .a__bleed, .a__bleed-x, .a__bleed-right {
     margin-right: calc(var(--outer-right) * -1);
   }
 
-  .bleed__a, .bleed-x__a, .bleed-left__a {
+  .a__bleed, .a__bleed-x, .a__bleed-left {
     margin-left: calc(var(--outer-left) * -1);
   }
 
-  .bleed-y__a, .bleed-top__a {
+  .a__bleed-y, .a__bleed-top {
     margin-top: calc(var(--outer-top) * -1);
   }
 
-  .bleed-y__a, .bleed-bottom__a {
+  .a__bleed-y, .a__bleed-bottom {
     margin-bottom: calc(var(--outer-bottom) * -1);
   }
 }
 @media screen and (min-width: 30em) {
-  .frame__b, .frame-x__b, .frame-right__b {
+  .b__bleed, [class^=b__bleed-], [class*=" b__bleed-"] {
+    width: unset !important;
+  }
+
+  .b__frame, .b__frame-x, .b__frame-right {
     padding-right: var(--outer-right);
   }
 
-  .frame__b, .frame-x__b, .frame-left__b {
+  .b__frame, .b__frame-x, .b__frame-left {
     padding-left: var(--outer-left);
   }
 
-  .frame-y__b, .frame-top__b {
+  .b__frame-y, .b__frame-top {
     padding-top: var(--outer-top);
   }
 
-  .frame-y__b, .frame-bottom__b {
+  .b__frame-y, .b__frame-bottom {
     padding-bottom: var(--outer-bottom);
   }
 
-  .bleed__b, .bleed-x__b, .bleed-right__b {
+  .b__bleed, .b__bleed-x, .b__bleed-right {
     margin-right: calc(var(--outer-right) * -1);
   }
 
-  .bleed__b, .bleed-x__b, .bleed-left__b {
+  .b__bleed, .b__bleed-x, .b__bleed-left {
     margin-left: calc(var(--outer-left) * -1);
   }
 
-  .bleed-y__b, .bleed-top__b {
+  .b__bleed-y, .b__bleed-top {
     margin-top: calc(var(--outer-top) * -1);
   }
 
-  .bleed-y__b, .bleed-bottom__b {
+  .b__bleed-y, .b__bleed-bottom {
     margin-bottom: calc(var(--outer-bottom) * -1);
   }
 }
 @media screen and (min-width: 40em) {
-  .frame__c, .frame-x__c, .frame-right__c {
+  .c__bleed, [class^=c__bleed-], [class*=" c__bleed-"] {
+    width: unset !important;
+  }
+
+  .c__frame, .c__frame-x, .c__frame-right {
     padding-right: var(--outer-right);
   }
 
-  .frame__c, .frame-x__c, .frame-left__c {
+  .c__frame, .c__frame-x, .c__frame-left {
     padding-left: var(--outer-left);
   }
 
-  .frame-y__c, .frame-top__c {
+  .c__frame-y, .c__frame-top {
     padding-top: var(--outer-top);
   }
 
-  .frame-y__c, .frame-bottom__c {
+  .c__frame-y, .c__frame-bottom {
     padding-bottom: var(--outer-bottom);
   }
 
-  .bleed__c, .bleed-x__c, .bleed-right__c {
+  .c__bleed, .c__bleed-x, .c__bleed-right {
     margin-right: calc(var(--outer-right) * -1);
   }
 
-  .bleed__c, .bleed-x__c, .bleed-left__c {
+  .c__bleed, .c__bleed-x, .c__bleed-left {
     margin-left: calc(var(--outer-left) * -1);
   }
 
-  .bleed-y__c, .bleed-top__c {
+  .c__bleed-y, .c__bleed-top {
     margin-top: calc(var(--outer-top) * -1);
   }
 
-  .bleed-y__c, .bleed-bottom__c {
+  .c__bleed-y, .c__bleed-bottom {
     margin-bottom: calc(var(--outer-bottom) * -1);
   }
 }

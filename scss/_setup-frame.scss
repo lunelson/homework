@@ -8,24 +8,25 @@
 
 @mixin homework-setup-frame($modern: $homework-is-modern) {
 
-  #{base-class('bleed')} { width: unset !important; }
 
   @if $modern {
 
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
 
-        $bp: m-suffix();
+        $m__: m-prefix();
 
-        .frame#{$bp}, .frame-x#{$bp}, .frame-right#{$bp} { padding-right: var(--outer-right); }
-        .frame#{$bp}, .frame-x#{$bp}, .frame-left#{$bp} { padding-left: var(--outer-left); }
-        .frame-y#{$bp}, .frame-top#{$bp} { padding-top: var(--outer-top); }
-        .frame-y#{$bp}, .frame-bottom#{$bp} { padding-bottom: var(--outer-bottom); }
+        #{m-base-class('bleed')} { width: unset !important; }
 
-        .bleed#{$bp}, .bleed-x#{$bp}, .bleed-right#{$bp} { margin-right: calc(var(--outer-right) * -1); }
-        .bleed#{$bp}, .bleed-x#{$bp}, .bleed-left#{$bp} { margin-left: calc(var(--outer-left) * -1); }
-        .bleed-y#{$bp}, .bleed-top#{$bp} { margin-top: calc(var(--outer-top) * -1); }
-        .bleed-y#{$bp}, .bleed-bottom#{$bp} { margin-bottom: calc(var(--outer-bottom) * -1); }
+        .#{$m__}frame, .#{$m__}frame-x, .#{$m__}frame-right { padding-right: var(--outer-right); }
+        .#{$m__}frame, .#{$m__}frame-x, .#{$m__}frame-left { padding-left: var(--outer-left); }
+        .#{$m__}frame-y, .#{$m__}frame-top { padding-top: var(--outer-top); }
+        .#{$m__}frame-y, .#{$m__}frame-bottom { padding-bottom: var(--outer-bottom); }
+
+        .#{$m__}bleed, .#{$m__}bleed-x, .#{$m__}bleed-right { margin-right: calc(var(--outer-right) * -1); }
+        .#{$m__}bleed, .#{$m__}bleed-x, .#{$m__}bleed-left { margin-left: calc(var(--outer-left) * -1); }
+        .#{$m__}bleed-y, .#{$m__}bleed-top { margin-top: calc(var(--outer-top) * -1); }
+        .#{$m__}bleed-y, .#{$m__}bleed-bottom { margin-bottom: calc(var(--outer-bottom) * -1); }
       }
     }
 
@@ -36,19 +37,19 @@
       $m-list: append($m-list, $m);
       @include m($m) {
 
-        #{m-suffixize('.frame, .frame-x, .frame-right', $m-list...)} { padding-right: m-var('outer-right'); }
-        #{m-suffixize('.frame, .frame-x, .frame-left', $m-list...)} { padding-left: m-var('outer-left'); }
-        #{m-suffixize('.frame-y, .frame-top', $m-list...)} { padding-top: m-var('outer-top'); }
-        #{m-suffixize('.frame-y, .frame-bottom', $m-list...)} { padding-bottom: m-var('outer-bottom'); }
+        #{m-prefixize('.frame, .frame-x, .frame-right', $m-list...)} { padding-right: m-var('outer-right'); }
+        #{m-prefixize('.frame, .frame-x, .frame-left', $m-list...)} { padding-left: m-var('outer-left'); }
+        #{m-prefixize('.frame-y, .frame-top', $m-list...)} { padding-top: m-var('outer-top'); }
+        #{m-prefixize('.frame-y, .frame-bottom', $m-list...)} { padding-bottom: m-var('outer-bottom'); }
 
-        #{m-suffixize('.bleed, .bleed-x', $m-list...)} { width: add(100%, add(m-var('outer-right'), m-var('outer-left'))); }
-        #{m-suffixize('.bleed-right', $m-list...)} { width: add(100%, m-var('outer-right')); }
-        #{m-suffixize('.bleed-left', $m-list...)} { width: add(100%, m-var('outer-left')); }
+        #{m-prefixize('.bleed, .bleed-x', $m-list...)} { width: add(100%, add(m-var('outer-right'), m-var('outer-left'))); }
+        #{m-prefixize('.bleed-right', $m-list...)} { width: add(100%, m-var('outer-right')); }
+        #{m-prefixize('.bleed-left', $m-list...)} { width: add(100%, m-var('outer-left')); }
 
-        #{m-suffixize('.bleed, .bleed-x, .bleed-right', $m-list...)} { margin-right: multiply(m-var('outer-right'), -1); }
-        #{m-suffixize('.bleed, .bleed-x, .bleed-left', $m-list...)} { margin-left: multiply(m-var('outer-left'), -1); }
-        #{m-suffixize('.bleed-y, .bleed-top', $m-list...)} { padding-top: multiply(m-var('outer-top'), -1); }
-        #{m-suffixize('.bleed-y, .bleed-bottom', $m-list...)} { padding-bottom: multiply(m-var('outer-bottom'), -1); }
+        #{m-prefixize('.bleed, .bleed-x, .bleed-right', $m-list...)} { margin-right: multiply(m-var('outer-right'), -1); }
+        #{m-prefixize('.bleed, .bleed-x, .bleed-left', $m-list...)} { margin-left: multiply(m-var('outer-left'), -1); }
+        #{m-prefixize('.bleed-y, .bleed-top', $m-list...)} { padding-top: multiply(m-var('outer-top'), -1); }
+        #{m-prefixize('.bleed-y, .bleed-bottom', $m-list...)} { padding-bottom: multiply(m-var('outer-bottom'), -1); }
       }
     }
 

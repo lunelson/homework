@@ -18,6 +18,11 @@
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 }
 
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
 @media screen and (min-width: 30em) {
   :root {
     --breakpoint: 30em;
@@ -175,26 +180,19 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
 .d-flex {
   display: flex !important;
 }
-.d-flex > * {
-  flex: 0 0 auto;
-  max-width: 100%;
-  min-width: 0%;
-  overflow-wrap: break-word;
-}
 
 .d-flex-y {
   display: flex !important;
   flex-direction: column;
-  align-items: stretch;
-}
-.d-flex-y > * {
-  flex: 0 0 auto;
-  max-width: 100%;
-  overflow-wrap: break-word;
 }
 
 .d-grid {
   display: grid !important;
+}
+
+.d-grid-y {
+  display: grid !important;
+  grid-auto-flow: column;
 }
 
 .d-block {
@@ -458,7 +456,7 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
 }
 
 @media screen and (min-width: 30em) {
-  .vhide__a {
+  .a__vhide {
     position: absolute !important;
     clip: rect(0 0 0 0);
     clip: rect(0, 0, 0, 0);
@@ -469,136 +467,129 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     width: 1px !important;
     overflow: hidden;
   }
-  body:hover .vhide__a a, body:hover .vhide__a input, body:hover .vhide__a button {
+  body:hover .a__vhide a, body:hover .a__vhide input, body:hover .a__vhide button {
     display: none !important;
   }
 
-  .hide__a {
+  .a__hide {
     pointer-events: none;
     visibility: hidden;
     opacity: 0;
   }
 
-  .show__a {
+  .a__show {
     pointer-events: initial;
     visibility: visible;
     opacity: 1;
   }
 
-  .d-none__a {
+  .a__d-none {
     display: none !important;
   }
 
-  .d-flex__a {
+  .a__d-flex {
     display: flex !important;
   }
-  .d-flex__a > * {
-    flex: 0 0 auto;
-    max-width: 100%;
-    min-width: 0%;
-    overflow-wrap: break-word;
-  }
 
-  .d-flex-y__a {
+  .a__d-flex-y {
     display: flex !important;
     flex-direction: column;
-    align-items: stretch;
-  }
-  .d-flex-y__a > * {
-    flex: 0 0 auto;
-    max-width: 100%;
-    overflow-wrap: break-word;
   }
 
-  .d-grid__a {
+  .a__d-grid {
     display: grid !important;
   }
 
-  .d-block__a {
+  .a__d-grid-y {
+    display: grid !important;
+    grid-auto-flow: column;
+  }
+
+  .a__d-block {
     display: block !important;
   }
 
-  .d-iblock__a {
+  .a__d-iblock {
     display: inline-block !important;
     vertical-align: baseline;
   }
 
-  .d-inline__a {
+  .a__d-inline {
     display: inline !important;
     vertical-align: baseline;
   }
 
-  .static__a {
+  .a__static {
     position: static;
   }
 
-  .rel__a {
+  .a__rel {
     position: relative;
   }
 
-  .fix__a {
+  .a__fix {
     position: fixed;
   }
 
-  .fix-tl__a {
+  .a__fix-tl {
     top: 0;
     left: 0;
   }
 
-  .fix-tr__a {
+  .a__fix-tr {
     top: 0;
     right: 0;
   }
 
-  .fix-bl__a {
+  .a__fix-bl {
     bottom: 0;
     left: 0;
   }
 
-  .fix-br__a {
+  .a__fix-br {
     bottom: 0;
     right: 0;
   }
 
-  .fix-trbl__a {
+  .a__fix-trbl {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
 
-  .abs__a {
+  .a__abs {
     position: absolute;
   }
 
-  .abs-tl__a {
+  .a__abs-tl {
     top: 0;
     left: 0;
   }
 
-  .abs-tr__a {
+  .a__abs-tr {
     top: 0;
     right: 0;
   }
 
-  .abs-bl__a {
+  .a__abs-bl {
     bottom: 0;
     left: 0;
   }
 
-  .abs-br__a {
+  .a__abs-br {
     bottom: 0;
     right: 0;
   }
 
-  .abs-trbl__a {
+  .a__abs-trbl {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
 
-  .abs-cover__a {
+  .a__abs-cover {
     top: 0;
     left: 0;
     width: 100%;
@@ -606,7 +597,7 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     object-fit: cover;
   }
 
-  .abs-contain__a {
+  .a__abs-contain {
     top: 0;
     left: 0;
     width: 100%;
@@ -614,168 +605,168 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     object-fit: contain;
   }
 
-  .a-left__a {
+  .a__a-left {
     text-align: left;
   }
 
-  .a-center__a {
+  .a__a-center {
     text-align: center;
   }
 
-  .a-right__a {
+  .a__a-right {
     text-align: right;
   }
 
-  .a-top__a {
+  .a__a-top {
     vertical-align: top;
   }
 
-  .a-middle__a {
+  .a__a-middle {
     vertical-align: middle;
   }
 
-  .a-baseline__a {
+  .a__a-baseline {
     vertical-align: baseline;
   }
 
-  .a-bottom__a {
+  .a__a-bottom {
     vertical-align: bottom;
   }
 
-  .ai-stretch__a {
+  .a__ai-stretch {
     align-items: stretch;
   }
 
-  .ai-center__a {
+  .a__ai-center {
     align-items: center;
   }
 
-  .ai-baseline__a {
+  .a__ai-baseline {
     align-items: baseline;
   }
 
-  .ai-start__a {
+  .a__ai-start {
     align-items: flex-start;
   }
 
-  .ai-end__a {
+  .a__ai-end {
     align-items: flex-end;
   }
 
-  .as-stretch__a {
+  .a__as-stretch {
     align-self: stretch;
   }
 
-  .as-center__a {
+  .a__as-center {
     align-self: center;
   }
 
-  .as-baseline__a {
+  .a__as-baseline {
     align-self: baseline;
   }
 
-  .as-start__a {
+  .a__as-start {
     align-self: flex-start;
   }
 
-  .as-end__a {
+  .a__as-end {
     align-self: flex-end;
   }
 
-  .ac-stretch__a {
+  .a__ac-stretch {
     align-content: stretch;
   }
 
-  .ac-center__a {
+  .a__ac-center {
     align-content: center;
   }
 
-  .ac-baseline__a {
+  .a__ac-baseline {
     align-content: baseline;
   }
 
-  .ac-start__a {
+  .a__ac-start {
     align-content: flex-start;
   }
 
-  .ac-end__a {
+  .a__ac-end {
     align-content: flex-end;
   }
 
-  .ac-between__a {
+  .a__ac-between {
     align-content: space-between;
   }
 
-  .ac-around__a {
+  .a__ac-around {
     align-content: space-around;
   }
 
-  .jc-stretch__a {
+  .a__jc-stretch {
     justify-content: stretch;
   }
 
-  .jc-center__a {
+  .a__jc-center {
     justify-content: center;
   }
 
-  .jc-start__a {
+  .a__jc-start {
     justify-content: flex-start;
   }
 
-  .jc-end__a {
+  .a__jc-end {
     justify-content: flex-end;
   }
 
-  .jc-between__a {
+  .a__jc-between {
     justify-content: space-between;
   }
 
-  .jc-around__a {
+  .a__jc-around {
     justify-content: space-around;
   }
 
-  .jc-evenly__a {
+  .a__jc-evenly {
     justify-content: space-evenly;
   }
 
-  .fx-1-0__a {
+  .a__fx-1-0 {
     flex: 1 0 auto;
   }
 
-  .fx-0-1__a {
+  .a__fx-0-1 {
     flex: 0 1 auto;
   }
 
-  .fx-1-1__a {
+  .a__fx-1-1 {
     flex: 1 1 auto;
   }
 
-  .fx-0-0__a {
+  .a__fx-0-0 {
     flex: 0 0 auto;
   }
 
-  .fit-none__a {
+  .a__fit-none {
     object-fit: none;
   }
 
-  .fit-fill__a {
+  .a__fit-fill {
     object-fit: fill;
   }
 
-  .fit-cover__a {
+  .a__fit-cover {
     object-fit: cover;
   }
 
-  .fit-contain__a {
+  .a__fit-contain {
     object-fit: contain;
   }
 
-  .fit-scale-down__a {
+  .a__fit-scale-down {
     object-fit: scale-down;
   }
 }
 @media screen and (min-width: 40em) {
-  .vhide__b {
+  .b__vhide {
     position: absolute !important;
     clip: rect(0 0 0 0);
     clip: rect(0, 0, 0, 0);
@@ -786,136 +777,129 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     width: 1px !important;
     overflow: hidden;
   }
-  body:hover .vhide__b a, body:hover .vhide__b input, body:hover .vhide__b button {
+  body:hover .b__vhide a, body:hover .b__vhide input, body:hover .b__vhide button {
     display: none !important;
   }
 
-  .hide__b {
+  .b__hide {
     pointer-events: none;
     visibility: hidden;
     opacity: 0;
   }
 
-  .show__b {
+  .b__show {
     pointer-events: initial;
     visibility: visible;
     opacity: 1;
   }
 
-  .d-none__b {
+  .b__d-none {
     display: none !important;
   }
 
-  .d-flex__b {
+  .b__d-flex {
     display: flex !important;
   }
-  .d-flex__b > * {
-    flex: 0 0 auto;
-    max-width: 100%;
-    min-width: 0%;
-    overflow-wrap: break-word;
-  }
 
-  .d-flex-y__b {
+  .b__d-flex-y {
     display: flex !important;
     flex-direction: column;
-    align-items: stretch;
-  }
-  .d-flex-y__b > * {
-    flex: 0 0 auto;
-    max-width: 100%;
-    overflow-wrap: break-word;
   }
 
-  .d-grid__b {
+  .b__d-grid {
     display: grid !important;
   }
 
-  .d-block__b {
+  .b__d-grid-y {
+    display: grid !important;
+    grid-auto-flow: column;
+  }
+
+  .b__d-block {
     display: block !important;
   }
 
-  .d-iblock__b {
+  .b__d-iblock {
     display: inline-block !important;
     vertical-align: baseline;
   }
 
-  .d-inline__b {
+  .b__d-inline {
     display: inline !important;
     vertical-align: baseline;
   }
 
-  .static__b {
+  .b__static {
     position: static;
   }
 
-  .rel__b {
+  .b__rel {
     position: relative;
   }
 
-  .fix__b {
+  .b__fix {
     position: fixed;
   }
 
-  .fix-tl__b {
+  .b__fix-tl {
     top: 0;
     left: 0;
   }
 
-  .fix-tr__b {
+  .b__fix-tr {
     top: 0;
     right: 0;
   }
 
-  .fix-bl__b {
+  .b__fix-bl {
     bottom: 0;
     left: 0;
   }
 
-  .fix-br__b {
+  .b__fix-br {
     bottom: 0;
     right: 0;
   }
 
-  .fix-trbl__b {
+  .b__fix-trbl {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
 
-  .abs__b {
+  .b__abs {
     position: absolute;
   }
 
-  .abs-tl__b {
+  .b__abs-tl {
     top: 0;
     left: 0;
   }
 
-  .abs-tr__b {
+  .b__abs-tr {
     top: 0;
     right: 0;
   }
 
-  .abs-bl__b {
+  .b__abs-bl {
     bottom: 0;
     left: 0;
   }
 
-  .abs-br__b {
+  .b__abs-br {
     bottom: 0;
     right: 0;
   }
 
-  .abs-trbl__b {
+  .b__abs-trbl {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
 
-  .abs-cover__b {
+  .b__abs-cover {
     top: 0;
     left: 0;
     width: 100%;
@@ -923,7 +907,7 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     object-fit: cover;
   }
 
-  .abs-contain__b {
+  .b__abs-contain {
     top: 0;
     left: 0;
     width: 100%;
@@ -931,168 +915,168 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     object-fit: contain;
   }
 
-  .a-left__b {
+  .b__a-left {
     text-align: left;
   }
 
-  .a-center__b {
+  .b__a-center {
     text-align: center;
   }
 
-  .a-right__b {
+  .b__a-right {
     text-align: right;
   }
 
-  .a-top__b {
+  .b__a-top {
     vertical-align: top;
   }
 
-  .a-middle__b {
+  .b__a-middle {
     vertical-align: middle;
   }
 
-  .a-baseline__b {
+  .b__a-baseline {
     vertical-align: baseline;
   }
 
-  .a-bottom__b {
+  .b__a-bottom {
     vertical-align: bottom;
   }
 
-  .ai-stretch__b {
+  .b__ai-stretch {
     align-items: stretch;
   }
 
-  .ai-center__b {
+  .b__ai-center {
     align-items: center;
   }
 
-  .ai-baseline__b {
+  .b__ai-baseline {
     align-items: baseline;
   }
 
-  .ai-start__b {
+  .b__ai-start {
     align-items: flex-start;
   }
 
-  .ai-end__b {
+  .b__ai-end {
     align-items: flex-end;
   }
 
-  .as-stretch__b {
+  .b__as-stretch {
     align-self: stretch;
   }
 
-  .as-center__b {
+  .b__as-center {
     align-self: center;
   }
 
-  .as-baseline__b {
+  .b__as-baseline {
     align-self: baseline;
   }
 
-  .as-start__b {
+  .b__as-start {
     align-self: flex-start;
   }
 
-  .as-end__b {
+  .b__as-end {
     align-self: flex-end;
   }
 
-  .ac-stretch__b {
+  .b__ac-stretch {
     align-content: stretch;
   }
 
-  .ac-center__b {
+  .b__ac-center {
     align-content: center;
   }
 
-  .ac-baseline__b {
+  .b__ac-baseline {
     align-content: baseline;
   }
 
-  .ac-start__b {
+  .b__ac-start {
     align-content: flex-start;
   }
 
-  .ac-end__b {
+  .b__ac-end {
     align-content: flex-end;
   }
 
-  .ac-between__b {
+  .b__ac-between {
     align-content: space-between;
   }
 
-  .ac-around__b {
+  .b__ac-around {
     align-content: space-around;
   }
 
-  .jc-stretch__b {
+  .b__jc-stretch {
     justify-content: stretch;
   }
 
-  .jc-center__b {
+  .b__jc-center {
     justify-content: center;
   }
 
-  .jc-start__b {
+  .b__jc-start {
     justify-content: flex-start;
   }
 
-  .jc-end__b {
+  .b__jc-end {
     justify-content: flex-end;
   }
 
-  .jc-between__b {
+  .b__jc-between {
     justify-content: space-between;
   }
 
-  .jc-around__b {
+  .b__jc-around {
     justify-content: space-around;
   }
 
-  .jc-evenly__b {
+  .b__jc-evenly {
     justify-content: space-evenly;
   }
 
-  .fx-1-0__b {
+  .b__fx-1-0 {
     flex: 1 0 auto;
   }
 
-  .fx-0-1__b {
+  .b__fx-0-1 {
     flex: 0 1 auto;
   }
 
-  .fx-1-1__b {
+  .b__fx-1-1 {
     flex: 1 1 auto;
   }
 
-  .fx-0-0__b {
+  .b__fx-0-0 {
     flex: 0 0 auto;
   }
 
-  .fit-none__b {
+  .b__fit-none {
     object-fit: none;
   }
 
-  .fit-fill__b {
+  .b__fit-fill {
     object-fit: fill;
   }
 
-  .fit-cover__b {
+  .b__fit-cover {
     object-fit: cover;
   }
 
-  .fit-contain__b {
+  .b__fit-contain {
     object-fit: contain;
   }
 
-  .fit-scale-down__b {
+  .b__fit-scale-down {
     object-fit: scale-down;
   }
 }
 @media screen and (min-width: 60em) {
-  .vhide__c {
+  .c__vhide {
     position: absolute !important;
     clip: rect(0 0 0 0);
     clip: rect(0, 0, 0, 0);
@@ -1103,136 +1087,129 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     width: 1px !important;
     overflow: hidden;
   }
-  body:hover .vhide__c a, body:hover .vhide__c input, body:hover .vhide__c button {
+  body:hover .c__vhide a, body:hover .c__vhide input, body:hover .c__vhide button {
     display: none !important;
   }
 
-  .hide__c {
+  .c__hide {
     pointer-events: none;
     visibility: hidden;
     opacity: 0;
   }
 
-  .show__c {
+  .c__show {
     pointer-events: initial;
     visibility: visible;
     opacity: 1;
   }
 
-  .d-none__c {
+  .c__d-none {
     display: none !important;
   }
 
-  .d-flex__c {
+  .c__d-flex {
     display: flex !important;
   }
-  .d-flex__c > * {
-    flex: 0 0 auto;
-    max-width: 100%;
-    min-width: 0%;
-    overflow-wrap: break-word;
-  }
 
-  .d-flex-y__c {
+  .c__d-flex-y {
     display: flex !important;
     flex-direction: column;
-    align-items: stretch;
-  }
-  .d-flex-y__c > * {
-    flex: 0 0 auto;
-    max-width: 100%;
-    overflow-wrap: break-word;
   }
 
-  .d-grid__c {
+  .c__d-grid {
     display: grid !important;
   }
 
-  .d-block__c {
+  .c__d-grid-y {
+    display: grid !important;
+    grid-auto-flow: column;
+  }
+
+  .c__d-block {
     display: block !important;
   }
 
-  .d-iblock__c {
+  .c__d-iblock {
     display: inline-block !important;
     vertical-align: baseline;
   }
 
-  .d-inline__c {
+  .c__d-inline {
     display: inline !important;
     vertical-align: baseline;
   }
 
-  .static__c {
+  .c__static {
     position: static;
   }
 
-  .rel__c {
+  .c__rel {
     position: relative;
   }
 
-  .fix__c {
+  .c__fix {
     position: fixed;
   }
 
-  .fix-tl__c {
+  .c__fix-tl {
     top: 0;
     left: 0;
   }
 
-  .fix-tr__c {
+  .c__fix-tr {
     top: 0;
     right: 0;
   }
 
-  .fix-bl__c {
+  .c__fix-bl {
     bottom: 0;
     left: 0;
   }
 
-  .fix-br__c {
+  .c__fix-br {
     bottom: 0;
     right: 0;
   }
 
-  .fix-trbl__c {
+  .c__fix-trbl {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
 
-  .abs__c {
+  .c__abs {
     position: absolute;
   }
 
-  .abs-tl__c {
+  .c__abs-tl {
     top: 0;
     left: 0;
   }
 
-  .abs-tr__c {
+  .c__abs-tr {
     top: 0;
     right: 0;
   }
 
-  .abs-bl__c {
+  .c__abs-bl {
     bottom: 0;
     left: 0;
   }
 
-  .abs-br__c {
+  .c__abs-br {
     bottom: 0;
     right: 0;
   }
 
-  .abs-trbl__c {
+  .c__abs-trbl {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
 
-  .abs-cover__c {
+  .c__abs-cover {
     top: 0;
     left: 0;
     width: 100%;
@@ -1240,7 +1217,7 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     object-fit: cover;
   }
 
-  .abs-contain__c {
+  .c__abs-contain {
     top: 0;
     left: 0;
     width: 100%;
@@ -1248,163 +1225,163 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
     object-fit: contain;
   }
 
-  .a-left__c {
+  .c__a-left {
     text-align: left;
   }
 
-  .a-center__c {
+  .c__a-center {
     text-align: center;
   }
 
-  .a-right__c {
+  .c__a-right {
     text-align: right;
   }
 
-  .a-top__c {
+  .c__a-top {
     vertical-align: top;
   }
 
-  .a-middle__c {
+  .c__a-middle {
     vertical-align: middle;
   }
 
-  .a-baseline__c {
+  .c__a-baseline {
     vertical-align: baseline;
   }
 
-  .a-bottom__c {
+  .c__a-bottom {
     vertical-align: bottom;
   }
 
-  .ai-stretch__c {
+  .c__ai-stretch {
     align-items: stretch;
   }
 
-  .ai-center__c {
+  .c__ai-center {
     align-items: center;
   }
 
-  .ai-baseline__c {
+  .c__ai-baseline {
     align-items: baseline;
   }
 
-  .ai-start__c {
+  .c__ai-start {
     align-items: flex-start;
   }
 
-  .ai-end__c {
+  .c__ai-end {
     align-items: flex-end;
   }
 
-  .as-stretch__c {
+  .c__as-stretch {
     align-self: stretch;
   }
 
-  .as-center__c {
+  .c__as-center {
     align-self: center;
   }
 
-  .as-baseline__c {
+  .c__as-baseline {
     align-self: baseline;
   }
 
-  .as-start__c {
+  .c__as-start {
     align-self: flex-start;
   }
 
-  .as-end__c {
+  .c__as-end {
     align-self: flex-end;
   }
 
-  .ac-stretch__c {
+  .c__ac-stretch {
     align-content: stretch;
   }
 
-  .ac-center__c {
+  .c__ac-center {
     align-content: center;
   }
 
-  .ac-baseline__c {
+  .c__ac-baseline {
     align-content: baseline;
   }
 
-  .ac-start__c {
+  .c__ac-start {
     align-content: flex-start;
   }
 
-  .ac-end__c {
+  .c__ac-end {
     align-content: flex-end;
   }
 
-  .ac-between__c {
+  .c__ac-between {
     align-content: space-between;
   }
 
-  .ac-around__c {
+  .c__ac-around {
     align-content: space-around;
   }
 
-  .jc-stretch__c {
+  .c__jc-stretch {
     justify-content: stretch;
   }
 
-  .jc-center__c {
+  .c__jc-center {
     justify-content: center;
   }
 
-  .jc-start__c {
+  .c__jc-start {
     justify-content: flex-start;
   }
 
-  .jc-end__c {
+  .c__jc-end {
     justify-content: flex-end;
   }
 
-  .jc-between__c {
+  .c__jc-between {
     justify-content: space-between;
   }
 
-  .jc-around__c {
+  .c__jc-around {
     justify-content: space-around;
   }
 
-  .jc-evenly__c {
+  .c__jc-evenly {
     justify-content: space-evenly;
   }
 
-  .fx-1-0__c {
+  .c__fx-1-0 {
     flex: 1 0 auto;
   }
 
-  .fx-0-1__c {
+  .c__fx-0-1 {
     flex: 0 1 auto;
   }
 
-  .fx-1-1__c {
+  .c__fx-1-1 {
     flex: 1 1 auto;
   }
 
-  .fx-0-0__c {
+  .c__fx-0-0 {
     flex: 0 0 auto;
   }
 
-  .fit-none__c {
+  .c__fit-none {
     object-fit: none;
   }
 
-  .fit-fill__c {
+  .c__fit-fill {
     object-fit: fill;
   }
 
-  .fit-cover__c {
+  .c__fit-cover {
     object-fit: cover;
   }
 
-  .fit-contain__c {
+  .c__fit-contain {
     object-fit: contain;
   }
 
-  .fit-scale-down__c {
+  .c__fit-scale-down {
     object-fit: scale-down;
   }
 }

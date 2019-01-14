@@ -10,25 +10,32 @@
   }
 }
 
-@function base-m-class($base, $solo: true, $_...) {
+@function m-base-class($base, $solo: true, $m: $curr-m, $_...) {
+  $m__: if($m, '#{$m}__', '');
   @if $solo {
-    @return selector-parse('.#{$base}, [class^="#{$base}__"], [class*=" #{$base}__"]');
+    @return selector-parse('.#{$m__}#{$base}, [class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
   } @else {
-    @return selector-parse('[class^="#{$base}__"], [class*=" #{$base}__"]');
+    @return selector-parse('[class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
   }
 }
 
-// @function base-class($str) {
-//   @return selector-parse("[class^='#{$str}-'], [class*=' #{$str}-']");
-// }
-
-// @function mod-class($str) {
-//   @return selector-parse("[class$='-#{$str}'], [class*='-#{$str} ']")
-// }
-
-
 @function m-suffix($m: $curr-m) {
   @return if($m, '__#{$m}', '');
+}
+
+@function m-prefix($m: $curr-m) {
+  @return if($m, '#{$m}__', '');
+}
+
+@function m-prefixize($sel, $ms...) {
+  $sel: selector-parse($sel); $out: ();
+  @each $m in $ms {
+    $fix: m-prefix($m);
+    @each $sub in $sel {
+      $out: append($out, selector-parse('#{$fix}#{$sub}'), 'comma');
+    }
+  }
+  @return $out;
 }
 
 @function m-suffixize($sel, $ms...) {

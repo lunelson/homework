@@ -42,11 +42,11 @@
 /////////////////////////////////////////////
 
 @function base-class($base, $solo: true, $m: $curr-m, $_...) {
-  $__m: if($m, '#{$m}__', '');
+  $m__: if($m, '#{$m}__', '');
   @if $solo {
-    @return selector-parse('.#{$__m}#{$base}, [class^="#{$__m}#{$base}-"], [class*=" #{$__m}#{$base}-"]');
+    @return selector-parse('.#{$m__}#{$base}, [class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
   } @else {
-    @return selector-parse('[class^="#{$__m}#{$base}-"], [class*=" #{$__m}#{$base}-"]');
+    @return selector-parse('[class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
   }
 }
 
@@ -70,11 +70,11 @@
 
 
 @function cols() {
-  @return if($homework-is-modern, var(--cols), m-var('grid-cols'));
+  @return if($homework-is-modern, var(--col-base), m-var('grid-cols'));
 }
 
 @function rows() {
-  @return if($homework-is-modern, var(--rows), m-var('grid-rows') or m-var('grid-cols'));
+  @return if($homework-is-modern, var(--row-base), m-var('grid-rows') or m-var('grid-cols'));
 }
 
 @function row-gap($y: null) {
@@ -115,7 +115,7 @@
 }
 
 @mixin flow-cell($n: null, $l: null, $r: null, $cols: cols()) {
-  @if $n and $homework-is-modern { & > * { --cols: #{$n}; } }
+  @if $n and $homework-is-modern { & > * { --col-base: #{$n}; } }
   @if $n { width: flow-span($n, $cols); }
   @if $l { margin-left: flow-span($l, $cols); }
   @if $r { margin-right: flow-span($r, $cols); }
@@ -130,7 +130,7 @@
 }
 
 @mixin solo-cell($n: null, $l: null, $r: null, $cols: cols()) {
-  @if $n and $homework-is-modern { & > * { --cols: #{$n}; } }
+  @if $n and $homework-is-modern { & > * { --col-base: #{$n}; } }
   @if $n { width: solo-span($n, $cols); }
   @if $l { margin-left: solo-push($l, $cols); }
   @if $r { margin-right: solo-push($r, $cols); }
@@ -151,26 +151,27 @@
 /*
   TODO / THINK
 
-  - replace --cols, --rows with --col-count, --row-count
+  - replace --col-base, --row-base with --col-count, --row-count
   - reconsider grid-template-rows value for 'grid' base class?
 */
 
-@mixin homework-setup-flow2($max-columns: max-columns(), $ratios: false) {
+@mixin homework-setup-flow2($max-columns: max-columns(), $row-classes: false) {
 
   *, *:before, *:after {
-    --row-span: initial;
+    // --row-span: initial;
     --push-l: initial;
     --push-r: initial;
-    --row: initial;
-    --col: initial;
+    // --row: initial;
+    // --col: initial;
   }
 
   :root {
-    --cols: var(--grid-cols);
-    --rows: var(--grid-rows, 1);
     --row-gap: var(--inner-y);
     --col-gap: var(--inner-x);
-    --col-span: var(--cols);
+    --col-base: var(--grid-cols);
+    // --row-base: var(--grid-rows, 1);
+    --col-span: var(--col-base);
+    --row-span: var(--grid-rows, 1);
   }
 
 
@@ -203,15 +204,15 @@
   #{base-class('grid')} {
     display: grid;
     grid-gap: var(--row-gap) var(--col-gap);
-    grid-template-rows: repeat(var(--rows), 1fr); // could be 0% instead of auto ?
-    grid-template-columns: repeat(var(--cols), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule for flex flow...
+    grid-template-rows: repeat(var(--row-span), 1fr); // could be 0% instead of auto ?
+    grid-template-columns: repeat(var(--col-span), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule for flex flow...
     & > * {
-      grid-column-end: span var(--cols);
+      grid-column-end: span var(--col-span);
     }
   }
 
-  #{base-class('cols', false)} { grid-template-columns: var(--cols); }
-  #{base-class('rows', false)} { grid-template-rows: var(--rows); }
+  // #{base-class('cols', false)} { grid-template-columns: var(--col-base); }
+  // #{base-class('rows', false)} { grid-template-rows: var(--row-base); }
 
   @each $y in map-keys(inner-y-mods()) { .flow-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); } }
   @each $x in map-keys(inner-x-mods()) { .flow-x-#{$x}, .grid-x-#{$x} { --col-gap: var(--inner-x-#{$x}); } }
@@ -228,79 +229,102 @@
       /////////////////////////////////////////////
 
       #{base-class('span')} {
-        width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--cols) - var(--col-gap));
+        width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          width: calc(99.99999% * var(--col-span) / var(--cols));
+          width: calc(99.99999% * var(--col-span) / var(--col-base));
         }
         @at-root #{selector-insert(base-class('grid'), '>')} {
           width: unset;
-          grid-column: auto / span var(--col-span);
+          grid-column-end: span var(--col-span);
         }
       }
 
-      #{base-class('pull-l', false)},
-      #{base-class('push-l', false)} {
-        margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--cols));
+      #{base-class('pull', false)},
+      #{base-class('push', false)} {
+        margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          margin-left: calc(99.99999% * var(--push-l) / var(--cols));
+          margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
         }
       }
 
       #{base-class('pull-r', false)},
       #{base-class('push-r', false)} {
-        margin-left: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--cols));
+        margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          margin-left: calc(99.99999% * var(--push-r) / var(--cols));
+          margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
         }
       }
 
       #{base-class('span-y', false)} { grid-row-end: span var(--row-span); }
-      #{base-class('col', false)} { grid-column-start: var(--col); }
-      #{base-class('row', false)} { grid-row-start: var(--row); }
+      // #{base-class('col', false)} { grid-column-start: var(--col); }
+      // #{base-class('row', false)} { grid-row-start: var(--row); }
 
       #{base-class('span-auto')} { flex: 1 1 0%; --col-span: 0; }
-      #{base-class('span-all')} { --col-span: var(--cols); }
-      #{base-class('span-y-all')} { --row-span: var(--rows); }
+      #{base-class('span-all')} { --col-span: var(--col-base); }
+      // #{base-class('span-y-all')} { --row-span: var(--row-base); }
 
       /////////////////////////////////////////////
       /////////// PER MEDIUM MOD CLASSES //////////
       /////////////////////////////////////////////
 
-      $__m: if($m, '#{$m}__', '');
+      $m__: m-prefix();
 
       @for $n from 0 through max-columns() {
         // TODO: span-all, span-auto
         // TODO: span-y-all, span-y-auto ??
 
+        @for $b from 2 through (max-columns() + 1) {
+          @for $a from 1 through ($b - 1) {
+            // $pairs: append($pairs, #{$a}-#{$b});
+            // $map: map-set($map, $a, append(map-get($map, $a) or (), ($a $b)));
+
+            @if $row-classes {
+              .#{$m__}row-#{$a}-#{$b} {
+                grid-row: #{$a} / #{$b};
+                --row-span: #{$b - $a};
+                // --row-base: #{$b - $a};
+                // > * { --row-base: #{$b - $a}; }
+              }
+            }
+
+            .#{$m__}col-#{$a}-#{$b} {
+              grid-column: #{$a} / #{$b};
+              --col-span: #{$b - $a};
+              // --col-base: #{$b - $a};
+              & > * { --col-base: #{$b - $a}; }
+            }
+          }
+        }
+
         @if $n > 0 {
-          .#{$__m}span-#{$n} { --col-span: #{$n}; & > * { --cols: #{$n}; } }
-          .#{$__m}span-y-#{$n} { --row-span: #{$n}; & > * { --rows: #{$n}; } }
-        }
-        .#{$__m}pull-l-#{$n} { --push-l: #{$n*-1}; }
-        .#{$__m}pull-r-#{$n} { --push-r: #{$n*-1}; }
-        .#{$__m}push-l-#{$n} { --push-l: #{$n}; }
-        .#{$__m}push-r-#{$n} { --push-r: #{$n}; }
-      }
-
-
-      @for $b from 2 through (max-columns() + 1) {
-        @for $a from 1 through ($b - 1) {
-          // $pairs: append($pairs, #{$a}-#{$b});
-          // $map: map-set($map, $a, append(map-get($map, $a) or (), ($a $b)));
-
-          .#{$__m}row-#{$a}-#{$b} {
-            grid-row: #{$a} / #{$b};
-            --row-span: #{$b - $a};
-            --rows: #{$b - $a};
-            // > * { --rows: #{$b - $a}; }
+          .#{$m__}span-#{$n},
+          .#{$m__}cols-#{$n} {
+            & > * { --col-base: #{$n}; }
           }
-          .#{$__m}col-#{$a}-#{$b} {
-            grid-column: #{$a} / #{$b};
-            --col-span: #{$b - $a};
-            --cols: #{$b - $a};
-            // > * { --cols: #{$b - $a}; }
+          .#{$m__}span-#{$n} {
+            --col-span: #{$n};
+            // & > * { --col-base: #{$n}; }
+          }
+          .#{$m__}span-y-#{$n} {
+            --row-span: #{$n};
+          }
+
+          .#{$m__}cols-#{$n} {
+            @at-root #{selector-unify(&, base-class('grid', true, null))} {
+              --col-span: #{$n};
+            }
+            // & > * { --col-base: #{$n}; }
+          }
+          .#{$m__}rows-#{$n} {
+            @at-root #{selector-unify(&, base-class('grid', true, null))} {
+              --row-span: #{$n};
+            }
           }
         }
+        .#{$m__}pull-#{$n} { --push-l: #{$n*-1}; }
+        .#{$m__}pull-r-#{$n} { --push-r: #{$n*-1}; }
+        .#{$m__}push-#{$n} { --push-l: #{$n}; }
+        .#{$m__}push-r-#{$n} { --push-r: #{$n}; }
       }
 
     }

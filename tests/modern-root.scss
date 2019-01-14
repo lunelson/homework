@@ -37,6 +37,7 @@ $media: (
   ),
   b: (
     breakpoint: 40em,
+    line-height: 1.25,
     // font-size: 20px,
     // inner-y-mods: (
     //   l: 4px
@@ -59,6 +60,5 @@ $media: (
 // /* #{map-inspect($root)} */
 /* #{map-inspect($media)} */
 @include homework-setup-core();
-@include homework-setup-root();
 // /* #{map-inspect($root)} */
 /* #{map-inspect($media)} */

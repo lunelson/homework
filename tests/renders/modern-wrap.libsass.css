@@ -22,21 +22,21 @@
 }
 
 @media screen and (min-width: 20em) {
-  .wrap-each__a,
+  .a__wrap-each,
   .wrap-a {
     --wrap-width: var(--outer-width);
   }
 }
 
 @media screen and (min-width: 30em) {
-  .wrap-each__b,
+  .b__wrap-each,
   .wrap-b {
     --wrap-width: var(--outer-width);
   }
 }
 
 @media screen and (min-width: 40em) {
-  .wrap-each__c,
+  .c__wrap-each,
   .wrap-c,
   .wrap-last {
     --wrap-width: var(--outer-width);

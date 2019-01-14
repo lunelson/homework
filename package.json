@@ -53,6 +53,7 @@
     "access": "public"
   },
   "ava": {
+    "verbose": false,
     "files": [
       "tests/*{.js,.scss}"
     ],

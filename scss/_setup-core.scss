@@ -15,35 +15,52 @@
   $media-orig: $media !global;
   $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
 
-  // modern only: custom props output
-  @if $modern and $output {
-    :root {
-      @include --medium-properties($root);
-      --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+  @if $output {
+
+    @if $modern {
+      :root {
+        @include --medium-properties($root);
+        --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+      }
+      html {
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+      }
+    } @else {
+      html {
+        font-size: map-get($incoming-medium, 'font-size');
+        line-height: map-get($incoming-medium, 'line-height');
+      }
     }
+
   }
 
   $outgoing-medium: $root;
   @each $m, $incoming-medium in $media {
 
-    // throw if the medium does not have a breakpoint key
     @if not index(map-keys($incoming-medium), 'breakpoint') {
       @include throw-error('homework: one of your $media does not have a breakpoint key');
     }
 
-    // parse, merge and merge-back
     $outgoing-medium: --parse-medium(--deep-merge($outgoing-medium, $incoming-medium));
     $media: map-merge($media, ($m: $outgoing-medium)) !global;
 
-    // modern only: custom props output
-    @if $modern and $output {
+    @if $output {
       @media #{--query-string(map-get($incoming-medium, 'breakpoint'))} {
-        :root {
-          @include --medium-properties($incoming-medium);
-          --outer-width: #{map-get($outgoing-medium, 'outer-width')};
+
+        @if $modern {
+          :root {
+            @include --medium-properties($incoming-medium);
+            --outer-width: #{map-get($outgoing-medium, 'outer-width')};
+          }
+        } @else {
+          html {
+            font-size: map-get($incoming-medium, 'font-size');
+            line-height: map-get($incoming-medium, 'line-height');
+          }
         }
+
       }
     }
-
   }
 }

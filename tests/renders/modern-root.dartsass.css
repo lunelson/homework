@@ -1,4 +1,4 @@
-/* ( a: ( breakpoint: 30em, outer-right: calc(31.25vw + -6.25rem), outer-left: calc(31.25vw + -6.25rem) ), b: ( breakpoint: 40em, font-defs: ( serif: ( l: 30px 1.1 ) ) ), c: ( font-size: 18px, breakpoint: 60em, outer-right: 200px, outer-left: 200px ) ) */
+/* ( a: ( breakpoint: 30em, outer-right: calc(31.25vw + -6.25rem), outer-left: calc(31.25vw + -6.25rem) ), b: ( breakpoint: 40em, line-height: 1.25, font-defs: ( serif: ( l: 30px 1.1 ) ) ), c: ( font-size: 18px, breakpoint: 60em, outer-right: 200px, outer-left: 200px ) ) */
 :root {
   --font-size: 16px;
   --line-height: 1.25;
@@ -19,6 +19,11 @@
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 }
 
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
 @media screen and (min-width: 30em) {
   :root {
     --breakpoint: 30em;
@@ -30,6 +35,7 @@
 @media screen and (min-width: 40em) {
   :root {
     --breakpoint: 40em;
+    --line-height: 1.25;
     --outer-width: 40rem;
   }
 }
@@ -42,9 +48,4 @@
     --outer-width: 53.3333333333rem;
   }
 }
-html {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
-}
-
 /* ( a: ( font-size: 16px, line-height: 1.25, inner-x: 1rem, inner-y: 1.5rem, outer-top: 2rem, outer-right: calc(31.25vw + -6.25rem), outer-bottom: 2rem, outer-left: calc(31.25vw + -6.25rem), grid-cols: 12, font-mods: ( sans: ( m: 18px 1.3, l: 24px 1.2 ), serif: ( m: 18px 1.3, l: 24px 1.2 ) ), inner-mods: ( s: 0.5, m: 1, l: 2 ), outer-width: 30rem, breakpoint: 30em ), b: ( font-size: 16px, line-height: 1.25, inner-x: 1rem, inner-y: 1.5rem, outer-top: 2rem, outer-right: calc(31.25vw + -6.25rem), outer-bottom: 2rem, outer-left: calc(31.25vw + -6.25rem), grid-cols: 12, font-mods: ( sans: ( m: 18px 1.3, l: 24px 1.2 ), serif: ( m: 18px 1.3, l: 24px 1.2 ) ), inner-mods: ( s: 0.5, m: 1, l: 2 ), outer-width: 40rem, breakpoint: 40em, font-defs: ( serif: ( l: 30px 1.1 ) ) ), c: ( font-size: 18px, line-height: 1.25, inner-x: 1rem, inner-y: 1.5rem, outer-top: 2rem, outer-right: 200px, outer-bottom: 2rem, outer-left: 200px, grid-cols: 12, font-mods: ( sans: ( m: 18px 1.3, l: 24px 1.2 ), serif: ( m: 18px 1.3, l: 24px 1.2 ) ), inner-mods: ( s: 0.5, m: 1, l: 2 ), outer-width: 53.3333333333rem, breakpoint: 60em, font-defs: ( serif: ( l: 30px 1.1 ) ) ) ) */

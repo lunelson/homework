@@ -6,6 +6,7 @@
   ),
   b: (
     breakpoint: 40em,
+    line-height: 1.25,
     font-defs: (
       serif: (
         l: 30px 1.1
@@ -39,6 +40,11 @@
   --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
 }
 
+html {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
 @media screen and (min-width: 30em) {
   :root {
     --breakpoint: 30em;
@@ -51,6 +57,7 @@
 @media screen and (min-width: 40em) {
   :root {
     --breakpoint: 40em;
+    --line-height: 1.25;
     --outer-width: 40rem;
   }
 }
@@ -63,11 +70,6 @@
     --outer-left: 200px;
     --outer-width: 53.3333333333rem;
   }
-}
-
-html {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
 }
 
 /* (
