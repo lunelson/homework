@@ -47,7 +47,7 @@
     :root {
       --row-gap: var(--inner-y);
       --column-gap: var(--inner-x);
-      --span-d: var(--grid-columns);
+      --span-d: var(--grid-cols);
       --span-n: var(--span-d);
     }
 
@@ -190,14 +190,14 @@
     // dimensions: explicit ratios
     // @if $ratios {
 
-    //   $media-grid-columns: ();
+    //   $media-grid-cols: ();
     //   $reduction-ratio-lists: ();
 
     //   @each $m, $medium in $media {
-    //     $media-grid-columns: append($media-grid-columns, map-get($medium, 'grid-columns'));
+    //     $media-grid-cols: append($media-grid-cols, map-get($medium, 'grid-cols'));
     //   }
 
-    //   @for $d from 1 through max($media-grid-columns...) {
+    //   @for $d from 1 through max($media-grid-cols...) {
     //     @for $n from 1 through $d {
     //       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
     //       $set: append(map-get($reduction-ratio-lists, $reduction) or (), $n $d);

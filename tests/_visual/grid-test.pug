@@ -11,73 +11,38 @@ append head
 
     body { font-family: sans-serif; }
 
-    .label::before {
+    .cell::before {
       font-family: monospace;
-      counter-reset: cp var(--span-n);
+      counter-reset: cp var(--col-span);
       content: counter(cp);
       display: block;
       width: 100%;
+      height: 100%;
       padding: 1em;
       background-color: #ddd;
-    }
-
-    .ispan {
-      --ispan: var(--span-d);
-      width: calc((100% + var(--column-gap)) / var(--span-d) * var(--ispan) - var(--column-gap));
-      padding: 10px;
-      background-color: green;
-      color: white;
-    }
-
-    .iml { margin-left: calc((100% + var(--column-gap)) / var(--span-d) * var(--iml)); }
-
-    .ispan-1 { --ispan: 1; }
-    .ispan-2 { --ispan: 2; }
-    .ispan-3 { --ispan: 3; }
-    .ispan-4 { --ispan: 4; }
-    .ispan-5 { --ispan: 5; }
-    .ispan-6 { --ispan: 6; }
-    .ispan-7 { --ispan: 7; }
-    .ispan-8 { --ispan: 8; }
-    .ispan-9 { --ispan: 9; }
-    .ispan-10 { --ispan: 10; }
-    .ispan-11 { --ispan: 11; }
-    .ispan-12 { --ispan: 12; }
-
-    .iml-1 { --iml: 1; }
-    .iml-2 { --iml: 2; }
-    .iml-3 { --iml: 3; }
-    .iml-4 { --iml: 4; }
-    .iml-5 { --iml: 5; }
-    .iml-6 { --iml: 6; }
-    .iml-7 { --iml: 7; }
-    .iml-8 { --iml: 8; }
-    .iml-9 { --iml: 9; }
-    .iml-10 { --iml: 10; }
-    .iml-11 { --iml: 11; }
-    .iml-12 { --iml: 12; }
-
-    :root {
-      --iml: var(--span-d);
-      --ispan: var(--span-d);
+      grid-column: auto / span var(--cols);
     }
 
 block body
 
-  //-
-    flow
-    span
-    ml
-    mr
-    ispan
-    iml
-    imr
-
   .wrap-last
-    .frame
-      .flow-m
+    .frame.stack-l
+
+      .grid
+        .cell.col-1-3.span-y-2
+        .cell.col-3-8.grid-xs.grid-x-xs
+          .cell.span-2
+          .cell.span-3
+          .cell.span-3
+          .cell.span-2
+        .cell.span-2.l__span-4
+        .cell
+
+      .stop.flow-m
+        .span-2.l__span-auto(style='background-color: orangered')
+          p= _casual.text
         .span
-          .label
+          .cell
           .ispan.ispan-1: p test
           .ispan.ispan-2: p test
           .ispan.ispan-3: p test
@@ -105,9 +70,9 @@ block body
 
       .flow-m
         .span
-          .label
+          .cell
         .span-6__m
-          .label
+          .cell
         .span-6__m
           .ispan: p test
           .ispan.ispan-1: p test
@@ -116,27 +81,27 @@ block body
           .ispan.ispan-4: p test
           .flow-m
             .span
-              .label
+              .cell
             .span-4
-              .label
+              .cell
         .span-3__l
-          .label
+          .cell
         .span-9__l
           .flow-m
             .span
-              .label
+              .cell
             .span-4
-              .label
+              .cell
             .span-5
               .flow-m
-                .span: .label
+                .span: .cell
                 .span-3
                   .flow-m
-                    .span: .label
-                    .span-2: .label
-                    .span-1: .label
+                    .span: .cell
+                    .span-2: .cell
+                    .span-1: .cell
                 .span-2
                   .flow-m
-                    .span: .label
-                    .span-1: .label
-                    .span-1: .label
+                    .span: .cell
+                    .span-1: .cell
+                    .span-1: .cell

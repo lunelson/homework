@@ -25,21 +25,88 @@ $media: (
 );
 
 @include homework-setup-core($output: false);
-@include homework-setup-flow2();
 
-// .test { @include span(1, -1, 2); }
-// .test { @include span(2, -1, 2); }
-// .test { @include span(3, -1, 2); }
-
-// .m-test {
-//   @include spans((
-//     a: 2 0 -1,
-//     b: 3 0 1
-//   ));
-//   .nest {
-//     @include spans-i((
-//       a: 3 1 1,
-//       b: 4 2 2
-//     ));
-//   }
+// .grid-fns {
+//   /* fetching vars */
+//   content: cols();
+//   content: rows();
+//   content: col-gap();
+//   content: row-gap();
+//   content: max-columns();
+//   /* flow span */
+//   content: flow-span();
+//   content: flow-span(1);
+//   content: flow-span(var(--span));
+//   content: flow-push();
+//   content: flow-pull();
+//   /* solo span */
+//   content: solo-span();
+//   content: solo-span(1);
+//   content: solo-span(var(--span));
+//   content: solo-push();
+//   content: solo-pull();
 // }
+
+// .flow-cell-mixins {
+//   @include flow-cell();
+//   @include flow-cell(2);
+//   @include flow-cell(2,1);
+//   @include flow-cell(2,1,1);
+//   @include flow-cell(2,-1,-1);
+// }
+
+// .solo-cell-mixins {
+//   @include solo-cell();
+//   @include solo-cell(2);
+//   @include solo-cell(2,1);
+//   @include solo-cell(2,1,1);
+//   @include solo-cell(2,-1,-1);
+// }
+
+// .flow-cells-mixins {
+//   @include flow-cells((
+//     null: 3,
+//     b: ()
+//   ));
+//   @include flow-cells((
+//     null: 3,
+//     b: (2)
+//   ));
+//   @include flow-cells((
+//     null: 3,
+//     b: (2,1)
+//   ));
+//   @include flow-cells((
+//     null: 3,
+//     b: (2,1,1)
+//   ));
+//   @include flow-cells((
+//     null: 3,
+//     b: (2,-1,-1)
+//   ));
+// }
+
+// .solo-cells-mixins {
+//   @include solo-cells((
+//     null: 3,
+//     b: ()
+//   ));
+//   @include solo-cells((
+//     null: 3,
+//     b: (2)
+//   ));
+//   @include solo-cells((
+//     null: 3,
+//     b: (2,1)
+//   ));
+//   @include solo-cells((
+//     null: 3,
+//     b: (2,1,1)
+//   ));
+//   @include solo-cells((
+//     null: 3,
+//     b: (2,-1,-1)
+//   ));
+// }
+
+@include homework-setup-flow2();

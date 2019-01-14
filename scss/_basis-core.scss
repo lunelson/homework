@@ -25,7 +25,7 @@ $root-defaults: (
   outer-right: 2rem,
   outer-bottom: 2rem,
   outer-left: 2rem,
-  grid-columns: 12,
+  grid-cols: 12,
 
   // mods
   // NB: default to one set of mods for both axes
@@ -194,7 +194,7 @@ $media-defaults: (
 // @function --max-columns() {
 //   $column-counts: ();
 //   @each $m, $medium in $media {
-//     $column-counts: append($column-counts, map-get($media, $m, 'grid-columns'));
+//     $column-counts: append($column-counts, map-get($media, $m, 'grid-cols'));
 //   }
 //   @return max($column-counts...);
 // }

@@ -53,7 +53,7 @@
 
     body::after {
       --outer-x: calc(var(--outer-right) + var(--outer-left));
-      --repeat-width: calc(100% / var(--grid-columns));
+      --repeat-width: calc(100% / var(--grid-cols));
       --column-width: calc(var(--repeat-width) - var(--inner-x));
       width: subtract(100%, var(--outer-x));
       @if $wrap-last { max-width: subtract(m-var('breakpoint', $last-m), var(--outer-x)); }
@@ -79,8 +79,8 @@
           // TODO: account for different outer-right/-left
           // $outer-diff: subtract($outer-right, $outer-left);
           $inner-x: m-var('inner-x') or 2rem;
-          $grid-columns: m-var('grid-columns') or 12;
-          $repeat-width: divide(100%, $grid-columns);
+          $grid-cols: m-var('grid-cols') or 12;
+          $repeat-width: divide(100%, $grid-cols);
           $column-width: subtract($repeat-width, $inner-x);
           width: subtract(100%, $outer-x);
           @if $wrap-last and $m == $last-m {

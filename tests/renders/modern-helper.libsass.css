@@ -7,7 +7,7 @@
   --outer-right: 2rem;
   --outer-bottom: 2rem;
   --outer-left: 2rem;
-  --grid-columns: 12;
+  --grid-cols: 12;
   --outer-width: 100%;
   --inner-y-s: calc(var(--inner-y) * 0.5);
   --inner-y-m: 3.5rem;
@@ -79,7 +79,7 @@
   position: relative;
 }
 
-.stop, .trim {
+.stop, .trap, .trim {
   padding-top: 0.1px;
   padding-bottom: 0.1px;
 }

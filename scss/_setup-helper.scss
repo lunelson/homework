@@ -42,7 +42,7 @@
   #{base-class('hold')} { position: relative; }
 
   // stop margin collapse propagation
-  .stop, .trim {
+  .stop, .trap, .trim {
     padding-top: 0.1px;
     padding-bottom: 0.1px;
   }

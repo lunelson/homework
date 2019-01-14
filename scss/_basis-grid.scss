@@ -9,7 +9,7 @@
 
 
 @function span-d() {
-  @return if($homework-is-modern, var(--span-d), m-var('grid-columns'));
+  @return if($homework-is-modern, var(--span-d), m-var('grid-cols'));
 }
 
 @function row-gap($y: null) {
@@ -21,10 +21,10 @@
 }
 
 @function max-columns() {
-  @if not (length($media) > 0) { @return m-var('grid-columns'); }
+  @if not (length($media) > 0) { @return m-var('grid-cols'); }
   $column-counts: ();
   @each $m, $medium in $media {
-    $column-counts: append($column-counts, map-get($media, $m, 'grid-columns'));
+    $column-counts: append($column-counts, map-get($media, $m, 'grid-cols'));
   }
   @return max($column-counts...);
 }

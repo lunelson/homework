@@ -1,3 +1,7 @@
+## additions
+
+`.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
+
 ## refactoring
 
 stack
