@@ -84,9 +84,11 @@
 
       #{m-base-class('span')} {
         width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
+
         @at-root #{selector-insert(m-base-class('flow'), '>')} {
           width: calc(99.99999% * var(--col-span) / var(--col-base));
         }
+
         @at-root #{selector-insert(m-base-class('grid'), '>')} {
           width: unset;
           grid-column-end: span var(--col-span);
@@ -96,6 +98,7 @@
       #{m-base-class('pull', false)},
       #{m-base-class('push', false)} {
         margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
+
         @at-root #{selector-insert(m-base-class('flow'), '>')} {
           margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
         }
@@ -104,6 +107,7 @@
       #{m-base-class('pull-r', false)},
       #{m-base-class('push-r', false)} {
         margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
+
         @at-root #{selector-insert(m-base-class('flow'), '>')} {
           margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
         }

@@ -429,19 +429,19 @@ body:hover .vhide button {
   justify-content: space-evenly;
 }
 
-.fx-1-0 {
+.flex-1-0 {
   flex: 1 0 auto;
 }
 
-.fx-0-1 {
+.flex-0-1 {
   flex: 0 1 auto;
 }
 
-.fx-1-1 {
+.flex-1-1 {
   flex: 1 1 auto;
 }
 
-.fx-0-0 {
+.flex-0-0 {
   flex: 0 0 auto;
 }
 
@@ -683,16 +683,16 @@ body:hover .vhide button {
   .a__jc-evenly {
     justify-content: space-evenly;
   }
-  .a__fx-1-0 {
+  .a__flex-1-0 {
     flex: 1 0 auto;
   }
-  .a__fx-0-1 {
+  .a__flex-0-1 {
     flex: 0 1 auto;
   }
-  .a__fx-1-1 {
+  .a__flex-1-1 {
     flex: 1 1 auto;
   }
-  .a__fx-0-0 {
+  .a__flex-0-0 {
     flex: 0 0 auto;
   }
   .a__fit-none {
@@ -930,16 +930,16 @@ body:hover .vhide button {
   .b__jc-evenly {
     justify-content: space-evenly;
   }
-  .b__fx-1-0 {
+  .b__flex-1-0 {
     flex: 1 0 auto;
   }
-  .b__fx-0-1 {
+  .b__flex-0-1 {
     flex: 0 1 auto;
   }
-  .b__fx-1-1 {
+  .b__flex-1-1 {
     flex: 1 1 auto;
   }
-  .b__fx-0-0 {
+  .b__flex-0-0 {
     flex: 0 0 auto;
   }
   .b__fit-none {
@@ -1177,16 +1177,16 @@ body:hover .vhide button {
   .c__jc-evenly {
     justify-content: space-evenly;
   }
-  .c__fx-1-0 {
+  .c__flex-1-0 {
     flex: 1 0 auto;
   }
-  .c__fx-0-1 {
+  .c__flex-0-1 {
     flex: 0 1 auto;
   }
-  .c__fx-1-1 {
+  .c__flex-1-1 {
     flex: 1 1 auto;
   }
-  .c__fx-0-0 {
+  .c__flex-0-0 {
     flex: 0 0 auto;
   }
   .c__fit-none {

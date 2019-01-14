@@ -157,27 +157,8 @@
 
       // display
       .#{$m__}d-none { display: none !important; }
-      .#{$m__}d-flex {
-        display: flex !important;
-        // & > * {
-        //   flex: 0 0 auto;
-        //   max-width: 100%;
-        //   min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
-        //   overflow-wrap: break-word;
-        // }
-      }
-      .#{$m__}d-flex-y {
-        display: flex !important;
-        flex-direction: column;
-        // align-items: stretch;
-        // & > * {
-        //   flex: 0 0 auto; // best for column direction
-        //   // min-height: auto;
-        //   // height: auto;
-        //   max-width: 100%; // fix overflow in IE
-        //   overflow-wrap: break-word;
-        // }
-      }
+      .#{$m__}d-flex { display: flex !important; }
+      .#{$m__}d-flex-y { display: flex !important; flex-direction: column; }
       .#{$m__}d-grid { display: grid !important; }
       .#{$m__}d-grid-y { display: grid !important; grid-auto-flow: column; }
       .#{$m__}d-block { display: block !important; }
@@ -244,13 +225,12 @@
       .#{$m__}jc-evenly { justify-content: space-evenly; }
 
       // flex
-      .#{$m__}fx-1-0 { flex: 1 0 auto; }
-      .#{$m__}fx-0-1 { flex: 0 1 auto; }
-      .#{$m__}fx-1-1 { flex: 1 1 auto; }
-      .#{$m__}fx-0-0 { flex: 0 0 auto; }
+      .#{$m__}flex-1-0 { flex: 1 0 auto; }
+      .#{$m__}flex-0-1 { flex: 0 1 auto; }
+      .#{$m__}flex-1-1 { flex: 1 1 auto; }
+      .#{$m__}flex-0-0 { flex: 0 0 auto; }
 
       // fitting
-
       .#{$m__}fit-none { object-fit: none; }
       .#{$m__}fit-fill { object-fit: fill; }
       .#{$m__}fit-cover { object-fit: cover; }

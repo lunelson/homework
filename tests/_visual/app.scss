@@ -1,5 +1,4 @@
 @import '../index';
-@import '../../scss/setup-flow2';
 
 // FONTS
 /*
@@ -103,7 +102,7 @@ $colors: (
 @include homework-setup-core();
 @include homework-setup-wrap();
 @include homework-setup-frame();
-@include homework-setup-flow2();
+@include homework-setup-flow();
 @include homework-setup-atomic();
 
 @include homework-setup-stack();
