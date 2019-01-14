@@ -99,7 +99,7 @@ $colors: (
 
 @include homework-reset;
 
-@include homework-setup-core();
+@include homework-setup-root();
 @include homework-setup-wrap();
 @include homework-setup-frame();
 @include homework-setup-flow();

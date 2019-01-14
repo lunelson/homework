@@ -22,7 +22,7 @@ $media: (
   c: (breakpoint: 40em),
 );
 
-@include homework-setup-core($output: false);
+@include homework-setup-root($output: false);
 @include homework-setup-flow();
 
 // .test { @include span(1, -1, 2); }

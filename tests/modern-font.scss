@@ -49,7 +49,7 @@ $fonts: (
   ),
 );
 
-@include homework-setup-core($trim: true, $output: false);
+@include homework-setup-root($trim: true, $output: false);
 @include homework-setup-font($trim: true);
 
 .plain {
