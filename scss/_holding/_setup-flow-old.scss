@@ -1,0 +1,240 @@
+//   __ _                                                           _
+//  / _| |                                                         | |
+// | |_| | _____      ________ ___ _ __   __ _ _ __ ______ ___  ___| |_ _   _ _ __
+// |  _| |/ _ \ \ /\ / /______/ __| '_ \ / _` | '_ \______/ __|/ _ \ __| | | | '_ \
+// | | | | (_) \ V  V /       \__ \ |_) | (_| | | | |     \__ \  __/ |_| |_| | |_) |
+// |_| |_|\___/ \_/\_/        |___/ .__/ \__,_|_| |_|     |___/\___|\__|\__,_| .__/
+//                                | |                                        | |
+//                                |_|                                        |_|
+
+
+@mixin homework-setup-flow($modern: $homework-is-modern, $max-columns: max-columns(), $ratios: false) {
+
+  #{base-class('flow')} {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    & > * {
+      flex: 0 0 auto;
+      width: 100%;
+      min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+      min-height: 1px;
+      background-clip: content-box;
+    }
+  }
+
+  .flow-0 {
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    & > * {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+
+  /////////////////////////////////////////////
+  /////////////////// modern //////////////////
+  /////////////////////////////////////////////
+
+  @if $modern {
+
+    *, *:before, *:after {
+      --push-l: initial; // breaks inheritance
+      --push-r: initial; // breaks inheritance
+    }
+
+    :root {
+      --row-gap: var(--inner-y);
+      --column-gap: var(--inner-x);
+      --span-d: var(--grid-cols);
+      --span-n: var(--span-d);
+    }
+
+    #{base-class('flow')} {
+      width: calc(100% + var(--column-gap)) !important;;
+      margin-left: calc(var(--column-gap) / -2);
+      margin-right: calc(var(--column-gap) / -2);
+      margin-top: calc(var(--row-gap) / -2);
+      margin-bottom: calc(var(--row-gap) / -2);
+      & > * {
+        padding-left: calc(var(--column-gap) / 2) !important;
+        padding-right: calc(var(--column-gap) / 2) !important;
+        padding-top: calc(var(--row-gap) / 2) !important;
+        padding-bottom: calc(var(--row-gap) / 2) !important;
+      }
+    }
+
+    // #{base-class('w')},
+    #{base-class('span')} {
+      width: calc(99.99999% * var(--span-n) / var(--span-d)) !important;
+    }
+
+    // #{base-class('w-i')},
+    #{base-class('span-i')} {
+      width: calc((99.99999% + var(--column-gap)) * var(--span-n) / var(--span-d) - var(--column-gap)) !important;
+    }
+
+    // #{base-class('ml', false)},
+    #{base-class('push-l', false)} {
+      margin-left: calc(99.99999% * var(--push-l) / var(--span-d)) !important;
+    }
+    // #{base-class('ml-i', false)},
+    #{base-class('push-l-i', false)} {
+      margin-left: calc((99.99999% + var(--column-gap)) * var(--push-l) / var(--span-d)) !important;
+    }
+    // #{base-class('mr', false)},
+    #{base-class('push-r', false)} {
+      margin-right: calc(99.99999% * var(--push-r) / var(--span-d)) !important;
+    }
+    // #{base-class('mr-i', false)},
+    #{base-class('push-r-i', false)} {
+      margin-right: calc((99.99999% + var(--column-gap)) * var(--push-r) / var(--span-d)) !important;
+    }
+
+    $inner-y-keys: map-keys(inner-y-mods());
+
+    @each $y in $inner-y-keys {
+      .flow-#{$y} { --row-gap: var(--inner-y-#{$y}); }
+    }
+
+    @each $m in join((null), map-keys($media)) {
+      @include m($m) {
+
+        $__m: m-suffix();
+
+        @for $n from 1 through $max-columns {
+
+          // span
+          // .w-#{$n}#{$__m},
+          .span-#{$n}#{$__m} {
+            --span-n: #{$n};
+            & > * { --span-d: var(--span-n); }
+          }
+
+          // span-i
+          // .w-i-#{$n}#{$__m},
+          .span-i-#{$n}#{$__m} {
+            --span-n: #{$n};
+            & > * { --span-d: var(--span-n); }
+          }
+
+          .push-l-0#{$__m} { --push-l: 0; }
+          .push-r-0#{$__m} { --push-r: 0; }
+
+                // push atomics
+          // .ml-#{$n}#{$__m},
+          .push-l-#{$n}#{$__m} { --push-l: #{$n}; }
+          // .mr-#{$n}#{$__m},
+          .push-r-#{$n}#{$__m} { --push-r: #{$n}; }
+          // .ml-neg-#{$n}#{$__m},
+          .push-l-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
+          // .mr-neg-#{$n}#{$__m},
+          .push-r-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
+
+          // push-i atomics
+          // .ml-i-#{$n}#{$__m},
+          .push-l-i-#{$n}#{$__m} { --push-l: #{$n}; }
+          // .mr-i-#{$n}#{$__m},
+          .push-r-i-#{$n}#{$__m} { --push-r: #{$n}; }
+          // .ml-i-neg-#{$n}#{$__m},
+          .push-l-i-neg-#{$n}#{$__m} { --push-l: #{$n*-1}; }
+          // .mr-i-neg-#{$n}#{$__m},
+          .push-r-i-neg-#{$n}#{$__m} { --push-r: #{$n*-1}; }
+
+        }
+      }
+    }
+  }
+
+
+  /////////////////////////////////////////////
+  /////////////////// legacy //////////////////
+  /////////////////////////////////////////////
+
+  @else {
+
+    @include mm-for('inner-y', 'inner-y-mods', 'inner-mods') {
+      @each $y in $inner-y-keys {
+        $row-gap: row-gap($y);
+
+        .flow-#{$y} {
+          margin-top: calc(#{$row-gap} / -2);
+          margin-bottom: calc(#{$row-gap} / -2);
+          & > * {
+            padding-top: calc(#{$row-gap} / 2) !important;
+            padding-bottom: calc(#{$row-gap} / 2) !important;
+          }
+        }
+      }
+    }
+
+    @include mm-for('inner-x') {
+      $column-gap: column-gap();
+
+      #{base-class('flow')} {
+        width: calc(100% + #{$column-gap}) !important;;
+        margin-left: calc(#{$column-gap} / -2);
+        margin-right: calc(#{$column-gap} / -2);
+        & > * {
+          padding-left: calc(#{$column-gap} / 2) !important;
+          padding-right: calc(#{$column-gap} / 2) !important;
+        }
+      }
+    }
+
+    /////////////////////////////////////////////
+    // TODO: fix the following; $__m has no reference //
+    /////////////////////////////////////////////
+
+    // dimensions: explicit ratios
+    // @if $ratios {
+
+    //   $media-grid-cols: ();
+    //   $reduction-ratio-lists: ();
+
+    //   @each $m, $medium in $media {
+    //     $media-grid-cols: append($media-grid-cols, map-get($medium, 'grid-cols'));
+    //   }
+
+    //   @for $d from 1 through max($media-grid-cols...) {
+    //     @for $n from 1 through $d {
+    //       $gcd: gcd($n, $d); $reduction: $n/$gcd $d/$gcd;
+    //       $set: append(map-get($reduction-ratio-lists, $reduction) or (), $n $d);
+    //       $reduction-ratio-lists: map-merge($reduction-ratio-lists, ($reduction: $set));
+    //     }
+    //   }
+
+    //   @each $reduction, $ratio-list in $reduction-ratio-lists {
+    //     // explicit percentage ratios
+    //     #{__map($ratio-list, 'ratio-class', 'span', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'w', $__m)} { width: ratio-span-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'px', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'pr', $__m)} { padding-right: ratio-span-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'px', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'pl', $__m)} { padding-left: ratio-span-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'mr', $__m)} { margin-right: ratio-span-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'ml', $__m)} { margin-left: ratio-span-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx-neg', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'mr-neg', $__m)} { margin-right: multiply(#{ratio-span-width($reduction)}, -1) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx-neg', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'ml-neg', $__m)} { margin-left: multiply(#{ratio-span-width($reduction)}, -1) }
+
+    //     // explicit span-internal ratio classes
+    //     #{__map($ratio-list, 'ratio-class', 'span-i', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'w-i', $__m)} { width: ratio-span-i-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx-i', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'mr-i', $__m)} { margin-right: ratio-push-i-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx-i', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'ml-i', $__m)} { margin-left: ratio-push-i-width($reduction) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'mr-i-neg', $__m)} { margin-right: multiply(#{ratio-push-i-width($reduction)}, -1) }
+    //     #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $__m)},
+    //     #{__map($ratio-list, 'ratio-class', 'ml-i-neg', $__m)} { margin-left: multiply(#{ratio-push-i-width($reduction)}, -1) }
+    //   }
+    // }
+
+  }
+}

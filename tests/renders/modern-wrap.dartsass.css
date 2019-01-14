@@ -1,4 +1,8 @@
-[class^=wrap-], [class*=" wrap-"] {
+:root {
+  --wrap-width: 100%;
+}
+
+.wrap, [class^=wrap-], [class*=" wrap-"] {
   margin-right: auto;
   margin-left: auto;
   width: 100%;
@@ -13,30 +17,67 @@
   margin-right: 0;
 }
 
-:root {
-  --wrap-width: 100%;
-}
-
-.wrap-each {
+.wrap {
   --wrap-width: var(--outer-width);
 }
 
 @media screen and (min-width: 20em) {
-  .a__wrap-each,
-.wrap-a {
+  .a__wrap, [class^=a__wrap-], [class*=" a__wrap-"] {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: var(--wrap-width);
+  }
+
+  .a__wrap-left {
+    margin-left: 0;
+  }
+
+  .a__wrap-right {
+    margin-right: 0;
+  }
+
+  .a__wrap, .wrap-a {
     --wrap-width: var(--outer-width);
   }
 }
 @media screen and (min-width: 30em) {
-  .b__wrap-each,
-.wrap-b {
+  .b__wrap, [class^=b__wrap-], [class*=" b__wrap-"] {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: var(--wrap-width);
+  }
+
+  .b__wrap-left {
+    margin-left: 0;
+  }
+
+  .b__wrap-right {
+    margin-right: 0;
+  }
+
+  .b__wrap, .wrap-b {
     --wrap-width: var(--outer-width);
   }
 }
 @media screen and (min-width: 40em) {
-  .c__wrap-each,
-.wrap-c,
-.wrap-last {
+  .c__wrap, [class^=c__wrap-], [class*=" c__wrap-"] {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: var(--wrap-width);
+  }
+
+  .c__wrap-left {
+    margin-left: 0;
+  }
+
+  .c__wrap-right {
+    margin-right: 0;
+  }
+
+  .c__wrap, .wrap-c, .wrap-last {
     --wrap-width: var(--outer-width);
   }
 }

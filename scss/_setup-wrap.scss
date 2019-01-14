@@ -7,36 +7,39 @@
 //                    | |             | |
 //                    |_|             |_|
 
-// TODO: consider the other forms of wrap-classes;, e.g. wrap-each__[m] is currently disabled
-// TODO: write set up for peel classes
+
+// TODO
+//   - output --outer-width-[m] (and --inner-width-[m]) properties in core
+//   - classes should be
+//       wrap-m / wrap-last,
+//       [m__]wrap-each
+
 
 @mixin homework-setup-wrap($modern: $homework-is-modern) {
 
-  #{base-class('wrap', false)} {
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
-    max-width: if($modern, var(--wrap-width), 100%);
-  }
-  .wrap-left { margin-left: 0; }
-  .wrap-right { margin-right: 0; }
-
-  $media-keys: map-keys($media);
-  $last-m: last($media-keys);
+  $last-m: last(media-keys());
 
   @if $modern {
 
     :root { --wrap-width: 100%; }
 
-    .wrap-each { --wrap-width: var(--outer-width); }
+    @each $m in join((null), media-keys()) {
+      @include m($m) {
 
-    @each $m, $medium in $media {
-     @include m($m) {
+        #{m-base-class('wrap')} {
+          margin-right: auto;
+          margin-left: auto;
+          width: 100%;
+          max-width: if($modern, var(--wrap-width), 100%);
+        }
+
         $m__: m-prefix();
 
-        .#{$m__}wrap-each,
-        .wrap-#{$m},
-        #{if($m == $last-m, '.wrap-last', '')} {
+        .#{$m__}wrap-left { margin-left: 0; }
+        .#{$m__}wrap-right { margin-right: 0; }
+        // .#{$m__}wrap-each { --wrap-width: var(--outer-width); }
+
+        .#{$m__}wrap, #{if($m, '.wrap-#{$m}', '')}, #{if($m == $last-m, '.wrap-last', '')} {
           --wrap-width: var(--outer-width);
         }
       }
