@@ -17,7 +17,7 @@ $font-default: (
   family: (arial, sans-serif),
   spacing: calc(1px - 0.025em),
   trim-x: calc(1px - 0.1em),
-  trim-adj: calc(1em - 1ex),
+  trim-adj: calc((1em - 1ex)/2),
   trim-capline: 0,
   trim-baseline: 0,
   feature-settings: ('kern' 1),
