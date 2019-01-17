@@ -1,26 +1,20 @@
-```scss
-$root-defaults: (
+# Homework
 
-  // bases
-  font-size: 16px,
-  line-height: 1.25,
-  inner-x: 1rem,
-  inner-y: 1.25rem,
-  outer-top: 2rem,
-  outer-right: 2rem,
-  outer-bottom: 2rem,
-  outer-left: 2rem,
-  grid-columns: 12,
+<img src="homework.svg" width="180">
 
-  // variations
-  font-mods: ( sans: ( m: 16px 1.25 ) ),
-  inner-x-mods: ( m: 1rem ),
-  inner-y-mods: ( m: 1rem ),
-);
+<!-- [![](https://img.shields.io/npm/v/@lunelson/homework.svg?style=flat-square)](#releases) -->
+[![](https://img.shields.io/github/license/lunelson/homework.svg?style=flat-square)](#license)
+[![](https://img.shields.io/npm/dt/@lunelson/homework.svg?style=flat-square)](#download)
 
-$media-defaults: (
-  s: (breakpoint: 30em),
-  m: (breakpoint: 45em),
-  l: (breakpoint: 67.5em),
-);
+Homework is a WIP Sass CSS framework, focused on design-oriented generic-object and utility classes, and *responsive values* managed through CSS custom properties.
+
+It is still a work-in-progress — APIs will change!
+
+## Installation
+```sh
+# install -- NB alpha version
+npm i @lunelson/homework@next
+
+# install peer dependencies
+@lunelson/sass-calc @lunelson/sass-maps-next @lunelson/sass-throw @lunelson/sass-u mathsass
 ```

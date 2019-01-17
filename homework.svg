@@ -1,0 +1,13 @@
+<svg viewBox="0 0 320 439" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd" stroke-linecap="square" stroke-linejoin="round">
+    <g stroke="#000" stroke-width="6">
+      <path d="M200 240v-80H80v80h120zm0 70H80v80H10V10h70v80h120V10h70v380h-70v-80z" fill-opacity=".4" fill="#FFF"/>
+      <g transform="translate(10 160)" fill="#000" fill-opacity=".25">
+        <path d="M190 230l40 40h70l-40-40zM0 230l40 40h70l-40-40zM190 190h-80l-40-40h120zM70 0l40 40h80V0z"/>
+      </g>
+      <g transform="translate(80 10)" fill="#000" fill-opacity=".5">
+        <path d="M190 0l40 40v380l-40-40zM0 300l40 40v80L0 380zM0 0l40 40v40H0zM0 150v80h40v-40z"/>
+      </g>
+    </g>
+  </g>
+</svg>

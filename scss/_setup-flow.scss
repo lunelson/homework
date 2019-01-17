@@ -64,7 +64,7 @@
     grid-template-rows: repeat(var(--row-span), 1fr); // could be 0% instead of auto ?
     grid-template-columns: repeat(var(--col-span), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule for flex flow...
     & > * {
-      grid-column-end: span var(--col-span);
+      grid-column: span var(--col-span) / span var(--col-span);
     }
   }
 
@@ -91,7 +91,7 @@
 
         @at-root #{selector-insert(m-base-class('grid'), '>')} {
           width: unset;
-          grid-column-end: span var(--col-span);
+          // grid-column-end: span var(--col-span);
         }
       }
 
@@ -124,31 +124,30 @@
 
       $m__: m-prefix();
 
+      // @for $b from 2 through (max-columns() + 1) {
+      //   @for $a from 1 through ($b - 1) {
+      //     // $pairs: append($pairs, #{$a}-#{$b});
+      //     // $map: map-set($map, $a, append(map-get($map, $a) or (), ($a $b)));
+
+      //     @if $row-classes {
+      //       .#{$m__}row-#{$a}-#{$b} {
+      //         grid-row: #{$a} / #{$b};
+      //         --row-span: #{$b - $a};
+      //         // --row-base: #{$b - $a};
+      //         // > * { --row-base: #{$b - $a}; }
+      //       }
+      //     }
+
+      //     .#{$m__}col-#{$a}-#{$b} {
+      //       grid-column: #{$a} / #{$b};
+      //       --col-span: #{$b - $a};
+      //       // --col-base: #{$b - $a};
+      //       & > * { --col-base: #{$b - $a}; }
+      //     }
+      //   }
+      // }
+
       @for $n from 0 through max-columns() {
-        @for $b from 2 through (max-columns() + 1) {
-
-          @for $a from 1 through ($b - 1) {
-            // $pairs: append($pairs, #{$a}-#{$b});
-            // $map: map-set($map, $a, append(map-get($map, $a) or (), ($a $b)));
-
-            @if $row-classes {
-              .#{$m__}row-#{$a}-#{$b} {
-                grid-row: #{$a} / #{$b};
-                --row-span: #{$b - $a};
-                // --row-base: #{$b - $a};
-                // > * { --row-base: #{$b - $a}; }
-              }
-            }
-
-            .#{$m__}col-#{$a}-#{$b} {
-              grid-column: #{$a} / #{$b};
-              --col-span: #{$b - $a};
-              // --col-base: #{$b - $a};
-              & > * { --col-base: #{$b - $a}; }
-            }
-          }
-        }
-
         @if $n > 0 {
           .#{$m__}span-#{$n},
           .#{$m__}cols-#{$n} {
@@ -172,10 +171,10 @@
             }
           }
         }
-        .#{$m__}pull-#{$n} { --push-l: #{$n*-1}; }
-        .#{$m__}pull-r-#{$n} { --push-r: #{$n*-1}; }
-        .#{$m__}push-#{$n} { --push-l: #{$n}; }
-        .#{$m__}push-r-#{$n} { --push-r: #{$n}; }
+        // .#{$m__}pull-#{$n} { --push-l: #{$n*-1}; }
+        // .#{$m__}pull-r-#{$n} { --push-r: #{$n*-1}; }
+        // .#{$m__}push-#{$n} { --push-l: #{$n}; }
+        // .#{$m__}push-r-#{$n} { --push-r: #{$n}; }
       }
 
     }
