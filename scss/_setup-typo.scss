@@ -32,6 +32,14 @@ $homework-plain-elements: p ul ol dl h3 h4 h5 h6 blockquote;
       font-kerning: normal;
     }
 
+    // bold, bolder, light, etc. normal
+    .fw-normal { font-weight: normal; }
+    .fw-bold, .bold, .strong { font-weight: bold; }
+
+    // italic, normal
+    .fs-italic, .italic, .em { font-style: italic; }
+    .fs-normal { font-style: normal; }
+
     body, #{base-class('f', false)} {
       font-size: var(--font-size);
       line-height: var(--line-height);

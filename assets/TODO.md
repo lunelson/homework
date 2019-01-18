@@ -33,14 +33,14 @@ homework/
       span, push, pull, col, row
   setup-typo (implicit)
       f, trim
+      ? fs- italic, normal
+      ? fw- bold, bolder, light, etc. normal
       `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
   setup-atomic (explicit)
       m+, p+, w, h, minh, maxh, minw, maxw
         NB: add w-viewport, h-viewport
       d, z (00-90)
       rel, fix, abs, show, hide, vhide, vshow
-      ? fs- italic, normal
-      ? fw- bold, bolder, light, etc. normal
       a, ac, as, jc, ai, flex, fit
       op -- (opacity) 00,02,04,06,08,10
       * replace fit with obj: .obj-contain /-cover /-fill /-none /-scale-down /-bottom /-center /-left /-left-bottom /-left-top /-right /-right-bottom /-right-top /-top
