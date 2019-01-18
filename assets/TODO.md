@@ -47,6 +47,7 @@ homework/
       (scroll-[auto|touch]) -- should maybe just be in reset
   setup-modern-helper (static||explicit)
       (optional) clearfix, flt-left/-right/-none, clr-left/-right/-none
+      skip -- see https://medium.freecodecamp.org/how-to-design-website-layouts-for-screen-readers-347b7b06e9cc
       clip, over-[auto|scroll|hidden|visible], clip-[x|y], over-[x|y]-[auto|scroll|hidden|visible]
       trim, trap, stop,
       fade (opacity)
