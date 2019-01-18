@@ -49,8 +49,8 @@ $fonts: (
   ),
 );
 
-@include homework-setup-root($trim: true, $output: false);
-@include homework-setup-font($trim: true);
+@include homework-setup-core($trim: true, $output: false);
+@include homework-setup-typo($trim: true);
 
 .plain {
 

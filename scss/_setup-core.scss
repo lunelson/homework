@@ -1,12 +1,9 @@
-//                                     _
-//                                    | |
-//   ___ ___  _ __ ___ ______ ___  ___| |_ _   _ _ __
-//  / __/ _ \| '__/ _ \______/ __|/ _ \ __| | | | '_ \
-// | (_| (_) | | |  __/      \__ \  __/ |_| |_| | |_) |
-//  \___\___/|_|  \___|      |___/\___|\__|\__,_| .__/
-//                                              | |
-//                                              |_|
+//   ___ ___  _ __ ___
+//  / __/ _ \| '__/ _ \
+// | (_| (_) | | |  __/
+//  \___\___/|_|  \___|
 
+// (m), :root -- implicitly responsive
 
 
 @mixin homework-setup-root($modern: $homework-is-modern, $trim: true, $output: true) {
@@ -19,7 +16,7 @@
 
     @if $modern {
       :root {
-        @include --medium-properties($root);
+        @include --output-medium-props($root);
         --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
       }
       html {
@@ -46,11 +43,17 @@
     $media: map-merge($media, ($m: $outgoing-medium)) !global;
 
     @if $output {
+
+      // TODO for wrap/peel
+      // :root
+      // --outer-width-#{$m}: ?
+      // --inner-width-#{$m}: ?
+
       @media #{--query-string(map-get($incoming-medium, 'breakpoint'))} {
 
         @if $modern {
           :root {
-            @include --medium-properties($incoming-medium);
+            @include --output-medium-props($incoming-medium);
             --outer-width: #{map-get($outgoing-medium, 'outer-width')};
           }
         } @else {

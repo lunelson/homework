@@ -1,11 +1,32 @@
-//  _   _                                         _
-// | | | |                                       | |
-// | |_| |__   ___ _ __ ___   ___ ______ ___  ___| |_ _   _ _ __
-// | __| '_ \ / _ \ '_ ` _ \ / _ \______/ __|/ _ \ __| | | | '_ \
-// | |_| | | |  __/ | | | | |  __/      \__ \  __/ |_| |_| | |_) |
-//  \__|_| |_|\___|_| |_| |_|\___|      |___/\___|\__|\__,_| .__/
-//                                                         | |
-//                                                         |_|
+//  _   _
+// | | | |
+// | |_| |__   ___ _ __ ___   ___
+// | __| '_ \ / _ \ '_ ` _ \ / _ \
+// | |_| | | |  __/ | | | | |  __/
+//  \__|_| |_|\___|_| |_| |_|\___|
+
+// $colors, $patterns, $weights, $radii, $shadows, $outlines
+// theme-[color]
+// c-, bgc-, bdc- ,fill- ,stroke-
+//   -[color]
+//   -theme
+//   -contrast
+//   -current
+// bd- bdt-, bdr-, bdb-, bdl-
+//   -1,-2,-3,-4,-5,-6,-7
+//   -s,-m,-l,...
+// bg-none/0, bd-none/0, ol-0/none
+// bg-[position], bg-[attachment]
+// bd-collapse/-separate
+// radius- t-, r-, b-, l-, tl-, tr-, bl-, br-,
+//   s, m, l, max,
+//   oval
+// shadow
+//   sm, md, lg
+//   none/0
+//   -ol-
+//     sm, md, lg
+
 
 
 @mixin homework-setup-theme($modern: $homework-is-modern, $lite: true) {

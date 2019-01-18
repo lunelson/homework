@@ -21,20 +21,20 @@ stack
 homework/
   reset
       [element].reset -- element specific resets
-  setup-modern-core (implicit)
+  setup-core (implicit)
       (m), :root
-  setup-modern-page (explicit)
+  setup-page (explicit)
       wrap, peel, frame, bleed,
-  setup-modern-stack (implicit)
+  setup-stack (implicit)
       stack, plain, chain, (shim)
-  setup-modern-grid (implicit)
+  setup-grid (implicit)
       grid, flow, cols, rows
-  setup-modern-cell (explicit)
+  setup-cell (explicit)
       span, push, pull, col, row
-  setup-modern-typo (implicit)
+  setup-typo (implicit)
       f, trim
       `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
-  setup-modern-atomic (explicit)
+  setup-atomic (explicit)
       m+, p+, w, h, minh, maxh, minw, maxw
         NB: add w-viewport, h-viewport
       d, z (00-90)
@@ -45,7 +45,7 @@ homework/
       op -- (opacity) 00,02,04,06,08,10
       * replace fit with obj: .obj-contain /-cover /-fill /-none /-scale-down /-bottom /-center /-left /-left-bottom /-left-top /-right /-right-bottom /-right-top /-top
       (scroll-[auto|touch]) -- should maybe just be in reset
-  setup-modern-helper (static||explicit)
+  setup-helper (static||explicit)
       (optional) clearfix, flt-left/-right/-none, clr-left/-right/-none
       skip -- see https://medium.freecodecamp.org/how-to-design-website-layouts-for-screen-readers-347b7b06e9cc
       clip, over-[auto|scroll|hidden|visible], clip-[x|y], over-[x|y]-[auto|scroll|hidden|visible]
@@ -58,7 +58,7 @@ homework/
       resize -- x|y|none|both
       cursor -- pointer|default
       select -- none, auto, text
-  setup-modern-theme
+  setup-theme
       $colors, $patterns, $weights, $radii, $shadows, $outlines
       theme-[color]
       c-, bgc-, bdc- ,fill- ,stroke-
@@ -80,7 +80,7 @@ homework/
         none/0
         -ol-
           sm, md, lg
-  setup-modern-state
+  setup-state
       .hover__
       .focus__
       .active__

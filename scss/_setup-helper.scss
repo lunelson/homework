@@ -1,11 +1,25 @@
-//  _          _                                 _
-// | |        | |                               | |
-// | |__   ___| |_ __   ___ _ __ ______ ___  ___| |_ _   _ _ __
-// | '_ \ / _ \ | '_ \ / _ \ '__|______/ __|/ _ \ __| | | | '_ \
-// | | | |  __/ | |_) |  __/ |         \__ \  __/ |_| |_| | |_) |
-// |_| |_|\___|_| .__/ \___|_|         |___/\___|\__|\__,_| .__/
-//              | |                                       | |
-//              |_|                                       |_|
+//  _          _
+// | |        | |
+// | |__   ___| |_ __   ___ _ __
+// | '_ \ / _ \ | '_ \ / _ \ '__|
+// | | | |  __/ | |_) |  __/ |
+// |_| |_|\___|_| .__/ \___|_|
+//              | |
+//              |_|
+
+// (optional) clearfix, flt-left/-right/-none, clr-left/-right/-none
+// skip -- see https://medium.freecodecamp.org/how-to-design-website-layouts-for-screen-readers-347b7b06e9cc
+// clip, over-[auto|scroll|hidden|visible], clip-[x|y], over-[x|y]-[auto|scroll|hidden|visible]
+// trim, trap, stop,
+// fade (opacity)
+// pill (border-radius: 50vmin)
+// truncate, break, ws (white-space)
+// aspect
+// pe (pointer-events)
+// resize -- x|y|none|both
+// cursor -- pointer|default
+// select -- none, auto, text
+
 
 @mixin homework-setup-helper($modern: $homework-is-modern) {
 

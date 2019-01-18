@@ -52,5 +52,5 @@ $media: (
   ),
 );
 
-@include homework-setup-root();
+@include homework-setup-core();
 @include homework-setup-helper();

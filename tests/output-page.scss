@@ -31,5 +31,5 @@ $media: (
     ),
 );
 
-@include homework-setup-root($output: false);
-@include homework-setup-frame();
+@include homework-setup-core($output: false);
+@include homework-setup-page();

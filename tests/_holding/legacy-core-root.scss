@@ -57,5 +57,5 @@ $media: (
 
 /* #{map-inspect($media)} */
 @include homework-setup-core(false);
-@include homework-setup-root(false);
+@include homework-setup-core(false);
 /* #{map-inspect($media)} */

@@ -16,7 +16,7 @@ $homework-is-modern: true !default;
 @import "scss/u-misc";
 
 @import "scss/basis-core";
-@import "scss/basis-font";
+@import "scss/basis-typo";
 @import "scss/basis-grid";
 @import "scss/basis-theme";
 
@@ -30,14 +30,15 @@ $homework-is-modern: true !default;
 @import "scss/reset";
 
 @import "scss/setup-core";
-@import "scss/setup-wrap";
-@import "scss/setup-frame";
+@import "scss/setup-page";
 @import "scss/setup-stack";
-@import "scss/setup-font";
-@import "scss/setup-flow";
+@import "scss/setup-grid";
+@import "scss/setup-cell";
+@import "scss/setup-typo";
 @import "scss/setup-atomic";
 @import "scss/setup-helper";
 @import "scss/setup-theme";
+@import "scss/setup-state";
 @import "scss/setup-debug";
 
 @import "scss/setup";
