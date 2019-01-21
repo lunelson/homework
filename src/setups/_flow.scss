@@ -73,7 +73,7 @@
 
 
 @function ratio-str($ratio) { @return "#{nth($ratio,1)}-#{nth($ratio,2)}"; }
-@function ratio-class($ratio, $index, $list, $root, $bp) { @return '.#{$root}-#{ratio-str($ratio)}#{$bp}'; }
+@function ratio-class($ratio, $index, $list, $root, $__m) { @return '.#{$root}-#{ratio-str($ratio)}#{$__m}'; }
 
 @function ratio-span-width($ratio) { @return span-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
 @function ratio-span-i-width($ratio) { @return span-i-width(#{nth($ratio,1)}, #{nth($ratio,2)}); }
@@ -154,38 +154,38 @@
     @each $m in join((null), map-keys($media)) {
       @include m($m) {
 
-        $bp: m-suffix();
+        $__m: m-suffix();
 
         // TODO: remove medium-specific versions of this. put this block above the '@each $m' block
         @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
-          .flow-#{$y}#{$bp} { --row-gap: var(--inner-y-#{$y}); }
+          .flow-#{$y}#{$__m} { --row-gap: var(--inner-y-#{$y}); }
         }
 
         // these are required to ensure that span__[bp] also counts
         // consider using span-all and span-i-all instead;
         // ...and eliminating base-m-class classes above
-        .span#{$bp} { --span-n: var(--span-d); }
-        .span-i#{$bp} { --span-n: var(--span-d); }
+        .span#{$__m} { --span-n: var(--span-d); }
+        .span-i#{$__m} { --span-n: var(--span-d); }
 
         @for $n from 1 through $max-columns {
 
           // span
-          .span-#{$n}#{$bp} { --span-n: #{$n}; & > * { --span-d: var(--span-n); } }
+          .span-#{$n}#{$__m} { --span-n: #{$n}; & > * { --span-d: var(--span-n); } }
 
           // span-i
-          .span-i-#{$n}#{$bp} { --span-n: #{$n}; & > * { --span-d: var(--span-n); } }
+          .span-i-#{$n}#{$__m} { --span-n: #{$n}; & > * { --span-d: var(--span-n); } }
 
           // span atomics
-          .ml-#{$n}#{$bp} { margin-left: calc(99.99999% * #{$n} / var(--span-d)) !important; }
-          .mr-#{$n}#{$bp} { margin-right: calc(99.99999% * #{$n} / var(--span-d)) !important; }
-          .ml-neg-#{$n}#{$bp} { margin-left: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
-          .mr-neg-#{$n}#{$bp} { margin-right: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
+          .ml-#{$n}#{$__m} { margin-left: calc(99.99999% * #{$n} / var(--span-d)) !important; }
+          .mr-#{$n}#{$__m} { margin-right: calc(99.99999% * #{$n} / var(--span-d)) !important; }
+          .ml-neg-#{$n}#{$__m} { margin-left: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
+          .mr-neg-#{$n}#{$__m} { margin-right: calc(99.99999% * #{-1 * $n} / var(--span-d)) !important; }
 
           // span-i atomics
-          .ml-i-#{$n}#{$bp} { margin-left: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
-          .mr-i-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
-          .ml-i-neg-#{$n}#{$bp} { margin-left: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
-          .mr-i-neg-#{$n}#{$bp} { margin-right: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
+          .ml-i-#{$n}#{$__m} { margin-left: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
+          .mr-i-#{$n}#{$__m} { margin-right: calc((99.99999% + var(--column-gap)) * #{$n} / var(--span-d)) !important; }
+          .ml-i-neg-#{$n}#{$__m} { margin-left: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
+          .mr-i-neg-#{$n}#{$__m} { margin-right: calc((99.99999% + var(--column-gap)) * #{-1 * $n} / var(--span-d)) !important; }
 
         }
 
@@ -238,34 +238,39 @@
         }
       }
 
-      @each $reduction, $ratio-list in $reduction-ratio-lists {
-        // explicit percentage ratios
-        #{__map($ratio-list, 'ratio-class', 'span', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'w', $bp)} { width: ratio-span-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'px', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'pr', $bp)} { padding-right: ratio-span-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'px', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'pl', $bp)} { padding-left: ratio-span-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'mx', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'mr', $bp)} { margin-right: ratio-span-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'mx', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'ml', $bp)} { margin-left: ratio-span-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'mx-neg', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'mr-neg', $bp)} { margin-right: multiply(#{ratio-span-width($reduction)}, -1) }
-        #{__map($ratio-list, 'ratio-class', 'mx-neg', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'ml-neg', $bp)} { margin-left: multiply(#{ratio-span-width($reduction)}, -1) }
+      @each $m in join((null), map-keys($media)) {
+        @include m($m) {
+          $__m: m-suffix();
+          @each $reduction, $ratio-list in $reduction-ratio-lists {
+            // explicit percentage ratios
+            #{__map($ratio-list, 'ratio-class', 'span', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'w', $__m)} { width: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'px', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'pr', $__m)} { padding-right: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'px', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'pl', $__m)} { padding-left: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'mr', $__m)} { margin-right: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'ml', $__m)} { margin-left: ratio-span-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-neg', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'mr-neg', $__m)} { margin-right: multiply(#{ratio-span-width($reduction)}, -1) }
+            #{__map($ratio-list, 'ratio-class', 'mx-neg', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'ml-neg', $__m)} { margin-left: multiply(#{ratio-span-width($reduction)}, -1) }
 
-        // explicit span-internal ratio classes
-        #{__map($ratio-list, 'ratio-class', 'span-i', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'w-i', $bp)} { width: ratio-span-i-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'mx-i', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'mr-i', $bp)} { margin-right: ratio-push-i-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'mx-i', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'ml-i', $bp)} { margin-left: ratio-push-i-width($reduction) }
-        #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'mr-i-neg', $bp)} { margin-right: multiply(#{ratio-push-i-width($reduction)}, -1) }
-        #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $bp)},
-        #{__map($ratio-list, 'ratio-class', 'ml-i-neg', $bp)} { margin-left: multiply(#{ratio-push-i-width($reduction)}, -1) }
+            // explicit span-internal ratio classes
+            #{__map($ratio-list, 'ratio-class', 'span-i', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'w-i', $__m)} { width: ratio-span-i-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'mr-i', $__m)} { margin-right: ratio-push-i-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'ml-i', $__m)} { margin-left: ratio-push-i-width($reduction) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'mr-i-neg', $__m)} { margin-right: multiply(#{ratio-push-i-width($reduction)}, -1) }
+            #{__map($ratio-list, 'ratio-class', 'mx-i-neg', $__m)},
+            #{__map($ratio-list, 'ratio-class', 'ml-i-neg', $__m)} { margin-left: multiply(#{ratio-push-i-width($reduction)}, -1) }
+          }
+        }
       }
     }
 
