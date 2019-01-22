@@ -98,8 +98,8 @@
   /////////////////////////////////////////////
 
   // fade (opacity) 00,02,04,06,08,10
-  @for $n from 0 through 9 { .#{$m__}fade-0#{$n} { opacity: $n/10; } }
-  .#{$m__}fade-10 { opacity: 1; }
+  @for $n from 0 through 9 { .fade-0#{$n} { opacity: $n/10; } }
+  .fade-10 { opacity: 1; }
 
   /////////////////////////////////////////////
   /////////////// border-radius ///////////////
@@ -229,13 +229,13 @@
 
       .#{$m__}static { position: static; }
       .#{$m__}rel { position: relative; }
-      #{base-m-class('fix')} { position: fixed; }
+      #{m-base-class('fix')} { position: fixed; }
       .#{$m__}fix-tl { top: 0; left: 0; }
       .#{$m__}fix-tr { top: 0; right: 0; }
       .#{$m__}fix-bl { bottom: 0; left: 0; }
       .#{$m__}fix-br { bottom: 0; right: 0; }
       .#{$m__}fix-trbl { top: 0; right: 0; bottom: 0; left: 0; }
-      #{base-m-class('abs')} { position: absolute; }
+      #{m-base-class('abs')} { position: absolute; }
       .#{$m__}abs-tl { top: 0; left: 0; }
       .#{$m__}abs-tr { top: 0; right: 0; }
       .#{$m__}abs-bl { bottom: 0; left: 0; }

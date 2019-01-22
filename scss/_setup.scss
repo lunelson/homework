@@ -31,12 +31,12 @@ $done-homework-setup: false;
     );
   }
 
-  @if index($setups, 'root') { @include homework-setup-root($modern); }
+  @if index($setups, 'root') { @include homework-setup-core($modern); }
   @if index($setups, 'wrap') { @include homework-setup-wrap($modern); }
   @if index($setups, 'frame') { @include homework-setup-frame($modern); }
   @if index($setups, 'flow') { @include homework-setup-flow($modern); }
   @if index($setups, 'stack') { @include homework-setup-stack($modern); }
-  @if index($setups, 'font') { @include homework-setup-font($modern); }
+  @if index($setups, 'font') { @include homework-setup-typo($modern); }
   @if index($setups, 'atomic') { @include homework-setup-atomic($modern); }
   @if index($setups, 'helper') { @include homework-setup-helper($modern); }
   @if index($setups, 'theme') { @include homework-setup-theme($modern); }

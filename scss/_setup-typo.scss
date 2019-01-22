@@ -12,7 +12,7 @@
 
 $homework-plain-elements: p ul ol dl h3 h4 h5 h6 blockquote;
 
-@mixin homework-setup-font( $modern: $homework-is-modern, $trim: true, $elements: $homework-plain-elements) {
+@mixin homework-setup-typo( $modern: $homework-is-modern, $trim: true, $elements: $homework-plain-elements) {
 
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
 

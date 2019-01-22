@@ -6,7 +6,7 @@
 // (m), :root -- implicitly responsive
 
 
-@mixin homework-setup-root($modern: $homework-is-modern, $trim: true, $output: true) {
+@mixin homework-setup-core($modern: $homework-is-modern, $trim: true, $output: true) {
 
   $root-orig: $root !global;
   $media-orig: $media !global;
