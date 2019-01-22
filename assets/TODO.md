@@ -113,6 +113,33 @@ homework/
       [m__]peel(-left)-right -> peel-from-left
       [m__]peel(-left)-left -> peel-from-left
 
+## new CSS
+
+- check out css containment
+https://blogs.igalia.com/mrego/2019/01/11/an-introduction-to-css-containment/
+
+## font and trim, v stack
+
+This should be the new way
+
+    .plain-ml
+      p,h1,h2
+
+    .stack.trim
+      p.f-sans-m
+      p.f-sans-s
+      p.f-sans-xs
+
+    f-[family]-[size]
+      &.lh-loose/-tight
+    fw-[weight]
+    fs-[style]
+
+## reset
+
+consider adding this as peerDep, to reduce noise
+https://github.com/nicolas-cusan/destyle.css/blob/master/Readme.md
+
 ## renames
   column-count (not 'grid-columns')
 
