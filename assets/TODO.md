@@ -1,3 +1,14 @@
+## more classes
+
+`xf` transform base class
+  .xf { transform: translate(var(--trans-x),var(--trans-y),var(--trans-z),) scale(var(--scale)) rotate(var(--rotate)); }
+  translate-x -y -z
+  rotate
+  scale
+
+`aspect` base class
+  .aspect-3-2, etc.
+
 ## preflight
 
 ** merge recent changes from kaminski branch
@@ -9,7 +20,7 @@
 .flow and .grid support span-all, span-auto ?
 ? is it illegal to write grid-column: span 2 / span 2;
 .trim is the determinator for .f trimming, not .stack
-  .stack.trim > .f-
+  .stack.trim > <div class="f-"></div>
   .trim > .f-
 stack
   - no need for separate mixins;
