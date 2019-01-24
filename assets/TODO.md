@@ -1,3 +1,8 @@
+## about hover
+
+add the hover media query to the hover classes!!
+https://twitter.com/souporserious/status/1075053627025149955
+
 ## more classes
 
 `xf` transform base class
