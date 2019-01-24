@@ -60,7 +60,10 @@
     grid-template-rows: repeat(var(--row-span), 1fr); // could be 0% instead of auto ?
     grid-template-columns: repeat(var(--col-span), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule for flex flow...
     & > * {
+      // grid-column: auto / auto;
+      // grid-row: auto / auto;
       grid-column: span var(--col-span) / span var(--col-span);
+      grid-row: span var(--row-span) / span var(--row-span);
     }
   }
 

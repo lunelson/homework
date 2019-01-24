@@ -8,30 +8,26 @@
 // span-[n], push-[n], pull-[n],
 // col-[n], row-[n], col-end-[n], row-end-[n]
 
+$m__: '';
+@function m__col-n-d($pair, $_...) { @return selector-parse('.#{$m__}col-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+@function m__row-n-d($pair, $_...) { @return selector-parse('.#{$m__}row-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+
 @mixin homework-setup-cell($row-classes: true) {
 
   $max-cols: max-columns();
 
-  $start-pairs: ();
-  $span-pairs: ();
-  $end-pairs: ();
+  $span-pair-list: ();
+  $start-pair-list: ();
+  $end-pair-list: ();
 
   @for $end from 2 through ($max-cols + 1) {
     @for $start from 1 through ($end - 1) {
       $span: ($end - $start);
-      $start-pairs: map-merge($start-pairs, ($start: append(map-get($start-pairs, $start) or (), ($start $end))));
-      $span-pairs: map-merge($span-pairs, ($span: append(map-get($span-pairs, $span) or (), ($start $end))));
-      $end-pairs: map-merge($end-pairs, ($end: append(map-get($end-pairs, $end) or (), ($start $end))));
+      $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
+      $start-pair-list: map-merge($start-pair-list, ($start: append(map-get($start-pair-list, $start) or (), ($start $end))));
+      $end-pair-list: map-merge($end-pair-list, ($end: append(map-get($end-pair-list, $end) or (), ($start $end))));
     }
   }
-
-  /*
-
-  #{inspect($span-pairs)}
-  #{inspect($start-pairs)}
-  #{inspect($end-pairs)}
-
-  */
 
   @each $m in join((null), media-keys()) {
     @include m($m) {
@@ -49,6 +45,9 @@
 
         @at-root #{selector-insert(m-base-class('grid'), '>')} {
           width: unset;
+          // grid-column: span var(--col-span) / span var(--col-span);
+          // grid-row: span var(--row-span) / span var(--row-span);
+
         }
       }
 
@@ -70,101 +69,99 @@
         }
       }
 
-      #{m-base-class('span-auto')} { flex: 1 1 0%; --col-span: 0; }
-      #{m-base-class('span-all')} { --col-span: var(--col-base); }
+      $m__: m-prefix() !global;
 
-      #{m-base-class('span-y', false)} { grid-row-end: span var(--row-span); }
+      .#{$m__}span-auto {
+        @at-root #{selector-insert(m-base-class('flow'), '>')} {
+          flex: 1 1 0%; --col-span: 0;
+        }
+        // !! span-auto does not seem to be meaningful
+        // @at-root #{selector-insert(m-base-class('grid'), '>')} {
+        //   grid-column: auto / auto;
+        // }
+      }
+
+      .#{$m__}span-all { --col-span: var(--col-base); }
 
       // responsive mods:
       // span-[n], push-[n], pull-[n],
       // col-[n], row-[n], col-end-[n], row-end-[n]
 
-      $m__: m-prefix();
+      @each $span, $pair-list in $span-pair-list {
 
-      @for $n from 0 through ($max-cols + 1) {
+        // for solo, flow
+        .#{$m__}span-#{$span},
+        .#{$m__}cols-#{$span},
+        #{__map($pair-list, 'm__col-n-d')} {
+          & > * { --col-base: #{$span}; }
+        }
 
-        // TODO: output .col-n-d and .row-n-d in groups,
-        //... by starts, ends, and spans
+        // for solo, flow, grid
+        .#{$m__}span-#{$span},
+        .#{$m__}col-span-#{$span},
+        #{__map($pair-list, 'm__col-n-d')} {
+          --col-span: #{$span};
+        }
 
-        // @if $row-classes {
-        //   .#{$m__}row-#{$a}-#{$b} {
-        //     grid-row: #{$a} / #{$b};
-        //     --row-span: #{$b - $a};
-        //     // --row-base: #{$b - $a};
-        //     // > * { --row-base: #{$b - $a}; }
-        //   }
+        // for grid only
+        // .#{$m__}span-y-#{$span},
+        .#{$m__}row-span-#{$span},
+        #{__map($pair-list, 'm__row-n-d')} {
+          --row-span: #{$span};
+        }
+        .#{$m__}cols-#{$span} {
+          @at-root #{selector-unify(&, base-class('grid'))} {
+            --col-span: #{$span};
+          }
+        }
+        .#{$m__}rows-#{$span} {
+          @at-root #{selector-unify(&, base-class('grid'))} {
+            --row-span: #{$span};
+          }
+        }
+
+        // #{__map($pair-list, 'm__col-n-d')} {
+        //   --col-span: #{$span};
+        //   & > * { --col-base: #{$span}; }
         // }
 
-        // .#{$m__}col-#{$a}-#{$b} {
-        //   grid-column: #{$a} / #{$b};
-        //   --col-span: #{$b - $a};
-        //   // --col-base: #{$b - $a};
-        //   & > * { --col-base: #{$b - $a}; }
-        // }
+      }
 
+      @each $start, $pair-list in $start-pair-list {
 
-        @if $n > 0 and $n < $max-cols + 1 {
-
-          // can span from 1 through 12
-
-          // for solo, flow
-          .#{$m__}span-#{$n},
-          .#{$m__}cols-#{$n} {
-            & > * { --col-base: #{$n}; }
-          }
-
-          // for solo, flow, grid
-          .#{$m__}span-#{$n},
-          .#{$m__}col-span-#{$n} {
-            --col-span: #{$n};
-          }
-
-          // for grid only
-          .#{$m__}span-y-#{$n},
-          .#{$m__}row-span-#{$n} {
-            --row-span: #{$n};
-          }
-          .#{$m__}cols-#{$n} {
-            @at-root #{selector-unify(&, base-class('grid'))} {
-              --col-span: #{$n};
-            }
-          }
-          .#{$m__}rows-#{$n} {
-            @at-root #{selector-unify(&, base-class('grid'))} {
-              --row-span: #{$n};
-            }
-          }
-
-          // push, pull
-          // for solo, flow
-          @if $n < $max-cols {
-            // can push from 1 through 11
-            .#{$m__}push-#{$n} { --push-l: #{$n}; }
-            .#{$m__}pull-#{$n} { --push-l: #{$n*-1}; }
-            .#{$m__}push-r-#{$n} { --push-r: #{$n}; }
-            .#{$m__}pull-r-#{$n} { --push-r: #{$n*-1}; }
-
-          }
+        .#{$m__}start-#{$start},
+        .#{$m__}col-start-#{$start},
+        #{__map($pair-list, 'm__col-n-d')} {
+          grid-column-start: $start;
         }
 
-        // start/end, for grid
-        @if $n > 1 {
-          // col can end from 2 through 13
-          .#{$m__}end-#{$n},
-          .#{$m__}col-end-#{$n} {
-            grid-column-end: $n;
-          }
+        .#{$m__}row-start-#{$start},
+        #{__map($pair-list, 'm__row-n-d')} {
+          grid-row-start: $start;
         }
-        @if $n < $max-cols + 1 {
-          // col can start from 1 through 12
-          .#{$m__}start-#{$n},
-          .#{$m__}col-start-#{$n} {
-            grid-column-start: $n;
-          }
+      }
+
+      @each $end, $pair-list in $end-pair-list {
+
+        .#{$m__}end-#{$end},
+        .#{$m__}col-end-#{$end},
+        #{__map($pair-list, 'm__col-n-d')} {
+          grid-column-end: $end;
         }
+
+        .#{$m__}row-end-#{$end},
+        #{__map($pair-list, 'm__row-n-d')} {
+          grid-row-end: $end;
+        }
+      }
+
+      @for $p from 1 through ($max-cols - 1) {
+        .#{$m__}push-#{$p} { --push-l: #{$p}; }
+        .#{$m__}pull-#{$p} { --push-l: #{$p*-1}; }
+        .#{$m__}push-r-#{$p} { --push-r: #{$p}; }
+        .#{$m__}pull-r-#{$p} { --push-r: #{$p*-1}; }
       }
 
     }
   }
-
 }
