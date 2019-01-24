@@ -29,10 +29,8 @@
     --row-span: var(--grid-rows, 1);
   }
 
-
-  /////////////////////////////////////////////
-  ////////// FLOW / GRID FOUNDATIONS //////////
-  /////////////////////////////////////////////
+  // global bases and mods
+  // flow, grid
 
   #{base-class('flow')} {
     display: flex;
@@ -73,108 +71,4 @@
   .flow-x-0, .grid-x-0 { --col-gap: 0; }
   .flow-0-0, .grid-0-0 { --row-gap: 0; --col-gap: 0; }
 
-  @each $m in join((null), media-keys()) {
-    @include m($m) {
-
-      /////////////////////////////////////////////
-      ////////// PER MEDIUM BASE CLASSES //////////
-      /////////////////////////////////////////////
-
-      #{m-base-class('span')} {
-        width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
-
-        @at-root #{selector-insert(m-base-class('flow'), '>')} {
-          width: calc(99.99999% * var(--col-span) / var(--col-base));
-        }
-
-        @at-root #{selector-insert(m-base-class('grid'), '>')} {
-          width: unset;
-          // grid-column-end: span var(--col-span);
-        }
-      }
-
-      #{m-base-class('pull', false)},
-      #{m-base-class('push', false)} {
-        margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
-
-        @at-root #{selector-insert(m-base-class('flow'), '>')} {
-          margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
-        }
-      }
-
-      #{m-base-class('pull-r', false)},
-      #{m-base-class('push-r', false)} {
-        margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
-
-        @at-root #{selector-insert(m-base-class('flow'), '>')} {
-          margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
-        }
-      }
-
-      #{m-base-class('span-auto')} { flex: 1 1 0%; --col-span: 0; }
-      #{m-base-class('span-all')} { --col-span: var(--col-base); }
-
-      #{m-base-class('span-y', false)} { grid-row-end: span var(--row-span); }
-
-      /////////////////////////////////////////////
-      /////////// PER MEDIUM MOD CLASSES //////////
-      /////////////////////////////////////////////
-
-      $m__: m-prefix();
-
-      // @for $b from 2 through (max-columns() + 1) {
-      //   @for $a from 1 through ($b - 1) {
-      //     // $pairs: append($pairs, #{$a}-#{$b});
-      //     // $map: map-set($map, $a, append(map-get($map, $a) or (), ($a $b)));
-
-      //     @if $row-classes {
-      //       .#{$m__}row-#{$a}-#{$b} {
-      //         grid-row: #{$a} / #{$b};
-      //         --row-span: #{$b - $a};
-      //         // --row-base: #{$b - $a};
-      //         // > * { --row-base: #{$b - $a}; }
-      //       }
-      //     }
-
-      //     .#{$m__}col-#{$a}-#{$b} {
-      //       grid-column: #{$a} / #{$b};
-      //       --col-span: #{$b - $a};
-      //       // --col-base: #{$b - $a};
-      //       & > * { --col-base: #{$b - $a}; }
-      //     }
-      //   }
-      // }
-
-      @for $n from 0 through max-columns() {
-        @if $n > 0 {
-          .#{$m__}span-#{$n},
-          .#{$m__}cols-#{$n} {
-            & > * { --col-base: #{$n}; }
-          }
-          .#{$m__}span-#{$n} {
-            --col-span: #{$n};
-          }
-          .#{$m__}span-y-#{$n} {
-            --row-span: #{$n};
-          }
-
-          .#{$m__}cols-#{$n} {
-            @at-root #{selector-unify(&, base-class('grid'))} {
-              --col-span: #{$n};
-            }
-          }
-          .#{$m__}rows-#{$n} {
-            @at-root #{selector-unify(&, base-class('grid'))} {
-              --row-span: #{$n};
-            }
-          }
-        }
-        // .#{$m__}pull-#{$n} { --push-l: #{$n*-1}; }
-        // .#{$m__}pull-r-#{$n} { --push-r: #{$n*-1}; }
-        // .#{$m__}push-#{$n} { --push-l: #{$n}; }
-        // .#{$m__}push-r-#{$n} { --push-r: #{$n}; }
-      }
-
-    }
-  }
 }

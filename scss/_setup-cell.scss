@@ -5,7 +5,166 @@
 // | (_|  __/ | |
 //  \___\___|_|_|
 
-// span, push, pull, col, row
-@mixin homework-setup-cell() {
+// span-[n], push-[n], pull-[n],
+// col-[n], row-[n], col-end-[n], row-end-[n]
+
+@mixin homework-setup-cell($row-classes: true) {
+
+  $max-cols: max-columns();
+
+  $start-pairs: ();
+  $span-pairs: ();
+  $end-pairs: ();
+
+  @for $end from 2 through ($max-cols + 1) {
+    @for $start from 1 through ($end - 1) {
+      $span: ($end - $start);
+      $start-pairs: map-merge($start-pairs, ($start: append(map-get($start-pairs, $start) or (), ($start $end))));
+      $span-pairs: map-merge($span-pairs, ($span: append(map-get($span-pairs, $span) or (), ($start $end))));
+      $end-pairs: map-merge($end-pairs, ($end: append(map-get($end-pairs, $end) or (), ($start $end))));
+    }
+  }
+
+  /*
+
+  #{inspect($span-pairs)}
+  #{inspect($start-pairs)}
+  #{inspect($end-pairs)}
+
+  */
+
+  @each $m in join((null), media-keys()) {
+    @include m($m) {
+
+      // global bases:
+      // span, push, pull
+      // flow > &, grid > &
+
+      #{m-base-class('span')} {
+        width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
+
+        @at-root #{selector-insert(m-base-class('flow'), '>')} {
+          width: calc(99.99999% * var(--col-span) / var(--col-base));
+        }
+
+        @at-root #{selector-insert(m-base-class('grid'), '>')} {
+          width: unset;
+        }
+      }
+
+      #{m-base-class('pull', false)},
+      #{m-base-class('push', false)} {
+        margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
+
+        @at-root #{selector-insert(m-base-class('flow'), '>')} {
+          margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
+        }
+      }
+
+      #{m-base-class('pull-r', false)},
+      #{m-base-class('push-r', false)} {
+        margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
+
+        @at-root #{selector-insert(m-base-class('flow'), '>')} {
+          margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
+        }
+      }
+
+      #{m-base-class('span-auto')} { flex: 1 1 0%; --col-span: 0; }
+      #{m-base-class('span-all')} { --col-span: var(--col-base); }
+
+      #{m-base-class('span-y', false)} { grid-row-end: span var(--row-span); }
+
+      // responsive mods:
+      // span-[n], push-[n], pull-[n],
+      // col-[n], row-[n], col-end-[n], row-end-[n]
+
+      $m__: m-prefix();
+
+      @for $n from 0 through ($max-cols + 1) {
+
+        // TODO: output .col-n-d and .row-n-d in groups,
+        //... by starts, ends, and spans
+
+        // @if $row-classes {
+        //   .#{$m__}row-#{$a}-#{$b} {
+        //     grid-row: #{$a} / #{$b};
+        //     --row-span: #{$b - $a};
+        //     // --row-base: #{$b - $a};
+        //     // > * { --row-base: #{$b - $a}; }
+        //   }
+        // }
+
+        // .#{$m__}col-#{$a}-#{$b} {
+        //   grid-column: #{$a} / #{$b};
+        //   --col-span: #{$b - $a};
+        //   // --col-base: #{$b - $a};
+        //   & > * { --col-base: #{$b - $a}; }
+        // }
+
+
+        @if $n > 0 and $n < $max-cols + 1 {
+
+          // can span from 1 through 12
+
+          // for solo, flow
+          .#{$m__}span-#{$n},
+          .#{$m__}cols-#{$n} {
+            & > * { --col-base: #{$n}; }
+          }
+
+          // for solo, flow, grid
+          .#{$m__}span-#{$n},
+          .#{$m__}col-span-#{$n} {
+            --col-span: #{$n};
+          }
+
+          // for grid only
+          .#{$m__}span-y-#{$n},
+          .#{$m__}row-span-#{$n} {
+            --row-span: #{$n};
+          }
+          .#{$m__}cols-#{$n} {
+            @at-root #{selector-unify(&, base-class('grid'))} {
+              --col-span: #{$n};
+            }
+          }
+          .#{$m__}rows-#{$n} {
+            @at-root #{selector-unify(&, base-class('grid'))} {
+              --row-span: #{$n};
+            }
+          }
+
+          // push, pull
+          // for solo, flow
+          @if $n < $max-cols {
+            // can push from 1 through 11
+            .#{$m__}push-#{$n} { --push-l: #{$n}; }
+            .#{$m__}pull-#{$n} { --push-l: #{$n*-1}; }
+            .#{$m__}push-r-#{$n} { --push-r: #{$n}; }
+            .#{$m__}pull-r-#{$n} { --push-r: #{$n*-1}; }
+
+          }
+        }
+
+        // start/end, for grid
+        @if $n > 1 {
+          // col can end from 2 through 13
+          .#{$m__}end-#{$n},
+          .#{$m__}col-end-#{$n} {
+            grid-column-end: $n;
+          }
+        }
+        @if $n < $max-cols + 1 {
+          // col can start from 1 through 12
+          .#{$m__}start-#{$n},
+          .#{$m__}col-start-#{$n} {
+            grid-column-start: $n;
+          }
+        }
+      }
+
+    }
+  }
 
 }

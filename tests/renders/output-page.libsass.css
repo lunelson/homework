@@ -1,0 +1,202 @@
+:root {
+  --wrap-width: 100%;
+}
+
+.wrap, [class^="wrap-"], [class*=" wrap-"] {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: var(--wrap-width);
+}
+
+.wrap-left {
+  margin-left: 0;
+}
+
+.wrap-right {
+  margin-right: 0;
+}
+
+.wrap {
+  --wrap-width: var(--outer-width);
+}
+
+@media screen and (min-width: 20em) {
+  .a__wrap, [class^="a__wrap-"], [class*=" a__wrap-"] {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: var(--wrap-width);
+  }
+  .a__wrap-left {
+    margin-left: 0;
+  }
+  .a__wrap-right {
+    margin-right: 0;
+  }
+  .a__wrap, .wrap-a {
+    --wrap-width: var(--outer-width);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .b__wrap, [class^="b__wrap-"], [class*=" b__wrap-"] {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: var(--wrap-width);
+  }
+  .b__wrap-left {
+    margin-left: 0;
+  }
+  .b__wrap-right {
+    margin-right: 0;
+  }
+  .b__wrap, .wrap-b {
+    --wrap-width: var(--outer-width);
+  }
+}
+
+@media screen and (min-width: 40em) {
+  .c__wrap, [class^="c__wrap-"], [class*=" c__wrap-"] {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: var(--wrap-width);
+  }
+  .c__wrap-left {
+    margin-left: 0;
+  }
+  .c__wrap-right {
+    margin-right: 0;
+  }
+  .c__wrap, .wrap-c, .wrap-last {
+    --wrap-width: var(--outer-width);
+  }
+}
+
+.bleed, [class^="bleed-"], [class*=" bleed-"] {
+  width: unset !important;
+}
+
+.frame, .frame-x, .frame-right {
+  padding-right: var(--outer-right);
+}
+
+.frame, .frame-x, .frame-left {
+  padding-left: var(--outer-left);
+}
+
+.frame-y, .frame-top {
+  padding-top: var(--outer-top);
+}
+
+.frame-y, .frame-bottom {
+  padding-bottom: var(--outer-bottom);
+}
+
+.bleed, .bleed-x, .bleed-right {
+  margin-right: calc(var(--outer-right) * -1);
+}
+
+.bleed, .bleed-x, .bleed-left {
+  margin-left: calc(var(--outer-left) * -1);
+}
+
+.bleed-y, .bleed-top {
+  margin-top: calc(var(--outer-top) * -1);
+}
+
+.bleed-y, .bleed-bottom {
+  margin-bottom: calc(var(--outer-bottom) * -1);
+}
+
+@media screen and (min-width: 20em) {
+  .a__bleed, [class^="a__bleed-"], [class*=" a__bleed-"] {
+    width: unset !important;
+  }
+  .a__frame, .a__frame-x, .a__frame-right {
+    padding-right: var(--outer-right);
+  }
+  .a__frame, .a__frame-x, .a__frame-left {
+    padding-left: var(--outer-left);
+  }
+  .a__frame-y, .a__frame-top {
+    padding-top: var(--outer-top);
+  }
+  .a__frame-y, .a__frame-bottom {
+    padding-bottom: var(--outer-bottom);
+  }
+  .a__bleed, .a__bleed-x, .a__bleed-right {
+    margin-right: calc(var(--outer-right) * -1);
+  }
+  .a__bleed, .a__bleed-x, .a__bleed-left {
+    margin-left: calc(var(--outer-left) * -1);
+  }
+  .a__bleed-y, .a__bleed-top {
+    margin-top: calc(var(--outer-top) * -1);
+  }
+  .a__bleed-y, .a__bleed-bottom {
+    margin-bottom: calc(var(--outer-bottom) * -1);
+  }
+}
+
+@media screen and (min-width: 30em) {
+  .b__bleed, [class^="b__bleed-"], [class*=" b__bleed-"] {
+    width: unset !important;
+  }
+  .b__frame, .b__frame-x, .b__frame-right {
+    padding-right: var(--outer-right);
+  }
+  .b__frame, .b__frame-x, .b__frame-left {
+    padding-left: var(--outer-left);
+  }
+  .b__frame-y, .b__frame-top {
+    padding-top: var(--outer-top);
+  }
+  .b__frame-y, .b__frame-bottom {
+    padding-bottom: var(--outer-bottom);
+  }
+  .b__bleed, .b__bleed-x, .b__bleed-right {
+    margin-right: calc(var(--outer-right) * -1);
+  }
+  .b__bleed, .b__bleed-x, .b__bleed-left {
+    margin-left: calc(var(--outer-left) * -1);
+  }
+  .b__bleed-y, .b__bleed-top {
+    margin-top: calc(var(--outer-top) * -1);
+  }
+  .b__bleed-y, .b__bleed-bottom {
+    margin-bottom: calc(var(--outer-bottom) * -1);
+  }
+}
+
+@media screen and (min-width: 40em) {
+  .c__bleed, [class^="c__bleed-"], [class*=" c__bleed-"] {
+    width: unset !important;
+  }
+  .c__frame, .c__frame-x, .c__frame-right {
+    padding-right: var(--outer-right);
+  }
+  .c__frame, .c__frame-x, .c__frame-left {
+    padding-left: var(--outer-left);
+  }
+  .c__frame-y, .c__frame-top {
+    padding-top: var(--outer-top);
+  }
+  .c__frame-y, .c__frame-bottom {
+    padding-bottom: var(--outer-bottom);
+  }
+  .c__bleed, .c__bleed-x, .c__bleed-right {
+    margin-right: calc(var(--outer-right) * -1);
+  }
+  .c__bleed, .c__bleed-x, .c__bleed-left {
+    margin-left: calc(var(--outer-left) * -1);
+  }
+  .c__bleed-y, .c__bleed-top {
+    margin-top: calc(var(--outer-top) * -1);
+  }
+  .c__bleed-y, .c__bleed-bottom {
+    margin-bottom: calc(var(--outer-bottom) * -1);
+  }
+}
