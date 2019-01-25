@@ -58,40 +58,26 @@ $fonts-defaults: (
   @return ($line - 1) * 0.5em + $trim * 1em;
 }
 
-@mixin font-mod($f, $s, $y: null, $trim: true, $modern: $homework-is-modern) {
+@mixin font-mod($f, $s, $y: null, $trim: true) {
 
-  /////////////////////////////////////////////
-  /////////////////// modern //////////////////
-  /////////////////////////////////////////////
+  $font: map-get($fonts, $f);
 
-  @if $modern {
+  --font-family: #{map-get($font, 'family')};
+  --font-feature-settings: #{inspect(map-get($font, 'feature-settings'))};
+  --letter-spacing: #{map-get($font, 'spacing')};
+  --trim-x: #{map-get($font, 'trim-x')};
 
-    $font: map-get($fonts, $f);
-
-    --font-family: #{map-get($font, 'family')};
-    --font-feature-settings: #{map-get($font, 'feature-settings')+''};
-    --letter-spacing: #{map-get($font, 'spacing')};
-    --trim-x: #{map-get($font, 'trim-x')};
-
-    @if $trim {
-      --trim-capline: #{map-get($font, 'trim-capline')};
-      --trim-baseline: #{map-get($font, 'trim-baseline')};
-    }
-
-    @include mm-for('font-mods' $f $s) {
-      $def: m-var('font-mods' $f $s);
-      $size: strip(nth($def, 1));
-      $line: nth($def, 2);
-      --font-size: #{$size / 16 * 1rem};
-      --line-height: #{if($line > 6, $line/$size, $line)};
-    }
+  @if $trim {
+    --trim-capline: #{map-get($font, 'trim-capline')};
+    --trim-baseline: #{map-get($font, 'trim-baseline')};
   }
 
-  /////////////////////////////////////////////
-  /////////////////// legacy //////////////////
-  /////////////////////////////////////////////
-
-  @else {
+  @include mm-for('font-mods' $f $s) {
+    $def: m-var('font-mods' $f $s);
+    $size: strip(nth($def, 1));
+    $line: nth($def, 2);
+    --font-size: #{$size / 16 * 1rem};
+    --line-height: #{if($line > 6, $line/$size, $line)};
   }
 
 }
