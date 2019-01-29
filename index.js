@@ -26,7 +26,7 @@ function setHomeworkConfig() { localStorage.setItem('homework', JSON.stringify(h
 if (process.env.NODE_ENV == 'development') {
   document.body.classList.toggle('debug', homeworkConfig.debug);
   document.body.addEventListener('keyup', function(event) {
-    if (event.shiftKey == true && event.altKey == true && event.keyCode == 68) {
+    if (event.shiftKey == true && event.ctrlKey == true && (event.keyCode||event.which) == 68) {
       homeworkConfig.debug = !homeworkConfig.debug;
       document.body.classList.toggle('debug', homeworkConfig.debug);
       setHomeworkConfig();
