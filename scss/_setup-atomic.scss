@@ -18,6 +18,10 @@
 
 @mixin homework-setup-atomic($modern: $homework-is-modern) {
 
+  // get lists of inner-y/-x-mod keys
+  $inner-y-keys: map-keys(inner-y-mods());
+  $inner-x-keys: map-keys(inner-x-mods());
+
   // join with null, to also output suffix-less class
   @each $m in join((null), media-keys()) {
 
@@ -34,121 +38,54 @@
       .#{$m__}w-0 { width: 0; }
       .#{$m__}h-0 { height: 0; }
 
-      .#{$m__}my-auto, .#{$m__}mt-auto { margin-top: auto; }
-      .#{$m__}mx-auto, .#{$m__}mr-auto { margin-right: auto; }
-      .#{$m__}my-auto, .#{$m__}mb-auto { margin-bottom: auto; }
-      .#{$m__}mx-auto, .#{$m__}ml-auto { margin-left: auto; }
+      #{m-base-class('mt', false)}, #{m-base-class('my', false)} { margin-top: var(--mt); }
+      #{m-base-class('mr', false)}, #{m-base-class('mx', false)} { margin-right: var(--mr); }
+      #{m-base-class('mb', false)}, #{m-base-class('my', false)} { margin-bottom: var(--mb); }
+      #{m-base-class('ml', false)}, #{m-base-class('mx', false)} { margin-left: var(--ml); }
 
-      .#{$m__}my-0, .#{$m__}mt-0 { margin-top: 0; }
-      .#{$m__}mx-0, .#{$m__}mr-0 { margin-right: 0; }
-      .#{$m__}my-0, .#{$m__}mb-0 { margin-bottom: 0; }
-      .#{$m__}mx-0, .#{$m__}ml-0 { margin-left: 0; }
-      .#{$m__}py-0, .#{$m__}pt-0 { padding-top: 0; }
-      .#{$m__}px-0, .#{$m__}pr-0 { padding-right: 0; }
-      .#{$m__}py-0, .#{$m__}pb-0 { padding-bottom: 0; }
-      .#{$m__}px-0, .#{$m__}pl-0 { padding-left: 0; }
+      #{m-base-class('mt-neg', false)}, #{m-base-class('my-neg', false)} { margin-top: multiply(var(--mt), -1); }
+      #{m-base-class('mr-neg', false)}, #{m-base-class('mx-neg', false)} { margin-right: multiply(var(--mr), -1); }
+      #{m-base-class('mb-neg', false)}, #{m-base-class('my-neg', false)} { margin-bottom: multiply(var(--mb), -1); }
+      #{m-base-class('ml-neg', false)}, #{m-base-class('mx-neg', false)} { margin-left: multiply(var(--ml), -1); }
 
-    }
-  }
+      #{m-base-class('pt', false)}, #{m-base-class('py', false)} { padding-top: var(--pt); }
+      #{m-base-class('pr', false)}, #{m-base-class('px', false)} { padding-right: var(--pr); }
+      #{m-base-class('pb', false)}, #{m-base-class('py', false)} { padding-bottom: var(--pb); }
+      #{m-base-class('pl', false)}, #{m-base-class('px', false)} { padding-left: var(--pl); }
 
-  // get lists of inner-y/-x-mod keys
-  $inner-y-keys: map-keys(inner-y-mods());
-  $inner-x-keys: map-keys(inner-x-mods());
-
-
-  /////////////////////////////////////////////
-  /////////////////// modern //////////////////
-  /////////////////////////////////////////////
-
-  @if $modern {
-
-    // join with null, to also output suffix-less class
-    @each $m in join((null), media-keys()) {
-
-      @include m($m) {
-
-        $m__: m-prefix();
-
-        #{m-base-class('mt', false)}, #{m-base-class('my', false)} { margin-top: var(--mt); }
-        #{m-base-class('mr', false)}, #{m-base-class('mx', false)} { margin-right: var(--mr); }
-        #{m-base-class('mb', false)}, #{m-base-class('my', false)} { margin-bottom: var(--mb); }
-        #{m-base-class('ml', false)}, #{m-base-class('mx', false)} { margin-left: var(--ml); }
-
-        #{m-base-class('mt-neg', false)}, #{m-base-class('my-neg', false)} { margin-top: multiply(var(--mt), -1); }
-        #{m-base-class('mr-neg', false)}, #{m-base-class('mx-neg', false)} { margin-right: multiply(var(--mr), -1); }
-        #{m-base-class('mb-neg', false)}, #{m-base-class('my-neg', false)} { margin-bottom: multiply(var(--mb), -1); }
-        #{m-base-class('ml-neg', false)}, #{m-base-class('mx-neg', false)} { margin-left: multiply(var(--ml), -1); }
-
-        #{m-base-class('pt', false)}, #{m-base-class('py', false)} { padding-top: var(--pt); }
-        #{m-base-class('pr', false)}, #{m-base-class('px', false)} { padding-right: var(--pr); }
-        #{m-base-class('pb', false)}, #{m-base-class('py', false)} { padding-bottom: var(--pb); }
-        #{m-base-class('pl', false)}, #{m-base-class('px', false)} { padding-left: var(--pl); }
-
-        // margin/padding: inner-y
-        @each $y in $inner-y-keys {
-          .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y},
-          .#{$m__}my-#{$y}, .#{$m__}mt-#{$y} { --mt: var(--inner-y-#{$y}); }
-          .#{$m__}my-neg-#{$y}, .#{$m__}mb-neg-#{$y},
-          .#{$m__}my-#{$y}, .#{$m__}mb-#{$y} { --mb: var(--inner-y-#{$y}); }
-          .#{$m__}py-#{$y}, .#{$m__}pt-#{$y} { --pt: var(--inner-y-#{$y}); }
-          .#{$m__}py-#{$y}, .#{$m__}pb-#{$y} { --pb: var(--inner-y-#{$y}); }
-        }
-
-        // margin/padding: inner-x
-        @each $x in $inner-x-keys {
-          .#{$m__}mx-neg-#{$x}, .#{$m__}mr-neg-#{$x},
-          .#{$m__}mx-#{$x}, .#{$m__}mr-#{$x} { --mr: var(--inner-x-#{$x}); }
-          .#{$m__}mx-neg-#{$x}, .#{$m__}ml-neg-#{$x},
-          .#{$m__}mx-#{$x}, .#{$m__}ml-#{$x} { --ml: var(--inner-x-#{$x}); }
-          .#{$m__}px-#{$x}, .#{$m__}pr-#{$x} { --pr: var(--inner-x-#{$x}); }
-          .#{$m__}px-#{$x}, .#{$m__}pl-#{$x} { --pl: var(--inner-x-#{$x}); }
-        }
-      }
-    }
-  }
-
-
-  /////////////////////////////////////////////
-  /////////////////// legacy //////////////////
-  /////////////////////////////////////////////
-
-  @else {
-
-    // list to collect suffix keys
-    $m-list: ();
-
-    // join with null, to also output suffix-less class
-    @each $m in join(null, media-keys()) {
-
-      // add suffix key to list, start MQ
-      $m-list: append($m-list, $m);
-      @include m($m) {
-
-        @each $y in $inner-y-keys {
-          $inner-y: inner-y($y);
-
-          // margin/padding: inner-y [class list; grows with each loop]
-          #{m-prefixize('.my-#{$y}, .mt-#{$y}', $m-list...)} { margin-top: $inner-y; }
-          #{m-prefixize('.my-#{$y}, .mb-#{$y}', $m-list...)} { margin-bottom: $inner-y; }
-          #{m-prefixize('.my-neg-#{$y}, .mt-neg-#{$y}', $m-list...)} { margin-top: -1 * $inner-y; }
-          #{m-prefixize('.my-neg-#{$y}, .mb-neg-#{$y}', $m-list...)} { margin-bottom: -1 * $inner-y; }
-          #{m-prefixize('.py-#{$y}, .pt-#{$y}', $m-list...)} { padding-top: $inner-y; }
-          #{m-prefixize('.py-#{$y}, .pb-#{$y}', $m-list...)} { padding-bottom: $inner-y; }
-        }
-
-        @each $x in $inner-x-keys {
-          $inner-x: inner-x($x);
-
-          // margin/padding: inner-x [class list; grows with each loop]
-          #{m-prefixize('.mx-#{$x}, .mr-#{$x}', $m-list...)} { margin-right: $inner-x; }
-          #{m-prefixize('.mx-#{$x}, .ml-#{$x}', $m-list...)} { margin-left: $inner-x; }
-          #{m-prefixize('.mx-neg-#{$x}, .mr-neg-#{$x}', $m-list...)} { margin-right: -1 * $inner-x; }
-          #{m-prefixize('.mx-neg-#{$x}, .ml-neg-#{$x}', $m-list...)} { margin-left: -1 * $inner-x; }
-          #{m-prefixize('.px-#{$x}, .pr-#{$x}', $m-list...)} { padding-right: $inner-x; }
-          #{m-prefixize('.px-#{$x}, .pl-#{$x}', $m-list...)} { padding-left: $inner-x; }
-        }
+      // margin/padding: inner-y
+      @each $y in $inner-y-keys {
+        .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y},
+        .#{$m__}my-#{$y}, .#{$m__}mt-#{$y} { --mt: var(--inner-y-#{$y}); }
+        .#{$m__}my-neg-#{$y}, .#{$m__}mb-neg-#{$y},
+        .#{$m__}my-#{$y}, .#{$m__}mb-#{$y} { --mb: var(--inner-y-#{$y}); }
+        .#{$m__}py-#{$y}, .#{$m__}pt-#{$y} { --pt: var(--inner-y-#{$y}); }
+        .#{$m__}py-#{$y}, .#{$m__}pb-#{$y} { --pb: var(--inner-y-#{$y}); }
       }
 
+      // margin/padding: inner-x
+      @each $x in $inner-x-keys {
+        .#{$m__}mx-neg-#{$x}, .#{$m__}mr-neg-#{$x},
+        .#{$m__}mx-#{$x}, .#{$m__}mr-#{$x} { --mr: var(--inner-x-#{$x}); }
+        .#{$m__}mx-neg-#{$x}, .#{$m__}ml-neg-#{$x},
+        .#{$m__}mx-#{$x}, .#{$m__}ml-#{$x} { --ml: var(--inner-x-#{$x}); }
+        .#{$m__}px-#{$x}, .#{$m__}pr-#{$x} { --pr: var(--inner-x-#{$x}); }
+        .#{$m__}px-#{$x}, .#{$m__}pl-#{$x} { --pl: var(--inner-x-#{$x}); }
+      }
+
+      .#{$m__}my-auto, .#{$m__}mt-auto { --mt: auto; }
+      .#{$m__}mx-auto, .#{$m__}mr-auto { --mr: auto; }
+      .#{$m__}my-auto, .#{$m__}mb-auto { --mb: auto; }
+      .#{$m__}mx-auto, .#{$m__}ml-auto { --ml: auto; }
+
+      .#{$m__}my-0, .#{$m__}mt-0 { --mt: 0; }
+      .#{$m__}mx-0, .#{$m__}mr-0 { --mr: 0; }
+      .#{$m__}my-0, .#{$m__}mb-0 { --mb: 0; }
+      .#{$m__}mx-0, .#{$m__}ml-0 { --ml: 0; }
+      .#{$m__}py-0, .#{$m__}pt-0 { --pt: 0; }
+      .#{$m__}px-0, .#{$m__}pr-0 { --pr: 0; }
+      .#{$m__}py-0, .#{$m__}pb-0 { --pb: 0; }
+      .#{$m__}px-0, .#{$m__}pl-0 { --pl: 0; }
     }
   }
 
