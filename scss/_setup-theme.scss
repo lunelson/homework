@@ -32,8 +32,8 @@
 @mixin homework-setup-theme($modern: $homework-is-modern, $lite: true) {
 
   $colors: map-merge((
-    dark: #111,
-    lite: #eee,
+    dark: #010101,
+    lite: #efefef,
   ), $colors) !global;
 
   @if $modern {
