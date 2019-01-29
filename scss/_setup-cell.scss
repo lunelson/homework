@@ -39,11 +39,11 @@ $m__: '';
       #{m-base-class('span')} {
         width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
 
-        @at-root #{selector-insert(m-base-class('flow'), '>')} {
+        @at-root #{selector-insert(base-class('flow'), '>')} {
           width: calc(99.99999% * var(--col-span) / var(--col-base));
         }
 
-        @at-root #{selector-insert(m-base-class('grid'), '>')} {
+        @at-root #{selector-insert(base-class('grid'), '>')} {
           width: unset;
           // grid-column: span var(--col-span) / span var(--col-span);
           // grid-row: span var(--row-span) / span var(--row-span);
@@ -55,7 +55,7 @@ $m__: '';
       #{m-base-class('push', false)} {
         margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
 
-        @at-root #{selector-insert(m-base-class('flow'), '>')} {
+        @at-root #{selector-insert(base-class('flow'), '>')} {
           margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
         }
       }
@@ -64,7 +64,7 @@ $m__: '';
       #{m-base-class('push-r', false)} {
         margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
 
-        @at-root #{selector-insert(m-base-class('flow'), '>')} {
+        @at-root #{selector-insert(base-class('flow'), '>')} {
           margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
         }
       }
