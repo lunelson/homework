@@ -27,146 +27,102 @@
 //   -ol-
 //     sm, md, lg
 
+$colors: () !default;
+$widths: () !default;
+$radii: () !default;
+$shadows: () !default;
 
 
-@mixin homework-setup-theme($modern: $homework-is-modern, $lite: true) {
+@mixin homework-setup-theme($lite: true) {
 
   $colors: map-merge((
     dark: #010101,
     lite: #efefef,
   ), $colors) !global;
 
-  @if $modern {
 
-    :root {
-      // NB: color custom props stored as RGB number list!!!!
-      // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
-
-      --color-fg: #{rgbify(map-get($colors, if($lite, 'dark', 'lite')))};
-      --color-bg: #{rgbify(map-get($colors, if($lite, 'lite', 'dark')))};
-      // --bd-color: #{map-get($colors, if($lite, 'dark', 'lite'))};
-
-      @each $c, $color in $colors {
-        // NB: color custom props stored as RGB number list!!!!
-        --color-#{$c}: #{rgbify($color)};
-        --color-#{$c}-contrast: #{rgbify(yiq($color))};
-        // --color-#{$c}-darkened: #{rgbify(mix($color, #000, 90%))};
-        // --color-#{$c}-lightened: #{rgbify(mix($color, #fff, 75%))};
-      }
-    }
-
-    body, #{base-class('fg', false)} { color: --rgb(var(--color-fg)); }
-    body, #{base-class('bg', false)} { background-color: --rgb(var(--color-bg)); }
-    // #{base-class('bd', false)} { border-color: --rgb(var(--bd-color)); }
-
-    ///
-    /// IMPLICIT CONTRAST COLORS
-    ///
-
-    .fg-contrast { --color-fg: var(--color-bg-contrast); }
-    .bg-contrast { --color-bg: var(--color-fg-contrast); }
-
+  :root {
+    // NB: color custom props stored as RGB number list!!!!
+    // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
     @each $c, $color in $colors {
-
-      ///
-      /// EXPLICIT COLORS
-      ///
-
-      .fg-#{$c} {
-        --color-fg: var(--color-#{$c});
-        --color-fg-contrast: var(--color-#{$c}-contrast);
-      }
-      .bg-#{$c} {
-        --color-bg: var(--color-#{$c});
-        --color-bg-contrast: var(--color-#{$c}-contrast);
-      }
-      .fg-#{$c}-contrast {
-        --color-fg: var(--color-#{$c}-contrast);
-      }
-      .bg-#{$c}-contrast {
-        --color-bg: var(--color-#{$c}-contrast);
-      }
-      .theme-#{$c} {
-        --theme-color: var(--color-#{$c});
-        --theme-color-contrast: var(--color-#{$c}-contrast);
-        // --theme-color-darkened: var(--color-#{$c}-darkened);
-        // --theme-color-lightened: var(--color-#{$c}-lightened);
-      }
+      --color-#{$c}: #{rgbify($color)};
+      --color-contrast-#{$c}: #{rgbify(yiq($color))};
     }
+  }
 
-    ///
-    /// IMPLICIT THEME COLORS
-    ///
+  // TODO: make sure the yiq function is working with dark and lite values
+  body {
+    background-color: var(--color-#{if($lite, lite, dark)});
+    color: var(--color-contrast-#{if($lite, lite, dark)});
+  }
 
-    .fg-theme {
-      --color-fg: var(--theme-color);
-      --color-fg-contrast: var(--theme-color-contrast);
-    }
-    .bg-theme {
-      --color-bg: var(--theme-color);
-      --color-bg-contrast: var(--theme-color-contrast);
-    }
-    .fg-theme-contrast {
-      --color-fg: var(--theme-color-contrast);
-    }
-    .bg-theme-contrast {
-      --color-bg: var(--theme-color-contrast);
-    }
+  // HTML elements
+  #{base-class('c', false)} { color: var(--fg-color); }
+  #{base-class('bg', false)} { background-color: var(--bg-color); }
+  #{base-class('bd', false)} { border-color: var(--bd-color, --fg-color); border-width: var(--bd-width); }
+  #{base-class('ol', false)} { outline-color: var(--ol-color, --fg-color); outline-width: var(--ol-width); }
 
-  } @else {
+  // SVG elements
+  #{base-class('fill', false)} { fill: var(--fill-color); }
+  #{base-class('stroke', false)} { stroke: var(--stroke-color); stroke-width: var(--stroke-width); }
 
-    $color-fg: map-get($colors, if($lite, 'dark', 'lite'));
-    $color-bg: map-get($colors, if($lite, 'lite', 'dark'));
+  /////////////////////////////////////////////
+  ////////////////// current //////////////////
+  /////////////////////////////////////////////
 
-    body { color: $color-fg; }
-    body { background-color: $color-bg; }
+  .fill-current { --fill-color: currentColor; }
+  .stroke-current { --stroke-color: currentColor; }
 
-    .bg-contrast { background-color: yiq($color-fg); }
-    .fg-contrast { color: yiq($color-bg); }
+  /////////////////////////////////////////////
+  //////////////// transparent ////////////////
+  /////////////////////////////////////////////
 
-    @each $c, $color in $colors {
+  .bg-transparent { --bg-color: transparent; }
+  .bd-transparent { --bd-color: transparent; }
+  .ol-transparent { --ol-color: transparent; }
+  .fill-transparent { --fill-color: transparent; }
+  .stroke-transparent { --stroke-color: transparent; }
 
-      .fg-#{$c} {
-        color: $color;
-        .bg-contrast, &.bg-contrast {
-          background-color: yiq($color);
-        }
-      }
-      .bg-#{$c} {
-        background-color: $color;
-        .fg-contrast, &.fg-contrast {
-          color: yiq($color);
-        }
-      }
-      .fg-contrast-#{$c} {
-        color: yiq($color);
-      }
-      .bg-contrast-#{$c} {
-        background-color: yiq($color);
-      }
-      .theme-#{$c} {
+  /////////////////////////////////////////////
+  ////////////////// contrast /////////////////
+  /////////////////////////////////////////////
 
-        .fg-theme {
-          color: $color;
-          .bg-contrast, &.bg-contrast {
-            background-color: yiq($color);
-          }
-        }
-        .bg-theme {
-          background-color: $color;
-          .fg-contrast, &.fg-contrast {
-            color: yiq($color);
-          }
-        }
-        .fg-contrast-theme {
-          color: yiq($color);
-        }
-        .bg-contrast-theme {
-          background-color: yiq($color);
-        }
+  // rare case, of choosing black/white vs fg color
+  .bg-contrast { --bg-color: var(--fg-color-contrast); }
+  // otherwise assume contrast against the bg color
+  .fg-contrast { --fg-color: var(--bg-color-contrast); }
+  .bd-contrast { --bd-color: var(--bg-color-contrast); }
+  .ol-contrast { --ol-color: var(--bg-color-contrast); }
+  .fill-contrast { --fill-color: var(--bg-color-contrast); }
+  .stroke-contrast { --stroke-color: var(--bg-color-contrast); }
 
-      }
-    }
+  /////////////////////////////////////////////
+  /////////////////// theme ///////////////////
+  /////////////////////////////////////////////
 
+  .fg-theme { --fg-color: var(--theme-color);
+    --fg-color-contrast: var(--theme-color-contrast); }
+  .bg-theme { --bg-color: var(--theme-color);
+    --bg-color-contrast: var(--theme-color-contrast); }
+  .bd-theme { --bd-color: var(--theme-color); }
+  .ol-theme { --ol-color: var(--theme-color); }
+  .fill-theme { --fill-color: var(--theme-color); }
+  .stroke-theme { --stroke-color: var(--theme-color); }
+
+  /////////////////////////////////////////////
+  ////////////////// [color] //////////////////
+  /////////////////////////////////////////////
+
+  @each $c, $color in $colors {
+    .theme-#{$c} { --theme-color: var(--color-#{$c});
+      --theme-color-contrast: var(--color-contrast-#{$c}); }
+    .fg-#{$c} { --fg-color: var(--color-#{$c});
+      --fg-color-contrast: var(--color-contrast-#{$c}); }
+    .bg-#{$c} { --bg-color: var(--color-#{$c});
+      --bg-color-contrast: var(--color-contrast-#{$c}); }
+    .bd-#{$c} { --bd-color: var(--color-#{$c}); }
+    .ol-#{$c} { --ol-color: var(--color-#{$c}); }
+    .fill-#{$c} { --fill-color: var(--color-#{$c}); }
+    .stroke-#{$c} { --stroke-color: var(--color-#{$c}); }
   }
 }
