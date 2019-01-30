@@ -61,24 +61,23 @@
   ////////////////// overflow /////////////////
   /////////////////////////////////////////////
 
-  // clip-[x|y]
-  #{base-class('clip')} {
-    overflow: hidden !important;
+  .clip, .clip-x, .clip-y {
     position: relative;
     z-index: 0; // make sure container can clip
   }
-  .clip-x { overflow-x: hidden; overflow-y: visible }
-  .clip-y { overflow-y: hidden; overflow-x: visible }
+  .clip { overflow: hidden; }
+  .clip-x { overflow-x: hidden; }
+  .clip-y { overflow-y: hidden; }
 
   // over-[x|y]-[auto|scroll|hidden|visible]
-  #{base-class('over')} {
-  }
-  .over-x {}
-  .over-y {}
-  .over-auto {}
-  .over-scroll {}
-  .over-hidden {}
-  .over-visible {}
+  // #{base-class('overflow')} {
+  // }
+  // .overflow-x {}
+  // .overflow-y {}
+  // .overflow-auto {}
+  // .overflow-scroll {}
+  // .overflow-hidden {}
+  // .overflow-visible {}
 
   /////////////////////////////////////////////
   /////////////// layout control //////////////
