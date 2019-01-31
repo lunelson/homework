@@ -5,6 +5,25 @@
 
 // (m), :root -- implicitly responsive
 
+// TODO:
+//   1. do all the parsing first in setup-core
+//     - when parsing each medium:
+//       warn if a breakpoint is not present ✅
+//       warn if a key is found that did not exist at $root ✅
+//   2. output the rules in setup-root
+//     - output base props outside of media queries:
+//       --breakpoint-[m] ✅
+//       --outer-width-[m] and --inner-width-[m] ✅
+//     - output media props using mm exclusive query ✅
+
+@function not-contained($list, $item) {
+  @return not index($list, $item);
+}
+
+@function any-not-contained($list, $items) {
+  @each $item in $items { @if not index($list, $item) { @return true; } }
+  @return false;
+}
 
 @mixin homework-setup-core($modern: $homework-is-modern, $trim: true, $output: true) {
 
@@ -12,58 +31,54 @@
   $media-orig: $media !global;
   $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
 
-  @if $output {
-
-    @if $modern {
-      :root {
-        @include --output-medium-props($root);
-        --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-      }
-      html {
-        font-size: var(--font-size);
-        line-height: var(--line-height);
-      }
-    } @else {
-      html {
-        font-size: map-get($incoming-medium, 'font-size');
-        line-height: map-get($incoming-medium, 'line-height');
-      }
-    }
-
-  }
+  // @if $output {
+  //   :root {
+  //     @include --output-medium-props($root);
+  //     --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
+  //   }
+  //   html {
+  //     font-size: var(--font-size);
+  //     line-height: var(--line-height);
+  //   }
+  // }
 
   $outgoing-medium: $root;
+  $reference-medium-keys: append(map-keys($root), 'breakpoint');
   @each $m, $incoming-medium in $media {
 
-    @if not index(map-keys($incoming-medium), 'breakpoint') {
+    @if not-contained(map-keys($incoming-medium), 'breakpoint') {
       @include throw-error('homework: one of your $media does not have a breakpoint key');
+    }
+
+    @if any-not-contained($reference-medium-keys, map-keys($incoming-medium)) {
+      @include throw-error('homework: one of your $media contains a key which is not present in $root');
     }
 
     $outgoing-medium: --parse-medium(--deep-merge($outgoing-medium, $incoming-medium));
     $media: map-merge($media, ($m: $outgoing-medium)) !global;
 
-    @if $output {
+    // @if $output {
 
-      // TODO for wrap/peel
-      // :root
-      // --outer-width-#{$m}: ?
-      // --inner-width-#{$m}: ?
+    //   // TODO for wrap/peel
+    //   // :root
+    //   // --outer-width-#{$m}: ?
+    //   // --inner-width-#{$m}: ?
 
-      @media #{--query-string(map-get($incoming-medium, 'breakpoint'))} {
+    //   @media #{--query-string(map-get($incoming-medium, 'breakpoint'))} {
 
-        @if $modern {
-          :root {
-            @include --output-medium-props($incoming-medium);
-            --outer-width: #{map-get($outgoing-medium, 'outer-width')};
-          }
-        } @else {
-          html {
-            font-size: map-get($incoming-medium, 'font-size');
-            line-height: map-get($incoming-medium, 'line-height');
-          }
-        }
+    //     @if $modern {
+    //       :root {
+    //         @include --output-medium-props($incoming-medium);
+    //         --outer-width: #{map-get($outgoing-medium, 'outer-width')};
+    //       }
+    //     } @else {
+    //       html {
+    //         font-size: map-get($incoming-medium, 'font-size');
+    //         line-height: map-get($incoming-medium, 'line-height');
+    //       }
+    //     }
 
-      }
-    }
+    //   }
+    // }
   }
 }

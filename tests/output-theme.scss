@@ -1,26 +1,45 @@
 @import 'index';
 
-// srgb gamma correction, per spec: https://en.wikipedia.org/wiki/srgb
-@function re-gamma($n) { @if $n <= 0.0031308 { @return $n * 12.92; } @else { @return 1.055 * pow($n, 1/2.4) - 0.055; } }
-@function de-gamma($n) { @if $n <= 0.04045 { @return $n / 12.92; } @else { @return pow((($n + 0.055)/1.055), 2.4); } }
-
-// srgb bt-709 luma
-@function luma($c) {
-  $rlin: de-gamma(red($c)/255);
-  $glin: de-gamma(green($c)/255);
-  $blin: de-gamma(blue($c)/255);
-  @return re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
-}
-
-.test {
-  out: inspect(luma(#bada55));
-}
-
 $colors: (
-  foo: #508021,
-  bar: #da50c9,
-  baz: #4741ff,
-  fiz: #da9b30,
+  'dark': #0a0a0a,
+  'lite': #f0f0f0,
+  'gray': (
+    #222222,
+    #545454,
+    #858585,
+    #B7B7B7,
+    #E9E9E9,
+  ),
+  'foo': #508021,
+  'bar': #da50c9,
+  'baz': #4741ff,
+  'fiz': #da9b30,
+  'purple': (
+    #11103E,
+    #2E2D6B,
+    #5A5898,
+    #9493C6,
+    #DDDCF3,
+  ),
+  'pink': (
+    a: #33052A,
+    b: #661456,
+    c: #992E84,
+    d: #CC52B4,
+    e: #FF80E5,
+  ),
 );
 
+$grays: ();
+
+// .fns {
+//   result: inspect(de-gamma(0.5));
+//   result: inspect(re-gamma(0.5));
+//   result: inspect(red(yellow));
+//   result: inspect(green(yellow));
+//   result: inspect(blue(yellow));
+//   result: inspect(yiq(#FF80E5));
+// }
+
+@include homework-setup-core($output: false);
 @include homework-setup-theme();

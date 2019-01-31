@@ -68,20 +68,21 @@ html {
   pointer-events: none !important;
 }
 
-.clip, [class^=clip-], [class*=" clip-"] {
-  overflow: hidden !important;
+.clip, .clip-x, .clip-y {
   position: relative;
   z-index: 0;
 }
 
+.clip {
+  overflow: hidden;
+}
+
 .clip-x {
   overflow-x: hidden;
-  overflow-y: visible;
 }
 
 .clip-y {
   overflow-y: hidden;
-  overflow-x: visible;
 }
 
 .hold, [class^=hold-], [class*=" hold-"] {

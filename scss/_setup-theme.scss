@@ -5,27 +5,10 @@
 // | |_| | | |  __/ | | | | |  __/
 //  \__|_| |_|\___|_| |_| |_|\___|
 
-// $colors, $patterns, $weights, $radii, $shadows, $outlines
-// theme-[color]
-// c-, bgc-, bdc- ,fill- ,stroke-
-//   -[color]
-//   -theme
-//   -contra
-//   -current
-// bd- bdt-, bdr-, bdb-, bdl-
-//   -1,-2,-3,-4,-5,-6,-7
-//   -s,-m,-l,...
-// bg-none/0, bd-none/0, ol-0/none
-// bg-[position], bg-[attachment]
-// bd-collapse/-separate
-// radius- t-, r-, b-, l-, tl-, tr-, bl-, br-,
-//   s, m, l, max,
-//   oval
-// shadow
-//   sm, md, lg
-//   none/0
-//   -ol-
-//     sm, md, lg
+
+$colors: () !default;
+
+// $grays: () !default;
 
 // TODO: this should be a map, not a list!!
 // -- stick with the s, m, l pattern
@@ -36,33 +19,60 @@ $widths: 1 2 3 4 !default;
 $radii: 2 4 6 8 !default;
 
 $shadows: (
-  // TODO: a way to calculate these in terms of 'lifting up'?
-  // TODO: break down in to smaller properties
   s: 2 3 4 5,
   m: 2 3 4 5,
   l: 2 3 4 5,
 ) !default;
 
+@function list-to-map($arg) {
+  @if type-of($arg) == 'map' { @return $arg; }
+  @if type-of($arg) != 'list' { @return error('list-to-map: $arg must be a list'); }
+  $out: ();
+  @for $n from 1 through length($arg) {
+    $out: map-merge($out, ($n: nth($arg, $n)));
+  }
+  @return $out;
+}
+
 
 @mixin homework-setup-theme($base: lite) {
+
+  $colors: map-merge((
+    dark: #0a0a0a,
+    lite: #f0f0f0,
+  ), $colors) !global;
+
+  $color-names: ();
 
   :root {
     // NB: color custom props stored as RGB number list!!!!
     // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
+    // @each $c, $color in $colors {
+    //   --color-#{$c}: #{rgbify($color)};
+    //   --contrast-#{$c}: #{rgbify(contrast-color($color))};
+    // }
     @each $c, $color in $colors {
-      --color-#{$c}: #{rgbify($color)};
-      --color-contra-#{$c}: #{rgbify(yiq($color))};
+      @if length($color) > 1 {
+        @each $n, $subcolor in list-to-map($color) {
+          --color-#{$c}-#{$n}: #{rgbify($subcolor)};
+          --contrast-#{$c}-#{$n}: #{rgbify(contrast-color($subcolor))};
+          $color-names: append($color-names, #{$c}-#{$n});
+        }
+      } @else {
+        --color-#{$c}: #{rgbify($color)};
+        --contrast-#{$c}: #{rgbify(contrast-color($color))};
+        $color-names: append($color-names, $c);
+      }
     }
   }
 
-  // TODO: make sure the yiq function is working with dark and lite values
   body {
     background-color: rgb(var(--color-#{$base}));
-    color: rgb(var(--color-contra-#{$base}));
+    color: rgb(var(--contrast-#{$base}));
   }
 
   // HTML elements
-  #{base-class('c', false)} {
+  #{base-class('fg', false)} {
     color: rgba(var(--fg-color), var(--fg-opacity, 1));
   }
   #{base-class('bg', false)} {
@@ -79,6 +89,7 @@ $shadows: (
     outline-color: rgba(var(--ol-color, --fg-color), var(--ol-opacity, 1));
     outline-width: var(--ol-width);
   }
+
   // SVG elements
   #{base-class('fill', false)} {
     fill: rgb(var(--fill-color));
@@ -94,13 +105,13 @@ $shadows: (
   ////////////////// [color] //////////////////
   /////////////////////////////////////////////
 
-  @each $c, $color in $colors {
+  @each $c in $color-names {
     .theme-#{$c} { --theme-color: var(--color-#{$c});
-      --theme-color-contra: var(--color-contra-#{$c}); }
+      --theme-contrast: var(--contrast-#{$c}); }
     .fg-#{$c} { --fg-color: var(--color-#{$c});
-      --fg-color-contra: var(--color-contra-#{$c}); }
+      --fg-contrast: var(--contrast-#{$c}); }
     .bg-#{$c} { --bg-color: var(--color-#{$c});
-      --bg-color-contra: var(--color-contra-#{$c}); }
+      --bg-contrast: var(--contrast-#{$c}); }
     .bd-#{$c} { --bd-color: var(--color-#{$c}); }
     .ol-#{$c} { --ol-color: var(--color-#{$c}); }
     .fill-#{$c} { --fill-color: var(--color-#{$c}); }
@@ -112,12 +123,12 @@ $shadows: (
   /////////////////////////////////////////////
 
   @for $n from 0 through 9 {
-    .fg-fade-0#{$n} { --fg-opacity: $n/10; }
-    .bg-fade-0#{$n} { --bg-opacity: $n/10; }
-    .bd-fade-0#{$n} { --bd-opacity: $n/10; }
-    .ol-fade-0#{$n} { --ol-opacity: $n/10; }
-    .fill-fade-0#{$n} { --fill-opacity: $n/10; }
-    .stroke-fade-0#{$n} { --stroke-opacity: $n/10; }
+    .fg-fade-#{$n} { --fg-opacity: #{$n/10}; }
+    .bg-fade-#{$n} { --bg-opacity: #{$n/10}; }
+    .bd-fade-#{$n} { --bd-opacity: #{$n/10}; }
+    .ol-fade-#{$n} { --ol-opacity: #{$n/10}; }
+    .fill-fade-#{$n} { --fill-opacity: #{$n/10}; }
+    .stroke-fade-#{$n} { --stroke-opacity: #{$n/10}; }
   }
 
   /////////////////////////////////////////////
@@ -125,22 +136,22 @@ $shadows: (
   /////////////////////////////////////////////
 
   // rare case, of choosing black/white vs fg color
-  .bg-contra { --bg-color: var(--fg-color-contra); }
+  .bg-contra { --bg-color: var(--fg-contrast); }
   // otherwise assume contra against the bg color
-  .fg-contra { --fg-color: var(--bg-color-contra); }
-  .bd-contra { --bd-color: var(--bg-color-contra); }
-  .ol-contra { --ol-color: var(--bg-color-contra); }
-  .fill-contra { --fill-color: var(--bg-color-contra); }
-  .stroke-contra { --stroke-color: var(--bg-color-contra); }
+  .fg-contra { --fg-color: var(--bg-contrast); }
+  .bd-contra { --bd-color: var(--bg-contrast); }
+  .ol-contra { --ol-color: var(--bg-contrast); }
+  .fill-contra { --fill-color: var(--bg-contrast); }
+  .stroke-contra { --stroke-color: var(--bg-contrast); }
 
   /////////////////////////////////////////////
   /////////////////// theme ///////////////////
   /////////////////////////////////////////////
 
   .fg-theme { --fg-color: var(--theme-color);
-    --fg-color-contra: var(--theme-color-contra); }
+    --fg-contrast: var(--theme-contrast); }
   .bg-theme { --bg-color: var(--theme-color);
-    --bg-color-contra: var(--theme-color-contra); }
+    --bg-contrast: var(--theme-contrast); }
   .bd-theme { --bd-color: var(--theme-color); }
   .ol-theme { --ol-color: var(--theme-color); }
   .fill-theme { --fill-color: var(--theme-color); }
@@ -169,7 +180,7 @@ $shadows: (
   /////////////////////////////////////////////
 
   @each $w in join((0), $widths) {
-    :root { --width-#{$w}: $w * 1px; }
+    :root { --width-#{$w}: #{$w * 1px}; }
     .bd-#{$w}, .bd-t-#{$w} { --bd-t-width: var(--width-#{$w}); }
     .bd-#{$w}, .bd-r-#{$w} { --bd-r-width: var(--width-#{$w}); }
     .bd-#{$w}, .bd-b-#{$w} { --bd-b-width: var(--width-#{$w}); }
@@ -183,7 +194,7 @@ $shadows: (
   /////////////////////////////////////////////
 
   @each $r in $radii {
-    :root { --radius-#{$r}: $r * 1px; }
+    :root { --radius-#{$r}: #{$r * 1px}; }
     .rnd-#{$r}, .rnd-t-#{$r}, .rnd-tl-#{$r} { border-top-left-radius: var(--radius-#{$r}); }
     .rnd-#{$r}, .rnd-t-#{$r}, .rnd-tr-#{$r} { border-top-right-radius: var(--radius-#{$r}); }
     .rnd-#{$r}, .rnd-b-#{$r}, .rnd-bl-#{$r} { border-bottom-left-radius: var(--radius-#{$r}); }
@@ -196,15 +207,14 @@ $shadows: (
   ////////// shadows, shadow-outlines /////////
   /////////////////////////////////////////////
 
-/*   shadow
-  sm, md, lg
-  none/0
-  -ol-
-    sm, md, lg
+  // shadows:
+  //   1. cast shadows
+  //     see: https://codepen.io/scottyzen/full/KbNRJq
+  //     should calculate automatically
+  //     should break in to component parts, i.e. color, height
+  //   2. outline shadows
+  //     see bootstrap
 
-    .bd-l-xl.bd-contra.bg-theme.fg-contra.
-      button.btn-s.rnd-tl-
- */
   /////////////////////////////////////////////
   /////////////////// other ///////////////////
   /////////////////////////////////////////////
@@ -212,4 +222,14 @@ $shadows: (
   // bg-[position], bg-[attachment]
   // bd-collapse/-separate
 
+  /////////////////////////////////////////////
+  ////////////////// [states] /////////////////
+  /////////////////////////////////////////////
+
+  // hov, hover
+  // foc, focus
+  // act, active
+  // dis, disabled
+  // parent-hov, parent-hover
+  // foc-within, focus-within
 }

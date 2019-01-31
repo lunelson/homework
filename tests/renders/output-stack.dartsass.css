@@ -1,12 +1,3 @@
-.stack, [class^=stack-], [class*=" stack-"] {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-.stack > *, [class^=stack-] > *, [class*=" stack-"] > * {
-  flex: 0 0 auto;
-}
-
 .stack, [class^=stack-], [class*=" stack-"], .plain, [class^=plain-], [class*=" plain-"] {
   padding-top: 0.01px;
   padding-bottom: 0.01px;
@@ -16,7 +7,7 @@
   margin-bottom: 0;
 }
 .stack > * + *, [class^=stack-] > * + *, [class*=" stack-"] > * + *, .plain > * + *, [class^=plain-] > * + *, [class*=" plain-"] > * + * {
-  margin-top: var(--stack-gap);
+  margin-top: var(--stack-gap, var(--inner-y));
 }
 
 .chain, [class^=chain-], [class*=" chain-"] {
@@ -31,42 +22,34 @@
   text-overflow: ellipsis;
 }
 .chain > * + *, [class^=chain-] > * + *, [class*=" chain-"] > * + * {
-  margin-left: var(--chain-gap);
-}
-
-:root {
-  --stack-gap: var(--inner-y);
-  --chain-gap: var(--inner-x);
+  margin-left: var(--chain-gap, var(--inner-x));
 }
 
 .stack-0 > * {
   --stack-gap: 0;
 }
 
-.plain > .shim-s, [class^=plain-] > .shim-s, [class*=" plain-"] > .shim-s,
-.stack > .shim-s, [class^=stack-] > .shim-s, [class*=" stack-"] > .shim-s {
+.stack > .shim-s, [class^=stack-] > .shim-s, [class*=" stack-"] > .shim-s, .plain > .shim-s, [class^=plain-] > .shim-s, [class*=" plain-"] > .shim-s {
   --stack-gap: var(--inner-y-s);
 }
 
-.stack-s > * {
+.stack-s > * + *, .plain-s > * + * {
   --stack-gap: var(--inner-y-s);
 }
 
-.plain > .shim-m, [class^=plain-] > .shim-m, [class*=" plain-"] > .shim-m,
-.stack > .shim-m, [class^=stack-] > .shim-m, [class*=" stack-"] > .shim-m {
+.stack > .shim-m, [class^=stack-] > .shim-m, [class*=" stack-"] > .shim-m, .plain > .shim-m, [class^=plain-] > .shim-m, [class*=" plain-"] > .shim-m {
   --stack-gap: var(--inner-y-m);
 }
 
-.stack-m > * {
+.stack-m > * + *, .plain-m > * + * {
   --stack-gap: var(--inner-y-m);
 }
 
-.plain > .shim-l, [class^=plain-] > .shim-l, [class*=" plain-"] > .shim-l,
-.stack > .shim-l, [class^=stack-] > .shim-l, [class*=" stack-"] > .shim-l {
+.stack > .shim-l, [class^=stack-] > .shim-l, [class*=" stack-"] > .shim-l, .plain > .shim-l, [class^=plain-] > .shim-l, [class*=" plain-"] > .shim-l {
   --stack-gap: var(--inner-y-l);
 }
 
-.stack-l > * {
+.stack-l > * + *, .plain-l > * + * {
   --stack-gap: var(--inner-y-l);
 }
 

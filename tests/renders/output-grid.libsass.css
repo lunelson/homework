@@ -114,10 +114,6 @@
   --col-span: 0;
 }
 
-.grid > .span-auto, [class^="grid-"] > .span-auto, [class*=" grid-"] > .span-auto {
-  grid-column: auto / auto;
-}
-
 .span-all {
   --col-span: var(--col-base);
 }
@@ -866,32 +862,29 @@
   .a__span, [class^="a__span-"], [class*=" a__span-"] {
     width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
   }
-  .a__flow > .a__span, .a__flow > [class^="a__span-"], .a__flow > [class*=" a__span-"], [class^="a__flow-"] > .a__span, [class^="a__flow-"] > [class^="a__span-"], [class^="a__flow-"] > [class*=" a__span-"], [class*=" a__flow-"] > .a__span, [class*=" a__flow-"] > [class^="a__span-"], [class*=" a__flow-"] > [class*=" a__span-"] {
+  .flow > .a__span, .flow > [class^="a__span-"], .flow > [class*=" a__span-"], [class^="flow-"] > .a__span, [class^="flow-"] > [class^="a__span-"], [class^="flow-"] > [class*=" a__span-"], [class*=" flow-"] > .a__span, [class*=" flow-"] > [class^="a__span-"], [class*=" flow-"] > [class*=" a__span-"] {
     width: calc(99.99999% * var(--col-span) / var(--col-base));
   }
-  .a__grid > .a__span, .a__grid > [class^="a__span-"], .a__grid > [class*=" a__span-"], [class^="a__grid-"] > .a__span, [class^="a__grid-"] > [class^="a__span-"], [class^="a__grid-"] > [class*=" a__span-"], [class*=" a__grid-"] > .a__span, [class*=" a__grid-"] > [class^="a__span-"], [class*=" a__grid-"] > [class*=" a__span-"] {
+  .grid > .a__span, .grid > [class^="a__span-"], .grid > [class*=" a__span-"], [class^="grid-"] > .a__span, [class^="grid-"] > [class^="a__span-"], [class^="grid-"] > [class*=" a__span-"], [class*=" grid-"] > .a__span, [class*=" grid-"] > [class^="a__span-"], [class*=" grid-"] > [class*=" a__span-"] {
     width: unset;
   }
   [class^="a__pull-"], [class*=" a__pull-"],
   [class^="a__push-"], [class*=" a__push-"] {
     margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
   }
-  .a__flow > [class^="a__pull-"], .a__flow > [class*=" a__pull-"], .a__flow > [class^="a__push-"], .a__flow > [class*=" a__push-"], [class^="a__flow-"] > [class^="a__pull-"], [class^="a__flow-"] > [class*=" a__pull-"], [class^="a__flow-"] > [class^="a__push-"], [class^="a__flow-"] > [class*=" a__push-"], [class*=" a__flow-"] > [class^="a__pull-"], [class*=" a__flow-"] > [class*=" a__pull-"], [class*=" a__flow-"] > [class^="a__push-"], [class*=" a__flow-"] > [class*=" a__push-"] {
+  .flow > [class^="a__pull-"], .flow > [class*=" a__pull-"], .flow > [class^="a__push-"], .flow > [class*=" a__push-"], [class^="flow-"] > [class^="a__pull-"], [class^="flow-"] > [class*=" a__pull-"], [class^="flow-"] > [class^="a__push-"], [class^="flow-"] > [class*=" a__push-"], [class*=" flow-"] > [class^="a__pull-"], [class*=" flow-"] > [class*=" a__pull-"], [class*=" flow-"] > [class^="a__push-"], [class*=" flow-"] > [class*=" a__push-"] {
     margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
   }
   [class^="a__pull-r-"], [class*=" a__pull-r-"],
   [class^="a__push-r-"], [class*=" a__push-r-"] {
     margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
   }
-  .a__flow > [class^="a__pull-r-"], .a__flow > [class*=" a__pull-r-"], .a__flow > [class^="a__push-r-"], .a__flow > [class*=" a__push-r-"], [class^="a__flow-"] > [class^="a__pull-r-"], [class^="a__flow-"] > [class*=" a__pull-r-"], [class^="a__flow-"] > [class^="a__push-r-"], [class^="a__flow-"] > [class*=" a__push-r-"], [class*=" a__flow-"] > [class^="a__pull-r-"], [class*=" a__flow-"] > [class*=" a__pull-r-"], [class*=" a__flow-"] > [class^="a__push-r-"], [class*=" a__flow-"] > [class*=" a__push-r-"] {
+  .flow > [class^="a__pull-r-"], .flow > [class*=" a__pull-r-"], .flow > [class^="a__push-r-"], .flow > [class*=" a__push-r-"], [class^="flow-"] > [class^="a__pull-r-"], [class^="flow-"] > [class*=" a__pull-r-"], [class^="flow-"] > [class^="a__push-r-"], [class^="flow-"] > [class*=" a__push-r-"], [class*=" flow-"] > [class^="a__pull-r-"], [class*=" flow-"] > [class*=" a__pull-r-"], [class*=" flow-"] > [class^="a__push-r-"], [class*=" flow-"] > [class*=" a__push-r-"] {
     margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
   }
   .a__flow > .a__span-auto, [class^="a__flow-"] > .a__span-auto, [class*=" a__flow-"] > .a__span-auto {
     flex: 1 1 0%;
     --col-span: 0;
-  }
-  .a__grid > .a__span-auto, [class^="a__grid-"] > .a__span-auto, [class*=" a__grid-"] > .a__span-auto {
-    grid-column: auto / auto;
   }
   .a__span-all {
     --col-span: var(--col-base);
@@ -1490,32 +1483,29 @@
   .b__span, [class^="b__span-"], [class*=" b__span-"] {
     width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
   }
-  .b__flow > .b__span, .b__flow > [class^="b__span-"], .b__flow > [class*=" b__span-"], [class^="b__flow-"] > .b__span, [class^="b__flow-"] > [class^="b__span-"], [class^="b__flow-"] > [class*=" b__span-"], [class*=" b__flow-"] > .b__span, [class*=" b__flow-"] > [class^="b__span-"], [class*=" b__flow-"] > [class*=" b__span-"] {
+  .flow > .b__span, .flow > [class^="b__span-"], .flow > [class*=" b__span-"], [class^="flow-"] > .b__span, [class^="flow-"] > [class^="b__span-"], [class^="flow-"] > [class*=" b__span-"], [class*=" flow-"] > .b__span, [class*=" flow-"] > [class^="b__span-"], [class*=" flow-"] > [class*=" b__span-"] {
     width: calc(99.99999% * var(--col-span) / var(--col-base));
   }
-  .b__grid > .b__span, .b__grid > [class^="b__span-"], .b__grid > [class*=" b__span-"], [class^="b__grid-"] > .b__span, [class^="b__grid-"] > [class^="b__span-"], [class^="b__grid-"] > [class*=" b__span-"], [class*=" b__grid-"] > .b__span, [class*=" b__grid-"] > [class^="b__span-"], [class*=" b__grid-"] > [class*=" b__span-"] {
+  .grid > .b__span, .grid > [class^="b__span-"], .grid > [class*=" b__span-"], [class^="grid-"] > .b__span, [class^="grid-"] > [class^="b__span-"], [class^="grid-"] > [class*=" b__span-"], [class*=" grid-"] > .b__span, [class*=" grid-"] > [class^="b__span-"], [class*=" grid-"] > [class*=" b__span-"] {
     width: unset;
   }
   [class^="b__pull-"], [class*=" b__pull-"],
   [class^="b__push-"], [class*=" b__push-"] {
     margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
   }
-  .b__flow > [class^="b__pull-"], .b__flow > [class*=" b__pull-"], .b__flow > [class^="b__push-"], .b__flow > [class*=" b__push-"], [class^="b__flow-"] > [class^="b__pull-"], [class^="b__flow-"] > [class*=" b__pull-"], [class^="b__flow-"] > [class^="b__push-"], [class^="b__flow-"] > [class*=" b__push-"], [class*=" b__flow-"] > [class^="b__pull-"], [class*=" b__flow-"] > [class*=" b__pull-"], [class*=" b__flow-"] > [class^="b__push-"], [class*=" b__flow-"] > [class*=" b__push-"] {
+  .flow > [class^="b__pull-"], .flow > [class*=" b__pull-"], .flow > [class^="b__push-"], .flow > [class*=" b__push-"], [class^="flow-"] > [class^="b__pull-"], [class^="flow-"] > [class*=" b__pull-"], [class^="flow-"] > [class^="b__push-"], [class^="flow-"] > [class*=" b__push-"], [class*=" flow-"] > [class^="b__pull-"], [class*=" flow-"] > [class*=" b__pull-"], [class*=" flow-"] > [class^="b__push-"], [class*=" flow-"] > [class*=" b__push-"] {
     margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
   }
   [class^="b__pull-r-"], [class*=" b__pull-r-"],
   [class^="b__push-r-"], [class*=" b__push-r-"] {
     margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
   }
-  .b__flow > [class^="b__pull-r-"], .b__flow > [class*=" b__pull-r-"], .b__flow > [class^="b__push-r-"], .b__flow > [class*=" b__push-r-"], [class^="b__flow-"] > [class^="b__pull-r-"], [class^="b__flow-"] > [class*=" b__pull-r-"], [class^="b__flow-"] > [class^="b__push-r-"], [class^="b__flow-"] > [class*=" b__push-r-"], [class*=" b__flow-"] > [class^="b__pull-r-"], [class*=" b__flow-"] > [class*=" b__pull-r-"], [class*=" b__flow-"] > [class^="b__push-r-"], [class*=" b__flow-"] > [class*=" b__push-r-"] {
+  .flow > [class^="b__pull-r-"], .flow > [class*=" b__pull-r-"], .flow > [class^="b__push-r-"], .flow > [class*=" b__push-r-"], [class^="flow-"] > [class^="b__pull-r-"], [class^="flow-"] > [class*=" b__pull-r-"], [class^="flow-"] > [class^="b__push-r-"], [class^="flow-"] > [class*=" b__push-r-"], [class*=" flow-"] > [class^="b__pull-r-"], [class*=" flow-"] > [class*=" b__pull-r-"], [class*=" flow-"] > [class^="b__push-r-"], [class*=" flow-"] > [class*=" b__push-r-"] {
     margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
   }
   .b__flow > .b__span-auto, [class^="b__flow-"] > .b__span-auto, [class*=" b__flow-"] > .b__span-auto {
     flex: 1 1 0%;
     --col-span: 0;
-  }
-  .b__grid > .b__span-auto, [class^="b__grid-"] > .b__span-auto, [class*=" b__grid-"] > .b__span-auto {
-    grid-column: auto / auto;
   }
   .b__span-all {
     --col-span: var(--col-base);
@@ -2114,32 +2104,29 @@
   .c__span, [class^="c__span-"], [class*=" c__span-"] {
     width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
   }
-  .c__flow > .c__span, .c__flow > [class^="c__span-"], .c__flow > [class*=" c__span-"], [class^="c__flow-"] > .c__span, [class^="c__flow-"] > [class^="c__span-"], [class^="c__flow-"] > [class*=" c__span-"], [class*=" c__flow-"] > .c__span, [class*=" c__flow-"] > [class^="c__span-"], [class*=" c__flow-"] > [class*=" c__span-"] {
+  .flow > .c__span, .flow > [class^="c__span-"], .flow > [class*=" c__span-"], [class^="flow-"] > .c__span, [class^="flow-"] > [class^="c__span-"], [class^="flow-"] > [class*=" c__span-"], [class*=" flow-"] > .c__span, [class*=" flow-"] > [class^="c__span-"], [class*=" flow-"] > [class*=" c__span-"] {
     width: calc(99.99999% * var(--col-span) / var(--col-base));
   }
-  .c__grid > .c__span, .c__grid > [class^="c__span-"], .c__grid > [class*=" c__span-"], [class^="c__grid-"] > .c__span, [class^="c__grid-"] > [class^="c__span-"], [class^="c__grid-"] > [class*=" c__span-"], [class*=" c__grid-"] > .c__span, [class*=" c__grid-"] > [class^="c__span-"], [class*=" c__grid-"] > [class*=" c__span-"] {
+  .grid > .c__span, .grid > [class^="c__span-"], .grid > [class*=" c__span-"], [class^="grid-"] > .c__span, [class^="grid-"] > [class^="c__span-"], [class^="grid-"] > [class*=" c__span-"], [class*=" grid-"] > .c__span, [class*=" grid-"] > [class^="c__span-"], [class*=" grid-"] > [class*=" c__span-"] {
     width: unset;
   }
   [class^="c__pull-"], [class*=" c__pull-"],
   [class^="c__push-"], [class*=" c__push-"] {
     margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
   }
-  .c__flow > [class^="c__pull-"], .c__flow > [class*=" c__pull-"], .c__flow > [class^="c__push-"], .c__flow > [class*=" c__push-"], [class^="c__flow-"] > [class^="c__pull-"], [class^="c__flow-"] > [class*=" c__pull-"], [class^="c__flow-"] > [class^="c__push-"], [class^="c__flow-"] > [class*=" c__push-"], [class*=" c__flow-"] > [class^="c__pull-"], [class*=" c__flow-"] > [class*=" c__pull-"], [class*=" c__flow-"] > [class^="c__push-"], [class*=" c__flow-"] > [class*=" c__push-"] {
+  .flow > [class^="c__pull-"], .flow > [class*=" c__pull-"], .flow > [class^="c__push-"], .flow > [class*=" c__push-"], [class^="flow-"] > [class^="c__pull-"], [class^="flow-"] > [class*=" c__pull-"], [class^="flow-"] > [class^="c__push-"], [class^="flow-"] > [class*=" c__push-"], [class*=" flow-"] > [class^="c__pull-"], [class*=" flow-"] > [class*=" c__pull-"], [class*=" flow-"] > [class^="c__push-"], [class*=" flow-"] > [class*=" c__push-"] {
     margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
   }
   [class^="c__pull-r-"], [class*=" c__pull-r-"],
   [class^="c__push-r-"], [class*=" c__push-r-"] {
     margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
   }
-  .c__flow > [class^="c__pull-r-"], .c__flow > [class*=" c__pull-r-"], .c__flow > [class^="c__push-r-"], .c__flow > [class*=" c__push-r-"], [class^="c__flow-"] > [class^="c__pull-r-"], [class^="c__flow-"] > [class*=" c__pull-r-"], [class^="c__flow-"] > [class^="c__push-r-"], [class^="c__flow-"] > [class*=" c__push-r-"], [class*=" c__flow-"] > [class^="c__pull-r-"], [class*=" c__flow-"] > [class*=" c__pull-r-"], [class*=" c__flow-"] > [class^="c__push-r-"], [class*=" c__flow-"] > [class*=" c__push-r-"] {
+  .flow > [class^="c__pull-r-"], .flow > [class*=" c__pull-r-"], .flow > [class^="c__push-r-"], .flow > [class*=" c__push-r-"], [class^="flow-"] > [class^="c__pull-r-"], [class^="flow-"] > [class*=" c__pull-r-"], [class^="flow-"] > [class^="c__push-r-"], [class^="flow-"] > [class*=" c__push-r-"], [class*=" flow-"] > [class^="c__pull-r-"], [class*=" flow-"] > [class*=" c__pull-r-"], [class*=" flow-"] > [class^="c__push-r-"], [class*=" flow-"] > [class*=" c__push-r-"] {
     margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
   }
   .c__flow > .c__span-auto, [class^="c__flow-"] > .c__span-auto, [class*=" c__flow-"] > .c__span-auto {
     flex: 1 1 0%;
     --col-span: 0;
-  }
-  .c__grid > .c__span-auto, [class^="c__grid-"] > .c__span-auto, [class*=" c__grid-"] > .c__span-auto {
-    grid-column: auto / auto;
   }
   .c__span-all {
     --col-span: var(--col-base);

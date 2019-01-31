@@ -6,37 +6,56 @@
 //  \__|_| |_|\___|_| |_| |_|\___|      \__,_|\___|_| \__,_|\__,_|_|\__|___/
 
 
-$colors: (
-  dark: #010101,
-  lite: #efefef,
-) !default;
-
 
 // srgb gamma correction, per spec: https://en.wikipedia.org/wiki/srgb
-@function re-gamma($n) { @if $n <= 0.0031308 { @return $n * 12.92; } @else { @return 1.055 * pow($n, 1/2.4) - 0.055; } }
-@function de-gamma($n) { @if $n <= 0.04045 { @return $n / 12.92; } @else { @return pow((($n + 0.055)/1.055), 2.4); } }
+@function re-gamma($n) {
+  @if $n <= 0.0031308 { @return $n * 12.92; }
+  @else { @return 1.055 * pow($n, 1/2.4) - 0.055; }
+}
+@function de-gamma($n) {
+  @if $n <= 0.04045 { @return $n / 12.92; }
+  @else { @return pow((($n + 0.055)/1.055), 2.4); }
+}
 
 // srgb bt-709 luma
-// @function luma($c) {
-//   $rlin: de-gamma(red($c)/255);
-//   $glin: de-gamma(green($c)/255);
-//   $blin: de-gamma(blue($c)/255);
-//   @return re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
-// }
-
-// modified from bootstrap, which does not linearize the colors
-@function yiq($c) {
+@function luma($c) {
   $rlin: de-gamma(red($c)/255);
   $glin: de-gamma(green($c)/255);
   $blin: de-gamma(blue($c)/255);
-  $yiq: 0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin;
-  @return map-get($colors, if($yiq >= 0.5, 'dark', 'lite'));
+  @return re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin) * 100;
+}
+
+// modified from bootstrap, which does not linearize the colors
+@function contrast-color($c) {
+  $rlin: de-gamma(red($c)/255);
+  $glin: de-gamma(green($c)/255);
+  $blin: de-gamma(blue($c)/255);
+  $luma: re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin);
+  @return map-get($colors, if($luma >= 0.5, 'dark', 'lite'));
+}
+
+@function overlay-color($c) {
+  // WORK IN PROGRESS
+  // see: https://codepen.io/lunelson/pen/YBNYPm
 }
 
 @function rgbify($c) { @return red($c), green($c), blue($c); }
 @function hslify($c) { @return hue($c), saturation($c), lightness($c); }
 
+$fn-rgb: get-function('rgb');
+$fn-rgba: get-function('rgba');
+$fn-hsl: get-function('hsl');
+$fn-hsla: get-function('hsla');
+
+@function --rgb($args...) { @return call($fn-rgb, $args...); }
+@function --rgba($args...) { @return call($fn-rgba, $args...); }
+@function --hsl($args...) { @return call($fn-hsl, $args...); }
+@function --hsla($args...) { @return call($fn-hsla, $args...); }
+
 @function rgb($args...) { @return #{'rgb(#{$args})'}; }
 @function rgba($args...) { @return #{'rgba(#{$args})'}; }
 @function hsl($args...) { @return #{'hsl(#{$args})'}; }
 @function hsla($args...) { @return #{'hsla(#{$args})'}; }
+
+@function shade($color, $percent){ @return mix(black, $color, $percent); }
+@function tint($color, $percent){ @return mix(white, $color, $percent); }

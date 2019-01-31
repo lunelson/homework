@@ -1,0 +1,25 @@
+//                  _
+//                 | |
+//  _ __ ___   ___ | |_
+// | '__/ _ \ / _ \| __|
+// | | | (_) | (_) | |_
+// |_|  \___/ \___/ \__|
+
+@mixin homework-setup-root() {
+  :root {
+    @each $m, $medium in $media {
+      --breakpoint-#{$m}: #{map-get($medium, 'breakpoint')};
+      --outer-width-#{$m}: #{map-get($medium, 'outer-width')};
+      // --inner-width-#{$m}: #{map-get($medium, 'inner-width')};
+    }
+    @include mm() {
+      $medium: m();
+      @include --output-medium-props($medium);
+      // --outer-width: #{map-get($medium, 'outer-width')};
+    }
+  }
+  html {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+  }
+}

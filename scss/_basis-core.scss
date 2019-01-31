@@ -27,12 +27,14 @@ $root-defaults: (
   outer-left: 2rem,
   grid-cols: 12,
 
-  // mods
+  // inner-mods
   // NB: default to one set of mods for both axes
-  font-mods: ( sans: ( m: 16px 1.25 ) ),
   inner-mods: ( m: 1rem ),
   // inner-x-mods: ( m: 1rem ),
   // inner-y-mods: ( m: 1rem ),
+
+  // font-mods (not required)
+  // font-mods: ( sans: ( m: 16px 1.25 ) ),
 );
 
 $media-defaults: (

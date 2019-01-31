@@ -39,9 +39,9 @@ $media: (
     breakpoint: 40em,
     line-height: 1.25,
     // font-size: 20px,
-    // inner-y-mods: (
-    //   l: 4px
-    // ),
+    inner-y-mods: (
+      l: 4px
+    ),
     font-mods: (
       serif: (
         l: 30px 1.1
@@ -56,10 +56,12 @@ $media: (
   ),
 );
 
+@include homework-setup-core($output: false);
 
-// /* #{map-inspect($root)} */
-/* #{map-inspect($media)} */
-@include homework-setup-core();
-@include homework-setup-root();
-// /* #{map-inspect($root)} */
-/* #{map-inspect($media)} */
+@include mm() {
+  $medium: m();
+  :root {
+    @include --output-medium-props($medium);
+    --outer-width: #{map-get($medium, 'outer-width')};
+  }
+}
