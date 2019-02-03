@@ -25,7 +25,8 @@
 }
 
 @function selector-insert($selectors, $combinator: '', $parent-selector: null) {
-  $parent-selector: selector-parse($parent-selector or &); $out: ();
+  $parent-selector: selector-parse($parent-selector or &);
+  $out: ();
   $lasts: selector-last($parent-selector);
   $initials: selector-initial($parent-selector);
   $selectors: selector-parse(if(length($selectors) == 0, '', $selectors));
@@ -45,4 +46,9 @@
     }
   }
   @return selector-parse($out);
+}
+
+@function selector-not($sel, $nots) {
+  @each $not in $nots { $sel: '#{$sel}:not(#{$not})' }
+  @return selector-parse($sel);
 }

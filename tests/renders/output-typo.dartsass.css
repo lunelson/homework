@@ -1,8 +1,9 @@
 body {
-  text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   font-kerning: normal;
+  font-family: "MessinaSans";
 }
 
 .fw-normal {
@@ -21,57 +22,40 @@ body {
   font-style: italic;
 }
 
-body, body code, body kbd, body pre, body samp, [class^=f-], [class^=f-] code, [class^=f-] kbd, [class^=f-] pre, [class^=f-] samp, [class*=" f-"], [class*=" f-"] code, [class*=" f-"] kbd, [class*=" f-"] pre, [class*=" f-"] samp {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
-  font-family: var(--font-family);
-  letter-spacing: var(--letter-spacing);
-  font-feature-settings: var(--font-feature-settings);
+* {
+  font-size: var(--font-size, inherit);
+  font-family: var(--font-family, inherit);
+  line-height: var(--line-height, inherit);
+  letter-spacing: var(--letter-spacing, inherit);
+  font-feature-settings: var(--font-feature-settings, inherit);
 }
 
-[class^=f-], [class*=" f-"] {
-  --trim-adjacent: 0em;
-  --trim-top: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-capline) * 1em + var(--trim-adjacent));
-  --trim-bottom: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-baseline) * 1em);
-}
-[class^=f-].trim, .trim > [class^=f-], .trim > [class*=" f-"], [class^=trim-] > [class^=f-], [class^=trim-] > [class*=" f-"], [class*=" trim-"] > [class^=f-], [class*=" trim-"] > [class*=" f-"], [class*=" f-"].trim {
-  margin-top: calc(0px - var(--trim-top));
-  margin-bottom: calc(0px - var(--trim-bottom));
-  margin-right: var(--trim-x);
-  margin-left: var(--trim-x);
-}
-
-.trim > * + [class^=f-], .trim > * + [class*=" f-"], [class^=trim-] > * + [class^=f-], [class^=trim-] > * + [class*=" f-"], [class*=" trim-"] > * + [class^=f-], [class*=" trim-"] > * + [class*=" f-"] {
-  margin-top: calc(var(--stack-gap, 0em) - var(--trim-top));
-}
-
-[class^=f-] + [class^=f-], [class^=f-] + [class*=" f-"], [class*=" f-"] + [class^=f-], [class*=" f-"] + [class*=" f-"] {
-  --trim-adjacent: calc((1em - 1ex)/2);
-}
-
-.f-sans, [class^=f-sans-], [class*=" f-sans-"], body {
-  --font-family: MessinaSans;
+.f-sans, [class^=f-sans-], [class*=" f-sans-"] {
+  --font-family: initial;
+  --line-height: 1.4;
   --letter-spacing: calc(1px - 0.025em);
   --font-feature-settings: "kern" 1;
-  --trim-x: calc(1px - 0.1em);
+  --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
 }
 
 .f-serif, [class^=f-serif-], [class*=" f-serif-"] {
-  --font-family: MessinaSerif;
+  --font-family: initial;
+  --line-height: 1.4;
   --letter-spacing: calc(1px - 0.025em);
   --font-feature-settings: "kern" 1;
-  --trim-x: calc(1px - 0.1em);
+  --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
 }
 
 .f-modern, [class^=f-modern-], [class*=" f-modern-"] {
-  --font-family: MessinaModern;
+  --font-family: initial;
+  --line-height: 1.4;
   --letter-spacing: calc(1px - 0.025em);
   --font-feature-settings: "kern" 1;
-  --trim-x: calc(1px - 0.1em);
+  --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
 }
@@ -136,36 +120,51 @@ body, body code, body kbd, body pre, body samp, [class^=f-], [class^=f-] code, [
   --line-height: 1.1;
 }
 
-.plain p, .plain ul, .plain ol, .plain dl, .plain h3, .plain h4, .plain h5, .plain h6, .plain blockquote, [class^=plain-] p, [class^=plain-] ul, [class^=plain-] ol, [class^=plain-] dl, [class^=plain-] h3, [class^=plain-] h4, [class^=plain-] h5, [class^=plain-] h6, [class^=plain-] blockquote, [class*=" plain-"] p, [class*=" plain-"] ul, [class*=" plain-"] ol, [class*=" plain-"] dl, [class*=" plain-"] h3, [class*=" plain-"] h4, [class*=" plain-"] h5, [class*=" plain-"] h6, [class*=" plain-"] blockquote {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
-  font-family: var(--font-family);
-  letter-spacing: var(--letter-spacing);
-  font-feature-settings: var(--font-feature-settings);
-  --trim-adjacent: 0em;
-  --trim-top: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-capline) * 1em + var(--trim-adjacent));
-  --trim-bottom: calc((var(--line-height) - 1) * 1em / 2 + var(--trim-baseline) * 1em);
+[class^=f-], [class*=" f-"] {
+  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline) + var(--trim-adjacent));
+  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline));
+  --trim-adjacent: 0%;
 }
-.plain > p, .plain > ul, .plain > ol, .plain > dl, .plain > h3, .plain > h4, .plain > h5, .plain > h6, .plain > blockquote, [class^=plain-] > p, [class^=plain-] > ul, [class^=plain-] > ol, [class^=plain-] > dl, [class^=plain-] > h3, [class^=plain-] > h4, [class^=plain-] > h5, [class^=plain-] > h6, [class^=plain-] > blockquote, [class*=" plain-"] > p, [class*=" plain-"] > ul, [class*=" plain-"] > ol, [class*=" plain-"] > dl, [class*=" plain-"] > h3, [class*=" plain-"] > h4, [class*=" plain-"] > h5, [class*=" plain-"] > h6, [class*=" plain-"] > blockquote {
-  margin-top: calc(0px - var(--trim-top));
-  margin-bottom: calc(0px - var(--trim-bottom));
-  margin-right: var(--trim-x);
-  margin-left: var(--trim-x);
+.trim > [class^=f-], .trim > [class*=" f-"], [class^=trim-] > [class^=f-], [class^=trim-] > [class*=" f-"], [class*=" trim-"] > [class^=f-], [class*=" trim-"] > [class*=" f-"] {
+  margin-top: calc(0% - var(--trim-top));
+  margin-bottom: calc(0% - var(--trim-bottom));
+  margin-right: var(--trim-sides);
+  margin-left: var(--trim-sides);
 }
 
-.plain > * + p, .plain > * + ul, .plain > * + ol, .plain > * + dl, .plain > * + h3, .plain > * + h4, .plain > * + h5, .plain > * + h6, .plain > * + blockquote, [class^=plain-] > * + p, [class^=plain-] > * + ul, [class^=plain-] > * + ol, [class^=plain-] > * + dl, [class^=plain-] > * + h3, [class^=plain-] > * + h4, [class^=plain-] > * + h5, [class^=plain-] > * + h6, [class^=plain-] > * + blockquote, [class*=" plain-"] > * + p, [class*=" plain-"] > * + ul, [class*=" plain-"] > * + ol, [class*=" plain-"] > * + dl, [class*=" plain-"] > * + h3, [class*=" plain-"] > * + h4, [class*=" plain-"] > * + h5, [class*=" plain-"] > * + h6, [class*=" plain-"] > * + blockquote {
-  margin-top: calc(var(--stack-gap, var(--inner-y)) - var(--trim-top));
+.trim > * + [class^=f-], .trim > * + [class*=" f-"], [class^=trim-] > * + [class^=f-], [class^=trim-] > * + [class*=" f-"], [class*=" trim-"] > * + [class^=f-], [class*=" trim-"] > * + [class*=" f-"] {
+  margin-top: calc(var(--stack-gap) - var(--trim-top));
 }
 
-.plain p + p, .plain p + ul, .plain p + ol, .plain p + dl, .plain p + h3, .plain p + h4, .plain p + h5, .plain p + h6, .plain p + blockquote, .plain ul + p, .plain ul + ul, .plain ul + ol, .plain ul + dl, .plain ul + h3, .plain ul + h4, .plain ul + h5, .plain ul + h6, .plain ul + blockquote, .plain ol + p, .plain ol + ul, .plain ol + ol, .plain ol + dl, .plain ol + h3, .plain ol + h4, .plain ol + h5, .plain ol + h6, .plain ol + blockquote, .plain dl + p, .plain dl + ul, .plain dl + ol, .plain dl + dl, .plain dl + h3, .plain dl + h4, .plain dl + h5, .plain dl + h6, .plain dl + blockquote, .plain h3 + p, .plain h3 + ul, .plain h3 + ol, .plain h3 + dl, .plain h3 + h3, .plain h3 + h4, .plain h3 + h5, .plain h3 + h6, .plain h3 + blockquote, .plain h4 + p, .plain h4 + ul, .plain h4 + ol, .plain h4 + dl, .plain h4 + h3, .plain h4 + h4, .plain h4 + h5, .plain h4 + h6, .plain h4 + blockquote, .plain h5 + p, .plain h5 + ul, .plain h5 + ol, .plain h5 + dl, .plain h5 + h3, .plain h5 + h4, .plain h5 + h5, .plain h5 + h6, .plain h5 + blockquote, .plain h6 + p, .plain h6 + ul, .plain h6 + ol, .plain h6 + dl, .plain h6 + h3, .plain h6 + h4, .plain h6 + h5, .plain h6 + h6, .plain h6 + blockquote, .plain blockquote + p, .plain blockquote + ul, .plain blockquote + ol, .plain blockquote + dl, .plain blockquote + h3, .plain blockquote + h4, .plain blockquote + h5, .plain blockquote + h6, .plain blockquote + blockquote, [class^=plain-] p + p, [class^=plain-] p + ul, [class^=plain-] p + ol, [class^=plain-] p + dl, [class^=plain-] p + h3, [class^=plain-] p + h4, [class^=plain-] p + h5, [class^=plain-] p + h6, [class^=plain-] p + blockquote, [class^=plain-] ul + p, [class^=plain-] ul + ul, [class^=plain-] ul + ol, [class^=plain-] ul + dl, [class^=plain-] ul + h3, [class^=plain-] ul + h4, [class^=plain-] ul + h5, [class^=plain-] ul + h6, [class^=plain-] ul + blockquote, [class^=plain-] ol + p, [class^=plain-] ol + ul, [class^=plain-] ol + ol, [class^=plain-] ol + dl, [class^=plain-] ol + h3, [class^=plain-] ol + h4, [class^=plain-] ol + h5, [class^=plain-] ol + h6, [class^=plain-] ol + blockquote, [class^=plain-] dl + p, [class^=plain-] dl + ul, [class^=plain-] dl + ol, [class^=plain-] dl + dl, [class^=plain-] dl + h3, [class^=plain-] dl + h4, [class^=plain-] dl + h5, [class^=plain-] dl + h6, [class^=plain-] dl + blockquote, [class^=plain-] h3 + p, [class^=plain-] h3 + ul, [class^=plain-] h3 + ol, [class^=plain-] h3 + dl, [class^=plain-] h3 + h3, [class^=plain-] h3 + h4, [class^=plain-] h3 + h5, [class^=plain-] h3 + h6, [class^=plain-] h3 + blockquote, [class^=plain-] h4 + p, [class^=plain-] h4 + ul, [class^=plain-] h4 + ol, [class^=plain-] h4 + dl, [class^=plain-] h4 + h3, [class^=plain-] h4 + h4, [class^=plain-] h4 + h5, [class^=plain-] h4 + h6, [class^=plain-] h4 + blockquote, [class^=plain-] h5 + p, [class^=plain-] h5 + ul, [class^=plain-] h5 + ol, [class^=plain-] h5 + dl, [class^=plain-] h5 + h3, [class^=plain-] h5 + h4, [class^=plain-] h5 + h5, [class^=plain-] h5 + h6, [class^=plain-] h5 + blockquote, [class^=plain-] h6 + p, [class^=plain-] h6 + ul, [class^=plain-] h6 + ol, [class^=plain-] h6 + dl, [class^=plain-] h6 + h3, [class^=plain-] h6 + h4, [class^=plain-] h6 + h5, [class^=plain-] h6 + h6, [class^=plain-] h6 + blockquote, [class^=plain-] blockquote + p, [class^=plain-] blockquote + ul, [class^=plain-] blockquote + ol, [class^=plain-] blockquote + dl, [class^=plain-] blockquote + h3, [class^=plain-] blockquote + h4, [class^=plain-] blockquote + h5, [class^=plain-] blockquote + h6, [class^=plain-] blockquote + blockquote, [class*=" plain-"] p + p, [class*=" plain-"] p + ul, [class*=" plain-"] p + ol, [class*=" plain-"] p + dl, [class*=" plain-"] p + h3, [class*=" plain-"] p + h4, [class*=" plain-"] p + h5, [class*=" plain-"] p + h6, [class*=" plain-"] p + blockquote, [class*=" plain-"] ul + p, [class*=" plain-"] ul + ul, [class*=" plain-"] ul + ol, [class*=" plain-"] ul + dl, [class*=" plain-"] ul + h3, [class*=" plain-"] ul + h4, [class*=" plain-"] ul + h5, [class*=" plain-"] ul + h6, [class*=" plain-"] ul + blockquote, [class*=" plain-"] ol + p, [class*=" plain-"] ol + ul, [class*=" plain-"] ol + ol, [class*=" plain-"] ol + dl, [class*=" plain-"] ol + h3, [class*=" plain-"] ol + h4, [class*=" plain-"] ol + h5, [class*=" plain-"] ol + h6, [class*=" plain-"] ol + blockquote, [class*=" plain-"] dl + p, [class*=" plain-"] dl + ul, [class*=" plain-"] dl + ol, [class*=" plain-"] dl + dl, [class*=" plain-"] dl + h3, [class*=" plain-"] dl + h4, [class*=" plain-"] dl + h5, [class*=" plain-"] dl + h6, [class*=" plain-"] dl + blockquote, [class*=" plain-"] h3 + p, [class*=" plain-"] h3 + ul, [class*=" plain-"] h3 + ol, [class*=" plain-"] h3 + dl, [class*=" plain-"] h3 + h3, [class*=" plain-"] h3 + h4, [class*=" plain-"] h3 + h5, [class*=" plain-"] h3 + h6, [class*=" plain-"] h3 + blockquote, [class*=" plain-"] h4 + p, [class*=" plain-"] h4 + ul, [class*=" plain-"] h4 + ol, [class*=" plain-"] h4 + dl, [class*=" plain-"] h4 + h3, [class*=" plain-"] h4 + h4, [class*=" plain-"] h4 + h5, [class*=" plain-"] h4 + h6, [class*=" plain-"] h4 + blockquote, [class*=" plain-"] h5 + p, [class*=" plain-"] h5 + ul, [class*=" plain-"] h5 + ol, [class*=" plain-"] h5 + dl, [class*=" plain-"] h5 + h3, [class*=" plain-"] h5 + h4, [class*=" plain-"] h5 + h5, [class*=" plain-"] h5 + h6, [class*=" plain-"] h5 + blockquote, [class*=" plain-"] h6 + p, [class*=" plain-"] h6 + ul, [class*=" plain-"] h6 + ol, [class*=" plain-"] h6 + dl, [class*=" plain-"] h6 + h3, [class*=" plain-"] h6 + h4, [class*=" plain-"] h6 + h5, [class*=" plain-"] h6 + h6, [class*=" plain-"] h6 + blockquote, [class*=" plain-"] blockquote + p, [class*=" plain-"] blockquote + ul, [class*=" plain-"] blockquote + ol, [class*=" plain-"] blockquote + dl, [class*=" plain-"] blockquote + h3, [class*=" plain-"] blockquote + h4, [class*=" plain-"] blockquote + h5, [class*=" plain-"] blockquote + h6, [class*=" plain-"] blockquote + blockquote {
-  --trim-adjacent: calc((1em - 1ex)/2);
+[class^=f-] + [class^=f-], [class^=f-] + [class*=" f-"], [class*=" f-"] + [class^=f-], [class*=" f-"] + [class*=" f-"] {
+  --trim-adjacent: var(--trim-ascender);
+}
+
+.plain **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^=plain-] **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
+  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline) + var(--trim-adjacent));
+  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline));
+  --trim-adjacent: 0%;
+}
+.plain > **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^=plain-] > **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
+  margin-top: calc(0% - var(--trim-top));
+  margin-bottom: calc(0% - var(--trim-bottom));
+  margin-right: var(--trim-sides);
+  margin-left: var(--trim-sides);
+}
+
+.plain > * + **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^=plain-] > * + **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > * + **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
+  margin-top: calc(var(--stack-gap) - var(--trim-top));
+}
+
+.plain **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^=plain-] **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + **:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
+  --trim-adjacent: var(--trim-ascender);
 }
 
 .plain h6 {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern" 1;
-  --letter-spacing: calc(1px - 0.025em);
-  --trim-x: calc(1px - 0.1em);
+  --font-feature-settings: null;
+  --letter-spacing: ;
+  --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 1rem;
@@ -173,9 +172,9 @@ body, body code, body kbd, body pre, body samp, [class^=f-], [class^=f-] code, [
 }
 .plain h5, .plain blockquote {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern" 1;
-  --letter-spacing: calc(1px - 0.025em);
-  --trim-x: calc(1px - 0.1em);
+  --font-feature-settings: null;
+  --letter-spacing: ;
+  --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 1rem;
@@ -183,9 +182,9 @@ body, body code, body kbd, body pre, body samp, [class^=f-], [class^=f-] code, [
 }
 .plain h4, .plain p, .plain ul, .plain ol, .plain dl {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern" 1;
-  --letter-spacing: calc(1px - 0.025em);
-  --trim-x: calc(1px - 0.1em);
+  --font-feature-settings: null;
+  --letter-spacing: ;
+  --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 2rem;
@@ -193,9 +192,9 @@ body, body code, body kbd, body pre, body samp, [class^=f-], [class^=f-] code, [
 }
 .plain h3 {
   --font-family: MessinaSans;
-  --font-feature-settings: "kern" 1;
-  --letter-spacing: calc(1px - 0.025em);
-  --trim-x: calc(1px - 0.1em);
+  --font-feature-settings: null;
+  --letter-spacing: ;
+  --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0;
   --trim-baseline: 0;
   --font-size: 3rem;

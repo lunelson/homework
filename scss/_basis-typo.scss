@@ -13,26 +13,35 @@
 
 $fonts: () !default;
 
+$fonts-defaults: (
+  sans: ( font-family: (arial, sans-serif) ),
+  serif: ( font-family: (georgia, serif) ),
+  mono: ( font-family: (monaco, consolas, monospace) )
+);
+
 $font-default: (
-  family: (arial, sans-serif),
-  spacing: calc(1px - 0.025em),
-  trim-x: calc(1px - 0.1em),
-  trim-adj: calc((1em - 1ex)/2),
+  // font-/family
+  // line-height
+  // letter-spacing
+  // trim-sides
+  // trim-capline
+  // trim-baseline
+  // trim-ascenderacent
+  // font-/feature-settings
+  // family: (arial, sans-serif),
+  line-height: 1.4,
+  letter-spacing: calc(1px - 0.025em),
+  trim-sides: calc(1px - 0.1em),
   trim-capline: 0,
   trim-baseline: 0,
-  feature-settings: ('kern' 1),
+  trim-ascender: calc((1em - 1ex)/2),
+  font-feature-settings: ('kern' 1),
 );
 
 // NOTES re feature-settings
 // https://sparanoid.com/lab/opentype-features/
 // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/OpenType_fonts_guide
 // https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
-
-$fonts-defaults: (
-  sans: ( family: (arial, sans-serif) ),
-  serif: ( family: (georgia, serif) ),
-  mono: ( family: (monaco, consolas, monospace) )
-);
 
 
 //   __            _          _          _
@@ -65,7 +74,7 @@ $fonts-defaults: (
   --font-family: #{map-get($font, 'family')};
   --font-feature-settings: #{inspect(map-get($font, 'feature-settings'))};
   --letter-spacing: #{map-get($font, 'spacing')};
-  --trim-x: #{map-get($font, 'trim-x')};
+  --trim-sides: #{map-get($font, 'trim-sides')};
 
   @if $trim {
     --trim-capline: #{map-get($font, 'trim-capline')};
@@ -101,7 +110,7 @@ $fonts-defaults: (
     @if $trim {
 
       @at-root #{selector-insert('>')} {
-        // TODO: re-add trim-x values here
+        // TODO: re-add trim-sides values here
         margin-top: subtract(0, line-trim-top($f, $s));
         margin-bottom: subtract(0, line-trim-bottom($f, $s));
       }
@@ -117,8 +126,8 @@ $fonts-defaults: (
     } @else {
 
       @at-root #{selector-insert('>')} {
-        // TODO: re-add trim-x values here
-        // margin: 0 var(--trim-x);
+        // TODO: re-add trim-sides values here
+        // margin: 0 var(--trim-sides);
         margin-top: 0;
         margin-bottom: 0;
       }

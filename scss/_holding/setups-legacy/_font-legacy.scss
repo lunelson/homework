@@ -27,14 +27,14 @@
       // base definition
       @include font($f);
 
-      // trim-x conditions
-      $trim-x: map-get($fonts, $f, 'trim-x');
-      @if $trim-x and $trim-x != 0 {
-        $is-trim-x: selector-parse('&.trim-x');
+      // trim-sides conditions
+      $trim-sides: map-get($fonts, $f, 'trim-sides');
+      @if $trim-sides and $trim-sides != 0 {
+        $is-trim-sides: selector-parse('&.trim-sides');
         $is-in-stack: insert-parents(base-class('stack'), '>');
-        @at-root #{$is-trim-x}, #{$is-in-stack} {
-          margin-right: $trim-x;
-          margin-left: $trim-x;
+        @at-root #{$is-trim-sides}, #{$is-in-stack} {
+          margin-right: $trim-sides;
+          margin-left: $trim-sides;
         }
       }
     }
