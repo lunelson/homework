@@ -39,24 +39,24 @@ $media: (
 
 $fonts: (
   sans: (
-    family: 'MessinaSans'
+    font-family: 'MessinaSans'
   ),
   serif: (
-    family: 'MessinaSerif'
+    font-family: 'MessinaSerif'
   ),
   modern: (
-    family: 'MessinaModern'
+    font-family: 'MessinaModern'
   ),
 );
 
 @include homework-setup-core($trim: true, $output: false);
 @include homework-setup-typo($trim: true);
 
-.plain {
+// .plain {
 
-  h6 { @include font-mod('sans', 'xs', null, true); }
-  h5, blockquote { @include font-mod('sans','s', null, true); }
-  h4, p, ul, ol, dl { @include font-mod('sans','m', null, true); }
-  h3 { @include font-mod('sans','l', null, true); }
+//   h6 { @include font-mod('sans', 'xs', null, true); }
+//   h5, blockquote { @include font-mod('sans','s', null, true); }
+//   h4, p, ul, ol, dl { @include font-mod('sans','m', null, true); }
+//   h3 { @include font-mod('sans','l', null, true); }
 
-}
+// }

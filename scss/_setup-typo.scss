@@ -60,21 +60,6 @@
     }
   }
 
-  @include mm-for('font-mods') {
-    @each $f, $mod in m-var('font-mods') {
-      @each $s, $def in $mod {
-        .f-#{$f}-#{$s} {
-          $size: strip(nth($def, 1));
-          $line: nth($def, 2);
-          --font-size: #{$size / 16 * 1rem};
-          // TODO: only write this if it's included
-          // NB line-heights > 6 are assumed to be px values
-          --line-height: #{if($line > 6, $line/$size, $line)};
-        }
-      }
-    }
-  }
-
   @if $trim {
     #{base-class('f', false)} {
       --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline) + var(--trim-adjacent));
@@ -97,7 +82,7 @@
 
   @if $trim {
     #{base-class('plain')} {
-      *#{selector-not('*', $trim-excludes)} {
+      #{selector-not('*', $trim-excludes)} {
         --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline) + var(--trim-adjacent));
         --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline));
         --trim-adjacent: 0%;
@@ -114,7 +99,21 @@
           --trim-adjacent: var(--trim-ascender);
         }
       }
+    }
+  }
 
+  @include mm-for('font-mods') {
+    @each $f, $mod in m-var('font-mods') {
+      @each $s, $def in $mod {
+        .f-#{$f}-#{$s} {
+          $size: strip(nth($def, 1));
+          $line: nth($def, 2);
+          --font-size: #{$size / 16 * 1rem};
+          // TODO: only write this if it's included
+          // NB line-heights > 6 are assumed to be px values
+          --line-height: #{if($line > 6, $line/$size, $line)};
+        }
+      }
     }
   }
 
