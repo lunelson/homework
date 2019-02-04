@@ -100,18 +100,15 @@ $colors: (
 @include homework-reset;
 
 @include homework-setup-core();
-@include homework-setup-wrap();
-@include homework-setup-frame();
-@include homework-setup-flow();
-@include homework-setup-atomic();
-
+@include homework-setup-root();
+@include homework-setup-page();
 @include homework-setup-stack();
-@include homework-setup-font($elements: p ul ol h3 h4 h5 h6);
-
+@include homework-setup-grid();
+@include homework-setup-cell();
+@include homework-setup-typo();
 @include homework-setup-atomic();
 @include homework-setup-helper();
-// @include homework-setup-theme();
-
+@include homework-setup-theme();
 @include homework-setup-debug();
 
 body {

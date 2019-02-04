@@ -20,20 +20,11 @@ $fonts-defaults: (
 );
 
 $font-default: (
-  // font-/family
-  // line-height
-  // letter-spacing
-  // trim-sides
-  // trim-capline
-  // trim-baseline
-  // trim-ascenderacent
-  // font-/feature-settings
-  // family: (arial, sans-serif),
-  line-height: 1.4,
+  line-height: 1.4em,
   letter-spacing: calc(1px - 0.025em),
   trim-sides: calc(1px - 0.1em),
-  trim-capline: 0,
-  trim-baseline: 0,
+  trim-capline: 0em,
+  trim-baseline: 0em,
   trim-ascender: calc((1em - 1ex)/2),
   font-feature-settings: ('kern' 1),
 );

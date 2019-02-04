@@ -12,7 +12,8 @@
 
 @mixin homework-setup-typo(
   $trim: true,
-  $trim-excludes: div table figure img svg video iframe object section aside header footer article) {
+  $trim-excludes: div table figure img svg video iframe object section aside header footer article
+) {
 
   // normalize $fonts
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
@@ -42,12 +43,14 @@
   // exerimental:
     // 1. whether this causes any problems ?
     // 2. whether this allows inline font-family/-size changes easily ?
-  * {
-    font-size: var(--font-size, inherit);
-    font-family: var(--font-family, inherit);
-    line-height: var(--line-height, inherit);
-    letter-spacing: var(--letter-spacing, inherit);
-    font-feature-settings: var(--font-feature-settings, inherit);
+  #{base-class('f', false)} {
+    @at-root &, i, b, em, strong, a, code, var, data, dfn, kbd, mark, q, small, sub, sup, cite, abbr {
+      font-size: var(--font-size, inherit);
+      font-family: var(--font-family, inherit);
+      line-height: var(--line-height, inherit);
+      letter-spacing: var(--letter-spacing, inherit);
+      font-feature-settings: var(--font-feature-settings, inherit);
+    }
   }
 
   @each $f, $font in $fonts {
@@ -68,8 +71,8 @@
 
       @if $trim {
         @if $ts { --trim-sides: #{$ts}; }
-        @if $tc { --trim-capline: #{$tc}; }
-        @if $tb { --trim-baseline: #{$tb}; }
+        @if $tc { --trim-capline: #{if(unitless($tc), $tc*1em, $tc)}; }
+        @if $tb { --trim-baseline: #{if(unitless($tb), $tb*1em, $tb)}; }
       }
     }
   }
@@ -121,9 +124,9 @@
           $fz: if(unitless($fz), $fz*1px, $fz);
           --font-size: #{$fz};
 
-          $lh: if(length($set)>1, nth($set, 2), null);
+          $lh: if(length($set) > 1, nth($set, 2), null);
           @if $lh {
-            $lh: if(unitless($lh) and $lh > 8, $lh*1px, $lh);
+            $lh: if(unitless($lh), if($lh > 8, $lh*1px, $lh*1em), $lh);
             --line-height: #{$lh};
           }
 

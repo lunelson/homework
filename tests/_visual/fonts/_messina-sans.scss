@@ -132,8 +132,8 @@
 }
 
 $messina-sans: (
-  family: 'MessinaSans',
+  font-family: 'MessinaSans',
   trim-capline: 0.125,
   trim-baseline: 0.1,
-  spacing: calc(0.8px - 0.03333em),
+  letter-spacing: calc(0.8px - 0.03333em),
 );
