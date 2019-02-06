@@ -46,22 +46,6 @@
   margin-left: var(--ml);
 }
 
-[class^="mt-neg-"], [class*=" mt-neg-"], [class^="my-neg-"], [class*=" my-neg-"] {
-  margin-top: calc(var(--mt) * -1);
-}
-
-[class^="mr-neg-"], [class*=" mr-neg-"], [class^="mx-neg-"], [class*=" mx-neg-"] {
-  margin-right: calc(var(--mr) * -1);
-}
-
-[class^="mb-neg-"], [class*=" mb-neg-"], [class^="my-neg-"], [class*=" my-neg-"] {
-  margin-bottom: calc(var(--mb) * -1);
-}
-
-[class^="ml-neg-"], [class*=" ml-neg-"], [class^="mx-neg-"], [class*=" mx-neg-"] {
-  margin-left: calc(var(--ml) * -1);
-}
-
 [class^="pt-"], [class*=" pt-"], [class^="py-"], [class*=" py-"] {
   padding-top: var(--pt);
 }
@@ -78,12 +62,18 @@
   padding-left: var(--pl);
 }
 
-.my-neg-s, .mt-neg-s,
+.my-neg-s, .mt-neg-s {
+  --mt: calc(var(--inner-y-s) * -1);
+}
+
+.my-neg-s, .mb-neg-s {
+  --mb: calc(var(--inner-y-s) * -1);
+}
+
 .my-s, .mt-s {
   --mt: var(--inner-y-s);
 }
 
-.my-neg-s, .mb-neg-s,
 .my-s, .mb-s {
   --mb: var(--inner-y-s);
 }
@@ -96,12 +86,18 @@
   --pb: var(--inner-y-s);
 }
 
-.my-neg-m, .mt-neg-m,
+.my-neg-m, .mt-neg-m {
+  --mt: calc(var(--inner-y-m) * -1);
+}
+
+.my-neg-m, .mb-neg-m {
+  --mb: calc(var(--inner-y-m) * -1);
+}
+
 .my-m, .mt-m {
   --mt: var(--inner-y-m);
 }
 
-.my-neg-m, .mb-neg-m,
 .my-m, .mb-m {
   --mb: var(--inner-y-m);
 }
@@ -114,12 +110,18 @@
   --pb: var(--inner-y-m);
 }
 
-.my-neg-l, .mt-neg-l,
+.my-neg-l, .mt-neg-l {
+  --mt: calc(var(--inner-y-l) * -1);
+}
+
+.my-neg-l, .mb-neg-l {
+  --mb: calc(var(--inner-y-l) * -1);
+}
+
 .my-l, .mt-l {
   --mt: var(--inner-y-l);
 }
 
-.my-neg-l, .mb-neg-l,
 .my-l, .mb-l {
   --mb: var(--inner-y-l);
 }
@@ -132,12 +134,18 @@
   --pb: var(--inner-y-l);
 }
 
-.mx-neg-s, .mr-neg-s,
+.mx-neg-s, .mr-neg-s {
+  --mr: calc(var(--inner-x-s) * -1);
+}
+
+.mx-neg-s, .ml-neg-s {
+  --ml: calc(var(--inner-x-s) * -1);
+}
+
 .mx-s, .mr-s {
   --mr: var(--inner-x-s);
 }
 
-.mx-neg-s, .ml-neg-s,
 .mx-s, .ml-s {
   --ml: var(--inner-x-s);
 }
@@ -150,12 +158,18 @@
   --pl: var(--inner-x-s);
 }
 
-.mx-neg-m, .mr-neg-m,
+.mx-neg-m, .mr-neg-m {
+  --mr: calc(var(--inner-x-m) * -1);
+}
+
+.mx-neg-m, .ml-neg-m {
+  --ml: calc(var(--inner-x-m) * -1);
+}
+
 .mx-m, .mr-m {
   --mr: var(--inner-x-m);
 }
 
-.mx-neg-m, .ml-neg-m,
 .mx-m, .ml-m {
   --ml: var(--inner-x-m);
 }
@@ -168,12 +182,18 @@
   --pl: var(--inner-x-m);
 }
 
-.mx-neg-l, .mr-neg-l,
+.mx-neg-l, .mr-neg-l {
+  --mr: calc(var(--inner-x-l) * -1);
+}
+
+.mx-neg-l, .ml-neg-l {
+  --ml: calc(var(--inner-x-l) * -1);
+}
+
 .mx-l, .mr-l {
   --mr: var(--inner-x-l);
 }
 
-.mx-neg-l, .ml-neg-l,
 .mx-l, .ml-l {
   --ml: var(--inner-x-l);
 }
@@ -271,18 +291,6 @@
   [class^="a__ml-"], [class*=" a__ml-"], [class^="a__mx-"], [class*=" a__mx-"] {
     margin-left: var(--ml);
   }
-  [class^="a__mt-neg-"], [class*=" a__mt-neg-"], [class^="a__my-neg-"], [class*=" a__my-neg-"] {
-    margin-top: calc(var(--mt) * -1);
-  }
-  [class^="a__mr-neg-"], [class*=" a__mr-neg-"], [class^="a__mx-neg-"], [class*=" a__mx-neg-"] {
-    margin-right: calc(var(--mr) * -1);
-  }
-  [class^="a__mb-neg-"], [class*=" a__mb-neg-"], [class^="a__my-neg-"], [class*=" a__my-neg-"] {
-    margin-bottom: calc(var(--mb) * -1);
-  }
-  [class^="a__ml-neg-"], [class*=" a__ml-neg-"], [class^="a__mx-neg-"], [class*=" a__mx-neg-"] {
-    margin-left: calc(var(--ml) * -1);
-  }
   [class^="a__pt-"], [class*=" a__pt-"], [class^="a__py-"], [class*=" a__py-"] {
     padding-top: var(--pt);
   }
@@ -295,11 +303,15 @@
   [class^="a__pl-"], [class*=" a__pl-"], [class^="a__px-"], [class*=" a__px-"] {
     padding-left: var(--pl);
   }
-  .a__my-neg-s, .a__mt-neg-s,
+  .a__my-neg-s, .a__mt-neg-s {
+    --mt: calc(var(--inner-y-s) * -1);
+  }
+  .a__my-neg-s, .a__mb-neg-s {
+    --mb: calc(var(--inner-y-s) * -1);
+  }
   .a__my-s, .a__mt-s {
     --mt: var(--inner-y-s);
   }
-  .a__my-neg-s, .a__mb-neg-s,
   .a__my-s, .a__mb-s {
     --mb: var(--inner-y-s);
   }
@@ -309,11 +321,15 @@
   .a__py-s, .a__pb-s {
     --pb: var(--inner-y-s);
   }
-  .a__my-neg-m, .a__mt-neg-m,
+  .a__my-neg-m, .a__mt-neg-m {
+    --mt: calc(var(--inner-y-m) * -1);
+  }
+  .a__my-neg-m, .a__mb-neg-m {
+    --mb: calc(var(--inner-y-m) * -1);
+  }
   .a__my-m, .a__mt-m {
     --mt: var(--inner-y-m);
   }
-  .a__my-neg-m, .a__mb-neg-m,
   .a__my-m, .a__mb-m {
     --mb: var(--inner-y-m);
   }
@@ -323,11 +339,15 @@
   .a__py-m, .a__pb-m {
     --pb: var(--inner-y-m);
   }
-  .a__my-neg-l, .a__mt-neg-l,
+  .a__my-neg-l, .a__mt-neg-l {
+    --mt: calc(var(--inner-y-l) * -1);
+  }
+  .a__my-neg-l, .a__mb-neg-l {
+    --mb: calc(var(--inner-y-l) * -1);
+  }
   .a__my-l, .a__mt-l {
     --mt: var(--inner-y-l);
   }
-  .a__my-neg-l, .a__mb-neg-l,
   .a__my-l, .a__mb-l {
     --mb: var(--inner-y-l);
   }
@@ -337,11 +357,15 @@
   .a__py-l, .a__pb-l {
     --pb: var(--inner-y-l);
   }
-  .a__mx-neg-s, .a__mr-neg-s,
+  .a__mx-neg-s, .a__mr-neg-s {
+    --mr: calc(var(--inner-x-s) * -1);
+  }
+  .a__mx-neg-s, .a__ml-neg-s {
+    --ml: calc(var(--inner-x-s) * -1);
+  }
   .a__mx-s, .a__mr-s {
     --mr: var(--inner-x-s);
   }
-  .a__mx-neg-s, .a__ml-neg-s,
   .a__mx-s, .a__ml-s {
     --ml: var(--inner-x-s);
   }
@@ -351,11 +375,15 @@
   .a__px-s, .a__pl-s {
     --pl: var(--inner-x-s);
   }
-  .a__mx-neg-m, .a__mr-neg-m,
+  .a__mx-neg-m, .a__mr-neg-m {
+    --mr: calc(var(--inner-x-m) * -1);
+  }
+  .a__mx-neg-m, .a__ml-neg-m {
+    --ml: calc(var(--inner-x-m) * -1);
+  }
   .a__mx-m, .a__mr-m {
     --mr: var(--inner-x-m);
   }
-  .a__mx-neg-m, .a__ml-neg-m,
   .a__mx-m, .a__ml-m {
     --ml: var(--inner-x-m);
   }
@@ -365,11 +393,15 @@
   .a__px-m, .a__pl-m {
     --pl: var(--inner-x-m);
   }
-  .a__mx-neg-l, .a__mr-neg-l,
+  .a__mx-neg-l, .a__mr-neg-l {
+    --mr: calc(var(--inner-x-l) * -1);
+  }
+  .a__mx-neg-l, .a__ml-neg-l {
+    --ml: calc(var(--inner-x-l) * -1);
+  }
   .a__mx-l, .a__mr-l {
     --mr: var(--inner-x-l);
   }
-  .a__mx-neg-l, .a__ml-neg-l,
   .a__mx-l, .a__ml-l {
     --ml: var(--inner-x-l);
   }
@@ -454,18 +486,6 @@
   [class^="b__ml-"], [class*=" b__ml-"], [class^="b__mx-"], [class*=" b__mx-"] {
     margin-left: var(--ml);
   }
-  [class^="b__mt-neg-"], [class*=" b__mt-neg-"], [class^="b__my-neg-"], [class*=" b__my-neg-"] {
-    margin-top: calc(var(--mt) * -1);
-  }
-  [class^="b__mr-neg-"], [class*=" b__mr-neg-"], [class^="b__mx-neg-"], [class*=" b__mx-neg-"] {
-    margin-right: calc(var(--mr) * -1);
-  }
-  [class^="b__mb-neg-"], [class*=" b__mb-neg-"], [class^="b__my-neg-"], [class*=" b__my-neg-"] {
-    margin-bottom: calc(var(--mb) * -1);
-  }
-  [class^="b__ml-neg-"], [class*=" b__ml-neg-"], [class^="b__mx-neg-"], [class*=" b__mx-neg-"] {
-    margin-left: calc(var(--ml) * -1);
-  }
   [class^="b__pt-"], [class*=" b__pt-"], [class^="b__py-"], [class*=" b__py-"] {
     padding-top: var(--pt);
   }
@@ -478,11 +498,15 @@
   [class^="b__pl-"], [class*=" b__pl-"], [class^="b__px-"], [class*=" b__px-"] {
     padding-left: var(--pl);
   }
-  .b__my-neg-s, .b__mt-neg-s,
+  .b__my-neg-s, .b__mt-neg-s {
+    --mt: calc(var(--inner-y-s) * -1);
+  }
+  .b__my-neg-s, .b__mb-neg-s {
+    --mb: calc(var(--inner-y-s) * -1);
+  }
   .b__my-s, .b__mt-s {
     --mt: var(--inner-y-s);
   }
-  .b__my-neg-s, .b__mb-neg-s,
   .b__my-s, .b__mb-s {
     --mb: var(--inner-y-s);
   }
@@ -492,11 +516,15 @@
   .b__py-s, .b__pb-s {
     --pb: var(--inner-y-s);
   }
-  .b__my-neg-m, .b__mt-neg-m,
+  .b__my-neg-m, .b__mt-neg-m {
+    --mt: calc(var(--inner-y-m) * -1);
+  }
+  .b__my-neg-m, .b__mb-neg-m {
+    --mb: calc(var(--inner-y-m) * -1);
+  }
   .b__my-m, .b__mt-m {
     --mt: var(--inner-y-m);
   }
-  .b__my-neg-m, .b__mb-neg-m,
   .b__my-m, .b__mb-m {
     --mb: var(--inner-y-m);
   }
@@ -506,11 +534,15 @@
   .b__py-m, .b__pb-m {
     --pb: var(--inner-y-m);
   }
-  .b__my-neg-l, .b__mt-neg-l,
+  .b__my-neg-l, .b__mt-neg-l {
+    --mt: calc(var(--inner-y-l) * -1);
+  }
+  .b__my-neg-l, .b__mb-neg-l {
+    --mb: calc(var(--inner-y-l) * -1);
+  }
   .b__my-l, .b__mt-l {
     --mt: var(--inner-y-l);
   }
-  .b__my-neg-l, .b__mb-neg-l,
   .b__my-l, .b__mb-l {
     --mb: var(--inner-y-l);
   }
@@ -520,11 +552,15 @@
   .b__py-l, .b__pb-l {
     --pb: var(--inner-y-l);
   }
-  .b__mx-neg-s, .b__mr-neg-s,
+  .b__mx-neg-s, .b__mr-neg-s {
+    --mr: calc(var(--inner-x-s) * -1);
+  }
+  .b__mx-neg-s, .b__ml-neg-s {
+    --ml: calc(var(--inner-x-s) * -1);
+  }
   .b__mx-s, .b__mr-s {
     --mr: var(--inner-x-s);
   }
-  .b__mx-neg-s, .b__ml-neg-s,
   .b__mx-s, .b__ml-s {
     --ml: var(--inner-x-s);
   }
@@ -534,11 +570,15 @@
   .b__px-s, .b__pl-s {
     --pl: var(--inner-x-s);
   }
-  .b__mx-neg-m, .b__mr-neg-m,
+  .b__mx-neg-m, .b__mr-neg-m {
+    --mr: calc(var(--inner-x-m) * -1);
+  }
+  .b__mx-neg-m, .b__ml-neg-m {
+    --ml: calc(var(--inner-x-m) * -1);
+  }
   .b__mx-m, .b__mr-m {
     --mr: var(--inner-x-m);
   }
-  .b__mx-neg-m, .b__ml-neg-m,
   .b__mx-m, .b__ml-m {
     --ml: var(--inner-x-m);
   }
@@ -548,11 +588,15 @@
   .b__px-m, .b__pl-m {
     --pl: var(--inner-x-m);
   }
-  .b__mx-neg-l, .b__mr-neg-l,
+  .b__mx-neg-l, .b__mr-neg-l {
+    --mr: calc(var(--inner-x-l) * -1);
+  }
+  .b__mx-neg-l, .b__ml-neg-l {
+    --ml: calc(var(--inner-x-l) * -1);
+  }
   .b__mx-l, .b__mr-l {
     --mr: var(--inner-x-l);
   }
-  .b__mx-neg-l, .b__ml-neg-l,
   .b__mx-l, .b__ml-l {
     --ml: var(--inner-x-l);
   }
@@ -637,18 +681,6 @@
   [class^="c__ml-"], [class*=" c__ml-"], [class^="c__mx-"], [class*=" c__mx-"] {
     margin-left: var(--ml);
   }
-  [class^="c__mt-neg-"], [class*=" c__mt-neg-"], [class^="c__my-neg-"], [class*=" c__my-neg-"] {
-    margin-top: calc(var(--mt) * -1);
-  }
-  [class^="c__mr-neg-"], [class*=" c__mr-neg-"], [class^="c__mx-neg-"], [class*=" c__mx-neg-"] {
-    margin-right: calc(var(--mr) * -1);
-  }
-  [class^="c__mb-neg-"], [class*=" c__mb-neg-"], [class^="c__my-neg-"], [class*=" c__my-neg-"] {
-    margin-bottom: calc(var(--mb) * -1);
-  }
-  [class^="c__ml-neg-"], [class*=" c__ml-neg-"], [class^="c__mx-neg-"], [class*=" c__mx-neg-"] {
-    margin-left: calc(var(--ml) * -1);
-  }
   [class^="c__pt-"], [class*=" c__pt-"], [class^="c__py-"], [class*=" c__py-"] {
     padding-top: var(--pt);
   }
@@ -661,11 +693,15 @@
   [class^="c__pl-"], [class*=" c__pl-"], [class^="c__px-"], [class*=" c__px-"] {
     padding-left: var(--pl);
   }
-  .c__my-neg-s, .c__mt-neg-s,
+  .c__my-neg-s, .c__mt-neg-s {
+    --mt: calc(var(--inner-y-s) * -1);
+  }
+  .c__my-neg-s, .c__mb-neg-s {
+    --mb: calc(var(--inner-y-s) * -1);
+  }
   .c__my-s, .c__mt-s {
     --mt: var(--inner-y-s);
   }
-  .c__my-neg-s, .c__mb-neg-s,
   .c__my-s, .c__mb-s {
     --mb: var(--inner-y-s);
   }
@@ -675,11 +711,15 @@
   .c__py-s, .c__pb-s {
     --pb: var(--inner-y-s);
   }
-  .c__my-neg-m, .c__mt-neg-m,
+  .c__my-neg-m, .c__mt-neg-m {
+    --mt: calc(var(--inner-y-m) * -1);
+  }
+  .c__my-neg-m, .c__mb-neg-m {
+    --mb: calc(var(--inner-y-m) * -1);
+  }
   .c__my-m, .c__mt-m {
     --mt: var(--inner-y-m);
   }
-  .c__my-neg-m, .c__mb-neg-m,
   .c__my-m, .c__mb-m {
     --mb: var(--inner-y-m);
   }
@@ -689,11 +729,15 @@
   .c__py-m, .c__pb-m {
     --pb: var(--inner-y-m);
   }
-  .c__my-neg-l, .c__mt-neg-l,
+  .c__my-neg-l, .c__mt-neg-l {
+    --mt: calc(var(--inner-y-l) * -1);
+  }
+  .c__my-neg-l, .c__mb-neg-l {
+    --mb: calc(var(--inner-y-l) * -1);
+  }
   .c__my-l, .c__mt-l {
     --mt: var(--inner-y-l);
   }
-  .c__my-neg-l, .c__mb-neg-l,
   .c__my-l, .c__mb-l {
     --mb: var(--inner-y-l);
   }
@@ -703,11 +747,15 @@
   .c__py-l, .c__pb-l {
     --pb: var(--inner-y-l);
   }
-  .c__mx-neg-s, .c__mr-neg-s,
+  .c__mx-neg-s, .c__mr-neg-s {
+    --mr: calc(var(--inner-x-s) * -1);
+  }
+  .c__mx-neg-s, .c__ml-neg-s {
+    --ml: calc(var(--inner-x-s) * -1);
+  }
   .c__mx-s, .c__mr-s {
     --mr: var(--inner-x-s);
   }
-  .c__mx-neg-s, .c__ml-neg-s,
   .c__mx-s, .c__ml-s {
     --ml: var(--inner-x-s);
   }
@@ -717,11 +765,15 @@
   .c__px-s, .c__pl-s {
     --pl: var(--inner-x-s);
   }
-  .c__mx-neg-m, .c__mr-neg-m,
+  .c__mx-neg-m, .c__mr-neg-m {
+    --mr: calc(var(--inner-x-m) * -1);
+  }
+  .c__mx-neg-m, .c__ml-neg-m {
+    --ml: calc(var(--inner-x-m) * -1);
+  }
   .c__mx-m, .c__mr-m {
     --mr: var(--inner-x-m);
   }
-  .c__mx-neg-m, .c__ml-neg-m,
   .c__mx-m, .c__ml-m {
     --ml: var(--inner-x-m);
   }
@@ -731,11 +783,15 @@
   .c__px-m, .c__pl-m {
     --pl: var(--inner-x-m);
   }
-  .c__mx-neg-l, .c__mr-neg-l,
+  .c__mx-neg-l, .c__mr-neg-l {
+    --mr: calc(var(--inner-x-l) * -1);
+  }
+  .c__mx-neg-l, .c__ml-neg-l {
+    --ml: calc(var(--inner-x-l) * -1);
+  }
   .c__mx-l, .c__mr-l {
     --mr: var(--inner-x-l);
   }
-  .c__mx-neg-l, .c__ml-neg-l,
   .c__mx-l, .c__ml-l {
     --ml: var(--inner-x-l);
   }

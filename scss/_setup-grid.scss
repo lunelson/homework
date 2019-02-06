@@ -16,11 +16,6 @@
 
 @mixin homework-setup-grid($max-columns: max-columns(), $row-classes: false) {
 
-  *, *:before, *:after {
-    --push-l: initial;
-    --push-r: initial;
-  }
-
   :root {
     --row-gap: var(--inner-y);
     --col-gap: var(--inner-x);

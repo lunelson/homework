@@ -14,12 +14,11 @@ $m__: '';
 
 @mixin homework-setup-cell($row-classes: true) {
 
+  // pre-calculations
   $max-cols: max-columns();
-
   $span-pair-list: ();
   $start-pair-list: ();
   $end-pair-list: ();
-
   @for $end from 2 through ($max-cols + 1) {
     @for $start from 1 through ($end - 1) {
       $span: ($end - $start);
@@ -27,6 +26,12 @@ $m__: '';
       $start-pair-list: map-merge($start-pair-list, ($start: append(map-get($start-pair-list, $start) or (), ($start $end))));
       $end-pair-list: map-merge($end-pair-list, ($end: append(map-get($end-pair-list, $end) or (), ($start $end))));
     }
+  }
+
+  // make push CPs non-cascading
+  *, *:before, *:after {
+    --push-l: initial;
+    --push-r: initial;
   }
 
   @each $m in join((null), media-keys()) {
@@ -44,7 +49,7 @@ $m__: '';
         }
 
         @at-root #{selector-insert(base-class('grid'), '>')} {
-          width: unset;
+          width: unset; // NOTE: try initial?
           // grid-column: span var(--col-span) / span var(--col-span);
           // grid-row: span var(--row-span) / span var(--row-span);
 

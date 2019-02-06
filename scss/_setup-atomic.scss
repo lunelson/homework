@@ -43,10 +43,10 @@
       #{m-base-class('mb', false)}, #{m-base-class('my', false)} { margin-bottom: var(--mb); }
       #{m-base-class('ml', false)}, #{m-base-class('mx', false)} { margin-left: var(--ml); }
 
-      #{m-base-class('mt-neg', false)}, #{m-base-class('my-neg', false)} { margin-top: multiply(var(--mt), -1); }
-      #{m-base-class('mr-neg', false)}, #{m-base-class('mx-neg', false)} { margin-right: multiply(var(--mr), -1); }
-      #{m-base-class('mb-neg', false)}, #{m-base-class('my-neg', false)} { margin-bottom: multiply(var(--mb), -1); }
-      #{m-base-class('ml-neg', false)}, #{m-base-class('mx-neg', false)} { margin-left: multiply(var(--ml), -1); }
+      // #{m-base-class('mt-neg', false)}, #{m-base-class('my-neg', false)} { margin-top: multiply(var(--mt), -1); }
+      // #{m-base-class('mr-neg', false)}, #{m-base-class('mx-neg', false)} { margin-right: multiply(var(--mr), -1); }
+      // #{m-base-class('mb-neg', false)}, #{m-base-class('my-neg', false)} { margin-bottom: multiply(var(--mb), -1); }
+      // #{m-base-class('ml-neg', false)}, #{m-base-class('mx-neg', false)} { margin-left: multiply(var(--ml), -1); }
 
       #{m-base-class('pt', false)}, #{m-base-class('py', false)} { padding-top: var(--pt); }
       #{m-base-class('pr', false)}, #{m-base-class('px', false)} { padding-right: var(--pr); }
@@ -55,9 +55,9 @@
 
       // margin/padding: inner-y
       @each $y in $inner-y-keys {
-        .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y},
+        .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y} { --mt: calc(var(--inner-y-#{$y}) * -1); }
+        .#{$m__}my-neg-#{$y}, .#{$m__}mb-neg-#{$y} { --mb: calc(var(--inner-y-#{$y}) * -1); }
         .#{$m__}my-#{$y}, .#{$m__}mt-#{$y} { --mt: var(--inner-y-#{$y}); }
-        .#{$m__}my-neg-#{$y}, .#{$m__}mb-neg-#{$y},
         .#{$m__}my-#{$y}, .#{$m__}mb-#{$y} { --mb: var(--inner-y-#{$y}); }
         .#{$m__}py-#{$y}, .#{$m__}pt-#{$y} { --pt: var(--inner-y-#{$y}); }
         .#{$m__}py-#{$y}, .#{$m__}pb-#{$y} { --pb: var(--inner-y-#{$y}); }
@@ -65,9 +65,9 @@
 
       // margin/padding: inner-x
       @each $x in $inner-x-keys {
-        .#{$m__}mx-neg-#{$x}, .#{$m__}mr-neg-#{$x},
+        .#{$m__}mx-neg-#{$x}, .#{$m__}mr-neg-#{$x} { --mr: calc(var(--inner-x-#{$x}) * -1); }
+        .#{$m__}mx-neg-#{$x}, .#{$m__}ml-neg-#{$x} { --ml: calc(var(--inner-x-#{$x}) * -1); }
         .#{$m__}mx-#{$x}, .#{$m__}mr-#{$x} { --mr: var(--inner-x-#{$x}); }
-        .#{$m__}mx-neg-#{$x}, .#{$m__}ml-neg-#{$x},
         .#{$m__}mx-#{$x}, .#{$m__}ml-#{$x} { --ml: var(--inner-x-#{$x}); }
         .#{$m__}px-#{$x}, .#{$m__}pr-#{$x} { --pr: var(--inner-x-#{$x}); }
         .#{$m__}px-#{$x}, .#{$m__}pl-#{$x} { --pl: var(--inner-x-#{$x}); }

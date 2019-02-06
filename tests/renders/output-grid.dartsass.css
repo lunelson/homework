@@ -1,8 +1,3 @@
-*, *:before, *:after {
-  --push-l: initial;
-  --push-r: initial;
-}
-
 :root {
   --row-gap: var(--inner-y);
   --col-gap: var(--inner-x);
@@ -75,6 +70,11 @@
 .flow-0-0, .grid-0-0 {
   --row-gap: 0;
   --col-gap: 0;
+}
+
+*, *:before, *:after {
+  --push-l: initial;
+  --push-r: initial;
 }
 
 .span, [class^=span-], [class*=" span-"] {

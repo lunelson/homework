@@ -6,7 +6,6 @@
   ),
   b: (
     breakpoint: 40em,
-    line-height: 1.25,
     font-mods: (
       serif: (
         l: 30px 1.1
@@ -31,8 +30,6 @@
 
 @media screen and (max-width: 29.999em) {
   :root {
-    --font-size: 16px;
-    --line-height: 1.25;
     --inner-x: 1rem;
     --inner-y: 1.5rem;
     --outer-top: 2rem;
@@ -40,6 +37,7 @@
     --outer-bottom: 2rem;
     --outer-left: 50px;
     --grid-cols: 12;
+    --font-size: 16px;
     --outer-width: 100%;
     --inner-y-s: calc(var(--inner-y) * 0.5);
     --inner-y-m: 3.5rem;
@@ -52,8 +50,6 @@
 
 @media screen and (min-width: 30em) and (max-width: 39.999em) {
   :root {
-    --font-size: 16px;
-    --line-height: 1.25;
     --inner-x: 1rem;
     --inner-y: 1.5rem;
     --outer-top: 2rem;
@@ -61,6 +57,7 @@
     --outer-bottom: 2rem;
     --outer-left: calc(31.25vw + -6.25rem);
     --grid-cols: 12;
+    --font-size: 16px;
     --outer-width: 30rem;
     --breakpoint: 30em;
     --inner-y-s: calc(var(--inner-y) * 0.5);
@@ -74,8 +71,6 @@
 
 @media screen and (min-width: 40em) and (max-width: 59.999em) {
   :root {
-    --font-size: 16px;
-    --line-height: 1.25;
     --inner-x: 1rem;
     --inner-y: 1.5rem;
     --outer-top: 2rem;
@@ -83,6 +78,7 @@
     --outer-bottom: 2rem;
     --outer-left: calc(31.25vw + -6.25rem);
     --grid-cols: 12;
+    --font-size: 16px;
     --outer-width: 40rem;
     --breakpoint: 40em;
     --inner-y-s: calc(var(--inner-y) * 0.5);
@@ -96,8 +92,6 @@
 
 @media screen and (min-width: 60em) {
   :root {
-    --font-size: 18px;
-    --line-height: 1.25;
     --inner-x: 1rem;
     --inner-y: 1.5rem;
     --outer-top: 2rem;
@@ -105,6 +99,7 @@
     --outer-bottom: 2rem;
     --outer-left: 200px;
     --grid-cols: 12;
+    --font-size: 18px;
     --outer-width: 53.3333333333rem;
     --breakpoint: 60em;
     --inner-y-s: calc(var(--inner-y) * 0.5);
@@ -123,8 +118,6 @@ html {
 
 /* (
   a: (
-    font-size: 16px,
-    line-height: 1.25,
     inner-x: 1rem,
     inner-y: 1.5rem,
     outer-top: 2rem,
@@ -152,12 +145,11 @@ html {
       m: 3.5rem,
       l: 2
     ),
+    font-size: 16px,
     outer-width: 30rem,
     breakpoint: 30em
   ),
   b: (
-    font-size: 16px,
-    line-height: 1.25,
     inner-x: 1rem,
     inner-y: 1.5rem,
     outer-top: 2rem,
@@ -185,12 +177,11 @@ html {
       m: 3.5rem,
       l: 2
     ),
+    font-size: 16px,
     outer-width: 40rem,
     breakpoint: 40em
   ),
   c: (
-    font-size: 18px,
-    line-height: 1.25,
     inner-x: 1rem,
     inner-y: 1.5rem,
     outer-top: 2rem,
@@ -218,6 +209,7 @@ html {
       m: 3.5rem,
       l: 2
     ),
+    font-size: 18px,
     outer-width: 53.3333333333rem,
     breakpoint: 60em
   )

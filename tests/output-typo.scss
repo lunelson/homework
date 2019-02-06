@@ -33,6 +33,14 @@ $media: (
   b: (
     breakpoint: 30em,
     inner-x: 3rem,
+    font-mods: (
+      serif: (
+        xs: 18,
+        s: 18,
+        m: 36,
+        l: 64,
+      ),
+    ),
   ),
   c: (breakpoint: 40em),
 );

@@ -1,3 +1,64 @@
+:root {
+  --font-family-sans: MessinaSans;
+  --font-feature-settings-sans: "kern" 1;
+  --line-height-sans: 1.4em;
+  --letter-spacing-sans: calc(1px - 0.025em);
+  --font-family-serif: MessinaSerif;
+  --font-feature-settings-serif: "kern" 1;
+  --line-height-serif: 1.4em;
+  --letter-spacing-serif: calc(1px - 0.025em);
+  --font-family-modern: MessinaModern;
+  --font-feature-settings-modern: "kern" 1;
+  --line-height-modern: 1.4em;
+  --letter-spacing-modern: calc(1px - 0.025em);
+}
+
+@media screen and (max-width: 29.999em) {
+  :root {
+    --font-size-sans-xs: 16px;
+    --font-size-sans-s: 16px;
+    --font-size-sans-m: 32px;
+    --font-size-sans-l: 48px;
+    --font-size-serif-xs: 16px;
+    --line-height-serif-xs: 1.3em;
+    --font-size-serif-s: 16px;
+    --line-height-serif-s: 1.3em;
+    --font-size-serif-m: 32px;
+    --line-height-serif-m: 1.2em;
+    --font-size-serif-l: 48px;
+    --line-height-serif-l: 1.1em;
+    --font-size-modern-xs: 16px;
+    --line-height-modern-xs: 1.3em;
+    --font-size-modern-s: 16px;
+    --line-height-modern-s: 1.3em;
+    --font-size-modern-m: 32px;
+    --line-height-modern-m: 1.2em;
+    --font-size-modern-l: 48px;
+    --line-height-modern-l: 1.1em;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  :root {
+    --font-size-sans-xs: 16px;
+    --font-size-sans-s: 16px;
+    --font-size-sans-m: 32px;
+    --font-size-sans-l: 48px;
+    --font-size-serif-xs: 18px;
+    --font-size-serif-s: 18px;
+    --font-size-serif-m: 36px;
+    --font-size-serif-l: 64px;
+    --font-size-modern-xs: 16px;
+    --line-height-modern-xs: 1.3em;
+    --font-size-modern-s: 16px;
+    --line-height-modern-s: 1.3em;
+    --font-size-modern-m: 32px;
+    --line-height-modern-m: 1.2em;
+    --font-size-modern-l: 48px;
+    --line-height-modern-l: 1.1em;
+  }
+}
+
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -50,38 +111,38 @@ body {
 }
 
 [class^="f-"], i, b, em, strong, a, code, var, data, dfn, kbd, mark, q, small, sub, sup, cite, abbr, [class*=" f-"] {
-  font-size: var(--font-size);
-  font-family: var(--font-family);
-  line-height: var(--line-height);
-  letter-spacing: var(--letter-spacing);
-  font-feature-settings: var(--font-feature-settings);
+  font-size: var(--font-size, inherit);
+  font-family: var(--font-family, inherit);
+  line-height: var(--line-height, inherit);
+  letter-spacing: var(--letter-spacing, inherit);
+  font-feature-settings: var(--font-feature-settings, inherit);
 }
 
 .f-sans, [class^="f-sans-"], [class*=" f-sans-"] {
-  --font-family: MessinaSans;
-  --line-height: 1.4em;
-  --letter-spacing: calc(1px - 0.025em);
-  --font-feature-settings: "kern" 1;
+  --font-family: var(--font-family-sans);
+  --line-height: var(--line-height-sans);
+  --letter-spacing: var(--letter-spacing-sans);
+  --font-feature-settings: var(--font-feature-settings-sans);
   --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0em;
   --trim-baseline: 0em;
 }
 
 .f-serif, [class^="f-serif-"], [class*=" f-serif-"] {
-  --font-family: MessinaSerif;
-  --line-height: 1.4em;
-  --letter-spacing: calc(1px - 0.025em);
-  --font-feature-settings: "kern" 1;
+  --font-family: var(--font-family-serif);
+  --line-height: var(--line-height-serif);
+  --letter-spacing: var(--letter-spacing-serif);
+  --font-feature-settings: var(--font-feature-settings-serif);
   --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0em;
   --trim-baseline: 0em;
 }
 
 .f-modern, [class^="f-modern-"], [class*=" f-modern-"] {
-  --font-family: MessinaModern;
-  --line-height: 1.4em;
-  --letter-spacing: calc(1px - 0.025em);
-  --font-feature-settings: "kern" 1;
+  --font-family: var(--font-family-modern);
+  --line-height: var(--line-height-modern);
+  --letter-spacing: var(--letter-spacing-modern);
+  --font-feature-settings: var(--font-feature-settings-modern);
   --trim-sides: calc(1px - 0.1em);
   --trim-capline: 0em;
   --trim-baseline: 0em;
@@ -124,57 +185,61 @@ body {
 }
 
 .f-sans-xs {
-  --font-size: 16px;
+  --font-size: var(--font-size-sans-xs);
+  --line-height: var(--line-height-sans-xs, var(--line-height-sans));
 }
 
 .f-sans-s {
-  --font-size: 16px;
+  --font-size: var(--font-size-sans-s);
+  --line-height: var(--line-height-sans-s, var(--line-height-sans));
 }
 
 .f-sans-m {
-  --font-size: 32px;
+  --font-size: var(--font-size-sans-m);
+  --line-height: var(--line-height-sans-m, var(--line-height-sans));
 }
 
 .f-sans-l {
-  --font-size: 48px;
+  --font-size: var(--font-size-sans-l);
+  --line-height: var(--line-height-sans-l, var(--line-height-sans));
 }
 
 .f-serif-xs {
-  --font-size: 16px;
-  --line-height: 1.3em;
+  --font-size: var(--font-size-serif-xs);
+  --line-height: var(--line-height-serif-xs, var(--line-height-serif));
 }
 
 .f-serif-s {
-  --font-size: 16px;
-  --line-height: 1.3em;
+  --font-size: var(--font-size-serif-s);
+  --line-height: var(--line-height-serif-s, var(--line-height-serif));
 }
 
 .f-serif-m {
-  --font-size: 32px;
-  --line-height: 1.2em;
+  --font-size: var(--font-size-serif-m);
+  --line-height: var(--line-height-serif-m, var(--line-height-serif));
 }
 
 .f-serif-l {
-  --font-size: 48px;
-  --line-height: 1.1em;
+  --font-size: var(--font-size-serif-l);
+  --line-height: var(--line-height-serif-l, var(--line-height-serif));
 }
 
 .f-modern-xs {
-  --font-size: 16px;
-  --line-height: 1.3em;
+  --font-size: var(--font-size-modern-xs);
+  --line-height: var(--line-height-modern-xs, var(--line-height-modern));
 }
 
 .f-modern-s {
-  --font-size: 16px;
-  --line-height: 1.3em;
+  --font-size: var(--font-size-modern-s);
+  --line-height: var(--line-height-modern-s, var(--line-height-modern));
 }
 
 .f-modern-m {
-  --font-size: 32px;
-  --line-height: 1.2em;
+  --font-size: var(--font-size-modern-m);
+  --line-height: var(--line-height-modern-m, var(--line-height-modern));
 }
 
 .f-modern-l {
-  --font-size: 48px;
-  --line-height: 1.1em;
+  --font-size: var(--font-size-modern-l);
+  --line-height: var(--line-height-modern-l, var(--line-height-modern));
 }
