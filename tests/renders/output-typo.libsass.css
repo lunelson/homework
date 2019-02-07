@@ -94,7 +94,8 @@ body {
   font-style: normal;
 }
 
-[class^="f-"], i, b, em, strong, a, code, var, data, dfn, kbd, mark, q, small, sub, sup, cite, abbr, [class*=" f-"] {
+[class^="f-"], [class*=" f-"],
+.plain *, [class^="plain-"] *, [class*=" plain-"] * {
   font-family: var(--font-family);
   font-feature-settings: var(--font-feature-settings);
   font-size: var(--font-size);
@@ -102,22 +103,25 @@ body {
   letter-spacing: calc(var(--letter-spacing));
 }
 
-.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"] {
-  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline) + var(--trim-top-adjust));
-  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline));
-  --trim-top-adjust: 0%;
-  margin-top: calc(0% - var(--trim-top));
-  margin-bottom: calc(0% - var(--trim-bottom));
+.trim > [class^="f-"], .trim > [class*=" f-"],
+.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"],
+.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
+  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline, 0em) + var(--trim-top-adjust, 0em));
+  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline, 0em));
+  margin-top: calc(0em - var(--trim-top));
+  margin-bottom: calc(0em - var(--trim-bottom));
   margin-right: var(--trim-sides);
   margin-left: var(--trim-sides);
 }
 
-.stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"] {
+.stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"],
+.plain > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
   margin-top: calc(var(--stack-gap) - var(--trim-top));
 }
 
-[class^="f-"] + [class^="f-"], [class^="f-"] + [class*=" f-"], [class*=" f-"] + [class^="f-"], [class*=" f-"] + [class*=" f-"] {
-  --trim-top-adjust: var(--adjust-adjacent, 0%);
+[class^="f-"] + [class^="f-"], [class^="f-"] + [class*=" f-"], [class*=" f-"] + [class^="f-"], [class*=" f-"] + [class*=" f-"],
+.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
+  --trim-top-adjust: var(--adjust-adjacent);
 }
 
 .f-sans, [class^="f-sans-"], [class*=" f-sans-"] {
@@ -151,32 +155,6 @@ body {
   --offset-capline: 0em;
   --offset-baseline: 0em;
   --adjust-adjacent: 0em;
-}
-
-.plain *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
-  font-family: var(--font-family);
-  font-feature-settings: var(--font-feature-settings);
-  font-size: var(--font-size);
-  line-height: calc(var(--line-height));
-  letter-spacing: calc(var(--letter-spacing));
-}
-
-.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
-  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline) + var(--trim-top-adjust));
-  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline));
-  --trim-top-adjust: 0%;
-  margin-top: calc(0% - var(--trim-top));
-  margin-bottom: calc(0% - var(--trim-bottom));
-  margin-right: var(--trim-sides);
-  margin-left: var(--trim-sides);
-}
-
-.plain > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
-  margin-top: calc(var(--stack-gap) - var(--trim-top));
-}
-
-.plain *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
-  --trim-top-adjust: var(--adjust-adjacent, 0%);
 }
 
 .f-sans-xs {

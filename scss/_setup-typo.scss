@@ -7,10 +7,7 @@
 //       __/ | |
 //      |___/|_|
 
-// f, trim -- implicitly repsonsive
-// `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
-
-@mixin homework-setup-typo( $trim: true, $trim-excludes: div table figure img svg video iframe object section aside header footer article ) {
+@mixin homework-setup-typo( $trim: true, $trim-excl: div table figure img svg video iframe object section aside header footer article ) {
 
   // normalize $fonts
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
@@ -18,42 +15,6 @@
     $font: map-merge($font-default, $font);
     $fonts: map-merge($fonts, ($f: $font)) !global;
   }
-
-  // $sel-f: '';
-  // $sel-stack-f: '';
-  // $sel-stack-f-sibling: '';
-  // $sel-f-adjacent: '';
-  // $sel-plain-el: '';
-  // $sel-plain-dir-el: '';
-  // $sel-plain-dir-el-sibling: '';
-  // $sel-plain-el-adjacent: '';
-
-  // #{base-class('f', false)} {
-  //   $sel-f: &;
-  //   @at-root #{selector-insert(base-class('stack'), '>')} { $sel-stack-f: &; }
-  //   @at-root #{selector-insert(base-class('stack'), '> * +')} { $sel-stack-f-sibling: &; }
-  //   @at-root #{selector-insert(selector-last(), '+')} { $sel-f-adjacent: &; }
-  // }
-
-  // #{base-class('plain')} {
-  //   #{selector-not('*', $trim-excludes)} { $sel-plain-el: &;
-  //     @at-root #{selector-insert('>')} { $sel-plain-dir-el: &; }
-  //     @at-root #{selector-insert('> * +')} { $sel-plain-dir-el-sibling: &; }
-  //     @at-root #{selector-insert(selector-last(), '+')} { $sel-plain-el-adjacent: &; }
-  //   }
-  // }
-
-  // .test {
-  //   sel-f: inspect($sel-f);
-  //   sel-stack-f: inspect($sel-stack-f);
-  //   sel-stack-f-sibling: inspect($sel-stack-f-sibling);
-  //   sel-f-adjacent: inspect($sel-f-adjacent);
-  //   sel-plain-el: inspect($sel-plain-el);
-  //   sel-plain-dir-el: inspect($sel-plain-dir-el);
-  //   sel-plain-dir-el-sibling: inspect($sel-plain-dir-el-sibling);
-  //   sel-plain-el-adjacent: inspect($sel-plain-el-adjacent);
-  // }
-
 
   :root {
     @each $f, $font in $fonts {
@@ -80,8 +41,7 @@
 
     }
 
-    // NOTE: alternate method here would be min-width queries with m-orig-var(font-mods)
-    // ...(less code but more runtime work)
+    // NOTE: alternate method here would be min-width queries with m-orig-var(font-mods)...(less code but more runtime work)
     @include mm-for('font-mods') {
       @each $f, $mod in m-var('font-mods') {
         @each $s, $set in $mod {
@@ -117,32 +77,38 @@
   .fs-italic, .em { font-style: italic; }
   .fs-normal { font-style: normal; }
 
-  // any .f-[f]-[s] plus common inline elements
-  // NOTE still not sure if this is the right idea
-  #{base-class('f', false)} {
-    @at-root &, i, b, em, strong, a, code, var, data, dfn, kbd, mark, q, small, sub, sup, cite, abbr {
-      font-family: var(--font-family);
-      font-feature-settings: var(--font-feature-settings);
-      font-size: var(--font-size); // TODO allow a lerp calc() expression here too
-      line-height: calc(var(--line-height)); // NB using calc(var()) because these are raw calc values
-      letter-spacing: calc(var(--letter-spacing)); // NB using calc(var()) because these are raw calc values
+  // TODO: add `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
+  .caps {  }
+
+  // any .f-[...] plus all children of .plain which are not in the exclude list
+  #{base-class('f', false)},
+  #{selector-combine(base-class('plain'), '*')} {
+    font-family: var(--font-family);
+    font-feature-settings: var(--font-feature-settings);
+    font-size: var(--font-size); // TODO allow a lerp calc() expression here too
+    line-height: calc(var(--line-height)); // NB using calc(var()) because these are raw calc values
+    letter-spacing: calc(var(--letter-spacing)); // NB using calc(var()) because these are raw calc values
+  }
+
+  @if $trim {
+    #{selector-combine('.trim', base-class('f', false), '>')},
+    #{selector-combine(base-class('stack'), base-class('f', false), '>')},
+    #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} {
+      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline, 0em) + var(--trim-top-adjust, 0em));
+      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline, 0em));
+
+      margin-top: calc(0em - var(--trim-top));
+      margin-bottom: calc(0em - var(--trim-bottom));
+      margin-right: var(--trim-sides);
+      margin-left: var(--trim-sides);
     }
-    @if $trim {
-      @at-root #{selector-insert(base-class('stack'), '>')} {
-        --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline) + var(--trim-top-adjust));
-        --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline));
-        --trim-top-adjust: 0%;
-        margin-top: calc(0% - var(--trim-top));
-        margin-bottom: calc(0% - var(--trim-bottom));
-        margin-right: var(--trim-sides);
-        margin-left: var(--trim-sides);
-      }
-      @at-root #{selector-insert(base-class('stack'), '> * +')} {
-        margin-top: subtract(var(--stack-gap), var(--trim-top));
-      }
-      @at-root #{selector-insert(selector-last(), '+')} {
-        --trim-top-adjust: var(--adjust-adjacent, 0%);
-      }
+    #{selector-combine(base-class('stack'), base-class('f', false), '> * +')},
+    #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '> * +')} {
+      margin-top: subtract(var(--stack-gap), var(--trim-top));
+    }
+    #{selector-combine(base-class('f', false), base-class('f', false), '+')},
+    #{selector-combine(base-class('plain'), selector-combine(selector-not('*', $trim-excl), selector-not('*', $trim-excl), '+'), '>')} {
+      --trim-top-adjust: var(--adjust-adjacent);
     }
   }
 
@@ -163,35 +129,6 @@
         @if $tc { --offset-capline: #{if(unitless($tc), $tc*1em, $tc)}; }
         @if $tb { --offset-baseline: #{if(unitless($tb), $tb*1em, $tb)}; }
         @if $aa { --adjust-adjacent: #{decalc($aa)}; }
-      }
-    }
-  }
-
-  @if $trim {
-    #{base-class('plain')} {
-      #{selector-not('*', $trim-excludes)} {
-        font-family: var(--font-family);
-        font-feature-settings: var(--font-feature-settings);
-        font-size: var(--font-size); // TODO allow a lerp calc() expression here too
-        line-height: calc(var(--line-height)); // NB using calc(var()) because these are raw calc values
-        letter-spacing: calc(var(--letter-spacing)); // NB using calc(var()) because these are raw calc values
-        @if $trim {
-          @at-root #{selector-insert('>')} {
-            --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline) + var(--trim-top-adjust));
-            --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline));
-            --trim-top-adjust: 0%;
-            margin-top: calc(0% - var(--trim-top));
-            margin-bottom: calc(0% - var(--trim-bottom));
-            margin-right: var(--trim-sides);
-            margin-left: var(--trim-sides);
-          }
-          @at-root #{selector-insert('> * +')} {
-            margin-top: subtract(var(--stack-gap), var(--trim-top));
-          }
-          @at-root #{selector-insert(selector-last(), '+')} {
-            --trim-top-adjust: var(--adjust-adjacent, 0%);
-          }
-        }
       }
     }
   }

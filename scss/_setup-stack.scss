@@ -98,7 +98,7 @@
 
   @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
     #{base-class('stack')}, #{base-class('plain')} { > .shim-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
-    .stack-#{$y} > * + *, .plain-#{$y} > * + * { --stack-gap: var(--inner-y-#{$y}); }
+    .stack-#{$y} > *, .plain-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
   }
 
   .chain-0 > * { --chain-gap: 0; }

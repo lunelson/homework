@@ -15,6 +15,10 @@
 }
 
 /* SELECTOR COMBINE !!! */
+.stack.typo > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .stack[class^="typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .stack[class*=" typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .typo[class^="stack-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="stack-"][class^="typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="stack-"][class*=" typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .typo[class*=" stack-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" stack-"][class^="typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" stack-"][class*=" typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
+  content: 'trim';
+}
+
 [class^="f-"], [class*=" f-"] {
   content: 'base';
 }
@@ -48,18 +52,23 @@
   content: 'adjacent';
 }
 
+[class^="f-"], [class*=" f-"],
 .plain *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
   content: 'base';
 }
 
+.trim > [class^="f-"], .trim > [class*=" f-"],
+.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"],
 .plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
   content: 'trim';
 }
 
+.stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"],
 .plain > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
   content: 'follow-trim';
 }
 
+[class^="f-"] + [class^="f-"], [class^="f-"] + [class*=" f-"], [class*=" f-"] + [class^="f-"], [class*=" f-"] + [class*=" f-"],
 .plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
   content: 'adjacent';
 }

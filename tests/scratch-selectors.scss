@@ -116,6 +116,10 @@ $plain-els: h2 h3 h4 h5 h6 p ul ol dl;
 
 $trim-excl: div table figure img svg video iframe object;
 
+#{selector-combine(selector-unify(base-class('stack'), base-class('typo')), selector-not('*', $trim-excl), '>')} {
+  content: 'trim'
+}
+
 #{base-class('f', false)} { content: 'base';}
 #{selector-combine(base-class('plain'), zip($plain-els))} { content: 'base';}
 
@@ -134,11 +138,15 @@ $trim-excl: div table figure img svg video iframe object;
   @return selector-parse($sel);
 }
 
-
+#{base-class('f', false)},
 #{selector-combine(base-class('plain'), selector-not('*', $trim-excl))} { content: 'base';}
 
+#{selector-combine('.trim', base-class('f', false), '>')},
+#{selector-combine(base-class('stack'), base-class('f', false), '>')},
 #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} { content: 'trim';}
 
+#{selector-combine(base-class('stack'), base-class('f', false), '> * +')},
 #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '> * +')} { content: 'follow-trim';}
 
+#{selector-combine(base-class('f', false), base-class('f', false), '+')},
 #{selector-combine(base-class('plain'), selector-combine(selector-not('*', $trim-excl), selector-not('*', $trim-excl), '+'), '>')} { content: 'adjacent';}

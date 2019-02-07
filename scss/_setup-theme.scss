@@ -12,7 +12,7 @@ $colors: () !default;
 
 // TODO: this should be a map, not a list!!
 // -- stick with the s, m, l pattern
-$widths: 1 2 3 4 !default;
+$widths: 1 2 4 8 16 !default;
 
 // TODO: this should be a map, not a list!!
 // -- stick with the s, m, l pattern
@@ -80,10 +80,11 @@ $shadows: (
   }
   #{base-class('bd', false)} {
     border-color: rgba(var(--bd-color, --fg-color), var(--bd-opacity, 1));
-    border-top-width: var(--bd-t-width);
-    border-right-width: var(--bd-r-width);
-    border-bottom-width: var(--bd-b-width);
-    border-left-width: var(--bd-l-width);
+    border-style: var(--bd-style, solid);
+    border-top-width: var(--bd-top-width, 0);
+    border-right-width: var(--bd-right-width, 0);
+    border-bottom-width: var(--bd-bottom-width, 0);
+    border-left-width: var(--bd-left-width, 0);
   }
   #{base-class('ol', false)} {
     outline-color: rgba(var(--ol-color, --fg-color), var(--ol-opacity, 1));
@@ -132,17 +133,17 @@ $shadows: (
   }
 
   /////////////////////////////////////////////
-  ////////////////// contra /////////////////
+  ////////////////// contrast /////////////////
   /////////////////////////////////////////////
 
   // rare case, of choosing black/white vs fg color
-  .bg-contra { --bg-color: var(--fg-contrast); }
-  // otherwise assume contra against the bg color
-  .fg-contra { --fg-color: var(--bg-contrast); }
-  .bd-contra { --bd-color: var(--bg-contrast); }
-  .ol-contra { --ol-color: var(--bg-contrast); }
-  .fill-contra { --fill-color: var(--bg-contrast); }
-  .stroke-contra { --stroke-color: var(--bg-contrast); }
+  .bg-contrast { --bg-color: var(--fg-contrast); }
+  // otherwise assume contrast against the bg color
+  .fg-contrast { --fg-color: var(--bg-contrast); }
+  .bd-contrast { --bd-color: var(--bg-contrast); }
+  .ol-contrast { --ol-color: var(--bg-contrast); }
+  .fill-contrast { --fill-color: var(--bg-contrast); }
+  .stroke-contrast { --stroke-color: var(--bg-contrast); }
 
   /////////////////////////////////////////////
   /////////////////// theme ///////////////////
@@ -181,10 +182,10 @@ $shadows: (
 
   @each $w in join((0), $widths) {
     :root { --width-#{$w}: #{$w * 1px}; }
-    .bd-#{$w}, .bd-t-#{$w} { --bd-t-width: var(--width-#{$w}); }
-    .bd-#{$w}, .bd-r-#{$w} { --bd-r-width: var(--width-#{$w}); }
-    .bd-#{$w}, .bd-b-#{$w} { --bd-b-width: var(--width-#{$w}); }
-    .bd-#{$w}, .bd-l-#{$w} { --bd-l-width: var(--width-#{$w}); }
+    .bd-#{$w}, .bd-top-#{$w} { --bd-top-width: var(--width-#{$w}); }
+    .bd-#{$w}, .bd-right-#{$w} { --bd-right-width: var(--width-#{$w}); }
+    .bd-#{$w}, .bd-bottom-#{$w} { --bd-bottom-width: var(--width-#{$w}); }
+    .bd-#{$w}, .bd-left-#{$w} { --bd-left-width: var(--width-#{$w}); }
     .ol-#{$w} { --ol-width: var(--width-#{$w}); }
     .stroke-#{$w} { --stroke-width: var(--width-#{$w}); }
   }
