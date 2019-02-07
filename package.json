@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@lunelson/penny": "^2.0.0-alpha.5",
-    "@lunelson/sass-calc": "^1.1.1",
+    "@lunelson/sass-calc": "^1.2.0",
     "@lunelson/sass-maps-next": "^1.0.0",
     "@lunelson/sass-throw": "^2.0.0-rc.4",
     "@lunelson/sass-u": "^0.11.0",
@@ -43,7 +43,7 @@
     "write": "^1.0.3"
   },
   "peerDependencies": {
-    "@lunelson/sass-calc": "^1.1.0",
+    "@lunelson/sass-calc": "^1.2.0",
     "@lunelson/sass-maps-next": "^1.0.0",
     "@lunelson/sass-throw": "^2.0.0-rc.4",
     "@lunelson/sass-u": "^0.11.0",

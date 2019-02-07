@@ -38,8 +38,8 @@ $shadows: (
 @mixin homework-setup-theme($base: lite) {
 
   $colors: map-merge((
-    dark: #0a0a0a,
-    lite: #f0f0f0,
+    dark: #141414,
+    lite: #F5F5F5,
   ), $colors) !global;
 
   $color-names: ();

@@ -61,7 +61,7 @@ layout, local -- (grid, flow, span, push, pull, col, row, cols, rows) (stack, ch
     --gap-y
     --push-r
     --push-l
-    --span-x
+    --span-x y
     --span-y
     --col-start / start-x
     --col-end / end-x

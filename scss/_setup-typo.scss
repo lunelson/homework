@@ -10,10 +10,7 @@
 // f, trim -- implicitly repsonsive
 // `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
 
-@mixin homework-setup-typo(
-  $trim: true,
-  $trim-excludes: div table figure img svg video iframe object section aside header footer article
-) {
+@mixin homework-setup-typo( $trim: true, $trim-excludes: div table figure img svg video iframe object section aside header footer article ) {
 
   // normalize $fonts
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
@@ -65,14 +62,22 @@
       $lh: map-get($font, 'line-height');
       $ls: map-get($font, 'letter-spacing');
       $ffs: map-get($font, 'font-feature-settings');
-      // $ts: map-get($font, 'trim-sides');
-      // $tc: map-get($font, 'trim-capline');
-      // $tb: map-get($font, 'trim-baseline');
-
       --font-family-#{$f}: #{$ff};
-      @if $ffs { --font-feature-settings-#{$f}: #{inspect($ffs)}; }
-      @if $lh { --line-height-#{$f}: #{$lh}; }
-      @if $ls { --letter-spacing-#{$f}: #{$ls}; }
+      --font-feature-settings-#{$f}: #{inspect($ffs)};
+      --line-height-#{$f}: #{decalc($lh)};
+      --letter-spacing-#{$f}: #{decalc($ls)};
+
+      @if $trim {
+        $ts: map-get($font, 'trim-sides');
+        $oc: map-get($font, 'offset-capline');
+        $ob: map-get($font, 'offset-baseline');
+        $aa: map-get($font, 'adjust-adjacent');
+        --trim-sides-#{$f}: #{$ts};
+        --offset-capline-#{$f}: #{if(unitless($oc), $oc*1em, $oc)};
+        --offset-baseline-#{$f}: #{if(unitless($ob), $ob*1em, $ob)};
+        --adjust-adjacent-#{$f}: #{decalc($aa)};
+      }
+
     }
 
     // NOTE: alternate method here would be min-width queries with m-orig-var(font-mods)
@@ -82,10 +87,12 @@
         @each $s, $set in $mod {
           $fz: nth($set, 1);
           $fz: if(unitless($fz), $fz*1px, $fz);
+          // TODO: make it possible to pass calc as this value too
           --font-size-#{$f}-#{$s}: #{$fz};
           $lh: if(length($set) > 1, nth($set, 2), null);
           @if $lh {
             $lh: if(unitless($lh), if($lh > 6, $lh*1px, $lh*1em), $lh);
+            // TODO: make it possible to pass calc as this value too
             --line-height-#{$f}-#{$s}: #{$lh};
           }
         }
@@ -102,7 +109,7 @@
   }
 
   // font weights
-  @each $n in (1 2 3 5 6 8 9) { .fw-#{$n*100} { font-weight: $n*100; } }
+  // @each $n in (1 2 3 5 6 8 9) { .fw-#{$n*100} { font-weight: $n*100; } }
   .fw-700, .fw-bold, .strong { font-weight: bold; }
   .fw-400, .fw-normal { font-weight: normal; }
 
@@ -114,11 +121,28 @@
   // NOTE still not sure if this is the right idea
   #{base-class('f', false)} {
     @at-root &, i, b, em, strong, a, code, var, data, dfn, kbd, mark, q, small, sub, sup, cite, abbr {
-      font-size: var(--font-size, inherit);
-      font-family: var(--font-family, inherit);
-      line-height: var(--line-height, inherit);
-      letter-spacing: var(--letter-spacing, inherit);
-      font-feature-settings: var(--font-feature-settings, inherit);
+      font-family: var(--font-family);
+      font-feature-settings: var(--font-feature-settings);
+      font-size: var(--font-size); // TODO allow a lerp calc() expression here too
+      line-height: calc(var(--line-height)); // NB using calc(var()) because these are raw calc values
+      letter-spacing: calc(var(--letter-spacing)); // NB using calc(var()) because these are raw calc values
+    }
+    @if $trim {
+      @at-root #{selector-insert(base-class('stack'), '>')} {
+        --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline) + var(--trim-top-adjust));
+        --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline));
+        --trim-top-adjust: 0%;
+        margin-top: calc(0% - var(--trim-top));
+        margin-bottom: calc(0% - var(--trim-bottom));
+        margin-right: var(--trim-sides);
+        margin-left: var(--trim-sides);
+      }
+      @at-root #{selector-insert(base-class('stack'), '> * +')} {
+        margin-top: subtract(var(--stack-gap), var(--trim-top));
+      }
+      @at-root #{selector-insert(selector-last(), '+')} {
+        --trim-top-adjust: var(--adjust-adjacent, 0%);
+      }
     }
   }
 
@@ -132,51 +156,44 @@
 
       @if $trim {
         $ts: map-get($font, 'trim-sides');
-        $tc: map-get($font, 'trim-capline');
-        $tb: map-get($font, 'trim-baseline');
+        $tc: map-get($font, 'offset-capline');
+        $tb: map-get($font, 'offset-baseline');
+        $aa: map-get($font, 'adjust-adjacent');
         @if $ts { --trim-sides: #{$ts}; }
-        @if $tc { --trim-capline: #{if(unitless($tc), $tc*1em, $tc)}; }
-        @if $tb { --trim-baseline: #{if(unitless($tb), $tb*1em, $tb)}; }
+        @if $tc { --offset-capline: #{if(unitless($tc), $tc*1em, $tc)}; }
+        @if $tb { --offset-baseline: #{if(unitless($tb), $tb*1em, $tb)}; }
+        @if $aa { --adjust-adjacent: #{decalc($aa)}; }
       }
     }
   }
 
   @if $trim {
-    #{base-class('f', false)} {
-      @at-root #{selector-insert(base-class('stack'), '>')} {
-        --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline) + var(--trim-adjacent));
-        --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline));
-        --trim-adjacent: 0%;
-        margin-top: calc(0% - var(--trim-top));
-        margin-bottom: calc(0% - var(--trim-bottom));
-        margin-right: var(--trim-sides);
-        margin-left: var(--trim-sides);
-      }
-      @at-root #{selector-insert(base-class('stack'), '> * +')} {
-        margin-top: subtract(var(--stack-gap), var(--trim-top));
-      }
-      @at-root #{selector-insert(selector-last(), '+')} {
-        --trim-adjacent: var(--trim-ascender) !important; //?
+    #{base-class('plain')} {
+      #{selector-not('*', $trim-excludes)} {
+        font-family: var(--font-family);
+        font-feature-settings: var(--font-feature-settings);
+        font-size: var(--font-size); // TODO allow a lerp calc() expression here too
+        line-height: calc(var(--line-height)); // NB using calc(var()) because these are raw calc values
+        letter-spacing: calc(var(--letter-spacing)); // NB using calc(var()) because these are raw calc values
+        @if $trim {
+          @at-root #{selector-insert('>')} {
+            --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline) + var(--trim-top-adjust));
+            --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline));
+            --trim-top-adjust: 0%;
+            margin-top: calc(0% - var(--trim-top));
+            margin-bottom: calc(0% - var(--trim-bottom));
+            margin-right: var(--trim-sides);
+            margin-left: var(--trim-sides);
+          }
+          @at-root #{selector-insert('> * +')} {
+            margin-top: subtract(var(--stack-gap), var(--trim-top));
+          }
+          @at-root #{selector-insert(selector-last(), '+')} {
+            --trim-top-adjust: var(--adjust-adjacent, 0%);
+          }
+        }
       }
     }
-
-    #{base-class('plain')} { #{selector-not('*', $trim-excludes)} {
-      @at-root #{selector-insert('>')} {
-        --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline) + var(--trim-adjacent));
-        --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline));
-        --trim-adjacent: 0%;
-        margin-top: calc(0% - var(--trim-top));
-        margin-bottom: calc(0% - var(--trim-bottom));
-        margin-right: var(--trim-sides);
-        margin-left: var(--trim-sides);
-      }
-      @at-root #{selector-insert('> * +')} {
-        margin-top: subtract(var(--stack-gap), var(--trim-top));
-      }
-      @at-root #{selector-insert(selector-last(), '+')} {
-        --trim-adjacent: var(--trim-ascender) !important; //?
-      }
-    } }
   }
 
   @each $f, $mod in map-get($root, 'font-mods') {
