@@ -45,28 +45,8 @@
 // ul
 
 
-@mixin reset-block {
+@mixin homework-reset-misc {
 
-  // html5, html4
-  article, aside, details, dialog, figcaption, figure, footer, header, main, menu, menuitem, nav, section, summary,
-  address, blockquote, div, dl, ol, ul, h1, h2, h3, h4, h5, h6, hgroup, hr, p, pre {
-    display: block;
-    margin: 0;
-    padding: 0;
-    font-size: 1em;
-    line-height: inherit;
-  }
-
-  hr {
-    height: 0; // OK, for border-box sizing
-    overflow: visible; // Show the overflow in Edge and IE.
-    border: none;
-    border-top: 1px solid #cccccc;
-  }
-
-  ol, ul {
-    list-style: none; // remove bullet / numbering style
-  }
 
   blockquote, q {
     quotes: none; // remove quotes

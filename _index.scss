@@ -20,10 +20,11 @@ $homework-is-modern: true !default;
 @import "scss/basis-grid";
 @import "scss/basis-theme";
 
-@import "scss/reset-root";
-@import "scss/reset-block";
+@import "scss/reset-destyle";
+@import "scss/reset-display";
 @import "scss/reset-embed";
-@import "scss/reset-inline";
+@import "scss/reset-root";
+@import "scss/reset-misc";
 @import "scss/reset-table";
 @import "scss/reset-ui";
 

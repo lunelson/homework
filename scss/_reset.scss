@@ -8,12 +8,13 @@
 $done-homework-reset: false;
 
 @mixin homework-reset {
-  @include reset-root;
-  @include reset-block;
-  @include reset-embed;
-  @include reset-inline;
-  @include reset-table;
-  @include reset-ui;
+  @include homework-reset-destyle;
+  @include homework-reset-display;
+  @include homework-reset-embed;
+  @include homework-reset-root;
+  @include homework-reset-misc;
+  @include homework-reset-table;
+  @include homework-reset-ui;
 
   $done-homework-reset: true !global;
 }

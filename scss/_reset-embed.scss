@@ -24,7 +24,7 @@
 // param
 
 
-@mixin reset-embed {
+@mixin homework-reset-embed {
 
   applet,
   audio,
@@ -39,7 +39,7 @@
   svg,
   video {
     display: block;
-    // width: 100%;
+    width: unset;
     max-width: 100%;
     border-style: none;
     border: 0;
@@ -52,12 +52,8 @@
     }
   }
 
-
   svg, symbol {
     overflow: visible;
-    // &:not(:root) {
-    //   overflow: hidden; // Hide the overflow in IE.
-    // }
   }
 
   audio:not([controls]) {
@@ -69,6 +65,4 @@
     frameborder: 0;
   }
 
-  // HIDDEN ELEMENTS
-  [hidden], template, slot, script, noscript, link, title, meta { display: none }
 }

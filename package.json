@@ -33,6 +33,7 @@
     "@lunelson/sass-u": "^0.11.0",
     "ava": "^1.0.1",
     "del": "^3.0.0",
+    "destyle.css": "^1.0.5",
     "markdown-it-container": "^2.0.0",
     "markdown-it-custom-block": "^0.1.1",
     "markdown-it-mentions": "^1.0.0",
@@ -40,6 +41,7 @@
     "mathsass": "^0.10.1",
     "node-sass": "^4.11.0",
     "sass": "^1.15.2",
+    "strip-css-comments": "^3.0.0",
     "write": "^1.0.3"
   },
   "peerDependencies": {
