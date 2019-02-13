@@ -53,12 +53,12 @@
 
 @mixin homework-setup-stack($modern: $homework-is-modern) {
 
-  // #{base-class('stack')} {
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: flex-start;
-  //   & > * { flex: 0 0 auto; }
-  // }
+  .flex-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    & > * { flex: 0 0 auto; }
+  }
 
   #{base-class('stack')}, #{base-class('plain')} {
     padding-top: 0.01px;
