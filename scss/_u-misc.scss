@@ -32,6 +32,9 @@
 //   @return $map;
 // }
 
+// TODO:
+// make this in to a package
+// follow algorithm established by this pkg https://github.com/TehShrike/deepmerge
 @function __deep-merge($target, $source) {
   $source: $source or ();
   $target: $target or ();
