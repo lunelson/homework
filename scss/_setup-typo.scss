@@ -70,11 +70,11 @@
 
   // font weights
   // @each $n in (1 2 3 5 6 8 9) { .fw-#{$n*100} { font-weight: $n*100; } }
-  .fw-700, .fw-bold, .strong { font-weight: bold; }
+  .fw-700, .fw-bold, .strong, strong { font-weight: bold; }
   .fw-400, .fw-normal { font-weight: normal; }
 
   // font-styles; NB: there is also 'oblique' but I've never seen it in use
-  .fs-italic, .em { font-style: italic; }
+  .fs-italic, .em, em { font-style: italic; }
   .fs-normal { font-style: normal; }
 
   // TODO: add `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing

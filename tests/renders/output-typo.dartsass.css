@@ -6,7 +6,7 @@
   --trim-sides-sans: 0;
   --offset-capline-sans: 0em;
   --offset-baseline-sans: 0em;
-  --adjust-adjacent-sans: 0em;
+  --adjust-adjacent-sans: 0.125em;
   --font-family-serif: MessinaSerif;
   --font-feature-settings-serif: ();
   --line-height-serif: 1.4em;
@@ -14,7 +14,7 @@
   --trim-sides-serif: 0;
   --offset-capline-serif: 0em;
   --offset-baseline-serif: 0em;
-  --adjust-adjacent-serif: 0em;
+  --adjust-adjacent-serif: 0.125em;
   --font-family-modern: MessinaModern;
   --font-feature-settings-modern: ();
   --line-height-modern: 1.4em;
@@ -22,7 +22,7 @@
   --trim-sides-modern: 0;
   --offset-capline-modern: 0em;
   --offset-baseline-modern: 0em;
-  --adjust-adjacent-modern: 0em;
+  --adjust-adjacent-modern: 0.125em;
 }
 @media screen and (max-width: 29.999em) {
   :root {
@@ -76,7 +76,7 @@ body {
   font-kerning: normal;
 }
 
-.fw-700, .fw-bold, .strong {
+.fw-700, .fw-bold, .strong, strong {
   font-weight: bold;
 }
 
@@ -84,7 +84,7 @@ body {
   font-weight: normal;
 }
 
-.fs-italic, .em {
+.fs-italic, .em, em {
   font-style: italic;
 }
 
@@ -130,7 +130,7 @@ body {
   --trim-sides: 0;
   --offset-capline: 0em;
   --offset-baseline: 0em;
-  --adjust-adjacent: 0em;
+  --adjust-adjacent: 0.125em;
 }
 
 .f-serif, [class^=f-serif-], [class*=" f-serif-"] {
@@ -141,7 +141,7 @@ body {
   --trim-sides: 0;
   --offset-capline: 0em;
   --offset-baseline: 0em;
-  --adjust-adjacent: 0em;
+  --adjust-adjacent: 0.125em;
 }
 
 .f-modern, [class^=f-modern-], [class*=" f-modern-"] {
@@ -152,7 +152,7 @@ body {
   --trim-sides: 0;
   --offset-capline: 0em;
   --offset-baseline: 0em;
-  --adjust-adjacent: 0em;
+  --adjust-adjacent: 0.125em;
 }
 
 .f-sans-xs {
