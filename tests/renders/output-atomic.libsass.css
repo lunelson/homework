@@ -1,33 +1,39 @@
-.w-unset {
-  width: unset;
+.y-0 {
+  --row-gap: 0;
 }
 
-.h-unset {
-  height: unset;
+.x-0 {
+  --col-gap: 0;
 }
 
-.w-auto {
-  width: auto;
+.y-s > *,
+[class^="y-"] > .shim-s, [class*=" y-"] > .shim-s {
+  --row-gap: var(--inner-y-s);
 }
 
-.h-auto {
-  height: auto;
+.y-m > *,
+[class^="y-"] > .shim-m, [class*=" y-"] > .shim-m {
+  --row-gap: var(--inner-y-m);
 }
 
-.w-100 {
-  width: 100%;
+.y-l > *,
+[class^="y-"] > .shim-l, [class*=" y-"] > .shim-l {
+  --row-gap: var(--inner-y-l);
 }
 
-.h-100 {
-  height: 100%;
+.x-s > *,
+[class^="x-"] > .shim-s, [class*=" x-"] > .shim-s {
+  --col-gap: var(--inner-x-s);
 }
 
-.w-0 {
-  width: 0;
+.x-m > *,
+[class^="x-"] > .shim-m, [class*=" x-"] > .shim-m {
+  --col-gap: var(--inner-x-m);
 }
 
-.h-0 {
-  height: 0;
+.x-l > *,
+[class^="x-"] > .shim-l, [class*=" x-"] > .shim-l {
+  --col-gap: var(--inner-x-l);
 }
 
 [class^="mt-"], [class*=" mt-"], [class^="my-"], [class*=" my-"] {
@@ -255,30 +261,6 @@
 }
 
 @media screen and (min-width: 30em) {
-  .a__w-unset {
-    width: unset;
-  }
-  .a__h-unset {
-    height: unset;
-  }
-  .a__w-auto {
-    width: auto;
-  }
-  .a__h-auto {
-    height: auto;
-  }
-  .a__w-100 {
-    width: 100%;
-  }
-  .a__h-100 {
-    height: 100%;
-  }
-  .a__w-0 {
-    width: 0;
-  }
-  .a__h-0 {
-    height: 0;
-  }
   [class^="a__mt-"], [class*=" a__mt-"], [class^="a__my-"], [class*=" a__my-"] {
     margin-top: var(--mt);
   }
@@ -450,30 +432,6 @@
 }
 
 @media screen and (min-width: 40em) {
-  .b__w-unset {
-    width: unset;
-  }
-  .b__h-unset {
-    height: unset;
-  }
-  .b__w-auto {
-    width: auto;
-  }
-  .b__h-auto {
-    height: auto;
-  }
-  .b__w-100 {
-    width: 100%;
-  }
-  .b__h-100 {
-    height: 100%;
-  }
-  .b__w-0 {
-    width: 0;
-  }
-  .b__h-0 {
-    height: 0;
-  }
   [class^="b__mt-"], [class*=" b__mt-"], [class^="b__my-"], [class*=" b__my-"] {
     margin-top: var(--mt);
   }
@@ -645,30 +603,6 @@
 }
 
 @media screen and (min-width: 60em) {
-  .c__w-unset {
-    width: unset;
-  }
-  .c__h-unset {
-    height: unset;
-  }
-  .c__w-auto {
-    width: auto;
-  }
-  .c__h-auto {
-    height: auto;
-  }
-  .c__w-100 {
-    width: 100%;
-  }
-  .c__h-100 {
-    height: 100%;
-  }
-  .c__w-0 {
-    width: 0;
-  }
-  .c__h-0 {
-    height: 0;
-  }
   [class^="c__mt-"], [class*=" c__mt-"], [class^="c__my-"], [class*=" c__my-"] {
     margin-top: var(--mt);
   }

@@ -1,8 +1,9 @@
+// @ts-nocheck
+
 const path = require('path');
 const writeFile = require('write');
 const globby = require('globby');
-const matcher = require('matcher');
-const del = require('del');
+
 const test = require('ava');
 
 const compilers = {
@@ -25,14 +26,8 @@ function sassRender(sass, file, outFile) {
   });
 }
 
-const srcFiles = globby.sync(['*.scss', '!**/_*', '!**/_*/**'], { cwd: __dirname, deep: 0 });
-const outFiles = globby.sync(['*.css'], { cwd: path.resolve(__dirname, 'renders'), deep: 0 });
-
-const delFiles = outFiles
-  .filter(file => !~srcFiles.indexOf(file.replace(/\.(dartsass|libsass).css/,'.scss')))
-  .map(file => path.join(__dirname, 'renders', file));
-
-del.sync(delFiles);
+const srcBase = path.basename(__filename, '.js');
+const srcFiles = globby.sync([`${srcBase}*.scss`, '!**/_*', '!**/_*/**'], { cwd: __dirname, deep: 0 });
 
 srcFiles.forEach(srcFile => {
   const file = path.resolve(__dirname, srcFile);
@@ -41,7 +36,6 @@ srcFiles.forEach(srcFile => {
     test(`${path.basename(srcFile, path.extname(srcFile))} [${compiler}]`, t => {
       return sassRender(compilers[compiler], file, outFile).then(css => {
         writeFile.sync(outFile, css);
-        // if (matcher.isMatch(path.basename(srcFile), 'scratch*')) return t.pass();
         t.snapshot(css);
       });
     });

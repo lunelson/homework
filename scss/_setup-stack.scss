@@ -7,50 +7,6 @@
 
 // stack, plain, chain, (shim) -- implicitly responsive
 
-// @mixin stack($modern: $homework-is-modern) {
-//   display: flex;
-//   width: 100%;
-//   flex-direction: column;
-//   align-items: stretch;
-//   padding-top: 0.1px;
-//   padding-bottom: 0.1px;
-//   & > * {
-//     flex: 0 0 auto;
-//     margin-top: 0;
-//     margin-bottom: 0;
-//   }
-//   & > * + * {
-//     margin-top: if($modern, var(--stack-gap), m-var(inner-y));
-//   }
-// }
-
-// @mixin plain($modern: $homework-is-modern) {
-//   padding-top: 0.1px;
-//   padding-bottom: 0.1px;
-//   & > * {
-//     margin-top: 0;
-//     margin-bottom: 0;
-//   }
-//   & > * + * {
-//     margin-top: if($modern, var(--stack-gap), m-var(inner-y));
-//   }
-// }
-
-// @mixin chain($modern: $homework-is-modern) {
-//   display: flex;
-//   width: 100%;
-//   flex-direction: row;
-//   & > * {
-//     flex: 0 0 auto;
-//     margin-left: 0;
-//     margin-right: 0;
-//     text-overflow: ellipsis;
-//   }
-//   & > * + * {
-//     margin-left: if($modern, var(--chain-gap), m-var(inner-x));
-//   }
-// }
-
 @mixin homework-setup-stack($modern: $homework-is-modern) {
 
   .flex-stack {
@@ -70,7 +26,6 @@
     & > * + * {
       margin-top: var(--stack-gap, var(--inner-y));
     }
-    // --stack-gap: initial !important;
   }
 
   #{base-class('chain')} {
@@ -86,24 +41,21 @@
     & > * + * {
       margin-left: var(--chain-gap, var(--inner-x));
     }
-    // --chain-gap: initial !important;
   }
 
-  // :root {
-  //   --stack-gap: var(--inner-y);
-  //   --chain-gap: var(--inner-x);
-  // }
-
   .stack-0 > * { --stack-gap: 0; }
+  .chain-0 > * { --chain-gap: 0; }
 
-  @each $y, $mult in map-get($root, 'inner-y-mods') or map-get($root, 'inner-mods') or () {
+  // get lists of inner-y/-x-mod keys on $root
+  $inner-y-keys: map-keys(inner-y-mods());
+  $inner-x-keys: map-keys(inner-x-mods());
+
+  @each $y in $inner-y-keys {
     #{base-class('stack')}, #{base-class('plain')} { > .shim-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
     .stack-#{$y} > *, .plain-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
   }
 
-  .chain-0 > * { --chain-gap: 0; }
-
-  @each $x, $mult in map-get($root, 'inner-x-mods') or map-get($root, 'inner-mods') or () {
+  @each $x in $inner-x-keys {
     #{base-class('chain')} { > .shim-#{$x} { --chain-gap: var(--inner-x-#{$x}); } }
     .chain-#{$x} > * { --chain-gap: var(--inner-x-#{$x}); }
   }

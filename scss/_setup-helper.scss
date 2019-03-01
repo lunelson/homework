@@ -20,6 +20,14 @@
 // cursor -- pointer|default
 // select -- none, auto, text
 
+// d, z (00-90)
+// rel, fix, abs, show, hide, vhide, vshow
+// ? fs- italic, normal
+// ? fw- bold, bolder, light, etc. normal
+// a, ac, as, jc, ai, flex, fit
+// op -- (opacity) 00,02,04,06,08,10
+// * replace fit with obj: .obj-contain /-cover /-fill /-none /-scale-down /-bottom /-center /-left /-left-bottom /-left-top /-right /-right-bottom /-right-top /-top
+// (scroll-[auto|touch]) -- should maybe just be in reset
 
 @mixin homework-setup-helper($modern: $homework-is-modern) {
 
@@ -174,6 +182,24 @@
     @include m($m) {
 
       $m__: m-prefix();
+
+      /////////////////////////////////////////////
+      //////////////// width/height ///////////////
+      /////////////////////////////////////////////
+
+      // NOTE: add minh, maxh, minw, maxw ?
+
+      .#{$m__}w-viewport { width: 100vw; }
+      .#{$m__}w-unset { width: unset; }
+      .#{$m__}w-auto { width: auto; }
+      .#{$m__}w-100 { width: 100%; }
+      .#{$m__}w-0 { width: 0; }
+
+      .#{$m__}h-viewport { height: 100vh; }
+      .#{$m__}h-unset { height: unset; }
+      .#{$m__}h-auto { height: auto; }
+      .#{$m__}h-100 { height: 100%; }
+      .#{$m__}h-0 { height: 0; }
 
       // hide visually-only / img replacement
       // https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html

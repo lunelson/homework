@@ -38,6 +38,10 @@
   --stack-gap: 0;
 }
 
+.chain-0 > * {
+  --chain-gap: 0;
+}
+
 .stack > .shim-s, [class^=stack-] > .shim-s, [class*=" stack-"] > .shim-s, .plain > .shim-s, [class^=plain-] > .shim-s, [class*=" plain-"] > .shim-s {
   --stack-gap: var(--inner-y-s);
 }
@@ -60,10 +64,6 @@
 
 .stack-l > *, .plain-l > * {
   --stack-gap: var(--inner-y-l);
-}
-
-.chain-0 > * {
-  --chain-gap: 0;
 }
 
 .chain > .shim-s, [class^=chain-] > .shim-s, [class*=" chain-"] > .shim-s {

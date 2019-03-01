@@ -5,22 +5,34 @@
 // | (_| | || (_) | | | | | | | (__
 //  \__,_|\__\___/|_| |_| |_|_|\___|
 
-// m+, p+, w, h, minh, maxh, minw, maxw
-// NB: add w-viewport, h-viewport
-// d, z (00-90)
-// rel, fix, abs, show, hide, vhide, vshow
-// ? fs- italic, normal
-// ? fw- bold, bolder, light, etc. normal
-// a, ac, as, jc, ai, flex, fit
-// op -- (opacity) 00,02,04,06,08,10
-// * replace fit with obj: .obj-contain /-cover /-fill /-none /-scale-down /-bottom /-center /-left /-left-bottom /-left-top /-right /-right-bottom /-right-top /-top
-// (scroll-[auto|touch]) -- should maybe just be in reset
-
 @mixin homework-setup-atomic($modern: $homework-is-modern) {
 
-  // get lists of inner-y/-x-mod keys
+  // get lists of inner-y/-x-mod keys on $root
   $inner-y-keys: map-keys(inner-y-mods());
   $inner-x-keys: map-keys(inner-x-mods());
+
+  // X AND Y CO-CLASSES FOR STACK, CHAIN, FLOW, GRID
+
+  .y-0 { --row-gap: 0; }
+  .x-0 { --col-gap: 0; }
+
+  // not convinced this is necessary yet
+  // #{base-class('y', false)} { --row-gap: var(--gap-y); }
+  // #{base-class('x', false)} { --col-gap: var(--gap-x); }
+
+  @each $y in $inner-y-keys {
+    .y-#{$y} > *,
+    #{selector-combine(base-class('y', false), '.shim-#{$y}', '>')} {
+      --row-gap: var(--inner-y-#{$y});
+    }
+  }
+
+  @each $x in $inner-x-keys {
+    .x-#{$x} > *,
+    #{selector-combine(base-class('x', false), '.shim-#{$x}', '>')} {
+      --col-gap: var(--inner-x-#{$x});
+    }
+  }
 
   // join with null, to also output suffix-less class
   @each $m in join((null), media-keys()) {
@@ -29,31 +41,16 @@
 
       $m__: m-prefix();
 
-      .#{$m__}w-unset { width: unset; }
-      .#{$m__}h-unset { height: unset; }
-      .#{$m__}w-auto { width: auto; }
-      .#{$m__}h-auto { height: auto; }
-      .#{$m__}w-100 { width: 100%; }
-      .#{$m__}h-100 { height: 100%; }
-      .#{$m__}w-0 { width: 0; }
-      .#{$m__}h-0 { height: 0; }
-
       #{m-base-class('mt', false)}, #{m-base-class('my', false)} { margin-top: var(--mt); }
       #{m-base-class('mr', false)}, #{m-base-class('mx', false)} { margin-right: var(--mr); }
       #{m-base-class('mb', false)}, #{m-base-class('my', false)} { margin-bottom: var(--mb); }
       #{m-base-class('ml', false)}, #{m-base-class('mx', false)} { margin-left: var(--ml); }
-
-      // #{m-base-class('mt-neg', false)}, #{m-base-class('my-neg', false)} { margin-top: multiply(var(--mt), -1); }
-      // #{m-base-class('mr-neg', false)}, #{m-base-class('mx-neg', false)} { margin-right: multiply(var(--mr), -1); }
-      // #{m-base-class('mb-neg', false)}, #{m-base-class('my-neg', false)} { margin-bottom: multiply(var(--mb), -1); }
-      // #{m-base-class('ml-neg', false)}, #{m-base-class('mx-neg', false)} { margin-left: multiply(var(--ml), -1); }
 
       #{m-base-class('pt', false)}, #{m-base-class('py', false)} { padding-top: var(--pt); }
       #{m-base-class('pr', false)}, #{m-base-class('px', false)} { padding-right: var(--pr); }
       #{m-base-class('pb', false)}, #{m-base-class('py', false)} { padding-bottom: var(--pb); }
       #{m-base-class('pl', false)}, #{m-base-class('px', false)} { padding-left: var(--pl); }
 
-      // margin/padding: inner-y
       @each $y in $inner-y-keys {
         .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y} { --mt: calc(var(--inner-y-#{$y}) * -1); }
         .#{$m__}my-neg-#{$y}, .#{$m__}mb-neg-#{$y} { --mb: calc(var(--inner-y-#{$y}) * -1); }
@@ -63,7 +60,6 @@
         .#{$m__}py-#{$y}, .#{$m__}pb-#{$y} { --pb: var(--inner-y-#{$y}); }
       }
 
-      // margin/padding: inner-x
       @each $x in $inner-x-keys {
         .#{$m__}mx-neg-#{$x}, .#{$m__}mr-neg-#{$x} { --mr: calc(var(--inner-x-#{$x}) * -1); }
         .#{$m__}mx-neg-#{$x}, .#{$m__}ml-neg-#{$x} { --ml: calc(var(--inner-x-#{$x}) * -1); }

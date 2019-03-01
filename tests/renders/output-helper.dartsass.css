@@ -133,6 +133,46 @@
   clip: auto;
 }
 
+.w-viewport {
+  width: 100vw;
+}
+
+.w-unset {
+  width: unset;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-0 {
+  width: 0;
+}
+
+.h-viewport {
+  height: 100vh;
+}
+
+.h-unset {
+  height: unset;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.h-0 {
+  height: 0;
+}
+
 .vhide {
   position: absolute !important;
   clip: rect(0 0 0 0);
@@ -527,6 +567,46 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
 }
 
 @media screen and (min-width: 30em) {
+  .a__w-viewport {
+    width: 100vw;
+  }
+
+  .a__w-unset {
+    width: unset;
+  }
+
+  .a__w-auto {
+    width: auto;
+  }
+
+  .a__w-100 {
+    width: 100%;
+  }
+
+  .a__w-0 {
+    width: 0;
+  }
+
+  .a__h-viewport {
+    height: 100vh;
+  }
+
+  .a__h-unset {
+    height: unset;
+  }
+
+  .a__h-auto {
+    height: auto;
+  }
+
+  .a__h-100 {
+    height: 100%;
+  }
+
+  .a__h-0 {
+    height: 0;
+  }
+
   .a__vhide {
     position: absolute !important;
     clip: rect(0 0 0 0);
@@ -921,6 +1001,46 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
   }
 }
 @media screen and (min-width: 40em) {
+  .b__w-viewport {
+    width: 100vw;
+  }
+
+  .b__w-unset {
+    width: unset;
+  }
+
+  .b__w-auto {
+    width: auto;
+  }
+
+  .b__w-100 {
+    width: 100%;
+  }
+
+  .b__w-0 {
+    width: 0;
+  }
+
+  .b__h-viewport {
+    height: 100vh;
+  }
+
+  .b__h-unset {
+    height: unset;
+  }
+
+  .b__h-auto {
+    height: auto;
+  }
+
+  .b__h-100 {
+    height: 100%;
+  }
+
+  .b__h-0 {
+    height: 0;
+  }
+
   .b__vhide {
     position: absolute !important;
     clip: rect(0 0 0 0);
@@ -1315,6 +1435,46 @@ body:hover .vhide a, body:hover .vhide input, body:hover .vhide button {
   }
 }
 @media screen and (min-width: 60em) {
+  .c__w-viewport {
+    width: 100vw;
+  }
+
+  .c__w-unset {
+    width: unset;
+  }
+
+  .c__w-auto {
+    width: auto;
+  }
+
+  .c__w-100 {
+    width: 100%;
+  }
+
+  .c__w-0 {
+    width: 0;
+  }
+
+  .c__h-viewport {
+    height: 100vh;
+  }
+
+  .c__h-unset {
+    height: unset;
+  }
+
+  .c__h-auto {
+    height: auto;
+  }
+
+  .c__h-100 {
+    height: 100%;
+  }
+
+  .c__h-0 {
+    height: 0;
+  }
+
   .c__vhide {
     position: absolute !important;
     clip: rect(0 0 0 0);
