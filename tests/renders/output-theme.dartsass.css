@@ -58,10 +58,11 @@ body {
 
 [class^=bd-], [class*=" bd-"] {
   border-color: rgba(var(--bd-color, --fg-color), var(--bd-opacity, 1));
-  border-top-width: var(--bd-t-width);
-  border-right-width: var(--bd-r-width);
-  border-bottom-width: var(--bd-b-width);
-  border-left-width: var(--bd-l-width);
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
 }
 
 [class^=ol-], [class*=" ol-"] {
@@ -971,27 +972,27 @@ body {
   --stroke-opacity: 0.9;
 }
 
-.bg-contra {
+.bg-contrast {
   --bg-color: var(--fg-contrast);
 }
 
-.fg-contra {
+.fg-contrast {
   --fg-color: var(--bg-contrast);
 }
 
-.bd-contra {
+.bd-contrast {
   --bd-color: var(--bg-contrast);
 }
 
-.ol-contra {
+.ol-contrast {
   --ol-color: var(--bg-contrast);
 }
 
-.fill-contra {
+.fill-contrast {
   --fill-color: var(--bg-contrast);
 }
 
-.stroke-contra {
+.stroke-contrast {
   --stroke-color: var(--bg-contrast);
 }
 
@@ -1053,20 +1054,20 @@ body {
   --width-0: 0px;
 }
 
-.bd-0, .bd-t-0 {
-  --bd-t-width: var(--width-0);
+.bd-0, .bd-top-0 {
+  --bd-top-width: var(--width-0);
 }
 
-.bd-0, .bd-r-0 {
-  --bd-r-width: var(--width-0);
+.bd-0, .bd-right-0 {
+  --bd-right-width: var(--width-0);
 }
 
-.bd-0, .bd-b-0 {
-  --bd-b-width: var(--width-0);
+.bd-0, .bd-bottom-0 {
+  --bd-bottom-width: var(--width-0);
 }
 
-.bd-0, .bd-l-0 {
-  --bd-l-width: var(--width-0);
+.bd-0, .bd-left-0 {
+  --bd-left-width: var(--width-0);
 }
 
 .ol-0 {
@@ -1081,20 +1082,20 @@ body {
   --width-1: 1px;
 }
 
-.bd-1, .bd-t-1 {
-  --bd-t-width: var(--width-1);
+.bd-1, .bd-top-1 {
+  --bd-top-width: var(--width-1);
 }
 
-.bd-1, .bd-r-1 {
-  --bd-r-width: var(--width-1);
+.bd-1, .bd-right-1 {
+  --bd-right-width: var(--width-1);
 }
 
-.bd-1, .bd-b-1 {
-  --bd-b-width: var(--width-1);
+.bd-1, .bd-bottom-1 {
+  --bd-bottom-width: var(--width-1);
 }
 
-.bd-1, .bd-l-1 {
-  --bd-l-width: var(--width-1);
+.bd-1, .bd-left-1 {
+  --bd-left-width: var(--width-1);
 }
 
 .ol-1 {
@@ -1109,20 +1110,20 @@ body {
   --width-2: 2px;
 }
 
-.bd-2, .bd-t-2 {
-  --bd-t-width: var(--width-2);
+.bd-2, .bd-top-2 {
+  --bd-top-width: var(--width-2);
 }
 
-.bd-2, .bd-r-2 {
-  --bd-r-width: var(--width-2);
+.bd-2, .bd-right-2 {
+  --bd-right-width: var(--width-2);
 }
 
-.bd-2, .bd-b-2 {
-  --bd-b-width: var(--width-2);
+.bd-2, .bd-bottom-2 {
+  --bd-bottom-width: var(--width-2);
 }
 
-.bd-2, .bd-l-2 {
-  --bd-l-width: var(--width-2);
+.bd-2, .bd-left-2 {
+  --bd-left-width: var(--width-2);
 }
 
 .ol-2 {
@@ -1134,51 +1135,23 @@ body {
 }
 
 :root {
-  --width-3: 3px;
-}
-
-.bd-3, .bd-t-3 {
-  --bd-t-width: var(--width-3);
-}
-
-.bd-3, .bd-r-3 {
-  --bd-r-width: var(--width-3);
-}
-
-.bd-3, .bd-b-3 {
-  --bd-b-width: var(--width-3);
-}
-
-.bd-3, .bd-l-3 {
-  --bd-l-width: var(--width-3);
-}
-
-.ol-3 {
-  --ol-width: var(--width-3);
-}
-
-.stroke-3 {
-  --stroke-width: var(--width-3);
-}
-
-:root {
   --width-4: 4px;
 }
 
-.bd-4, .bd-t-4 {
-  --bd-t-width: var(--width-4);
+.bd-4, .bd-top-4 {
+  --bd-top-width: var(--width-4);
 }
 
-.bd-4, .bd-r-4 {
-  --bd-r-width: var(--width-4);
+.bd-4, .bd-right-4 {
+  --bd-right-width: var(--width-4);
 }
 
-.bd-4, .bd-b-4 {
-  --bd-b-width: var(--width-4);
+.bd-4, .bd-bottom-4 {
+  --bd-bottom-width: var(--width-4);
 }
 
-.bd-4, .bd-l-4 {
-  --bd-l-width: var(--width-4);
+.bd-4, .bd-left-4 {
+  --bd-left-width: var(--width-4);
 }
 
 .ol-4 {
@@ -1187,6 +1160,62 @@ body {
 
 .stroke-4 {
   --stroke-width: var(--width-4);
+}
+
+:root {
+  --width-8: 8px;
+}
+
+.bd-8, .bd-top-8 {
+  --bd-top-width: var(--width-8);
+}
+
+.bd-8, .bd-right-8 {
+  --bd-right-width: var(--width-8);
+}
+
+.bd-8, .bd-bottom-8 {
+  --bd-bottom-width: var(--width-8);
+}
+
+.bd-8, .bd-left-8 {
+  --bd-left-width: var(--width-8);
+}
+
+.ol-8 {
+  --ol-width: var(--width-8);
+}
+
+.stroke-8 {
+  --stroke-width: var(--width-8);
+}
+
+:root {
+  --width-16: 16px;
+}
+
+.bd-16, .bd-top-16 {
+  --bd-top-width: var(--width-16);
+}
+
+.bd-16, .bd-right-16 {
+  --bd-right-width: var(--width-16);
+}
+
+.bd-16, .bd-bottom-16 {
+  --bd-bottom-width: var(--width-16);
+}
+
+.bd-16, .bd-left-16 {
+  --bd-left-width: var(--width-16);
+}
+
+.ol-16 {
+  --ol-width: var(--width-16);
+}
+
+.stroke-16 {
+  --stroke-width: var(--width-16);
 }
 
 :root {
