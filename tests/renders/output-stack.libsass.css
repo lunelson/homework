@@ -1,6 +1,16 @@
+.flex-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.flex-stack > * {
+  flex: 0 0 auto;
+}
+
 .stack, [class^="stack-"], [class*=" stack-"], .plain, [class^="plain-"], [class*=" plain-"] {
-  padding-top: 0.01px;
-  padding-bottom: 0.01px;
+  padding-top: 0.1px;
+  padding-bottom: 0.1px;
 }
 
 .stack > *, [class^="stack-"] > *, [class*=" stack-"] > *, .plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
@@ -37,7 +47,7 @@
   --stack-gap: var(--inner-y-s);
 }
 
-.stack-s > * + *, .plain-s > * + * {
+.stack-s > *, .plain-s > * {
   --stack-gap: var(--inner-y-s);
 }
 
@@ -45,7 +55,7 @@
   --stack-gap: var(--inner-y-m);
 }
 
-.stack-m > * + *, .plain-m > * + * {
+.stack-m > *, .plain-m > * {
   --stack-gap: var(--inner-y-m);
 }
 
@@ -53,7 +63,7 @@
   --stack-gap: var(--inner-y-l);
 }
 
-.stack-l > * + *, .plain-l > * + * {
+.stack-l > *, .plain-l > * {
   --stack-gap: var(--inner-y-l);
 }
 
