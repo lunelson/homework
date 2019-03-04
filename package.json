@@ -39,7 +39,9 @@
     "markdown-it-mentions": "^1.0.0",
     "markdown-it-prism": "^2.0.1",
     "mathsass": "^0.10.1",
+    "node-hook": "^1.0.0",
     "node-sass": "^4.11.0",
+    "require-extension-hooks": "^0.3.3",
     "sass": "^1.15.2",
     "strip-css-comments": "^3.0.0",
     "write": "^1.0.3"

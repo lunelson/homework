@@ -107,3 +107,4 @@ GitHub.sublime-settings
 
 
 # End of https://www.gitignore.io/api/sass,node,sublimetext,visualstudiocode
+/tests/scratch

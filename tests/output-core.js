@@ -3,7 +3,6 @@
 const path = require('path');
 const writeFile = require('write');
 const globby = require('globby');
-
 const test = require('ava');
 
 const compilers = {
