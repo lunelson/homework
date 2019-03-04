@@ -9,20 +9,7 @@
 
 // grid, flow, cols, rows
 
-// TODO / THINK
-// - replace --col-base, --row-base with --col-count, --row-count
-// - reconsider grid-template-rows value for 'grid' base class?
-
-
-@mixin homework-setup-grid($max-columns: max-columns(), $row-classes: false) {
-
-  :root {
-    --row-gap: var(--inner-y);
-    --col-gap: var(--inner-x);
-    --col-base: var(--grid-cols);
-    --col-span: var(--col-base);
-    --row-span: var(--grid-rows, 1);
-  }
+@mixin homework-setup-grid($max-columns: --max-columns(), $row-classes: false) {
 
   // global bases and mods
   // flow, grid
@@ -31,34 +18,32 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: calc(100% + var(--col-gap)) !important;;
-    margin-left: calc(var(--col-gap) / -2);
-    margin-right: calc(var(--col-gap) / -2);
-    margin-top: calc(var(--row-gap) / -2);
-    margin-bottom: calc(var(--row-gap) / -2);
+    width: calc(100% + var(--col-gap, var(--inner-x)));
+    margin-left: calc(var(--col-gap, var(--inner-x)) / -2);
+    margin-right: calc(var(--col-gap, var(--inner-x)) / -2);
+    margin-top: calc(var(--row-gap, var(--inner-y)) / -2);
+    margin-bottom: calc(var(--row-gap, var(--inner-y)) / -2);
     & > * {
       flex: 0 0 auto;
       width: 100%;
       min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
       min-height: 1px;
       background-clip: content-box;
-      padding-left: calc(var(--col-gap) / 2) !important;
-      padding-right: calc(var(--col-gap) / 2) !important;
-      padding-top: calc(var(--row-gap) / 2) !important;
-      padding-bottom: calc(var(--row-gap) / 2) !important;
+      padding-left: calc(var(--col-gap, var(--inner-x)) / 2);
+      padding-right: calc(var(--col-gap, var(--inner-x)) / 2);
+      padding-top: calc(var(--row-gap, var(--inner-y)) / 2);
+      padding-bottom: calc(var(--row-gap, var(--inner-y)) / 2);
     }
   }
 
   #{base-class('grid')} {
     display: grid;
-    grid-gap: var(--row-gap) var(--col-gap);
-    grid-template-rows: repeat(var(--row-span), 1fr); // could be 0% instead of auto ?
-    grid-template-columns: repeat(var(--col-span), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule for flex flow...
+    grid-gap: var(--row-gap, var(--inner-y)) var(--col-gap, var(--inner-x));
+    grid-template-rows: repeat(var(--row-span, 1), 1fr); // could be 0% instead of auto ?
+    grid-template-columns: repeat(var(--col-span, var(--grid-columns)), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule for flex flow...
     & > * {
-      // grid-column: auto / auto;
-      // grid-row: auto / auto;
-      grid-column: span var(--col-span) / span var(--col-span);
-      grid-row: span var(--row-span) / span var(--row-span);
+      grid-column: span var(--col-span, var(--grid-columns)) / span var(--col-span, var(--grid-columns));
+      grid-row: span var(--row-span, 1) / span var(--row-span, 1);
     }
   }
 
@@ -68,5 +53,4 @@
   .flow-0, .grid-0 { --row-gap: 0; }
   .flow-x-0, .grid-x-0 { --col-gap: 0; }
   .flow-0-0, .grid-0-0 { --row-gap: 0; --col-gap: 0; }
-
 }

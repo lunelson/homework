@@ -54,7 +54,7 @@ $media: (
   ),
 );
 
-@include homework-setup-core($output: false);
+@include homework-setup-core();
 
 @include mm() {
   $medium: m();

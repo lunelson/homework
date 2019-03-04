@@ -1,39 +1,57 @@
-.y-0 {
+.y-0.flow, .y-0.grid {
   --row-gap: 0;
 }
+.y-0.stack > * {
+  --stack-gap: 0;
+}
 
-.x-0 {
+.x-0.flow, .x-0.grid {
   --col-gap: 0;
 }
+.x-0.chain > * {
+  --chain-gap: 0;
+}
 
-.y-s > *,
-[class^=y-] > .shim-s, [class*=" y-"] > .shim-s {
+.y-s.flow, .y-s.grid {
   --row-gap: var(--inner-y-s);
 }
+.y-s.stack > * {
+  --stack-gap: var(--inner-y-s);
+}
 
-.y-m > *,
-[class^=y-] > .shim-m, [class*=" y-"] > .shim-m {
+.y-m.flow, .y-m.grid {
   --row-gap: var(--inner-y-m);
 }
+.y-m.stack > * {
+  --stack-gap: var(--inner-y-m);
+}
 
-.y-l > *,
-[class^=y-] > .shim-l, [class*=" y-"] > .shim-l {
+.y-l.flow, .y-l.grid {
   --row-gap: var(--inner-y-l);
 }
+.y-l.stack > * {
+  --stack-gap: var(--inner-y-l);
+}
 
-.x-s > *,
-[class^=x-] > .shim-s, [class*=" x-"] > .shim-s {
+.x-s.flow, .x-s.grid {
   --col-gap: var(--inner-x-s);
 }
-
-.x-m > *,
-[class^=x-] > .shim-m, [class*=" x-"] > .shim-m {
-  --col-gap: var(--inner-x-m);
+.x-s.chain > * {
+  --chain-gap: var(--inner-x-s);
 }
 
-.x-l > *,
-[class^=x-] > .shim-l, [class*=" x-"] > .shim-l {
+.x-m.flow, .x-m.grid {
+  --col-gap: var(--inner-x-m);
+}
+.x-m.chain > * {
+  --chain-gap: var(--inner-x-m);
+}
+
+.x-l.flow, .x-l.grid {
   --col-gap: var(--inner-x-l);
+}
+.x-l.chain > * {
+  --chain-gap: var(--inner-x-l);
 }
 
 [class^=mt-], [class*=" mt-"], [class^=my-], [class*=" my-"] {

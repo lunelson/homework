@@ -96,8 +96,8 @@ $media: (
   --col-gap: null;
   --row: initial;
   --col: initial;
-  --cols: var(--grid-cols);
-  --rows: var(--grid-rows, --grid-cols);
+  --cols: var(--grid-columns);
+  --rows: var(--grid-rows, --grid-columns);
   --span: var(--cols);
   --span-y: 1;
   --push-r: initial;

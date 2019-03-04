@@ -9,13 +9,13 @@
 // col-[n], row-[n], col-end-[n], row-end-[n]
 
 $m__: '';
-@function m__col-n-d($pair, $_...) { @return selector-parse('.#{$m__}col-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
-@function m__row-n-d($pair, $_...) { @return selector-parse('.#{$m__}row-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+@function m__col-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}col-#{nth($pair, 1)}-to-#{nth($pair, 2)}'); }
+@function m__row-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}row-#{nth($pair, 1)}-to-#{nth($pair, 2)}'); }
 
 @mixin homework-setup-cell($row-classes: true) {
 
   // pre-calculations
-  $max-cols: max-columns();
+  $max-cols: --max-columns();
   $span-pair-list: ();
   $start-pair-list: ();
   $end-pair-list: ();
@@ -30,47 +30,39 @@ $m__: '';
 
   // make push CPs non-cascading
   *, *:before, *:after {
-    --push-l: initial;
-    --push-r: initial;
+    --col-push: initial;
+    --col-push-r: initial;
   }
 
   @each $m in join((null), media-keys()) {
     @include m($m) {
 
-      // global bases:
-      // span, push, pull
-      // flow > &, grid > &
-
       #{m-base-class('span')} {
-        width: calc((99.99999% + var(--col-gap)) * var(--col-span) / var(--col-base) - var(--col-gap));
+        width: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)) - var(--col-gap, var(--inner-x)));
 
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          width: calc(99.99999% * var(--col-span) / var(--col-base));
+          width: calc(99.99999% * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)));
         }
-
         @at-root #{selector-insert(base-class('grid'), '>')} {
           width: unset; // NOTE: try initial?
-          // grid-column: span var(--col-span) / span var(--col-span);
-          // grid-row: span var(--row-span) / span var(--row-span);
-
         }
       }
 
       #{m-base-class('pull', false)},
       #{m-base-class('push', false)} {
-        margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--col-base));
+        margin-left: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-push) / var(--flow-columns, var(--grid-columns)));
 
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          margin-left: calc(99.99999% * var(--push-l) / var(--col-base));
+          margin-left: calc(99.99999% * var(--col-push) / var(--flow-columns, var(--grid-columns)));
         }
       }
 
       #{m-base-class('pull-r', false)},
       #{m-base-class('push-r', false)} {
-        margin-right: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--col-base));
+        margin-right: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-push-r) / var(--flow-columns, var(--grid-columns)));
 
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          margin-right: calc(99.99999% * var(--push-r) / var(--col-base));
+          margin-right: calc(99.99999% * var(--col-push-r) / var(--flow-columns, var(--grid-columns)));
         }
       }
 
@@ -78,40 +70,32 @@ $m__: '';
 
       .#{$m__}span-auto {
         @at-root #{selector-insert(m-base-class('flow'), '>')} {
-          flex: 1 1 0%; --col-span: 0;
+          flex: 1 1 0%;
+          --col-span: 0;
         }
-        // !! span-auto does not seem to be meaningful
-        // @at-root #{selector-insert(m-base-class('grid'), '>')} {
-        //   grid-column: auto / auto;
-        // }
       }
 
-      .#{$m__}span-all { --col-span: var(--col-base); }
-
-      // responsive mods:
-      // span-[n], push-[n], pull-[n],
-      // col-[n], row-[n], col-end-[n], row-end-[n]
+      .#{$m__}span-all { --col-span: var(--flow-columns, var(--grid-columns)); }
 
       @each $span, $pair-list in $span-pair-list {
 
-        // for solo, flow
-        .#{$m__}span-#{$span},
+        // FOR SOLO, FLOW
         .#{$m__}cols-#{$span},
-        #{__map($pair-list, 'm__col-n-d')} {
-          & > * { --col-base: #{$span}; }
+        .#{$m__}span-#{$span},
+        #{__map($pair-list, 'm__col-start-to-end')} {
+          & > * { --flow-columns: #{$span}; }
         }
 
-        // for solo, flow, grid
+        // FOR SOLO, FLOW, GRID
         .#{$m__}span-#{$span},
         .#{$m__}col-span-#{$span},
-        #{__map($pair-list, 'm__col-n-d')} {
+        #{__map($pair-list, 'm__col-start-to-end')} {
           --col-span: #{$span};
         }
 
-        // for grid only
-        // .#{$m__}span-y-#{$span},
+        // FOR GRID ONLY
         .#{$m__}row-span-#{$span},
-        #{__map($pair-list, 'm__row-n-d')} {
+        #{__map($pair-list, 'm__row-start-to-end')} {
           --row-span: #{$span};
         }
         .#{$m__}cols-#{$span} {
@@ -125,23 +109,18 @@ $m__: '';
           }
         }
 
-        // #{__map($pair-list, 'm__col-n-d')} {
-        //   --col-span: #{$span};
-        //   & > * { --col-base: #{$span}; }
-        // }
-
       }
 
       @each $start, $pair-list in $start-pair-list {
 
         .#{$m__}start-#{$start},
         .#{$m__}col-start-#{$start},
-        #{__map($pair-list, 'm__col-n-d')} {
+        #{__map($pair-list, 'm__col-start-to-end')} {
           grid-column-start: $start;
         }
 
         .#{$m__}row-start-#{$start},
-        #{__map($pair-list, 'm__row-n-d')} {
+        #{__map($pair-list, 'm__row-start-to-end')} {
           grid-row-start: $start;
         }
       }
@@ -150,21 +129,21 @@ $m__: '';
 
         .#{$m__}end-#{$end},
         .#{$m__}col-end-#{$end},
-        #{__map($pair-list, 'm__col-n-d')} {
+        #{__map($pair-list, 'm__col-start-to-end')} {
           grid-column-end: $end;
         }
 
         .#{$m__}row-end-#{$end},
-        #{__map($pair-list, 'm__row-n-d')} {
+        #{__map($pair-list, 'm__row-start-to-end')} {
           grid-row-end: $end;
         }
       }
 
       @for $p from 1 through ($max-cols - 1) {
-        .#{$m__}push-#{$p} { --push-l: #{$p}; }
-        .#{$m__}pull-#{$p} { --push-l: #{$p*-1}; }
-        .#{$m__}push-r-#{$p} { --push-r: #{$p}; }
-        .#{$m__}pull-r-#{$p} { --push-r: #{$p*-1}; }
+        .#{$m__}push-#{$p} { --col-push: #{$p}; }
+        .#{$m__}pull-#{$p} { --col-push: #{$p*-1}; }
+        .#{$m__}push-r-#{$p} { --col-push-r: #{$p}; }
+        .#{$m__}pull-r-#{$p} { --col-push-r: #{$p*-1}; }
       }
 
     }

@@ -25,22 +25,11 @@
   @return false;
 }
 
-@mixin homework-setup-core($modern: $homework-is-modern, $trim: true, $output: true) {
+@mixin homework-setup-core() {
 
   $root-orig: $root !global;
   $media-orig: $media !global;
   $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
-
-  // @if $output {
-  //   :root {
-  //     @include --output-medium-props($root);
-  //     --inner-width: calc(var(--outer-width) - (var(--outer-right) + var(--outer-left)));
-  //   }
-  //   html {
-  //     font-size: var(--font-size);
-  //     line-height: var(--line-height);
-  //   }
-  // }
 
   $outgoing-medium: $root;
   $reference-medium-keys: append(map-keys($root), 'breakpoint');
@@ -57,28 +46,5 @@
     $outgoing-medium: --parse-medium(--deep-merge($outgoing-medium, $incoming-medium));
     $media: map-merge($media, ($m: $outgoing-medium)) !global;
 
-    // @if $output {
-
-    //   // TODO for wrap/peel
-    //   // :root
-    //   // --outer-width-#{$m}: ?
-    //   // --inner-width-#{$m}: ?
-
-    //   @media #{--query-string(map-get($incoming-medium, 'breakpoint'))} {
-
-    //     @if $modern {
-    //       :root {
-    //         @include --output-medium-props($incoming-medium);
-    //         --outer-width: #{map-get($outgoing-medium, 'outer-width')};
-    //       }
-    //     } @else {
-    //       html {
-    //         font-size: map-get($incoming-medium, 'font-size');
-    //         line-height: map-get($incoming-medium, 'line-height');
-    //       }
-    //     }
-
-    //   }
-    // }
   }
 }

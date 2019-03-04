@@ -41,5 +41,5 @@ $grays: ();
 //   result: inspect(yiq(#FF80E5));
 // }
 
-@include homework-setup-core($output: false);
+@include homework-setup-core();
 @include homework-setup-theme();

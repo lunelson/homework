@@ -117,13 +117,14 @@ body {
 
 .plain {
 
+  @include font-base('sans');
   --stack-gap: var(--inner-y-ml);
 
   // STACK FONT STYLES
-  h6 { @include font-mod('sans', 'xs', null, true); }
-  h5, p, ul, ol, dl, blockquote { @include font-mod('sans','s', null, true); }
-  h4 { @include font-mod('sans','m', null, true); }
-  h3 { @include font-mod('sans','l', null, true); }
+  h6 { @include font-mod('sans', 'xs'); }
+  h5, p, ul, ol, dl, blockquote { @include font-mod('sans','s'); }
+  h4 { @include font-mod('sans','m'); }
+  h3 { @include font-mod('sans','l'); }
 
   h3, h4, h5 {
     --stack-gap: var(--inner-y-l);

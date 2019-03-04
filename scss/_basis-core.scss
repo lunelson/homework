@@ -17,14 +17,14 @@ $curr-m: null;
 $root-defaults: (
 
   // CORE VALUES
-
+  font-size: 16px,
   inner-x: 1rem,
   inner-y: 1.5rem,
   outer-top: 2rem,
   outer-right: 2rem,
   outer-bottom: 2rem,
   outer-left: 2rem,
-  grid-cols: 12,
+  grid-columns: 12,
 
   // OPTIONAL VALUES
 
@@ -119,39 +119,21 @@ $media-defaults: (
   @return if($mod, if(unitless($mod), m-var('inner-x') * $mod, $mod), m-var('inner-x'));
 }
 
-// @function font-size($f: null, $s: null) {
-//   @if not ($f and $s) { @return m-var('font-size'); }
-//   $mod: m-var('font-mods' $f $s);
-//   // TODO: error if not $mod
-//   $size: strip(nth($mod, 1));
-//   @return $size / 16 * 1rem;
-// }
-
-// @function line-height($f: null, $s: null) {
-//   @if not ($f and $s) { @return m-var('line-height'); }
-//   $mod: m-var('font-mods' $f $s);
-//   // TODO: error if not $mod
-//   $size: strip(nth($mod, 1));
-//   $line: nth($mod, 2);
-//   @return if($line > 6, $line/$size, $line);
-// }
-
-
 /////////////////////////////////////////////
 ////////////////// private //////////////////
 /////////////////////////////////////////////
 
-@mixin --output-medium-props($medium) {
+@mixin --output-medium-props($medium: m()) {
   @each $key, $val in $medium {
     @if not index('list' 'map', type-of($val)) {
       --#{$key}: #{$val};
     }
   }
-  @each $y, $mod in map-get($medium, 'inner-y-mods') or map-get($medium, 'inner-mods') or () {
+  @each $y, $mod in inner-x-mods() {
     @if unitless($mod) { --inner-y-#{$y}: calc(var(--inner-y) * #{$mod}); }
     @else { --inner-y-#{$y}: #{$mod}; }
   }
-  @each $x, $mod in map-get($medium, 'inner-x-mods') or map-get($medium, 'inner-mods') or () {
+  @each $x, $mod in inner-x-mods() {
     @if unitless($mod) { --inner-x-#{$x}: calc(var(--inner-x) * #{$mod}); }
     @else { --inner-x-#{$x}: #{$mod}; }
   }
@@ -179,13 +161,14 @@ $media-defaults: (
     + if($max, ' and (max-width: #{$max - 0.001})', '');
 }
 
-// @function --max-columns() {
-//   $column-counts: ();
-//   @each $m, $medium in $media {
-//     $column-counts: append($column-counts, map-get($media, $m, 'grid-cols'));
-//   }
-//   @return max($column-counts...);
-// }
+@function --max-columns() {
+  @if not (length($media) > 0) { @return m-var('grid-columns'); }
+  $column-counts: ();
+  @each $m, $medium in $media {
+    $column-counts: append($column-counts, map-get($media, $m, 'grid-columns'));
+  }
+  @return max($column-counts...);
+}
 
 @function --mm-filter-orig($media-keys, $props...) {
   @if length($props) < 1 { @return (); }

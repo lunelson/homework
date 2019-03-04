@@ -10,16 +10,12 @@
     @each $m, $medium in $media {
       --breakpoint-#{$m}: #{map-get($medium, 'breakpoint')};
       --outer-width-#{$m}: #{map-get($medium, 'outer-width')};
-      // --inner-width-#{$m}: #{map-get($medium, 'inner-width')};
     }
     @include mm() {
-      $medium: m();
-      @include --output-medium-props($medium);
-      // --outer-width: #{map-get($medium, 'outer-width')};
+      @include --output-medium-props();
     }
   }
   html {
     font-size: var(--font-size);
-    line-height: var(--line-height);
   }
 }

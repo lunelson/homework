@@ -16,6 +16,7 @@
     & > * { flex: 0 0 auto; }
   }
 
+  // NB: base-class plain connects to TYPO
   #{base-class('stack')}, #{base-class('plain')} {
     padding-top: 0.1px;
     padding-bottom: 0.1px;
@@ -50,8 +51,8 @@
   $inner-x-keys: map-keys(inner-x-mods());
 
   @each $y in $inner-y-keys {
-    #{base-class('stack')}, #{base-class('plain')} { > .shim-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
-    .stack-#{$y} > *, .plain-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
+    #{base-class('stack')} { > .shim-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
+    .stack-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
   }
 
   @each $x in $inner-x-keys {

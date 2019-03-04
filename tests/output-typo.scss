@@ -57,7 +57,7 @@ $fonts: (
   ),
 );
 
-@include homework-setup-core($trim: true, $output: false);
+@include homework-setup-core();
 @include homework-setup-typo($trim: true);
 
 .plain {
