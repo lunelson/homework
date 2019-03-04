@@ -1,24 +1,22 @@
 // @ts-nocheck
+
 var hooks = require('require-extension-hooks');
 
-hooks('.scss').push(function() {
+hooks('.scss').push(() => {
   return `
     const path = require('path');
     const writeFile = require('write');
-    const globby = require('globby');
     const test = require('ava');
-
     const compilers = {
       dartsass: require('sass'),
       libsass: require('node-sass'),
     };
 
-    function sassRender(sass, file, outFile) {
+    function render(compiler, file) {
       return new Promise((resolve, reject) => {
-        sass.render({
+        compiler.render({
           file,
-          outFile,
-          includePaths: [path.resolve(__dirname, '../node_modules')],
+          includePaths: [__dirname, path.resolve(__dirname, '../node_modules')],
           outputStyle: 'expanded',
           precision: 10
         }, (err, data) => {
@@ -29,9 +27,9 @@ hooks('.scss').push(function() {
     }
 
     Object.keys(compilers).forEach(compiler => {
-      const outFile = path.join(__dirname, 'scratch', path.relative(__dirname, __filename)).replace(/\.scss$/, '.'+compiler+'.css');
+      const outFile = path.join(__dirname, 'renders', path.relative(__dirname, __filename)).replace(/\.scss$/, '.'+compiler+'.css');
       test(path.basename(__filename, path.extname(__filename))+'['+compiler+']', t => {
-        return sassRender(compilers[compiler], __filename, outFile).then(css => {
+        return render(compilers[compiler], __filename).then(css => {
           writeFile.sync(outFile, css);
           t.snapshot(css);
         });
@@ -39,12 +37,3 @@ hooks('.scss').push(function() {
     });
   `;
 });
-
-require('../output-grid.scss');
-console.log();
-
-// var hook = require('node-hook');
-// hook.hook('.scss', (source, filename) => {
-//   return `const bar = "hello world"`;
-// });
-// console.log(require('../output-core.scss'));
