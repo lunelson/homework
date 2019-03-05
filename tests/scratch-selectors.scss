@@ -116,37 +116,45 @@ $plain-els: h2 h3 h4 h5 h6 p ul ol dl;
 
 $trim-excl: div table figure img svg video iframe object;
 
-#{selector-combine(selector-unify(base-class('stack'), base-class('typo')), selector-not('*', $trim-excl), '>')} {
-  content: 'trim'
+#{selector-combine('.trim', base-class('f', false), '>')} {
+  content: 'hello world';
 }
 
-#{base-class('f', false)} { content: 'base';}
-#{selector-combine(base-class('plain'), zip($plain-els))} { content: 'base';}
-
-#{selector-combine(base-class('stack'), base-class('f', false), '>')},
-#{selector-combine('.trim', base-class('f', false), '>')} { content: 'trim'; }
-#{selector-combine(base-class('plain'), zip($plain-els), '>')} { content: 'trim';}
-
-#{selector-combine(base-class('stack'), base-class('f', false), '> * +')} { content: 'follow-trim';}
-#{selector-combine(base-class('plain'), zip($plain-els), '> * +')} { content: 'follow-trim';}
-
-#{selector-combine(base-class('f', false), base-class('f', false), '+')} { content: 'adjacent';}
-#{selector-combine(base-class('plain'), selector-combine(zip($plain-els), zip($plain-els), '+'), '>')} { content: 'adjacent';}
-
-@function selector-not($sel, $nots) {
-  @each $not in $nots { $sel: '#{$sel}:not(#{$not})' }
-  @return selector-parse($sel);
+#{selector-unify('.trim', base-class('f', false))} {
+  content: 'hello world';
 }
 
-#{base-class('f', false)},
-#{selector-combine(base-class('plain'), selector-not('*', $trim-excl))} { content: 'base';}
+// #{selector-combine(selector-unify(base-class('stack'), base-class('typo')), selector-not('*', $trim-excl), '>')} {
+//   content: 'trim'
+// }
 
-#{selector-combine('.trim', base-class('f', false), '>')},
-#{selector-combine(base-class('stack'), base-class('f', false), '>')},
-#{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} { content: 'trim';}
+// #{base-class('f', false)} { content: 'base';}
+// #{selector-combine(base-class('plain'), zip($plain-els))} { content: 'base';}
 
-#{selector-combine(base-class('stack'), base-class('f', false), '> * +')},
-#{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '> * +')} { content: 'follow-trim';}
+// #{selector-combine(base-class('stack'), base-class('f', false), '>')},
+// #{selector-combine('.trim', base-class('f', false), '>')} { content: 'trim'; }
+// #{selector-combine(base-class('plain'), zip($plain-els), '>')} { content: 'trim';}
 
-#{selector-combine(base-class('f', false), base-class('f', false), '+')},
-#{selector-combine(base-class('plain'), selector-combine(selector-not('*', $trim-excl), selector-not('*', $trim-excl), '+'), '>')} { content: 'adjacent';}
+// #{selector-combine(base-class('stack'), base-class('f', false), '> * +')} { content: 'follow-trim';}
+// #{selector-combine(base-class('plain'), zip($plain-els), '> * +')} { content: 'follow-trim';}
+
+// #{selector-combine(base-class('f', false), base-class('f', false), '+')} { content: 'adjacent';}
+// #{selector-combine(base-class('plain'), selector-combine(zip($plain-els), zip($plain-els), '+'), '>')} { content: 'adjacent';}
+
+// @function selector-not($sel, $nots) {
+//   @each $not in $nots { $sel: '#{$sel}:not(#{$not})' }
+//   @return selector-parse($sel);
+// }
+
+// #{base-class('f', false)},
+// #{selector-combine(base-class('plain'), selector-not('*', $trim-excl))} { content: 'base';}
+
+// #{selector-combine('.trim', base-class('f', false), '>')},
+// #{selector-combine(base-class('stack'), base-class('f', false), '>')},
+// #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} { content: 'trim';}
+
+// #{selector-combine(base-class('stack'), base-class('f', false), '> * +')},
+// #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '> * +')} { content: 'follow-trim';}
+
+// #{selector-combine(base-class('f', false), base-class('f', false), '+')},
+// #{selector-combine(base-class('plain'), selector-combine(selector-not('*', $trim-excl), selector-not('*', $trim-excl), '+'), '>')} { content: 'adjacent';}

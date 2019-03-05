@@ -57,23 +57,20 @@
     "access": "public"
   },
   "ava": {
-    "verbose": true,
-    "extensions": [
-      "scss"
-    ],
+    "extensions": [ "scss" ],
     "compileEnhancements": false,
     "require": [
       "./tests/helpers/setup.js"
     ],
     "files": [
       "tests/*.scss",
-      "!**/_*/**",
-      "!**/_*"
+      "!tests/_*/**",
+      "!tests/_*"
     ],
     "sources": [
       "_index.scss",
       "scss/**/*.scss",
-      "!**/_*/**"
+      "!scss/_*/**"
     ]
   },
   "release-it": {

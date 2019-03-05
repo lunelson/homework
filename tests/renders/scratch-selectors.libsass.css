@@ -15,60 +15,10 @@
 }
 
 /* SELECTOR COMBINE !!! */
-.stack.typo > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .stack[class^="typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .stack[class*=" typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .typo[class^="stack-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="stack-"][class^="typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="stack-"][class*=" typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), .typo[class*=" stack-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" stack-"][class^="typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" stack-"][class*=" typo-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
-  content: 'trim';
-}
-
-[class^="f-"], [class*=" f-"] {
-  content: 'base';
-}
-
-.plain h2, .plain h3, .plain h4, .plain h5, .plain h6, .plain p, .plain ul, .plain ol, .plain dl, [class^="plain-"] h2, [class^="plain-"] h3, [class^="plain-"] h4, [class^="plain-"] h5, [class^="plain-"] h6, [class^="plain-"] p, [class^="plain-"] ul, [class^="plain-"] ol, [class^="plain-"] dl, [class*=" plain-"] h2, [class*=" plain-"] h3, [class*=" plain-"] h4, [class*=" plain-"] h5, [class*=" plain-"] h6, [class*=" plain-"] p, [class*=" plain-"] ul, [class*=" plain-"] ol, [class*=" plain-"] dl {
-  content: 'base';
-}
-
-.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"],
 .trim > [class^="f-"], .trim > [class*=" f-"] {
-  content: 'trim';
+  content: 'hello world';
 }
 
-.plain > h2, .plain > h3, .plain > h4, .plain > h5, .plain > h6, .plain > p, .plain > ul, .plain > ol, .plain > dl, [class^="plain-"] > h2, [class^="plain-"] > h3, [class^="plain-"] > h4, [class^="plain-"] > h5, [class^="plain-"] > h6, [class^="plain-"] > p, [class^="plain-"] > ul, [class^="plain-"] > ol, [class^="plain-"] > dl, [class*=" plain-"] > h2, [class*=" plain-"] > h3, [class*=" plain-"] > h4, [class*=" plain-"] > h5, [class*=" plain-"] > h6, [class*=" plain-"] > p, [class*=" plain-"] > ul, [class*=" plain-"] > ol, [class*=" plain-"] > dl {
-  content: 'trim';
-}
-
-.stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"] {
-  content: 'follow-trim';
-}
-
-.plain > * + h2, .plain > * + h3, .plain > * + h4, .plain > * + h5, .plain > * + h6, .plain > * + p, .plain > * + ul, .plain > * + ol, .plain > * + dl, [class^="plain-"] > * + h2, [class^="plain-"] > * + h3, [class^="plain-"] > * + h4, [class^="plain-"] > * + h5, [class^="plain-"] > * + h6, [class^="plain-"] > * + p, [class^="plain-"] > * + ul, [class^="plain-"] > * + ol, [class^="plain-"] > * + dl, [class*=" plain-"] > * + h2, [class*=" plain-"] > * + h3, [class*=" plain-"] > * + h4, [class*=" plain-"] > * + h5, [class*=" plain-"] > * + h6, [class*=" plain-"] > * + p, [class*=" plain-"] > * + ul, [class*=" plain-"] > * + ol, [class*=" plain-"] > * + dl {
-  content: 'follow-trim';
-}
-
-[class^="f-"] + [class^="f-"], [class^="f-"] + [class*=" f-"], [class*=" f-"] + [class^="f-"], [class*=" f-"] + [class*=" f-"] {
-  content: 'adjacent';
-}
-
-.plain > h2 + h2, .plain > h2 + h3, .plain > h2 + h4, .plain > h2 + h5, .plain > h2 + h6, .plain > h2 + p, .plain > h2 + ul, .plain > h2 + ol, .plain > h2 + dl, .plain > h3 + h2, .plain > h3 + h3, .plain > h3 + h4, .plain > h3 + h5, .plain > h3 + h6, .plain > h3 + p, .plain > h3 + ul, .plain > h3 + ol, .plain > h3 + dl, .plain > h4 + h2, .plain > h4 + h3, .plain > h4 + h4, .plain > h4 + h5, .plain > h4 + h6, .plain > h4 + p, .plain > h4 + ul, .plain > h4 + ol, .plain > h4 + dl, .plain > h5 + h2, .plain > h5 + h3, .plain > h5 + h4, .plain > h5 + h5, .plain > h5 + h6, .plain > h5 + p, .plain > h5 + ul, .plain > h5 + ol, .plain > h5 + dl, .plain > h6 + h2, .plain > h6 + h3, .plain > h6 + h4, .plain > h6 + h5, .plain > h6 + h6, .plain > h6 + p, .plain > h6 + ul, .plain > h6 + ol, .plain > h6 + dl, .plain > p + h2, .plain > p + h3, .plain > p + h4, .plain > p + h5, .plain > p + h6, .plain > p + p, .plain > p + ul, .plain > p + ol, .plain > p + dl, .plain > ul + h2, .plain > ul + h3, .plain > ul + h4, .plain > ul + h5, .plain > ul + h6, .plain > ul + p, .plain > ul + ul, .plain > ul + ol, .plain > ul + dl, .plain > ol + h2, .plain > ol + h3, .plain > ol + h4, .plain > ol + h5, .plain > ol + h6, .plain > ol + p, .plain > ol + ul, .plain > ol + ol, .plain > ol + dl, .plain > dl + h2, .plain > dl + h3, .plain > dl + h4, .plain > dl + h5, .plain > dl + h6, .plain > dl + p, .plain > dl + ul, .plain > dl + ol, .plain > dl + dl, [class^="plain-"] > h2 + h2, [class^="plain-"] > h2 + h3, [class^="plain-"] > h2 + h4, [class^="plain-"] > h2 + h5, [class^="plain-"] > h2 + h6, [class^="plain-"] > h2 + p, [class^="plain-"] > h2 + ul, [class^="plain-"] > h2 + ol, [class^="plain-"] > h2 + dl, [class^="plain-"] > h3 + h2, [class^="plain-"] > h3 + h3, [class^="plain-"] > h3 + h4, [class^="plain-"] > h3 + h5, [class^="plain-"] > h3 + h6, [class^="plain-"] > h3 + p, [class^="plain-"] > h3 + ul, [class^="plain-"] > h3 + ol, [class^="plain-"] > h3 + dl, [class^="plain-"] > h4 + h2, [class^="plain-"] > h4 + h3, [class^="plain-"] > h4 + h4, [class^="plain-"] > h4 + h5, [class^="plain-"] > h4 + h6, [class^="plain-"] > h4 + p, [class^="plain-"] > h4 + ul, [class^="plain-"] > h4 + ol, [class^="plain-"] > h4 + dl, [class^="plain-"] > h5 + h2, [class^="plain-"] > h5 + h3, [class^="plain-"] > h5 + h4, [class^="plain-"] > h5 + h5, [class^="plain-"] > h5 + h6, [class^="plain-"] > h5 + p, [class^="plain-"] > h5 + ul, [class^="plain-"] > h5 + ol, [class^="plain-"] > h5 + dl, [class^="plain-"] > h6 + h2, [class^="plain-"] > h6 + h3, [class^="plain-"] > h6 + h4, [class^="plain-"] > h6 + h5, [class^="plain-"] > h6 + h6, [class^="plain-"] > h6 + p, [class^="plain-"] > h6 + ul, [class^="plain-"] > h6 + ol, [class^="plain-"] > h6 + dl, [class^="plain-"] > p + h2, [class^="plain-"] > p + h3, [class^="plain-"] > p + h4, [class^="plain-"] > p + h5, [class^="plain-"] > p + h6, [class^="plain-"] > p + p, [class^="plain-"] > p + ul, [class^="plain-"] > p + ol, [class^="plain-"] > p + dl, [class^="plain-"] > ul + h2, [class^="plain-"] > ul + h3, [class^="plain-"] > ul + h4, [class^="plain-"] > ul + h5, [class^="plain-"] > ul + h6, [class^="plain-"] > ul + p, [class^="plain-"] > ul + ul, [class^="plain-"] > ul + ol, [class^="plain-"] > ul + dl, [class^="plain-"] > ol + h2, [class^="plain-"] > ol + h3, [class^="plain-"] > ol + h4, [class^="plain-"] > ol + h5, [class^="plain-"] > ol + h6, [class^="plain-"] > ol + p, [class^="plain-"] > ol + ul, [class^="plain-"] > ol + ol, [class^="plain-"] > ol + dl, [class^="plain-"] > dl + h2, [class^="plain-"] > dl + h3, [class^="plain-"] > dl + h4, [class^="plain-"] > dl + h5, [class^="plain-"] > dl + h6, [class^="plain-"] > dl + p, [class^="plain-"] > dl + ul, [class^="plain-"] > dl + ol, [class^="plain-"] > dl + dl, [class*=" plain-"] > h2 + h2, [class*=" plain-"] > h2 + h3, [class*=" plain-"] > h2 + h4, [class*=" plain-"] > h2 + h5, [class*=" plain-"] > h2 + h6, [class*=" plain-"] > h2 + p, [class*=" plain-"] > h2 + ul, [class*=" plain-"] > h2 + ol, [class*=" plain-"] > h2 + dl, [class*=" plain-"] > h3 + h2, [class*=" plain-"] > h3 + h3, [class*=" plain-"] > h3 + h4, [class*=" plain-"] > h3 + h5, [class*=" plain-"] > h3 + h6, [class*=" plain-"] > h3 + p, [class*=" plain-"] > h3 + ul, [class*=" plain-"] > h3 + ol, [class*=" plain-"] > h3 + dl, [class*=" plain-"] > h4 + h2, [class*=" plain-"] > h4 + h3, [class*=" plain-"] > h4 + h4, [class*=" plain-"] > h4 + h5, [class*=" plain-"] > h4 + h6, [class*=" plain-"] > h4 + p, [class*=" plain-"] > h4 + ul, [class*=" plain-"] > h4 + ol, [class*=" plain-"] > h4 + dl, [class*=" plain-"] > h5 + h2, [class*=" plain-"] > h5 + h3, [class*=" plain-"] > h5 + h4, [class*=" plain-"] > h5 + h5, [class*=" plain-"] > h5 + h6, [class*=" plain-"] > h5 + p, [class*=" plain-"] > h5 + ul, [class*=" plain-"] > h5 + ol, [class*=" plain-"] > h5 + dl, [class*=" plain-"] > h6 + h2, [class*=" plain-"] > h6 + h3, [class*=" plain-"] > h6 + h4, [class*=" plain-"] > h6 + h5, [class*=" plain-"] > h6 + h6, [class*=" plain-"] > h6 + p, [class*=" plain-"] > h6 + ul, [class*=" plain-"] > h6 + ol, [class*=" plain-"] > h6 + dl, [class*=" plain-"] > p + h2, [class*=" plain-"] > p + h3, [class*=" plain-"] > p + h4, [class*=" plain-"] > p + h5, [class*=" plain-"] > p + h6, [class*=" plain-"] > p + p, [class*=" plain-"] > p + ul, [class*=" plain-"] > p + ol, [class*=" plain-"] > p + dl, [class*=" plain-"] > ul + h2, [class*=" plain-"] > ul + h3, [class*=" plain-"] > ul + h4, [class*=" plain-"] > ul + h5, [class*=" plain-"] > ul + h6, [class*=" plain-"] > ul + p, [class*=" plain-"] > ul + ul, [class*=" plain-"] > ul + ol, [class*=" plain-"] > ul + dl, [class*=" plain-"] > ol + h2, [class*=" plain-"] > ol + h3, [class*=" plain-"] > ol + h4, [class*=" plain-"] > ol + h5, [class*=" plain-"] > ol + h6, [class*=" plain-"] > ol + p, [class*=" plain-"] > ol + ul, [class*=" plain-"] > ol + ol, [class*=" plain-"] > ol + dl, [class*=" plain-"] > dl + h2, [class*=" plain-"] > dl + h3, [class*=" plain-"] > dl + h4, [class*=" plain-"] > dl + h5, [class*=" plain-"] > dl + h6, [class*=" plain-"] > dl + p, [class*=" plain-"] > dl + ul, [class*=" plain-"] > dl + ol, [class*=" plain-"] > dl + dl {
-  content: 'adjacent';
-}
-
-[class^="f-"], [class*=" f-"],
-.plain *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
-  content: 'base';
-}
-
-.trim > [class^="f-"], .trim > [class*=" f-"],
-.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"],
-.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
-  content: 'trim';
-}
-
-.stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"],
-.plain > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
-  content: 'follow-trim';
-}
-
-[class^="f-"] + [class^="f-"], [class^="f-"] + [class*=" f-"], [class*=" f-"] + [class^="f-"], [class*=" f-"] + [class*=" f-"],
-.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
-  content: 'adjacent';
+.trim[class^="f-"], .trim[class*=" f-"] {
+  content: 'hello world';
 }
