@@ -91,7 +91,7 @@
   }
 
   @if $trim {
-    #{selector-combine('.trim', base-class('f', false), '>')},
+    #{selector-unify('.trim', base-class('f', false))},
     #{selector-combine(base-class('stack'), base-class('f', false), '>')},
     #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} {
       --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline, 0em) + var(--trim-top-adjust, 0em));

@@ -103,7 +103,7 @@ body {
   letter-spacing: calc(var(--letter-spacing));
 }
 
-.trim > [class^="f-"], .trim > [class*=" f-"],
+.trim[class^="f-"], .trim[class*=" f-"],
 .stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"],
 .plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline, 0em) + var(--trim-top-adjust, 0em));
