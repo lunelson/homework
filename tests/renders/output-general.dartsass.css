@@ -12,6 +12,10 @@
   }
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .nobr {
   white-space: nowrap;
   text-overflow: ellipsis;

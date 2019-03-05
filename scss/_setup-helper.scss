@@ -57,6 +57,7 @@
 
   // ADD: truncate, break, ws- (white-space)
 
+  .nowrap { white-space: nowrap; }
   .nobr { white-space: nowrap; text-overflow: ellipsis; }
 
   // disable pointer on scrolling
