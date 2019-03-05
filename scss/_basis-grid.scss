@@ -7,27 +7,27 @@
 //                                | |                                  | |
 //                                |_|                                  |_|
 
-@function flow-span($n: var(--col-base), $cols: var(--col-base)) {
+@function flow-span($n: var(--flow-columns, var(--grid-columns)), $cols: var(--flow-columns, var(--grid-columns))) {
   @return calc(99.99999% * #{$n} / #{$cols});
 }
-@function flow-push($n: 1, $cols: var(--col-base)) {
+@function flow-push($n: 1, $cols: var(--flow-columns, var(--grid-columns))) {
   @return calc(99.99999% * #{$n} / #{$cols});
 }
-@function flow-pull($n: 1, $cols: var(--col-base)) {
+@function flow-pull($n: 1, $cols: var(--flow-columns, var(--grid-columns))) {
   @return calc(99.99999% * #{-$n} / #{$cols});
 }
 
-@function solo-span($n: var(--col-base), $cols: var(--col-base)) {
-  @return calc((99.99999% + var(--col-gap)) * #{$n} / #{$cols} - var(--col-gap));
+@function solo-span($n: var(--flow-columns, var(--grid-columns)), $cols: var(--flow-columns, var(--grid-columns))) {
+  @return calc((99.99999% + var(--col-gap, var(--inner-x))) * #{$n} / #{$cols} - var(--col-gap, var(--inner-x)));
 }
-@function solo-push($n: 1, $cols: var(--col-base)) {
-  @return calc((99.99999% + var(--col-gap)) * #{$n} / #{$cols});
+@function solo-push($n: 1, $cols: var(--flow-columns, var(--grid-columns))) {
+  @return calc((99.99999% + var(--col-gap, var(--inner-x))) * #{$n} / #{$cols});
 }
-@function solo-pull($n: 1, $cols: var(--col-base)) {
-  @return calc((99.99999% + var(--col-gap)) * #{-$n} / #{$cols});
+@function solo-pull($n: 1, $cols: var(--flow-columns, var(--grid-columns))) {
+  @return calc((99.99999% + var(--col-gap, var(--inner-x))) * #{-$n} / #{$cols});
 }
 
-@mixin flow-cell($n: null, $l: null, $r: null, $cols: var(--col-base)) {
+@mixin flow-cell($n: null, $l: null, $r: null, $cols: var(--flow-columns, var(--grid-columns))) {
   @if $n { width: flow-span($n, $cols); & > * { --col-base: #{$n}; } }
   @if $l { margin-left: flow-span($l, $cols); }
   @if $r { margin-right: flow-span($r, $cols); }
@@ -41,7 +41,7 @@
   }
 }
 
-@mixin solo-cell($n: null, $l: null, $r: null, $cols: var(--col-base)) {
+@mixin solo-cell($n: null, $l: null, $r: null, $cols: var(--flow-columns, var(--grid-columns))) {
   @if $n { width: solo-span($n, $cols); & > * { --col-base: #{$n}; } }
   @if $l { margin-left: solo-push($l, $cols); }
   @if $r { margin-right: solo-push($r, $cols); }
