@@ -1,6 +1,6 @@
 {
   "name": "@lunelson/homework",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "An ultra-responsive, design-primitives and utility Sass CSS framework",
   "keywords": [],
   "homepage": "https://github.com/lunelson/homework#readme",
@@ -58,9 +58,13 @@
   },
   "ava": {
     "verbose": true,
-    "extensions": ["scss"],
+    "extensions": [
+      "scss"
+    ],
     "compileEnhancements": false,
-    "require": [ "./tests/helpers/setup.js" ],
+    "require": [
+      "./tests/helpers/setup.js"
+    ],
     "files": [
       "tests/*.scss",
       "!**/_*/**",
