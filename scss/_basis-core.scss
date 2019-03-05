@@ -129,7 +129,7 @@ $media-defaults: (
       --#{$key}: #{$val};
     }
   }
-  @each $y, $mod in inner-x-mods() {
+  @each $y, $mod in inner-y-mods() {
     @if unitless($mod) { --inner-y-#{$y}: calc(var(--inner-y) * #{$mod}); }
     @else { --inner-y-#{$y}: #{$mod}; }
   }

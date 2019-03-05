@@ -19,7 +19,7 @@
     --grid-columns: 12;
     --outer-width: 100%;
     --inner-y-s: calc(var(--inner-y) * 0.5);
-    --inner-y-m: calc(var(--inner-y) * 1);
+    --inner-y-m: 3.5rem;
     --inner-y-l: calc(var(--inner-y) * 2);
     --inner-x-s: calc(var(--inner-x) * 0.5);
     --inner-x-m: calc(var(--inner-x) * 1);
@@ -39,7 +39,7 @@
     --outer-width: 30rem;
     --breakpoint: 30em;
     --inner-y-s: calc(var(--inner-y) * 0.5);
-    --inner-y-m: calc(var(--inner-y) * 1);
+    --inner-y-m: 3.5rem;
     --inner-y-l: calc(var(--inner-y) * 2);
     --inner-x-s: calc(var(--inner-x) * 0.5);
     --inner-x-m: calc(var(--inner-x) * 1);
@@ -59,7 +59,7 @@
     --outer-width: 40rem;
     --breakpoint: 40em;
     --inner-y-s: calc(var(--inner-y) * 0.5);
-    --inner-y-m: calc(var(--inner-y) * 1);
+    --inner-y-m: 3.5rem;
     --inner-y-l: calc(var(--inner-y) * 2);
     --inner-x-s: calc(var(--inner-x) * 0.5);
     --inner-x-m: calc(var(--inner-x) * 1);
@@ -79,7 +79,7 @@
     --outer-width: 53.3333333333rem;
     --breakpoint: 60em;
     --inner-y-s: calc(var(--inner-y) * 0.5);
-    --inner-y-m: calc(var(--inner-y) * 1);
+    --inner-y-m: 3.5rem;
     --inner-y-l: calc(var(--inner-y) * 2);
     --inner-x-s: calc(var(--inner-x) * 0.5);
     --inner-x-m: calc(var(--inner-x) * 1);
