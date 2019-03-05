@@ -57,6 +57,7 @@
     "access": "public"
   },
   "ava": {
+    "verbose": true,
     "extensions": ["scss"],
     "compileEnhancements": false,
     "require": [ "./tests/helpers/setup.js" ],
@@ -70,5 +71,10 @@
       "scss/**/*.scss",
       "!**/_*/**"
     ]
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    }
   }
 }
