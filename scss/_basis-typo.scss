@@ -20,8 +20,8 @@ $fonts-defaults: (
 
 $font-default: (
   line-height: 1.4em,
-  offset-capline: 0em,
-  offset-baseline: 0em,
+  dist-capline: 0em,
+  dist-baseline: 0em,
   trim-sides: 0, // calc(1px - 0.1em),
   letter-spacing: 0px, // calc(1px - 0.025em),
   adjust-adjacent: (1em/8), // calc((1em - 1ex)/2),
@@ -51,8 +51,8 @@ $font-default: (
 
   @if $trim {
     --trim-sides: var(--trim-sides-#{$f});
-    --offset-capline: var(--offset-capline-#{$f});
-    --offset-baseline: var(--offset-baseline-#{$f});
+    --dist-capline: var(--dist-capline-#{$f});
+    --dist-baseline: var(--dist-baseline-#{$f});
     --adjust-adjacent: var(--adjust-adjacent-#{$f});
   }
 }

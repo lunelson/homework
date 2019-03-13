@@ -30,12 +30,12 @@
 
       @if $trim {
         $ts: map-get($font, 'trim-sides');
-        $oc: map-get($font, 'offset-capline');
-        $ob: map-get($font, 'offset-baseline');
+        $oc: map-get($font, 'dist-capline');
+        $ob: map-get($font, 'dist-baseline');
         $aa: map-get($font, 'adjust-adjacent');
         --trim-sides-#{$f}: #{$ts};
-        --offset-capline-#{$f}: #{if(unitless($oc), $oc*1em, $oc)};
-        --offset-baseline-#{$f}: #{if(unitless($ob), $ob*1em, $ob)};
+        --dist-capline-#{$f}: #{if(unitless($oc), $oc*1em, $oc)};
+        --dist-baseline-#{$f}: #{if(unitless($ob), $ob*1em, $ob)};
         --adjust-adjacent-#{$f}: #{decalc($aa)};
       }
 
@@ -94,8 +94,8 @@
     #{selector-unify('.trim', base-class('f', false))},
     #{selector-combine(base-class('stack'), base-class('f', false), '>')},
     #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} {
-      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--offset-capline, 0em) + var(--trim-top-adjust, 0em));
-      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--offset-baseline, 0em));
+      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
 
       margin-top: calc(0em - var(--trim-top));
       margin-bottom: calc(0em - var(--trim-bottom));
@@ -122,12 +122,12 @@
 
       @if $trim {
         $ts: map-get($font, 'trim-sides');
-        $tc: map-get($font, 'offset-capline');
-        $tb: map-get($font, 'offset-baseline');
+        $tc: map-get($font, 'dist-capline');
+        $tb: map-get($font, 'dist-baseline');
         $aa: map-get($font, 'adjust-adjacent');
         @if $ts { --trim-sides: #{$ts}; }
-        @if $tc { --offset-capline: #{if(unitless($tc), $tc*1em, $tc)}; }
-        @if $tb { --offset-baseline: #{if(unitless($tb), $tb*1em, $tb)}; }
+        @if $tc { --dist-capline: #{if(unitless($tc), $tc*1em, $tc)}; }
+        @if $tb { --dist-baseline: #{if(unitless($tb), $tb*1em, $tb)}; }
         @if $aa { --adjust-adjacent: #{decalc($aa)}; }
       }
     }

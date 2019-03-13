@@ -7,8 +7,8 @@
 
 $inconsolata: (
   family: 'Inconsolata',
-  offset-capline: 0.1,
-  offset-baseline: 0.1,
+  dist-capline: 0.1,
+  dist-baseline: 0.1,
 );
 
 @font-face {
@@ -38,8 +38,8 @@ $inconsolata: (
 
 $karla: (
   family: 'Karla',
-  offset-capline: 0.1,
-  offset-baseline: 0.1,
+  dist-capline: 0.1,
+  dist-baseline: 0.1,
 );
 
 @font-face {
@@ -57,8 +57,8 @@ $karla: (
 
 $source-code-pro: (
   family: 'SourceCodePro',
-  offset-capline: 0.1,
-  offset-baseline: 0.1,
+  dist-capline: 0.1,
+  dist-baseline: 0.1,
 );
 
 @font-face {
@@ -88,8 +88,8 @@ $source-code-pro: (
 
 $source-sans-pro: (
   family: 'SourceSansPro',
-  offset-capline: 0.17,
-  offset-baseline: 0.1,
+  dist-capline: 0.17,
+  dist-baseline: 0.1,
   spacing-max: 0.5,
   spacing-end: 32,
 );
@@ -109,8 +109,8 @@ $source-sans-pro: (
 
 $source-serif-pro: (
   family: 'SourceSerifPro',
-  offset-capline: 0.1,
-  offset-baseline: 0.1,
+  dist-capline: 0.1,
+  dist-baseline: 0.1,
 );
 
 @font-face {
@@ -122,8 +122,8 @@ $source-serif-pro: (
 
 $telex: (
   family: 'Telex',
-  offset-capline: 0.1,
-  offset-baseline: 0.1,
+  dist-capline: 0.1,
+  dist-baseline: 0.1,
 );
 
 @font-face {
@@ -153,8 +153,8 @@ $telex: (
 
 $vollkorn: (
   family: 'Vollkorn',
-  offset-capline: 0.1,
-  offset-baseline: 0.1,
+  dist-capline: 0.1,
+  dist-baseline: 0.1,
 );
 
 @font-face {
@@ -184,6 +184,6 @@ $vollkorn: (
 
 $clear-sans: (
   family: 'ClearSans',
-  offset-capline: 0.1,
-  offset-baseline: 0.1,
+  dist-capline: 0.1,
+  dist-baseline: 0.1,
 );
