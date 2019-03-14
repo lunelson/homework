@@ -1,3 +1,26 @@
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+.fw-700, .fw-bold, .strong, strong {
+  font-weight: bold;
+}
+
+.fw-400, .fw-normal {
+  font-weight: normal;
+}
+
+.fs-italic, .em, em {
+  font-style: italic;
+}
+
+.fs-normal {
+  font-style: normal;
+}
+
 :root {
   --font-family-sans: MessinaSans;
   --font-feature-settings-sans: ();
@@ -69,29 +92,6 @@
   }
 }
 
-body {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-kerning: normal;
-}
-
-.fw-700, .fw-bold, .strong, strong {
-  font-weight: bold;
-}
-
-.fw-400, .fw-normal {
-  font-weight: normal;
-}
-
-.fs-italic, .em, em {
-  font-style: italic;
-}
-
-.fs-normal {
-  font-style: normal;
-}
-
 [class^=f-], [class*=" f-"],
 .plain > *, [class^=plain-] > *, [class*=" plain-"] > * {
   font-family: var(--font-family);
@@ -101,7 +101,7 @@ body {
   letter-spacing: calc(var(--letter-spacing));
 }
 
-.trim[class^=f-], .trim[class*=" f-"],
+.trim > [class^=f-], .trim > [class*=" f-"],
 .stack > [class^=f-], .stack > [class*=" f-"], [class^=stack-] > [class^=f-], [class^=stack-] > [class*=" f-"], [class*=" stack-"] > [class^=f-], [class*=" stack-"] > [class*=" f-"],
 .plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^=plain-] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));

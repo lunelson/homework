@@ -9,6 +9,28 @@
 
 @mixin homework-setup-typo( $trim: true, $trim-excl: div table figure img svg video iframe object section aside header footer article ) {
 
+  // TODO: place these defaults in homework-reset
+  body {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+    font-family: map-get($fonts, nth(map-keys($fonts), 1), 'family');
+  }
+
+
+  // font weights
+  // @each $n in (1 2 3 5 6 8 9) { .fw-#{$n*100} { font-weight: $n*100; } }
+  .fw-700, .fw-bold, .strong, strong { font-weight: bold; }
+  .fw-400, .fw-normal { font-weight: normal; }
+
+  // font-styles; NB: there is also 'oblique' but I've never seen it in use
+  .fs-italic, .em, em { font-style: italic; }
+  .fs-normal { font-style: normal; }
+
+  // TODO: add `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
+  .caps {  }
+
   // normalize $fonts
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
   @each $f, $font in $fonts {
@@ -59,27 +81,6 @@
       }
     }
   }
-  // TODO: place these defaults in homework-reset
-  body {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-kerning: normal;
-    font-family: map-get($fonts, nth(map-keys($fonts), 1), 'family');
-  }
-
-
-  // font weights
-  // @each $n in (1 2 3 5 6 8 9) { .fw-#{$n*100} { font-weight: $n*100; } }
-  .fw-700, .fw-bold, .strong, strong { font-weight: bold; }
-  .fw-400, .fw-normal { font-weight: normal; }
-
-  // font-styles; NB: there is also 'oblique' but I've never seen it in use
-  .fs-italic, .em, em { font-style: italic; }
-  .fs-normal { font-style: normal; }
-
-  // TODO: add `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
-  .caps {  }
 
   // any .f-[...] plus all children of .plain which are not in the exclude list
   #{base-class('f', false)},
@@ -92,7 +93,8 @@
   }
 
   @if $trim {
-    #{selector-unify('.trim', base-class('f', false))},
+
+    #{selector-combine('.trim', base-class('f', false), '>')},
     #{selector-combine(base-class('stack'), base-class('f', false), '>')},
     #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} {
       --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
@@ -111,6 +113,7 @@
     #{selector-combine(base-class('plain'), selector-combine(selector-not('*', $trim-excl), selector-not('*', $trim-excl), '+'), '>')} {
       --trim-top-adjust: var(--adjust-adjacent);
     }
+
   }
 
   @each $f, $font in $fonts {
