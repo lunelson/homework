@@ -1,6 +1,14 @@
+review mechanics of font-size vs root-scale, vs outer-width
+  apply to :root selector, not html?
+revert the trim change
+test the y-/x- class usage and other co-classes on grid and flow
+revamp reset
+  as merge of destyle and remedy
+  saving only opinionated typo resets
+
 ## about hover
 
-add the hover media query to the hover classes!!
+add the hover media query to the hover classes!! in theme
 https://twitter.com/souporserious/status/1075053627025149955
 
 ## more classes
@@ -19,7 +27,7 @@ https://twitter.com/souporserious/status/1075053627025149955
 ** merge recent changes from kaminski branch
 .flow and .grid alone, apply base inner-x/-y values
 .flow and .grid support concurrent .cols/.rows classes
-  .grid.cols-[n]
+  .grid.cols-[n].y-s.x-xs
   .flow.cols-[n]
 .col-start-[n] / .col-end-[n], to be combined with .span-[n]
 .flow and .grid support span-all, span-auto ?

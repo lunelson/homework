@@ -1,0 +1,3 @@
+...essentially, the properties tracked and the class abstractions are those typcially specified in a deisng system: dimensions, distances, gaps, ratios, font sizes, spacings, features, colors, weights, fills, strokes, borders, radii
+
+this is the sense in which homework is 'design-oriented'. by contrast, although abstractions such as .stack or .peel have much in common with OOCSS, the "media object" which is the most often quoted example of that appraoch is something I would consider a component pattern (fully worthwhile) to be written in a project's local codebase rather than as a framework-level abstraction. HW's abstractions are a bit more fundamental and agnostic.
