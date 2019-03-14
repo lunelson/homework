@@ -95,7 +95,7 @@ body {
 }
 
 [class^="f-"], [class*=" f-"],
-.plain *, [class^="plain-"] *, [class*=" plain-"] * {
+.plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
   font-family: var(--font-family);
   font-feature-settings: var(--font-feature-settings);
   font-size: var(--font-size);

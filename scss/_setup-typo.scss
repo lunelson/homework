@@ -68,6 +68,7 @@
     font-family: map-get($fonts, nth(map-keys($fonts), 1), 'family');
   }
 
+
   // font weights
   // @each $n in (1 2 3 5 6 8 9) { .fw-#{$n*100} { font-weight: $n*100; } }
   .fw-700, .fw-bold, .strong, strong { font-weight: bold; }
@@ -82,7 +83,7 @@
 
   // any .f-[...] plus all children of .plain which are not in the exclude list
   #{base-class('f', false)},
-  #{selector-combine(base-class('plain'), '*')} {
+  #{selector-combine(base-class('plain'), '*', '>')} {
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings);
     font-size: var(--font-size); // TODO allow a lerp calc() expression here too
