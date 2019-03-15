@@ -1,6 +1,13 @@
+## ava testing
+
+- add sindresorhus' strip-css-comments, so you can use block comments
+- store the require.extensions code in a file, read it in with fs.readFileSync
+
+
+## core setup
+
 review mechanics of font-size vs root-scale, vs outer-width
   apply to :root selector, not html?
-revert the trim change
 test the y-/x- class usage and other co-classes on grid and flow
 revamp reset
   as merge of destyle and remedy
