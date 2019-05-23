@@ -15,7 +15,7 @@ const sassIncl = path.join(__dirname, 'node_modules');
 */
 
 function work() {
-  return gulp.src('./test/**/*.scss')
+  return gulp.src('./test/legacy/*.scss')
     .pipe(plumber(sass.logError))
     .pipe(sass({
       outputStyle: 'expanded',
@@ -23,17 +23,23 @@ function work() {
     }))
     .pipe(gulp.dest('./test'));
 }
+
 function test() {
-  return gulp.src('./test/**/*.scss')
+  return gulp.src('./test/legacy/*.scss')
     .pipe(plumber())
     .pipe(sass({
       outputStyle: 'expanded',
       includePaths: [sassIncl]
     }).on('error', sass.logError))
-    .pipe(rename({extname: '.css'}))
+    .pipe(rename({
+      extname: '.css'
+    }))
     .pipe(diff())
-    .pipe(diff.reporter({ fail: true }));
+    .pipe(diff.reporter({
+      fail: true
+    }));
 }
+
 function watch() {
   return gulp.watch('./**/*.scss', work);
 }

@@ -39,37 +39,115 @@
   padding-bottom: 0 !important;
 }
 
-.flow-s {
-  margin-top: calc(1.25rem / -2);
-  margin-bottom: calc(1.25rem / -2);
+@media screen and (max-width: 19.999em) {
+  .flow-s {
+    margin-top: calc(1.25rem / -2);
+    margin-bottom: calc(1.25rem / -2);
+  }
+  .flow-s > * {
+    padding-top: calc(1.25rem / 2) !important;
+    padding-bottom: calc(1.25rem / 2) !important;
+  }
+  .flow-m {
+    margin-top: calc(2.5rem / -2);
+    margin-bottom: calc(2.5rem / -2);
+  }
+  .flow-m > * {
+    padding-top: calc(2.5rem / 2) !important;
+    padding-bottom: calc(2.5rem / 2) !important;
+  }
+  .flow-l {
+    margin-top: calc(4rem / -2);
+    margin-bottom: calc(4rem / -2);
+  }
+  .flow-l > * {
+    padding-top: calc(4rem / 2) !important;
+    padding-bottom: calc(4rem / 2) !important;
+  }
 }
 
-.flow-s > * {
-  padding-top: calc(1.25rem / 2) !important;
-  padding-bottom: calc(1.25rem / 2) !important;
+@media screen and (min-width: 20em) and (max-width: 29.999em) {
+  .flow-s {
+    margin-top: calc(1.25rem / -2);
+    margin-bottom: calc(1.25rem / -2);
+  }
+  .flow-s > * {
+    padding-top: calc(1.25rem / 2) !important;
+    padding-bottom: calc(1.25rem / 2) !important;
+  }
+  .flow-m {
+    margin-top: calc(2.5rem / -2);
+    margin-bottom: calc(2.5rem / -2);
+  }
+  .flow-m > * {
+    padding-top: calc(2.5rem / 2) !important;
+    padding-bottom: calc(2.5rem / 2) !important;
+  }
+  .flow-l {
+    margin-top: calc(4rem / -2);
+    margin-bottom: calc(4rem / -2);
+  }
+  .flow-l > * {
+    padding-top: calc(4rem / 2) !important;
+    padding-bottom: calc(4rem / 2) !important;
+  }
 }
 
-.flow-m {
-  margin-top: calc(2.5rem / -2);
-  margin-bottom: calc(2.5rem / -2);
+@media screen and (min-width: 30em) and (max-width: 39.999em) {
+  .flow-s {
+    margin-top: calc(1.25rem / -2);
+    margin-bottom: calc(1.25rem / -2);
+  }
+  .flow-s > * {
+    padding-top: calc(1.25rem / 2) !important;
+    padding-bottom: calc(1.25rem / 2) !important;
+  }
+  .flow-m {
+    margin-top: calc(2.5rem / -2);
+    margin-bottom: calc(2.5rem / -2);
+  }
+  .flow-m > * {
+    padding-top: calc(2.5rem / 2) !important;
+    padding-bottom: calc(2.5rem / 2) !important;
+  }
+  .flow-l {
+    margin-top: calc(4rem / -2);
+    margin-bottom: calc(4rem / -2);
+  }
+  .flow-l > * {
+    padding-top: calc(4rem / 2) !important;
+    padding-bottom: calc(4rem / 2) !important;
+  }
 }
 
-.flow-m > * {
-  padding-top: calc(2.5rem / 2) !important;
-  padding-bottom: calc(2.5rem / 2) !important;
+@media screen and (min-width: 40em) {
+  .flow-s {
+    margin-top: calc(1.25rem / -2);
+    margin-bottom: calc(1.25rem / -2);
+  }
+  .flow-s > * {
+    padding-top: calc(1.25rem / 2) !important;
+    padding-bottom: calc(1.25rem / 2) !important;
+  }
+  .flow-m {
+    margin-top: calc(2.5rem / -2);
+    margin-bottom: calc(2.5rem / -2);
+  }
+  .flow-m > * {
+    padding-top: calc(2.5rem / 2) !important;
+    padding-bottom: calc(2.5rem / 2) !important;
+  }
+  .flow-l {
+    margin-top: calc(4rem / -2);
+    margin-bottom: calc(4rem / -2);
+  }
+  .flow-l > * {
+    padding-top: calc(4rem / 2) !important;
+    padding-bottom: calc(4rem / 2) !important;
+  }
 }
 
-.flow-l {
-  margin-top: calc(4rem / -2);
-  margin-bottom: calc(4rem / -2);
-}
-
-.flow-l > * {
-  padding-top: calc(4rem / 2) !important;
-  padding-bottom: calc(4rem / 2) !important;
-}
-
-@media screen and (max-width: 29.999em) {
+@media screen and (max-width: 19.999em) {
   .flow, [class^="flow-"], [class*=" flow-"] {
     width: calc(100% + 2rem) !important;
     margin-left: calc(2rem / -2);
@@ -81,7 +159,31 @@
   }
 }
 
-@media screen and (min-width: 30em) {
+@media screen and (min-width: 20em) and (max-width: 29.999em) {
+  .flow, [class^="flow-"], [class*=" flow-"] {
+    width: calc(100% + 2rem) !important;
+    margin-left: calc(2rem / -2);
+    margin-right: calc(2rem / -2);
+  }
+  .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
+    padding-left: calc(2rem / 2) !important;
+    padding-right: calc(2rem / 2) !important;
+  }
+}
+
+@media screen and (min-width: 30em) and (max-width: 39.999em) {
+  .flow, [class^="flow-"], [class*=" flow-"] {
+    width: calc(100% + 3rem) !important;
+    margin-left: calc(3rem / -2);
+    margin-right: calc(3rem / -2);
+  }
+  .flow > *, [class^="flow-"] > *, [class*=" flow-"] > * {
+    padding-left: calc(3rem / 2) !important;
+    padding-right: calc(3rem / 2) !important;
+  }
+}
+
+@media screen and (min-width: 40em) {
   .flow, [class^="flow-"], [class*=" flow-"] {
     width: calc(100% + 3rem) !important;
     margin-left: calc(3rem / -2);
