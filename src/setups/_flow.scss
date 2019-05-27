@@ -156,9 +156,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: calc(100% + #{column-gap()}) !important;
-    margin-left: calc(#{column-gap()} / -2);
-    margin-right: calc(#{column-gap()} / -2);
+    // width: calc(100% + #{inner-x()}) !important;
+    // margin-left: calc(#{inner-x()} / -2);
+    // margin-right: calc(#{inner-x()} / -2);
 
     &>* {
       flex: 0 0 auto;
@@ -167,8 +167,8 @@
       min-height: 1px;
       overflow-wrap: break-word; // break long words
       background-clip: content-box;
-      padding-left: calc(#{column-gap()} / 2) !important;
-      padding-right: calc(#{column-gap()} / 2) !important;
+      // padding-left: calc(#{inner-x()} / 2) !important;
+      // padding-right: calc(#{inner-x()} / 2) !important;
     }
   }
 
@@ -314,13 +314,13 @@
 
     @include mm-for('inner-x', 'inner-x-mods', 'inner-mods') {
       #{base-class('flow')} {
-        width: calc(100% + #{column-gap()}) !important;
-        margin-left: calc(#{column-gap()} / -2);
-        margin-right: calc(#{column-gap()} / -2);
+        width: calc(100% + #{inner-x()}) !important;
+        margin-left: calc(#{inner-x()} / -2) !important;;
+        margin-right: calc(#{inner-x()} / -2) !important;;
 
         &>* {
-          padding-left: calc(#{column-gap()} / 2) !important;
-          padding-right: calc(#{column-gap()} / 2) !important;
+          padding-left: calc(#{inner-x()} / 2) !important;
+          padding-right: calc(#{inner-x()} / 2) !important;
         }
       }
     }
