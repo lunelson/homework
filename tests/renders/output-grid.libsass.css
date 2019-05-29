@@ -1,3 +1,30 @@
+/*
+  utils
+  reset
+  setup
+
+  SETUP TYPES
+
+  core
+  root
+  typo/font
+  outer
+    wrap-unwrap
+    frame-bleed
+  utils
+  inner
+    stack-chain
+    flow-grid-cell
+  theme
+  debug
+
+  SETUP PARTS
+
+  core
+  rest
+
+
+*/
 .flow, [class^="flow-"], [class*=" flow-"] {
   display: flex !important;
   flex-direction: row;
@@ -76,6 +103,7 @@
 }
 
 .span, [class^="span-"], [class*=" span-"] {
+  max-width: 100%;
   width: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)) - var(--col-gap, var(--inner-x)));
 }
 
@@ -856,6 +884,7 @@
 
 @media screen and (min-width: 20em) {
   .a__span, [class^="a__span-"], [class*=" a__span-"] {
+    max-width: 100%;
     width: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)) - var(--col-gap, var(--inner-x)));
   }
   .flow > .a__span, .flow > [class^="a__span-"], .flow > [class*=" a__span-"], [class^="flow-"] > .a__span, [class^="flow-"] > [class^="a__span-"], [class^="flow-"] > [class*=" a__span-"], [class*=" flow-"] > .a__span, [class*=" flow-"] > [class^="a__span-"], [class*=" flow-"] > [class*=" a__span-"] {
@@ -1477,6 +1506,7 @@
 
 @media screen and (min-width: 30em) {
   .b__span, [class^="b__span-"], [class*=" b__span-"] {
+    max-width: 100%;
     width: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)) - var(--col-gap, var(--inner-x)));
   }
   .flow > .b__span, .flow > [class^="b__span-"], .flow > [class*=" b__span-"], [class^="flow-"] > .b__span, [class^="flow-"] > [class^="b__span-"], [class^="flow-"] > [class*=" b__span-"], [class*=" flow-"] > .b__span, [class*=" flow-"] > [class^="b__span-"], [class*=" flow-"] > [class*=" b__span-"] {
@@ -2098,6 +2128,7 @@
 
 @media screen and (min-width: 40em) {
   .c__span, [class^="c__span-"], [class*=" c__span-"] {
+    max-width: 100%;
     width: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)) - var(--col-gap, var(--inner-x)));
   }
   .flow > .c__span, .flow > [class^="c__span-"], .flow > [class*=" c__span-"], [class^="flow-"] > .c__span, [class^="flow-"] > [class^="c__span-"], [class^="flow-"] > [class*=" c__span-"], [class*=" flow-"] > .c__span, [class*=" flow-"] > [class^="c__span-"], [class*=" flow-"] > [class*=" c__span-"] {

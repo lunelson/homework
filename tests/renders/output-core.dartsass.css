@@ -1,3 +1,30 @@
+/*
+  utils
+  reset
+  setup
+
+  SETUP TYPES
+
+  core
+  root
+  typo/font
+  outer
+    wrap-unwrap
+    frame-bleed
+  utils
+  inner
+    stack-chain
+    flow-grid-cell
+  theme
+  debug
+
+  SETUP PARTS
+
+  core
+  rest
+
+
+*/
 /* ( a: ( breakpoint: 30em, outer-right: calc(31.25vw + -6.25rem), outer-left: calc(31.25vw + -6.25rem) ), b: ( breakpoint: 40em, font-mods: ( serif: ( l: 30px 1.1 ) ) ), c: ( font-size: 18px, breakpoint: 60em, outer-right: 200px, outer-left: 200px ) ) */
 :root {
   --breakpoint-a: 30em;

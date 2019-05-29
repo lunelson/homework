@@ -1,3 +1,30 @@
+/*
+  utils
+  reset
+  setup
+
+  SETUP TYPES
+
+  core
+  root
+  typo/font
+  outer
+    wrap-unwrap
+    frame-bleed
+  utils
+  inner
+    stack-chain
+    flow-grid-cell
+  theme
+  debug
+
+  SETUP PARTS
+
+  core
+  rest
+
+
+*/
 .stack .f, .stack [class^="f-"], .stack [class*=" f-"], [class^="stack-"] .f, [class^="stack-"] [class^="f-"], [class^="stack-"] [class*=" f-"], [class*=" stack-"] .f, [class*=" stack-"] [class^="f-"], [class*=" stack-"] [class*=" f-"] {
   color: blue;
 }

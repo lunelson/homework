@@ -29,27 +29,27 @@
     "@lunelson/penny": "^2.0.0-alpha.5",
     "@lunelson/sass-calc": "^1.2.0",
     "@lunelson/sass-maps-next": "^1.0.0",
-    "@lunelson/sass-throw": "^2.0.0-rc.4",
+    "@lunelson/sass-throw": "^2.1.0",
     "@lunelson/sass-u": "^0.11.0",
-    "ava": "^1.0.1",
-    "del": "^3.0.0",
+    "ava": "^1.4.1",
+    "del": "^4.1.1",
     "destyle.css": "^1.0.5",
     "markdown-it-container": "^2.0.0",
     "markdown-it-custom-block": "^0.1.1",
     "markdown-it-mentions": "^1.0.0",
-    "markdown-it-prism": "^2.0.1",
+    "markdown-it-prism": "^2.0.2",
     "mathsass": "^0.10.1",
     "node-hook": "^1.0.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "require-extension-hooks": "^0.3.3",
-    "sass": "^1.15.2",
-    "strip-css-comments": "^3.0.0",
+    "sass": "^1.20.1",
+    "strip-css-comments": "^4.0.0",
     "write": "^1.0.3"
   },
   "peerDependencies": {
     "@lunelson/sass-calc": "^1.2.0",
     "@lunelson/sass-maps-next": "^1.0.0",
-    "@lunelson/sass-throw": "^2.0.0-rc.4",
+    "@lunelson/sass-throw": "^2.1.0",
     "@lunelson/sass-u": "^0.11.0",
     "mathsass": "^0.10.1"
   },
@@ -57,7 +57,9 @@
     "access": "public"
   },
   "ava": {
-    "extensions": [ "scss" ],
+    "extensions": [
+      "scss"
+    ],
     "compileEnhancements": false,
     "require": [
       "./tests/helpers/setup.js"
