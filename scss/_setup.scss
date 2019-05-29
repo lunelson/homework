@@ -7,6 +7,33 @@
 //                    | |
 //                    |_|
 
+/*
+  utils
+  reset
+  setup
+
+  SETUP TYPES
+
+  core
+  root
+  typo/font
+  outer
+    wrap-unwrap
+    frame-bleed
+  utils
+  inner
+    stack-chain
+    flow-grid-cell
+  theme
+  debug
+
+  SETUP PARTS
+
+  core
+  rest
+
+
+*/
 $done-homework-setup: false;
 
 @mixin homework-setup($modern: true, $setups...) {
