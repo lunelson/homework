@@ -38,6 +38,8 @@ $m__: '';
     @include m($m) {
 
       #{m-base-class('span')} {
+
+        max-width: 100%;
         width: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)) - var(--col-gap, var(--inner-x)));
 
         @at-root #{selector-insert(base-class('flow'), '>')} {
