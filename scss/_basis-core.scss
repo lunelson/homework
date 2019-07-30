@@ -124,9 +124,9 @@ $media-defaults: (
 /////////////////////////////////////////////
 
 @mixin --output-medium-props($medium: m()) {
-  @each $key, $val in $medium {
-    @if not index('list' 'map', type-of($val)) {
-      --#{$key}: #{$val};
+  @each $prop, $value in $medium {
+    @if not index('list' 'map', type-of($value)) {
+      --#{$prop}: #{$value};
     }
   }
   @each $y, $mod in inner-y-mods() {

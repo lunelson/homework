@@ -1,8 +1,0 @@
-//
-// WRAP
-//
-
-#{base-class('wrap')} { margin: 0 auto; }
-.wrap--outer { @include m(xl) { max-width: medium-var('outer-width'); } }
-// .wrap--inner { @include m(xl) { max-width: medium-var('inner-width'); } }
-

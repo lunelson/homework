@@ -3,28 +3,6 @@
 // | (_| (_) | | |  __/
 //  \___\___/|_|  \___|
 
-// (m), :root -- implicitly responsive
-
-// TODO:
-//   1. do all the parsing first in setup-core
-//     - when parsing each medium:
-//       warn if a breakpoint is not present ✅
-//       warn if a key is found that did not exist at $root ✅
-//   2. output the rules in setup-root
-//     - output base props outside of media queries:
-//       --breakpoint-[m] ✅
-//       --outer-width-[m] and --inner-width-[m] ✅
-//     - output media props using mm exclusive query ✅
-
-@function not-contained($list, $item) {
-  @return not index($list, $item);
-}
-
-@function any-not-contained($list, $items) {
-  @each $item in $items { @if not index($list, $item) { @return true; } }
-  @return false;
-}
-
 @mixin homework-setup-core() {
 
   $root-orig: $root !global;

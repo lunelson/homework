@@ -1,7 +1,16 @@
-## ava testing
+## reset
 
-- add sindresorhus' strip-css-comments, so you can use block comments
-- store the require.extensions code in a file, read it in with fs.readFileSync
+1. extreme; for resetting children of an element
+http://cleanslatecss.com/#Why-would-I-need-it
+
+2. meyer and adaptations thereof
+http://meyerweb.com/eric/tools/css/reset/
+http://html5doctor.com/html-5-reset-stylesheet/
+
+ben frain's new one
+https://benfrain.com/a-modern-css-reset-with-caveats/?ref=heydesigner-weekly
+
+https://github.com/nicolas-cusan/destyle.css
 
 
 ## core setup
@@ -29,23 +38,6 @@ https://twitter.com/souporserious/status/1075053627025149955
 `aspect` base class
   .aspect-3-2, etc.
 
-## preflight
-
-** merge recent changes from kaminski branch
-.flow and .grid alone, apply base inner-x/-y values
-.flow and .grid support concurrent .cols/.rows classes
-  .grid.cols-[n].y-s.x-xs
-  .flow.cols-[n]
-.col-start-[n] / .col-end-[n], to be combined with .span-[n]
-.flow and .grid support span-all, span-auto ?
-? is it illegal to write grid-column: span 2 / span 2;
-.trim is the determinator for .f trimming, not .stack
-  .stack.trim > <div class="f-"></div>
-  .trim > .f-
-stack
-  - no need for separate mixins;
-  - refactor for common stack/plain styles
-  - delete old shit
 
 ## re-org
 

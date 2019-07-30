@@ -5,42 +5,7 @@
 // | | | | (_) | | | | | |  __/\ V  V / (_) | |  |   <       \__ \ (__\__ \__ \
 // |_| |_|\___/|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\      |___/\___|___/___/
 
-$homework-is-modern: true !default;
-
-@import "scss/u-functions";
-@import "scss/u-math";
-@import "scss/u-lists";
-@import "scss/u-maps";
-@import "scss/u-classes";
-@import "scss/u-selectors";
-@import "scss/u-misc";
-
-@import "scss/basis-core";
-@import "scss/basis-typo";
-@import "scss/basis-grid";
-@import "scss/basis-theme";
-
-@import "scss/reset-destyle";
-@import "scss/reset-display";
-@import "scss/reset-embed";
-@import "scss/reset-root";
-@import "scss/reset-misc";
-@import "scss/reset-table";
-@import "scss/reset-ui";
-
+@import "scss/u";
+@import "scss/basis";
 @import "scss/reset";
-
-@import "scss/setup-core";
-@import "scss/setup-root";
-@import "scss/setup-page";
-@import "scss/setup-stack";
-@import "scss/setup-grid";
-@import "scss/setup-cell";
-@import "scss/setup-typo";
-@import "scss/setup-atomic";
-@import "scss/setup-helper";
-@import "scss/setup-theme";
-@import "scss/setup-state";
-@import "scss/setup-debug";
-
 @import "scss/setup";

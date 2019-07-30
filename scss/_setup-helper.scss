@@ -29,7 +29,7 @@
 // * replace fit with obj: .obj-contain /-cover /-fill /-none /-scale-down /-bottom /-center /-left /-left-bottom /-left-top /-right /-right-bottom /-right-top /-top
 // (scroll-[auto|touch]) -- should maybe just be in reset
 
-@mixin homework-setup-helper($modern: $homework-is-modern) {
+@mixin homework-setup-helper() {
 
   /////////////////////////////////////////////
   /////////////// float / clear ///////////////

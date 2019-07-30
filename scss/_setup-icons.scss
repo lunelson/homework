@@ -22,7 +22,7 @@
   &::before { padding-bottom: 100% * $height / $width; }
 }
 
-@mixin homework-setup-icon($modern: $homework-is-modern) {
+@mixin homework-setup-icon() {
 
   #{base-class('icon')} {
     > svg {

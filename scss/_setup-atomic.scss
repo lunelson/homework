@@ -5,7 +5,7 @@
 // | (_| | || (_) | | | | | | | (__
 //  \__,_|\__\___/|_| |_| |_|_|\___|
 
-@mixin homework-setup-atomic($modern: $homework-is-modern) {
+@mixin homework-setup-atomic() {
 
   // get lists of inner-y/-x-mod keys on $root
   $inner-y-keys: map-keys(inner-y-mods());

@@ -7,7 +7,7 @@
 
 // stack, plain, chain, (shim) -- implicitly responsive
 
-@mixin homework-setup-stack($modern: $homework-is-modern) {
+@mixin homework-setup-stack() {
 
   .flex-stack {
     display: flex;

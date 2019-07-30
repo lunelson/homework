@@ -9,7 +9,7 @@
 
 // grid, flow, cols, rows
 
-@mixin homework-setup-grid($max-columns: --max-columns(), $row-classes: false) {
+@mixin homework-setup-grid($max-columns: --max-columns()) {
 
   // global bases and mods
   // flow, grid

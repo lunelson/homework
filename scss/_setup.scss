@@ -7,68 +7,49 @@
 //                    | |
 //                    |_|
 
-/*
-  utils
-  reset
-  setup
+@import "setup-core";
+@import "setup-root";
+@import "setup-page";
+@import "setup-stack";
+@import "setup-grid";
+@import "setup-cell";
+@import "setup-typo";
+@import "setup-atomic";
+@import "setup-helper";
+@import "setup-theme";
+@import "setup-state";
+@import "setup-debug";
 
-  SETUP TYPES
+$homework-setup-done: false;
 
-  core
-  root
-  typo/font
-  outer
-    wrap-unwrap
-    frame-bleed
-  utils
-  inner
-    stack-chain
-    flow-grid-cell
-  theme
-  debug
+@mixin homework-setup($setups...) {
+  $setups: if(length($setups) > 0, $setups, (
+    "core",
+    "root",
+    "page",
+    "stack",
+    "grid",
+    "cell",
+    "typo",
+    "atomic",
+    "helper",
+    "theme",
+    "state",
+    "debug",
+  ));
 
-  SETUP PARTS
+  @if index($setups, "core") { @include homework-setup-core; }
+  @if index($setups, "root") { @include homework-setup-root; }
+  @if index($setups, "page") { @include homework-setup-page; }
+  @if index($setups, "stack") { @include homework-setup-stack; }
+  @if index($setups, "grid") { @include homework-setup-grid; }
+  @if index($setups, "cell") { @include homework-setup-cell; }
+  @if index($setups, "typo") { @include homework-setup-typo; }
+  @if index($setups, "atomic") { @include homework-setup-atomic; }
+  @if index($setups, "helper") { @include homework-setup-helper; }
+  @if index($setups, "theme") { @include homework-setup-theme; }
+  @if index($setups, "state") { @include homework-setup-state; }
+  @if index($setups, "debug") { @include homework-setup-debug; }
 
-  core
-  rest
-
-
-*/
-$done-homework-setup: false;
-
-@mixin homework-setup($modern: true, $setups...) {
-
-  // run homework reset, if not done
-  @if not $done-homework-reset { @include homework-reset; }
-
-  // default to all setups
-  @if length($setups) == 0 {
-    $setups: (
-      'core',
-      'root',
-      'wrap',
-      'frame',
-      'stack',
-      'font',
-      'flow',
-      'atomic',
-      'helper',
-      'theme',
-      'debug',
-    );
-  }
-
-  @if index($setups, 'root') { @include homework-setup-core($modern); }
-  @if index($setups, 'wrap') { @include homework-setup-wrap($modern); }
-  @if index($setups, 'frame') { @include homework-setup-frame($modern); }
-  @if index($setups, 'flow') { @include homework-setup-flow($modern); }
-  @if index($setups, 'stack') { @include homework-setup-stack($modern); }
-  @if index($setups, 'font') { @include homework-setup-typo($modern); }
-  @if index($setups, 'atomic') { @include homework-setup-atomic($modern); }
-  @if index($setups, 'helper') { @include homework-setup-helper($modern); }
-  @if index($setups, 'theme') { @include homework-setup-theme($modern); }
-  @if index($setups, 'debug') { @include homework-setup-debug($modern); }
-
-  // set $done-homework to true
-  $done-homework-setup: true !global;
+  $homework-setup-done: true !global;
 }
