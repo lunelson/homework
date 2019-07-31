@@ -98,18 +98,7 @@ $colors: (
 );
 
 @include homework-reset;
-
-@include homework-setup-core();
-@include homework-setup-root();
-@include homework-setup-page();
-@include homework-setup-stack();
-@include homework-setup-grid();
-@include homework-setup-cell();
-@include homework-setup-typo();
-@include homework-setup-atomic();
-@include homework-setup-helper();
-@include homework-setup-theme();
-@include homework-setup-debug();
+@include homework-setup;
 
 body {
   background-color: #eee;

@@ -11,12 +11,18 @@ append head
 
     body { font-family: sans-serif; }
 
+    .label {
+      width: 100%;
+      height: 100%;
+    }
+
     .label::before {
       font-family: monospace;
       counter-reset: cp var(--span-n);
       content: counter(cp);
       display: block;
       width: 100%;
+      height: 100%;
       padding: 1em;
       background-color: #ddd;
     }
@@ -30,43 +36,92 @@ append head
 
 block body
 
-  .wrap-last
-    .frame
-      .flow-s
-        .span
-          .label
-        .span
-          .label
-        .span
-          .label
-        .span
-          .label
-          .itest.span-i-1: span .span-i-1
-          .itest.span-i-2: span .span-i-2
-          .itest.span-i-3: span .span-i-3
-          .itest.span-i-4: span .span-i-4
-          .itest.span-i-5: span .span-i-5
-          .itest.span-i-6: span .span-i-6
-          .itest.span-i-7: span .span-i-7
-          .itest.span-i-8: span .span-i-8
-          .itest.span-i-9: span .span-i-9
-          .itest.span-i-10: span .span-i-10
-          .itest.span-i-11: span .span-i-11
-          .itest.span-i-12: span .span-i-12
-          .itest.span-i-1.ml-i-1: span .span-i-1.ml-i-1
-          .itest.span-i-1.ml-i-2: span .span-i-1.ml-i-2
-          .itest.span-i-1.ml-i-3: span .span-i-1.ml-i-3
-          .itest.span-i-1.ml-i-4: span .span-i-1.ml-i-4
-          .itest.span-i-1.ml-i-5: span .span-i-1.ml-i-5
-          .itest.span-i-1.ml-i-6: span .span-i-1.ml-i-6
-          .itest.span-i-1.ml-i-7: span .span-i-1.ml-i-7
-          .itest.span-i-1.ml-i-8: span .span-i-1.ml-i-8
-          .itest.span-i-1.ml-i-9: span .span-i-1.ml-i-9
-          .itest.span-i-1.ml-i-10: span .span-i-1.ml-i-10
-          .itest.span-i-1.ml-i-11: span .span-i-1.ml-i-11
-          .itest.span-i-1.ml-i-12: span .span-i-1.ml-i-12
+  .wrap-last.frame
+    .stack-l
+      .stack-s
+        h2 basics
+        h3 mcol
+        .mcol-3.span-9
+          p= _casual.text
+          //- p= _casual.title
+          //- p= _casual.title
+        h3 flow
+        .stop: .flow-s
+          .span-6: .label
+          .span-6: .flow
+            .span-3: .label
+            .span-3: .label
+          .span-6.grid
+            .span-3: .label
+            .span-3: .label
+          .span-6.mcol-2
+            p= _casual.title
+            p= _casual.title
+        h3 grid
+        .grid-s
+          .span-3.row-span-2: .label
+          .span-6: .label
+          .span-6: .flow
+            .span-3: .label
+            .span-3.push-1: .label
+          .span-6.grid
+            .span-3: .label
+            .span-3.push-1: .label
+          .span-6.mcol-2
+            p= _casual.title
+            p= _casual.title
+      .stack-m
+        h2 nesting
+        .stop: .flow-s
+          .stop: .flow
+            .grid
+          .stop: .flow
+            .cols
+          .grid
+            .flow
+          .grid
+            .cols
+          .cols
+            .flow
+          .cols
+            .grid
 
-      .flow-m
+
+      .stop: .flow-s
+        .span
+          .label
+        .span
+          .label
+        .span
+          .label
+        .span
+          .label
+          .itest.span-1: span .span-1
+          .itest.span-2: span .span-2
+          .itest.span-3: span .span-3
+          .itest.span-4: span .span-4
+          .itest.span-5: span .span-5
+          .itest.span-6: span .span-6
+          .itest.span-7: span .span-7
+          .itest.span-8: span .span-8
+          .itest.span-9: span .span-9
+          .itest.span-10: span .span-10
+          .itest.span-11: span .span-11
+          .itest.span-12: span .span-12
+          .itest.span-1.push-1: span .span-1.push-1
+          .itest.span-1.push-2: span .span-1.push-2
+          .itest.span-1.push-3: span .span-1.push-3
+          .itest.span-1.push-4: span .span-1.push-4
+          .itest.span-1.push-5: span .span-1.push-5
+          .itest.span-1.push-6: span .span-1.push-6
+          .itest.span-1.push-7: span .span-1.push-7
+          .itest.span-1.push-8: span .span-1.push-8
+          .itest.span-1.push-9: span .span-1.push-9
+          .itest.span-1.push-10: span .span-1.push-10
+          .itest.span-1.push-11: span .span-1.push-11
+          .itest.span-1.push-12: span .span-1.push-12
+
+      .stop: .flow-m
         .span
           .label
         .span-6__m

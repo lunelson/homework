@@ -22,6 +22,6 @@ $media: (
   c: (breakpoint: 40em),
 );
 
-@include homework-setup-core();
-@include homework-setup-grid();
-@include homework-setup-cell();
+@include homework-setup-core;
+// @include homework-setup-root;
+@include homework-setup-columns;

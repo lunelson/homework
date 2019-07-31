@@ -1,47 +1,45 @@
-/*
-  utils
-  reset
-  setup
-
-  SETUP TYPES
-
-  core
-  root
-  typo/font
-  outer
-    wrap-unwrap
-    frame-bleed
-  utils
-  inner
-    stack-chain
-    flow-grid-cell
-  theme
-  debug
-
-  SETUP PARTS
-
-  core
-  rest
-
-
-*/
-body {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-kerning: normal;
+.fw-900, .fw-bolder, .fw-black {
+  font-weight: 900;
 }
 
-.fw-700, .fw-bold, .strong, strong {
-  font-weight: bold;
+.fw-800, .fw-extrabold {
+  font-weight: 800;
+}
+
+.fw-700, .fw-bold, strong, b, h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+.fw-600, .fw-semibold {
+  font-weight: 600;
+}
+
+.fw-500, .fw-medium {
+  font-weight: 500;
 }
 
 .fw-400, .fw-normal {
-  font-weight: normal;
+  font-weight: 400;
 }
 
-.fs-italic, .em, em {
+.fw-300, .fw-light {
+  font-weight: 300;
+}
+
+.fw-200, .fw-extralight {
+  font-weight: 200;
+}
+
+.fw-100, .fw-lighter, .fw-thin {
+  font-weight: 100;
+}
+
+.fs-italic, .em, em, i {
   font-style: italic;
+}
+
+.fs-oblique {
+  font-style: oblique;
 }
 
 .fs-normal {

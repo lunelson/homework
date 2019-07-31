@@ -1,30 +1,3 @@
-/*
-  utils
-  reset
-  setup
-
-  SETUP TYPES
-
-  core
-  root
-  typo/font
-  outer
-    wrap-unwrap
-    frame-bleed
-  utils
-  inner
-    stack-chain
-    flow-grid-cell
-  theme
-  debug
-
-  SETUP PARTS
-
-  core
-  rest
-
-
-*/
 :root {
   --wrap-width: 100%;
 }
@@ -33,7 +6,7 @@
   margin-right: auto;
   margin-left: auto;
   width: 100%;
-  max-width: var(--wrap-width);
+  max-width: var(--wrap-width, 100%);
 }
 
 .wrap-left {
@@ -53,7 +26,7 @@
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    max-width: var(--wrap-width);
+    max-width: var(--wrap-width, 100%);
   }
 
   .a__wrap-left {
@@ -73,7 +46,7 @@
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    max-width: var(--wrap-width);
+    max-width: var(--wrap-width, 100%);
   }
 
   .b__wrap-left {
@@ -93,7 +66,7 @@
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    max-width: var(--wrap-width);
+    max-width: var(--wrap-width, 100%);
   }
 
   .c__wrap-left {

@@ -9,8 +9,8 @@
 // col-[n], row-[n], col-end-[n], row-end-[n]
 
 $m__: '';
-@function m__col-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}col-#{nth($pair, 1)}-to-#{nth($pair, 2)}'); }
-@function m__row-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}row-#{nth($pair, 1)}-to-#{nth($pair, 2)}'); }
+// @function m__col-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}col-#{nth($pair, 1)}-to-#{nth($pair, 2)}'); }
+// @function m__row-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}row-#{nth($pair, 1)}-to-#{nth($pair, 2)}'); }
 
 @mixin homework-setup-cell($row-classes: true) {
 
@@ -30,8 +30,8 @@ $m__: '';
 
   // make push CPs non-cascading
   *, *:before, *:after {
-    --col-push: initial;
-    --col-push-r: initial;
+    --column-push: initial;
+    --column-push-r: initial;
   }
 
   @each $m in join((null), media-keys()) {
@@ -40,31 +40,42 @@ $m__: '';
       #{m-base-class('span')} {
 
         max-width: 100%;
-        width: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)) - var(--col-gap, var(--inner-x)));
+        width: calc((99.99999% + var(--column-gap, var(--inner-x))) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap, var(--inner-x)));
 
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          width: calc(99.99999% * var(--col-span, var(--grid-columns)) / var(--flow-columns, var(--grid-columns)));
+          width: calc(99.99999% * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)));
         }
         @at-root #{selector-insert(base-class('grid'), '>')} {
-          width: unset; // NOTE: try initial?
+          width: initial; // alt: unset
+        }
+        @at-root #{selector-insert(base-class('cols'), '>')} {
+          width: initial; // alt: unset
         }
       }
 
       #{m-base-class('pull', false)},
       #{m-base-class('push', false)} {
-        margin-left: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-push) / var(--flow-columns, var(--grid-columns)));
+        margin-left: calc((99.99999% + var(--column-gap, var(--inner-x))) * var(--column-push) / var(--local-column-count, var(--column-count)));
 
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          margin-left: calc(99.99999% * var(--col-push) / var(--flow-columns, var(--grid-columns)));
+          margin-left: calc(99.99999% * var(--column-push) / var(--local-column-count, var(--column-count)));
+        }
+
+        @at-root #{selector-insert(base-class('grid'), '>')} {
+          margin-left: initial; // alt: unset
         }
       }
 
       #{m-base-class('pull-r', false)},
       #{m-base-class('push-r', false)} {
-        margin-right: calc((99.99999% + var(--col-gap, var(--inner-x))) * var(--col-push-r) / var(--flow-columns, var(--grid-columns)));
+        margin-right: calc((99.99999% + var(--column-gap, var(--inner-x))) * var(--column-push-r) / var(--local-column-count, var(--column-count)));
 
         @at-root #{selector-insert(base-class('flow'), '>')} {
-          margin-right: calc(99.99999% * var(--col-push-r) / var(--flow-columns, var(--grid-columns)));
+          margin-right: calc(99.99999% * var(--column-push-r) / var(--local-column-count, var(--column-count)));
+        }
+
+        @at-root #{selector-insert(base-class('grid'), '>')} {
+          margin-right: initial; // alt: unset
         }
       }
 
@@ -73,26 +84,26 @@ $m__: '';
       .#{$m__}span-auto {
         @at-root #{selector-insert(m-base-class('flow'), '>')} {
           flex: 1 1 0%;
-          --col-span: 0;
+          --column-span: 0;
         }
       }
 
-      .#{$m__}span-all { --col-span: var(--flow-columns, var(--grid-columns)); }
+      .#{$m__}span-all { --column-span: var(--local-column-count, var(--column-count)); }
 
       @each $span, $pair-list in $span-pair-list {
 
         // FOR SOLO, FLOW
-        .#{$m__}cols-#{$span},
+        // .#{$m__}cols-#{$span},
         .#{$m__}span-#{$span},
         #{__map($pair-list, 'm__col-start-to-end')} {
-          & > * { --flow-columns: #{$span}; }
+          & > * { --local-column-count: #{$span}; }
         }
 
         // FOR SOLO, FLOW, GRID
         .#{$m__}span-#{$span},
-        .#{$m__}col-span-#{$span},
+        // .#{$m__}col-span-#{$span},
         #{__map($pair-list, 'm__col-start-to-end')} {
-          --col-span: #{$span};
+          --column-span: #{$span};
         }
 
         // FOR GRID ONLY
@@ -102,7 +113,7 @@ $m__: '';
         }
         .#{$m__}cols-#{$span} {
           @at-root #{selector-unify(&, base-class('grid'))} {
-            --col-span: #{$span};
+            --column-span: #{$span};
           }
         }
         .#{$m__}rows-#{$span} {
@@ -142,10 +153,10 @@ $m__: '';
       }
 
       @for $p from 1 through ($max-cols - 1) {
-        .#{$m__}push-#{$p} { --col-push: #{$p}; }
-        .#{$m__}pull-#{$p} { --col-push: #{$p*-1}; }
-        .#{$m__}push-r-#{$p} { --col-push-r: #{$p}; }
-        .#{$m__}pull-r-#{$p} { --col-push-r: #{$p*-1}; }
+        .#{$m__}push-#{$p} { --column-push: #{$p}; }
+        .#{$m__}pull-#{$p} { --column-push: #{$p*-1}; }
+        .#{$m__}push-r-#{$p} { --column-push-r: #{$p}; }
+        .#{$m__}pull-r-#{$p} { --column-push-r: #{$p*-1}; }
       }
 
     }

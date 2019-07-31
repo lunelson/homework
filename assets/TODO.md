@@ -164,7 +164,7 @@ consider adding this as peerDep, to reduce noise
 https://github.com/nicolas-cusan/destyle.css/blob/master/Readme.md
 
 ## renames
-  column-count (not 'grid-columns')
+  column-count (not 'column-count')
 
 ## othernames
   inset
@@ -213,7 +213,7 @@ $root-defaults: (
   outer-right: 2rem,
   outer-bottom: 2rem,
   outer-left: 2rem,
-  grid-columns: 12,
+  column-count: 12,
 
   // variations
   font-mods: ( sans: ( m: 16px 1.25 ) ),

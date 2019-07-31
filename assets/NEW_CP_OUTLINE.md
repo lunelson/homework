@@ -26,7 +26,7 @@
   --overlay-color-[c]
 
 (grid)
-  X--grid-columns / base-columns / root-columns
+  X--column-count / base-columns / root-columns
 
 ## CLASS properties
 

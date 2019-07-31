@@ -93,11 +93,11 @@ $media: (
 
 :root {
   --row-gap: null;
-  --col-gap: null;
+  --column-gap: null;
   --row: initial;
   --col: initial;
-  --cols: var(--grid-columns);
-  --rows: var(--grid-rows, --grid-columns);
+  --cols: var(--column-count);
+  --rows: var(--grid-rows, --column-count);
   --span: var(--cols);
   --span-y: 1;
   --push-r: initial;
@@ -123,7 +123,7 @@ $inner-y-keys: map-keys(inner-y-mods());
 
 $inner-x-keys: map-keys(inner-x-mods());
 @each $x in $inner-x-keys {
-  .flow-x-#{$x}, .grid-x-#{$x} { --col-gap: var(--inner-x-#{$x}); }
+  .flow-x-#{$x}, .grid-x-#{$x} { --column-gap: var(--inner-x-#{$x}); }
 }
 
 //           _ _
@@ -137,7 +137,7 @@ $inner-x-keys: map-keys(inner-x-mods());
   @include m($m) {
 
     #{m-base-class('span')} {
-      width: calc((99.99999% + var(--col-gap)) * var(--span) / var(--cols) - var(--col-gap)) !important;
+      width: calc((99.99999% + var(--column-gap)) * var(--span) / var(--cols) - var(--column-gap)) !important;
 
       @at-root #{selector-insert(base-class('flow'), '>')} {
         width: calc(99.99999% * var(--span) / var(--cols)) !important;
@@ -150,7 +150,7 @@ $inner-x-keys: map-keys(inner-x-mods());
 
     #{m-base-class('pull-l', false)},
     #{m-base-class('push-l', false)} {
-      margin-left: calc((99.99999% + var(--col-gap)) * var(--push-l) / var(--cols)) !important;
+      margin-left: calc((99.99999% + var(--column-gap)) * var(--push-l) / var(--cols)) !important;
 
       @at-root #{selector-insert(base-class('flow'), '>')} {
         margin-left: calc(99.99999% * var(--push-l) / var(--cols)) !important;
@@ -159,7 +159,7 @@ $inner-x-keys: map-keys(inner-x-mods());
 
     #{m-base-class('pull-r', false)},
     #{m-base-class('push-r', false)} {
-      margin-left: calc((99.99999% + var(--col-gap)) * var(--push-r) / var(--cols)) !important;
+      margin-left: calc((99.99999% + var(--column-gap)) * var(--push-r) / var(--cols)) !important;
 
       @at-root #{selector-insert(base-class('flow'), '>')} {
         margin-left: calc(99.99999% * var(--push-r) / var(--cols)) !important;

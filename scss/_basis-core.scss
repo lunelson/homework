@@ -24,7 +24,7 @@ $root-defaults: (
   outer-right: 2rem,
   outer-bottom: 2rem,
   outer-left: 2rem,
-  grid-columns: 12,
+  column-count: 12,
 
   // OPTIONAL VALUES
 
@@ -162,10 +162,10 @@ $media-defaults: (
 }
 
 @function --max-columns() {
-  @if not (length($media) > 0) { @return m-var('grid-columns'); }
+  @if not (length($media) > 0) { @return m-var('column-count'); }
   $column-counts: ();
   @each $m, $medium in $media {
-    $column-counts: append($column-counts, map-get($media, $m, 'grid-columns'));
+    $column-counts: append($column-counts, map-get($media, $m, 'column-count'));
   }
   @return max($column-counts...);
 }

@@ -1,0 +1,211 @@
+//            _
+//           | |
+//   ___ ___ | |_   _ _ __ ___  _ __  ___
+//  / __/ _ \| | | | | '_ ` _ \| '_ \/ __|
+// | (_| (_) | | |_| | | | | | | | | \__ \
+//  \___\___/|_|\__,_|_| |_| |_|_| |_|___/
+
+$m__: '';
+@function m__col-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}col-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+@function m__row-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}row-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+
+@mixin homework-setup-columns($max-columns: --max-columns()) {
+
+  #{base-class('mcol')} {
+    column-fill: balance;
+    column-width: auto;
+    column-count: var(--multi-column-span, var(--column-span, var(--column-count)));
+    column-gap: var(--column-gap, var(--inner-x));
+    & > * {
+      column-span: none;
+    }
+  }
+
+  #{base-class('flow')} {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: calc(100% + var(--column-gap, var(--inner-x))) !important;
+    margin-left: calc(var(--column-gap, var(--inner-x)) / -2) !important;
+    margin-right: calc(var(--column-gap, var(--inner-x)) / -2) !important;
+    margin-top: calc(var(--row-gap, var(--inner-y)) / -2) !important;
+    margin-bottom: calc(var(--row-gap, var(--inner-y)) / -2) !important;
+    & > * {
+      flex: 0 0 auto;
+      width: 100%;
+      min-width: 0%; // https://css-tricks.com/flexbox-truncated-text/
+      min-height: 1px;
+      background-clip: content-box;
+      padding-left: calc(var(--column-gap, var(--inner-x)) / 2) !important;
+      padding-right: calc(var(--column-gap, var(--inner-x)) / 2) !important;
+      padding-top: calc(var(--row-gap, var(--inner-y)) / 2) !important;
+      padding-bottom: calc(var(--row-gap, var(--inner-y)) / 2) !important;
+    }
+  }
+
+  #{base-class('grid')} {
+    display: grid !important;
+    grid-gap: var(--row-gap, var(--inner-y)) var(--column-gap, var(--inner-x));
+    grid-template-rows: repeat(var(--row-span, var(--row-count, 1)), max-content);
+    grid-template-columns: repeat(var(--column-span, var(--column-count)), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
+    & > * {
+      grid-column: span var(--column-span, var(--column-count)) / span var(--column-span, var(--column-count));
+      grid-row: span var(--row-span, var(--row-count, 1)) / span var(--row-span, var(--row-count, 1));
+    }
+  }
+
+  @each $y in map-keys(inner-y-mods()) { .flow-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); } }
+
+  // make the following props *non-cascading*
+  *, ::before, ::after {
+    --column-push: initial;
+    --column-push-r: initial;
+    --column-start: initial;
+    --column-end: initial;
+    --row-start: initial;
+    --row-end: initial;
+  }
+
+  // pre-calculations
+  $max-cols: --max-columns();
+  $span-pair-list: ();
+  $start-pair-list: ();
+  $end-pair-list: ();
+  @for $end from 2 through ($max-cols + 1) {
+    @for $start from 1 through ($end - 1) {
+      $span: ($end - $start);
+      $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
+      $start-pair-list: map-merge($start-pair-list, ($start: append(map-get($start-pair-list, $start) or (), ($start $end))));
+      $end-pair-list: map-merge($end-pair-list, ($end: append(map-get($end-pair-list, $end) or (), ($start $end))));
+    }
+  }
+
+  @each $m in join((null), media-keys()) {
+    @include m($m) {
+      $m__: m-prefix() !global;
+
+      // CONTEXTS: solo, flow, mcol; RESET: grid
+      #{m-base-class('span', false)} {
+        max-width: 100%;
+        width: calc((99.99999% + var(--column-gap, var(--inner-x))) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap, var(--inner-x)));
+        @at-root #{selector-insert(base-class('flow'), '>')} {
+          width: calc(99.99999% * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)));
+        }
+        @at-root #{selector-insert(base-class('mcol'), '>')} {
+          column-span: var(--multi-column-span, var(--column-span, var(--column-count)));
+          width: initial; // alt: unset
+        }
+        @at-root #{selector-insert(base-class('grid'), '>')} {
+          width: initial; // alt: unset
+        }
+      }
+
+      // CONTEXTS: solo, flow, grid
+      .#{$m__}span-all { --column-span: var(--local-column-count, var(--column-count)); }
+
+      // CONTEXTS: solo, flow; RESET: grid
+      #{m-base-class('pull', false)},
+      #{m-base-class('push', false)} {
+        margin-left: calc((99.99999% + var(--column-gap, var(--inner-x))) * var(--column-push) / var(--local-column-count, var(--column-count)));
+        @at-root #{selector-insert(base-class('flow'), '>')} {
+          margin-left: calc(99.99999% * var(--column-push) / var(--local-column-count, var(--column-count)));
+        }
+        @at-root #{selector-insert(base-class('grid'), '>')} {
+          margin-left: initial; // alt: unset
+        }
+      }
+
+      // CONTEXTS: solo, flow; RESET: grid
+      #{m-base-class('pull-r', false)},
+      #{m-base-class('push-r', false)} {
+        margin-right: calc((99.99999% + var(--column-gap, var(--inner-x))) * var(--column-push-r) / var(--local-column-count, var(--column-count)));
+        @at-root #{selector-insert(base-class('flow'), '>')} {
+          margin-right: calc(99.99999% * var(--column-push-r) / var(--local-column-count, var(--column-count)));
+        }
+        @at-root #{selector-insert(base-class('grid'), '>')} {
+          margin-right: initial; // alt: unset
+        }
+      }
+
+      // CONTEXT: grid-only; IDEA: is there a way to calculate this in flow/solo?
+      #{m-base-class('grid')} {
+        @at-root #{selector-combine(&, m-base-class('start', false), $cmbn: '>')} {
+          grid-column-start: var(--column-start);
+        }
+        @at-root #{selector-combine(&, m-base-class('end', false), $cmbn: '>')} {
+          grid-column-end: var(--column-end);
+        }
+        @at-root #{selector-combine(&, m-base-class('row-start', false), $cmbn: '>')} {
+          grid-row-start: var(--row-start);
+        }
+        @at-root #{selector-combine(&, m-base-class('row-end', false), $cmbn: '>')} {
+          grid-row-end: var(--row-end);
+        }
+      }
+
+      // CONTEXT: flow-only
+      #{m-base-class('flow')} {
+        & > .#{$m__}span-auto {
+          flex: 1 1 auto;
+          --column-span: 0;
+        }
+      }
+
+      @for $n from 1 through ($max-cols - 1) {
+
+        // push-/pull-(x) ==> --column-push = x
+        .#{$m__}push-#{$n} { --column-push: #{$n}; }
+        .#{$m__}pull-#{$n} { --column-push: #{$n*-1}; }
+
+        // push-r-/pull-r-(x) ==> --column-push-r = x
+        .#{$m__}push-r-#{$n} { --column-push-r: #{$n}; }
+        .#{$m__}pull-r-#{$n} { --column-push-r: #{$n*-1}; }
+      }
+
+      @each $span, $pair-list in $span-pair-list {
+
+        // mcol-(x) ==> --multi-column-span = x
+        .mcol-#{$span} { --multi-column-span: #{$span} }
+
+        // span-(x) ==> --column-span = x
+        .#{$m__}span-#{$span} { --column-span: #{$span}; }
+
+        // row-span-(y) ==> --row-span = y
+        .#{$m__}row-span-#{$span} { --row-span: #{$span}; }
+
+        // cols-(x) ==> --column-count = x
+        .#{$m__}cols-#{$span} { --column-count: #{$span}; }
+
+        // rows-(y) ==> --row-count = y
+        .#{$m__}rows-#{$span} { --row-count: #{$span}; }
+
+        // span-(x) > *, span-(s)-(e) > * ==> --local-column-count = x
+        .#{$m__}span-#{$span},
+        #{__map($pair-list, 'm__col-start-to-end')} { & > * { --local-column-count: #{$span}; } }
+      }
+
+      @each $start, $pair-list in $start-pair-list {
+
+        // start-(s), col-(s)-() ==> --column-start = s
+        .#{$m__}start-#{$start},
+        #{__map($pair-list, 'm__col-start-to-end')} { --column-start: #{$start}; }
+
+        // row-start-(x), row-(s)-() ==> --row-start = x
+        .#{$m__}row-start-#{$start},
+        #{__map($pair-list, 'm__row-start-to-end')} { --row-start: #{$start}; }
+      }
+
+      @each $end, $pair-list in $end-pair-list {
+
+        // end-(e), col-()-(e) ==> --column-end = e
+        .#{$m__}end-#{$end},
+        #{__map($pair-list, 'm__col-start-to-end')} { --column-end: #{$end}; }
+
+        // row-end-(x), row-()-(e) ==> --row-end = x
+        .#{$m__}row-end-#{$end},
+        #{__map($pair-list, 'm__row-start-to-end')} { --row-end: #{$end}; }
+      }
+
+    }
+  }
+}

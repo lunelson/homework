@@ -11,43 +11,25 @@
   $inner-y-keys: map-keys(inner-y-mods());
   $inner-x-keys: map-keys(inner-x-mods());
 
-  // X AND Y CO-CLASSES FOR STACK, CHAIN, FLOW, GRID
-  .y-0 {
-    &.flow, &.grid {
-      --row-gap: 0;
-    }
-    &.stack > * {
-      --stack-gap: 0;
-    }
+  // ix and iy co-classes for stack, chain, mcol, flow, grid
+  .iy-0 {
+    &.flow, &.grid { --row-gap: 0; }
+    &.stack > * { --stack-gap: 0; }
   }
-  .x-0 {
-    &.flow, &.grid {
-      --col-gap: 0;
-    }
-    &.chain > * {
-      --chain-gap: 0;
-    }
-  }
-
   @each $y in $inner-y-keys {
-    .y-#{$y} {
-      &.flow, &.grid {
-        --row-gap: var(--inner-y-#{$y});
-      }
-      &.stack > * {
-        --stack-gap: var(--inner-y-#{$y});
-      }
+    .iy-#{$y} {
+      &.flow, &.grid { --row-gap: var(--inner-y-#{$y}); }
+      &.stack > * { --stack-gap: var(--inner-y-#{$y}); }
     }
   }
-
+  .ix-0 {
+    &.mcol, &.flow, &.grid { --column-gap: 0; }
+    &.chain > * { --chain-gap: 0; }
+  }
   @each $x in $inner-x-keys {
-    .x-#{$x} {
-      &.flow, &.grid {
-        --col-gap: var(--inner-x-#{$x});
-      }
-      &.chain > * {
-        --chain-gap: var(--inner-x-#{$x});
-      }
+    .ix-#{$x} {
+      &.mcol, &.flow, &.grid { --column-gap: var(--inner-x-#{$x}); }
+      &.chain > * { --chain-gap: var(--inner-x-#{$x}); }
     }
   }
 
