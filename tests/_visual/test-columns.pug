@@ -1,7 +1,7 @@
 extends _app
 
 append defs
-  - title = 'Test: Grid'
+  - title = 'Test: Columns'
 
 append head
   style.
@@ -10,6 +10,11 @@ append head
     }
 
     body { font-family: sans-serif; }
+
+    .mark {
+      background-color: #ddd;
+      background-clip: content-box;
+    }
 
     .label {
       width: 100%;
@@ -36,15 +41,54 @@ append head
 
 block body
 
-  .wrap-last.frame
-    .stack-l
-      .stack-s
-        h2 basics
-        h3 mcol
-        .mcol-3.span-9
-          p= _casual.text
-          //- p= _casual.title
-          //- p= _casual.title
+  .wrap-last.frame.frame-y
+    .stack-m
+      h2 basics
+
+      .stack-xs
+        h3 .mcol-3.span-9 with .nobr-inside break control
+        .stop: .mcol-3.mt-neg-xs.span-9
+          p.mark.pt-xs.span-all #[b This spans all columns, except in Firefox.] #{_casual.text}
+          p.mark.pt-xs.nobr-inside= _chance.paragraph({ sentences: 2 })
+          p.mark.pt-xs.nobr-inside= _chance.paragraph({ sentences: 2 })
+          p.mark.pt-xs.nobr-inside= _chance.paragraph({ sentences: 2 })
+        h3 .mcol-3.span-9 with .nobr-inside break control
+        .stop.span-9: .mcol-3.mt-neg-xs
+          //- .stop.pt-xs.nobr-inside.span-all: .label
+          //- .stop.pt-xs.nobr-inside: .label
+          //- .stop.pt-xs.nobr-inside: .label
+          //- .stop.pt-xs.nobr-inside: .label
+          p.mark.pt-xs.span-all #[b This spans all columns, except in Firefox.] #{_casual.text}
+          p.mark.pt-xs.nobr-inside= _chance.paragraph({ sentences: 2 })
+          p.mark.pt-xs.nobr-inside= _chance.paragraph({ sentences: 2 })
+          p.mark.pt-xs.nobr-inside= _chance.paragraph({ sentences: 2 })
+
+      .stack-xs
+        h3 .mcol with .flow inside
+        .stop.span-9: .mcol-3.mt-neg-xs
+          .stop.pt-xs.nobr-inside: .flow-xs
+            p.mark.span-2 #[b .span-2] #{_chance.paragraph({ sentences: 1 })}
+            p.mark.span-2.push-1 #[b .span-2] #{_chance.paragraph({ sentences: 1 })}
+          p.mark.pt-xs.nobr-inside #[b .span-2] #{_chance.paragraph({ sentences: 2})}
+          p.mark.pt-xs.nobr-inside #[b .span-2] #{_chance.paragraph({ sentences: 2})}
+
+      .stack-xs
+        h3 mcol with grid inside
+        .stop.span-9: .mcol-3.mt-neg-xs
+          .grid-xs.pt-xs.nobr-inside
+            .span-2= _chance.paragraph({ sentences: 1 })
+            .span-2= _chance.paragraph({ sentences: 1 })
+          p.pt-xs.nobr-inside= _chance.paragraph({ sentences: 3 })
+          p.pt-xs.nobr-inside= _chance.paragraph({ sentences: 3 })
+
+        h3 #[code .grid.span-9]
+        //- .stop.span-9: .grid
+        .grid.span-9
+          p.span-3= _chance.paragraph({ sentences: 3 })
+          p.span-3= _chance.paragraph({ sentences: 3 })
+          p.span-3= _chance.paragraph({ sentences: 3 })
+
+      .stack-xs
         h3 flow
         .stop: .flow-s
           .span-6: .label
@@ -57,6 +101,7 @@ block body
           .span-6.mcol-2
             p= _casual.title
             p= _casual.title
+      .stack-xs
         h3 grid
         .grid-s
           .span-3.row-span-2: .label

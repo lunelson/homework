@@ -1,3 +1,10 @@
+## better prefixing??
+
+consider using postcss-preset-env rather than autoprefixer
+
+https://github.com/csstools/postcss-preset-env
+https://preset-env.cssdb.org/playground
+
 ## reset
 
 1. extreme; for resetting children of an element

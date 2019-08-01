@@ -1,7 +1,7 @@
 .mcol, [class^=mcol-], [class*=" mcol-"] {
   column-fill: balance;
   column-width: auto;
-  column-count: var(--multi-column-span, var(--column-span, var(--column-count)));
+  column-count: var(--multi-column-count, var(--column-span, var(--column-count)));
   column-gap: var(--column-gap, var(--inner-x));
 }
 .mcol > *, [class^=mcol-] > *, [class*=" mcol-"] > * {
@@ -71,7 +71,7 @@
 }
 
 .mcol > [class^=span-], .mcol > [class*=" span-"], [class^=mcol-] > [class^=span-], [class^=mcol-] > [class*=" span-"], [class*=" mcol-"] > [class^=span-], [class*=" mcol-"] > [class*=" span-"] {
-  column-span: var(--multi-column-span, var(--column-span, var(--column-count)));
+  column-span: var(--multi-column-count, var(--column-span, var(--column-count)));
   width: initial;
 }
 
@@ -305,7 +305,7 @@
 }
 
 .mcol-1 {
-  --multi-column-span: 1 ;
+  --multi-column-count: 1 ;
 }
 
 .span-1 {
@@ -330,7 +330,7 @@
 }
 
 .mcol-2 {
-  --multi-column-span: 2 ;
+  --multi-column-count: 2 ;
 }
 
 .span-2 {
@@ -355,7 +355,7 @@
 }
 
 .mcol-3 {
-  --multi-column-span: 3 ;
+  --multi-column-count: 3 ;
 }
 
 .span-3 {
@@ -380,7 +380,7 @@
 }
 
 .mcol-4 {
-  --multi-column-span: 4 ;
+  --multi-column-count: 4 ;
 }
 
 .span-4 {
@@ -405,7 +405,7 @@
 }
 
 .mcol-5 {
-  --multi-column-span: 5 ;
+  --multi-column-count: 5 ;
 }
 
 .span-5 {
@@ -430,7 +430,7 @@
 }
 
 .mcol-6 {
-  --multi-column-span: 6 ;
+  --multi-column-count: 6 ;
 }
 
 .span-6 {
@@ -455,7 +455,7 @@
 }
 
 .mcol-7 {
-  --multi-column-span: 7 ;
+  --multi-column-count: 7 ;
 }
 
 .span-7 {
@@ -480,7 +480,7 @@
 }
 
 .mcol-8 {
-  --multi-column-span: 8 ;
+  --multi-column-count: 8 ;
 }
 
 .span-8 {
@@ -505,7 +505,7 @@
 }
 
 .mcol-9 {
-  --multi-column-span: 9 ;
+  --multi-column-count: 9 ;
 }
 
 .span-9 {
@@ -530,7 +530,7 @@
 }
 
 .mcol-10 {
-  --multi-column-span: 10 ;
+  --multi-column-count: 10 ;
 }
 
 .span-10 {
@@ -555,7 +555,7 @@
 }
 
 .mcol-11 {
-  --multi-column-span: 11 ;
+  --multi-column-count: 11 ;
 }
 
 .span-11 {
@@ -580,7 +580,7 @@
 }
 
 .mcol-12 {
-  --multi-column-span: 12 ;
+  --multi-column-count: 12 ;
 }
 
 .span-12 {
@@ -854,7 +854,7 @@
   }
 
   .mcol > [class^=a__span-], .mcol > [class*=" a__span-"], [class^=mcol-] > [class^=a__span-], [class^=mcol-] > [class*=" a__span-"], [class*=" mcol-"] > [class^=a__span-], [class*=" mcol-"] > [class*=" a__span-"] {
-    column-span: var(--multi-column-span, var(--column-span, var(--column-count)));
+    column-span: var(--multi-column-count, var(--column-span, var(--column-count)));
     width: initial;
   }
 
@@ -1088,7 +1088,7 @@
   }
 
   .mcol-1 {
-    --multi-column-span: 1 ;
+    --multi-column-count: 1 ;
   }
 
   .a__span-1 {
@@ -1113,7 +1113,7 @@
   }
 
   .mcol-2 {
-    --multi-column-span: 2 ;
+    --multi-column-count: 2 ;
   }
 
   .a__span-2 {
@@ -1138,7 +1138,7 @@
   }
 
   .mcol-3 {
-    --multi-column-span: 3 ;
+    --multi-column-count: 3 ;
   }
 
   .a__span-3 {
@@ -1163,7 +1163,7 @@
   }
 
   .mcol-4 {
-    --multi-column-span: 4 ;
+    --multi-column-count: 4 ;
   }
 
   .a__span-4 {
@@ -1188,7 +1188,7 @@
   }
 
   .mcol-5 {
-    --multi-column-span: 5 ;
+    --multi-column-count: 5 ;
   }
 
   .a__span-5 {
@@ -1213,7 +1213,7 @@
   }
 
   .mcol-6 {
-    --multi-column-span: 6 ;
+    --multi-column-count: 6 ;
   }
 
   .a__span-6 {
@@ -1238,7 +1238,7 @@
   }
 
   .mcol-7 {
-    --multi-column-span: 7 ;
+    --multi-column-count: 7 ;
   }
 
   .a__span-7 {
@@ -1263,7 +1263,7 @@
   }
 
   .mcol-8 {
-    --multi-column-span: 8 ;
+    --multi-column-count: 8 ;
   }
 
   .a__span-8 {
@@ -1288,7 +1288,7 @@
   }
 
   .mcol-9 {
-    --multi-column-span: 9 ;
+    --multi-column-count: 9 ;
   }
 
   .a__span-9 {
@@ -1313,7 +1313,7 @@
   }
 
   .mcol-10 {
-    --multi-column-span: 10 ;
+    --multi-column-count: 10 ;
   }
 
   .a__span-10 {
@@ -1338,7 +1338,7 @@
   }
 
   .mcol-11 {
-    --multi-column-span: 11 ;
+    --multi-column-count: 11 ;
   }
 
   .a__span-11 {
@@ -1363,7 +1363,7 @@
   }
 
   .mcol-12 {
-    --multi-column-span: 12 ;
+    --multi-column-count: 12 ;
   }
 
   .a__span-12 {
@@ -1637,7 +1637,7 @@
   }
 
   .mcol > [class^=b__span-], .mcol > [class*=" b__span-"], [class^=mcol-] > [class^=b__span-], [class^=mcol-] > [class*=" b__span-"], [class*=" mcol-"] > [class^=b__span-], [class*=" mcol-"] > [class*=" b__span-"] {
-    column-span: var(--multi-column-span, var(--column-span, var(--column-count)));
+    column-span: var(--multi-column-count, var(--column-span, var(--column-count)));
     width: initial;
   }
 
@@ -1871,7 +1871,7 @@
   }
 
   .mcol-1 {
-    --multi-column-span: 1 ;
+    --multi-column-count: 1 ;
   }
 
   .b__span-1 {
@@ -1896,7 +1896,7 @@
   }
 
   .mcol-2 {
-    --multi-column-span: 2 ;
+    --multi-column-count: 2 ;
   }
 
   .b__span-2 {
@@ -1921,7 +1921,7 @@
   }
 
   .mcol-3 {
-    --multi-column-span: 3 ;
+    --multi-column-count: 3 ;
   }
 
   .b__span-3 {
@@ -1946,7 +1946,7 @@
   }
 
   .mcol-4 {
-    --multi-column-span: 4 ;
+    --multi-column-count: 4 ;
   }
 
   .b__span-4 {
@@ -1971,7 +1971,7 @@
   }
 
   .mcol-5 {
-    --multi-column-span: 5 ;
+    --multi-column-count: 5 ;
   }
 
   .b__span-5 {
@@ -1996,7 +1996,7 @@
   }
 
   .mcol-6 {
-    --multi-column-span: 6 ;
+    --multi-column-count: 6 ;
   }
 
   .b__span-6 {
@@ -2021,7 +2021,7 @@
   }
 
   .mcol-7 {
-    --multi-column-span: 7 ;
+    --multi-column-count: 7 ;
   }
 
   .b__span-7 {
@@ -2046,7 +2046,7 @@
   }
 
   .mcol-8 {
-    --multi-column-span: 8 ;
+    --multi-column-count: 8 ;
   }
 
   .b__span-8 {
@@ -2071,7 +2071,7 @@
   }
 
   .mcol-9 {
-    --multi-column-span: 9 ;
+    --multi-column-count: 9 ;
   }
 
   .b__span-9 {
@@ -2096,7 +2096,7 @@
   }
 
   .mcol-10 {
-    --multi-column-span: 10 ;
+    --multi-column-count: 10 ;
   }
 
   .b__span-10 {
@@ -2121,7 +2121,7 @@
   }
 
   .mcol-11 {
-    --multi-column-span: 11 ;
+    --multi-column-count: 11 ;
   }
 
   .b__span-11 {
@@ -2146,7 +2146,7 @@
   }
 
   .mcol-12 {
-    --multi-column-span: 12 ;
+    --multi-column-count: 12 ;
   }
 
   .b__span-12 {
@@ -2420,7 +2420,7 @@
   }
 
   .mcol > [class^=c__span-], .mcol > [class*=" c__span-"], [class^=mcol-] > [class^=c__span-], [class^=mcol-] > [class*=" c__span-"], [class*=" mcol-"] > [class^=c__span-], [class*=" mcol-"] > [class*=" c__span-"] {
-    column-span: var(--multi-column-span, var(--column-span, var(--column-count)));
+    column-span: var(--multi-column-count, var(--column-span, var(--column-count)));
     width: initial;
   }
 
@@ -2654,7 +2654,7 @@
   }
 
   .mcol-1 {
-    --multi-column-span: 1 ;
+    --multi-column-count: 1 ;
   }
 
   .c__span-1 {
@@ -2679,7 +2679,7 @@
   }
 
   .mcol-2 {
-    --multi-column-span: 2 ;
+    --multi-column-count: 2 ;
   }
 
   .c__span-2 {
@@ -2704,7 +2704,7 @@
   }
 
   .mcol-3 {
-    --multi-column-span: 3 ;
+    --multi-column-count: 3 ;
   }
 
   .c__span-3 {
@@ -2729,7 +2729,7 @@
   }
 
   .mcol-4 {
-    --multi-column-span: 4 ;
+    --multi-column-count: 4 ;
   }
 
   .c__span-4 {
@@ -2754,7 +2754,7 @@
   }
 
   .mcol-5 {
-    --multi-column-span: 5 ;
+    --multi-column-count: 5 ;
   }
 
   .c__span-5 {
@@ -2779,7 +2779,7 @@
   }
 
   .mcol-6 {
-    --multi-column-span: 6 ;
+    --multi-column-count: 6 ;
   }
 
   .c__span-6 {
@@ -2804,7 +2804,7 @@
   }
 
   .mcol-7 {
-    --multi-column-span: 7 ;
+    --multi-column-count: 7 ;
   }
 
   .c__span-7 {
@@ -2829,7 +2829,7 @@
   }
 
   .mcol-8 {
-    --multi-column-span: 8 ;
+    --multi-column-count: 8 ;
   }
 
   .c__span-8 {
@@ -2854,7 +2854,7 @@
   }
 
   .mcol-9 {
-    --multi-column-span: 9 ;
+    --multi-column-count: 9 ;
   }
 
   .c__span-9 {
@@ -2879,7 +2879,7 @@
   }
 
   .mcol-10 {
-    --multi-column-span: 10 ;
+    --multi-column-count: 10 ;
   }
 
   .c__span-10 {
@@ -2904,7 +2904,7 @@
   }
 
   .mcol-11 {
-    --multi-column-span: 11 ;
+    --multi-column-count: 11 ;
   }
 
   .c__span-11 {
@@ -2929,7 +2929,7 @@
   }
 
   .mcol-12 {
-    --multi-column-span: 12 ;
+    --multi-column-count: 12 ;
   }
 
   .c__span-12 {

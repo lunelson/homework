@@ -7,6 +7,12 @@
 
 // stack, plain, chain, (shim) -- implicitly responsive
 
+// IDEA:
+// rev-stack-(y) => stack using bottom-margin
+// p-stack-(y) => stack using top-padding
+// rev-p-stack-(y) => stack using bottom-padding
+
+
 @mixin homework-setup-stack() {
 
   .flex-stack {

@@ -11,27 +11,32 @@
   $inner-y-keys: map-keys(inner-y-mods());
   $inner-x-keys: map-keys(inner-x-mods());
 
+  :root {
+    --ix: var(--inner-x);
+    --iy: var(--inner-y);
+  }
+
   // ix and iy co-classes for stack, chain, mcol, flow, grid
-  .iy-0 {
-    &.flow, &.grid { --row-gap: 0; }
-    &.stack > * { --stack-gap: 0; }
-  }
-  @each $y in $inner-y-keys {
-    .iy-#{$y} {
-      &.flow, &.grid { --row-gap: var(--inner-y-#{$y}); }
-      &.stack > * { --stack-gap: var(--inner-y-#{$y}); }
-    }
-  }
-  .ix-0 {
-    &.mcol, &.flow, &.grid { --column-gap: 0; }
-    &.chain > * { --chain-gap: 0; }
-  }
-  @each $x in $inner-x-keys {
-    .ix-#{$x} {
-      &.mcol, &.flow, &.grid { --column-gap: var(--inner-x-#{$x}); }
-      &.chain > * { --chain-gap: var(--inner-x-#{$x}); }
-    }
-  }
+  // .iy-0 {
+  //   &.flow, &.grid { --row-gap: 0; }
+  //   &.stack > * { --stack-gap: 0; }
+  // }
+  // @each $y in $inner-y-keys {
+  //   .iy-#{$y} {
+  //     &.flow, &.grid { --row-gap: var(--inner-y-#{$y}); }
+  //     &.stack > * { --stack-gap: var(--inner-y-#{$y}); }
+  //   }
+  // }
+  // .ix-0 {
+  //   &.mcol, &.flow, &.grid { --column-gap: 0; }
+  //   &.chain > * { --chain-gap: 0; }
+  // }
+  // @each $x in $inner-x-keys {
+  //   .ix-#{$x} {
+  //     &.mcol, &.flow, &.grid { --column-gap: var(--inner-x-#{$x}); }
+  //     &.chain > * { --chain-gap: var(--inner-x-#{$x}); }
+  //   }
+  // }
 
   // join with null, to also output suffix-less class
   @each $m in join((null), media-keys()) {
@@ -40,15 +45,15 @@
 
       $m__: m-prefix();
 
-      #{m-base-class('mt', false)}, #{m-base-class('my', false)} { margin-top: var(--mt); }
-      #{m-base-class('mr', false)}, #{m-base-class('mx', false)} { margin-right: var(--mr); }
-      #{m-base-class('mb', false)}, #{m-base-class('my', false)} { margin-bottom: var(--mb); }
-      #{m-base-class('ml', false)}, #{m-base-class('mx', false)} { margin-left: var(--ml); }
+      #{m-base-class('mt', false)}, #{m-base-class('my', false)} { margin-top: var(--mt) !important; }
+      #{m-base-class('mr', false)}, #{m-base-class('mx', false)} { margin-right: var(--mr) !important; }
+      #{m-base-class('mb', false)}, #{m-base-class('my', false)} { margin-bottom: var(--mb) !important; }
+      #{m-base-class('ml', false)}, #{m-base-class('mx', false)} { margin-left: var(--ml) !important; }
 
-      #{m-base-class('pt', false)}, #{m-base-class('py', false)} { padding-top: var(--pt); }
-      #{m-base-class('pr', false)}, #{m-base-class('px', false)} { padding-right: var(--pr); }
-      #{m-base-class('pb', false)}, #{m-base-class('py', false)} { padding-bottom: var(--pb); }
-      #{m-base-class('pl', false)}, #{m-base-class('px', false)} { padding-left: var(--pl); }
+      #{m-base-class('pt', false)}, #{m-base-class('py', false)} { padding-top: var(--pt) !important; }
+      #{m-base-class('pr', false)}, #{m-base-class('px', false)} { padding-right: var(--pr) !important; }
+      #{m-base-class('pb', false)}, #{m-base-class('py', false)} { padding-bottom: var(--pb) !important; }
+      #{m-base-class('pl', false)}, #{m-base-class('px', false)} { padding-left: var(--pl) !important; }
 
       @each $y in $inner-y-keys {
         .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y} { --mt: calc(var(--inner-y-#{$y}) * -1); }
@@ -57,6 +62,8 @@
         .#{$m__}my-#{$y}, .#{$m__}mb-#{$y} { --mb: var(--inner-y-#{$y}); }
         .#{$m__}py-#{$y}, .#{$m__}pt-#{$y} { --pt: var(--inner-y-#{$y}); }
         .#{$m__}py-#{$y}, .#{$m__}pb-#{$y} { --pb: var(--inner-y-#{$y}); }
+
+        .#{$m__}iy-#{$y} { --iy: var(--inner-y-#{$y}); }
       }
 
       @each $x in $inner-x-keys {
@@ -66,6 +73,8 @@
         .#{$m__}mx-#{$x}, .#{$m__}ml-#{$x} { --ml: var(--inner-x-#{$x}); }
         .#{$m__}px-#{$x}, .#{$m__}pr-#{$x} { --pr: var(--inner-x-#{$x}); }
         .#{$m__}px-#{$x}, .#{$m__}pl-#{$x} { --pl: var(--inner-x-#{$x}); }
+
+        .#{$m__}ix-#{$x} { --ix: var(--inner-x-#{$x}); }
       }
 
       .#{$m__}my-auto, .#{$m__}mt-auto { --mt: auto; }
@@ -81,6 +90,9 @@
       .#{$m__}px-0, .#{$m__}pr-0 { --pr: 0; }
       .#{$m__}py-0, .#{$m__}pb-0 { --pb: 0; }
       .#{$m__}px-0, .#{$m__}pl-0 { --pl: 0; }
+
+      .#{$m__}iy-0 { --iy: 0; }
+      .#{$m__}ix-0 { --ix: 0; }
     }
   }
 

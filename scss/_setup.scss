@@ -56,7 +56,7 @@ $homework-setup-done: false;
   @include homework-setup-page;
   @include homework-setup-columns;
   @include homework-setup-stack;
-  @include homework-setup-cell;
+  // @include homework-setup-cell;
   @include homework-setup-typo;
   @include homework-setup-atomic;
   @include homework-setup-helper;
