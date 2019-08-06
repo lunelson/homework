@@ -14,13 +14,8 @@ $m__: '';
   /*
     TODO: potential name changes:
 
-    --global-column-count
-    --local-column-count
-    --multi-column-count
-    --max-column-count
-
-    --column-span
-    --row-span
+    --column-count _-> --global-column-count
+    mcol --> multi
   */
 
   // MULTI-COLUMN LAYOUT
@@ -107,6 +102,11 @@ $m__: '';
     }
   }
 
+  /*
+$span-pair-list: #{map-inspect($span-pair-list)}
+$start-pair-list: #{map-inspect($start-pair-list)}
+$end-pair-list: #{map-inspect($end-pair-list)}
+  */
   @each $m in join((null), media-keys()) {
     @include m($m) {
       $m__: m-prefix() !global;
@@ -199,12 +199,22 @@ $m__: '';
           --multi-column-count: #{$span};
         }
 
-        // TODO: span-safe, span-min-(), span-max-()
+        // TODO: span-min-() --> maintain min of 2 columns, expand to fill.
+
+        // TODO: span-max-() --> maintain max of 2 columns, contract to fill.
 
         // span-(x) ==> --column-span = x
-        .#{$m__}span-#{$span} { --column-span: #{$span}; }
+        .#{$m__}span-#{$span} {
+          --column-span: #{$span};
+          & > * { --local-column-count: #{$span}; }
 
-        // TODO: row-span-safe, row-span-min-(), row-span-max-()
+          // NB: this is while CSS min() and max() functions are not yet supported
+          $span-max: m-var('column-count');
+          &.span-safe {
+            --column-span: #{min($span, $span-max)};
+            & > * { --local-column-count: #{min($span, $span-max)}; }
+          }
+        }
 
         // row-span-(y) ==> --row-span = y
         .#{$m__}row-span-#{$span} { --row-span: #{$span}; }
@@ -215,8 +225,6 @@ $m__: '';
       }
 
       @each $start, $pair-list in $start-pair-list {
-
-        // TODO: start-first
 
         // start-(s), col-(s)-() ==> --column-start = s
         .#{$m__}start-#{$start},
@@ -229,7 +237,11 @@ $m__: '';
 
       @each $end, $pair-list in $end-pair-list {
 
-        // TODO: end-last, end-neg-(e)
+        // end-neg-(e)
+        .#{$m__}end-neg-#{$end - 1} { --column-end: #{($end - 1)*-1}; }
+
+        // row-end-neg-(e)
+        .#{$m__}row-end-neg-#{$end - 1} { --row-end: #{($end - 1)*-1}; }
 
         // end-(e), col-()-(e) ==> --column-end = e
         .#{$m__}end-#{$end},

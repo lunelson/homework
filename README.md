@@ -109,7 +109,7 @@ some of these classes are inside the border, some outside
 ### utils
 ### debug
 
-## on the design process
+## On the Approach
 
 To me, the whole idea of custom properties is that they should work efficiently with inheritance and cascade enabling precise and powerful control.
 
@@ -125,6 +125,11 @@ Homework is a WIP Sass CSS framework, focused on design-oriented generic-object 
 
 - hybrid utility-first / object-oriented approach, focused on layout and typography "primitives"
 - responsive (@media-scoped) values
+
+### other methodologies
+
+* https://github.com/sky-uk/css
+* https://css-tricks.com/combining-the-powers-of-sem-and-bio-for-improving-css/
 
 ## Compatibility
 
