@@ -87,7 +87,7 @@ typography, local -- (f-, plain > *)
     --trim-top-adjust
       --dist-capline
       --dist-baseline
-      --adjust-adjacent
+      --trim-adjacent
 
 theme -- fg, bg, bd, ol, fill, stroke, round,
 

@@ -46,7 +46,7 @@ homework/
       [element].reset -- element specific resets
   setup-core (implicit)
       (m), :root
-  setup-page (explicit)
+  setup-outer (explicit)
       wrap, peel, frame, bleed,
   setup-stack (implicit)
       stack, plain, chain, (shim)
@@ -59,7 +59,7 @@ homework/
       ? fs- italic, normal
       ? fw- bold, bolder, light, etc. normal
       `.caps` (and `.smcp`) co-class(es) for `.f-` classes, with different spacing
-  setup-atomic (explicit)
+  setup-inner (explicit)
       m+, p+, w, h, minh, maxh, minw, maxw
         NB: add w-viewport, h-viewport
       d, z (00-90)
@@ -68,7 +68,7 @@ homework/
       op -- (opacity) 00,02,04,06,08,10
       * replace fit with obj: .obj-contain /-cover /-fill /-none /-scale-down /-bottom /-center /-left /-left-bottom /-left-top /-right /-right-bottom /-right-top /-top
       (scroll-[auto|touch]) -- should maybe just be in reset
-  setup-helper (static||explicit)
+  setup-utilities (static||explicit)
       (optional) clearfix, flt-left/-right/-none, clr-left/-right/-none
       skip -- see https://medium.freecodecamp.org/how-to-design-website-layouts-for-screen-readers-347b7b06e9cc
       clip, over-[auto|scroll|hidden|visible], clip-[x|y], over-[x|y]-[auto|scroll|hidden|visible]

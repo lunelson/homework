@@ -7,9 +7,9 @@
 //                          __/ |
 //                         |___/
 
-// NOTES
-// - $wrap-last should be changed to a more complex parameter:
-//   - e.g. 'last' vs 'all' vs false, depending on whether design is responsive vs. adaptive, and/or wrapped at last mq
+// TODO
+// $wrap-last should be changed to a more complex parameter:
+// - e.g. 'last' vs 'all' vs false, depending on whether design is responsive vs. adaptive, and/or wrapped at last mq
 
 @mixin homework-setup-debug($modern: true, $wrap-last: true, $color: rgba(200,200,200,0.2)) {
 
@@ -27,7 +27,7 @@
       position: fixed;
       bottom: 0;
       left: 0;
-      z-index: 112; // higher than all other layers ??
+      z-index: 999;
     }
     &::before {
       background-color: $color;

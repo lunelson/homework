@@ -42,6 +42,16 @@
   @return $out;
 }
 
+@function __list-to-index-map($arg) {
+  @if type-of($arg) == 'map' { @return $arg; }
+  @if type-of($arg) != 'list' { @return error('__list-to-index-map: $arg must be a list'); }
+  $out: ();
+  @for $n from 1 through length($arg) {
+    $out: map-merge($out, ($n: nth($arg, $n)));
+  }
+  @return $out;
+}
+
 @function join-all($lists...) {
   $result: ();
   @each $list in $lists {

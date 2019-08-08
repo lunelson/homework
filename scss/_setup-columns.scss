@@ -11,13 +11,6 @@ $m__: '';
 
 @mixin homework-setup-columns($max-columns: --max-columns()) {
 
-  /*
-    TODO: potential name changes:
-
-    --column-count _-> --global-column-count
-    mcol --> multi
-  */
-
   // MULTI-COLUMN LAYOUT
   // issues: https://caniuse.com/#feat=multicolumn
   #{base-class('mcol')} {
@@ -35,6 +28,7 @@ $m__: '';
     }
   }
 
+  // FLEXBOX-FLOW LAYOUT
   #{base-class('flow')} {
     display: flex !important;
     flex-direction: row;
@@ -57,6 +51,7 @@ $m__: '';
     }
   }
 
+  // GRID LAYOUT
   #{base-class('grid')} {
     display: grid !important;
     grid-gap: var(--row-gap, var(--iy)) var(--column-gap, var(--ix));
@@ -81,9 +76,9 @@ $m__: '';
   }
 
   // break classes for mcol children
-  .br-inside { break-inside: always; }
-  .br-before { break-before: always; }
-  .br-after { break-after: always; }
+  .br-inside { break-inside: auto; }
+  .br-before { break-before: auto; }
+  .br-after { break-after: auto; }
   .nobr-inside { break-inside: avoid; }
   .nobr-before { break-before: avoid; }
   .nobr-after { break-after: avoid; }

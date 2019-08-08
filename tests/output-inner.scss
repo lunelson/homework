@@ -53,7 +53,7 @@ $media: (
 );
 
 @include homework-setup-core();
-@include homework-setup-atomic();
+@include homework-setup-inner();
 
 // .test {
 //   floor-to: floor-to(1.3333,2);

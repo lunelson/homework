@@ -1,0 +1,25 @@
+  // disable pointer on scrolling
+  .is-scrolling,
+  .is-scrolling * {
+    pointer-events: none !important;
+  }
+
+    /////////////////////////////////////////////
+  /////////////// float / clear ///////////////
+  /////////////////////////////////////////////
+
+  // ADD: flt-left/-right/-none, clr-left/-right/-none
+  // ADD: $float option in mixin, default false
+
+  // https://css-tricks.com/snippets/css/clear-fix/
+  .clearfix {
+    &::after {
+      content:"";
+      display:table;
+      clear:both;
+    }
+    @supports (display: flow-root) {
+      display: flow-root;
+      &::after { content: none; }
+    }
+  }

@@ -1,9 +1,3 @@
-/*
-    TODO: potential name changes:
-
-    --column-count _-> --global-column-count
-    mcol --> multi
-  */
 .mcol, [class^="mcol-"], [class*=" mcol-"] {
   column-fill: balance;
   column-width: auto;
@@ -77,15 +71,15 @@
 }
 
 .br-inside {
-  break-inside: always;
+  break-inside: auto;
 }
 
 .br-before {
-  break-before: always;
+  break-before: auto;
 }
 
 .br-after {
-  break-after: always;
+  break-after: auto;
 }
 
 .nobr-inside {

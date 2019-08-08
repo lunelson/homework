@@ -24,17 +24,6 @@ $shadows: (
   l: 2 3 4 5,
 ) !default;
 
-@function list-to-map($arg) {
-  @if type-of($arg) == 'map' { @return $arg; }
-  @if type-of($arg) != 'list' { @return error('list-to-map: $arg must be a list'); }
-  $out: ();
-  @for $n from 1 through length($arg) {
-    $out: map-merge($out, ($n: nth($arg, $n)));
-  }
-  @return $out;
-}
-
-
 @mixin homework-setup-theme($base: lite) {
 
   $colors: map-merge((
@@ -47,13 +36,9 @@ $shadows: (
   :root {
     // NB: color custom props stored as RGB number list!!!!
     // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
-    // @each $c, $color in $colors {
-    //   --color-#{$c}: #{rgbify($color)};
-    //   --contrast-#{$c}: #{rgbify(contrast-color($color))};
-    // }
     @each $c, $color in $colors {
       @if length($color) > 1 {
-        @each $n, $subcolor in list-to-map($color) {
+        @each $n, $subcolor in __list-to-index-map($color) {
           --color-#{$c}-#{$n}: #{rgbify($subcolor)};
           --contrast-#{$c}-#{$n}: #{rgbify(contrast-color($subcolor))};
           $color-names: append($color-names, #{$c}-#{$n});
@@ -79,7 +64,7 @@ $shadows: (
     background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
   }
   #{base-class('bd', false)} {
-    border-color: rgba(var(--bd-color, --fg-color), var(--bd-opacity, 1));
+    border-color: rgba(var(--bd-color, var(--fg-color)), var(--bd-opacity, 1));
     border-style: var(--bd-style, solid);
     border-top-width: var(--bd-top-width, 0);
     border-right-width: var(--bd-right-width, 0);
@@ -87,7 +72,7 @@ $shadows: (
     border-left-width: var(--bd-left-width, 0);
   }
   #{base-class('ol', false)} {
-    outline-color: rgba(var(--ol-color, --fg-color), var(--ol-opacity, 1));
+    outline-color: rgba(var(--ol-color, var(--fg-color)), var(--ol-opacity, 1));
     outline-width: var(--ol-width);
   }
 
@@ -103,7 +88,7 @@ $shadows: (
   }
 
   /////////////////////////////////////////////
-  ////////////////// [color] //////////////////
+  ////////////////// [prop-]color //////////////////
   /////////////////////////////////////////////
 
   @each $c in $color-names {
@@ -120,20 +105,31 @@ $shadows: (
   }
 
   /////////////////////////////////////////////
-  ///////////////// [opacity] /////////////////
+  ///////////////// [prop-]opacity /////////////////
   /////////////////////////////////////////////
+
+  // fade (opacity) 00,02,04,06,08,10
+  @for $n from 0 through 9 { .op-#{$n}0 { opacity: $n/10; } }
+  // .op-100 { opacity: 1; } // almost no need !
 
   @for $n from 0 through 9 {
-    .fg-fade-#{$n} { --fg-opacity: #{$n/10}; }
-    .bg-fade-#{$n} { --bg-opacity: #{$n/10}; }
-    .bd-fade-#{$n} { --bd-opacity: #{$n/10}; }
-    .ol-fade-#{$n} { --ol-opacity: #{$n/10}; }
-    .fill-fade-#{$n} { --fill-opacity: #{$n/10}; }
-    .stroke-fade-#{$n} { --stroke-opacity: #{$n/10}; }
+    .fg-op-#{$n}0 { --fg-opacity: #{$n/10}; }
+    .bg-op-#{$n}0 { --bg-opacity: #{$n/10}; }
+    .bd-op-#{$n}0 { --bd-opacity: #{$n/10}; }
+    .ol-op-#{$n}0 { --ol-opacity: #{$n/10}; }
+    .fill-op-#{$n}0 { --fill-opacity: #{$n/10}; }
+    .stroke-op-#{$n}0 { --stroke-opacity: #{$n/10}; }
   }
 
+  // .fg-clear, .fg-transparent { --fg-opacity: 0; }
+  // .bg-clear, .bg-transparent { --bg-opacity: 0; }
+  // .bd-clear, .bd-transparent { --bd-opacity: 0; }
+  // .ol-clear, .ol-transparent { --ol-opacity: 0; }
+  // .fill-clear, .fill-transparent { --fill-opacity: 0; }
+  // .stroke-clear, .stroke-transparent { --stroke-opacity: 0; }
+
   /////////////////////////////////////////////
-  ////////////////// contrast /////////////////
+  ////////////////// contrast [prop-]color /////////////////
   /////////////////////////////////////////////
 
   // rare case, of choosing black/white vs fg color
@@ -146,7 +142,7 @@ $shadows: (
   .stroke-contrast { --stroke-color: var(--bg-contrast); }
 
   /////////////////////////////////////////////
-  /////////////////// theme ///////////////////
+  /////////////////// theme [prop-]color ///////////////////
   /////////////////////////////////////////////
 
   .fg-theme { --fg-color: var(--theme-color);
@@ -159,25 +155,14 @@ $shadows: (
   .stroke-theme { --stroke-color: var(--theme-color); }
 
   /////////////////////////////////////////////
-  ////////////////// current //////////////////
+  ////////////////// currentColor //////////////////
   /////////////////////////////////////////////
 
   .fill-current { fill: currentColor; } // ? --fill-color: var(--fg-color);
   .stroke-current { stroke: currentColor; } // ? --stroke-color: var(--fg-color);
 
   /////////////////////////////////////////////
-  //////////////// transparent ////////////////
-  /////////////////////////////////////////////
-
-  // NOTE: these could also work by setting respective --[key]-opacity to 0
-  .bg-clear { background-color: transparent; } // ? --bg-color: initial;
-  .bd-clear { border-color: transparent; } // ? --bd-color: initial;
-  .ol-clear { outline-color: transparent; } // ? --ol-color: initial;
-  .fill-clear { fill: transparent; } // ? --fill-color: initial;
-  .stroke-clear { stroke: transparent; } // ? --stroke-color: initial;
-
-  /////////////////////////////////////////////
-  ////////////////// [width] //////////////////
+  ////////////////// border-/stroke-/outline-width //////////////////
   /////////////////////////////////////////////
 
   @each $w in join((0), $widths) {
@@ -191,15 +176,15 @@ $shadows: (
   }
 
   /////////////////////////////////////////////
-  ////////////////// [radius] /////////////////
+  /////////////// border-radius ///////////////
   /////////////////////////////////////////////
 
   @each $r in $radii {
     :root { --radius-#{$r}: #{$r * 1px}; }
-    .rnd-#{$r}, .rnd-t-#{$r}, .rnd-tl-#{$r} { border-top-left-radius: var(--radius-#{$r}); }
-    .rnd-#{$r}, .rnd-t-#{$r}, .rnd-tr-#{$r} { border-top-right-radius: var(--radius-#{$r}); }
-    .rnd-#{$r}, .rnd-b-#{$r}, .rnd-bl-#{$r} { border-bottom-left-radius: var(--radius-#{$r}); }
-    .rnd-#{$r}, .rnd-b-#{$r}, .rnd-br-#{$r} { border-bottom-right-radius: var(--radius-#{$r}); }
+    .br-#{$r}, .br-t-#{$r}, .br-tl-#{$r} { border-top-left-radius: var(--radius-#{$r}); }
+    .br-#{$r}, .br-t-#{$r}, .br-tr-#{$r} { border-top-right-radius: var(--radius-#{$r}); }
+    .br-#{$r}, .br-b-#{$r}, .br-bl-#{$r} { border-bottom-left-radius: var(--radius-#{$r}); }
+    .br-#{$r}, .br-b-#{$r}, .br-br-#{$r} { border-bottom-right-radius: var(--radius-#{$r}); }
   }
   .oval { border-radius: 50%; }
   .pill { border-radius: 50vmin; }
@@ -222,15 +207,4 @@ $shadows: (
 
   // bg-[position], bg-[attachment]
   // bd-collapse/-separate
-
-  /////////////////////////////////////////////
-  ////////////////// [states] /////////////////
-  /////////////////////////////////////////////
-
-  // hov, hover
-  // foc, focus
-  // act, active
-  // dis, disabled
-  // parent-hov, parent-hover
-  // foc-within, focus-within
 }

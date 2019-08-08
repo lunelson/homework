@@ -9,20 +9,20 @@
   $media-orig: $media !global;
   $root: --parse-medium(map-merge($root-defaults, $root), 16px) !global;
 
-  $outgoing-medium: $root;
-  $reference-medium-keys: append(map-keys($root), 'breakpoint');
-  @each $m, $incoming-medium in $media {
+  $ref-medium: $root;
+  $ref-medium-keys: append(map-keys($root), 'breakpoint');
+  @each $m, $src-medium in $media {
 
-    @if not-contained(map-keys($incoming-medium), 'breakpoint') {
+    @if not-contained(map-keys($src-medium), 'breakpoint') {
       @include throw-error('homework: one of your $media does not have a breakpoint key');
     }
 
-    @if any-not-contained($reference-medium-keys, map-keys($incoming-medium)) {
+    @if any-not-contained($ref-medium-keys, map-keys($src-medium)) {
       @include throw-error('homework: one of your $media contains a key which is not present in $root');
     }
 
-    $outgoing-medium: --parse-medium(--deep-merge($outgoing-medium, $incoming-medium));
-    $media: map-merge($media, ($m: $outgoing-medium)) !global;
+    $ref-medium: --parse-medium(--deep-merge($ref-medium, $src-medium));
+    $media: map-merge($media, ($m: $ref-medium)) !global;
 
   }
 }

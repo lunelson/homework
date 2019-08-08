@@ -1,0 +1,155 @@
+@mixin homework-setup-utilities-m() {
+
+  @each $m in join(null, map-keys($media)) {
+
+    @include m($m) {
+
+      $m__: m-prefix();
+
+      /////////////////////////////////////////////
+      //////////////// width/height ///////////////
+      /////////////////////////////////////////////
+
+      // NOTE: add minh, maxh, minw, maxw ?
+
+      .#{$m__}w-viewport { width: 100vw; }
+      .#{$m__}w-unset { width: unset; }
+      .#{$m__}w-auto { width: auto; }
+      .#{$m__}w-100 { width: 100%; }
+      .#{$m__}w-0 { width: 0; }
+
+      .#{$m__}h-viewport { height: 100vh; }
+      .#{$m__}h-unset { height: unset; }
+      .#{$m__}h-auto { height: auto; }
+      .#{$m__}h-100 { height: 100%; }
+      .#{$m__}h-0 { height: 0; }
+
+      // hide/show, without removing from DOM
+      .#{$m__}hide {
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+      }
+      .#{$m__}show {
+        pointer-events: initial;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      // display
+      .#{$m__}d-none { display: none !important; }
+      .#{$m__}d-flex { display: flex !important; }
+      .#{$m__}d-flex-y { display: flex !important; flex-direction: column; }
+      .#{$m__}d-grid { display: grid !important; }
+      .#{$m__}d-grid-y { display: grid !important; grid-auto-flow: column; }
+      .#{$m__}d-block { display: block !important; }
+      .#{$m__}d-iblock { display: inline-block !important; vertical-align: baseline; }
+      .#{$m__}d-inline { display: inline !important; vertical-align: baseline; }
+
+      /////////////////////////////////////////////
+      ////////////////// z-index //////////////////
+      /////////////////////////////////////////////
+
+      .#{$m__}z-00 { z-index: 0; }
+      @for $n from 1 through 10 { .#{$m__}z-#{$n*10} { z-index: $n*10; } }
+
+      /////////////////////////////////////////////
+      ////////////////// position /////////////////
+      /////////////////////////////////////////////
+
+      .#{$m__}p-static { position: static; }
+      .#{$m__}p-rel { position: relative; }
+      #{m-base-class('fix')} { position: fixed; }
+      .#{$m__}p-fix-tl { top: 0; left: 0; }
+      .#{$m__}p-fix-tr { top: 0; right: 0; }
+      .#{$m__}p-fix-bl { bottom: 0; left: 0; }
+      .#{$m__}p-fix-br { bottom: 0; right: 0; }
+      .#{$m__}p-fix-trbl { top: 0; right: 0; bottom: 0; left: 0; }
+      #{m-base-class('abs')} { position: absolute; }
+      .#{$m__}p-abs-tl { top: 0; left: 0; }
+      .#{$m__}p-abs-tr { top: 0; right: 0; }
+      .#{$m__}p-abs-bl { bottom: 0; left: 0; }
+      .#{$m__}p-abs-br { bottom: 0; right: 0; }
+      .#{$m__}p-abs-trbl { top: 0; right: 0; bottom: 0; left: 0; }
+      .#{$m__}p-abs-cover { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+      .#{$m__}p-abs-contain { top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+
+      /////////////////////////////////////////////
+      ////////////// inline alignment /////////////
+      /////////////////////////////////////////////
+
+      .#{$m__}a-left { text-align: left }
+      .#{$m__}a-center { text-align: center }
+      .#{$m__}a-right { text-align: right }
+      .#{$m__}a-justify { text-align: justify }
+      .#{$m__}a-top { vertical-align: top }
+      .#{$m__}a-middle { vertical-align: middle }
+      .#{$m__}a-baseline { vertical-align: baseline }
+      .#{$m__}a-bottom { vertical-align: bottom }
+
+      /////////////////////////////////////////////
+      ////////////// block alignment //////////////
+      /////////////////////////////////////////////
+
+      // align-items
+      .#{$m__}ai-stretch { align-items: stretch; }
+      .#{$m__}ai-center { align-items: center; }
+      .#{$m__}ai-baseline { align-items: baseline; }
+      .#{$m__}ai-start { align-items: flex-start; }
+      .#{$m__}ai-end { align-items: flex-end; }
+
+      // align-self
+      .#{$m__}as-stretch { align-self: stretch; }
+      .#{$m__}as-center { align-self: center; }
+      .#{$m__}as-baseline { align-self: baseline; }
+      .#{$m__}as-start { align-self: flex-start; }
+      .#{$m__}as-end { align-self: flex-end; }
+
+      // align-content
+      .#{$m__}ac-stretch { align-content: stretch; }
+      .#{$m__}ac-center { align-content: center; }
+      .#{$m__}ac-baseline { align-content: baseline; }
+      .#{$m__}ac-start { align-content: flex-start; }
+      .#{$m__}ac-end { align-content: flex-end; }
+      .#{$m__}ac-between { align-content: space-between; }
+      .#{$m__}ac-around { align-content: space-around; }
+
+      // justify-content
+      .#{$m__}jc-stretch { justify-content: stretch; }
+      .#{$m__}jc-center { justify-content: center; }
+      .#{$m__}jc-start { justify-content: flex-start; }
+      .#{$m__}jc-end { justify-content: flex-end; }
+      .#{$m__}jc-between { justify-content: space-between; }
+      .#{$m__}jc-around { justify-content: space-around; }
+      .#{$m__}jc-evenly { justify-content: space-evenly; }
+
+      // flex
+      .#{$m__}flex-1-0 { flex: 1 0 auto; }
+      .#{$m__}flex-0-1 { flex: 0 1 auto; }
+      .#{$m__}flex-1-1 { flex: 1 1 auto; }
+      .#{$m__}flex-0-0 { flex: 0 0 auto; }
+
+      /////////////////////////////////////////////
+      //////////// object-fit/-position ///////////
+      /////////////////////////////////////////////
+
+      // obj-contain /-cover /-fill /-none /-scale-down
+      .#{$m__}fit-none { object-fit: none; }
+      .#{$m__}fit-fill { object-fit: fill; }
+      .#{$m__}fit-cover { object-fit: cover; }
+      .#{$m__}fit-contain { object-fit: contain; }
+      .#{$m__}fit-scale-down { object-fit: scale-down; }
+
+      // obj-bottom /-center /-left /-left-bottom /-left-top /-right /-right-bottom /-right-top /-top
+      // .#{$m__}obj-bottom { object-position: bottom; }
+      // .#{$m__}obj-center { object-position: center; }
+      // .#{$m__}obj-left { object-position: left; }
+      // .#{$m__}obj-left-bottom { object-position: left-bottom; }
+      // .#{$m__}obj-left-top { object-position: left-top; }
+      // .#{$m__}obj-right { object-position: right; }
+      // .#{$m__}obj-right-bottom { object-position: right-bottom; }
+      // .#{$m__}obj-right-top { object-position: right-top; }
+      // .#{$m__}obj-top { object-position: top; }
+    }
+  }
+}

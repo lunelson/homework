@@ -51,6 +51,9 @@
     white-space: normal;
   }
 
+  strong, b, h1, h2, h3, h4, h5, h6 { font-weight: 700; }
+  em, i { font-style: italic; }
+
   // UI ELEMENTS
   // a, button, datalist, fieldset, form, input, keygen, label, legend, meter, optgroup, option, output, progress, select, textarea
 

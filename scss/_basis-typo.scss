@@ -20,12 +20,12 @@ $fonts-defaults: (
 
 $font-default: (
   line-height: 1.4em,
+  letter-spacing: 0px, // calc(1px - 0.025em),
+  font-feature-settings: (), // ('kern' 1),
   dist-capline: 0em,
   dist-baseline: 0em,
   trim-sides: 0, // calc(1px - 0.1em),
-  letter-spacing: 0px, // calc(1px - 0.025em),
-  adjust-adjacent: (1em/8), // calc((1em - 1ex)/2),
-  font-feature-settings: (), // ('kern' 1),
+  trim-adjacent: (1em/8), // calc((1em - 1ex)/2),
 );
 
 // NOTES re feature-settings
@@ -53,7 +53,7 @@ $font-default: (
     --trim-sides: var(--trim-sides-#{$f});
     --dist-capline: var(--dist-capline-#{$f});
     --dist-baseline: var(--dist-baseline-#{$f});
-    --adjust-adjacent: var(--adjust-adjacent-#{$f});
+    --trim-adjacent: var(--trim-adjacent-#{$f});
   }
 }
 

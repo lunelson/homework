@@ -50,8 +50,8 @@
     }
   }
 
-  .stack-0 > * { --stack-gap: 0; }
-  .chain-0 > * { --chain-gap: 0; }
+  // .stack-0 > * { --stack-gap: 0; }
+  // .chain-0 > * { --chain-gap: 0; }
 
   $inner-y-keys: map-keys(inner-y-mods());
   $inner-x-keys: map-keys(inner-x-mods());

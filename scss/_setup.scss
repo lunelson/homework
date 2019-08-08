@@ -9,59 +9,31 @@
 
 @import "setup-core";
 @import "setup-root";
-@import "setup-page";
+@import "setup-outer";
+@import "setup-inner";
 @import "setup-columns";
 @import "setup-stack";
-@import "setup-cell";
 @import "setup-typo";
-@import "setup-atomic";
-@import "setup-helper";
 @import "setup-theme";
 @import "setup-state";
 @import "setup-debug";
+@import "setup-utilities";
+@import "setup-utilities-m";
 
 $homework-setup-done: false;
 
 @mixin homework-setup($setups...) {
-  // $setups: if(length($setups) > 0, $setups, (
-  //   "core",
-  //   "root",
-  //   "page",
-  //   "stack",
-  //   "grid",
-  //   "cell",
-  //   "typo",
-  //   "atomic",
-  //   "helper",
-  //   "theme",
-  //   "state",
-  //   "debug",
-  // ));
-
-  // @if index($setups, "core") { @include homework-setup-core; }
-  // @if index($setups, "root") { @include homework-setup-root; }
-  // @if index($setups, "page") { @include homework-setup-page; }
-  // @if index($setups, "grid") { @include homework-setup-columns; }
-  // @if index($setups, "stack") { @include homework-setup-stack; }
-  // @if index($setups, "cell") { @include homework-setup-cell; }
-  // @if index($setups, "typo") { @include homework-setup-typo; }
-  // @if index($setups, "atomic") { @include homework-setup-atomic; }
-  // @if index($setups, "helper") { @include homework-setup-helper; }
-  // @if index($setups, "theme") { @include homework-setup-theme; }
-  // @if index($setups, "state") { @include homework-setup-state; }
-  // @if index($setups, "debug") { @include homework-setup-debug; }
-
   @include homework-setup-core;
   @include homework-setup-root;
-  @include homework-setup-page;
+  @include homework-setup-outer;
+  @include homework-setup-inner;
   @include homework-setup-columns;
   @include homework-setup-stack;
-  // @include homework-setup-cell;
   @include homework-setup-typo;
-  @include homework-setup-atomic;
-  @include homework-setup-helper;
   @include homework-setup-theme;
   @include homework-setup-state;
   @include homework-setup-debug;
+  @include homework-setup-utilities;
+  @include homework-setup-utilities-m;
   $homework-setup-done: true !global;
 }
