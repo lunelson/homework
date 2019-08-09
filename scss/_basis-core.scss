@@ -12,6 +12,8 @@ $media: () !default;
 $root-orig: ();
 $media-orig: ();
 
+// this global var is the basis of m() and mm() mixin functionality
+// it should be upgraded when new mixin-argument API has shipped
 $curr-m: null;
 
 $root-defaults: (
@@ -68,8 +70,6 @@ $media-defaults: (
 
 @function m-orig-var($key, $m: $curr-m) { @return map-get(m-orig($m), $key...); }
 @function m-var-orig($args...) { @return m-orig-var($args...);} // re confusion
-
-@function media-keys() { @return map-keys($media); }
 
 @mixin m($min, $max: null) {
   $prev-m: $curr-m;
@@ -162,7 +162,7 @@ $media-defaults: (
 }
 
 @function --max-columns() {
-  @if not (length($media) > 0) { @return m-var('column-count'); }
+  @if not (length($media) > 0) { @return map-get($root, 'column-count'); }
   $column-counts: ();
   @each $m, $medium in $media {
     $column-counts: append($column-counts, map-get($media, $m, 'column-count'));
@@ -191,14 +191,14 @@ $media-defaults: (
 }
 
 @function --mm-slice($lo: null, $hi: null) {
-  $keys: join(join(null, media-keys()), null);
+  $keys: join(join(null, map-keys($media)), null);
   $index1: if($lo, index($keys, $lo), 1);
   $index2: if($hi, index($keys, $hi), length($keys));
   @return if($index1 and $index2, --slice($keys, $index1, $index2), ());
 }
 
 @function --mm-where($props...) {
-  $result: --mm-filter-orig(media-keys(), $props...);
+  $result: --mm-filter-orig(map-keys($media), $props...);
   @return if(length($result) > 0, join(join(null, $result), null), ());
 }
 

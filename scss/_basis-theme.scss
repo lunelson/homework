@@ -46,6 +46,8 @@
 @function rgbify($c) { @return red($c), green($c), blue($c); }
 @function hslify($c) { @return hue($c), saturation($c), lightness($c); }
 
+// COLOR FUNCTIONS UNLOADING
+
 $fn-rgb: get-function('rgb');
 $fn-rgba: get-function('rgba');
 $fn-hsl: get-function('hsl');

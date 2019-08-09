@@ -6,6 +6,7 @@
 //  \___\___/|_|\__,_|_| |_| |_|_| |_|___/
 
 $m__: '';
+
 @function m__col-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}col-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
 @function m__row-start-to-end($pair, $_...) { @return selector-parse('.#{$m__}row-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
 
@@ -102,9 +103,9 @@ $span-pair-list: #{map-inspect($span-pair-list)}
 $start-pair-list: #{map-inspect($start-pair-list)}
 $end-pair-list: #{map-inspect($end-pair-list)}
   */
-  @each $m in join((null), media-keys()) {
+  @each $m in join((null), map-keys($media)) {
     @include m($m) {
-      $m__: m-prefix() !global;
+      $m__: state-prefix() !global;
 
       // contexts: solo, flow, mcol; reset: grid
       #{m-base-class('span', false)} {
