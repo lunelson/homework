@@ -1,0 +1,51 @@
+@function test_fn($args...) { @return $args; }
+
+$test-fn: get-function(test-fn);
+
+.test {
+  output: call($test-fn, foo, bar);
+}
+
+// @function __map($list, $func, $args...) {
+//   @if length($list) == 0 { @return (); }
+//   $result: ();
+//   @for $i from 1 through length($list) {
+//     $result: append($result, call(get-function($func), nth($list, $i), $i, $list, $args...), 'comma');
+//   }
+//   @return $result;
+// }
+
+// $pairs: ((1 2) (2 3) (3 4) (4 5) (5 6) (6 7) (7 8) (8 9) (9 10) (10 11) (11 12) (12 13) (13 14) (14 15));
+
+// @function test_function($pair, $_...) { @return selector-parse('.col-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+
+// .test {
+//   out: inspect(__map($pairs, 'test_function'));
+// }
+
+
+// // pre-calculations
+// $max-column-count: 14;
+// $span-pair-list: ();
+// $start-pair-list: ();
+// $end-pair-list: ();
+// @for $end from 2 through ($max-column-count + 1) {
+//   @for $start from 1 through ($end - 1) {
+//     $span: ($end - $start);
+//     $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
+//     $start-pair-list: map-merge($start-pair-list, ($start: append(map-get($start-pair-list, $start) or (), ($start $end))));
+//     $end-pair-list: map-merge($end-pair-list, ($end: append(map-get($end-pair-list, $end) or (), ($start $end))));
+//   }
+// }
+
+// /* #{inspect($span-pair-list)} */
+
+// @function m--col-start-to-end($pair, $_...) { @return selector-parse('.col-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+// @function m--row-start-to-end($pair, $_...) { @return selector-parse('.row-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+
+// .test {
+//   out: inspect(__map($pairs, 'm--col-start-to-end'));
+//   @each $span, $pair-list in $span-pair-list {
+//     out: inspect(__map($pair-list, 'm--col-start-to-end'));
+//   }
+// }

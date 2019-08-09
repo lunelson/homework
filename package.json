@@ -32,9 +32,9 @@
     "@lunelson/sass-maps-next": "latest",
     "@lunelson/sass-throw": "latest",
     "@lunelson/sass-u": "latest",
-    "ava": "^2.1.0",
-    "del": "^4.1.1",
-    "destyle.css": "^1.0.7",
+    "ava": "^2.2.0",
+    "del": "^5.0.0",
+    "destyle.css": "^1.0.8",
     "markdown-it-container": "^2.0.0",
     "markdown-it-custom-block": "^0.1.1",
     "markdown-it-mentions": "^1.0.0",
@@ -43,7 +43,6 @@
     "node-hook": "^1.0.0",
     "node-sass": "^4.12.0",
     "require-extension-hooks": "^0.3.3",
-    "sass": "^1.22.0",
     "strip-css-comments": "^4.0.0",
     "write": "^1.0.3"
   },
@@ -81,5 +80,8 @@
     "github": {
       "release": true
     }
+  },
+  "dependencies": {
+    "sass": "^1.22.0"
   }
 }
