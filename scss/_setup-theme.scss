@@ -40,8 +40,8 @@ $colors: () !default;
   }
 
   body {
-    color: rgb(var(--fg-default));
-    background-color: rgb(var(--bg-default));
+    color: rgba(var(--fg-default), var(--fg-opacity, 1));
+    background-color: rgba(var(--bg-default), var(--bg-opacity, 1));
   }
 
   #{stateful-base-class('fg', false)} {
@@ -77,6 +77,8 @@ $colors: () !default;
     stroke-opacity: var(--stroke-opacity, 1);
     stroke-width: var(--stroke-width);
   }
+
+  // STATEFUL THEME PROPERTIES
 
   @each $pseudo in ( '', 'hover', 'focus', 'active', 'disabled', 'focus-within', 'parent-hover', 'parent-focus' ) {
 
@@ -119,23 +121,26 @@ $colors: () !default;
 
     // CURRENT COLOR FILL/STROKE
 
-    // NB: can't use --fill-color here because currentColor is not in calc(rgba(...) format
-    // .#{$p__}fill-current { #{$sel} { fill: currentColor; } }
-    // .#{$p__}stroke-current { #{$sel} { stroke: currentColor; } }
+    .#{$p__}fill-current { #{$sel} { --fill-color: currentColor; } }
+    .#{$p__}stroke-current { #{$sel} { --stroke-color: currentColor; } }
 
     // OPACITY
 
-    // .#{$p__}op-100 { #{$sel} { opacity: 1; } } // no need?
-    // @for $n from 0 through 9 { .#{$p__}op-#{$n}0 { #{$sel} { opacity: $n/10; } } }
+    .#{$p__}o-100 { #{$sel} { opacity: 1; } } // no need?
+    @for $n from 0 through 9 { .#{$p__}o-#{$n}0 { #{$sel} { opacity: $n/10; } } }
 
-    // @for $n from 0 through 9 {
-    //   .#{$p__}fg-op-#{$n}0 { #{$sel} { --fg-opacity: #{$n/10}; } }
-    //   .#{$p__}bg-op-#{$n}0 { #{$sel} { --bg-opacity: #{$n/10}; } }
-    //   .#{$p__}bd-op-#{$n}0 { #{$sel} { --bd-opacity: #{$n/10}; } }
-    //   .#{$p__}ol-op-#{$n}0 { #{$sel} { --ol-opacity: #{$n/10}; } }
-    //   .#{$p__}fill-op-#{$n}0 { #{$sel} { --fill-opacity: #{$n/10}; } }
-    //   .#{$p__}stroke-op-#{$n}0 { #{$sel} { --stroke-opacity: #{$n/10}; } }
-    // }
-
+    @for $n from 0 through 9 {
+      .#{$p__}fgo-#{$n}0 { #{$sel} { --fg-opacity: #{$n/10}; } }
+      .#{$p__}bgo-#{$n}0 { #{$sel} { --bg-opacity: #{$n/10}; } }
+      .#{$p__}bdo-#{$n}0 { #{$sel} { --bd-opacity: #{$n/10}; } }
+      .#{$p__}olo-#{$n}0 { #{$sel} { --ol-opacity: #{$n/10}; } }
+      .#{$p__}fillo-#{$n}0 { #{$sel} { --fill-opacity: #{$n/10}; } }
+      .#{$p__}strokeo-#{$n}0 { #{$sel} { --stroke-opacity: #{$n/10}; } }
+    }
   }
+
+  // NON-STATEFUL THEME PROPERTIES
+
+  // TODO: stroke and border widths !?
+
 }
