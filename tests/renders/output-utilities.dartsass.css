@@ -25,6 +25,21 @@
   z-index: 100000;
 }
 
+.focus__vshow {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+.focus__vshow:focus {
+  z-index: 20;
+  width: auto;
+  height: auto;
+  clip: auto;
+}
+
 .vhide {
   position: absolute;
   clip: rect(0 0 0 0);
@@ -35,7 +50,6 @@
   margin: 0;
   overflow: hidden;
 }
-
 .vhide:hover a, .vhide:hover input, .vhide:hover button, .vhide:hover select, .vhide:hover textarea {
   display: none;
 }
@@ -47,7 +61,6 @@
   width: initial;
   overflow: initial;
 }
-
 .vshow:hover a, .vshow:hover input, .vshow:hover button, .vshow:hover select, .vshow:hover textarea {
   display: initial;
 }
@@ -125,7 +138,7 @@
   white-space: pre-line;
 }
 
-.clip, [class^="clip-"], [class*=" clip-"] {
+.clip, [class^=clip-]:not([class$=clip-]), [class*=" clip-"]:not([class$=clip-]) {
   position: relative;
   z-index: 0;
 }
@@ -158,7 +171,7 @@
   overflow: visible;
 }
 
-.hold, [class^="hold-"], [class*=" hold-"] {
+.hold, [class^=hold-]:not([class$=hold-]), [class*=" hold-"]:not([class$=hold-]) {
   position: relative;
 }
 
@@ -167,20 +180,18 @@
   padding-bottom: 0.1px;
 }
 
-.aspect, [class^="aspect-"], [class*=" aspect-"] {
+.aspect, [class^=aspect-]:not([class$=aspect-]), [class*=" aspect-"]:not([class$=aspect-]) {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-
-.aspect > *, [class^="aspect-"] > *, [class*=" aspect-"] > * {
+.aspect > *, [class^=aspect-]:not([class$=aspect-]) > *, [class*=" aspect-"]:not([class$=aspect-]) > * {
   flex: 0 0 auto;
   width: 100%;
 }
-
-.aspect::before, [class^="aspect-"]::before, [class*=" aspect-"]::before {
-  content: '';
+.aspect::before, [class^=aspect-]:not([class$=aspect-])::before, [class*=" aspect-"]:not([class$=aspect-])::before {
+  content: "";
   display: block;
   width: 0.01px;
   height: 0;

@@ -15,7 +15,6 @@
 @import "setup-stack";
 @import "setup-typo";
 @import "setup-theme";
-@import "setup-state";
 @import "setup-debug";
 @import "setup-utilities";
 @import "setup-utilities-m";
@@ -31,7 +30,6 @@ $homework-setup-done: false;
   @include homework-setup-stack;
   @include homework-setup-typo;
   @include homework-setup-theme;
-  @include homework-setup-state;
   @include homework-setup-debug;
   @include homework-setup-utilities;
   @include homework-setup-utilities-m;

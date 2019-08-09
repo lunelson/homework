@@ -2,35 +2,52 @@
 /// CLASSES
 ///
 
+// @function base-class($base, $solo: true, $_...) {
+//   @if $solo {
+//     @return selector-parse('.#{$base}, [class^="#{$base}-"], [class*=" #{$base}-"]');
+//   } @else {
+//     @return selector-parse('[class^="#{$base}-"], [class*=" #{$base}-"]');
+//   }
+// }
+
+// @function m-base-class($base, $solo: true, $m: $curr-m, $_...) {
+//   $m__: if($m, '#{$m}__', '');
+//   @if $solo {
+//     @return selector-parse('.#{$m__}#{$base}, [class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
+//   } @else {
+//     @return selector-parse('[class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
+//   }
+// }
+
+// NEW FUNCTIONS
+
 @function base-class($base, $solo: true, $_...) {
-  @if $solo {
-    @return selector-parse('.#{$base}, [class^="#{$base}-"], [class*=" #{$base}-"]');
-  } @else {
-    @return selector-parse('[class^="#{$base}-"], [class*=" #{$base}-"]');
-  }
+  $solo-selector: if($solo, '.#{$base}, ', '');
+  @return selector-parse('#{$solo-selector}[class^="#{$base}-"]:not([class$="#{$base}-"]), [class*=" #{$base}-"]:not([class$="#{$base}-"])');
+}
+
+@function stateful-base-class($base, $solo: true, $_...) {
+  $solo-selector: if($solo, '.#{$base}, [class*="__#{$base}"]:not([class*=" __#{$base}"]):not([class^="__#{$base}"]), ', '');
+  @return selector-parse('#{$solo-selector}[class^="#{$base}-"]:not([class$="#{$base}-"]), [class*=" #{$base}-"]:not([class$="#{$base}-"]), [class*="__#{$base}-"]:not([class*=" __#{$base}-"]):not([class*="__#{$base}- "]):not([class$="__#{$base}-"]):not([class^="__#{$base}-"])');
 }
 
 @function m-base-class($base, $solo: true, $m: $curr-m, $_...) {
   $m__: if($m, '#{$m}__', '');
   @if $solo {
-    @return selector-parse('.#{$m__}#{$base}, [class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
+    @return selector-parse('.#{$m__}#{$base}, [class^="#{$m__}#{$base}-"]:not([class$="#{$m__}#{$base}-"]), [class*=" #{$m__}#{$base}-"]:not([class$="#{$m__}#{$base}-"])');
   } @else {
-    @return selector-parse('[class^="#{$m__}#{$base}-"], [class*=" #{$m__}#{$base}-"]');
+    @return selector-parse('[class^="#{$m__}#{$base}-"]:not([class$="#{$m__}#{$base}-"]), [class*=" #{$m__}#{$base}-"]:not([class$="#{$m__}#{$base}-"])');
   }
 }
 
-@function m-suffix($m: $curr-m) {
-  @return if($m, '__#{$m}', '');
+@function state-prefix($m: $curr-m) {
+  @return if($m and str-length($m) > 0, '#{$m}__', '');
 }
 
-@function m-prefix($m: $curr-m) {
-  @return if($m, '#{$m}__', '');
-}
-
-@function m-prefixize($sel, $ms...) {
+@function state-prefixize($sel, $ms...) {
   $sel: selector-parse($sel); $out: ();
   @each $m in $ms {
-    $fix: m-prefix($m);
+    $fix: state-prefix($m);
     @each $sub in $sel {
       $out: append($out, selector-parse('#{$fix}#{$sub}'), 'comma');
     }
@@ -38,13 +55,13 @@
   @return $out;
 }
 
-@function m-suffixize($sel, $ms...) {
-  $sel: selector-parse($sel); $out: ();
-  @each $m in $ms {
-    $fix: m-suffix($m);
-    @each $sub in $sel {
-      $out: append($out, selector-parse('#{$sub}#{$fix}'), 'comma');
-    }
-  }
-  @return $out;
-}
+// @function m-suffixize($sel, $ms...) {
+//   $sel: selector-parse($sel); $out: ();
+//   @each $m in $ms {
+//     $fix: m-suffix($m);
+//     @each $sub in $sel {
+//       $out: append($out, selector-parse('#{$sub}#{$fix}'), 'comma');
+//     }
+//   }
+//   @return $out;
+// }

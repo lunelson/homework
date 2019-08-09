@@ -305,6 +305,14 @@ abbr, acronym, b, bdo, big, br, cite, code, dfn, em, i, kbd, q, samp, small, spa
   white-space: normal;
 }
 
+strong, b, h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+em, i {
+  font-style: italic;
+}
+
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;

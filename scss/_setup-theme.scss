@@ -8,23 +8,7 @@
 
 $colors: () !default;
 
-// $grays: () !default;
-
-// TODO: this should be a map, not a list!!
-// -- stick with the s, m, l pattern
-$widths: 1 2 4 8 16 !default;
-
-// TODO: this should be a map, not a list!!
-// -- stick with the s, m, l pattern
-$radii: 2 4 6 8 !default;
-
-$shadows: (
-  s: 2 3 4 5,
-  m: 2 3 4 5,
-  l: 2 3 4 5,
-) !default;
-
-@mixin homework-setup-theme($base: lite) {
+@mixin homework-setup-theme($type: lite) {
 
   $colors: map-merge((
     dark: #141414,
@@ -34,8 +18,9 @@ $shadows: (
   $color-names: ();
 
   :root {
+
     // NB: color custom props stored as RGB number list!!!!
-    // due to this idea here: https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
+    // original idea --> https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
     @each $c, $color in $colors {
       @if length($color) > 1 {
         @each $n, $subcolor in __list-to-index-map($color) {
@@ -49,162 +34,108 @@ $shadows: (
         $color-names: append($color-names, $c);
       }
     }
+
+    --fg-default: #{if($type == 'lite', --color-dark, --color-lite)};
+    --bg-default: #{if($type == 'lite', --color-lite, --color-dark)};
   }
 
   body {
-    background-color: rgb(var(--color-#{$base}));
-    color: rgb(var(--contrast-#{$base}));
+    background-color: rgb(var(--color-#{$type}));
+    color: rgb(var(--contrast-#{$type}));
   }
 
-  // HTML elements
-  #{base-class('fg', false)} {
-    color: rgba(var(--fg-color), var(--fg-opacity, 1));
+  #{stateful-base-class('fg', false)} {
+    color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
   }
-  #{base-class('bg', false)} {
-    background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
+
+  #{stateful-base-class('bg', false)} {
+    background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
   }
-  #{base-class('bd', false)} {
-    border-color: rgba(var(--bd-color, var(--fg-color)), var(--bd-opacity, 1));
+
+  #{stateful-base-class('bd', false)} {
+    border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
     border-style: var(--bd-style, solid);
     border-top-width: var(--bd-top-width, 0);
     border-right-width: var(--bd-right-width, 0);
     border-bottom-width: var(--bd-bottom-width, 0);
     border-left-width: var(--bd-left-width, 0);
   }
-  #{base-class('ol', false)} {
-    outline-color: rgba(var(--ol-color, var(--fg-color)), var(--ol-opacity, 1));
+
+  #{stateful-base-class('ol', false)} {
+    outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
     outline-width: var(--ol-width);
   }
 
-  // SVG elements
-  #{base-class('fill', false)} {
+
+  #{stateful-base-class('fill', false)} {
     fill: rgb(var(--fill-color));
     fill-opacity: var(--fill-opacity, 1);
   }
-  #{base-class('stroke', false)} {
+
+  #{stateful-base-class('stroke', false)} {
     stroke: rgb(var(--stroke-color));
     stroke-opacity: var(--stroke-opacity, 1);
     stroke-width: var(--stroke-width);
   }
 
-  /////////////////////////////////////////////
-  ////////////////// [prop-]color //////////////////
-  /////////////////////////////////////////////
+  @each $pseudo in ( '', 'hover', 'focus', 'active', 'disabled', 'focus-within', 'parent-hover', 'parent-focus' ) {
 
-  @each $c in $color-names {
-    .theme-#{$c} { --theme-color: var(--color-#{$c});
-      --theme-contrast: var(--contrast-#{$c}); }
-    .fg-#{$c} { --fg-color: var(--color-#{$c});
-      --fg-contrast: var(--contrast-#{$c}); }
-    .bg-#{$c} { --bg-color: var(--color-#{$c});
-      --bg-contrast: var(--contrast-#{$c}); }
-    .bd-#{$c} { --bd-color: var(--color-#{$c}); }
-    .ol-#{$c} { --ol-color: var(--color-#{$c}); }
-    .fill-#{$c} { --fill-color: var(--color-#{$c}); }
-    .stroke-#{$c} { --stroke-color: var(--color-#{$c}); }
+    $p__: state-prefix($pseudo);
+    $sel: if(str-length($pseudo) > 0,
+      if(not not str-index($pseudo, 'parent-'),
+        '.parent:#{str-slice($pseudo, 8)} &',
+        '&:#{$pseudo}'),
+      '&');
+
+    // CONTRAST CLASSES
+
+    .#{$p__}bg-contrast { #{$sel} { --bg-color: var(--fg-contrast); } } // rare case! - contrast vs foreground
+    .#{$p__}fg-contrast { #{$sel} { --fg-color: var(--bg-contrast); } }
+    .#{$p__}bd-contrast { #{$sel} { --bd-color: var(--bg-contrast); } }
+    .#{$p__}ol-contrast { #{$sel} { --ol-color: var(--bg-contrast); } }
+    .#{$p__}fill-contrast { #{$sel} { --fill-color: var(--bg-contrast); } }
+    .#{$p__}stroke-contrast { #{$sel} { --stroke-color: var(--bg-contrast); } }
+
+    // THEME CLASSES
+
+    .#{$p__}fg-theme { #{$sel} { --fg-color: var(--theme-color); --fg-contrast: var(--theme-contrast); } }
+    .#{$p__}bg-theme { #{$sel} { --bg-color: var(--theme-color); --bg-contrast: var(--theme-contrast); } }
+    .#{$p__}bd-theme { #{$sel} { --bd-color: var(--theme-color); } }
+    .#{$p__}ol-theme { #{$sel} { --ol-color: var(--theme-color); } }
+    .#{$p__}fill-theme { #{$sel} { --fill-color: var(--theme-color); } }
+    .#{$p__}stroke-theme { #{$sel} { --stroke-color: var(--theme-color); } }
+
+    @each $c in $color-names {
+
+      .#{$p__}theme-#{$c} { #{$sel} { --theme-color: var(--color-#{$c}); --theme-contrast: var(--contrast-#{$c}); } }
+      .#{$p__}fg-#{$c} { #{$sel} { --fg-color: var(--color-#{$c}); --fg-contrast: var(--contrast-#{$c}); } }
+      .#{$p__}bg-#{$c} { #{$sel} { --bg-color: var(--color-#{$c}); --bg-contrast: var(--contrast-#{$c}); } }
+      .#{$p__}bd-#{$c} { #{$sel} { --bd-color: var(--color-#{$c}); } }
+      .#{$p__}ol-#{$c} { #{$sel} { --ol-color: var(--color-#{$c}); } }
+      .#{$p__}fill-#{$c} { #{$sel} { --fill-color: var(--color-#{$c}); } }
+      .#{$p__}stroke-#{$c} { #{$sel} { --stroke-color: var(--color-#{$c}); } }
+
+    }
+
+    // CURRENT COLOR FILL/STROKE
+
+    // NB: can't use --fill-color here because currentColor is not in calc(rgba(...) format
+    // .#{$p__}fill-current { #{$sel} { fill: currentColor; } }
+    // .#{$p__}stroke-current { #{$sel} { stroke: currentColor; } }
+
+    // OPACITY
+
+    // .#{$p__}op-100 { #{$sel} { opacity: 1; } } // no need?
+    // @for $n from 0 through 9 { .#{$p__}op-#{$n}0 { #{$sel} { opacity: $n/10; } } }
+
+    // @for $n from 0 through 9 {
+    //   .#{$p__}fg-op-#{$n}0 { #{$sel} { --fg-opacity: #{$n/10}; } }
+    //   .#{$p__}bg-op-#{$n}0 { #{$sel} { --bg-opacity: #{$n/10}; } }
+    //   .#{$p__}bd-op-#{$n}0 { #{$sel} { --bd-opacity: #{$n/10}; } }
+    //   .#{$p__}ol-op-#{$n}0 { #{$sel} { --ol-opacity: #{$n/10}; } }
+    //   .#{$p__}fill-op-#{$n}0 { #{$sel} { --fill-opacity: #{$n/10}; } }
+    //   .#{$p__}stroke-op-#{$n}0 { #{$sel} { --stroke-opacity: #{$n/10}; } }
+    // }
+
   }
-
-  /////////////////////////////////////////////
-  ///////////////// [prop-]opacity /////////////////
-  /////////////////////////////////////////////
-
-  // fade (opacity) 00,02,04,06,08,10
-  @for $n from 0 through 9 { .op-#{$n}0 { opacity: $n/10; } }
-  // .op-100 { opacity: 1; } // almost no need !
-
-  @for $n from 0 through 9 {
-    .fg-op-#{$n}0 { --fg-opacity: #{$n/10}; }
-    .bg-op-#{$n}0 { --bg-opacity: #{$n/10}; }
-    .bd-op-#{$n}0 { --bd-opacity: #{$n/10}; }
-    .ol-op-#{$n}0 { --ol-opacity: #{$n/10}; }
-    .fill-op-#{$n}0 { --fill-opacity: #{$n/10}; }
-    .stroke-op-#{$n}0 { --stroke-opacity: #{$n/10}; }
-  }
-
-  // .fg-clear, .fg-transparent { --fg-opacity: 0; }
-  // .bg-clear, .bg-transparent { --bg-opacity: 0; }
-  // .bd-clear, .bd-transparent { --bd-opacity: 0; }
-  // .ol-clear, .ol-transparent { --ol-opacity: 0; }
-  // .fill-clear, .fill-transparent { --fill-opacity: 0; }
-  // .stroke-clear, .stroke-transparent { --stroke-opacity: 0; }
-
-  /////////////////////////////////////////////
-  ////////////////// contrast [prop-]color /////////////////
-  /////////////////////////////////////////////
-
-  // rare case, of choosing black/white vs fg color
-  .bg-contrast { --bg-color: var(--fg-contrast); }
-  // otherwise assume contrast against the bg color
-  .fg-contrast { --fg-color: var(--bg-contrast); }
-  .bd-contrast { --bd-color: var(--bg-contrast); }
-  .ol-contrast { --ol-color: var(--bg-contrast); }
-  .fill-contrast { --fill-color: var(--bg-contrast); }
-  .stroke-contrast { --stroke-color: var(--bg-contrast); }
-
-  /////////////////////////////////////////////
-  /////////////////// theme [prop-]color ///////////////////
-  /////////////////////////////////////////////
-
-  .fg-theme { --fg-color: var(--theme-color);
-    --fg-contrast: var(--theme-contrast); }
-  .bg-theme { --bg-color: var(--theme-color);
-    --bg-contrast: var(--theme-contrast); }
-  .bd-theme { --bd-color: var(--theme-color); }
-  .ol-theme { --ol-color: var(--theme-color); }
-  .fill-theme { --fill-color: var(--theme-color); }
-  .stroke-theme { --stroke-color: var(--theme-color); }
-
-  /////////////////////////////////////////////
-  ////////////////// currentColor //////////////////
-  /////////////////////////////////////////////
-
-  .fill-current { fill: currentColor; } // ? --fill-color: var(--fg-color);
-  .stroke-current { stroke: currentColor; } // ? --stroke-color: var(--fg-color);
-
-  /////////////////////////////////////////////
-  ////////////////// border-/stroke-/outline-width //////////////////
-  /////////////////////////////////////////////
-
-  @each $w in join((0), $widths) {
-    :root { --width-#{$w}: #{$w * 1px}; }
-    .bd-#{$w}, .bd-top-#{$w} { --bd-top-width: var(--width-#{$w}); }
-    .bd-#{$w}, .bd-right-#{$w} { --bd-right-width: var(--width-#{$w}); }
-    .bd-#{$w}, .bd-bottom-#{$w} { --bd-bottom-width: var(--width-#{$w}); }
-    .bd-#{$w}, .bd-left-#{$w} { --bd-left-width: var(--width-#{$w}); }
-    .ol-#{$w} { --ol-width: var(--width-#{$w}); }
-    .stroke-#{$w} { --stroke-width: var(--width-#{$w}); }
-  }
-
-  /////////////////////////////////////////////
-  /////////////// border-radius ///////////////
-  /////////////////////////////////////////////
-
-  @each $r in $radii {
-    :root { --radius-#{$r}: #{$r * 1px}; }
-    .br-#{$r}, .br-t-#{$r}, .br-tl-#{$r} { border-top-left-radius: var(--radius-#{$r}); }
-    .br-#{$r}, .br-t-#{$r}, .br-tr-#{$r} { border-top-right-radius: var(--radius-#{$r}); }
-    .br-#{$r}, .br-b-#{$r}, .br-bl-#{$r} { border-bottom-left-radius: var(--radius-#{$r}); }
-    .br-#{$r}, .br-b-#{$r}, .br-br-#{$r} { border-bottom-right-radius: var(--radius-#{$r}); }
-  }
-  .oval { border-radius: 50%; }
-  .pill { border-radius: 50vmin; }
-
-  /////////////////////////////////////////////
-  ////////// shadows, shadow-outlines /////////
-  /////////////////////////////////////////////
-
-  // shadows:
-  //   1. cast shadows
-  //     see: https://codepen.io/scottyzen/full/KbNRJq
-  //     should calculate automatically
-  //     should break in to component parts, i.e. color, height
-  //   2. outline shadows
-  //     see bootstrap
-
-  /////////////////////////////////////////////
-  /////////////////// other ///////////////////
-  /////////////////////////////////////////////
-
-  // bg-[position], bg-[attachment]
-  // bd-collapse/-separate
 }
