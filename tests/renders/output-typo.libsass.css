@@ -1,32 +1,34 @@
-body {
+html {
+  font-size: var(--font-size);
   font-family: var(--font-family);
+  line-height: var(--line-height);
 }
 
 :root {
   --font-family: var(--font-family-sans);
-  --font-feature-settings: var(--font-feature-settings-sans);
   --line-height: var(--line-height-sans);
   --letter-spacing: var(--letter-spacing-sans);
+  --font-feature-settings: var(--font-feature-settings-sans);
   --font-family-sans: MessinaSans;
-  --font-feature-settings-sans: ();
   --line-height-sans: 1.4em;
   --letter-spacing-sans: 0px;
+  --font-feature-settings-sans: ();
   --dist-capline-sans: 0em;
   --dist-baseline-sans: 0em;
   --trim-sides-sans: 0;
   --trim-adjacent-sans: 0.125em;
   --font-family-serif: MessinaSerif;
-  --font-feature-settings-serif: ();
   --line-height-serif: 1.4em;
   --letter-spacing-serif: 0px;
+  --font-feature-settings-serif: ();
   --dist-capline-serif: 0em;
   --dist-baseline-serif: 0em;
   --trim-sides-serif: 0;
   --trim-adjacent-serif: 0.125em;
   --font-family-modern: MessinaModern;
-  --font-feature-settings-modern: ();
   --line-height-modern: 1.4em;
   --letter-spacing-modern: 0px;
+  --font-feature-settings-modern: ();
   --dist-capline-modern: 0em;
   --dist-baseline-modern: 0em;
   --trim-sides-modern: 0;
@@ -83,9 +85,9 @@ body {
 .plain > *, [class^="plain-"]:not([class$="plain-"]) > *, [class*=" plain-"]:not([class$="plain-"]) > * {
   font-size: var(--font-size);
   font-family: var(--font-family);
-  font-feature-settings: var(--font-feature-settings);
   line-height: calc(var(--line-height));
   letter-spacing: calc(var(--letter-spacing));
+  font-feature-settings: var(--font-feature-settings);
 }
 
 .trim > [class^="f-"]:not([class$="f-"]), .trim > [class*=" f-"]:not([class$="f-"]),
@@ -111,7 +113,6 @@ body {
 
 .f-sans, [class^="f-sans-"]:not([class$="f-sans-"]), [class*=" f-sans-"]:not([class$="f-sans-"]) {
   --font-family: var(--font-family-sans);
-  --line-height: var(--line-height-sans);
   --letter-spacing: var(--letter-spacing-sans);
   --font-feature-settings: var(--font-feature-settings-sans);
   --dist-capline: 0em;
@@ -122,7 +123,6 @@ body {
 
 .f-serif, [class^="f-serif-"]:not([class$="f-serif-"]), [class*=" f-serif-"]:not([class$="f-serif-"]) {
   --font-family: var(--font-family-serif);
-  --line-height: var(--line-height-serif);
   --letter-spacing: var(--letter-spacing-serif);
   --font-feature-settings: var(--font-feature-settings-serif);
   --dist-capline: 0em;
@@ -133,7 +133,6 @@ body {
 
 .f-modern, [class^="f-modern-"]:not([class$="f-modern-"]), [class*=" f-modern-"]:not([class$="f-modern-"]) {
   --font-family: var(--font-family-modern);
-  --line-height: var(--line-height-modern);
   --letter-spacing: var(--letter-spacing-modern);
   --font-feature-settings: var(--font-feature-settings-modern);
   --dist-capline: 0em;

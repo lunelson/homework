@@ -46,8 +46,8 @@
 }
 
 body {
-  background-color: rgb(var(--color-lite));
-  color: rgb(var(--contrast-lite));
+  color: rgb(var(--fg-default));
+  background-color: rgb(var(--bg-default));
 }
 
 [class^="fg-"]:not([class$="fg-"]), [class*=" fg-"]:not([class$="fg-"]), [class*="__fg-"]:not([class*=" __fg-"]):not([class*="__fg- "]):not([class$="__fg-"]):not([class^="__fg-"]) {

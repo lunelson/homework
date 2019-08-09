@@ -26,7 +26,7 @@
     "test:visual": "penny serve tests/_visual"
   },
   "devDependencies": {
-    "@lunelson/penny": "next",
+    "@lunelson/penny": "^2.0.0-alpha.14",
     "@lunelson/sass-calc": "latest",
     "@lunelson/sass-lerp": "latest",
     "@lunelson/sass-maps-next": "latest",

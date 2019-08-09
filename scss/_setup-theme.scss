@@ -40,8 +40,8 @@ $colors: () !default;
   }
 
   body {
-    background-color: rgb(var(--color-#{$type}));
-    color: rgb(var(--contrast-#{$type}));
+    color: rgb(var(--fg-default));
+    background-color: rgb(var(--bg-default));
   }
 
   #{stateful-base-class('fg', false)} {

@@ -11,17 +11,17 @@
 */
 
 
-@import 'fonts/messina-sans';
-@import 'fonts/messina-serif';
-@import 'fonts/messina-modern';
+// @import 'fonts/messina-sans';
+// @import 'fonts/messina-serif';
+// @import 'fonts/messina-modern';
 
-@import 'fonts/hack';
-@import 'fonts/google';
-@import 'fonts/neutral';
-@import 'fonts/gt-america';
-@import 'fonts/maison-neue';
+// @import 'fonts/hack';
+// @import 'fonts/google';
+// @import 'fonts/neutral';
+// @import 'fonts/gt-america';
+// @import 'fonts/maison-neue';
 @import 'fonts/theinhardt';
-@import 'fonts/untitled-sans';
+// @import 'fonts/untitled-sans';
 
 @import 'prism';
 
@@ -80,13 +80,20 @@ $media: (
 
 $fonts: (
   // sans: $theinhardt,
-  sans: $neutral,
-  mono: $hack,
+  sans: (
+    family: ('Arial'),
+    dist-capline: 0.1,
+    dist-baseline: 0.1,
+    spacing: 1px,
+    spacing-max: 0.75,
+    spacing-end: 100
+  ),
+  // mono: $hack,
   // sans: $messina-sans,
   // sans: $source-sans-pro,
-  serif: $messina-serif,
+  // serif: $messina-serif,
   // serif: $source-serif-pro,
-  modern: $messina-modern,
+  // modern: $messina-modern,
   // mono: $source-code-pro
 );
 
