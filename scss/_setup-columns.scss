@@ -98,11 +98,6 @@ $m__: '';
     }
   }
 
-  /*
-$span-pair-list: #{map-inspect($span-pair-list)}
-$start-pair-list: #{map-inspect($start-pair-list)}
-$end-pair-list: #{map-inspect($end-pair-list)}
-  */
   @each $m in join((null), map-keys($media)) {
     @include m($m) {
       $m__: state-prefix() !global;
