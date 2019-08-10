@@ -15,11 +15,16 @@
 
 @mixin homework-setup-stack() {
 
-  .flex-stack {
+  *, ::before, ::after {
+    --stack-gap: var(--inner-y);
+    --chain-gap: var(--inner-x);
+  }
+
+  .stack-flex {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    & > * { flex: 0 0 auto; }
+    & > * { flex: 0 0 auto; width: initial }
   }
 
   // NB: base-class plain connects to TYPO
@@ -31,7 +36,7 @@
       margin-bottom: 0;
     }
     & > * + * {
-      margin-top: var(--stack-gap, var(--inner-y));
+      margin-top: var(--stack-gap);
     }
   }
 
@@ -46,7 +51,7 @@
       text-overflow: ellipsis;
     }
     & > * + * {
-      margin-left: var(--chain-gap, var(--inner-x));
+      margin-left: var(--chain-gap);
     }
   }
 

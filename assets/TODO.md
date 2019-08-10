@@ -1,3 +1,8 @@
+## inheritance
+
+- !!! re-check inheritance mechanisms, as with --stack-gap
+- need a test/proof suite here
+
 ## reset
 
 1. extreme; for resetting children of an element
@@ -7,11 +12,11 @@ http://cleanslatecss.com/#Why-would-I-need-it
 http://meyerweb.com/eric/tools/css/reset/
 http://html5doctor.com/html-5-reset-stylesheet/
 
-ben frain's new one
-https://benfrain.com/a-modern-css-reset-with-caveats/?ref=heydesigner-weekly
+3. ben frain's new one
+https://benfrain.com/a-modern-css-reset-with-caveats/
 
+4. destyle
 https://github.com/nicolas-cusan/destyle.css
-
 
 ## core setup
 
@@ -22,21 +27,27 @@ revamp reset
   as merge of destyle and remedy
   saving only opinionated typo resets
 
-## about hover
-
-add the hover media query to the hover classes!! in theme
-https://twitter.com/souporserious/status/1075053627025149955
+##
 
 ## more classes
 
-`xf` transform base class
-  .xf { transform: translate(var(--trans-x),var(--trans-y),var(--trans-z),) scale(var(--scale)) rotate(var(--rotate)); }
-  translate-x -y -z
-  rotate
-  scale
-
-`aspect` base class
+(max-) `aspect` base class (use flex max aspect method)
   .aspect-3-2, etc.
+
+`xn` transition base class
+  xn { transition: ... }
+  --transition-delay: 0s
+  --transition-duration: 0s
+  --transition-property: all
+  --transition-timing-function: ease
+
+`xf` transform base class (complicated!!)
+  .xf { transform: translate3d(var(--translate-x),var(--translate-y),var(--translate-z),) scale(var(--scale)) rotate(var(--rotate)); }
+  --translate-x -y -z
+  --rotate
+  --scale
+
+  xf-origin, xf-... (more classes required)
 
 
 ## re-org

@@ -3,7 +3,7 @@
   <p>Homework</p>
 </h1>
 
-<h3 align="center">Über-responsive CSS design primitives using custom-properties</h4>
+<h3 align="center">Stateful design-primitive CSS utility-objects<br>driven by custom properties</h3>
 
 <p align="center">
   <a href="#releases"><img src="https://img.shields.io/npm/v/@lunelson/homework.svg?style=flat-square" alt=""></a>
@@ -17,6 +17,125 @@
 </p>
 
 ## Concept
+
+### Layout
+### Typography
+### Color (Theme)
+
+    intelligent, stateful, ultra-responsive
+    built with Sass
+    responsive states: @media, :pseudo
+    context inheritance, e.g. column-count
+    class pattern [state]__[base]-[variant]
+
+    concerns itself with core elements of a design system, being layout, typography and color
+
+
+    custom property spec/inheritance structure basis
+    cross-(modern-)browser-viable utility object patterns
+
+    central configuration, design system
+      fonts
+      colors
+        maps and lists
+      root+media
+        root-font-size
+        breakpoints
+        column-count
+        inner/outer spacings * (x, y)
+        inner/outer mods, resp.
+        font size/line mods, per font
+    utility-objects, for:
+      outer, inner
+      stack, chain, plain
+        shim
+      mcol, flow, grid
+        (row-)span, push, pull, (row-)start, (row-)end, col-a-b, row-a-b
+      font/typographic control wrt
+        optical trim alignment, plain-(y) classes
+      theme control wrt color/opacity of
+        fg, bg, bd, ol, fill, stroke
+        ...stateful WRT 'hover', 'focus', 'active', 'disabled', 'focus-within', 'parent-hover', 'parent-focus'
+    design-oriented reset
+      destyle.css + some custom resets WRT embeds and a few other concerns
+
+    @include homework-reset;
+    @include homework-setup;
+
+### The "core" and "root" setup modules
+#### the internal Sass maps which run the system and shadow the custom properties
+#### the `:root` custom properties generated
+
+### The "inner" setup module
+  iy, ix -- see stack, column
+  px, py, pt, pr, pb, pl
+  mx, my, mt, mr, mb, ml
+  mx-neg, my-neg, mt-neg, mr-neg, mb-neg, ml-neg
+  mx-auto, my-auto, mt-auto, mr-auto, mb-auto, ml-auto
+
+### The "outer" setup module
+    wrap, peel
+    wrap-left/-right, peel-left/-right
+    frame, bleed
+    frame-left/-right, bleed-left/-right
+
+### The "stack" setup module
+    stack, plain, chain
+    shim
+
+### The "columns" setup module
+    multi-[c], flow-[y], grid-[y]
+    columns-[c], rows-[r]
+    push-[c], pull-[c], push-r-[c], pull-r-[c],
+    span-[c], start-[c], end-[c], column-[s]-[e]
+    span-all, span-auto, span-safe
+    (CSS4) span-max-[c], span-min-[c]
+    row-span-[r], row-start-[r], row-end-[r], row-[s]-[e]
+
+#### the approach
+
+#### the mechanisms in play
+- [Multi-column Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Columns)
+- [Flexible Box Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout)
+- [Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout)
+
+#### on the border-box barrier
+some of these classes are inside the border, some outside
+
+### typography
+  f, trim, stack > f, plain > *
+
+### theme
+### utils
+### debug
+### reset
+
+- imports [destyle.css](https://nicolas-cusan.github.io/destyle.css/)
+-
+
+
+## On the Approach
+
+To me, the whole idea of custom properties is that they should work efficiently with inheritance and cascade enabling precise and powerful control.
+
+So bare base classes like ‘f-sans’ and ‘aspect’ are good, even when they have little or no styles on their own: they are waiting for a different CP value to be plugged in.
+
+For TYPO classes, these could be both —font-size and —line-height; or if you’ve got an expression for line-height you could get away with just —font-size
+
+Similarly when you’re scaffolding out a site, especially if you’re ‘designing in code’ you you can tweak —stack-gap, —chain-gap, —column-gap and —row-gap as you go, and then review your rogue values later to see what kinds of values you need to plug back in to your base config
+
+...Because the standard config can be restrictive or tedious when you are building, if you have to keep going back to define a value at multiple breakpoints before you can use it.
+
+Homework is a WIP Sass CSS framework, focused on design-oriented generic-object and utility classes on a basis of responsive (`@media`-scoped) CSS custom properties.
+
+- hybrid utility-first / object-oriented approach, focused on layout and typography "primitives"
+- responsive (@media-scoped) values
+
+### other methodologies
+
+* https://github.com/sky-uk/css
+* https://css-tricks.com/combining-the-powers-of-sem-and-bio-for-improving-css/
+
 
 ## Setup
 
@@ -54,82 +173,6 @@ import '@lunelson/homework';
 // ...or CommonJS
 require('@lunelson/homework);
 ```
-
-## Usage and walkthrough
-    @include homework-reset;
-    @include homework-setup;
-
-### The "reset" module
-
-- imports [destyle.css](https://nicolas-cusan.github.io/destyle.css/)
--
-
-### The "core" and "root" setup modules
-#### the internal Sass maps which run the system and shadow the custom properties
-#### the `:root` custom properties generated
-
-### The "atomic" setup module
-  iy, ix -- see stack, column
-  px, py, pt, pr, pb, pl
-  mx, my, mt, mr, mb, ml
-  mx-neg, my-neg, mt-neg, mr-neg, mb-neg, ml-neg
-  mx-auto, my-auto, mt-auto, mr-auto, mb-auto, ml-auto
-
-### The "outer" setup module
-    wrap, peel
-    wrap-left/-right, peel-left/-right
-    frame, bleed
-    frame-left/-right, bleed-left/-right
-
-### The "stack" setup module
-    stack, plain, chain
-    shim
-
-### The "columns" setup module
-    multi-[c], flow-[y], grid-[y]
-    columns-[c], rows-[r]
-    push-[c], pull-[c], push-r-[c], pull-r-[c],
-    span-[c], start-[c], end-[c], column-[s]-[e]
-    span-all, span-auto, span-safe
-    (CSS4) span-max-[c], span-min-[c]
-    row-span-[r], row-start-[r], row-end-[r], row-[s]-[e]
-#### the approach
-
-#### the mechanisms in play
-- [Multi-column Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Columns)
-- [Flexible Box Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout)
-- [Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout)
-#### on the border-box barrier
-some of these classes are inside the border, some outside
-
-### typography
-  f, trim, stack > f, plain > *
-
-### theme
-### utils
-### debug
-
-## On the Approach
-
-To me, the whole idea of custom properties is that they should work efficiently with inheritance and cascade enabling precise and powerful control.
-
-So bare base classes like ‘f-sans’ and ‘aspect’ are good, even when they have little or no styles on their own: they are waiting for a different CP value to be plugged in.
-
-For TYPO classes, these could be both —font-size and —line-height; or if you’ve got an expression for line-height you could get away with just —font-size
-
-Similarly when you’re scaffolding out a site, especially if you’re ‘designing in code’ you you can tweak —stack-gap, —chain-gap, —column-gap and —row-gap as you go, and then review your rogue values later to see what kinds of values you need to plug back in to your base config
-
-...Because the standard config can be restrictive or tedious when you are building, if you have to keep going back to define a value at multiple breakpoints before you can use it.
-
-Homework is a WIP Sass CSS framework, focused on design-oriented generic-object and utility classes on a basis of responsive (`@media`-scoped) CSS custom properties.
-
-- hybrid utility-first / object-oriented approach, focused on layout and typography "primitives"
-- responsive (@media-scoped) values
-
-### other methodologies
-
-* https://github.com/sky-uk/css
-* https://css-tricks.com/combining-the-powers-of-sem-and-bio-for-improving-css/
 
 ## Compatibility
 
