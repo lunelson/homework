@@ -44,50 +44,51 @@ $colors: () !default;
     background-color: rgba(var(--bg-default), var(--bg-opacity, 1));
   }
 
-  #{stateful-base-class('fg', false)} {
-    color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
-  }
-
-  #{stateful-base-class('bg', false)} {
-    background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
-  }
-
-  #{stateful-base-class('bd', false)} {
-    border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
-    border-style: var(--bd-style, solid);
-    border-top-width: var(--bd-top-width, 0);
-    border-right-width: var(--bd-right-width, 0);
-    border-bottom-width: var(--bd-bottom-width, 0);
-    border-left-width: var(--bd-left-width, 0);
-  }
-
-  #{stateful-base-class('ol', false)} {
-    outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
-    outline-width: var(--ol-width);
-  }
-
-
-  #{stateful-base-class('fill', false)} {
-    fill: rgb(var(--fill-color));
-    fill-opacity: var(--fill-opacity, 1);
-  }
-
-  #{stateful-base-class('stroke', false)} {
-    stroke: rgb(var(--stroke-color));
-    stroke-opacity: var(--stroke-opacity, 1);
-    stroke-width: var(--stroke-width);
-  }
-
   // STATEFUL THEME PROPERTIES
 
   @each $pseudo in ( '', 'hover', 'focus', 'active', 'disabled', 'focus-within', 'parent-hover', 'parent-focus' ) {
 
     $p__: state-prefix($pseudo);
+
     $sel: if(str-length($pseudo) > 0,
       if(not not str-index($pseudo, 'parent-'),
         '.parent:#{str-slice($pseudo, 8)} &',
         '&:#{$pseudo}'),
       '&');
+
+    #{state-base-class('fg', false, $pseudo)} { #{$sel} {
+      color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+    } }
+
+    #{state-base-class('bg', false, $pseudo)} { #{$sel} {
+      background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+    } }
+
+    #{state-base-class('bd', false, $pseudo)} { #{$sel} {
+      border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+      border-style: var(--bd-style, solid);
+      border-top-width: var(--bd-top-width, 0);
+      border-right-width: var(--bd-right-width, 0);
+      border-bottom-width: var(--bd-bottom-width, 0);
+      border-left-width: var(--bd-left-width, 0);
+    } }
+
+    #{state-base-class('ol', false, $pseudo)} { #{$sel} {
+      outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+      outline-width: var(--ol-width);
+    } }
+
+
+    #{state-base-class('fill', false, $pseudo)} { #{$sel} {
+      fill: rgb(var(--fill-color));
+      fill-opacity: var(--fill-opacity, 1);
+    } }
+
+    #{state-base-class('stroke', false, $pseudo)} { #{$sel} {
+      stroke: rgb(var(--stroke-color));
+      stroke-opacity: var(--stroke-opacity, 1);
+      stroke-width: var(--stroke-width);
+    } }
 
     // CONTRAST CLASSES
 

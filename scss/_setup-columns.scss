@@ -103,7 +103,7 @@ $m__: '';
       $m__: state-prefix() !global;
 
       // contexts: solo, flow, mcol; reset: grid
-      #{m-base-class('span', false)} {
+      #{state-base-class('span', false)} {
         max-width: 100%;
         width: calc((99.99999% + var(--column-gap, var(--ix))) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap, var(--ix)));
         @at-root #{selector-insert(base-class('flow'), '>')} {
@@ -118,8 +118,8 @@ $m__: '';
       }
 
       // contexts: solo, flow; reset: grid
-      #{m-base-class('pull', false)},
-      #{m-base-class('push', false)} {
+      #{state-base-class('pull', false)},
+      #{state-base-class('push', false)} {
         margin-left: calc((99.99999% + var(--column-gap, var(--ix))) * var(--column-push) / var(--local-column-count, var(--column-count)));
         @at-root #{selector-insert(base-class('flow'), '>')} {
           margin-left: calc(99.99999% * var(--column-push) / var(--local-column-count, var(--column-count)));
@@ -130,8 +130,8 @@ $m__: '';
       }
 
       // contexts: solo, flow; reset: grid
-      #{m-base-class('pull-r', false)},
-      #{m-base-class('push-r', false)} {
+      #{state-base-class('pull-r', false)},
+      #{state-base-class('push-r', false)} {
         margin-right: calc((99.99999% + var(--column-gap, var(--ix))) * var(--column-push-r) / var(--local-column-count, var(--column-count)));
         @at-root #{selector-insert(base-class('flow'), '>')} {
           margin-right: calc(99.99999% * var(--column-push-r) / var(--local-column-count, var(--column-count)));
@@ -141,31 +141,31 @@ $m__: '';
         }
       }
 
-      // context: grid-only; idea: is there a way to calculate this in flow/solo?
-      #{m-base-class('grid')} {
-        @at-root #{selector-combine(&, m-base-class('start', false), $cmbn: '>')} {
+      // context: grid-only (start-/end-classes)
+      #{state-base-class('grid')} {
+        @at-root #{selector-combine(&, state-base-class('start', false), $cmbn: '>')} {
           grid-column-start: var(--column-start);
         }
-        @at-root #{selector-combine(&, m-base-class('end', false), $cmbn: '>')} {
+        @at-root #{selector-combine(&, state-base-class('end', false), $cmbn: '>')} {
           grid-column-end: var(--column-end);
         }
-        @at-root #{selector-combine(&, m-base-class('row-start', false), $cmbn: '>')} {
+        @at-root #{selector-combine(&, state-base-class('row-start', false), $cmbn: '>')} {
           grid-row-start: var(--row-start);
         }
-        @at-root #{selector-combine(&, m-base-class('row-end', false), $cmbn: '>')} {
+        @at-root #{selector-combine(&, state-base-class('row-end', false), $cmbn: '>')} {
           grid-row-end: var(--row-end);
         }
       }
 
       // // context: mcol-only (doesn't work in FF)
-      // #{m-base-class('mcol')} {
+      // #{state-base-class('mcol')} {
       //   & > .#{$m__}span-all {
       //     column-span: all;
       //   }
       // }
 
       // context: flow-only
-      #{m-base-class('flow')} {
+      #{state-base-class('flow')} {
         & > .#{$m__}span-auto {
           flex: 1 1 auto;
           --column-span: 0;

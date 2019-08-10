@@ -59,13 +59,13 @@
 
       .#{$m__}p-static { position: static; }
       .#{$m__}p-rel { position: relative; }
-      #{m-base-class('fix')} { position: fixed; }
+      #{state-base-class('fix')} { position: fixed; }
       .#{$m__}p-fix-tl { top: 0; left: 0; }
       .#{$m__}p-fix-tr { top: 0; right: 0; }
       .#{$m__}p-fix-bl { bottom: 0; left: 0; }
       .#{$m__}p-fix-br { bottom: 0; right: 0; }
       .#{$m__}p-fix-trbl { top: 0; right: 0; bottom: 0; left: 0; }
-      #{m-base-class('abs')} { position: absolute; }
+      #{state-base-class('abs')} { position: absolute; }
       .#{$m__}p-abs-tl { top: 0; left: 0; }
       .#{$m__}p-abs-tr { top: 0; right: 0; }
       .#{$m__}p-abs-bl { bottom: 0; left: 0; }

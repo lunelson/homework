@@ -20,7 +20,7 @@
   @each $m in join((null), map-keys($media)) {
     @include m($m) {
 
-      #{m-base-class('wrap')} {
+      #{state-base-class('wrap')} {
         margin-right: auto;
         margin-left: auto;
         width: 100%;
@@ -102,7 +102,7 @@
 
       $m__: state-prefix();
 
-      #{m-base-class('bleed')} { width: unset !important; }
+      #{state-base-class('bleed')} { width: unset !important; }
 
       .#{$m__}frame, .#{$m__}frame-x, .#{$m__}frame-right { padding-right: var(--outer-right); }
       .#{$m__}frame, .#{$m__}frame-x, .#{$m__}frame-left { padding-left: var(--outer-left); }

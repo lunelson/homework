@@ -46,19 +46,19 @@
 }
 
 body {
-  color: rgb(var(--fg-default));
-  background-color: rgb(var(--bg-default));
+  color: rgba(var(--fg-default), var(--fg-opacity, 1));
+  background-color: rgba(var(--bg-default), var(--bg-opacity, 1));
 }
 
-[class^="fg-"]:not([class$="fg-"]), [class*=" fg-"]:not([class$="fg-"]), [class*="__fg-"]:not([class*=" __fg-"]):not([class*="__fg- "]):not([class$="__fg-"]):not([class^="__fg-"]) {
+[class^="fg-"]:not([class$="fg-"]), [class*=" fg-"]:not([class$="fg-"]) {
   color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
 }
 
-[class^="bg-"]:not([class$="bg-"]), [class*=" bg-"]:not([class$="bg-"]), [class*="__bg-"]:not([class*=" __bg-"]):not([class*="__bg- "]):not([class$="__bg-"]):not([class^="__bg-"]) {
+[class^="bg-"]:not([class$="bg-"]), [class*=" bg-"]:not([class$="bg-"]) {
   background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
 }
 
-[class^="bd-"]:not([class$="bd-"]), [class*=" bd-"]:not([class$="bd-"]), [class*="__bd-"]:not([class*=" __bd-"]):not([class*="__bd- "]):not([class$="__bd-"]):not([class^="__bd-"]) {
+[class^="bd-"]:not([class$="bd-"]), [class*=" bd-"]:not([class$="bd-"]) {
   border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
   border-style: var(--bd-style, solid);
   border-top-width: var(--bd-top-width, 0);
@@ -67,17 +67,17 @@ body {
   border-left-width: var(--bd-left-width, 0);
 }
 
-[class^="ol-"]:not([class$="ol-"]), [class*=" ol-"]:not([class$="ol-"]), [class*="__ol-"]:not([class*=" __ol-"]):not([class*="__ol- "]):not([class$="__ol-"]):not([class^="__ol-"]) {
+[class^="ol-"]:not([class$="ol-"]), [class*=" ol-"]:not([class$="ol-"]) {
   outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
   outline-width: var(--ol-width);
 }
 
-[class^="fill-"]:not([class$="fill-"]), [class*=" fill-"]:not([class$="fill-"]), [class*="__fill-"]:not([class*=" __fill-"]):not([class*="__fill- "]):not([class$="__fill-"]):not([class^="__fill-"]) {
+[class^="fill-"]:not([class$="fill-"]), [class*=" fill-"]:not([class$="fill-"]) {
   fill: rgb(var(--fill-color));
   fill-opacity: var(--fill-opacity, 1);
 }
 
-[class^="stroke-"]:not([class$="stroke-"]), [class*=" stroke-"]:not([class$="stroke-"]), [class*="__stroke-"]:not([class*=" __stroke-"]):not([class*="__stroke- "]):not([class$="__stroke-"]):not([class^="__stroke-"]) {
+[class^="stroke-"]:not([class$="stroke-"]), [class*=" stroke-"]:not([class$="stroke-"]) {
   stroke: rgb(var(--stroke-color));
   stroke-opacity: var(--stroke-opacity, 1);
   stroke-width: var(--stroke-width);
@@ -784,6 +784,331 @@ body {
   --stroke-color: var(--color-pink-e);
 }
 
+.fill-current {
+  --fill-color: currentColor;
+}
+
+.stroke-current {
+  --stroke-color: currentColor;
+}
+
+.o-100 {
+  opacity: 1;
+}
+
+.o-00 {
+  opacity: 0;
+}
+
+.o-10 {
+  opacity: 0.1;
+}
+
+.o-20 {
+  opacity: 0.2;
+}
+
+.o-30 {
+  opacity: 0.3;
+}
+
+.o-40 {
+  opacity: 0.4;
+}
+
+.o-50 {
+  opacity: 0.5;
+}
+
+.o-60 {
+  opacity: 0.6;
+}
+
+.o-70 {
+  opacity: 0.7;
+}
+
+.o-80 {
+  opacity: 0.8;
+}
+
+.o-90 {
+  opacity: 0.9;
+}
+
+.fgo-00 {
+  --fg-opacity: 0;
+}
+
+.bgo-00 {
+  --bg-opacity: 0;
+}
+
+.bdo-00 {
+  --bd-opacity: 0;
+}
+
+.olo-00 {
+  --ol-opacity: 0;
+}
+
+.fillo-00 {
+  --fill-opacity: 0;
+}
+
+.strokeo-00 {
+  --stroke-opacity: 0;
+}
+
+.fgo-10 {
+  --fg-opacity: 0.1;
+}
+
+.bgo-10 {
+  --bg-opacity: 0.1;
+}
+
+.bdo-10 {
+  --bd-opacity: 0.1;
+}
+
+.olo-10 {
+  --ol-opacity: 0.1;
+}
+
+.fillo-10 {
+  --fill-opacity: 0.1;
+}
+
+.strokeo-10 {
+  --stroke-opacity: 0.1;
+}
+
+.fgo-20 {
+  --fg-opacity: 0.2;
+}
+
+.bgo-20 {
+  --bg-opacity: 0.2;
+}
+
+.bdo-20 {
+  --bd-opacity: 0.2;
+}
+
+.olo-20 {
+  --ol-opacity: 0.2;
+}
+
+.fillo-20 {
+  --fill-opacity: 0.2;
+}
+
+.strokeo-20 {
+  --stroke-opacity: 0.2;
+}
+
+.fgo-30 {
+  --fg-opacity: 0.3;
+}
+
+.bgo-30 {
+  --bg-opacity: 0.3;
+}
+
+.bdo-30 {
+  --bd-opacity: 0.3;
+}
+
+.olo-30 {
+  --ol-opacity: 0.3;
+}
+
+.fillo-30 {
+  --fill-opacity: 0.3;
+}
+
+.strokeo-30 {
+  --stroke-opacity: 0.3;
+}
+
+.fgo-40 {
+  --fg-opacity: 0.4;
+}
+
+.bgo-40 {
+  --bg-opacity: 0.4;
+}
+
+.bdo-40 {
+  --bd-opacity: 0.4;
+}
+
+.olo-40 {
+  --ol-opacity: 0.4;
+}
+
+.fillo-40 {
+  --fill-opacity: 0.4;
+}
+
+.strokeo-40 {
+  --stroke-opacity: 0.4;
+}
+
+.fgo-50 {
+  --fg-opacity: 0.5;
+}
+
+.bgo-50 {
+  --bg-opacity: 0.5;
+}
+
+.bdo-50 {
+  --bd-opacity: 0.5;
+}
+
+.olo-50 {
+  --ol-opacity: 0.5;
+}
+
+.fillo-50 {
+  --fill-opacity: 0.5;
+}
+
+.strokeo-50 {
+  --stroke-opacity: 0.5;
+}
+
+.fgo-60 {
+  --fg-opacity: 0.6;
+}
+
+.bgo-60 {
+  --bg-opacity: 0.6;
+}
+
+.bdo-60 {
+  --bd-opacity: 0.6;
+}
+
+.olo-60 {
+  --ol-opacity: 0.6;
+}
+
+.fillo-60 {
+  --fill-opacity: 0.6;
+}
+
+.strokeo-60 {
+  --stroke-opacity: 0.6;
+}
+
+.fgo-70 {
+  --fg-opacity: 0.7;
+}
+
+.bgo-70 {
+  --bg-opacity: 0.7;
+}
+
+.bdo-70 {
+  --bd-opacity: 0.7;
+}
+
+.olo-70 {
+  --ol-opacity: 0.7;
+}
+
+.fillo-70 {
+  --fill-opacity: 0.7;
+}
+
+.strokeo-70 {
+  --stroke-opacity: 0.7;
+}
+
+.fgo-80 {
+  --fg-opacity: 0.8;
+}
+
+.bgo-80 {
+  --bg-opacity: 0.8;
+}
+
+.bdo-80 {
+  --bd-opacity: 0.8;
+}
+
+.olo-80 {
+  --ol-opacity: 0.8;
+}
+
+.fillo-80 {
+  --fill-opacity: 0.8;
+}
+
+.strokeo-80 {
+  --stroke-opacity: 0.8;
+}
+
+.fgo-90 {
+  --fg-opacity: 0.9;
+}
+
+.bgo-90 {
+  --bg-opacity: 0.9;
+}
+
+.bdo-90 {
+  --bd-opacity: 0.9;
+}
+
+.olo-90 {
+  --ol-opacity: 0.9;
+}
+
+.fillo-90 {
+  --fill-opacity: 0.9;
+}
+
+.strokeo-90 {
+  --stroke-opacity: 0.9;
+}
+
+[class^="hover__fg-"]:not([class$="hover__fg-"]):hover, [class*=" hover__fg-"]:not([class$="hover__fg-"]):hover {
+  color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+}
+
+[class^="hover__bg-"]:not([class$="hover__bg-"]):hover, [class*=" hover__bg-"]:not([class$="hover__bg-"]):hover {
+  background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+}
+
+[class^="hover__bd-"]:not([class$="hover__bd-"]):hover, [class*=" hover__bd-"]:not([class$="hover__bd-"]):hover {
+  border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
+}
+
+[class^="hover__ol-"]:not([class$="hover__ol-"]):hover, [class*=" hover__ol-"]:not([class$="hover__ol-"]):hover {
+  outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+  outline-width: var(--ol-width);
+}
+
+[class^="hover__fill-"]:not([class$="hover__fill-"]):hover, [class*=" hover__fill-"]:not([class$="hover__fill-"]):hover {
+  fill: rgb(var(--fill-color));
+  fill-opacity: var(--fill-opacity, 1);
+}
+
+[class^="hover__stroke-"]:not([class$="hover__stroke-"]):hover, [class*=" hover__stroke-"]:not([class$="hover__stroke-"]):hover {
+  stroke: rgb(var(--stroke-color));
+  stroke-opacity: var(--stroke-opacity, 1);
+  stroke-width: var(--stroke-width);
+}
+
 .hover__bg-contrast:hover {
   --bg-color: var(--fg-contrast);
 }
@@ -1483,6 +1808,331 @@ body {
 
 .hover__stroke-pink-e:hover {
   --stroke-color: var(--color-pink-e);
+}
+
+.hover__fill-current:hover {
+  --fill-color: currentColor;
+}
+
+.hover__stroke-current:hover {
+  --stroke-color: currentColor;
+}
+
+.hover__o-100:hover {
+  opacity: 1;
+}
+
+.hover__o-00:hover {
+  opacity: 0;
+}
+
+.hover__o-10:hover {
+  opacity: 0.1;
+}
+
+.hover__o-20:hover {
+  opacity: 0.2;
+}
+
+.hover__o-30:hover {
+  opacity: 0.3;
+}
+
+.hover__o-40:hover {
+  opacity: 0.4;
+}
+
+.hover__o-50:hover {
+  opacity: 0.5;
+}
+
+.hover__o-60:hover {
+  opacity: 0.6;
+}
+
+.hover__o-70:hover {
+  opacity: 0.7;
+}
+
+.hover__o-80:hover {
+  opacity: 0.8;
+}
+
+.hover__o-90:hover {
+  opacity: 0.9;
+}
+
+.hover__fgo-00:hover {
+  --fg-opacity: 0;
+}
+
+.hover__bgo-00:hover {
+  --bg-opacity: 0;
+}
+
+.hover__bdo-00:hover {
+  --bd-opacity: 0;
+}
+
+.hover__olo-00:hover {
+  --ol-opacity: 0;
+}
+
+.hover__fillo-00:hover {
+  --fill-opacity: 0;
+}
+
+.hover__strokeo-00:hover {
+  --stroke-opacity: 0;
+}
+
+.hover__fgo-10:hover {
+  --fg-opacity: 0.1;
+}
+
+.hover__bgo-10:hover {
+  --bg-opacity: 0.1;
+}
+
+.hover__bdo-10:hover {
+  --bd-opacity: 0.1;
+}
+
+.hover__olo-10:hover {
+  --ol-opacity: 0.1;
+}
+
+.hover__fillo-10:hover {
+  --fill-opacity: 0.1;
+}
+
+.hover__strokeo-10:hover {
+  --stroke-opacity: 0.1;
+}
+
+.hover__fgo-20:hover {
+  --fg-opacity: 0.2;
+}
+
+.hover__bgo-20:hover {
+  --bg-opacity: 0.2;
+}
+
+.hover__bdo-20:hover {
+  --bd-opacity: 0.2;
+}
+
+.hover__olo-20:hover {
+  --ol-opacity: 0.2;
+}
+
+.hover__fillo-20:hover {
+  --fill-opacity: 0.2;
+}
+
+.hover__strokeo-20:hover {
+  --stroke-opacity: 0.2;
+}
+
+.hover__fgo-30:hover {
+  --fg-opacity: 0.3;
+}
+
+.hover__bgo-30:hover {
+  --bg-opacity: 0.3;
+}
+
+.hover__bdo-30:hover {
+  --bd-opacity: 0.3;
+}
+
+.hover__olo-30:hover {
+  --ol-opacity: 0.3;
+}
+
+.hover__fillo-30:hover {
+  --fill-opacity: 0.3;
+}
+
+.hover__strokeo-30:hover {
+  --stroke-opacity: 0.3;
+}
+
+.hover__fgo-40:hover {
+  --fg-opacity: 0.4;
+}
+
+.hover__bgo-40:hover {
+  --bg-opacity: 0.4;
+}
+
+.hover__bdo-40:hover {
+  --bd-opacity: 0.4;
+}
+
+.hover__olo-40:hover {
+  --ol-opacity: 0.4;
+}
+
+.hover__fillo-40:hover {
+  --fill-opacity: 0.4;
+}
+
+.hover__strokeo-40:hover {
+  --stroke-opacity: 0.4;
+}
+
+.hover__fgo-50:hover {
+  --fg-opacity: 0.5;
+}
+
+.hover__bgo-50:hover {
+  --bg-opacity: 0.5;
+}
+
+.hover__bdo-50:hover {
+  --bd-opacity: 0.5;
+}
+
+.hover__olo-50:hover {
+  --ol-opacity: 0.5;
+}
+
+.hover__fillo-50:hover {
+  --fill-opacity: 0.5;
+}
+
+.hover__strokeo-50:hover {
+  --stroke-opacity: 0.5;
+}
+
+.hover__fgo-60:hover {
+  --fg-opacity: 0.6;
+}
+
+.hover__bgo-60:hover {
+  --bg-opacity: 0.6;
+}
+
+.hover__bdo-60:hover {
+  --bd-opacity: 0.6;
+}
+
+.hover__olo-60:hover {
+  --ol-opacity: 0.6;
+}
+
+.hover__fillo-60:hover {
+  --fill-opacity: 0.6;
+}
+
+.hover__strokeo-60:hover {
+  --stroke-opacity: 0.6;
+}
+
+.hover__fgo-70:hover {
+  --fg-opacity: 0.7;
+}
+
+.hover__bgo-70:hover {
+  --bg-opacity: 0.7;
+}
+
+.hover__bdo-70:hover {
+  --bd-opacity: 0.7;
+}
+
+.hover__olo-70:hover {
+  --ol-opacity: 0.7;
+}
+
+.hover__fillo-70:hover {
+  --fill-opacity: 0.7;
+}
+
+.hover__strokeo-70:hover {
+  --stroke-opacity: 0.7;
+}
+
+.hover__fgo-80:hover {
+  --fg-opacity: 0.8;
+}
+
+.hover__bgo-80:hover {
+  --bg-opacity: 0.8;
+}
+
+.hover__bdo-80:hover {
+  --bd-opacity: 0.8;
+}
+
+.hover__olo-80:hover {
+  --ol-opacity: 0.8;
+}
+
+.hover__fillo-80:hover {
+  --fill-opacity: 0.8;
+}
+
+.hover__strokeo-80:hover {
+  --stroke-opacity: 0.8;
+}
+
+.hover__fgo-90:hover {
+  --fg-opacity: 0.9;
+}
+
+.hover__bgo-90:hover {
+  --bg-opacity: 0.9;
+}
+
+.hover__bdo-90:hover {
+  --bd-opacity: 0.9;
+}
+
+.hover__olo-90:hover {
+  --ol-opacity: 0.9;
+}
+
+.hover__fillo-90:hover {
+  --fill-opacity: 0.9;
+}
+
+.hover__strokeo-90:hover {
+  --stroke-opacity: 0.9;
+}
+
+[class^="focus__fg-"]:not([class$="focus__fg-"]):focus, [class*=" focus__fg-"]:not([class$="focus__fg-"]):focus {
+  color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+}
+
+[class^="focus__bg-"]:not([class$="focus__bg-"]):focus, [class*=" focus__bg-"]:not([class$="focus__bg-"]):focus {
+  background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+}
+
+[class^="focus__bd-"]:not([class$="focus__bd-"]):focus, [class*=" focus__bd-"]:not([class$="focus__bd-"]):focus {
+  border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
+}
+
+[class^="focus__ol-"]:not([class$="focus__ol-"]):focus, [class*=" focus__ol-"]:not([class$="focus__ol-"]):focus {
+  outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+  outline-width: var(--ol-width);
+}
+
+[class^="focus__fill-"]:not([class$="focus__fill-"]):focus, [class*=" focus__fill-"]:not([class$="focus__fill-"]):focus {
+  fill: rgb(var(--fill-color));
+  fill-opacity: var(--fill-opacity, 1);
+}
+
+[class^="focus__stroke-"]:not([class$="focus__stroke-"]):focus, [class*=" focus__stroke-"]:not([class$="focus__stroke-"]):focus {
+  stroke: rgb(var(--stroke-color));
+  stroke-opacity: var(--stroke-opacity, 1);
+  stroke-width: var(--stroke-width);
 }
 
 .focus__bg-contrast:focus {
@@ -2186,6 +2836,331 @@ body {
   --stroke-color: var(--color-pink-e);
 }
 
+.focus__fill-current:focus {
+  --fill-color: currentColor;
+}
+
+.focus__stroke-current:focus {
+  --stroke-color: currentColor;
+}
+
+.focus__o-100:focus {
+  opacity: 1;
+}
+
+.focus__o-00:focus {
+  opacity: 0;
+}
+
+.focus__o-10:focus {
+  opacity: 0.1;
+}
+
+.focus__o-20:focus {
+  opacity: 0.2;
+}
+
+.focus__o-30:focus {
+  opacity: 0.3;
+}
+
+.focus__o-40:focus {
+  opacity: 0.4;
+}
+
+.focus__o-50:focus {
+  opacity: 0.5;
+}
+
+.focus__o-60:focus {
+  opacity: 0.6;
+}
+
+.focus__o-70:focus {
+  opacity: 0.7;
+}
+
+.focus__o-80:focus {
+  opacity: 0.8;
+}
+
+.focus__o-90:focus {
+  opacity: 0.9;
+}
+
+.focus__fgo-00:focus {
+  --fg-opacity: 0;
+}
+
+.focus__bgo-00:focus {
+  --bg-opacity: 0;
+}
+
+.focus__bdo-00:focus {
+  --bd-opacity: 0;
+}
+
+.focus__olo-00:focus {
+  --ol-opacity: 0;
+}
+
+.focus__fillo-00:focus {
+  --fill-opacity: 0;
+}
+
+.focus__strokeo-00:focus {
+  --stroke-opacity: 0;
+}
+
+.focus__fgo-10:focus {
+  --fg-opacity: 0.1;
+}
+
+.focus__bgo-10:focus {
+  --bg-opacity: 0.1;
+}
+
+.focus__bdo-10:focus {
+  --bd-opacity: 0.1;
+}
+
+.focus__olo-10:focus {
+  --ol-opacity: 0.1;
+}
+
+.focus__fillo-10:focus {
+  --fill-opacity: 0.1;
+}
+
+.focus__strokeo-10:focus {
+  --stroke-opacity: 0.1;
+}
+
+.focus__fgo-20:focus {
+  --fg-opacity: 0.2;
+}
+
+.focus__bgo-20:focus {
+  --bg-opacity: 0.2;
+}
+
+.focus__bdo-20:focus {
+  --bd-opacity: 0.2;
+}
+
+.focus__olo-20:focus {
+  --ol-opacity: 0.2;
+}
+
+.focus__fillo-20:focus {
+  --fill-opacity: 0.2;
+}
+
+.focus__strokeo-20:focus {
+  --stroke-opacity: 0.2;
+}
+
+.focus__fgo-30:focus {
+  --fg-opacity: 0.3;
+}
+
+.focus__bgo-30:focus {
+  --bg-opacity: 0.3;
+}
+
+.focus__bdo-30:focus {
+  --bd-opacity: 0.3;
+}
+
+.focus__olo-30:focus {
+  --ol-opacity: 0.3;
+}
+
+.focus__fillo-30:focus {
+  --fill-opacity: 0.3;
+}
+
+.focus__strokeo-30:focus {
+  --stroke-opacity: 0.3;
+}
+
+.focus__fgo-40:focus {
+  --fg-opacity: 0.4;
+}
+
+.focus__bgo-40:focus {
+  --bg-opacity: 0.4;
+}
+
+.focus__bdo-40:focus {
+  --bd-opacity: 0.4;
+}
+
+.focus__olo-40:focus {
+  --ol-opacity: 0.4;
+}
+
+.focus__fillo-40:focus {
+  --fill-opacity: 0.4;
+}
+
+.focus__strokeo-40:focus {
+  --stroke-opacity: 0.4;
+}
+
+.focus__fgo-50:focus {
+  --fg-opacity: 0.5;
+}
+
+.focus__bgo-50:focus {
+  --bg-opacity: 0.5;
+}
+
+.focus__bdo-50:focus {
+  --bd-opacity: 0.5;
+}
+
+.focus__olo-50:focus {
+  --ol-opacity: 0.5;
+}
+
+.focus__fillo-50:focus {
+  --fill-opacity: 0.5;
+}
+
+.focus__strokeo-50:focus {
+  --stroke-opacity: 0.5;
+}
+
+.focus__fgo-60:focus {
+  --fg-opacity: 0.6;
+}
+
+.focus__bgo-60:focus {
+  --bg-opacity: 0.6;
+}
+
+.focus__bdo-60:focus {
+  --bd-opacity: 0.6;
+}
+
+.focus__olo-60:focus {
+  --ol-opacity: 0.6;
+}
+
+.focus__fillo-60:focus {
+  --fill-opacity: 0.6;
+}
+
+.focus__strokeo-60:focus {
+  --stroke-opacity: 0.6;
+}
+
+.focus__fgo-70:focus {
+  --fg-opacity: 0.7;
+}
+
+.focus__bgo-70:focus {
+  --bg-opacity: 0.7;
+}
+
+.focus__bdo-70:focus {
+  --bd-opacity: 0.7;
+}
+
+.focus__olo-70:focus {
+  --ol-opacity: 0.7;
+}
+
+.focus__fillo-70:focus {
+  --fill-opacity: 0.7;
+}
+
+.focus__strokeo-70:focus {
+  --stroke-opacity: 0.7;
+}
+
+.focus__fgo-80:focus {
+  --fg-opacity: 0.8;
+}
+
+.focus__bgo-80:focus {
+  --bg-opacity: 0.8;
+}
+
+.focus__bdo-80:focus {
+  --bd-opacity: 0.8;
+}
+
+.focus__olo-80:focus {
+  --ol-opacity: 0.8;
+}
+
+.focus__fillo-80:focus {
+  --fill-opacity: 0.8;
+}
+
+.focus__strokeo-80:focus {
+  --stroke-opacity: 0.8;
+}
+
+.focus__fgo-90:focus {
+  --fg-opacity: 0.9;
+}
+
+.focus__bgo-90:focus {
+  --bg-opacity: 0.9;
+}
+
+.focus__bdo-90:focus {
+  --bd-opacity: 0.9;
+}
+
+.focus__olo-90:focus {
+  --ol-opacity: 0.9;
+}
+
+.focus__fillo-90:focus {
+  --fill-opacity: 0.9;
+}
+
+.focus__strokeo-90:focus {
+  --stroke-opacity: 0.9;
+}
+
+[class^="active__fg-"]:not([class$="active__fg-"]):active, [class*=" active__fg-"]:not([class$="active__fg-"]):active {
+  color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+}
+
+[class^="active__bg-"]:not([class$="active__bg-"]):active, [class*=" active__bg-"]:not([class$="active__bg-"]):active {
+  background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+}
+
+[class^="active__bd-"]:not([class$="active__bd-"]):active, [class*=" active__bd-"]:not([class$="active__bd-"]):active {
+  border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
+}
+
+[class^="active__ol-"]:not([class$="active__ol-"]):active, [class*=" active__ol-"]:not([class$="active__ol-"]):active {
+  outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+  outline-width: var(--ol-width);
+}
+
+[class^="active__fill-"]:not([class$="active__fill-"]):active, [class*=" active__fill-"]:not([class$="active__fill-"]):active {
+  fill: rgb(var(--fill-color));
+  fill-opacity: var(--fill-opacity, 1);
+}
+
+[class^="active__stroke-"]:not([class$="active__stroke-"]):active, [class*=" active__stroke-"]:not([class$="active__stroke-"]):active {
+  stroke: rgb(var(--stroke-color));
+  stroke-opacity: var(--stroke-opacity, 1);
+  stroke-width: var(--stroke-width);
+}
+
 .active__bg-contrast:active {
   --bg-color: var(--fg-contrast);
 }
@@ -2885,6 +3860,331 @@ body {
 
 .active__stroke-pink-e:active {
   --stroke-color: var(--color-pink-e);
+}
+
+.active__fill-current:active {
+  --fill-color: currentColor;
+}
+
+.active__stroke-current:active {
+  --stroke-color: currentColor;
+}
+
+.active__o-100:active {
+  opacity: 1;
+}
+
+.active__o-00:active {
+  opacity: 0;
+}
+
+.active__o-10:active {
+  opacity: 0.1;
+}
+
+.active__o-20:active {
+  opacity: 0.2;
+}
+
+.active__o-30:active {
+  opacity: 0.3;
+}
+
+.active__o-40:active {
+  opacity: 0.4;
+}
+
+.active__o-50:active {
+  opacity: 0.5;
+}
+
+.active__o-60:active {
+  opacity: 0.6;
+}
+
+.active__o-70:active {
+  opacity: 0.7;
+}
+
+.active__o-80:active {
+  opacity: 0.8;
+}
+
+.active__o-90:active {
+  opacity: 0.9;
+}
+
+.active__fgo-00:active {
+  --fg-opacity: 0;
+}
+
+.active__bgo-00:active {
+  --bg-opacity: 0;
+}
+
+.active__bdo-00:active {
+  --bd-opacity: 0;
+}
+
+.active__olo-00:active {
+  --ol-opacity: 0;
+}
+
+.active__fillo-00:active {
+  --fill-opacity: 0;
+}
+
+.active__strokeo-00:active {
+  --stroke-opacity: 0;
+}
+
+.active__fgo-10:active {
+  --fg-opacity: 0.1;
+}
+
+.active__bgo-10:active {
+  --bg-opacity: 0.1;
+}
+
+.active__bdo-10:active {
+  --bd-opacity: 0.1;
+}
+
+.active__olo-10:active {
+  --ol-opacity: 0.1;
+}
+
+.active__fillo-10:active {
+  --fill-opacity: 0.1;
+}
+
+.active__strokeo-10:active {
+  --stroke-opacity: 0.1;
+}
+
+.active__fgo-20:active {
+  --fg-opacity: 0.2;
+}
+
+.active__bgo-20:active {
+  --bg-opacity: 0.2;
+}
+
+.active__bdo-20:active {
+  --bd-opacity: 0.2;
+}
+
+.active__olo-20:active {
+  --ol-opacity: 0.2;
+}
+
+.active__fillo-20:active {
+  --fill-opacity: 0.2;
+}
+
+.active__strokeo-20:active {
+  --stroke-opacity: 0.2;
+}
+
+.active__fgo-30:active {
+  --fg-opacity: 0.3;
+}
+
+.active__bgo-30:active {
+  --bg-opacity: 0.3;
+}
+
+.active__bdo-30:active {
+  --bd-opacity: 0.3;
+}
+
+.active__olo-30:active {
+  --ol-opacity: 0.3;
+}
+
+.active__fillo-30:active {
+  --fill-opacity: 0.3;
+}
+
+.active__strokeo-30:active {
+  --stroke-opacity: 0.3;
+}
+
+.active__fgo-40:active {
+  --fg-opacity: 0.4;
+}
+
+.active__bgo-40:active {
+  --bg-opacity: 0.4;
+}
+
+.active__bdo-40:active {
+  --bd-opacity: 0.4;
+}
+
+.active__olo-40:active {
+  --ol-opacity: 0.4;
+}
+
+.active__fillo-40:active {
+  --fill-opacity: 0.4;
+}
+
+.active__strokeo-40:active {
+  --stroke-opacity: 0.4;
+}
+
+.active__fgo-50:active {
+  --fg-opacity: 0.5;
+}
+
+.active__bgo-50:active {
+  --bg-opacity: 0.5;
+}
+
+.active__bdo-50:active {
+  --bd-opacity: 0.5;
+}
+
+.active__olo-50:active {
+  --ol-opacity: 0.5;
+}
+
+.active__fillo-50:active {
+  --fill-opacity: 0.5;
+}
+
+.active__strokeo-50:active {
+  --stroke-opacity: 0.5;
+}
+
+.active__fgo-60:active {
+  --fg-opacity: 0.6;
+}
+
+.active__bgo-60:active {
+  --bg-opacity: 0.6;
+}
+
+.active__bdo-60:active {
+  --bd-opacity: 0.6;
+}
+
+.active__olo-60:active {
+  --ol-opacity: 0.6;
+}
+
+.active__fillo-60:active {
+  --fill-opacity: 0.6;
+}
+
+.active__strokeo-60:active {
+  --stroke-opacity: 0.6;
+}
+
+.active__fgo-70:active {
+  --fg-opacity: 0.7;
+}
+
+.active__bgo-70:active {
+  --bg-opacity: 0.7;
+}
+
+.active__bdo-70:active {
+  --bd-opacity: 0.7;
+}
+
+.active__olo-70:active {
+  --ol-opacity: 0.7;
+}
+
+.active__fillo-70:active {
+  --fill-opacity: 0.7;
+}
+
+.active__strokeo-70:active {
+  --stroke-opacity: 0.7;
+}
+
+.active__fgo-80:active {
+  --fg-opacity: 0.8;
+}
+
+.active__bgo-80:active {
+  --bg-opacity: 0.8;
+}
+
+.active__bdo-80:active {
+  --bd-opacity: 0.8;
+}
+
+.active__olo-80:active {
+  --ol-opacity: 0.8;
+}
+
+.active__fillo-80:active {
+  --fill-opacity: 0.8;
+}
+
+.active__strokeo-80:active {
+  --stroke-opacity: 0.8;
+}
+
+.active__fgo-90:active {
+  --fg-opacity: 0.9;
+}
+
+.active__bgo-90:active {
+  --bg-opacity: 0.9;
+}
+
+.active__bdo-90:active {
+  --bd-opacity: 0.9;
+}
+
+.active__olo-90:active {
+  --ol-opacity: 0.9;
+}
+
+.active__fillo-90:active {
+  --fill-opacity: 0.9;
+}
+
+.active__strokeo-90:active {
+  --stroke-opacity: 0.9;
+}
+
+[class^="disabled__fg-"]:not([class$="disabled__fg-"]):disabled, [class*=" disabled__fg-"]:not([class$="disabled__fg-"]):disabled {
+  color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+}
+
+[class^="disabled__bg-"]:not([class$="disabled__bg-"]):disabled, [class*=" disabled__bg-"]:not([class$="disabled__bg-"]):disabled {
+  background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+}
+
+[class^="disabled__bd-"]:not([class$="disabled__bd-"]):disabled, [class*=" disabled__bd-"]:not([class$="disabled__bd-"]):disabled {
+  border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
+}
+
+[class^="disabled__ol-"]:not([class$="disabled__ol-"]):disabled, [class*=" disabled__ol-"]:not([class$="disabled__ol-"]):disabled {
+  outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+  outline-width: var(--ol-width);
+}
+
+[class^="disabled__fill-"]:not([class$="disabled__fill-"]):disabled, [class*=" disabled__fill-"]:not([class$="disabled__fill-"]):disabled {
+  fill: rgb(var(--fill-color));
+  fill-opacity: var(--fill-opacity, 1);
+}
+
+[class^="disabled__stroke-"]:not([class$="disabled__stroke-"]):disabled, [class*=" disabled__stroke-"]:not([class$="disabled__stroke-"]):disabled {
+  stroke: rgb(var(--stroke-color));
+  stroke-opacity: var(--stroke-opacity, 1);
+  stroke-width: var(--stroke-width);
 }
 
 .disabled__bg-contrast:disabled {
@@ -3588,6 +4888,331 @@ body {
   --stroke-color: var(--color-pink-e);
 }
 
+.disabled__fill-current:disabled {
+  --fill-color: currentColor;
+}
+
+.disabled__stroke-current:disabled {
+  --stroke-color: currentColor;
+}
+
+.disabled__o-100:disabled {
+  opacity: 1;
+}
+
+.disabled__o-00:disabled {
+  opacity: 0;
+}
+
+.disabled__o-10:disabled {
+  opacity: 0.1;
+}
+
+.disabled__o-20:disabled {
+  opacity: 0.2;
+}
+
+.disabled__o-30:disabled {
+  opacity: 0.3;
+}
+
+.disabled__o-40:disabled {
+  opacity: 0.4;
+}
+
+.disabled__o-50:disabled {
+  opacity: 0.5;
+}
+
+.disabled__o-60:disabled {
+  opacity: 0.6;
+}
+
+.disabled__o-70:disabled {
+  opacity: 0.7;
+}
+
+.disabled__o-80:disabled {
+  opacity: 0.8;
+}
+
+.disabled__o-90:disabled {
+  opacity: 0.9;
+}
+
+.disabled__fgo-00:disabled {
+  --fg-opacity: 0;
+}
+
+.disabled__bgo-00:disabled {
+  --bg-opacity: 0;
+}
+
+.disabled__bdo-00:disabled {
+  --bd-opacity: 0;
+}
+
+.disabled__olo-00:disabled {
+  --ol-opacity: 0;
+}
+
+.disabled__fillo-00:disabled {
+  --fill-opacity: 0;
+}
+
+.disabled__strokeo-00:disabled {
+  --stroke-opacity: 0;
+}
+
+.disabled__fgo-10:disabled {
+  --fg-opacity: 0.1;
+}
+
+.disabled__bgo-10:disabled {
+  --bg-opacity: 0.1;
+}
+
+.disabled__bdo-10:disabled {
+  --bd-opacity: 0.1;
+}
+
+.disabled__olo-10:disabled {
+  --ol-opacity: 0.1;
+}
+
+.disabled__fillo-10:disabled {
+  --fill-opacity: 0.1;
+}
+
+.disabled__strokeo-10:disabled {
+  --stroke-opacity: 0.1;
+}
+
+.disabled__fgo-20:disabled {
+  --fg-opacity: 0.2;
+}
+
+.disabled__bgo-20:disabled {
+  --bg-opacity: 0.2;
+}
+
+.disabled__bdo-20:disabled {
+  --bd-opacity: 0.2;
+}
+
+.disabled__olo-20:disabled {
+  --ol-opacity: 0.2;
+}
+
+.disabled__fillo-20:disabled {
+  --fill-opacity: 0.2;
+}
+
+.disabled__strokeo-20:disabled {
+  --stroke-opacity: 0.2;
+}
+
+.disabled__fgo-30:disabled {
+  --fg-opacity: 0.3;
+}
+
+.disabled__bgo-30:disabled {
+  --bg-opacity: 0.3;
+}
+
+.disabled__bdo-30:disabled {
+  --bd-opacity: 0.3;
+}
+
+.disabled__olo-30:disabled {
+  --ol-opacity: 0.3;
+}
+
+.disabled__fillo-30:disabled {
+  --fill-opacity: 0.3;
+}
+
+.disabled__strokeo-30:disabled {
+  --stroke-opacity: 0.3;
+}
+
+.disabled__fgo-40:disabled {
+  --fg-opacity: 0.4;
+}
+
+.disabled__bgo-40:disabled {
+  --bg-opacity: 0.4;
+}
+
+.disabled__bdo-40:disabled {
+  --bd-opacity: 0.4;
+}
+
+.disabled__olo-40:disabled {
+  --ol-opacity: 0.4;
+}
+
+.disabled__fillo-40:disabled {
+  --fill-opacity: 0.4;
+}
+
+.disabled__strokeo-40:disabled {
+  --stroke-opacity: 0.4;
+}
+
+.disabled__fgo-50:disabled {
+  --fg-opacity: 0.5;
+}
+
+.disabled__bgo-50:disabled {
+  --bg-opacity: 0.5;
+}
+
+.disabled__bdo-50:disabled {
+  --bd-opacity: 0.5;
+}
+
+.disabled__olo-50:disabled {
+  --ol-opacity: 0.5;
+}
+
+.disabled__fillo-50:disabled {
+  --fill-opacity: 0.5;
+}
+
+.disabled__strokeo-50:disabled {
+  --stroke-opacity: 0.5;
+}
+
+.disabled__fgo-60:disabled {
+  --fg-opacity: 0.6;
+}
+
+.disabled__bgo-60:disabled {
+  --bg-opacity: 0.6;
+}
+
+.disabled__bdo-60:disabled {
+  --bd-opacity: 0.6;
+}
+
+.disabled__olo-60:disabled {
+  --ol-opacity: 0.6;
+}
+
+.disabled__fillo-60:disabled {
+  --fill-opacity: 0.6;
+}
+
+.disabled__strokeo-60:disabled {
+  --stroke-opacity: 0.6;
+}
+
+.disabled__fgo-70:disabled {
+  --fg-opacity: 0.7;
+}
+
+.disabled__bgo-70:disabled {
+  --bg-opacity: 0.7;
+}
+
+.disabled__bdo-70:disabled {
+  --bd-opacity: 0.7;
+}
+
+.disabled__olo-70:disabled {
+  --ol-opacity: 0.7;
+}
+
+.disabled__fillo-70:disabled {
+  --fill-opacity: 0.7;
+}
+
+.disabled__strokeo-70:disabled {
+  --stroke-opacity: 0.7;
+}
+
+.disabled__fgo-80:disabled {
+  --fg-opacity: 0.8;
+}
+
+.disabled__bgo-80:disabled {
+  --bg-opacity: 0.8;
+}
+
+.disabled__bdo-80:disabled {
+  --bd-opacity: 0.8;
+}
+
+.disabled__olo-80:disabled {
+  --ol-opacity: 0.8;
+}
+
+.disabled__fillo-80:disabled {
+  --fill-opacity: 0.8;
+}
+
+.disabled__strokeo-80:disabled {
+  --stroke-opacity: 0.8;
+}
+
+.disabled__fgo-90:disabled {
+  --fg-opacity: 0.9;
+}
+
+.disabled__bgo-90:disabled {
+  --bg-opacity: 0.9;
+}
+
+.disabled__bdo-90:disabled {
+  --bd-opacity: 0.9;
+}
+
+.disabled__olo-90:disabled {
+  --ol-opacity: 0.9;
+}
+
+.disabled__fillo-90:disabled {
+  --fill-opacity: 0.9;
+}
+
+.disabled__strokeo-90:disabled {
+  --stroke-opacity: 0.9;
+}
+
+[class^="focus-within__fg-"]:not([class$="focus-within__fg-"]):focus-within, [class*=" focus-within__fg-"]:not([class$="focus-within__fg-"]):focus-within {
+  color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+}
+
+[class^="focus-within__bg-"]:not([class$="focus-within__bg-"]):focus-within, [class*=" focus-within__bg-"]:not([class$="focus-within__bg-"]):focus-within {
+  background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+}
+
+[class^="focus-within__bd-"]:not([class$="focus-within__bd-"]):focus-within, [class*=" focus-within__bd-"]:not([class$="focus-within__bd-"]):focus-within {
+  border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
+}
+
+[class^="focus-within__ol-"]:not([class$="focus-within__ol-"]):focus-within, [class*=" focus-within__ol-"]:not([class$="focus-within__ol-"]):focus-within {
+  outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+  outline-width: var(--ol-width);
+}
+
+[class^="focus-within__fill-"]:not([class$="focus-within__fill-"]):focus-within, [class*=" focus-within__fill-"]:not([class$="focus-within__fill-"]):focus-within {
+  fill: rgb(var(--fill-color));
+  fill-opacity: var(--fill-opacity, 1);
+}
+
+[class^="focus-within__stroke-"]:not([class$="focus-within__stroke-"]):focus-within, [class*=" focus-within__stroke-"]:not([class$="focus-within__stroke-"]):focus-within {
+  stroke: rgb(var(--stroke-color));
+  stroke-opacity: var(--stroke-opacity, 1);
+  stroke-width: var(--stroke-width);
+}
+
 .focus-within__bg-contrast:focus-within {
   --bg-color: var(--fg-contrast);
 }
@@ -4287,6 +5912,331 @@ body {
 
 .focus-within__stroke-pink-e:focus-within {
   --stroke-color: var(--color-pink-e);
+}
+
+.focus-within__fill-current:focus-within {
+  --fill-color: currentColor;
+}
+
+.focus-within__stroke-current:focus-within {
+  --stroke-color: currentColor;
+}
+
+.focus-within__o-100:focus-within {
+  opacity: 1;
+}
+
+.focus-within__o-00:focus-within {
+  opacity: 0;
+}
+
+.focus-within__o-10:focus-within {
+  opacity: 0.1;
+}
+
+.focus-within__o-20:focus-within {
+  opacity: 0.2;
+}
+
+.focus-within__o-30:focus-within {
+  opacity: 0.3;
+}
+
+.focus-within__o-40:focus-within {
+  opacity: 0.4;
+}
+
+.focus-within__o-50:focus-within {
+  opacity: 0.5;
+}
+
+.focus-within__o-60:focus-within {
+  opacity: 0.6;
+}
+
+.focus-within__o-70:focus-within {
+  opacity: 0.7;
+}
+
+.focus-within__o-80:focus-within {
+  opacity: 0.8;
+}
+
+.focus-within__o-90:focus-within {
+  opacity: 0.9;
+}
+
+.focus-within__fgo-00:focus-within {
+  --fg-opacity: 0;
+}
+
+.focus-within__bgo-00:focus-within {
+  --bg-opacity: 0;
+}
+
+.focus-within__bdo-00:focus-within {
+  --bd-opacity: 0;
+}
+
+.focus-within__olo-00:focus-within {
+  --ol-opacity: 0;
+}
+
+.focus-within__fillo-00:focus-within {
+  --fill-opacity: 0;
+}
+
+.focus-within__strokeo-00:focus-within {
+  --stroke-opacity: 0;
+}
+
+.focus-within__fgo-10:focus-within {
+  --fg-opacity: 0.1;
+}
+
+.focus-within__bgo-10:focus-within {
+  --bg-opacity: 0.1;
+}
+
+.focus-within__bdo-10:focus-within {
+  --bd-opacity: 0.1;
+}
+
+.focus-within__olo-10:focus-within {
+  --ol-opacity: 0.1;
+}
+
+.focus-within__fillo-10:focus-within {
+  --fill-opacity: 0.1;
+}
+
+.focus-within__strokeo-10:focus-within {
+  --stroke-opacity: 0.1;
+}
+
+.focus-within__fgo-20:focus-within {
+  --fg-opacity: 0.2;
+}
+
+.focus-within__bgo-20:focus-within {
+  --bg-opacity: 0.2;
+}
+
+.focus-within__bdo-20:focus-within {
+  --bd-opacity: 0.2;
+}
+
+.focus-within__olo-20:focus-within {
+  --ol-opacity: 0.2;
+}
+
+.focus-within__fillo-20:focus-within {
+  --fill-opacity: 0.2;
+}
+
+.focus-within__strokeo-20:focus-within {
+  --stroke-opacity: 0.2;
+}
+
+.focus-within__fgo-30:focus-within {
+  --fg-opacity: 0.3;
+}
+
+.focus-within__bgo-30:focus-within {
+  --bg-opacity: 0.3;
+}
+
+.focus-within__bdo-30:focus-within {
+  --bd-opacity: 0.3;
+}
+
+.focus-within__olo-30:focus-within {
+  --ol-opacity: 0.3;
+}
+
+.focus-within__fillo-30:focus-within {
+  --fill-opacity: 0.3;
+}
+
+.focus-within__strokeo-30:focus-within {
+  --stroke-opacity: 0.3;
+}
+
+.focus-within__fgo-40:focus-within {
+  --fg-opacity: 0.4;
+}
+
+.focus-within__bgo-40:focus-within {
+  --bg-opacity: 0.4;
+}
+
+.focus-within__bdo-40:focus-within {
+  --bd-opacity: 0.4;
+}
+
+.focus-within__olo-40:focus-within {
+  --ol-opacity: 0.4;
+}
+
+.focus-within__fillo-40:focus-within {
+  --fill-opacity: 0.4;
+}
+
+.focus-within__strokeo-40:focus-within {
+  --stroke-opacity: 0.4;
+}
+
+.focus-within__fgo-50:focus-within {
+  --fg-opacity: 0.5;
+}
+
+.focus-within__bgo-50:focus-within {
+  --bg-opacity: 0.5;
+}
+
+.focus-within__bdo-50:focus-within {
+  --bd-opacity: 0.5;
+}
+
+.focus-within__olo-50:focus-within {
+  --ol-opacity: 0.5;
+}
+
+.focus-within__fillo-50:focus-within {
+  --fill-opacity: 0.5;
+}
+
+.focus-within__strokeo-50:focus-within {
+  --stroke-opacity: 0.5;
+}
+
+.focus-within__fgo-60:focus-within {
+  --fg-opacity: 0.6;
+}
+
+.focus-within__bgo-60:focus-within {
+  --bg-opacity: 0.6;
+}
+
+.focus-within__bdo-60:focus-within {
+  --bd-opacity: 0.6;
+}
+
+.focus-within__olo-60:focus-within {
+  --ol-opacity: 0.6;
+}
+
+.focus-within__fillo-60:focus-within {
+  --fill-opacity: 0.6;
+}
+
+.focus-within__strokeo-60:focus-within {
+  --stroke-opacity: 0.6;
+}
+
+.focus-within__fgo-70:focus-within {
+  --fg-opacity: 0.7;
+}
+
+.focus-within__bgo-70:focus-within {
+  --bg-opacity: 0.7;
+}
+
+.focus-within__bdo-70:focus-within {
+  --bd-opacity: 0.7;
+}
+
+.focus-within__olo-70:focus-within {
+  --ol-opacity: 0.7;
+}
+
+.focus-within__fillo-70:focus-within {
+  --fill-opacity: 0.7;
+}
+
+.focus-within__strokeo-70:focus-within {
+  --stroke-opacity: 0.7;
+}
+
+.focus-within__fgo-80:focus-within {
+  --fg-opacity: 0.8;
+}
+
+.focus-within__bgo-80:focus-within {
+  --bg-opacity: 0.8;
+}
+
+.focus-within__bdo-80:focus-within {
+  --bd-opacity: 0.8;
+}
+
+.focus-within__olo-80:focus-within {
+  --ol-opacity: 0.8;
+}
+
+.focus-within__fillo-80:focus-within {
+  --fill-opacity: 0.8;
+}
+
+.focus-within__strokeo-80:focus-within {
+  --stroke-opacity: 0.8;
+}
+
+.focus-within__fgo-90:focus-within {
+  --fg-opacity: 0.9;
+}
+
+.focus-within__bgo-90:focus-within {
+  --bg-opacity: 0.9;
+}
+
+.focus-within__bdo-90:focus-within {
+  --bd-opacity: 0.9;
+}
+
+.focus-within__olo-90:focus-within {
+  --ol-opacity: 0.9;
+}
+
+.focus-within__fillo-90:focus-within {
+  --fill-opacity: 0.9;
+}
+
+.focus-within__strokeo-90:focus-within {
+  --stroke-opacity: 0.9;
+}
+
+.parent:hover [class^="parent-hover__fg-"]:not([class$="parent-hover__fg-"]), .parent:hover [class*=" parent-hover__fg-"]:not([class$="parent-hover__fg-"]) {
+  color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+}
+
+.parent:hover [class^="parent-hover__bg-"]:not([class$="parent-hover__bg-"]), .parent:hover [class*=" parent-hover__bg-"]:not([class$="parent-hover__bg-"]) {
+  background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+}
+
+.parent:hover [class^="parent-hover__bd-"]:not([class$="parent-hover__bd-"]), .parent:hover [class*=" parent-hover__bd-"]:not([class$="parent-hover__bd-"]) {
+  border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
+}
+
+.parent:hover [class^="parent-hover__ol-"]:not([class$="parent-hover__ol-"]), .parent:hover [class*=" parent-hover__ol-"]:not([class$="parent-hover__ol-"]) {
+  outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+  outline-width: var(--ol-width);
+}
+
+.parent:hover [class^="parent-hover__fill-"]:not([class$="parent-hover__fill-"]), .parent:hover [class*=" parent-hover__fill-"]:not([class$="parent-hover__fill-"]) {
+  fill: rgb(var(--fill-color));
+  fill-opacity: var(--fill-opacity, 1);
+}
+
+.parent:hover [class^="parent-hover__stroke-"]:not([class$="parent-hover__stroke-"]), .parent:hover [class*=" parent-hover__stroke-"]:not([class$="parent-hover__stroke-"]) {
+  stroke: rgb(var(--stroke-color));
+  stroke-opacity: var(--stroke-opacity, 1);
+  stroke-width: var(--stroke-width);
 }
 
 .parent:hover .parent-hover__bg-contrast {
@@ -4990,6 +6940,331 @@ body {
   --stroke-color: var(--color-pink-e);
 }
 
+.parent:hover .parent-hover__fill-current {
+  --fill-color: currentColor;
+}
+
+.parent:hover .parent-hover__stroke-current {
+  --stroke-color: currentColor;
+}
+
+.parent:hover .parent-hover__o-100 {
+  opacity: 1;
+}
+
+.parent:hover .parent-hover__o-00 {
+  opacity: 0;
+}
+
+.parent:hover .parent-hover__o-10 {
+  opacity: 0.1;
+}
+
+.parent:hover .parent-hover__o-20 {
+  opacity: 0.2;
+}
+
+.parent:hover .parent-hover__o-30 {
+  opacity: 0.3;
+}
+
+.parent:hover .parent-hover__o-40 {
+  opacity: 0.4;
+}
+
+.parent:hover .parent-hover__o-50 {
+  opacity: 0.5;
+}
+
+.parent:hover .parent-hover__o-60 {
+  opacity: 0.6;
+}
+
+.parent:hover .parent-hover__o-70 {
+  opacity: 0.7;
+}
+
+.parent:hover .parent-hover__o-80 {
+  opacity: 0.8;
+}
+
+.parent:hover .parent-hover__o-90 {
+  opacity: 0.9;
+}
+
+.parent:hover .parent-hover__fgo-00 {
+  --fg-opacity: 0;
+}
+
+.parent:hover .parent-hover__bgo-00 {
+  --bg-opacity: 0;
+}
+
+.parent:hover .parent-hover__bdo-00 {
+  --bd-opacity: 0;
+}
+
+.parent:hover .parent-hover__olo-00 {
+  --ol-opacity: 0;
+}
+
+.parent:hover .parent-hover__fillo-00 {
+  --fill-opacity: 0;
+}
+
+.parent:hover .parent-hover__strokeo-00 {
+  --stroke-opacity: 0;
+}
+
+.parent:hover .parent-hover__fgo-10 {
+  --fg-opacity: 0.1;
+}
+
+.parent:hover .parent-hover__bgo-10 {
+  --bg-opacity: 0.1;
+}
+
+.parent:hover .parent-hover__bdo-10 {
+  --bd-opacity: 0.1;
+}
+
+.parent:hover .parent-hover__olo-10 {
+  --ol-opacity: 0.1;
+}
+
+.parent:hover .parent-hover__fillo-10 {
+  --fill-opacity: 0.1;
+}
+
+.parent:hover .parent-hover__strokeo-10 {
+  --stroke-opacity: 0.1;
+}
+
+.parent:hover .parent-hover__fgo-20 {
+  --fg-opacity: 0.2;
+}
+
+.parent:hover .parent-hover__bgo-20 {
+  --bg-opacity: 0.2;
+}
+
+.parent:hover .parent-hover__bdo-20 {
+  --bd-opacity: 0.2;
+}
+
+.parent:hover .parent-hover__olo-20 {
+  --ol-opacity: 0.2;
+}
+
+.parent:hover .parent-hover__fillo-20 {
+  --fill-opacity: 0.2;
+}
+
+.parent:hover .parent-hover__strokeo-20 {
+  --stroke-opacity: 0.2;
+}
+
+.parent:hover .parent-hover__fgo-30 {
+  --fg-opacity: 0.3;
+}
+
+.parent:hover .parent-hover__bgo-30 {
+  --bg-opacity: 0.3;
+}
+
+.parent:hover .parent-hover__bdo-30 {
+  --bd-opacity: 0.3;
+}
+
+.parent:hover .parent-hover__olo-30 {
+  --ol-opacity: 0.3;
+}
+
+.parent:hover .parent-hover__fillo-30 {
+  --fill-opacity: 0.3;
+}
+
+.parent:hover .parent-hover__strokeo-30 {
+  --stroke-opacity: 0.3;
+}
+
+.parent:hover .parent-hover__fgo-40 {
+  --fg-opacity: 0.4;
+}
+
+.parent:hover .parent-hover__bgo-40 {
+  --bg-opacity: 0.4;
+}
+
+.parent:hover .parent-hover__bdo-40 {
+  --bd-opacity: 0.4;
+}
+
+.parent:hover .parent-hover__olo-40 {
+  --ol-opacity: 0.4;
+}
+
+.parent:hover .parent-hover__fillo-40 {
+  --fill-opacity: 0.4;
+}
+
+.parent:hover .parent-hover__strokeo-40 {
+  --stroke-opacity: 0.4;
+}
+
+.parent:hover .parent-hover__fgo-50 {
+  --fg-opacity: 0.5;
+}
+
+.parent:hover .parent-hover__bgo-50 {
+  --bg-opacity: 0.5;
+}
+
+.parent:hover .parent-hover__bdo-50 {
+  --bd-opacity: 0.5;
+}
+
+.parent:hover .parent-hover__olo-50 {
+  --ol-opacity: 0.5;
+}
+
+.parent:hover .parent-hover__fillo-50 {
+  --fill-opacity: 0.5;
+}
+
+.parent:hover .parent-hover__strokeo-50 {
+  --stroke-opacity: 0.5;
+}
+
+.parent:hover .parent-hover__fgo-60 {
+  --fg-opacity: 0.6;
+}
+
+.parent:hover .parent-hover__bgo-60 {
+  --bg-opacity: 0.6;
+}
+
+.parent:hover .parent-hover__bdo-60 {
+  --bd-opacity: 0.6;
+}
+
+.parent:hover .parent-hover__olo-60 {
+  --ol-opacity: 0.6;
+}
+
+.parent:hover .parent-hover__fillo-60 {
+  --fill-opacity: 0.6;
+}
+
+.parent:hover .parent-hover__strokeo-60 {
+  --stroke-opacity: 0.6;
+}
+
+.parent:hover .parent-hover__fgo-70 {
+  --fg-opacity: 0.7;
+}
+
+.parent:hover .parent-hover__bgo-70 {
+  --bg-opacity: 0.7;
+}
+
+.parent:hover .parent-hover__bdo-70 {
+  --bd-opacity: 0.7;
+}
+
+.parent:hover .parent-hover__olo-70 {
+  --ol-opacity: 0.7;
+}
+
+.parent:hover .parent-hover__fillo-70 {
+  --fill-opacity: 0.7;
+}
+
+.parent:hover .parent-hover__strokeo-70 {
+  --stroke-opacity: 0.7;
+}
+
+.parent:hover .parent-hover__fgo-80 {
+  --fg-opacity: 0.8;
+}
+
+.parent:hover .parent-hover__bgo-80 {
+  --bg-opacity: 0.8;
+}
+
+.parent:hover .parent-hover__bdo-80 {
+  --bd-opacity: 0.8;
+}
+
+.parent:hover .parent-hover__olo-80 {
+  --ol-opacity: 0.8;
+}
+
+.parent:hover .parent-hover__fillo-80 {
+  --fill-opacity: 0.8;
+}
+
+.parent:hover .parent-hover__strokeo-80 {
+  --stroke-opacity: 0.8;
+}
+
+.parent:hover .parent-hover__fgo-90 {
+  --fg-opacity: 0.9;
+}
+
+.parent:hover .parent-hover__bgo-90 {
+  --bg-opacity: 0.9;
+}
+
+.parent:hover .parent-hover__bdo-90 {
+  --bd-opacity: 0.9;
+}
+
+.parent:hover .parent-hover__olo-90 {
+  --ol-opacity: 0.9;
+}
+
+.parent:hover .parent-hover__fillo-90 {
+  --fill-opacity: 0.9;
+}
+
+.parent:hover .parent-hover__strokeo-90 {
+  --stroke-opacity: 0.9;
+}
+
+.parent:focus [class^="parent-focus__fg-"]:not([class$="parent-focus__fg-"]), .parent:focus [class*=" parent-focus__fg-"]:not([class$="parent-focus__fg-"]) {
+  color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+}
+
+.parent:focus [class^="parent-focus__bg-"]:not([class$="parent-focus__bg-"]), .parent:focus [class*=" parent-focus__bg-"]:not([class$="parent-focus__bg-"]) {
+  background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+}
+
+.parent:focus [class^="parent-focus__bd-"]:not([class$="parent-focus__bd-"]), .parent:focus [class*=" parent-focus__bd-"]:not([class$="parent-focus__bd-"]) {
+  border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+  border-style: var(--bd-style, solid);
+  border-top-width: var(--bd-top-width, 0);
+  border-right-width: var(--bd-right-width, 0);
+  border-bottom-width: var(--bd-bottom-width, 0);
+  border-left-width: var(--bd-left-width, 0);
+}
+
+.parent:focus [class^="parent-focus__ol-"]:not([class$="parent-focus__ol-"]), .parent:focus [class*=" parent-focus__ol-"]:not([class$="parent-focus__ol-"]) {
+  outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+  outline-width: var(--ol-width);
+}
+
+.parent:focus [class^="parent-focus__fill-"]:not([class$="parent-focus__fill-"]), .parent:focus [class*=" parent-focus__fill-"]:not([class$="parent-focus__fill-"]) {
+  fill: rgb(var(--fill-color));
+  fill-opacity: var(--fill-opacity, 1);
+}
+
+.parent:focus [class^="parent-focus__stroke-"]:not([class$="parent-focus__stroke-"]), .parent:focus [class*=" parent-focus__stroke-"]:not([class$="parent-focus__stroke-"]) {
+  stroke: rgb(var(--stroke-color));
+  stroke-opacity: var(--stroke-opacity, 1);
+  stroke-width: var(--stroke-width);
+}
+
 .parent:focus .parent-focus__bg-contrast {
   --bg-color: var(--fg-contrast);
 }
@@ -5689,4 +7964,296 @@ body {
 
 .parent:focus .parent-focus__stroke-pink-e {
   --stroke-color: var(--color-pink-e);
+}
+
+.parent:focus .parent-focus__fill-current {
+  --fill-color: currentColor;
+}
+
+.parent:focus .parent-focus__stroke-current {
+  --stroke-color: currentColor;
+}
+
+.parent:focus .parent-focus__o-100 {
+  opacity: 1;
+}
+
+.parent:focus .parent-focus__o-00 {
+  opacity: 0;
+}
+
+.parent:focus .parent-focus__o-10 {
+  opacity: 0.1;
+}
+
+.parent:focus .parent-focus__o-20 {
+  opacity: 0.2;
+}
+
+.parent:focus .parent-focus__o-30 {
+  opacity: 0.3;
+}
+
+.parent:focus .parent-focus__o-40 {
+  opacity: 0.4;
+}
+
+.parent:focus .parent-focus__o-50 {
+  opacity: 0.5;
+}
+
+.parent:focus .parent-focus__o-60 {
+  opacity: 0.6;
+}
+
+.parent:focus .parent-focus__o-70 {
+  opacity: 0.7;
+}
+
+.parent:focus .parent-focus__o-80 {
+  opacity: 0.8;
+}
+
+.parent:focus .parent-focus__o-90 {
+  opacity: 0.9;
+}
+
+.parent:focus .parent-focus__fgo-00 {
+  --fg-opacity: 0;
+}
+
+.parent:focus .parent-focus__bgo-00 {
+  --bg-opacity: 0;
+}
+
+.parent:focus .parent-focus__bdo-00 {
+  --bd-opacity: 0;
+}
+
+.parent:focus .parent-focus__olo-00 {
+  --ol-opacity: 0;
+}
+
+.parent:focus .parent-focus__fillo-00 {
+  --fill-opacity: 0;
+}
+
+.parent:focus .parent-focus__strokeo-00 {
+  --stroke-opacity: 0;
+}
+
+.parent:focus .parent-focus__fgo-10 {
+  --fg-opacity: 0.1;
+}
+
+.parent:focus .parent-focus__bgo-10 {
+  --bg-opacity: 0.1;
+}
+
+.parent:focus .parent-focus__bdo-10 {
+  --bd-opacity: 0.1;
+}
+
+.parent:focus .parent-focus__olo-10 {
+  --ol-opacity: 0.1;
+}
+
+.parent:focus .parent-focus__fillo-10 {
+  --fill-opacity: 0.1;
+}
+
+.parent:focus .parent-focus__strokeo-10 {
+  --stroke-opacity: 0.1;
+}
+
+.parent:focus .parent-focus__fgo-20 {
+  --fg-opacity: 0.2;
+}
+
+.parent:focus .parent-focus__bgo-20 {
+  --bg-opacity: 0.2;
+}
+
+.parent:focus .parent-focus__bdo-20 {
+  --bd-opacity: 0.2;
+}
+
+.parent:focus .parent-focus__olo-20 {
+  --ol-opacity: 0.2;
+}
+
+.parent:focus .parent-focus__fillo-20 {
+  --fill-opacity: 0.2;
+}
+
+.parent:focus .parent-focus__strokeo-20 {
+  --stroke-opacity: 0.2;
+}
+
+.parent:focus .parent-focus__fgo-30 {
+  --fg-opacity: 0.3;
+}
+
+.parent:focus .parent-focus__bgo-30 {
+  --bg-opacity: 0.3;
+}
+
+.parent:focus .parent-focus__bdo-30 {
+  --bd-opacity: 0.3;
+}
+
+.parent:focus .parent-focus__olo-30 {
+  --ol-opacity: 0.3;
+}
+
+.parent:focus .parent-focus__fillo-30 {
+  --fill-opacity: 0.3;
+}
+
+.parent:focus .parent-focus__strokeo-30 {
+  --stroke-opacity: 0.3;
+}
+
+.parent:focus .parent-focus__fgo-40 {
+  --fg-opacity: 0.4;
+}
+
+.parent:focus .parent-focus__bgo-40 {
+  --bg-opacity: 0.4;
+}
+
+.parent:focus .parent-focus__bdo-40 {
+  --bd-opacity: 0.4;
+}
+
+.parent:focus .parent-focus__olo-40 {
+  --ol-opacity: 0.4;
+}
+
+.parent:focus .parent-focus__fillo-40 {
+  --fill-opacity: 0.4;
+}
+
+.parent:focus .parent-focus__strokeo-40 {
+  --stroke-opacity: 0.4;
+}
+
+.parent:focus .parent-focus__fgo-50 {
+  --fg-opacity: 0.5;
+}
+
+.parent:focus .parent-focus__bgo-50 {
+  --bg-opacity: 0.5;
+}
+
+.parent:focus .parent-focus__bdo-50 {
+  --bd-opacity: 0.5;
+}
+
+.parent:focus .parent-focus__olo-50 {
+  --ol-opacity: 0.5;
+}
+
+.parent:focus .parent-focus__fillo-50 {
+  --fill-opacity: 0.5;
+}
+
+.parent:focus .parent-focus__strokeo-50 {
+  --stroke-opacity: 0.5;
+}
+
+.parent:focus .parent-focus__fgo-60 {
+  --fg-opacity: 0.6;
+}
+
+.parent:focus .parent-focus__bgo-60 {
+  --bg-opacity: 0.6;
+}
+
+.parent:focus .parent-focus__bdo-60 {
+  --bd-opacity: 0.6;
+}
+
+.parent:focus .parent-focus__olo-60 {
+  --ol-opacity: 0.6;
+}
+
+.parent:focus .parent-focus__fillo-60 {
+  --fill-opacity: 0.6;
+}
+
+.parent:focus .parent-focus__strokeo-60 {
+  --stroke-opacity: 0.6;
+}
+
+.parent:focus .parent-focus__fgo-70 {
+  --fg-opacity: 0.7;
+}
+
+.parent:focus .parent-focus__bgo-70 {
+  --bg-opacity: 0.7;
+}
+
+.parent:focus .parent-focus__bdo-70 {
+  --bd-opacity: 0.7;
+}
+
+.parent:focus .parent-focus__olo-70 {
+  --ol-opacity: 0.7;
+}
+
+.parent:focus .parent-focus__fillo-70 {
+  --fill-opacity: 0.7;
+}
+
+.parent:focus .parent-focus__strokeo-70 {
+  --stroke-opacity: 0.7;
+}
+
+.parent:focus .parent-focus__fgo-80 {
+  --fg-opacity: 0.8;
+}
+
+.parent:focus .parent-focus__bgo-80 {
+  --bg-opacity: 0.8;
+}
+
+.parent:focus .parent-focus__bdo-80 {
+  --bd-opacity: 0.8;
+}
+
+.parent:focus .parent-focus__olo-80 {
+  --ol-opacity: 0.8;
+}
+
+.parent:focus .parent-focus__fillo-80 {
+  --fill-opacity: 0.8;
+}
+
+.parent:focus .parent-focus__strokeo-80 {
+  --stroke-opacity: 0.8;
+}
+
+.parent:focus .parent-focus__fgo-90 {
+  --fg-opacity: 0.9;
+}
+
+.parent:focus .parent-focus__bgo-90 {
+  --bg-opacity: 0.9;
+}
+
+.parent:focus .parent-focus__bdo-90 {
+  --bd-opacity: 0.9;
+}
+
+.parent:focus .parent-focus__olo-90 {
+  --ol-opacity: 0.9;
+}
+
+.parent:focus .parent-focus__fillo-90 {
+  --fill-opacity: 0.9;
+}
+
+.parent:focus .parent-focus__strokeo-90 {
+  --stroke-opacity: 0.9;
 }

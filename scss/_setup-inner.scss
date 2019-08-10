@@ -23,15 +23,15 @@
 
       $m__: state-prefix();
 
-      #{m-base-class('mt', false)}, #{m-base-class('my', false)} { margin-top: var(--mt) !important; }
-      #{m-base-class('mr', false)}, #{m-base-class('mx', false)} { margin-right: var(--mr) !important; }
-      #{m-base-class('mb', false)}, #{m-base-class('my', false)} { margin-bottom: var(--mb) !important; }
-      #{m-base-class('ml', false)}, #{m-base-class('mx', false)} { margin-left: var(--ml) !important; }
+      #{state-base-class('mt', false)}, #{state-base-class('my', false)} { margin-top: var(--mt) !important; }
+      #{state-base-class('mr', false)}, #{state-base-class('mx', false)} { margin-right: var(--mr) !important; }
+      #{state-base-class('mb', false)}, #{state-base-class('my', false)} { margin-bottom: var(--mb) !important; }
+      #{state-base-class('ml', false)}, #{state-base-class('mx', false)} { margin-left: var(--ml) !important; }
 
-      #{m-base-class('pt', false)}, #{m-base-class('py', false)} { padding-top: var(--pt) !important; }
-      #{m-base-class('pr', false)}, #{m-base-class('px', false)} { padding-right: var(--pr) !important; }
-      #{m-base-class('pb', false)}, #{m-base-class('py', false)} { padding-bottom: var(--pb) !important; }
-      #{m-base-class('pl', false)}, #{m-base-class('px', false)} { padding-left: var(--pl) !important; }
+      #{state-base-class('pt', false)}, #{state-base-class('py', false)} { padding-top: var(--pt) !important; }
+      #{state-base-class('pr', false)}, #{state-base-class('px', false)} { padding-right: var(--pr) !important; }
+      #{state-base-class('pb', false)}, #{state-base-class('py', false)} { padding-bottom: var(--pb) !important; }
+      #{state-base-class('pl', false)}, #{state-base-class('px', false)} { padding-left: var(--pl) !important; }
 
       @each $y in $inner-y-keys {
         .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y} { --mt: calc(var(--inner-y-#{$y}) * -1); }
