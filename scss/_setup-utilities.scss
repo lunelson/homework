@@ -106,6 +106,15 @@
   .fs-oblique { font-style: oblique; }
   .fs-normal { font-style: normal; }
 
+  // (column) breaking; applies to .mcol children
+
+  .br-inside { break-inside: auto; }
+  .br-before { break-before: auto; }
+  .br-after { break-after: auto; }
+  .nobr-inside { break-inside: avoid; }
+  .nobr-before { break-before: avoid; }
+  .nobr-after { break-after: avoid; }
+
   /////////////////////////////////////////////
   ///////////////// whitespace ////////////////
   /////////////////////////////////////////////
