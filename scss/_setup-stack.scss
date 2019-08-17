@@ -15,17 +15,10 @@
 
 @mixin homework-setup-stack() {
 
-  *, ::before, ::after {
-    --stack-gap: var(--inner-y);
-    --chain-gap: var(--inner-x);
-  }
-
-  .stack-flex {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    & > * { flex: 0 0 auto; width: initial }
-  }
+  // *, ::before, ::after {
+  //   --stack-gap: var(--inner-y);
+  //   --chain-gap: var(--inner-x);
+  // }
 
   // NB: base-class plain connects to TYPO
   #{base-class('stack')}, #{base-class('plain')} {
@@ -40,6 +33,15 @@
     }
   }
 
+  // TODO: use this, or lose it
+  // i.e. add to #{base-class('stack')}
+  #{base-class('stack')} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    & > * { flex: 0 0 auto; width: initial }
+  }
+
   #{base-class('chain')} {
     display: flex;
     flex-direction: row;
@@ -48,27 +50,27 @@
       flex: 0 0 auto;
       margin-right: 0;
       margin-left: 0;
-      text-overflow: ellipsis;
+      width: max-content;
+      // text-overflow: ellipsis;
     }
     & > * + * {
       margin-left: var(--chain-gap);
     }
   }
 
+  @each $y in join((null), map-keys(inner-y-mods())) {
+    $-y: mod-suffix($y);
+    .stack#{$-y} > *, .plain#{$-y} > * { --stack-gap: var(--inner-y#{$-y}); }
+    #{base-class('stack')} { > .shim#{$-y} { --stack-gap: var(--inner-y#{$-y}); } }
+  }
+
+  @each $x in join((null), map-keys(inner-x-mods())) {
+    $-x: mod-suffix($x);
+    .chain#{$-x} > * { --chain-gap: var(--inner-x#{$-x}); }
+    #{base-class('chain')} { > .shim#{$-x} { --chain-gap: var(--inner-x#{$-x}); } }
+  }
+
   .stack-0 > * { --stack-gap: 0; }
   .chain-0 > * { --chain-gap: 0; }
-
-  $inner-y-keys: map-keys(inner-y-mods());
-  $inner-x-keys: map-keys(inner-x-mods());
-
-  @each $y in $inner-y-keys {
-    .stack-#{$y} > *, .plain-#{$y} > * { --stack-gap: var(--inner-y-#{$y}); }
-    #{base-class('stack')} { > .shim-#{$y} { --stack-gap: var(--inner-y-#{$y}); } }
-  }
-
-  @each $x in $inner-x-keys {
-    .chain-#{$x} > * { --chain-gap: var(--inner-x-#{$x}); }
-    #{base-class('chain')} { > .shim-#{$x} { --chain-gap: var(--inner-x-#{$x}); } }
-  }
 
 }

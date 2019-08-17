@@ -1,12 +1,3 @@
-.flex-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.flex-stack > * {
-  flex: 0 0 auto;
-}
-
 .stack, [class^=stack-]:not([class$=stack-]), [class*=" stack-"]:not([class$=stack-]), .plain, [class^=plain-]:not([class$=plain-]), [class*=" plain-"]:not([class$=plain-]) {
   padding-top: 0.1px;
   padding-bottom: 0.1px;
@@ -16,7 +7,17 @@
   margin-bottom: 0;
 }
 .stack > * + *, [class^=stack-]:not([class$=stack-]) > * + *, [class*=" stack-"]:not([class$=stack-]) > * + *, .plain > * + *, [class^=plain-]:not([class$=plain-]) > * + *, [class*=" plain-"]:not([class$=plain-]) > * + * {
-  margin-top: var(--stack-gap, var(--inner-y));
+  margin-top: var(--stack-gap);
+}
+
+.stack, [class^=stack-]:not([class$=stack-]), [class*=" stack-"]:not([class$=stack-]) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.stack > *, [class^=stack-]:not([class$=stack-]) > *, [class*=" stack-"]:not([class$=stack-]) > * {
+  flex: 0 0 auto;
+  width: initial;
 }
 
 .chain, [class^=chain-]:not([class$=chain-]), [class*=" chain-"]:not([class$=chain-]) {
@@ -28,18 +29,18 @@
   flex: 0 0 auto;
   margin-right: 0;
   margin-left: 0;
-  text-overflow: ellipsis;
+  width: max-content;
 }
 .chain > * + *, [class^=chain-]:not([class$=chain-]) > * + *, [class*=" chain-"]:not([class$=chain-]) > * + * {
-  margin-left: var(--chain-gap, var(--inner-x));
+  margin-left: var(--chain-gap);
 }
 
-.stack-0 > * {
-  --stack-gap: 0;
+.stack > *, .plain > * {
+  --stack-gap: var(--inner-y);
 }
 
-.chain-0 > * {
-  --chain-gap: 0;
+.stack > .shim, [class^=stack-]:not([class$=stack-]) > .shim, [class*=" stack-"]:not([class$=stack-]) > .shim {
+  --stack-gap: var(--inner-y);
 }
 
 .stack-s > *, .plain-s > * {
@@ -66,6 +67,14 @@
   --stack-gap: var(--inner-y-l);
 }
 
+.chain > * {
+  --chain-gap: var(--inner-x);
+}
+
+.chain > .shim, [class^=chain-]:not([class$=chain-]) > .shim, [class*=" chain-"]:not([class$=chain-]) > .shim {
+  --chain-gap: var(--inner-x);
+}
+
 .chain-s > * {
   --chain-gap: var(--inner-x-s);
 }
@@ -80,4 +89,12 @@
 
 .chain > .shim-form, [class^=chain-]:not([class$=chain-]) > .shim-form, [class*=" chain-"]:not([class$=chain-]) > .shim-form {
   --chain-gap: var(--inner-x-form);
+}
+
+.stack-0 > * {
+  --stack-gap: 0;
+}
+
+.chain-0 > * {
+  --chain-gap: 0;
 }
