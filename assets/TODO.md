@@ -3,6 +3,62 @@
 - !!! re-check inheritance mechanisms, as with --stack-gap
 - need a test/proof suite here
 
+      .stack-l -> --stack-gap: unset
+        .stack-m -> --stack-gap: l
+          .stack-s -> --stack-gap: m
+            * -> --stack-gap: s
+        .stack -> --stack-gap: l (could set --stack-gap: --inner-x on bare class!?)
+          .stack-s -> --stack-gap: l
+            * -> --stack-gap: s
+
+      .flow-l -> --row-gap: l
+        .span-(x) -> --row-gap: l
+          .flow -> --row-gap: l (could set --row-gap: --inner-x on bare class!?)
+        .span-(x) -> --row-gap: l
+          .flow-m -> --row-gap: m
+
+      .grid-l -> --row-gap: l
+        .span-(x) -> --row-gap: l
+
+      .grid-l -> --row-gap: l
+        .grid-m -> --row-gap: m
+
+## wrap vs. peel logic
+
+    wrap-last, wrap-[m],
+    wrap-each, [m__]wrap-each
+    wrap(-center)
+      [m__]peel(-center)-center -> peel
+      [m__]peel(-center)-right -> peel-right
+      [m__]peel(-center)-left -> peel-left
+    wrap-right
+      [m__]peel(-right)-center -> peel-from-right
+      [m__]peel(-right)-right -> peel-from-right
+      [m__]peel(-right)-left -> peel-from-right
+    wrap-left
+      [m__]peel(-left)-center -> peel-from-left
+      [m__]peel(-left)-right -> peel-from-left
+      [m__]peel(-left)-left -> peel-from-left
+
+## global options
+
+create a $homework-options map:
+  core
+    element on which to define all globals (default is :root)
+      e.g. use-root: true -- whether to set homework CPs on :root object or on .homework-root class
+  theme
+    dark or lite
+  typo
+    trim or not
+    non-trim elements in .plain
+
+
+
+## font and trim logics
+
+- plain-(y) classes should get a --stack-gap variable pre-set
+- lh-loose and lh-tight classes to be somehow auto-generated?
+
 ## reset
 
 1. extreme; for resetting children of an element
@@ -22,12 +78,6 @@ https://github.com/nicolas-cusan/destyle.css
 
 review mechanics of font-size vs root-scale, vs outer-width
   apply to :root selector, not html?
-test the y-/x- class usage and other co-classes on grid and flow
-revamp reset
-  as merge of destyle and remedy
-  saving only opinionated typo resets
-
-##
 
 ## more classes
 
@@ -126,56 +176,13 @@ homework/
 
 ## next level
 
-- consider placing globals on a .homework-root class rather than :root, to reduce recalc tree size
 - review icon alignment from nova-lbz; can it be generalized; does it depend upon font metrics
-- create a $homework-options map
-  - use-root: true -- whether to set homework CPs on :root object or on .homework-root class
-  - do-trim: true -- whether to trim fonts
-- implement wrap vs. peel logic:
-    wrap-last, wrap-[m],
-    wrap-each, [m__]wrap-each
-    wrap(-center)
-      [m__]peel(-center)-center -> peel
-      [m__]peel(-center)-right -> peel-right
-      [m__]peel(-center)-left -> peel-left
-    wrap-right
-      [m__]peel(-right)-center -> peel-from-right
-      [m__]peel(-right)-right -> peel-from-right
-      [m__]peel(-right)-left -> peel-from-right
-    wrap-left
-      [m__]peel(-left)-center -> peel-from-left
-      [m__]peel(-left)-right -> peel-from-left
-      [m__]peel(-left)-left -> peel-from-left
+
 
 ## new CSS
 
 - check out css containment
 https://blogs.igalia.com/mrego/2019/01/11/an-introduction-to-css-containment/
-
-## font and trim, v stack
-
-This should be the new way
-
-    .plain-ml
-      p,h1,h2
-
-    .stack.trim
-      p.f-sans-m
-      p.f-sans-s
-      p.f-sans-xs
-
-    f-[family]-[size]
-      &.lh-loose/-tight
-    fw-[weight]
-    fs-[style]
-
-## reset
-
-consider adding this as peerDep, to reduce noise
-https://github.com/nicolas-cusan/destyle.css/blob/master/Readme.md
-
-## renames
-  column-count (not 'column-count')
 
 ## othernames
   inset
