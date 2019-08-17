@@ -8,51 +8,67 @@
 @mixin homework-setup-inner() {
 
   // gets lists of inner-y/-x-mod keys on $root
-  $inner-y-keys: map-keys(inner-y-mods());
-  $inner-x-keys: map-keys(inner-x-mods());
+  // $inner-y-keys: map-keys(inner-y-mods());
+  // $inner-x-keys: map-keys(inner-x-mods());
 
-  :root {
-    --ix: var(--inner-x);
-    --iy: var(--inner-y);
-  }
+  // :root {
+  //   --ix: var(--inner-x);
+  //   --iy: var(--inner-y);
+  // }
 
   // join with null, to also output suffix-less class
   @each $m in join((null), map-keys($media)) {
 
     @include m($m) {
 
+      #{state-base-class('mt', true, $m)}, #{state-base-class('my', true, $m)} { margin-top: var(--mt) !important; }
+      #{state-base-class('mr', true, $m)}, #{state-base-class('mx', true, $m)} { margin-right: var(--mr) !important; }
+      #{state-base-class('mb', true, $m)}, #{state-base-class('my', true, $m)} { margin-bottom: var(--mb) !important; }
+      #{state-base-class('ml', true, $m)}, #{state-base-class('mx', true, $m)} { margin-left: var(--ml) !important; }
+
+      #{state-base-class('pt', true, $m)}, #{state-base-class('py', true, $m)} { padding-top: var(--pt) !important; }
+      #{state-base-class('pr', true, $m)}, #{state-base-class('px', true, $m)} { padding-right: var(--pr) !important; }
+      #{state-base-class('pb', true, $m)}, #{state-base-class('py', true, $m)} { padding-bottom: var(--pb) !important; }
+      #{state-base-class('pl', true, $m)}, #{state-base-class('px', true, $m)} { padding-left: var(--pl) !important; }
+
       $m__: state-prefix();
 
-      #{state-base-class('mt', false)}, #{state-base-class('my', false)} { margin-top: var(--mt) !important; }
-      #{state-base-class('mr', false)}, #{state-base-class('mx', false)} { margin-right: var(--mr) !important; }
-      #{state-base-class('mb', false)}, #{state-base-class('my', false)} { margin-bottom: var(--mb) !important; }
-      #{state-base-class('ml', false)}, #{state-base-class('mx', false)} { margin-left: var(--ml) !important; }
+      // .#{$m__}my-neg, .#{$m__}mt-neg { --mt: calc(var(--inner-y) * -1); }
+      // .#{$m__}my-neg, .#{$m__}mb-neg { --mb: calc(var(--inner-y) * -1); }
+      // .#{$m__}my, .#{$m__}mt { --mt: var(--inner-y); }
+      // .#{$m__}my, .#{$m__}mb { --mb: var(--inner-y); }
+      // .#{$m__}py, .#{$m__}pt { --pt: var(--inner-y); }
+      // .#{$m__}py, .#{$m__}pb { --pb: var(--inner-y); }
 
-      #{state-base-class('pt', false)}, #{state-base-class('py', false)} { padding-top: var(--pt) !important; }
-      #{state-base-class('pr', false)}, #{state-base-class('px', false)} { padding-right: var(--pr) !important; }
-      #{state-base-class('pb', false)}, #{state-base-class('py', false)} { padding-bottom: var(--pb) !important; }
-      #{state-base-class('pl', false)}, #{state-base-class('px', false)} { padding-left: var(--pl) !important; }
+      // .#{$m__}mx-neg, .#{$m__}mr-neg { --mr: calc(var(--inner-x) * -1); }
+      // .#{$m__}mx-neg, .#{$m__}ml-neg { --ml: calc(var(--inner-x) * -1); }
+      // .#{$m__}mx, .#{$m__}mr { --mr: var(--inner-x); }
+      // .#{$m__}mx, .#{$m__}ml { --ml: var(--inner-x); }
+      // .#{$m__}px, .#{$m__}pr { --pr: var(--inner-x); }
+      // .#{$m__}px, .#{$m__}pl { --pl: var(--inner-x); }
 
-      @each $y in $inner-y-keys {
-        .#{$m__}my-neg-#{$y}, .#{$m__}mt-neg-#{$y} { --mt: calc(var(--inner-y-#{$y}) * -1); }
-        .#{$m__}my-neg-#{$y}, .#{$m__}mb-neg-#{$y} { --mb: calc(var(--inner-y-#{$y}) * -1); }
-        .#{$m__}my-#{$y}, .#{$m__}mt-#{$y} { --mt: var(--inner-y-#{$y}); }
-        .#{$m__}my-#{$y}, .#{$m__}mb-#{$y} { --mb: var(--inner-y-#{$y}); }
-        .#{$m__}py-#{$y}, .#{$m__}pt-#{$y} { --pt: var(--inner-y-#{$y}); }
-        .#{$m__}py-#{$y}, .#{$m__}pb-#{$y} { --pb: var(--inner-y-#{$y}); }
+      @each $y in join((null), map-keys(inner-y-mods())) {
+        $-y: mod-suffix($y);
+        .#{$m__}my-neg#{$-y}, .#{$m__}mt-neg#{$-y} { --mt: calc(var(--inner-y#{$-y}) * -1); }
+        .#{$m__}my-neg#{$-y}, .#{$m__}mb-neg#{$-y} { --mb: calc(var(--inner-y#{$-y}) * -1); }
+        .#{$m__}my#{$-y}, .#{$m__}mt#{$-y} { --mt: var(--inner-y#{$-y}); }
+        .#{$m__}my#{$-y}, .#{$m__}mb#{$-y} { --mb: var(--inner-y#{$-y}); }
+        .#{$m__}py#{$-y}, .#{$m__}pt#{$-y} { --pt: var(--inner-y#{$-y}); }
+        .#{$m__}py#{$-y}, .#{$m__}pb#{$-y} { --pb: var(--inner-y#{$-y}); }
 
-        .#{$m__}iy-#{$y} { --iy: var(--inner-y-#{$y}); }
+        // .#{$m__}iy-#{$y} { --iy: var(--inner-y-#{$y}); }
       }
 
-      @each $x in $inner-x-keys {
-        .#{$m__}mx-neg-#{$x}, .#{$m__}mr-neg-#{$x} { --mr: calc(var(--inner-x-#{$x}) * -1); }
-        .#{$m__}mx-neg-#{$x}, .#{$m__}ml-neg-#{$x} { --ml: calc(var(--inner-x-#{$x}) * -1); }
-        .#{$m__}mx-#{$x}, .#{$m__}mr-#{$x} { --mr: var(--inner-x-#{$x}); }
-        .#{$m__}mx-#{$x}, .#{$m__}ml-#{$x} { --ml: var(--inner-x-#{$x}); }
-        .#{$m__}px-#{$x}, .#{$m__}pr-#{$x} { --pr: var(--inner-x-#{$x}); }
-        .#{$m__}px-#{$x}, .#{$m__}pl-#{$x} { --pl: var(--inner-x-#{$x}); }
+      @each $x in join((null), map-keys(inner-x-mods())) {
+        $-x: mod-suffix($x);
+        .#{$m__}mx-neg#{$-x}, .#{$m__}mr-neg#{$-x} { --mr: calc(var(--inner-x#{$-x}) * -1); }
+        .#{$m__}mx-neg#{$-x}, .#{$m__}ml-neg#{$-x} { --ml: calc(var(--inner-x#{$-x}) * -1); }
+        .#{$m__}mx#{$-x}, .#{$m__}mr#{$-x} { --mr: var(--inner-x#{$-x}); }
+        .#{$m__}mx#{$-x}, .#{$m__}ml#{$-x} { --ml: var(--inner-x#{$-x}); }
+        .#{$m__}px#{$-x}, .#{$m__}pr#{$-x} { --pr: var(--inner-x#{$-x}); }
+        .#{$m__}px#{$-x}, .#{$m__}pl#{$-x} { --pl: var(--inner-x#{$-x}); }
 
-        .#{$m__}ix-#{$x} { --ix: var(--inner-x-#{$x}); }
+        // .#{$m__}ix-#{$x} { --ix: var(--inner-x-#{$x}); }
       }
 
       .#{$m__}my-auto, .#{$m__}mt-auto { --mt: auto; }
@@ -69,8 +85,8 @@
       .#{$m__}py-0, .#{$m__}pb-0 { --pb: 0; }
       .#{$m__}px-0, .#{$m__}pl-0 { --pl: 0; }
 
-      .#{$m__}iy-0 { --iy: 0; }
-      .#{$m__}ix-0 { --ix: 0; }
+      // .#{$m__}iy-0 { --iy: 0; }
+      // .#{$m__}ix-0 { --ix: 0; }
     }
   }
 
