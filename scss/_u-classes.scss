@@ -2,6 +2,9 @@
 /// CLASSES
 ///
 
+// NB: the :not() appended attr selectors increase security but also specificity
+// might have consider removing them; see https://stackoverflow.com/a/35038747/1204994
+
 @function base-class($base, $solo: true, $_...) {
   $solo-selector: if($solo, '.#{$base}, ', '');
   @return selector-parse('#{$solo-selector}[class^="#{$base}-"]:not([class$="#{$base}-"]), [class*=" #{$base}-"]:not([class$="#{$base}-"])');
@@ -17,10 +20,13 @@
   @return selector-parse('#{$solo-selector}[class^="#{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"]), [class*=" #{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"])');
 }
 
-// @function stateful-base-class($base, $solo: true, $_...) {
-//   $solo-selector: if($solo, '.#{$base}, [class*="__#{$base}"]:not([class*=" __#{$base}"]):not([class^="__#{$base}"]), ', '');
-//   @return selector-parse('#{$solo-selector}[class^="#{$base}-"]:not([class$="#{$base}-"]), [class*=" #{$base}-"]:not([class$="#{$base}-"]), [class*="__#{$base}-"]:not([class*=" __#{$base}-"]):not([class*="__#{$base}- "]):not([class$="__#{$base}-"]):not([class^="__#{$base}-"])');
-// }
+@function mod-suffix($mod: null) {
+  @return if($mod and str-length($mod) > 0, '-#{$mod}', '');
+}
+
+@function mod-class($base, $mod: null, $_...) {
+  @return selector-parse('#{$base}#{mod-suffix($mod)}');
+}
 
 @function state-prefixize($sel, $ms...) {
   $sel: selector-parse($sel); $out: ();
