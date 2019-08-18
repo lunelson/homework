@@ -11,106 +11,60 @@
 
   $last-m: last(map-keys($media));
 
-  /////////////////////////////////////////////
-  //////////////////// wrap ///////////////////
-  /////////////////////////////////////////////
+  // WRAP
 
-  :root { --wrap-width: 100%; }
-
-  @each $m in join((null), map-keys($media)) {
-    @include m($m) {
-
-      #{state-base-class('wrap')} {
-        margin-right: auto;
-        margin-left: auto;
-        width: 100%;
-        max-width: var(--wrap-width, 100%);
-      }
-
-      $m__: state-prefix();
-
-      .#{$m__}wrap-left { margin-left: 0; }
-      .#{$m__}wrap-right { margin-right: 0; }
-      .#{$m__}wrap-each { --wrap-width: var(--outer-width); }
-
-      .#{$m__}wrap, #{if($m, '.wrap-#{$m}', '')}, #{if($m == $last-m, '.wrap-last', '')} {
-        --wrap-width: var(--outer-width);
-      }
-    }
+  #{base-class('wrap', true)} {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
   }
 
-  /////////////////////////////////////////////
-  //////////////////// peel ///////////////////
-  /////////////////////////////////////////////
-
-  // .peel {
-  //   margin-right: 0;
-  //   margin-left: 0;
-  //   max-width: none;
-  //   width: 100vw;
-  // }
-
-  // @include mm-for('outer-right', 'outer-left') {
-
-  //   $outer-right: m-var('outer-right');
-  //   $outer-left: m-var('outer-left');
-  //   $wrap-offset: subtract($outer-right, $outer-left);
-  //   $peel-margin: subtract(100%, 100vw);
-  //   $peel-margin-right: divide(subtract($peel-margin, $wrap-offset), 2);
-  //   $peel-margin-left: divide(add($peel-margin, $wrap-offset), 2);
-
-  //   .peel {
-  //     &--right { width: add(100vw, $peel-margin-left);}
-  //     &--left { width: add(100vw, $peel-margin-right);}
-  //     &, &--right { margin-right: $peel-margin-right; }
-  //     &, &--left { margin-left: $peel-margin-left; }
-  //   }
-
-  //   .peel--from-right {
-  //     &, &.peel--right { margin-right: - $outer-right;}
-  //     &, &.peel--left { margin-left: add($peel-margin, $outer-right); }
-  //     &.peel--right {
-  //       width: add(100%, $outer-right);
-  //       margin-left: 0;
-  //     }
-  //     &.peel--left {
-  //       width: subtract(100vw, $outer-right);
-  //       margin-right: 0;
-  //     }
-  //   }
-
-  //   .peel--from-left {
-  //     &, &.peel--right { margin-right: add($peel-margin, $outer-left); }
-  //     &, &.peel--left { margin-left: - $outer-left; }
-  //     &.peel--right {
-  //       width: subtract(100vw, $outer-left);
-  //       margin-left: 0;
-  //     }
-  //     &.peel--left {
-  //       width: add(100%, $outer-left);
-  //       margin-right: 0;
-  //     }
-  //   }
-  // }
-
-  /////////////////////////////////////////////
-  //////////////// frame/bleed ////////////////
-  /////////////////////////////////////////////
+  .wrap-left { margin-left: 0; }
+  .wrap-right { margin-right: 0; }
+  .wrap-each { max-width: var(--outer-width); }
 
   @each $m in join((null), map-keys($media)) {
+
+    $-m: mod-suffix($m);
+
+    @if $m {
+      .wrap#{$-m},
+      #{if($m == $last-m, '.wrap-last', '')} { max-width: var(--outer-width#{$-m}); }
+    }
+
     @include m($m) {
 
       $m__: state-prefix();
 
-      #{state-base-class('bleed')} { width: unset !important; }
+      // PEEL
+      // TODO: add peel-r-right, -r-left, -l-right, -l-left logic
 
-      .#{$m__}frame, .#{$m__}frame-x, .#{$m__}frame-right { padding-right: var(--outer-right); }
-      .#{$m__}frame, .#{$m__}frame-x, .#{$m__}frame-left { padding-left: var(--outer-left); }
+      $wrap-offset: subtract(var(--outer-right), var(--outer-left));
+      $peel-margin: subtract(100%, calc(100vw - var(--scroll-width, 0px)));
+
+      .#{$m__}peel, .#{$m__}peel-right, .#{$m__}peel-left {
+        max-width: none !important;
+        width: initial !important;
+      }
+      .#{$m__}peel, .#{$m__}peel-right { margin-right: divide(subtract($peel-margin, $wrap-offset), 2); }
+      .#{$m__}peel, .#{$m__}peel-left { margin-left: divide(add($peel-margin, $wrap-offset), 2); }
+
+      // FRAME
+
+      .#{$m__}frame, .#{$m__}frame-right { padding-right: var(--outer-right); }
+      .#{$m__}frame, .#{$m__}frame-left { padding-left: var(--outer-left); }
       .#{$m__}frame-y, .#{$m__}frame-top { padding-top: var(--outer-top); }
       .#{$m__}frame-y, .#{$m__}frame-bottom { padding-bottom: var(--outer-bottom); }
 
-      .#{$m__}bleed, .#{$m__}bleed-x, .#{$m__}bleed-right { margin-right: calc(var(--outer-right) * -1); }
-      .#{$m__}bleed, .#{$m__}bleed-x, .#{$m__}bleed-left { margin-left: calc(var(--outer-left) * -1); }
+      // BLEED
+
+      .#{$m__}bleed, .#{$m__}bleed-right, .#{$m__}bleed-left {
+        max-width: none !important;
+        width: initial !important;
+      }
+      .#{$m__}bleed, .#{$m__}bleed-right { margin-right: calc(var(--outer-right) * -1); }
+      .#{$m__}bleed, .#{$m__}bleed-left { margin-left: calc(var(--outer-left) * -1); }
+
       .#{$m__}bleed-y, .#{$m__}bleed-top { margin-top: calc(var(--outer-top) * -1); }
       .#{$m__}bleed-y, .#{$m__}bleed-bottom { margin-bottom: calc(var(--outer-bottom) * -1); }
     }
