@@ -153,19 +153,21 @@ homework/
       cursor -- pointer|default
       select -- none, auto, text
   setup-theme
-      $colors, $patterns, $weights, $radii, $shadows, $outlines
+      $colors, $patterns, $widths, $radii, $shadows, $outlines
       theme-[color]
-      c-, bgc-, bdc- ,fill- ,stroke-
+      fg-, bg-, bd- ,fill- ,stroke-, rule-
         -[color]
         -theme
         -contrast
         -current
       bd- bdt-, bdr-, bdb-, bdl-
-        -1,-2,-3,-4,-5,-6,-7
+        -0,-1,-2,-3,-4,-5,-6,-7
+          0,1,2,3,4,6,8
+          0,4,8,12,16,20,24
         -s,-m,-l,...
       bg-none/0, bd-none/0, ol-0/none
-      bg-[position], bg-[attachment]
-      bd-collapse/-separate
+      ~~bg-[position], bg-[attachment]
+      ~~bd-collapse/-separate
       radius- t-, r-, b-, l-, tl-, tr-, bl-, br-,
         s, m, l, max,
         oval

@@ -8,7 +8,27 @@
 
 $colors: () !default;
 
-@mixin homework-setup-theme($type: lite) {
+/*
+
+themes
+  alpha
+    base
+    primary
+    secondary
+  bravo
+    base
+    primary
+    secondary
+
+--base-alpha
+
+.theme-alpha
+  --color-base
+  --color-primary
+  --color-secondary
+
+  */
+@mixin homework-setup-key($type: lite) {
 
   $colors: map-merge((
     dark: #141414,
@@ -79,6 +99,11 @@ $colors: () !default;
     } }
 
 
+    // #{state-base-class('rule', false, $pseudo)} { #{$sel} {
+    //   rule: rgb(var(--rule-color));
+    //   rule-opacity: var(--rule-opacity, 1);
+    // } }
+
     #{state-base-class('fill', false, $pseudo)} { #{$sel} {
       fill: rgb(var(--fill-color));
       fill-opacity: var(--fill-opacity, 1);
@@ -96,25 +121,28 @@ $colors: () !default;
     .#{$p__}fg-contrast { #{$sel} { --fg-color: var(--bg-contrast); } }
     .#{$p__}bd-contrast { #{$sel} { --bd-color: var(--bg-contrast); } }
     .#{$p__}ol-contrast { #{$sel} { --ol-color: var(--bg-contrast); } }
+    // .#{$p__}rule-contrast { #{$sel} { --rule-color: var(--bg-contrast); } }
     .#{$p__}fill-contrast { #{$sel} { --fill-color: var(--bg-contrast); } }
     .#{$p__}stroke-contrast { #{$sel} { --stroke-color: var(--bg-contrast); } }
 
     // THEME CLASSES
 
-    .#{$p__}fg-theme { #{$sel} { --fg-color: var(--theme-color); --fg-contrast: var(--theme-contrast); } }
-    .#{$p__}bg-theme { #{$sel} { --bg-color: var(--theme-color); --bg-contrast: var(--theme-contrast); } }
-    .#{$p__}bd-theme { #{$sel} { --bd-color: var(--theme-color); } }
-    .#{$p__}ol-theme { #{$sel} { --ol-color: var(--theme-color); } }
-    .#{$p__}fill-theme { #{$sel} { --fill-color: var(--theme-color); } }
-    .#{$p__}stroke-theme { #{$sel} { --stroke-color: var(--theme-color); } }
+    .#{$p__}fg-key { #{$sel} { --fg-color: var(--key-color); --fg-contrast: var(--key-contrast); } }
+    .#{$p__}bg-key { #{$sel} { --bg-color: var(--key-color); --bg-contrast: var(--key-contrast); } }
+    .#{$p__}bd-key { #{$sel} { --bd-color: var(--key-color); } }
+    .#{$p__}ol-key { #{$sel} { --ol-color: var(--key-color); } }
+    // .#{$p__}rule-key { #{$sel} { --rule-color: var(--key-color); } }
+    .#{$p__}fill-key { #{$sel} { --fill-color: var(--key-color); } }
+    .#{$p__}stroke-key { #{$sel} { --stroke-color: var(--key-color); } }
 
     @each $c in $color-names {
 
-      .#{$p__}theme-#{$c} { #{$sel} { --theme-color: var(--color-#{$c}); --theme-contrast: var(--contrast-#{$c}); } }
+      .#{$p__}key-#{$c} { #{$sel} { --key-color: var(--color-#{$c}); --key-contrast: var(--contrast-#{$c}); } }
       .#{$p__}fg-#{$c} { #{$sel} { --fg-color: var(--color-#{$c}); --fg-contrast: var(--contrast-#{$c}); } }
       .#{$p__}bg-#{$c} { #{$sel} { --bg-color: var(--color-#{$c}); --bg-contrast: var(--contrast-#{$c}); } }
       .#{$p__}bd-#{$c} { #{$sel} { --bd-color: var(--color-#{$c}); } }
       .#{$p__}ol-#{$c} { #{$sel} { --ol-color: var(--color-#{$c}); } }
+      // .#{$p__}rule-#{$c} { #{$sel} { --rule-color: var(--color-#{$c}); } }
       .#{$p__}fill-#{$c} { #{$sel} { --fill-color: var(--color-#{$c}); } }
       .#{$p__}stroke-#{$c} { #{$sel} { --stroke-color: var(--color-#{$c}); } }
 
@@ -122,6 +150,7 @@ $colors: () !default;
 
     // CURRENT COLOR FILL/STROKE
 
+    // .#{$p__}rule-current { #{$sel} { --rule-color: currentColor; } }
     .#{$p__}fill-current { #{$sel} { --fill-color: currentColor; } }
     .#{$p__}stroke-current { #{$sel} { --stroke-color: currentColor; } }
 
@@ -131,17 +160,28 @@ $colors: () !default;
     @for $n from 0 through 9 { .#{$p__}o-#{$n}0 { #{$sel} { opacity: $n/10; } } }
 
     @for $n from 0 through 9 {
-      .#{$p__}fgo-#{$n}0 { #{$sel} { --fg-opacity: #{$n/10}; } }
-      .#{$p__}bgo-#{$n}0 { #{$sel} { --bg-opacity: #{$n/10}; } }
-      .#{$p__}bdo-#{$n}0 { #{$sel} { --bd-opacity: #{$n/10}; } }
-      .#{$p__}olo-#{$n}0 { #{$sel} { --ol-opacity: #{$n/10}; } }
-      .#{$p__}fillo-#{$n}0 { #{$sel} { --fill-opacity: #{$n/10}; } }
-      .#{$p__}strokeo-#{$n}0 { #{$sel} { --stroke-opacity: #{$n/10}; } }
+      .#{$p__}fg-o-#{$n}0 { #{$sel} { --fg-opacity: #{$n/10}; } }
+      .#{$p__}bg-o-#{$n}0 { #{$sel} { --bg-opacity: #{$n/10}; } }
+      .#{$p__}bd-o-#{$n}0 { #{$sel} { --bd-opacity: #{$n/10}; } }
+      .#{$p__}ol-o-#{$n}0 { #{$sel} { --ol-opacity: #{$n/10}; } }
+      // .#{$p__}rule-o-#{$n}0 { #{$sel} { --rule-opacity: #{$n/10}; } }
+      .#{$p__}fill-o-#{$n}0 { #{$sel} { --fill-opacity: #{$n/10}; } }
+      .#{$p__}stroke-o-#{$n}0 { #{$sel} { --stroke-opacity: #{$n/10}; } }
     }
   }
 
   // NON-STATEFUL THEME PROPERTIES
 
-  // TODO: stroke and border widths !?
+  // bd-#{$w}, bd-t-#{$w} {}
+  // bd-#{$w}, bd-r-#{$w} {}
+  // bd-#{$w}, bd-b-#{$w} {}
+  // bd-#{$w}, bd-l-#{$w} {}
+
+  // stroke-#{$w} {}
+
+  // radius-#{$w}, radius-l-#{$w}, radius-t-#{$w}, radius-tl-#{$w} {}
+  // radius-#{$w}, radius-r-#{$w}, radius-t-#{$w}, radius-tr-#{$w} {}
+  // radius-#{$w}, radius-r-#{$w}, radius-b-#{$w}, radius-br-#{$w} {}
+  // radius-#{$w}, radius-l-#{$w}, radius-b-#{$w}, radius-bl-#{$w} {}
 
 }

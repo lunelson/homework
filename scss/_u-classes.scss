@@ -12,6 +12,7 @@
 @function state-base-class($base, $solo: true, $state: $curr-m, $_...) {
   $p__: state-prefix($state);
   $solo-selector: if($solo, '.#{$p__}#{$base}, ', '');
+  // @return selector-parse('#{$solo-selector}[class^="#{$p__}#{$base}-"], [class*=" #{$p__}#{$base}-"]');
   @return selector-parse('#{$solo-selector}[class^="#{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"]), [class*=" #{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"])');
 }
 
