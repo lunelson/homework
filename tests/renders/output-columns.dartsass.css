@@ -27,7 +27,7 @@
   flex: 0 0 auto;
   width: 100%;
   min-width: 0%;
-  min-height: 1px;
+  max-width: 100%;
   background-clip: content-box;
   padding-left: calc(var(--column-gap) / 2) !important;
   padding-right: calc(var(--column-gap) / 2) !important;
@@ -76,7 +76,6 @@
 }
 
 [class^=span-]:not([class$=span-]), [class*=" span-"]:not([class$=span-]) {
-  max-width: 100%;
   width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap));
 }
 .flow > [class^=span-]:not([class$=span-]), .flow > [class*=" span-"]:not([class$=span-]), [class^=flow-]:not([class$=flow-]) > [class^=span-]:not([class$=span-]), [class^=flow-]:not([class$=flow-]) > [class*=" span-"]:not([class$=span-]), [class*=" flow-"]:not([class$=flow-]) > [class^=span-]:not([class$=span-]), [class*=" flow-"]:not([class$=flow-]) > [class*=" span-"]:not([class$=span-]) {
@@ -1038,7 +1037,6 @@
 
 @media screen and (min-width: 20em) {
   [class^=a__span-]:not([class$=a__span-]), [class*=" a__span-"]:not([class$=a__span-]) {
-    max-width: 100%;
     width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap));
   }
   .flow > [class^=a__span-]:not([class$=a__span-]), .flow > [class*=" a__span-"]:not([class$=a__span-]), [class^=flow-]:not([class$=flow-]) > [class^=a__span-]:not([class$=a__span-]), [class^=flow-]:not([class$=flow-]) > [class*=" a__span-"]:not([class$=a__span-]), [class*=" flow-"]:not([class$=flow-]) > [class^=a__span-]:not([class$=a__span-]), [class*=" flow-"]:not([class$=flow-]) > [class*=" a__span-"]:not([class$=a__span-]) {
@@ -2000,7 +1998,6 @@
 }
 @media screen and (min-width: 30em) {
   [class^=b__span-]:not([class$=b__span-]), [class*=" b__span-"]:not([class$=b__span-]) {
-    max-width: 100%;
     width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap));
   }
   .flow > [class^=b__span-]:not([class$=b__span-]), .flow > [class*=" b__span-"]:not([class$=b__span-]), [class^=flow-]:not([class$=flow-]) > [class^=b__span-]:not([class$=b__span-]), [class^=flow-]:not([class$=flow-]) > [class*=" b__span-"]:not([class$=b__span-]), [class*=" flow-"]:not([class$=flow-]) > [class^=b__span-]:not([class$=b__span-]), [class*=" flow-"]:not([class$=flow-]) > [class*=" b__span-"]:not([class$=b__span-]) {
@@ -2962,7 +2959,6 @@
 }
 @media screen and (min-width: 40em) {
   [class^=c__span-]:not([class$=c__span-]), [class*=" c__span-"]:not([class$=c__span-]) {
-    max-width: 100%;
     width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap));
   }
   .flow > [class^=c__span-]:not([class$=c__span-]), .flow > [class*=" c__span-"]:not([class$=c__span-]), [class^=flow-]:not([class$=flow-]) > [class^=c__span-]:not([class$=c__span-]), [class^=flow-]:not([class$=flow-]) > [class*=" c__span-"]:not([class$=c__span-]), [class*=" flow-"]:not([class$=flow-]) > [class^=c__span-]:not([class$=c__span-]), [class*=" flow-"]:not([class$=flow-]) > [class*=" c__span-"]:not([class$=c__span-]) {
