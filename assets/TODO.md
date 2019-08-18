@@ -1,3 +1,8 @@
+## rule color, width: column/theme setup
+
+multi-column and grid support drawing rules
+need a shorthand class and way to drive like borders and outlines
+
 ## inheritance
 
 - !!! re-check inheritance mechanisms, as with --stack-gap
@@ -24,6 +29,8 @@
         .grid-m -> --row-gap: m
 
 ## wrap vs. peel logic
+
+!! test these at the same time
 
     wrap-last, wrap-[m],
     wrap-each, [m__]wrap-each
@@ -114,7 +121,10 @@ homework/
   setup-grid (implicit)
       grid, flow, cols, rows
   setup-cell (explicit)
-      span, push, pull, col, row
+      span, push, pull, start, end
+      span + start/end
+      start-end-s-e
+      col, row
   setup-typo (implicit)
       f, trim
       ? fs- italic, normal
