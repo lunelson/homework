@@ -5,11 +5,6 @@
 // NB: the :not() appended attr selectors increase security but also specificity
 // might have consider removing them; see https://stackoverflow.com/a/35038747/1204994
 
-@function base-class($base, $solo: true, $_...) {
-  $solo-selector: if($solo, '.#{$base}, ', '');
-  @return selector-parse('#{$solo-selector}[class^="#{$base}-"]:not([class$="#{$base}-"]), [class*=" #{$base}-"]:not([class$="#{$base}-"])');
-}
-
 @function state-prefix($state: $curr-m) {
   @return if($state and str-length($state) > 0, '#{$state}__', '');
 }
@@ -18,6 +13,12 @@
   $p__: state-prefix($state);
   $solo-selector: if($solo, '.#{$p__}#{$base}, ', '');
   @return selector-parse('#{$solo-selector}[class^="#{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"]), [class*=" #{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"])');
+}
+
+@function base-class($base, $solo: true, $_...) {
+  @return state-base-class($base, $solo, null, $_...);
+  // $solo-selector: if($solo, '.#{$base}, ', '');
+  // @return selector-parse('#{$solo-selector}[class^="#{$base}-"]:not([class$="#{$base}-"]), [class*=" #{$base}-"]:not([class$="#{$base}-"])');
 }
 
 @function mod-suffix($mod: null) {
