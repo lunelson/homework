@@ -45,6 +45,8 @@ $font-default: (
 
 @mixin font-base($f, $trim: true) {
   --font-family: var(--font-family-#{$f});
+
+  --font-size: var(--font-size-#{$f});
   --line-height: var(--line-height-#{$f});
   --letter-spacing: var(--letter-spacing-#{$f});
   --font-feature-settings: var(--font-feature-settings-#{$f});
@@ -59,5 +61,11 @@ $font-default: (
 
 @mixin font-mod($f, $s) {
   --font-size: var(--font-size-#{$f}-#{$s});
+  // NB: --line-height-#{$f}-#{$s} might not exist, therefore fall back
   --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
+}
+
+@mixin font-definition($f, $s, $trim: true) {
+  @include font-base($f, $trim);
+  @include font-mod($f, $s);
 }

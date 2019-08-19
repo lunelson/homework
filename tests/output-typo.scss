@@ -60,11 +60,10 @@ $fonts: (
 @include homework-setup-core();
 @include homework-setup-typo($trim: true);
 
-.plain {
+.plain > {
   h2, h3, h4, h5, h6, p, ul, ol, dl { @include font-base('sans'); }
   h6 { @include font-mod('sans', 'xs'); }
   h5, blockquote { @include font-mod('sans','s'); }
   h4, p, ul, ol, dl { @include font-mod('sans','m'); }
   h3 { @include font-mod('sans','l'); }
-
 }

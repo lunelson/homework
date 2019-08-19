@@ -1,14 +1,55 @@
-html {
-  font-size: var(--font-size);
+/*
+
+themes
+  alpha
+    base
+    primary
+    secondary
+  bravo
+    base
+    primary
+    secondary
+
+--base-alpha
+
+.theme-alpha
+  --color-base
+  --color-primary
+  --color-secondary
+
+  */
+body,
+[class^="f-"], [class*=" f-"],
+.plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
   font-family: var(--font-family);
-  line-height: var(--line-height);
+  font-size: calc(var(--font-size));
+  line-height: calc(var(--line-height, 1.25));
+  letter-spacing: calc(var(--letter-spacing, 0));
+  font-feature-settings: var(--font-feature-settings, "");
+}
+
+.trim > [class^="f-"], .trim > [class*=" f-"],
+.stack > [class^="f-"], .stack > [class*=" f-"], [class^="stack-"] > [class^="f-"], [class^="stack-"] > [class*=" f-"], [class*=" stack-"] > [class^="f-"], [class*=" stack-"] > [class*=" f-"],
+.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
+  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+  margin-top: calc(0em - var(--trim-top));
+  margin-bottom: calc(0em - var(--trim-bottom));
+  margin-right: var(--trim-sides);
+  margin-left: var(--trim-sides);
+}
+
+.stack > * + [class^="f-"], .stack > * + [class*=" f-"], [class^="stack-"] > * + [class^="f-"], [class^="stack-"] > * + [class*=" f-"], [class*=" stack-"] > * + [class^="f-"], [class*=" stack-"] > * + [class*=" f-"],
+.plain > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
+  margin-top: calc(var(--stack-gap) - var(--trim-top));
+}
+
+[class^="f-"] + [class^="f-"], [class^="f-"] + [class*=" f-"], [class*=" f-"] + [class^="f-"], [class*=" f-"] + [class*=" f-"],
+.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^="plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
+  --trim-top-adjust: var(--trim-adjacent);
 }
 
 :root {
-  --font-family: var(--font-family-sans);
-  --line-height: var(--line-height-sans);
-  --letter-spacing: var(--letter-spacing-sans);
-  --font-feature-settings: var(--font-feature-settings-sans);
   --font-family-sans: MessinaSans;
   --line-height-sans: 1.4em;
   --letter-spacing-sans: 0px;
@@ -17,6 +58,23 @@ html {
   --dist-baseline-sans: 0em;
   --trim-sides-sans: 0;
   --trim-adjacent-sans: 0.125em;
+}
+
+.plain-sans > *, [class^="plain-sans-"] > *, [class*=" plain-sans-"] > *,
+.f-sans, [class^="f-sans-"], [class*=" f-sans-"],
+.plain > *, [class^="plain-"] > *, [class*=" plain-"] > *,
+body {
+  --font-family: var(--font-family-sans);
+  --line-height: var(--line-height-sans);
+  --letter-spacing: var(--letter-spacing-sans);
+  --font-feature-settings: var(--font-feature-settings-sans);
+  --dist-capline: var(--dist-capline-sans);
+  --dist-baseline: var(--dist-baseline-sans);
+  --trim-sides: var(--trim-sides-sans);
+  --trim-adjacent: var(--trim-adjacent-sans);
+}
+
+:root {
   --font-family-serif: MessinaSerif;
   --line-height-serif: 1.4em;
   --letter-spacing-serif: 0px;
@@ -25,6 +83,21 @@ html {
   --dist-baseline-serif: 0em;
   --trim-sides-serif: 0;
   --trim-adjacent-serif: 0.125em;
+}
+
+.plain-serif > *, [class^="plain-serif-"] > *, [class*=" plain-serif-"] > *,
+.f-serif, [class^="f-serif-"], [class*=" f-serif-"] {
+  --font-family: var(--font-family-serif);
+  --line-height: var(--line-height-serif);
+  --letter-spacing: var(--letter-spacing-serif);
+  --font-feature-settings: var(--font-feature-settings-serif);
+  --dist-capline: var(--dist-capline-serif);
+  --dist-baseline: var(--dist-baseline-serif);
+  --trim-sides: var(--trim-sides-serif);
+  --trim-adjacent: var(--trim-adjacent-serif);
+}
+
+:root {
   --font-family-modern: MessinaModern;
   --line-height-modern: 1.4em;
   --letter-spacing-modern: 0px;
@@ -35,174 +108,131 @@ html {
   --trim-adjacent-modern: 0.125em;
 }
 
-@media screen and (max-width: 29.999em) {
-  :root {
-    --font-size-sans-xs: 16px;
-    --font-size-sans-s: 16px;
-    --font-size-sans-m: 32px;
-    --font-size-sans-l: 48px;
-    --font-size-serif-xs: 16px;
-    --line-height-serif-xs: 1.3em;
-    --font-size-serif-s: 16px;
-    --line-height-serif-s: 1.3em;
-    --font-size-serif-m: 32px;
-    --line-height-serif-m: 1.2em;
-    --font-size-serif-l: 48px;
-    --line-height-serif-l: 1.1em;
-    --font-size-modern-xs: 16px;
-    --line-height-modern-xs: 1.3em;
-    --font-size-modern-s: 16px;
-    --line-height-modern-s: 1.3em;
-    --font-size-modern-m: 32px;
-    --line-height-modern-m: 1.2em;
-    --font-size-modern-l: 48px;
-    --line-height-modern-l: 1.1em;
-  }
-}
-
-@media screen and (min-width: 30em) {
-  :root {
-    --font-size-sans-xs: 16px;
-    --font-size-sans-s: 16px;
-    --font-size-sans-m: 32px;
-    --font-size-sans-l: 48px;
-    --font-size-serif-xs: 18px;
-    --font-size-serif-s: 18px;
-    --font-size-serif-m: 36px;
-    --font-size-serif-l: 64px;
-    --font-size-modern-xs: 16px;
-    --line-height-modern-xs: 1.3em;
-    --font-size-modern-s: 16px;
-    --line-height-modern-s: 1.3em;
-    --font-size-modern-m: 32px;
-    --line-height-modern-m: 1.2em;
-    --font-size-modern-l: 48px;
-    --line-height-modern-l: 1.1em;
-  }
-}
-
-[class^="f-"]:not([class$="f-"]), [class*=" f-"]:not([class$="f-"]),
-.plain > *, [class^="plain-"]:not([class$="plain-"]) > *, [class*=" plain-"]:not([class$="plain-"]) > * {
-  font-size: var(--font-size);
-  font-family: var(--font-family);
-  line-height: calc(var(--line-height));
-  letter-spacing: calc(var(--letter-spacing));
-  font-feature-settings: var(--font-feature-settings);
-}
-
-.trim > [class^="f-"]:not([class$="f-"]), .trim > [class*=" f-"]:not([class$="f-"]),
-.stack > [class^="f-"]:not([class$="f-"]), .stack > [class*=" f-"]:not([class$="f-"]), [class^="stack-"]:not([class$="stack-"]) > [class^="f-"]:not([class$="f-"]), [class^="stack-"]:not([class$="stack-"]) > [class*=" f-"]:not([class$="f-"]), [class*=" stack-"]:not([class$="stack-"]) > [class^="f-"]:not([class$="f-"]), [class*=" stack-"]:not([class$="stack-"]) > [class*=" f-"]:not([class$="f-"]),
-.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"]:not([class$="plain-"]) > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"]:not([class$="plain-"]) > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
-  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
-  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
-  margin-top: calc(0em - var(--trim-top));
-  margin-bottom: calc(0em - var(--trim-bottom));
-  margin-right: var(--trim-sides);
-  margin-left: var(--trim-sides);
-}
-
-.stack > * + [class^="f-"]:not([class$="f-"]), .stack > * + [class*=" f-"]:not([class$="f-"]), [class^="stack-"]:not([class$="stack-"]) > * + [class^="f-"]:not([class$="f-"]), [class^="stack-"]:not([class$="stack-"]) > * + [class*=" f-"]:not([class$="f-"]), [class*=" stack-"]:not([class$="stack-"]) > * + [class^="f-"]:not([class$="f-"]), [class*=" stack-"]:not([class$="stack-"]) > * + [class*=" f-"]:not([class$="f-"]),
-.plain > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"]:not([class$="plain-"]) > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"]:not([class$="plain-"]) > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
-  margin-top: calc(var(--stack-gap) - var(--trim-top));
-}
-
-[class^="f-"]:not([class$="f-"]) + [class^="f-"]:not([class$="f-"]), [class^="f-"]:not([class$="f-"]) + [class*=" f-"]:not([class$="f-"]), [class*=" f-"]:not([class$="f-"]) + [class^="f-"]:not([class$="f-"]), [class*=" f-"]:not([class$="f-"]) + [class*=" f-"]:not([class$="f-"]),
-.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class^="plain-"]:not([class$="plain-"]) > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article), [class*=" plain-"]:not([class$="plain-"]) > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object):not(section):not(aside):not(header):not(footer):not(article) {
-  --trim-top-adjust: var(--trim-adjacent);
-}
-
-.f-sans, [class^="f-sans-"]:not([class$="f-sans-"]), [class*=" f-sans-"]:not([class$="f-sans-"]) {
-  --font-family: var(--font-family-sans);
-  --letter-spacing: var(--letter-spacing-sans);
-  --font-feature-settings: var(--font-feature-settings-sans);
-  --dist-capline: 0em;
-  --dist-baseline: 0em;
-  --trim-sides: 0;
-  --trim-adjacent: 0.125em;
-}
-
-.f-serif, [class^="f-serif-"]:not([class$="f-serif-"]), [class*=" f-serif-"]:not([class$="f-serif-"]) {
-  --font-family: var(--font-family-serif);
-  --letter-spacing: var(--letter-spacing-serif);
-  --font-feature-settings: var(--font-feature-settings-serif);
-  --dist-capline: 0em;
-  --dist-baseline: 0em;
-  --trim-sides: 0;
-  --trim-adjacent: 0.125em;
-}
-
-.f-modern, [class^="f-modern-"]:not([class$="f-modern-"]), [class*=" f-modern-"]:not([class$="f-modern-"]) {
+.plain-modern > *, [class^="plain-modern-"] > *, [class*=" plain-modern-"] > *,
+.f-modern, [class^="f-modern-"], [class*=" f-modern-"] {
   --font-family: var(--font-family-modern);
+  --line-height: var(--line-height-modern);
   --letter-spacing: var(--letter-spacing-modern);
   --font-feature-settings: var(--font-feature-settings-modern);
-  --dist-capline: 0em;
-  --dist-baseline: 0em;
-  --trim-sides: 0;
-  --trim-adjacent: 0.125em;
+  --dist-capline: var(--dist-capline-modern);
+  --dist-baseline: var(--dist-baseline-modern);
+  --trim-sides: var(--trim-sides-modern);
+  --trim-adjacent: var(--trim-adjacent-modern);
 }
 
+:root {
+  --font-size-sans-xs: 16px;
+  --font-size-sans-s: 16px;
+  --font-size-sans-m: 32px;
+  --font-size-sans-l: 48px;
+}
+
+.plain-sans-xs > *,
 .f-sans-xs {
   --font-size: var(--font-size-sans-xs);
   --line-height: var(--line-height-sans-xs, var(--line-height-sans));
 }
 
+.plain-sans-s > *,
 .f-sans-s {
   --font-size: var(--font-size-sans-s);
   --line-height: var(--line-height-sans-s, var(--line-height-sans));
 }
 
+.plain-sans-m > *,
 .f-sans-m {
   --font-size: var(--font-size-sans-m);
   --line-height: var(--line-height-sans-m, var(--line-height-sans));
 }
 
+.plain-sans-l > *,
 .f-sans-l {
   --font-size: var(--font-size-sans-l);
   --line-height: var(--line-height-sans-l, var(--line-height-sans));
 }
 
+:root {
+  --font-size-serif-xs: 16px;
+  --line-height-serif-xs: 1.3em;
+  --font-size-serif-s: 16px;
+  --line-height-serif-s: 1.3em;
+  --font-size-serif-m: 32px;
+  --line-height-serif-m: 1.2em;
+  --font-size-serif-l: 48px;
+  --line-height-serif-l: 1.1em;
+}
+
+.plain-serif-xs > *,
 .f-serif-xs {
   --font-size: var(--font-size-serif-xs);
   --line-height: var(--line-height-serif-xs, var(--line-height-serif));
 }
 
+.plain-serif-s > *,
 .f-serif-s {
   --font-size: var(--font-size-serif-s);
   --line-height: var(--line-height-serif-s, var(--line-height-serif));
 }
 
+.plain-serif-m > *,
 .f-serif-m {
   --font-size: var(--font-size-serif-m);
   --line-height: var(--line-height-serif-m, var(--line-height-serif));
 }
 
+.plain-serif-l > *,
 .f-serif-l {
   --font-size: var(--font-size-serif-l);
   --line-height: var(--line-height-serif-l, var(--line-height-serif));
 }
 
+:root {
+  --font-size-modern-xs: 16px;
+  --line-height-modern-xs: 1.3em;
+  --font-size-modern-s: 16px;
+  --line-height-modern-s: 1.3em;
+  --font-size-modern-m: 32px;
+  --line-height-modern-m: 1.2em;
+  --font-size-modern-l: 48px;
+  --line-height-modern-l: 1.1em;
+}
+
+.plain-modern-xs > *,
 .f-modern-xs {
   --font-size: var(--font-size-modern-xs);
   --line-height: var(--line-height-modern-xs, var(--line-height-modern));
 }
 
+.plain-modern-s > *,
 .f-modern-s {
   --font-size: var(--font-size-modern-s);
   --line-height: var(--line-height-modern-s, var(--line-height-modern));
 }
 
+.plain-modern-m > *,
 .f-modern-m {
   --font-size: var(--font-size-modern-m);
   --line-height: var(--line-height-modern-m, var(--line-height-modern));
 }
 
+.plain-modern-l > *,
 .f-modern-l {
   --font-size: var(--font-size-modern-l);
   --line-height: var(--line-height-modern-l, var(--line-height-modern));
 }
 
-.plain h2, .plain h3, .plain h4, .plain h5, .plain h6, .plain p, .plain ul, .plain ol, .plain dl {
+@media screen and (min-width: 30em) {
+  :root {
+    --font-size-serif-xs: 18px;
+    --font-size-serif-s: 18px;
+    --font-size-serif-m: 36px;
+    --font-size-serif-l: 64px;
+  }
+}
+
+.plain > h2, .plain > h3, .plain > h4, .plain > h5, .plain > h6, .plain > p, .plain > ul, .plain > ol, .plain > dl {
   --font-family: var(--font-family-sans);
+  --font-size: var(--font-size-sans);
   --line-height: var(--line-height-sans);
   --letter-spacing: var(--letter-spacing-sans);
   --font-feature-settings: var(--font-feature-settings-sans);
@@ -212,22 +242,22 @@ html {
   --trim-adjacent: var(--trim-adjacent-sans);
 }
 
-.plain h6 {
+.plain > h6 {
   --font-size: var(--font-size-sans-xs);
   --line-height: var(--line-height-sans-xs, var(--line-height-sans));
 }
 
-.plain h5, .plain blockquote {
+.plain > h5, .plain > blockquote {
   --font-size: var(--font-size-sans-s);
   --line-height: var(--line-height-sans-s, var(--line-height-sans));
 }
 
-.plain h4, .plain p, .plain ul, .plain ol, .plain dl {
+.plain > h4, .plain > p, .plain > ul, .plain > ol, .plain > dl {
   --font-size: var(--font-size-sans-m);
   --line-height: var(--line-height-sans-m, var(--line-height-sans));
 }
 
-.plain h3 {
+.plain > h3 {
   --font-size: var(--font-size-sans-l);
   --line-height: var(--line-height-sans-l, var(--line-height-sans));
 }

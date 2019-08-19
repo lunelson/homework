@@ -10,15 +10,10 @@
 // NB: a set of advanced OpenType classes can be enabled with utility-opentype:
 // http://utility-opentype.kennethormandy.com/
 
+// $non-trim-elements: div table figure img svg video iframe object section aside header footer article;
+$non-trim-elements: div table figure img svg video iframe object;
 
-@mixin homework-setup-typo( $trim: true, $trim-excl: div table figure img svg video iframe object section aside header footer article ) {
-
-  html {
-    // NB: --font-size variable is set in setup-root(), it is responsive by $medium
-    font-size: var(--font-size);
-    font-family: var(--font-family);
-    line-height: var(--line-height);
-  }
+@mixin homework-setup-typo( $trim: true, $trim-excl: $non-trim-elements ) {
 
   // normalize $fonts
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
@@ -27,68 +22,15 @@
     $fonts: map-merge($fonts, ($f: $font)) !global;
   }
 
-  :root {
-    @each $f, $font in $fonts {
-
-      // make first font in $fonts the default
-      @if $f == nth(map-keys($fonts), 1) {
-        --font-family: var(--font-family-#{$f});
-        --line-height: var(--line-height-#{$f});
-        --letter-spacing: var(--letter-spacing-#{$f});
-        --font-feature-settings: var(--font-feature-settings-#{$f});
-      }
-
-      $ff: map-get($font, 'font-family');
-      $lh: map-get($font, 'line-height');
-      $ls: map-get($font, 'letter-spacing');
-      $ffs: map-get($font, 'font-feature-settings');
-
-      // output variant properties
-      --font-family-#{$f}: #{$ff};
-      --line-height-#{$f}: #{decalc($lh)};
-      --letter-spacing-#{$f}: #{decalc($ls)};
-      --font-feature-settings-#{$f}: #{inspect($ffs)};
-
-      @if $trim {
-        $oc: map-get($font, 'dist-capline');
-        $ob: map-get($font, 'dist-baseline');
-        $ts: map-get($font, 'trim-sides');
-        $aa: map-get($font, 'trim-adjacent');
-        --dist-capline-#{$f}: #{if(unitless($oc), $oc*1em, $oc)};
-        --dist-baseline-#{$f}: #{if(unitless($ob), $ob*1em, $ob)};
-        --trim-sides-#{$f}: #{$ts};
-        --trim-adjacent-#{$f}: #{decalc($aa)};
-      }
-    }
-
-
-    // NOTE: alternate method here would be min-width queries with m-orig-var(font-mods)...(less code but more compile work)
-    @include mm-for('font-mods') {
-      @each $f, $mod in m-var('font-mods') {
-        @each $s, $set in $mod {
-          $fz: nth($set, 1);
-          $fz: if(unitless($fz), $fz*1px, $fz);
-          // TODO: proof whether it's possible to use lerp expressions here
-          --font-size-#{$f}-#{$s}: #{$fz};
-          $lh: if(length($set) > 1, nth($set, 2), null);
-          @if $lh {
-            $lh: if(unitless($lh), if($lh > 6, $lh*1px, $lh*1em), $lh);
-            // TODO: proof whether it's possible to use lerp expressions here
-            --line-height-#{$f}-#{$s}: #{$lh};
-          }
-        }
-      }
-    }
-  }
-
-  // any .f-[...] plus all children of .plain which are not in the exclude list
+  body,
   #{base-class('f', false)},
   #{selector-combine(base-class('plain'), '*', '>')} {
-    font-size: var(--font-size); // TODO allow a lerp calc() expression here too
     font-family: var(--font-family);
-    line-height: calc(var(--line-height)); // raw calc values
-    letter-spacing: calc(var(--letter-spacing)); // raw calc values
-    font-feature-settings: var(--font-feature-settings);
+
+    font-size: calc(var(--font-size)); // TODO allow a lerp calc() expression here too
+    line-height: calc(var(--line-height, 1.25)); // raw calc values
+    letter-spacing: calc(var(--letter-spacing, 0)); // raw calc values
+    font-feature-settings: var(--font-feature-settings, '');
   }
 
   @if $trim {
@@ -116,32 +58,78 @@
   }
 
   @each $f, $font in $fonts {
-
-    #{base-class('f-#{$f}')} {
-      --font-family: var(--font-family-#{$f});
-      --letter-spacing: var(--letter-spacing-#{$f});
-      --font-feature-settings: var(--font-feature-settings-#{$f});
+    :root {
+      $ff: map-get($font, 'font-family');
+      $lh: map-get($font, 'line-height');
+      $ls: map-get($font, 'letter-spacing');
+      $ffs: map-get($font, 'font-feature-settings');
+      --font-family-#{$f}: #{$ff};
+      --line-height-#{$f}: #{decalc($lh)};
+      --letter-spacing-#{$f}: #{decalc($ls)};
+      --font-feature-settings-#{$f}: #{inspect($ffs)};
 
       @if $trim {
         $dc: map-get($font, 'dist-capline');
         $db: map-get($font, 'dist-baseline');
         $ts: map-get($font, 'trim-sides');
         $ta: map-get($font, 'trim-adjacent');
-        @if $dc { --dist-capline: #{if(unitless($dc), $dc * 1em, $dc)}; }
-        @if $db { --dist-baseline: #{if(unitless($db), $db * 1em, $db)}; }
-        @if $ts { --trim-sides: #{$ts}; }
-        @if $ta { --trim-adjacent: #{decalc($ta)}; }
+        --dist-capline-#{$f}: #{if(unitless($dc), $dc*1em, $dc)};
+        --dist-baseline-#{$f}: #{if(unitless($db), $db*1em, $db)};
+        --trim-sides-#{$f}: #{$ts};
+        --trim-adjacent-#{$f}: #{decalc($ta)};
+      }
+    }
+
+    #{selector-combine(base-class('plain-#{$f}'), '*', '>')},
+    #{base-class('f-#{$f}')},
+    #{if($f == nth(map-keys($fonts), 1), selector-combine(base-class('plain'), '*', '>'), '')},
+    #{if($f == nth(map-keys($fonts), 1), 'body', '')} {
+      --font-family: var(--font-family-#{$f});
+      --line-height: var(--line-height-#{$f});
+      --letter-spacing: var(--letter-spacing-#{$f});
+      --font-feature-settings: var(--font-feature-settings-#{$f});
+
+      @if $trim {
+        --dist-capline: var(--dist-capline-#{$f});
+        --dist-baseline: var(--dist-baseline-#{$f});
+        --trim-sides: var(--trim-sides-#{$f});
+        --trim-adjacent: var(--trim-adjacent-#{$f});
       }
     }
   }
 
-  @each $f, $mod in map-get($root, 'font-mods') {
-    @each $s, $set in $mod {
-      .f-#{$f}-#{$s} {
-        --font-size: var(--font-size-#{$f}-#{$s});
-        --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
+  @each $m in join((null), map-keys($media)) {
+    @include m($m) {
+      @each $f, $mod in m-var-orig('font-mods') {
+        :root {
+          @each $s, $set in $mod or () {
+
+            // (A) output the custom properties
+            $fz: __nth($set, 1); $lh: __nth($set, 2);
+
+            // TODO: proof whether it's possible to use lerp expressions here
+            $fz: if(unitless($fz), $fz*1px, $fz);
+            --font-size-#{$f}-#{$s}: #{$fz};
+
+            @if $lh {
+              // TODO: proof whether it's possible to use lerp expressions here
+              $lh: if(unitless($lh), if($lh > 6, $lh*1px, $lh*1em), $lh);
+              --line-height-#{$f}-#{$s}: #{$lh};
+            }
+
+            // (B) if on $root, output the .f-(f)-(s) assignment
+            @if not $m {
+              @at-root .plain-#{$f}-#{$s} > *,
+              .f-#{$f}-#{$s} {
+                --font-size: var(--font-size-#{$f}-#{$s});
+                --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
+              }
+            }
+          }
+        }
       }
     }
   }
+
 
 }

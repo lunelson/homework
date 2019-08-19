@@ -1,3 +1,25 @@
+## what to test
+
+columns
+  span-max, span-min, span-safe
+    - can't exceed global max (current)
+    - can't exceed local max (css 4)
+
+theme
+  .theme-[theme] switching
+  .key-[color] switching
+
+typo
+  lerp expressions in font defs
+    font-size ?? can I use decalc() ?
+    line-height (works with decalc())
+    letter-spacing (works with decalc())
+  lerp expressions in font-mod defs (unclear WRT unit/unitless...?)
+  plain, plain-[f], plain-[f]-[mod] declinations/fallbacks
+    !! correct minimum behaviour even if no user .plain- styles have been defined
+
+
+
 ## rule color, width: column/theme setup
 
 multi-column and grid support drawing rules
@@ -197,38 +219,36 @@ homework/
 https://blogs.igalia.com/mrego/2019/01/11/an-introduction-to-css-containment/
 
 ## othernames
-  inset
-  hang
-  tuck
-  slip
-  edge
-  shim
 
-  drop
-  slide
-  lip
-  rim
-  lap
-  well
-  dent
-  bump
-  hump
-  rise
-  card
-  bind
-  bound
-  lead
-  wrap
-  edge
-  slip
-
-  shift
-  spread
-  fringe
-  verge
-  skirt
-
-  alpha/omega
+inset
+hang
+tuck
+slip
+edge
+shim
+drop
+slide
+lip
+rim
+lap
+well
+dent
+bump
+hump
+rise
+card
+bind
+bound
+lead
+wrap
+edge
+slip
+shift
+spread
+fringe
+verge
+skirt
+alpha/omega
   (see that saved tweet, from earlier)
 
 ```scss
