@@ -30,7 +30,6 @@ $non-trim-elements: div table figure img svg video iframe object;
     font-size: calc(var(--font-size)); // TODO allow a lerp calc() expression here too
     line-height: calc(var(--line-height, 1.25)); // raw calc values
     letter-spacing: calc(var(--letter-spacing, 0)); // raw calc values
-    font-feature-settings: var(--font-feature-settings, '');
   }
 
   @if $trim {
@@ -62,11 +61,9 @@ $non-trim-elements: div table figure img svg video iframe object;
       $ff: map-get($font, 'font-family');
       $lh: map-get($font, 'line-height');
       $ls: map-get($font, 'letter-spacing');
-      $ffs: map-get($font, 'font-feature-settings');
       --font-family-#{$f}: #{$ff};
       --line-height-#{$f}: #{decalc($lh)};
       --letter-spacing-#{$f}: #{decalc($ls)};
-      --font-feature-settings-#{$f}: #{inspect($ffs)};
 
       @if $trim {
         $dc: map-get($font, 'dist-capline');
@@ -87,7 +84,6 @@ $non-trim-elements: div table figure img svg video iframe object;
       --font-family: var(--font-family-#{$f});
       --line-height: var(--line-height-#{$f});
       --letter-spacing: var(--letter-spacing-#{$f});
-      --font-feature-settings: var(--font-feature-settings-#{$f});
 
       @if $trim {
         --dist-capline: var(--dist-capline-#{$f});

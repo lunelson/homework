@@ -13,25 +13,19 @@
 $fonts: () !default;
 
 $fonts-defaults: (
-  sans: ( font-family: (Arial, sans-serif) ),
-  serif: ( font-family: (Georgia, serif) ),
-  mono: ( font-family: (Monaco, Consolas, monospace) )
+  sans: ( font-family: ('Arial', sans-serif) ),
+  serif: ( font-family: ('Georgia', serif) ),
+  mono: ( font-family: ('Monaco', 'Consolas', monospace) )
 );
 
 $font-default: (
   line-height: 1.4em,
   letter-spacing: 0px, // calc(1px - 0.025em),
-  font-feature-settings: (), // ('kern' 1),
   dist-capline: 0em,
   dist-baseline: 0em,
   trim-sides: 0, // calc(1px - 0.1em),
   trim-adjacent: (1em/8), // calc((1em - 1ex)/2),
 );
-
-// NOTES re feature-settings
-// https://sparanoid.com/lab/opentype-features/
-// https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/OpenType_fonts_guide
-// https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
 
 
 //   __            _          _          _
@@ -49,7 +43,6 @@ $font-default: (
   --font-size: var(--font-size-#{$f});
   --line-height: var(--line-height-#{$f});
   --letter-spacing: var(--letter-spacing-#{$f});
-  --font-feature-settings: var(--font-feature-settings-#{$f});
 
   @if $trim {
     --trim-sides: var(--trim-sides-#{$f});

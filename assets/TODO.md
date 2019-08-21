@@ -1,3 +1,14 @@
+## opentype control
+- remove the font-feature-settings in typo setup
+- recommend integraiton of OT utility classes
+  https://github.com/kennethormandy/utility-opentype
+  http://utility-opentype.kennethormandy.com/#design-decisions
+
+- references
+  https://sparanoid.com/lab/opentype-features/
+  https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/OpenType_fonts_guide
+  https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
+
 ## what to test
 
 columns
