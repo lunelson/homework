@@ -23,7 +23,7 @@
     "start": "ava --watch",
     "test": "ava",
     "test:scratch": "npm t -- --watch --match *scratch*",
-    "test:visual": "penny serve tests/_visual"
+    "test:visual": "penny serve tests/www"
   },
   "devDependencies": {
     "@lunelson/penny": "^2.0.0-alpha.14",
