@@ -15,7 +15,7 @@
       @include --output-medium-props();
     }
   }
-  // html {
-  //   font-size: var(--font-size);
-  // }
+  :root {
+    font-size: var(--font-size);
+  }
 }

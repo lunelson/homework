@@ -26,7 +26,7 @@ $non-trim-elements: div table figure img svg video iframe object;
   #{selector-combine(base-class('plain'), '*', '>')} {
     font-family: var(--font-family);
 
-    font-size: calc(var(--font-size)); // TODO allow a lerp calc() expression here too
+    // font-size: calc(var(--font-size)); // TODO allow a lerp calc() expression here too
     line-height: calc(var(--line-height)); // raw calc values
     letter-spacing: calc(var(--letter-spacing)); // raw calc values
   }
@@ -118,7 +118,8 @@ $non-trim-elements: div table figure img svg video iframe object;
             @if not $m {
               @at-root .plain-#{$f}-#{$s} > *,
               .f-#{$f}-#{$s} {
-                --font-size: var(--font-size-#{$f}-#{$s});
+                // --font-size: var(--font-size-#{$f}-#{$s});
+                font-size: var(--font-size-#{$f}-#{$s});
                 --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
               }
             }
