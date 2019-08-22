@@ -1,26 +1,9 @@
-extends _app
+extends __layout
 
 append defs
   - title = 'Test: Font'
 
 append head
-  style.
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
-    .label::before {
-      font-family: monospace;
-      //- font-size: 1rem;
-      counter-reset: cp var(--stack-gap);
-      counter-reset: cp ;
-      content: counter(cp);
-      display: block;
-      width: 100%;
-      padding: 1em;
-      background-color: #ddd;
-    }
 
 block body
   +ph({ aspect: 8 })

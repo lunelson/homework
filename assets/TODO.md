@@ -21,14 +21,15 @@ theme
   .key-[color] switching
 
 typo
-  lerp expressions in font defs
+  lerp expressions in $font defs OR font-mods
     font-size ?? can I use decalc() ?
     line-height (works with decalc())
     letter-spacing (works with decalc())
   lerp expressions in font-mod defs (unclear WRT unit/unitless...?)
   plain, plain-[f], plain-[f]-[mod] declinations/fallbacks
     !! correct minimum behaviour even if no user .plain- styles have been defined
-
+  ? difference in referencing :root instead of body in setup declarations ?
+  lh-loose and lh-tight classes to be somehow auto-generated?
 
 
 ## rule color, width: column/theme setup
@@ -91,13 +92,6 @@ create a $homework-options map:
   typo
     trim or not
     non-trim elements in .plain
-
-
-
-## font and trim logics
-
-- plain-(y) classes should get a --stack-gap variable pre-set
-- lh-loose and lh-tight classes to be somehow auto-generated?
 
 ## reset
 

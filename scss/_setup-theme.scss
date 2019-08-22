@@ -28,7 +28,7 @@ themes
   --color-secondary
 
   */
-@mixin homework-setup-key($type: lite) {
+@mixin homework-setup-theme($type: lite) {
 
   $colors: map-merge((
     dark: #141414,

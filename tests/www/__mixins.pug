@@ -1,0 +1,28 @@
+//- mixin ph(aspect, text, color='#eee')
+  .aspect(style=`background-color: ${color}; --aspect: ${aspect};`)
+    div= text
+
+mixin ph({ height, aspect, color, text })
+  -
+    const style = {
+      'background-color': color||'rgba(0,0,0,0.17)',
+      'height': height || 0,
+      'padding-bottom': aspect ? `${100/aspect}%` : 0
+    }
+  .hold(style=style)&attributes(attributes)
+    .abs-trbl.d-flex.jc-center.ai-center
+      if block
+        block
+      else
+        .a-center= text
+
+mixin ph2(aspect, color, text)
+  .hold(style=`background-color: ${color||'rgba(0,0,0,0.17)'}; padding-bottom: ${100/aspect}%;`)&attributes(attributes)
+    .abs-trbl.d-flex.jc-center.ai-center
+      if block
+        block
+      else
+        .a-center= text
+
+mixin dump(value)
+  pre(style='whitespace: pre-wrap')!= JSON.stringify(value, null, 2)

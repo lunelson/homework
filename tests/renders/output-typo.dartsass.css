@@ -23,9 +23,8 @@ body,
 .plain > *, [class^=plain-] > *, [class*=" plain-"] > * {
   font-family: var(--font-family);
   font-size: calc(var(--font-size));
-  line-height: calc(var(--line-height, 1.25));
-  letter-spacing: calc(var(--letter-spacing, 0));
-  font-feature-settings: var(--font-feature-settings, "");
+  line-height: calc(var(--line-height));
+  letter-spacing: calc(var(--letter-spacing));
 }
 
 .trim > [class^=f-], .trim > [class*=" f-"],
@@ -51,9 +50,8 @@ body,
 
 :root {
   --font-family-sans: MessinaSans;
-  --line-height-sans: 1.4em;
-  --letter-spacing-sans: 0px;
-  --font-feature-settings-sans: ();
+  --line-height-sans: 1.25;
+  --letter-spacing-sans: 0;
   --dist-capline-sans: 0em;
   --dist-baseline-sans: 0em;
   --trim-sides-sans: 0;
@@ -61,13 +59,12 @@ body,
 }
 
 .plain-sans > *, [class^=plain-sans-] > *, [class*=" plain-sans-"] > *,
-.f-sans, [class^=f-sans-], [class*=" f-sans-"],
 .plain > *, [class^=plain-] > *, [class*=" plain-"] > *,
+.f-sans, [class^=f-sans-], [class*=" f-sans-"],
 body {
   --font-family: var(--font-family-sans);
   --line-height: var(--line-height-sans);
   --letter-spacing: var(--letter-spacing-sans);
-  --font-feature-settings: var(--font-feature-settings-sans);
   --dist-capline: var(--dist-capline-sans);
   --dist-baseline: var(--dist-baseline-sans);
   --trim-sides: var(--trim-sides-sans);
@@ -76,9 +73,8 @@ body {
 
 :root {
   --font-family-serif: MessinaSerif;
-  --line-height-serif: 1.4em;
-  --letter-spacing-serif: 0px;
-  --font-feature-settings-serif: ();
+  --line-height-serif: 1.25;
+  --letter-spacing-serif: 0;
   --dist-capline-serif: 0em;
   --dist-baseline-serif: 0em;
   --trim-sides-serif: 0;
@@ -90,7 +86,6 @@ body {
   --font-family: var(--font-family-serif);
   --line-height: var(--line-height-serif);
   --letter-spacing: var(--letter-spacing-serif);
-  --font-feature-settings: var(--font-feature-settings-serif);
   --dist-capline: var(--dist-capline-serif);
   --dist-baseline: var(--dist-baseline-serif);
   --trim-sides: var(--trim-sides-serif);
@@ -99,9 +94,8 @@ body {
 
 :root {
   --font-family-modern: MessinaModern;
-  --line-height-modern: 1.4em;
-  --letter-spacing-modern: 0px;
-  --font-feature-settings-modern: ();
+  --line-height-modern: 1.25;
+  --letter-spacing-modern: 0;
   --dist-capline-modern: 0em;
   --dist-baseline-modern: 0em;
   --trim-sides-modern: 0;
@@ -113,7 +107,6 @@ body {
   --font-family: var(--font-family-modern);
   --line-height: var(--line-height-modern);
   --letter-spacing: var(--letter-spacing-modern);
-  --font-feature-settings: var(--font-feature-settings-modern);
   --dist-capline: var(--dist-capline-modern);
   --dist-baseline: var(--dist-baseline-modern);
   --trim-sides: var(--trim-sides-modern);
@@ -231,7 +224,6 @@ body {
   --font-size: var(--font-size-sans);
   --line-height: var(--line-height-sans);
   --letter-spacing: var(--letter-spacing-sans);
-  --font-feature-settings: var(--font-feature-settings-sans);
   --trim-sides: var(--trim-sides-sans);
   --dist-capline: var(--dist-capline-sans);
   --dist-baseline: var(--dist-baseline-sans);

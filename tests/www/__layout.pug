@@ -1,0 +1,39 @@
+include __mixins
+
+block defs
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    link(href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,700,700i|Roboto+Slab:400,700|Roboto:400,400i,700,700i&display=swap' rel='stylesheet')
+    link(href="/app.css", rel="stylesheet", type="text/css")
+
+
+
+    style.
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      .label::before {
+        font-family: monospace;
+        //- font-size: 1rem;
+        counter-reset: cp var(--stack-gap);
+        counter-reset: cp ;
+        content: counter(cp);
+        display: block;
+        width: 100%;
+        padding: 1em;
+        background-color: #ddd;
+      }
+
+    title= `test: ${_path.basename($options.filename).replace(/\.pug$/,'')}`
+    block head
+
+  body.debug(class=`layout-${layout}`)
+    block body
+    script(src="/app.js", type="text/javascript")

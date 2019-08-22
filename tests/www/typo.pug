@@ -1,0 +1,52 @@
+extends __layout
+
+block body
+
+  .wrap-last
+    .frame.frame-y.stack-l
+
+
+      .stop: .flow
+        - var testString = 'ABCDEFGHIJabcdefghij'
+        .stack-l
+          h2.f-sans-m base classes
+          .f-sans-s.fg-foo(style='--fg-color: #aaa')= _chance.paragraph()
+
+
+      //- f-(font) / plain-(font)
+      .stop: .flow
+        .stack-m.span-6
+          h3.f-mono #[code .stack > .f-($f)]
+          each font in ['sans', 'slab', 'mono']
+            div.stack(style='background-color: #f0f0f0', )
+              p(class=`f-${font}`)= testString
+              p(class=`f-${font}`)= testString
+
+        .stack-m.span-6
+          h3.f-mono #[code .plain > p]
+          div.plain(style='background-color: #f0f0f0')
+            p= testString
+            p= testString
+
+          h3.f-mono #[code .plain-($f) > p]
+          each font in ['sans', 'slab', 'mono']
+            div(style='background-color: #f0f0f0', class=`plain-${font}`)
+              p= testString
+              p= testString
+
+
+      //- f-(font)-(mod) / plain-(font)-(mod)
+      .stop: .flow
+        .stack-m.span-6
+          h3.f-mono #[code .trim > .f-($f)-($size)]
+          each font in ['sans', 'slab', 'mono']
+            .stack-m
+              each size in ['s', 'm', 'l']
+                div.trim(style='background-color: #f0f0f0', ): p(class=`f-${font}-${size}`)= testString
+
+        .stack-m.span-6
+          h3.f-mono #[code .plain-($f)-($size) > p]
+          each font in ['sans', 'slab', 'mono']
+            .stack-m
+              each size in ['s', 'm', 'l']
+                div(style='background-color: #f0f0f0', class=`plain-${font}-${size}`): p= testString

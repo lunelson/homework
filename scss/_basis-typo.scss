@@ -5,11 +5,6 @@
 // | || (_) | | | | |_      | (_| |  __/ || (_| | |_| | | |_\__ \
 // |_| \___/|_| |_|\__|      \__,_|\___|_| \__,_|\__,_|_|\__|___/
 
-// TODO
-// handle non-px values in font-mods
-// figure out what HTML elements require explicitly applying --font-family
-// apply the increased --trim-top to cases where font is adjacent to font -- only to the custom property !
-
 $fonts: () !default;
 
 $fonts-defaults: (
@@ -19,12 +14,12 @@ $fonts-defaults: (
 );
 
 $font-default: (
-  line-height: 1.4em,
-  letter-spacing: 0px, // calc(1px - 0.025em),
+  line-height: 1.25em, // MUST HAVE A UNIT
+  letter-spacing: 0, // calc(1px - 0.025em),
   dist-capline: 0em,
   dist-baseline: 0em,
-  trim-sides: 0, // calc(1px - 0.1em),
   trim-adjacent: (1em/8), // calc((1em - 1ex)/2),
+  trim-sides: 0, // calc(1px - 0.1em),
 );
 
 

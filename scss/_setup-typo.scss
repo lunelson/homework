@@ -7,11 +7,10 @@
 //       __/ | |
 //      |___/|_|
 
-// NB: a set of advanced OpenType classes can be enabled with utility-opentype:
-// http://utility-opentype.kennethormandy.com/
-
 // $non-trim-elements: div table figure img svg video iframe object section aside header footer article;
 $non-trim-elements: div table figure img svg video iframe object;
+
+@function normalize-unit($n, $unit) { @return if(type-of($n) == number and unitless($n), $n * $unit, $n); }
 
 @mixin homework-setup-typo( $trim: true, $trim-excl: $non-trim-elements ) {
 
@@ -28,8 +27,8 @@ $non-trim-elements: div table figure img svg video iframe object;
     font-family: var(--font-family);
 
     font-size: calc(var(--font-size)); // TODO allow a lerp calc() expression here too
-    line-height: calc(var(--line-height, 1.25)); // raw calc values
-    letter-spacing: calc(var(--letter-spacing, 0)); // raw calc values
+    line-height: calc(var(--line-height)); // raw calc values
+    letter-spacing: calc(var(--letter-spacing)); // raw calc values
   }
 
   @if $trim {
@@ -62,8 +61,8 @@ $non-trim-elements: div table figure img svg video iframe object;
       $lh: map-get($font, 'line-height');
       $ls: map-get($font, 'letter-spacing');
       --font-family-#{$f}: #{$ff};
-      --line-height-#{$f}: #{decalc($lh)};
-      --letter-spacing-#{$f}: #{decalc($ls)};
+      --line-height-#{$f}: #{decalc(normalize-unit($lh, 1em))};
+      --letter-spacing-#{$f}: #{decalc($ls)}; // normalize this too ?
 
       @if $trim {
         $dc: map-get($font, 'dist-capline');
@@ -78,8 +77,8 @@ $non-trim-elements: div table figure img svg video iframe object;
     }
 
     #{selector-combine(base-class('plain-#{$f}'), '*', '>')},
-    #{base-class('f-#{$f}')},
     #{if($f == nth(map-keys($fonts), 1), selector-combine(base-class('plain'), '*', '>'), '')},
+    #{base-class('f-#{$f}')},
     #{if($f == nth(map-keys($fonts), 1), 'body', '')} {
       --font-family: var(--font-family-#{$f});
       --line-height: var(--line-height-#{$f});
@@ -104,13 +103,15 @@ $non-trim-elements: div table figure img svg video iframe object;
             $fz: __nth($set, 1); $lh: __nth($set, 2);
 
             // TODO: proof whether it's possible to use lerp expressions here
-            $fz: if(unitless($fz), $fz*1px, $fz);
-            --font-size-#{$f}-#{$s}: #{$fz};
+            // $fz: if(unitless($fz), $fz*1px, $fz);
+            // $fz: decalc(normalize-unit($fz, 1rem));
+            --font-size-#{$f}-#{$s}: #{decalc(normalize-unit($fz, 1rem))};
 
             @if $lh {
               // TODO: proof whether it's possible to use lerp expressions here
-              $lh: if(unitless($lh), if($lh > 6, $lh*1px, $lh*1em), $lh);
-              --line-height-#{$f}-#{$s}: #{$lh};
+              // $lh: if(unitless($lh), if($lh > 6, $lh*1px, $lh*1em), $lh);
+              // $lh: decalc(normalize-unit($lh, 1em));
+              --line-height-#{$f}-#{$s}: #{decalc(normalize-unit($lh, 1em))};
             }
 
             // (B) if on $root, output the .f-(f)-(s) assignment

@@ -15,11 +15,6 @@
 
 @mixin homework-setup-stack() {
 
-  // *, ::before, ::after {
-  //   --stack-gap: var(--inner-y);
-  //   --chain-gap: var(--inner-x);
-  // }
-
   // NB: base-class plain connects to TYPO
   #{base-class('stack')}, #{base-class('plain')} {
     padding-top: 0.1px;
@@ -34,12 +29,17 @@
   }
 
   // TODO: use this, or lose it
-  // i.e. add to #{base-class('stack')}
   #{base-class('stack')} {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    & > * { flex: 0 0 auto; width: initial }
+    & > * {
+      flex: 0 0 auto;
+      width: 100%;
+      width: fill-available;
+      // width: available;
+      width: stretch;
+    }
   }
 
   #{base-class('chain')} {
