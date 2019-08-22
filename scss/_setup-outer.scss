@@ -46,15 +46,15 @@
         max-width: none !important;
         width: initial !important;
       }
-      .#{$m__}peel, .#{$m__}peel-right { margin-right: divide(subtract($peel-margin, $wrap-offset), 2); }
-      .#{$m__}peel, .#{$m__}peel-left { margin-left: divide(add($peel-margin, $wrap-offset), 2); }
+      .#{$m__}peel, .#{$m__}peel-right { margin-right: divide(subtract($peel-margin, $wrap-offset), 2) !important; }
+      .#{$m__}peel, .#{$m__}peel-left { margin-left: divide(add($peel-margin, $wrap-offset), 2) !important; }
 
       // FRAME
 
-      .#{$m__}frame, .#{$m__}frame-right { padding-right: var(--outer-right); }
-      .#{$m__}frame, .#{$m__}frame-left { padding-left: var(--outer-left); }
-      .#{$m__}frame-y, .#{$m__}frame-top { padding-top: var(--outer-top); }
-      .#{$m__}frame-y, .#{$m__}frame-bottom { padding-bottom: var(--outer-bottom); }
+      .#{$m__}frame, .#{$m__}frame-right { padding-right: var(--outer-right) !important; }
+      .#{$m__}frame, .#{$m__}frame-left { padding-left: var(--outer-left) !important; }
+      .#{$m__}frame-y, .#{$m__}frame-top { padding-top: var(--outer-top) !important; }
+      .#{$m__}frame-y, .#{$m__}frame-bottom { padding-bottom: var(--outer-bottom) !important; }
 
       // BLEED
 
@@ -62,11 +62,10 @@
         max-width: none !important;
         width: initial !important;
       }
-      .#{$m__}bleed, .#{$m__}bleed-right { margin-right: calc(var(--outer-right) * -1); }
-      .#{$m__}bleed, .#{$m__}bleed-left { margin-left: calc(var(--outer-left) * -1); }
-
-      .#{$m__}bleed-y, .#{$m__}bleed-top { margin-top: calc(var(--outer-top) * -1); }
-      .#{$m__}bleed-y, .#{$m__}bleed-bottom { margin-bottom: calc(var(--outer-bottom) * -1); }
+      .#{$m__}bleed, .#{$m__}bleed-right { margin-right: calc(var(--outer-right) * -1) !important; }
+      .#{$m__}bleed, .#{$m__}bleed-left { margin-left: calc(var(--outer-left) * -1) !important; }
+      .#{$m__}bleed-y, .#{$m__}bleed-top { margin-top: calc(var(--outer-top) * -1) !important; }
+      .#{$m__}bleed-y, .#{$m__}bleed-bottom { margin-bottom: calc(var(--outer-bottom) * -1) !important; }
     }
   }
 }
