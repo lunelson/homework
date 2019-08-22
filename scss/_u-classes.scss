@@ -13,13 +13,12 @@
   $p__: state-prefix($state);
   $solo-selector: if($solo, '.#{$p__}#{$base}, ', '');
   @return selector-parse('#{$solo-selector}[class^="#{$p__}#{$base}-"], [class*=" #{$p__}#{$base}-"]');
+  // ALT VERSION, HIGHER SPECIFICITY; see above
   // @return selector-parse('#{$solo-selector}[class^="#{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"]), [class*=" #{$p__}#{$base}-"]:not([class$="#{$p__}#{$base}-"])');
 }
 
 @function base-class($base, $solo: true, $_...) {
   @return state-base-class($base, $solo, null, $_...);
-  // $solo-selector: if($solo, '.#{$base}, ', '');
-  // @return selector-parse('#{$solo-selector}[class^="#{$base}-"]:not([class$="#{$base}-"]), [class*=" #{$base}-"]:not([class$="#{$base}-"])');
 }
 
 @function mod-suffix($mod: null) {

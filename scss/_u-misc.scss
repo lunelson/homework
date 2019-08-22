@@ -23,15 +23,6 @@
   @return __slice($result, $start, $end);
 }
 
-// @function __get($map, $keys...) {
-//   @if type-of($map) != 'map' or length($map) == 0 { @error 'non-map or zero-length-map passed to __get'; }
-//   @each $key in $keys {
-//     @if type-of($map) != 'map' { @return $map; }
-//     $map: map-get($map, $key);
-//   }
-//   @return $map;
-// }
-
 // TODO:
 // make this in to a package
 // follow algorithm established by this pkg https://github.com/TehShrike/deepmerge

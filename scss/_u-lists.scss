@@ -12,9 +12,9 @@
 ///
 
 @function __nth($list, $n) {
-  // TODO allow it to handle strings; create str-nth
-  @if length($list) == 0 or $n < 1 or $n > length($list) { @return null; }
-  @return nth($list, $n);
+  @if type-of($list) == string { @return str-slice($list, $n, $n); }
+  @if length($list) == 0 or $n == 0 or $n > length($list) { @return (); }
+  @return nth($list, if($n < 0, length($list) + 1 + $n, $n));
 }
 
 @function __first($list) {
