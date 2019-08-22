@@ -44,13 +44,13 @@ themes
     @each $c, $color in $colors {
       @if length($color) > 1 {
         @each $n, $subcolor in __list-to-index-map($color) {
-          --color-#{$c}-#{$n}: #{rgbify($subcolor)};
-          --contrast-#{$c}-#{$n}: #{rgbify(contrast-color($subcolor))};
+          --color-#{$c}-#{$n}: #{hslify($subcolor)};
+          --contrast-#{$c}-#{$n}: #{hslify(contrast-color($subcolor))};
           $color-names: append($color-names, #{$c}-#{$n});
         }
       } @else {
-        --color-#{$c}: #{rgbify($color)};
-        --contrast-#{$c}: #{rgbify(contrast-color($color))};
+        --color-#{$c}: #{hslify($color)};
+        --contrast-#{$c}: #{hslify(contrast-color($color))};
         $color-names: append($color-names, $c);
       }
     }
@@ -60,8 +60,8 @@ themes
   }
 
   body {
-    color: rgba(var(--fg-default), var(--fg-opacity, 1));
-    background-color: rgba(var(--bg-default), var(--bg-opacity, 1));
+    color: hsla(var(--fg-default), var(--fg-opacity, 1));
+    background-color: hsla(var(--bg-default), var(--bg-opacity, 1));
   }
 
   // STATEFUL THEME PROPERTIES
@@ -77,15 +77,15 @@ themes
       '&');
 
     #{state-base-class('fg', false, $pseudo)} { #{$sel} {
-      color: rgba(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+      color: hsla(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
     } }
 
     #{state-base-class('bg', false, $pseudo)} { #{$sel} {
-      background-color: rgba(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+      background-color: hsla(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
     } }
 
     #{state-base-class('bd', false, $pseudo)} { #{$sel} {
-      border-color: rgba(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+      border-color: hsla(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
       border-style: var(--bd-style, solid);
       border-top-width: var(--bd-top-width, 0);
       border-right-width: var(--bd-right-width, 0);
@@ -94,7 +94,7 @@ themes
     } }
 
     #{state-base-class('ol', false, $pseudo)} { #{$sel} {
-      outline-color: rgba(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+      outline-color: hsla(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
       outline-width: var(--ol-width);
     } }
 
