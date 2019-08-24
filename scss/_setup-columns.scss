@@ -28,6 +28,15 @@
     }
   }
 
+  #{base-class('mcol-flow')} {
+    margin-top: calc(var(--row-gap) / -2) !important;
+    margin-bottom: calc(var(--row-gap) / -2) !important;
+    & > * {
+      padding-top: calc(var(--row-gap) / 2) !important;
+      padding-bottom: calc(var(--row-gap) / 2) !important;
+    }
+  }
+
   // FLEXBOX-FLOW LAYOUT
   #{base-class('flow')} {
     display: flex !important;
@@ -64,30 +73,18 @@
     }
   }
 
-  // make the following props *non-cascading*
-  *, ::before, ::after {
-    --column-push: initial;
-    --column-push-r: initial;
-    --column-start: initial;
-    --column-end: initial;
-    --row-start: initial;
-    --row-end: initial;
-  }
-
   :root { --column-gap: var(--inner-x); }
 
-  .flow, .grid { --row-gap: var(--inner-y); }
+  .mcol-flow, .flow, .grid { --row-gap: var(--inner-y); }
 
   @each $y in map-keys(inner-y-mods()) {
-    .flow-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
+    .mcol-flow-#{$y}, .flow-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
   }
 
-  // pre-calculations
-  $max-column-count: --max-columns();
   // $span-pair-list: ();
   // $start-pair-list: ();
   // $end-pair-list: ();
-  // @for $end from 2 through ($max-column-count + 1) {
+  // @for $end from 2 through ($max-columns + 1) {
   //   @for $start from 1 through ($end - 1) {
   //     $span: ($end - $start);
   //     $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
@@ -95,6 +92,16 @@
   //     $end-pair-list: map-merge($end-pair-list, ($end: append(map-get($end-pair-list, $end) or (), ($start $end))));
   //   }
   // }
+
+  // make the following props *non-cascading*
+  * {
+    --column-push: initial;
+    --column-push-r: initial;
+    // --column-start: initial;
+    // --column-end: initial;
+    // --row-start: initial;
+    // --row-end: initial;
+  }
 
   @each $m in join((null), map-keys($media)) {
     @include m($m) {
@@ -138,12 +145,12 @@
       }
 
       // #{state-base-class('start-end', false, $m)} { grid-column-start: var(--column-start); grid-column-end: var(--column-end); }
-      #{state-base-class('start', false, $m)} { grid-column-start: var(--column-start); }
-      #{state-base-class('end', false, $m)} { grid-column-end: var(--column-end); }
+      // #{state-base-class('start', false, $m)} { grid-column-start: var(--column-start); }
+      // #{state-base-class('end', false, $m)} { grid-column-end: var(--column-end); }
 
       // #{state-base-class('row-start-end', false, $m)} { grid-row-start: var(--row-start); grid-row-end: var(--row-end); }
-      #{state-base-class('row-start', false, $m)} { grid-row-start: var(--row-start); }
-      #{state-base-class('row-end', false, $m)} { grid-row-end: var(--row-end); }
+      // #{state-base-class('row-start', false, $m)} { grid-row-start: var(--row-start); }
+      // #{state-base-class('row-end', false, $m)} { grid-row-end: var(--row-end); }
 
       // NB: this is set globally so it also affects the functions defined at the top
       // $m__: state-prefix() !global;
@@ -164,7 +171,7 @@
         }
       }
 
-      @for $n from 1 through $max-column-count {
+      @for $n from 1 through $max-columns {
 
         // PUSH / PULL
 
@@ -179,7 +186,7 @@
         // SPAN
 
         // mcol-(x) ==> --multi-column-count = x
-        .mcol-#{$n} { --multi-column-count: #{$n}; }
+        .#{$m__}mcol-#{$n} { --multi-column-count: #{$n}; }
 
         // EXPERIMENTAL: span-min-() --> maintain min of 2 columns, expand to fill.
         .#{$m__}span-min-#{$n} {
@@ -209,27 +216,28 @@
         // row-span-(y) ==> --row-span = y
         .#{$m__}row-span-#{$n} { --row-span: #{$n}; }
 
-        // START
+        // START / END
+        // TODO; add start-end-(s)-(e) variants
 
-        // start-(s), col-(s)-() ==> --column-start = s
-        .#{$m__}start-#{$n} { --column-start: #{$n}; }
+        // start-(s), col-(s)-() ==> grid-column-start = s
+        .#{$m__}start-#{$n} { grid-column-start: #{$n}; }
 
-        // row-start-(x), row-(s)-() ==> --row-start = x
-        .#{$m__}row-start-#{$n} { --row-start: #{$n}; }
+        // row-start-(x), row-(s)-() ==> grid-row-start = x
+        .#{$m__}row-start-#{$n} { grid-row-start: #{$n}; }
 
         // END
 
         // end-neg-(e)
-        .#{$m__}end-neg-#{$n} { --column-end: #{$n * -1}; }
+        .#{$m__}end-neg-#{$n} { grid-column-end: #{$n * -1}; }
 
         // row-end-neg-(e)
-        .#{$m__}row-end-neg-#{$n} { --row-end: #{$n * -1}; }
+        .#{$m__}row-end-neg-#{$n} { grid-row-end: #{$n * -1}; }
 
-        // end-(e), col-()-(e) ==> --column-end = e
-        .#{$m__}end-#{$n + 1} { --column-end: #{$n + 1}; }
+        // end-(e), col-()-(e) ==> grid-column-end = e
+        .#{$m__}end-#{$n + 1} { grid-column-end: #{$n + 1}; }
 
-        // row-end-(x), row-()-(e) ==> --row-end = x
-        .#{$m__}row-end-#{$n + 1} { --row-end: #{$n + 1}; }
+        // row-end-(x), row-()-(e) ==> grid-row-end = x
+        .#{$m__}row-end-#{$n + 1} { grid-row-end: #{$n + 1}; }
       }
     }
   }
