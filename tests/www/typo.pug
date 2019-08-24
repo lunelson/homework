@@ -4,58 +4,59 @@ block body
 
   .wrap-last
     .frame.frame-y
-
-      - var testString = 'ABCDEFGHIJabcdefghij'
       .stack-l
-        h2.f-sans-m base classes
-        .f-sans-s.fg-null(style='--fg-color: 0deg, 0%, 40%;')= _chance.paragraph()
 
-        //- f-(font) / plain-(font)
-        .stop: .flow
-          .stack-m.span-6
-            h3.f-mono #[code .stack > .f-($f)]
-            each font in ['sans', 'slab', 'mono']
-              div.stack(style='background-color: #f0f0f0', )
-                p(class=`f-${font}`)= testString
-                p(class=`f-${font}`)= testString
+        - var testString = 'ABCDEFGHIJabcdefghij'
+        .stack-m
+          h2.f-sans-m base classes
+          .f-sans-s.fg-null(style='--fg-color: 0deg, 0%, 40%;')= _chance.paragraph()
 
-          .stack-m.span-6
-            h3.f-mono #[code .plain > p]
-            div.plain(style='background-color: #f0f0f0')
-              p= testString
-              p= testString
+          //- f-(font) / plain-(font)
+          .stop: .flow
+            .stack-m.span-6
+              h3.f-mono #[code .stack > .f-($f)]
+              each font in ['sans', 'slab', 'mono']
+                div.stack(style='background-color: #f0f0f0', )
+                  p(class=`f-${font}`)= testString
+                  p(class=`f-${font}`)= testString
 
-            h3.f-mono #[code .plain-($f) > p]
-            each font in ['sans', 'slab', 'mono']
-              div(style='background-color: #f0f0f0', class=`plain-${font}`)
+            .stack-m.span-6
+              h3.f-mono #[code .plain > p]
+              div.plain(style='background-color: #f0f0f0')
                 p= testString
                 p= testString
 
-        //- f-(font)-(mod) / plain-(font)-(mod)
-        .stop: .flow
-          .stack-m.span-6
-            h3.f-mono #[code .trim > .f-($f)-($size)]
+              h3.f-mono #[code .plain-($f) > p]
+              each font in ['sans', 'slab', 'mono']
+                div(style='background-color: #f0f0f0', class=`plain-${font}`)
+                  p= testString
+                  p= testString
+
+          //- f-(font)-(mod) / plain-(font)-(mod)
+          .stop: .flow
+            .stack-m.span-6
+              h3.f-mono #[code .trim > .f-($f)-($size)]
+              each font in ['sans', 'slab', 'mono']
+                .stack-m
+                  each size in ['s', 'm', 'l']
+                    div.trim(style='background-color: #f0f0f0', ): p(class=`f-${font}-${size}`)= testString
+
+            .stack-m.span-6
+              h3.f-mono #[code .plain-($f)-($size) > p]
+              each font in ['sans', 'slab', 'mono']
+                .stack-m
+                  each size in ['s', 'm', 'l']
+                    div(style='background-color: #f0f0f0', class=`plain-${font}-${size}`): p= testString
+
+        .stack-m
+          h2.f-sans-m plain classes
+          .f-sans-s.fg-null(style='--fg-color: 0deg, 0%, 40%;')= _chance.paragraph()
+
+          .stop: .mcol-2.mt-neg-l
             each font in ['sans', 'slab', 'mono']
-              .stack-m
-                each size in ['s', 'm', 'l']
-                  div.trim(style='background-color: #f0f0f0', ): p(class=`f-${font}-${size}`)= testString
-
-          .stack-m.span-6
-            h3.f-mono #[code .plain-($f)-($size) > p]
-            each font in ['sans', 'slab', 'mono']
-              .stack-m
-                each size in ['s', 'm', 'l']
-                  div(style='background-color: #f0f0f0', class=`plain-${font}-${size}`): p= testString
-
-      .stack-l
-        h2.f-sans-m plain classes
-        .f-sans-s.fg-null(style='--fg-color: 0deg, 0%, 40%;')= _chance.paragraph()
-
-        .stop: .mcol-2.mt-neg-l
-          each font in ['sans', 'slab', 'mono']
-            each size in ['s', 'm', 'l']
-              .stack-m.span-6.pt-l
-                h3.f-mono #[code .plain-#{font}-#{size}.plain-#{size}]
-                div(style='background-color: #f0f0f0', class=`plain-${size} plain-${font}-${size}`)
-                  p= _chance.paragraph({ sentences: 2 })
-                  p= _chance.paragraph({ sentences: 2 })
+              each size in ['s', 'm', 'l']
+                .stack-m.span-6.pt-l
+                  h3.f-mono #[code .plain-#{font}-#{size}.plain-#{size}]
+                  div(style='background-color: #f0f0f0', class=`plain-${size} plain-${font}-${size}`)
+                    p= _chance.paragraph({ sentences: 2 })
+                    p= _chance.paragraph({ sentences: 2 })

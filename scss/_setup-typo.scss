@@ -25,10 +25,8 @@ $non-trim-elements: div table figure img svg video iframe object;
   #{base-class('f', false)},
   #{selector-combine(base-class('plain'), '*', '>')} {
     font-family: var(--font-family);
-
-    // font-size: calc(var(--font-size)); // TODO allow a lerp calc() expression here too
-    line-height: calc(var(--line-height)); // raw calc values
-    letter-spacing: calc(var(--letter-spacing)); // raw calc values
+    line-height: calc(var(--line-height)); // can be raw calc values !!
+    letter-spacing: calc(var(--letter-spacing)); // can be raw calc values !!
   }
 
   @if $trim {
@@ -103,14 +101,10 @@ $non-trim-elements: div table figure img svg video iframe object;
             $fz: __nth($set, 1); $lh: __nth($set, 2);
 
             // TODO: proof whether it's possible to use lerp expressions here
-            // $fz: if(unitless($fz), $fz*1px, $fz);
-            // $fz: decalc(normalize-unit($fz, 1rem));
             --font-size-#{$f}-#{$s}: #{decalc(normalize-unit($fz, 1rem))};
 
-            @if $lh {
+            @if $lh != () {
               // TODO: proof whether it's possible to use lerp expressions here
-              // $lh: if(unitless($lh), if($lh > 6, $lh*1px, $lh*1em), $lh);
-              // $lh: decalc(normalize-unit($lh, 1em));
               --line-height-#{$f}-#{$s}: #{decalc(normalize-unit($lh, 1em))};
             }
 
@@ -118,7 +112,6 @@ $non-trim-elements: div table figure img svg video iframe object;
             @if not $m {
               @at-root .plain-#{$f}-#{$s} > *,
               .f-#{$f}-#{$s} {
-                // --font-size: var(--font-size-#{$f}-#{$s});
                 font-size: var(--font-size-#{$f}-#{$s});
                 --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
               }
@@ -128,6 +121,5 @@ $non-trim-elements: div table figure img svg video iframe object;
       }
     }
   }
-
 
 }
