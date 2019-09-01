@@ -66,7 +66,7 @@ themes
 
   // STATEFUL THEME PROPERTIES
 
-  @each $pseudo in ( '', 'hover', 'focus', 'active', 'disabled', 'focus-within', 'parent-hover', 'parent-focus' ) {
+  @each $pseudo in ( '', 'hover', 'focus', 'active', 'target', 'disabled', 'focus-within', 'parent-hover', 'parent-focus' ) {
 
     $p__: state-prefix($pseudo);
 
