@@ -1,4 +1,26 @@
+## width: initial vs unset vs fill-available/stretch
+
+- test all the points where width is being reset to initial; is this correct? should some other rule be used?
+
+## inner-x/-y test branch
+
+- keep stack, flow, grid etc. aligned with --inner-x/-y
+- make mod classes change the assignment of inner-x
+- use ix/iy classes to change assignment of inner-x
+... BUT how do you reset to the base value of inner-x, if you've lost the reference?
+
+## columns final
+
+✅ remove CPs for column/row-start/end; write styles directly
+- conditionally add the start-end-s-e and row-start-end-s-e classes, make sure these apply span inheritance
+- consider mcol as a BETA feature; still to resolve:
+  - mcol-(n) / mcol-stack-(y)
+    - negative margin-top, offset padding-top on children ?
+    - negative margin-top/-bottom, padding-top/-bottom on children (hybrid mcol and flow actually !!)
+    ... what then, is the basic mcol style, for plain text?
+
 ## opentype control
+
 - remove the font-feature-settings in typo setup
 - recommend integraiton of OT utility classes
   https://github.com/kennethormandy/utility-opentype
@@ -36,6 +58,7 @@ typo
 
 multi-column and grid support drawing rules
 need a shorthand class and way to drive like borders and outlines
+  cr, rule-
 
 ## inheritance
 
