@@ -7,16 +7,6 @@
 
 @mixin homework-setup-inner() {
 
-  // gets lists of inner-y/-x-mod keys on $root
-  // $inner-y-keys: map-keys(inner-y-mods());
-  // $inner-x-keys: map-keys(inner-x-mods());
-
-  // :root {
-  //   --ix: var(--inner-x);
-  //   --iy: var(--inner-y);
-  // }
-
-  // join with null, to also output suffix-less class
   @each $m in join((null), map-keys($media)) {
 
     @include m($m) {

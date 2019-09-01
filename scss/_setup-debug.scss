@@ -9,7 +9,10 @@
 
 // TODO
 // $wrap-last should be changed to a more complex parameter:
-// - e.g. 'last' vs 'all' vs false, depending on whether design is responsive vs. adaptive, and/or wrapped at last mq
+// - e.g. 'last' vs 'each' vs false, depending on whether design is responsive vs. adaptive, and/or wrapped at last mq
+
+// TODO II
+// supply the selector (default: body) as an argument here, in case the document is constructed differently?
 
 @mixin homework-setup-debug($modern: true, $wrap-last: true, $color: rgba(200,200,200,0.2)) {
 
