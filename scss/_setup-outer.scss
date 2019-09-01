@@ -44,7 +44,10 @@
 
       .#{$m__}peel, .#{$m__}peel-right, .#{$m__}peel-left {
         max-width: none !important;
-        width: initial !important;
+        width: 100% !important;
+        width: fill-available !important;
+        // width: available !important;
+        width: stretch !important;
       }
       .#{$m__}peel, .#{$m__}peel-right { margin-right: divide(subtract($peel-margin, $wrap-offset), 2) !important; }
       .#{$m__}peel, .#{$m__}peel-left { margin-left: divide(add($peel-margin, $wrap-offset), 2) !important; }
@@ -60,7 +63,10 @@
 
       .#{$m__}bleed, .#{$m__}bleed-right, .#{$m__}bleed-left {
         max-width: none !important;
-        width: initial !important;
+        width: 100% !important;
+        width: fill-available !important;
+        // width: available !important;
+        width: stretch !important;
       }
       .#{$m__}bleed, .#{$m__}bleed-right { margin-right: calc(var(--outer-right) * -1) !important; }
       .#{$m__}bleed, .#{$m__}bleed-left { margin-left: calc(var(--outer-left) * -1) !important; }
