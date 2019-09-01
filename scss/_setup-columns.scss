@@ -71,10 +71,10 @@
     display: grid !important;
     grid-gap: var(--row-gap) var(--column-gap);
     grid-template-columns: repeat(var(--local-column-count, var(--column-span, var(--column-count))), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
-    grid-template-rows: repeat(var(--row-span, var(--row-count, 1)), max-content);
+    grid-template-rows: repeat(var(--row-span, var(--global-rows, 1)), max-content);
     & > * {
       grid-column: span var(--column-span, var(--column-count)) / span var(--column-span, var(--column-count));
-      grid-row: span var(--row-span, var(--row-count, 1)) / span var(--row-span, var(--row-count, 1));
+      grid-row: span var(--row-span, 1) / span var(--row-span, 1);
     }
   }
 
