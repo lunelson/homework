@@ -18,12 +18,16 @@
     column-width: auto;
     column-count: var(--multi-column-count, 1);
     column-gap: var(--column-gap);
-    -webkit-perspective: 1; // create new stacking context; see issues https://caniuse.com/#feat=multicolumn
+    perspective: 1; // create new stacking context; see issues https://caniuse.com/#feat=multicolumn
     & > * {
-      column-span: none;
-      break-inside: avoid;
+      column-span: none; // will not be used
+      // FRAGMENTATION; see https://www.smashingmagazine.com/2019/02/css-fragmentation/
+      // break-inside: avoid;
+      box-decoration-break: clone;
       break-before: auto;
       break-after: auto;
+      orphans: 2;
+      widows: 2;
       --local-column-count: calc(var(--column-span, var(--column-count)) / var(--multi-column-count, 1));
     }
   }
@@ -32,6 +36,7 @@
     margin-top: calc(var(--row-gap) / -2) !important;
     margin-bottom: calc(var(--row-gap) / -2) !important;
     & > * {
+      break-inside: avoid;
       padding-top: calc(var(--row-gap) / 2) !important;
       padding-bottom: calc(var(--row-gap) / 2) !important;
     }
@@ -65,8 +70,8 @@
   #{base-class('grid')} {
     display: grid !important;
     grid-gap: var(--row-gap) var(--column-gap);
-    grid-template-rows: repeat(var(--row-span, var(--row-count, 1)), max-content);
     grid-template-columns: repeat(var(--local-column-count, var(--column-span, var(--column-count))), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
+    grid-template-rows: repeat(var(--row-span, var(--row-count, 1)), max-content);
     & > * {
       grid-column: span var(--column-span, var(--column-count)) / span var(--column-span, var(--column-count));
       grid-row: span var(--row-span, var(--row-count, 1)) / span var(--row-span, var(--row-count, 1));

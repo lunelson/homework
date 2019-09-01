@@ -1,0 +1,24 @@
+extends __layout
+
+block body
+
+  .wrap-last
+    .frame.frame-y
+      .stack-l
+
+        - var testString = 'ABCDEFGHIJabcdefghij'
+        .stack-m
+          h2.f-sans-m mcol-flow: external neg y margin, internal y padding; no break-inside
+
+          .stop(style='background-color: #f0f0f0'): .mcol-2.m__mcol-3.mcol-flow-s
+            .trim: p.f-sans= _casual.text
+            .trim: p.f-sans= _casual.text
+            .trim: p.f-sans= _casual.text
+            .trim: p.f-sans= _casual.text
+            .trim: p.f-sans= _casual.text
+            .trim: p.f-sans= _casual.text
+
+        .stack-m
+          h2.f-sans-m mcol: internal y margin; allow break-inside
+
+          .trim(style='background-color: #f0f0f0'): p.f-sans.mcol-2.m__mcol-3= _chance.paragraph({sentences: 8})
