@@ -29,6 +29,12 @@ $non-trim-elements: div table figure img svg video iframe object;
     letter-spacing: calc(var(--letter-spacing)); // can be raw calc values !!
   }
 
+  // .lh-loose { line-height: calc(var(--line-height) * 1.1); }
+  // .lh-tight { line-height: calc(var(--line-height) * 0.9); }
+
+  // .ls-loose { letter-spacing: calc(var(--letter-spacing) * 1.1); }
+  // .ls-tight { letter-spacing: calc(var(--letter-spacing) * 0.9); }
+
   @if $trim {
 
     #{selector-combine('.trim', base-class('f', false), '>')},
