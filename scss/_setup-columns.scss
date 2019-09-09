@@ -250,31 +250,31 @@
         .#{$m__}row-end-neg-#{$n} { grid-row-end: #{$n * -1}; }
       }
 
-      $span-pair-list: ();
-      @for $end from 2 through ($max-columns + 1) {
-        @for $start from 1 through ($end - 1) {
-          $span: ($end - $start);
-          $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
-        }
-      }
+      // $span-pair-list: ();
+      // @for $end from 2 through ($max-columns + 1) {
+      //   @for $start from 1 through ($end - 1) {
+      //     $span: ($end - $start);
+      //     $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
+      //   }
+      // }
 
-      @each $n, $pair-list in $span-pair-list {
+      // @each $n, $pair-list in $span-pair-list {
 
-        // .start-(s).end-(e)
-        #{__map($pair-list, 'm__start-end', $m__)} {
-          --column-span: #{$n} !important;
-          --column-span-proxy: #{$n} !important;
-          & > * {
-            --local-column-count: #{$n} !important;
-            --local-column-count-proxy: #{$n} !important;
-          }
-        }
+      //   // .start-(s).end-(e)
+      //   #{__map($pair-list, 'm__start-end', $m__)} {
+      //     --column-span: #{$n};
+      //     --column-span-proxy: #{$n};
+      //     & > * {
+      //       --local-column-count: #{$n};
+      //       --local-column-count-proxy: #{$n};
+      //     }
+      //   }
 
-        // .row-start-(s).row-end-(e)
-        #{__map($pair-list, 'm__row-start-row-end', $m__)} {
-          --row-span: #{$n}
-        }
-      }
+      //   // .row-start-(s).row-end-(e)
+      //   #{__map($pair-list, 'm__row-start-row-end', $m__)} {
+      //     --row-span: #{$n};
+      //   }
+      // }
 
     }
   }
