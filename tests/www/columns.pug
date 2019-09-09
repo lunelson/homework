@@ -12,6 +12,9 @@ append head
       justify-content: center;
       padding: 0.6em;
     }
+    .numbox::before {
+      /*content: attr(class);*/
+    }
     .numbox:empty::before {
       counter-increment: numbox;
       content: counter(numbox);
