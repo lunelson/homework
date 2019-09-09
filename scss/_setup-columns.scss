@@ -20,22 +20,29 @@
     column-gap: var(--column-gap);
     perspective: 1; // create new stacking context; see issues https://caniuse.com/#feat=multicolumn
     & > * {
+      // column/section/page fragmentation:
+      // see https://www.smashingmagazine.com/2019/02/css-fragmentation/
       column-span: none; // will not be used
-      // FRAGMENTATION; see https://www.smashingmagazine.com/2019/02/css-fragmentation/
-      // break-inside: avoid;
       box-decoration-break: clone;
       break-before: auto;
       break-after: auto;
       orphans: 2;
       widows: 2;
-      --local-column-count: calc(var(--column-span, var(--column-count)) / var(--multi-column-count, 1));
     }
+    & > * {
+      --column-span: calc(var(--column-span-proxy, var(--column-count)) / var(--multi-column-count, 1));
+    }
+    & > * > * {
+      --local-column-count: calc(var(--local-column-count-proxy, var(--column-count)) / var(--multi-column-count, 1));
+    }
+
   }
 
   #{base-class('mcol-flow')} {
     margin-top: calc(var(--row-gap) / -2) !important;
     margin-bottom: calc(var(--row-gap) / -2) !important;
     & > * {
+      // don't break inside; treat as blocks
       break-inside: avoid;
       padding-top: calc(var(--row-gap) / 2) !important;
       padding-bottom: calc(var(--row-gap) / 2) !important;
@@ -70,7 +77,7 @@
   #{base-class('grid')} {
     display: grid !important;
     grid-gap: var(--row-gap) var(--column-gap);
-    grid-template-columns: repeat(var(--local-column-count, var(--column-span, var(--column-count))), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
+    grid-template-columns: repeat(var(--column-span, var(--column-count)), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
     grid-template-rows: repeat(var(--row-span, var(--global-rows, 1)), max-content);
     & > * {
       grid-column: span var(--column-span, var(--column-count)) / span var(--column-span, var(--column-count));
@@ -193,29 +200,37 @@
         // mcol-(x) ==> --multi-column-count = x
         .#{$m__}mcol-#{$n} { --multi-column-count: #{$n}; }
 
-        // EXPERIMENTAL: span-min-() --> maintain min of 2 columns, expand to fill.
-        .#{$m__}span-min-#{$n} {
-          --column-span: max(#{$n}, var(--column-count));
-          & > * { --local-column-count: max(#{$n}, var(--column-count)); }
-        }
+        // // EXPERIMENTAL: span-min-() --> maintain min of 2 columns, expand to fill.
+        // .#{$m__}span-min-#{$n} {
+        //   --column-span: max(#{$n}, var(--column-count));
+        //   & > * { --local-column-count: max(#{$n}, var(--column-count)); }
+        // }
 
-        // EXPERIMENTAL: span-max-() --> maintain max of 2 columns, contract to fill.
-        .#{$m__}span-max-#{$n} {
-          --column-span: min(#{$n}, var(--column-count));
-          & > * { --local-column-count: min(#{$n}, var(--column-count)); }
-        }
+        // // EXPERIMENTAL: span-max-() --> maintain max of 2 columns, contract to fill.
+        // .#{$m__}span-max-#{$n} {
+        //   --column-span: min(#{$n}, var(--column-count));
+        //   & > * { --local-column-count: min(#{$n}, var(--column-count)); }
+        // }
 
         // span-(x) ==> --column-span = x; span-(x) > * ==> --local-column-count = x
         .#{$m__}span-#{$n} {
           --column-span: #{$n};
-          & > * { --local-column-count: #{$n}; }
+          --column-span-proxy: #{$n};
+          & > * {
+            --local-column-count: #{$n};
+            --local-column-count-proxy: #{$n};
+          }
 
           // NB: this is while CSS min() and max() functions are not yet supported
-          $column-count: m-var('column-count');
-          &.span-safe {
-            --column-span: #{min($n, $column-count)};
-            & > * { --local-column-count: #{min($n, $column-count)}; }
-          }
+          // $column-count: m-var('column-count');
+          // &.span-safe {
+          //   --column-span: #{min($n, $column-count)};
+          //   --column-span-proxy: #{min($n, $column-count)};
+          //   & > * {
+          //     --local-column-count: #{min($n, $column-count)};
+          //     --local-column-count-proxy: #{min($n, $column-count)};
+          //   }
+          // }
         }
 
         // row-span-(y) ==> --row-span = y
