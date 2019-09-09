@@ -14,7 +14,7 @@
   #{base-class('mcol')} {
     column-fill: balance;
     column-width: auto;
-    column-count: var(--multi-column-count, 1);
+    column-count: var(--multi-columns, 1);
     column-gap: var(--column-gap);
     perspective: 1; // create new stacking context; see issues https://caniuse.com/#feat=multicolumn
     & > * {
@@ -28,10 +28,10 @@
       widows: 2;
     }
     & > * {
-      --column-span: calc(var(--column-span-proxy, var(--column-count)) / var(--multi-column-count, 1));
+      --column-span: calc(var(--column-span-proxy, var(--global-columns)) / var(--multi-columns, 1));
     }
     & > * > * {
-      --local-column-count: calc(var(--local-column-count-proxy, var(--column-count)) / var(--multi-column-count, 1));
+      --local-columns: calc(var(--local-columns-proxy, var(--global-columns)) / var(--multi-columns, 1));
     }
 
   }
@@ -75,10 +75,10 @@
   #{base-class('grid')} {
     display: grid !important;
     grid-gap: var(--row-gap) var(--column-gap);
-    grid-template-columns: repeat(var(--column-span, var(--column-count)), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
+    grid-template-columns: repeat(var(--column-span, var(--global-columns)), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
     grid-template-rows: repeat(var(--row-span, var(--global-rows, 1)), max-content);
     & > * {
-      grid-column: span var(--column-span, var(--column-count)) / span var(--column-span, var(--column-count));
+      grid-column: span var(--column-span, var(--global-columns)) / span var(--column-span, var(--global-columns));
       grid-row: span var(--row-span, 1) / span var(--row-span, 1);
     }
   }
@@ -102,10 +102,10 @@
 
       #{state-base-class('span', false, $m)} {
         // context: solo
-        width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap));
+        width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap));
         @at-root #{selector-insert(base-class('flow'), '>')} {
           // context: flow
-          width: calc(99.99999% * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)));
+          width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)));
         }
         // @at-root #{selector-insert(base-class('mcol'), '>')} {
         //   // context: mcol
@@ -121,10 +121,10 @@
       #{state-base-class('pull', false, $m)},
       #{state-base-class('push', false, $m)} {
         // context: solo
-        margin-left: calc((99.99999% + var(--column-gap)) * var(--column-push) / var(--local-column-count, var(--column-count)));
+        margin-left: calc((99.99999% + var(--column-gap)) * var(--column-push) / var(--local-columns, var(--global-columns)));
         @at-root #{selector-insert(base-class('flow'), '>')} {
           // context: flow
-          margin-left: calc(99.99999% * var(--column-push) / var(--local-column-count, var(--column-count)));
+          margin-left: calc(99.99999% * var(--column-push) / var(--local-columns, var(--global-columns)));
         }
         // @at-root #{selector-insert(base-class('grid'), '>')} {
         //   // context: grid
@@ -135,10 +135,10 @@
       #{state-base-class('pull-r', false, $m)},
       #{state-base-class('push-r', false, $m)} {
         // context: solo
-        margin-right: calc((99.99999% + var(--column-gap)) * var(--column-push-r) / var(--local-column-count, var(--column-count)));
+        margin-right: calc((99.99999% + var(--column-gap)) * var(--column-push-r) / var(--local-columns, var(--global-columns)));
         @at-root #{selector-insert(base-class('flow'), '>')} {
           // context: flow
-          margin-right: calc(99.99999% * var(--column-push-r) / var(--local-column-count, var(--column-count)));
+          margin-right: calc(99.99999% * var(--column-push-r) / var(--local-columns, var(--global-columns)));
         }
         // @at-root #{selector-insert(base-class('grid'), '>')} {
         //   // context: grid
@@ -167,8 +167,8 @@
 
         // MCOL
 
-        // mcol-(x) ==> --multi-column-count = x
-        .#{$m__}mcol-#{$n} { --multi-column-count: #{$n}; }
+        // mcol-(x) ==> --multi-columns = x
+        .#{$m__}mcol-#{$n} { --multi-columns: #{$n}; }
 
         // PUSH / PULL
 
@@ -184,41 +184,41 @@
 
         // // EXPERIMENTAL: span-min-() --> maintain min of 2 columns, expand to fill.
         // .#{$m__}span-min-#{$n} {
-        //   --column-span: max(#{$n}, var(--column-count));
-        //   & > * { --local-column-count: max(#{$n}, var(--column-count)); }
+        //   --column-span: max(#{$n}, var(--global-columns));
+        //   & > * { --local-columns: max(#{$n}, var(--global-columns)); }
         // }
 
         // // EXPERIMENTAL: span-max-() --> maintain max of 2 columns, contract to fill.
         // .#{$m__}span-max-#{$n} {
-        //   --column-span: min(#{$n}, var(--column-count));
-        //   & > * { --local-column-count: min(#{$n}, var(--column-count)); }
+        //   --column-span: min(#{$n}, var(--global-columns));
+        //   & > * { --local-columns: min(#{$n}, var(--global-columns)); }
         // }
 
         .#{$m__}span-#{$n} {
           --column-span: #{$n} !important;
           --column-span-proxy: #{$n} !important;
           & > * {
-            --local-column-count: #{$n} !important;
-            --local-column-count-proxy: #{$n} !important;
+            --local-columns: #{$n} !important;
+            --local-columns-proxy: #{$n} !important;
           }
 
           // NB: this is while CSS min() and max() functions are not yet supported
-          // $column-count: m-var('column-count');
+          // $global-columns: m-var('global-columns');
           // &.span-safe {
-          //   --column-span: #{min($n, $column-count)};
-          //   --column-span-proxy: #{min($n, $column-count)};
+          //   --column-span: #{min($n, $global-columns)};
+          //   --column-span-proxy: #{min($n, $global-columns)};
           //   & > * {
-          //     --local-column-count: #{min($n, $column-count)};
-          //     --local-column-count-proxy: #{min($n, $column-count)};
+          //     --local-columns: #{min($n, $global-columns)};
+          //     --local-columns-proxy: #{min($n, $global-columns)};
           //   }
           // }
         }
 
         .#{$m__}start-#{$n} {
           grid-column-start: #{$n};
-          --column-span: calc(var(--column-span-proxy, var(--column-count)) - #{$n - 1});
+          --column-span: calc(var(--column-span-proxy, var(--global-columns)) - #{$n - 1});
           & > * {
-            --local-column-count: calc(var(--local-column-count-proxy, var(--column-count)) - #{$n - 1});
+            --local-columns: calc(var(--local-columns-proxy, var(--global-columns)) - #{$n - 1});
           }
         }
 
@@ -226,15 +226,15 @@
           grid-column-end: #{$n + 1};
           --column-span: #{$n};
           & > * {
-            --local-column-count: #{$n};
+            --local-columns: #{$n};
           }
         }
 
         .#{$m__}end-neg-#{$n} {
           grid-column-end: #{$n * -1};
-          --column-span: calc(var(--column-span-proxy, var(--column-count)) - #{$n - 1});
+          --column-span: calc(var(--column-span-proxy, var(--global-columns)) - #{$n - 1});
           & > * {
-            --local-column-count: calc(var(--local-column-count-proxy, var(--column-count)) - #{$n - 1});
+            --local-columns: calc(var(--local-columns-proxy, var(--global-columns)) - #{$n - 1});
           }
         }
 
@@ -265,8 +265,8 @@
       //     --column-span: #{$n};
       //     --column-span-proxy: #{$n};
       //     & > * {
-      //       --local-column-count: #{$n};
-      //       --local-column-count-proxy: #{$n};
+      //       --local-columns: #{$n};
+      //       --local-columns-proxy: #{$n};
       //     }
       //   }
 

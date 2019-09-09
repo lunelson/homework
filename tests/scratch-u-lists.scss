@@ -25,11 +25,11 @@ $test-fn: get-function(test-fn);
 
 
 // // pre-calculations
-// $max-column-count: 14;
+// $max-global-columns: 14;
 // $span-pair-list: ();
 // $start-pair-list: ();
 // $end-pair-list: ();
-// @for $end from 2 through ($max-column-count + 1) {
+// @for $end from 2 through ($max-global-columns + 1) {
 //   @for $start from 1 through ($end - 1) {
 //     $span: ($end - $start);
 //     $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));

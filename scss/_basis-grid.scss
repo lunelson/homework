@@ -7,27 +7,27 @@
 //                                | |                                  | |
 //                                |_|                                  |_|
 
-@function flow-span($n: var(--local-column-count, var(--column-count)), $cols: var(--local-column-count, var(--column-count))) {
+@function flow-span($n: var(--local-columns, var(--global-columns)), $cols: var(--local-columns, var(--global-columns))) {
   @return calc(99.99999% * #{$n} / #{$cols});
 }
-@function flow-push($n: 1, $cols: var(--local-column-count, var(--column-count))) {
+@function flow-push($n: 1, $cols: var(--local-columns, var(--global-columns))) {
   @return calc(99.99999% * #{$n} / #{$cols});
 }
-@function flow-pull($n: 1, $cols: var(--local-column-count, var(--column-count))) {
+@function flow-pull($n: 1, $cols: var(--local-columns, var(--global-columns))) {
   @return calc(99.99999% * #{-$n} / #{$cols});
 }
 
-@function solo-span($n: var(--local-column-count, var(--column-count)), $cols: var(--local-column-count, var(--column-count))) {
+@function solo-span($n: var(--local-columns, var(--global-columns)), $cols: var(--local-columns, var(--global-columns))) {
   @return calc((99.99999% + var(--column-gap, var(--inner-x))) * #{$n} / #{$cols} - var(--column-gap, var(--inner-x)));
 }
-@function solo-push($n: 1, $cols: var(--local-column-count, var(--column-count))) {
+@function solo-push($n: 1, $cols: var(--local-columns, var(--global-columns))) {
   @return calc((99.99999% + var(--column-gap, var(--inner-x))) * #{$n} / #{$cols});
 }
-@function solo-pull($n: 1, $cols: var(--local-column-count, var(--column-count))) {
+@function solo-pull($n: 1, $cols: var(--local-columns, var(--global-columns))) {
   @return calc((99.99999% + var(--column-gap, var(--inner-x))) * #{-$n} / #{$cols});
 }
 
-@mixin flow-cell($n: null, $l: null, $r: null, $cols: var(--local-column-count, var(--column-count))) {
+@mixin flow-cell($n: null, $l: null, $r: null, $cols: var(--local-columns, var(--global-columns))) {
   @if $n { width: flow-span($n, $cols); & > * { --col-base: #{$n}; } }
   @if $l { margin-left: flow-span($l, $cols); }
   @if $r { margin-right: flow-span($r, $cols); }
@@ -41,7 +41,7 @@
   }
 }
 
-@mixin solo-cell($n: null, $l: null, $r: null, $cols: var(--local-column-count, var(--column-count))) {
+@mixin solo-cell($n: null, $l: null, $r: null, $cols: var(--local-columns, var(--global-columns))) {
   @if $n { width: solo-span($n, $cols); & > * { --col-base: #{$n}; } }
   @if $l { margin-left: solo-push($l, $cols); }
   @if $r { margin-right: solo-push($r, $cols); }
