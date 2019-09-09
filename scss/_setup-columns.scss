@@ -29,11 +29,10 @@
     }
     & > * {
       --column-span: calc(var(--column-span-proxy, var(--global-columns)) / var(--multi-columns, 1));
-    }
-    & > * > * {
       --local-columns: calc(var(--local-columns-proxy, var(--global-columns)) / var(--multi-columns, 1));
     }
-
+    // & > * > * {
+    // }
   }
 
   #{base-class('mcol-flow')} {

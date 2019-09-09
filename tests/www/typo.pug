@@ -52,10 +52,10 @@ block body
           h2.f-sans-m plain classes
           .f-sans-s.fg-null(style='--fg-color: 0deg, 0%, 40%;')= _chance.paragraph()
 
-          .stop: .mcol-2.mt-neg-l
+          .stop: .mcol-2.mcol-flow-l
             each font in ['sans', 'slab', 'mono']
               each size in ['s', 'm', 'l']
-                .stack-m.span-6.pt-l
+                .stack-m.span-5
                   h3.f-mono #[code .plain-#{font}-#{size}.plain-#{size}]
                   div(style='background-color: #f0f0f0', class=`plain-${size} plain-${font}-${size}`)
                     p= _chance.paragraph({ sentences: 2 })

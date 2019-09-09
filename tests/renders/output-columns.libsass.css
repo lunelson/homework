@@ -17,9 +17,6 @@
 
 .mcol > *, [class^="mcol-"] > *, [class*=" mcol-"] > * {
   --column-span: calc(var(--column-span-proxy, var(--global-columns)) / var(--multi-columns, 1));
-}
-
-.mcol > * > *, [class^="mcol-"] > * > *, [class*=" mcol-"] > * > * {
   --local-columns: calc(var(--local-columns-proxy, var(--global-columns)) / var(--multi-columns, 1));
 }
 
