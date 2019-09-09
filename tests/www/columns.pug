@@ -1,5 +1,23 @@
 extends __layout
 
+append head
+  style.
+    body, .numbox-group {
+      counter-reset: numbox;
+    }
+    .numbox {
+      border: 2px #333 solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6em;
+    }
+    .numbox:empty::before {
+      counter-increment: numbox;
+      content: counter(numbox);
+      display: block;
+    }
+
 block body
 
   .wrap-last
@@ -9,22 +27,34 @@ block body
         - var testString = 'ABCDEFGHIJabcdefghij'
         .stack-m
 
+          h2.f-sans-m grid with start/end/span combinations
+          .grid-s.numbox-group
+            .numbox.start-4 .start-4
+            .numbox.start-4.span-3 .start-4.span-3
+            .numbox.end-neg-3 .end-neg-3
+            .numbox.end-neg-3.span-7 .end-neg-3.span-7
+            .numbox.end-7 .end-7
+            .numbox.end-7.span-4 .end-7.span-4
+            .numbox.span-4 span-4
+            .numbox.span-4 span-4
+            .numbox.span-4 span-4
+            .numbox.span-4 span-4
           h2.f-sans-m mcol-flow with nested other stuff
-          .stop: .flow: .stop.span-8(style='background-color: #f0f0f0'): .mcol-2.mcol-flow-s
-            .box
-              .bd-gray-1(style=`height: ${_.random(60,300)}px; border: 2px solid`)
-            .box
-              .bd-gray-1(style=`height: ${_.random(60,300)}px; border: 2px solid`)
-            .box
-              .bd-gray-1(style=`height: ${_.random(60,300)}px; border: 2px solid`)
-            .box
+          .stop.numbox-group: .flow: .stop.span-8(style='background-color: #f0f0f0'): .mcol-2.mcol-flow-s
+            .hold
+              .numbox(style=`height: ${_.random(60,300)}px;`)
+            .hold
+              .numbox(style=`height: ${_.random(60,300)}px;`)
+            .hold
+              .numbox(style=`height: ${_.random(60,300)}px;`)
+            .hold
               .flow
                 .span-2
-                  .bd-gray-1(style=`height: ${_.random(60,300)}px; border: 2px solid`)
+                  .numbox(style=`height: ${_.random(60,300)}px;`)
                 .span-2
-                  .bd-gray-1(style=`height: ${_.random(60,300)}px; border: 2px solid`)
-            .box
-              .bd-gray-1(style=`height: ${_.random(60,300)}px; border: 2px solid`)
+                  .numbox(style=`height: ${_.random(60,300)}px;`)
+            .hold
+              .numbox(style=`height: ${_.random(60,300)}px;`)
 
         .stack-m
 

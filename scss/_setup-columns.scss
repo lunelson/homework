@@ -185,6 +185,11 @@
 
       @for $n from 1 through $max-columns {
 
+        // MCOL
+
+        // mcol-(x) ==> --multi-column-count = x
+        .#{$m__}mcol-#{$n} { --multi-column-count: #{$n}; }
+
         // PUSH / PULL
 
         // push-/pull-(x) ==> --column-push = x
@@ -195,10 +200,7 @@
         .#{$m__}push-r-#{$n} { --column-push-r: #{$n}; }
         .#{$m__}pull-r-#{$n} { --column-push-r: #{$n * -1}; }
 
-        // SPAN
-
-        // mcol-(x) ==> --multi-column-count = x
-        .#{$m__}mcol-#{$n} { --multi-column-count: #{$n}; }
+        // SPAN / START / END
 
         // // EXPERIMENTAL: span-min-() --> maintain min of 2 columns, expand to fill.
         // .#{$m__}span-min-#{$n} {
@@ -212,13 +214,12 @@
         //   & > * { --local-column-count: min(#{$n}, var(--column-count)); }
         // }
 
-        // span-(x) ==> --column-span = x; span-(x) > * ==> --local-column-count = x
         .#{$m__}span-#{$n} {
-          --column-span: #{$n};
-          --column-span-proxy: #{$n};
+          --column-span: #{$n} !important;
+          --column-span-proxy: #{$n} !important;
           & > * {
-            --local-column-count: #{$n};
-            --local-column-count-proxy: #{$n};
+            --local-column-count: #{$n} !important;
+            --local-column-count-proxy: #{$n} !important;
           }
 
           // NB: this is while CSS min() and max() functions are not yet supported
@@ -233,31 +234,42 @@
           // }
         }
 
-        // row-span-(y) ==> --row-span = y
+        .#{$m__}start-#{$n} {
+          grid-column-start: #{$n};
+          --column-span: calc(var(--column-span-proxy, var(--column-count)) - #{$n - 1});
+          & > * {
+            --local-column-count: calc(var(--local-column-count-proxy, var(--column-count)) - #{$n - 1});
+          }
+        }
+
+        .#{$m__}end-#{$n + 1} {
+          grid-column-end: #{$n + 1};
+          --column-span: #{$n};
+          & > * {
+            --local-column-count: #{$n};
+          }
+        }
+
+        .#{$m__}end-neg-#{$n} {
+          grid-column-end: #{$n * -1};
+          --column-span: calc(var(--column-span-proxy, var(--column-count)) - #{$n - 1});
+          & > * {
+            --local-column-count: calc(var(--local-column-count-proxy, var(--column-count)) - #{$n - 1});
+          }
+        }
+
+        // TODO: add .start-end-(s)-(e) and .start-(s).end-(e) variants
+
+        // ROW SPAN / START / END
+        // NB: implicit spanning behavior is not used in rows, because they fallback to 1 instead of --global-rows
+
         .#{$m__}row-span-#{$n} { --row-span: #{$n}; }
 
-        // START / END
-        // TODO; add start-end-(s)-(e) variants
-
-        // start-(s), col-(s)-() ==> grid-column-start = s
-        .#{$m__}start-#{$n} { grid-column-start: #{$n}; }
-
-        // row-start-(x), row-(s)-() ==> grid-row-start = x
         .#{$m__}row-start-#{$n} { grid-row-start: #{$n}; }
 
-        // END
-
-        // end-neg-(e)
-        .#{$m__}end-neg-#{$n} { grid-column-end: #{$n * -1}; }
-
-        // row-end-neg-(e)
-        .#{$m__}row-end-neg-#{$n} { grid-row-end: #{$n * -1}; }
-
-        // end-(e), col-()-(e) ==> grid-column-end = e
-        .#{$m__}end-#{$n + 1} { grid-column-end: #{$n + 1}; }
-
-        // row-end-(x), row-()-(e) ==> grid-row-end = x
         .#{$m__}row-end-#{$n + 1} { grid-row-end: #{$n + 1}; }
+
+        .#{$m__}row-end-neg-#{$n} { grid-row-end: #{$n * -1}; }
       }
     }
   }
