@@ -5,10 +5,8 @@
 // | (_| (_) | | |_| | | | | | | | | \__ \
 //  \___\___/|_|\__,_|_| |_| |_|_| |_|___/
 
-// $m__: '';
-
-// @function m__start-end($pair, $index, $list, $m__, $_...) { @return selector-parse('.#{$m__}start-end-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
-// @function m__row-start-end($pair, $index, $list, $m__, $_...) { @return selector-parse('.#{$m__}row-start-end-#{nth($pair, 1)}-#{nth($pair, 2)}'); }
+@function m__start-end($pair, $index, $list, $m__, $_...) { @return selector-parse('.#{$m__}start-#{nth($pair, 1)}.end-#{nth($pair, 2)}'); }
+@function m__row-start-row-end($pair, $index, $list, $m__, $_...) { @return selector-parse('.#{$m__}row-start-#{nth($pair, 1)}.row-end-#{nth($pair, 2)}'); }
 
 @mixin homework-setup-columns($max-columns: --max-columns()) {
 
@@ -93,79 +91,61 @@
     .mcol-flow-#{$y}, .flow-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
   }
 
-  // $span-pair-list: ();
-  // $start-pair-list: ();
-  // $end-pair-list: ();
-  // @for $end from 2 through ($max-columns + 1) {
-  //   @for $start from 1 through ($end - 1) {
-  //     $span: ($end - $start);
-  //     $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
-  //     $start-pair-list: map-merge($start-pair-list, ($start: append(map-get($start-pair-list, $start) or (), ($start $end))));
-  //     $end-pair-list: map-merge($end-pair-list, ($end: append(map-get($end-pair-list, $end) or (), ($start $end))));
-  //   }
-  // }
-
   // make the following props *non-cascading*
   * {
     --column-push: initial;
     --column-push-r: initial;
-    // --column-start: initial;
-    // --column-end: initial;
-    // --row-start: initial;
-    // --row-end: initial;
   }
 
   @each $m in join((null), map-keys($media)) {
     @include m($m) {
 
-      // contexts: solo, flow, mcol; reset: grid
       #{state-base-class('span', false, $m)} {
+        // context: solo
         width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)) - var(--column-gap));
         @at-root #{selector-insert(base-class('flow'), '>')} {
+          // context: flow
           width: calc(99.99999% * var(--column-span, var(--column-count)) / var(--local-column-count, var(--column-count)));
         }
-        @at-root #{selector-insert(base-class('mcol'), '>')} {
-          width: initial; // alt: unset
-        }
+        // @at-root #{selector-insert(base-class('mcol'), '>')} {
+        //   // context: mcol
+        //   width: initial;
+        // }
         @at-root #{selector-insert(base-class('grid'), '>')} {
-          width: initial; // alt: unset
+          // context: grid
+          width: initial;
         }
       }
 
       // contexts: solo, flow; reset: grid
       #{state-base-class('pull', false, $m)},
       #{state-base-class('push', false, $m)} {
+        // context: solo
         margin-left: calc((99.99999% + var(--column-gap)) * var(--column-push) / var(--local-column-count, var(--column-count)));
         @at-root #{selector-insert(base-class('flow'), '>')} {
+          // context: flow
           margin-left: calc(99.99999% * var(--column-push) / var(--local-column-count, var(--column-count)));
         }
-        @at-root #{selector-insert(base-class('grid'), '>')} {
-          margin-left: initial; // alt: unset
-        }
+        // @at-root #{selector-insert(base-class('grid'), '>')} {
+        //   // context: grid
+        //   margin-left: initial;
+        // }
       }
 
-      // contexts: solo, flow; reset: grid
       #{state-base-class('pull-r', false, $m)},
       #{state-base-class('push-r', false, $m)} {
+        // context: solo
         margin-right: calc((99.99999% + var(--column-gap)) * var(--column-push-r) / var(--local-column-count, var(--column-count)));
         @at-root #{selector-insert(base-class('flow'), '>')} {
+          // context: flow
           margin-right: calc(99.99999% * var(--column-push-r) / var(--local-column-count, var(--column-count)));
         }
-        @at-root #{selector-insert(base-class('grid'), '>')} {
-          margin-right: initial; // alt: unset
-        }
+        // @at-root #{selector-insert(base-class('grid'), '>')} {
+        //   // context: grid
+        //   margin-right: initial;
+        // }
       }
 
-      // #{state-base-class('start-end', false, $m)} { grid-column-start: var(--column-start); grid-column-end: var(--column-end); }
-      // #{state-base-class('start', false, $m)} { grid-column-start: var(--column-start); }
-      // #{state-base-class('end', false, $m)} { grid-column-end: var(--column-end); }
-
-      // #{state-base-class('row-start-end', false, $m)} { grid-row-start: var(--row-start); grid-row-end: var(--row-end); }
-      // #{state-base-class('row-start', false, $m)} { grid-row-start: var(--row-start); }
-      // #{state-base-class('row-end', false, $m)} { grid-row-end: var(--row-end); }
-
-      // NB: this is set globally so it also affects the functions defined at the top
-      // $m__: state-prefix() !global;
       $m__: state-prefix();
 
       // // context: mcol-only (doesn't work in FF)
@@ -258,8 +238,6 @@
           }
         }
 
-        // TODO: add .start-end-(s)-(e) and .start-(s).end-(e) variants
-
         // ROW SPAN / START / END
         // NB: implicit spanning behavior is not used in rows, because they fallback to 1 instead of --global-rows
 
@@ -271,6 +249,33 @@
 
         .#{$m__}row-end-neg-#{$n} { grid-row-end: #{$n * -1}; }
       }
+
+      $span-pair-list: ();
+      @for $end from 2 through ($max-columns + 1) {
+        @for $start from 1 through ($end - 1) {
+          $span: ($end - $start);
+          $span-pair-list: map-merge($span-pair-list, ($span: append(map-get($span-pair-list, $span) or (), ($start $end))));
+        }
+      }
+
+      @each $n, $pair-list in $span-pair-list {
+
+        // .start-(s).end-(e)
+        #{__map($pair-list, 'm__start-end', $m__)} {
+          --column-span: #{$n} !important;
+          --column-span-proxy: #{$n} !important;
+          & > * {
+            --local-column-count: #{$n} !important;
+            --local-column-count-proxy: #{$n} !important;
+          }
+        }
+
+        // .row-start-(s).row-end-(e)
+        #{__map($pair-list, 'm__row-start-row-end', $m__)} {
+          --row-span: #{$n}
+        }
+      }
+
     }
   }
 }
