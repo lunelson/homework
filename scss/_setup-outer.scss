@@ -25,16 +25,16 @@
 
   @each $m in join((null), map-keys($media)) {
 
-    $-m: mod-suffix($m);
-
-    @if $m {
-      .wrap#{$-m},
-      #{if($m == $last-m, '.wrap-last', '')} { max-width: var(--outer-width#{$-m}); }
-    }
-
     @include m($m) {
 
       $m__: state-prefix();
+
+      $-m: mod-suffix($m);
+
+      @if $m {
+        .wrap#{$-m},
+        #{if($m == $last-m, '.wrap-last', '')} { max-width: var(--outer-width#{$-m}); }
+      }
 
       // PEEL
       // TODO: add peel-r-right, -r-left, -l-right, -l-left logic
