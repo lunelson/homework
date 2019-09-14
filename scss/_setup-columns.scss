@@ -101,10 +101,10 @@
 
       #{state-base-class('span', false, $m)} {
         // context: solo
-        width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap));
+        width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap)) !important;
         @at-root #{selector-insert(base-class('flow'), '>')} {
           // context: flow
-          width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)));
+          width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns))) !important;
         }
         // @at-root #{selector-insert(base-class('mcol'), '>')} {
         //   // context: mcol
@@ -112,7 +112,7 @@
         // }
         @at-root #{selector-insert(base-class('grid'), '>')} {
           // context: grid
-          width: initial;
+          width: initial !important;
         }
       }
 
