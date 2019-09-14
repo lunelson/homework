@@ -25,15 +25,16 @@ $non-trim-elements: div table figure img svg video iframe object;
   #{base-class('f', false)},
   #{selector-combine(base-class('plain'), '*', '>')} {
     font-family: var(--font-family);
+    font-size: var(--font-size);
     line-height: calc(var(--line-height)); // can be raw calc values !!
     letter-spacing: calc(var(--letter-spacing)); // can be raw calc values !!
   }
 
-  // .lh-loose { line-height: calc(var(--line-height) * 1.1); }
-  // .lh-tight { line-height: calc(var(--line-height) * 0.9); }
+  .lh-loose { line-height: calc(var(--line-height) * 1.1); }
+  .lh-tight { line-height: calc(var(--line-height) * 0.9); }
 
-  // .ls-loose { letter-spacing: calc(var(--letter-spacing) * 1.1); }
-  // .ls-tight { letter-spacing: calc(var(--letter-spacing) * 0.9); }
+  .ls-loose { letter-spacing: calc(var(--letter-spacing) * 1.1); }
+  .ls-tight { letter-spacing: calc(var(--letter-spacing) * 0.9); }
 
   @if $trim {
 
@@ -118,7 +119,7 @@ $non-trim-elements: div table figure img svg video iframe object;
             @if not $m {
               @at-root .plain-#{$f}-#{$s} > *,
               .f-#{$f}-#{$s} {
-                font-size: var(--font-size-#{$f}-#{$s});
+                --font-size: var(--font-size-#{$f}-#{$s});
                 --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
               }
             }
