@@ -129,6 +129,15 @@
       .#{$m__}flex-1-1 { flex: 1 1 auto; }
       .#{$m__}flex-0-0 { flex: 0 0 auto; }
 
+      // order
+      .#{$m__}order-3 { order: 3; }
+      .#{$m__}order-2 { order: 2; }
+      .#{$m__}order-1 { order: 1; }
+      .#{$m__}order-0 { order: 0; }
+      .#{$m__}order-neg-1 { order: -1; }
+      .#{$m__}order-neg-2 { order: -2; }
+      .#{$m__}order-neg-3 { order: -3; }
+
       /////////////////////////////////////////////
       //////////// object-fit/-position ///////////
       /////////////////////////////////////////////
