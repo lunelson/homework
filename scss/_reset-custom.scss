@@ -11,10 +11,11 @@
 
   *, ::before, ::after {
 
-    word-break: inherit;
-    word-wrap: inherit;
-    overflow-wrap: inherit;
-    hyphens: inherit;
+    word-break: keep-all;
+    // word-wrap: anywhere; // ms version of following
+    overflow-wrap: break-word;
+    white-space: initial;
+    hyphens: manual;
 
     font-family: inherit;
     font-weight: inherit;
