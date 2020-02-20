@@ -31,8 +31,8 @@
 @media screen and (max-width: 29.999em) {
   :root {
     --font-size: 16px;
-    --inner-x: 1rem;
     --inner-y: 1.5rem;
+    --inner-x: 1rem;
     --outer-top: 2rem;
     --outer-right: 50px;
     --outer-bottom: 2rem;
@@ -51,8 +51,8 @@
 @media screen and (min-width: 30em) and (max-width: 39.999em) {
   :root {
     --font-size: 16px;
-    --inner-x: 1rem;
     --inner-y: 1.5rem;
+    --inner-x: 1rem;
     --outer-top: 2rem;
     --outer-right: calc(31.25vw + -6.25rem);
     --outer-bottom: 2rem;
@@ -72,8 +72,8 @@
 @media screen and (min-width: 40em) and (max-width: 59.999em) {
   :root {
     --font-size: 16px;
-    --inner-x: 1rem;
     --inner-y: 1.5rem;
+    --inner-x: 1rem;
     --outer-top: 2rem;
     --outer-right: calc(31.25vw + -6.25rem);
     --outer-bottom: 2rem;
@@ -93,8 +93,8 @@
 @media screen and (min-width: 60em) {
   :root {
     --font-size: 18px;
-    --inner-x: 1rem;
     --inner-y: 1.5rem;
+    --inner-x: 1rem;
     --outer-top: 2rem;
     --outer-right: 200px;
     --outer-bottom: 2rem;
@@ -111,11 +111,15 @@
   }
 }
 
+:root {
+  font-size: var(--font-size);
+}
+
 /* (
   a: (
     font-size: 16px,
-    inner-x: 1rem,
     inner-y: 1.5rem,
+    inner-x: 1rem,
     outer-top: 2rem,
     outer-right: calc(31.25vw + -6.25rem),
     outer-bottom: 2rem,
@@ -146,8 +150,8 @@
   ),
   b: (
     font-size: 16px,
-    inner-x: 1rem,
     inner-y: 1.5rem,
+    inner-x: 1rem,
     outer-top: 2rem,
     outer-right: calc(31.25vw + -6.25rem),
     outer-bottom: 2rem,
@@ -178,8 +182,8 @@
   ),
   c: (
     font-size: 18px,
-    inner-x: 1rem,
     inner-y: 1.5rem,
+    inner-x: 1rem,
     outer-top: 2rem,
     outer-right: 200px,
     outer-bottom: 2rem,

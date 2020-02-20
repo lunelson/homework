@@ -269,10 +269,10 @@ template {
 }
 
 *, ::before, ::after {
-  word-break: inherit;
-  word-wrap: inherit;
-  overflow-wrap: inherit;
-  hyphens: inherit;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  white-space: initial;
+  hyphens: manual;
   font-family: inherit;
   font-weight: inherit;
   font-style: inherit;
@@ -352,8 +352,8 @@ picture,
 svg,
 video {
   display: block;
-  width: unset;
   max-width: 100%;
+  height: auto;
   border-style: none;
   border: 0;
 }

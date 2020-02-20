@@ -1,32 +1,32 @@
-.mt, [class^=mt-]:not([class$=mt-]), [class*=" mt-"]:not([class$=mt-]), .my, [class^=my-]:not([class$=my-]), [class*=" my-"]:not([class$=my-]) {
+.mt, [class^=mt-], [class*=" mt-"], .my, [class^=my-], [class*=" my-"] {
   margin-top: var(--mt) !important;
 }
 
-.mr, [class^=mr-]:not([class$=mr-]), [class*=" mr-"]:not([class$=mr-]), .mx, [class^=mx-]:not([class$=mx-]), [class*=" mx-"]:not([class$=mx-]) {
+.mr, [class^=mr-], [class*=" mr-"], .mx, [class^=mx-], [class*=" mx-"] {
   margin-right: var(--mr) !important;
 }
 
-.mb, [class^=mb-]:not([class$=mb-]), [class*=" mb-"]:not([class$=mb-]), .my, [class^=my-]:not([class$=my-]), [class*=" my-"]:not([class$=my-]) {
+.mb, [class^=mb-], [class*=" mb-"], .my, [class^=my-], [class*=" my-"] {
   margin-bottom: var(--mb) !important;
 }
 
-.ml, [class^=ml-]:not([class$=ml-]), [class*=" ml-"]:not([class$=ml-]), .mx, [class^=mx-]:not([class$=mx-]), [class*=" mx-"]:not([class$=mx-]) {
+.ml, [class^=ml-], [class*=" ml-"], .mx, [class^=mx-], [class*=" mx-"] {
   margin-left: var(--ml) !important;
 }
 
-.pt, [class^=pt-]:not([class$=pt-]), [class*=" pt-"]:not([class$=pt-]), .py, [class^=py-]:not([class$=py-]), [class*=" py-"]:not([class$=py-]) {
+.pt, [class^=pt-], [class*=" pt-"], .py, [class^=py-], [class*=" py-"] {
   padding-top: var(--pt) !important;
 }
 
-.pr, [class^=pr-]:not([class$=pr-]), [class*=" pr-"]:not([class$=pr-]), .px, [class^=px-]:not([class$=px-]), [class*=" px-"]:not([class$=px-]) {
+.pr, [class^=pr-], [class*=" pr-"], .px, [class^=px-], [class*=" px-"] {
   padding-right: var(--pr) !important;
 }
 
-.pb, [class^=pb-]:not([class$=pb-]), [class*=" pb-"]:not([class$=pb-]), .py, [class^=py-]:not([class$=py-]), [class*=" py-"]:not([class$=py-]) {
+.pb, [class^=pb-], [class*=" pb-"], .py, [class^=py-], [class*=" py-"] {
   padding-bottom: var(--pb) !important;
 }
 
-.pl, [class^=pl-]:not([class$=pl-]), [class*=" pl-"]:not([class$=pl-]), .px, [class^=px-]:not([class$=px-]), [class*=" px-"]:not([class$=px-]) {
+.pl, [class^=pl-], [class*=" pl-"], .px, [class^=px-], [class*=" px-"] {
   padding-left: var(--pl) !important;
 }
 
@@ -271,35 +271,35 @@
 }
 
 @media screen and (min-width: 30em) {
-  .a__mt, [class^=a__mt-]:not([class$=a__mt-]), [class*=" a__mt-"]:not([class$=a__mt-]), .a__my, [class^=a__my-]:not([class$=a__my-]), [class*=" a__my-"]:not([class$=a__my-]) {
+  .a__mt, [class^=a__mt-], [class*=" a__mt-"], .a__my, [class^=a__my-], [class*=" a__my-"] {
     margin-top: var(--mt) !important;
   }
 
-  .a__mr, [class^=a__mr-]:not([class$=a__mr-]), [class*=" a__mr-"]:not([class$=a__mr-]), .a__mx, [class^=a__mx-]:not([class$=a__mx-]), [class*=" a__mx-"]:not([class$=a__mx-]) {
+  .a__mr, [class^=a__mr-], [class*=" a__mr-"], .a__mx, [class^=a__mx-], [class*=" a__mx-"] {
     margin-right: var(--mr) !important;
   }
 
-  .a__mb, [class^=a__mb-]:not([class$=a__mb-]), [class*=" a__mb-"]:not([class$=a__mb-]), .a__my, [class^=a__my-]:not([class$=a__my-]), [class*=" a__my-"]:not([class$=a__my-]) {
+  .a__mb, [class^=a__mb-], [class*=" a__mb-"], .a__my, [class^=a__my-], [class*=" a__my-"] {
     margin-bottom: var(--mb) !important;
   }
 
-  .a__ml, [class^=a__ml-]:not([class$=a__ml-]), [class*=" a__ml-"]:not([class$=a__ml-]), .a__mx, [class^=a__mx-]:not([class$=a__mx-]), [class*=" a__mx-"]:not([class$=a__mx-]) {
+  .a__ml, [class^=a__ml-], [class*=" a__ml-"], .a__mx, [class^=a__mx-], [class*=" a__mx-"] {
     margin-left: var(--ml) !important;
   }
 
-  .a__pt, [class^=a__pt-]:not([class$=a__pt-]), [class*=" a__pt-"]:not([class$=a__pt-]), .a__py, [class^=a__py-]:not([class$=a__py-]), [class*=" a__py-"]:not([class$=a__py-]) {
+  .a__pt, [class^=a__pt-], [class*=" a__pt-"], .a__py, [class^=a__py-], [class*=" a__py-"] {
     padding-top: var(--pt) !important;
   }
 
-  .a__pr, [class^=a__pr-]:not([class$=a__pr-]), [class*=" a__pr-"]:not([class$=a__pr-]), .a__px, [class^=a__px-]:not([class$=a__px-]), [class*=" a__px-"]:not([class$=a__px-]) {
+  .a__pr, [class^=a__pr-], [class*=" a__pr-"], .a__px, [class^=a__px-], [class*=" a__px-"] {
     padding-right: var(--pr) !important;
   }
 
-  .a__pb, [class^=a__pb-]:not([class$=a__pb-]), [class*=" a__pb-"]:not([class$=a__pb-]), .a__py, [class^=a__py-]:not([class$=a__py-]), [class*=" a__py-"]:not([class$=a__py-]) {
+  .a__pb, [class^=a__pb-], [class*=" a__pb-"], .a__py, [class^=a__py-], [class*=" a__py-"] {
     padding-bottom: var(--pb) !important;
   }
 
-  .a__pl, [class^=a__pl-]:not([class$=a__pl-]), [class*=" a__pl-"]:not([class$=a__pl-]), .a__px, [class^=a__px-]:not([class$=a__px-]), [class*=" a__px-"]:not([class$=a__px-]) {
+  .a__pl, [class^=a__pl-], [class*=" a__pl-"], .a__px, [class^=a__px-], [class*=" a__px-"] {
     padding-left: var(--pl) !important;
   }
 
@@ -544,35 +544,35 @@
   }
 }
 @media screen and (min-width: 40em) {
-  .b__mt, [class^=b__mt-]:not([class$=b__mt-]), [class*=" b__mt-"]:not([class$=b__mt-]), .b__my, [class^=b__my-]:not([class$=b__my-]), [class*=" b__my-"]:not([class$=b__my-]) {
+  .b__mt, [class^=b__mt-], [class*=" b__mt-"], .b__my, [class^=b__my-], [class*=" b__my-"] {
     margin-top: var(--mt) !important;
   }
 
-  .b__mr, [class^=b__mr-]:not([class$=b__mr-]), [class*=" b__mr-"]:not([class$=b__mr-]), .b__mx, [class^=b__mx-]:not([class$=b__mx-]), [class*=" b__mx-"]:not([class$=b__mx-]) {
+  .b__mr, [class^=b__mr-], [class*=" b__mr-"], .b__mx, [class^=b__mx-], [class*=" b__mx-"] {
     margin-right: var(--mr) !important;
   }
 
-  .b__mb, [class^=b__mb-]:not([class$=b__mb-]), [class*=" b__mb-"]:not([class$=b__mb-]), .b__my, [class^=b__my-]:not([class$=b__my-]), [class*=" b__my-"]:not([class$=b__my-]) {
+  .b__mb, [class^=b__mb-], [class*=" b__mb-"], .b__my, [class^=b__my-], [class*=" b__my-"] {
     margin-bottom: var(--mb) !important;
   }
 
-  .b__ml, [class^=b__ml-]:not([class$=b__ml-]), [class*=" b__ml-"]:not([class$=b__ml-]), .b__mx, [class^=b__mx-]:not([class$=b__mx-]), [class*=" b__mx-"]:not([class$=b__mx-]) {
+  .b__ml, [class^=b__ml-], [class*=" b__ml-"], .b__mx, [class^=b__mx-], [class*=" b__mx-"] {
     margin-left: var(--ml) !important;
   }
 
-  .b__pt, [class^=b__pt-]:not([class$=b__pt-]), [class*=" b__pt-"]:not([class$=b__pt-]), .b__py, [class^=b__py-]:not([class$=b__py-]), [class*=" b__py-"]:not([class$=b__py-]) {
+  .b__pt, [class^=b__pt-], [class*=" b__pt-"], .b__py, [class^=b__py-], [class*=" b__py-"] {
     padding-top: var(--pt) !important;
   }
 
-  .b__pr, [class^=b__pr-]:not([class$=b__pr-]), [class*=" b__pr-"]:not([class$=b__pr-]), .b__px, [class^=b__px-]:not([class$=b__px-]), [class*=" b__px-"]:not([class$=b__px-]) {
+  .b__pr, [class^=b__pr-], [class*=" b__pr-"], .b__px, [class^=b__px-], [class*=" b__px-"] {
     padding-right: var(--pr) !important;
   }
 
-  .b__pb, [class^=b__pb-]:not([class$=b__pb-]), [class*=" b__pb-"]:not([class$=b__pb-]), .b__py, [class^=b__py-]:not([class$=b__py-]), [class*=" b__py-"]:not([class$=b__py-]) {
+  .b__pb, [class^=b__pb-], [class*=" b__pb-"], .b__py, [class^=b__py-], [class*=" b__py-"] {
     padding-bottom: var(--pb) !important;
   }
 
-  .b__pl, [class^=b__pl-]:not([class$=b__pl-]), [class*=" b__pl-"]:not([class$=b__pl-]), .b__px, [class^=b__px-]:not([class$=b__px-]), [class*=" b__px-"]:not([class$=b__px-]) {
+  .b__pl, [class^=b__pl-], [class*=" b__pl-"], .b__px, [class^=b__px-], [class*=" b__px-"] {
     padding-left: var(--pl) !important;
   }
 
@@ -817,35 +817,35 @@
   }
 }
 @media screen and (min-width: 60em) {
-  .c__mt, [class^=c__mt-]:not([class$=c__mt-]), [class*=" c__mt-"]:not([class$=c__mt-]), .c__my, [class^=c__my-]:not([class$=c__my-]), [class*=" c__my-"]:not([class$=c__my-]) {
+  .c__mt, [class^=c__mt-], [class*=" c__mt-"], .c__my, [class^=c__my-], [class*=" c__my-"] {
     margin-top: var(--mt) !important;
   }
 
-  .c__mr, [class^=c__mr-]:not([class$=c__mr-]), [class*=" c__mr-"]:not([class$=c__mr-]), .c__mx, [class^=c__mx-]:not([class$=c__mx-]), [class*=" c__mx-"]:not([class$=c__mx-]) {
+  .c__mr, [class^=c__mr-], [class*=" c__mr-"], .c__mx, [class^=c__mx-], [class*=" c__mx-"] {
     margin-right: var(--mr) !important;
   }
 
-  .c__mb, [class^=c__mb-]:not([class$=c__mb-]), [class*=" c__mb-"]:not([class$=c__mb-]), .c__my, [class^=c__my-]:not([class$=c__my-]), [class*=" c__my-"]:not([class$=c__my-]) {
+  .c__mb, [class^=c__mb-], [class*=" c__mb-"], .c__my, [class^=c__my-], [class*=" c__my-"] {
     margin-bottom: var(--mb) !important;
   }
 
-  .c__ml, [class^=c__ml-]:not([class$=c__ml-]), [class*=" c__ml-"]:not([class$=c__ml-]), .c__mx, [class^=c__mx-]:not([class$=c__mx-]), [class*=" c__mx-"]:not([class$=c__mx-]) {
+  .c__ml, [class^=c__ml-], [class*=" c__ml-"], .c__mx, [class^=c__mx-], [class*=" c__mx-"] {
     margin-left: var(--ml) !important;
   }
 
-  .c__pt, [class^=c__pt-]:not([class$=c__pt-]), [class*=" c__pt-"]:not([class$=c__pt-]), .c__py, [class^=c__py-]:not([class$=c__py-]), [class*=" c__py-"]:not([class$=c__py-]) {
+  .c__pt, [class^=c__pt-], [class*=" c__pt-"], .c__py, [class^=c__py-], [class*=" c__py-"] {
     padding-top: var(--pt) !important;
   }
 
-  .c__pr, [class^=c__pr-]:not([class$=c__pr-]), [class*=" c__pr-"]:not([class$=c__pr-]), .c__px, [class^=c__px-]:not([class$=c__px-]), [class*=" c__px-"]:not([class$=c__px-]) {
+  .c__pr, [class^=c__pr-], [class*=" c__pr-"], .c__px, [class^=c__px-], [class*=" c__px-"] {
     padding-right: var(--pr) !important;
   }
 
-  .c__pb, [class^=c__pb-]:not([class$=c__pb-]), [class*=" c__pb-"]:not([class$=c__pb-]), .c__py, [class^=c__py-]:not([class$=c__py-]), [class*=" c__py-"]:not([class$=c__py-]) {
+  .c__pb, [class^=c__pb-], [class*=" c__pb-"], .c__py, [class^=c__py-], [class*=" c__py-"] {
     padding-bottom: var(--pb) !important;
   }
 
-  .c__pl, [class^=c__pl-]:not([class$=c__pl-]), [class*=" c__pl-"]:not([class$=c__pl-]), .c__px, [class^=c__px-]:not([class$=c__px-]), [class*=" c__px-"]:not([class$=c__px-]) {
+  .c__pl, [class^=c__pl-], [class*=" c__pl-"], .c__px, [class^=c__px-], [class*=" c__px-"] {
     padding-left: var(--pl) !important;
   }
 

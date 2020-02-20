@@ -1,29 +1,26 @@
-/*
-
-themes
-  alpha
-    base
-    primary
-    secondary
-  bravo
-    base
-    primary
-    secondary
-
---base-alpha
-
-.theme-alpha
-  --color-base
-  --color-primary
-  --color-secondary
-
-  */
 body,
 [class^="f-"], [class*=" f-"],
 .plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
   font-family: var(--font-family);
+  font-size: var(--font-size);
   line-height: calc(var(--line-height));
   letter-spacing: calc(var(--letter-spacing));
+}
+
+.lh-loose {
+  line-height: calc(var(--line-height) * 1.1);
+}
+
+.lh-tight {
+  line-height: calc(var(--line-height) * 0.9);
+}
+
+.ls-loose {
+  letter-spacing: calc(var(--letter-spacing) * 1.1);
+}
+
+.ls-tight {
+  letter-spacing: calc(var(--letter-spacing) * 0.9);
 }
 
 .trim > [class^="f-"], .trim > [class*=" f-"],
@@ -121,25 +118,25 @@ body {
 
 .plain-sans-xs > *,
 .f-sans-xs {
-  font-size: var(--font-size-sans-xs);
+  --font-size: var(--font-size-sans-xs);
   --line-height: var(--line-height-sans-xs, var(--line-height-sans));
 }
 
 .plain-sans-s > *,
 .f-sans-s {
-  font-size: var(--font-size-sans-s);
+  --font-size: var(--font-size-sans-s);
   --line-height: var(--line-height-sans-s, var(--line-height-sans));
 }
 
 .plain-sans-m > *,
 .f-sans-m {
-  font-size: var(--font-size-sans-m);
+  --font-size: var(--font-size-sans-m);
   --line-height: var(--line-height-sans-m, var(--line-height-sans));
 }
 
 .plain-sans-l > *,
 .f-sans-l {
-  font-size: var(--font-size-sans-l);
+  --font-size: var(--font-size-sans-l);
   --line-height: var(--line-height-sans-l, var(--line-height-sans));
 }
 
@@ -156,25 +153,25 @@ body {
 
 .plain-serif-xs > *,
 .f-serif-xs {
-  font-size: var(--font-size-serif-xs);
+  --font-size: var(--font-size-serif-xs);
   --line-height: var(--line-height-serif-xs, var(--line-height-serif));
 }
 
 .plain-serif-s > *,
 .f-serif-s {
-  font-size: var(--font-size-serif-s);
+  --font-size: var(--font-size-serif-s);
   --line-height: var(--line-height-serif-s, var(--line-height-serif));
 }
 
 .plain-serif-m > *,
 .f-serif-m {
-  font-size: var(--font-size-serif-m);
+  --font-size: var(--font-size-serif-m);
   --line-height: var(--line-height-serif-m, var(--line-height-serif));
 }
 
 .plain-serif-l > *,
 .f-serif-l {
-  font-size: var(--font-size-serif-l);
+  --font-size: var(--font-size-serif-l);
   --line-height: var(--line-height-serif-l, var(--line-height-serif));
 }
 
@@ -191,25 +188,25 @@ body {
 
 .plain-modern-xs > *,
 .f-modern-xs {
-  font-size: var(--font-size-modern-xs);
+  --font-size: var(--font-size-modern-xs);
   --line-height: var(--line-height-modern-xs, var(--line-height-modern));
 }
 
 .plain-modern-s > *,
 .f-modern-s {
-  font-size: var(--font-size-modern-s);
+  --font-size: var(--font-size-modern-s);
   --line-height: var(--line-height-modern-s, var(--line-height-modern));
 }
 
 .plain-modern-m > *,
 .f-modern-m {
-  font-size: var(--font-size-modern-m);
+  --font-size: var(--font-size-modern-m);
   --line-height: var(--line-height-modern-m, var(--line-height-modern));
 }
 
 .plain-modern-l > *,
 .f-modern-l {
-  font-size: var(--font-size-modern-l);
+  --font-size: var(--font-size-modern-l);
   --line-height: var(--line-height-modern-l, var(--line-height-modern));
 }
 

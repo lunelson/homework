@@ -92,15 +92,15 @@
 }
 
 [class^="span-"], [class*=" span-"] {
-  width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap));
+  width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap)) !important;
 }
 
 .flow > [class^="span-"], .flow > [class*=" span-"], [class^="flow-"] > [class^="span-"], [class^="flow-"] > [class*=" span-"], [class*=" flow-"] > [class^="span-"], [class*=" flow-"] > [class*=" span-"] {
-  width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)));
+  width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns))) !important;
 }
 
 .grid > [class^="span-"], .grid > [class*=" span-"], [class^="grid-"] > [class^="span-"], [class^="grid-"] > [class*=" span-"], [class*=" grid-"] > [class^="span-"], [class*=" grid-"] > [class*=" span-"] {
-  width: initial;
+  width: initial !important;
 }
 
 [class^="pull-"], [class*=" pull-"],
@@ -1004,13 +1004,13 @@
 
 @media screen and (min-width: 20em) {
   [class^="a__span-"], [class*=" a__span-"] {
-    width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap));
+    width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap)) !important;
   }
   .flow > [class^="a__span-"], .flow > [class*=" a__span-"], [class^="flow-"] > [class^="a__span-"], [class^="flow-"] > [class*=" a__span-"], [class*=" flow-"] > [class^="a__span-"], [class*=" flow-"] > [class*=" a__span-"] {
-    width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)));
+    width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns))) !important;
   }
   .grid > [class^="a__span-"], .grid > [class*=" a__span-"], [class^="grid-"] > [class^="a__span-"], [class^="grid-"] > [class*=" a__span-"], [class*=" grid-"] > [class^="a__span-"], [class*=" grid-"] > [class*=" a__span-"] {
-    width: initial;
+    width: initial !important;
   }
   [class^="a__pull-"], [class*=" a__pull-"],
   [class^="a__push-"], [class*=" a__push-"] {
@@ -1706,13 +1706,13 @@
 
 @media screen and (min-width: 30em) {
   [class^="b__span-"], [class*=" b__span-"] {
-    width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap));
+    width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap)) !important;
   }
   .flow > [class^="b__span-"], .flow > [class*=" b__span-"], [class^="flow-"] > [class^="b__span-"], [class^="flow-"] > [class*=" b__span-"], [class*=" flow-"] > [class^="b__span-"], [class*=" flow-"] > [class*=" b__span-"] {
-    width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)));
+    width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns))) !important;
   }
   .grid > [class^="b__span-"], .grid > [class*=" b__span-"], [class^="grid-"] > [class^="b__span-"], [class^="grid-"] > [class*=" b__span-"], [class*=" grid-"] > [class^="b__span-"], [class*=" grid-"] > [class*=" b__span-"] {
-    width: initial;
+    width: initial !important;
   }
   [class^="b__pull-"], [class*=" b__pull-"],
   [class^="b__push-"], [class*=" b__push-"] {
@@ -2408,13 +2408,13 @@
 
 @media screen and (min-width: 40em) {
   [class^="c__span-"], [class*=" c__span-"] {
-    width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap));
+    width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap)) !important;
   }
   .flow > [class^="c__span-"], .flow > [class*=" c__span-"], [class^="flow-"] > [class^="c__span-"], [class^="flow-"] > [class*=" c__span-"], [class*=" flow-"] > [class^="c__span-"], [class*=" flow-"] > [class*=" c__span-"] {
-    width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)));
+    width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns))) !important;
   }
   .grid > [class^="c__span-"], .grid > [class*=" c__span-"], [class^="grid-"] > [class^="c__span-"], [class^="grid-"] > [class*=" c__span-"], [class*=" grid-"] > [class^="c__span-"], [class*=" grid-"] > [class*=" c__span-"] {
-    width: initial;
+    width: initial !important;
   }
   [class^="c__pull-"], [class*=" c__pull-"],
   [class^="c__push-"], [class*=" c__push-"] {

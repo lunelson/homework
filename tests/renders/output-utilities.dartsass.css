@@ -113,6 +113,30 @@
   font-style: normal;
 }
 
+.br-inside {
+  break-inside: auto;
+}
+
+.br-before {
+  break-before: auto;
+}
+
+.br-after {
+  break-after: auto;
+}
+
+.nobr-inside {
+  break-inside: avoid;
+}
+
+.nobr-before {
+  break-before: avoid;
+}
+
+.nobr-after {
+  break-after: avoid;
+}
+
 .nobr {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -138,7 +162,7 @@
   white-space: pre-line;
 }
 
-.clip, [class^=clip-]:not([class$=clip-]), [class*=" clip-"]:not([class$=clip-]) {
+.clip, [class^=clip-], [class*=" clip-"] {
   position: relative;
   z-index: 0;
 }
@@ -171,7 +195,7 @@
   overflow: visible;
 }
 
-.hold, [class^=hold-]:not([class$=hold-]), [class*=" hold-"]:not([class$=hold-]) {
+.hold, [class^=hold-], [class*=" hold-"] {
   position: relative;
 }
 
@@ -180,17 +204,17 @@
   padding-bottom: 0.1px;
 }
 
-.aspect, [class^=aspect-]:not([class$=aspect-]), [class*=" aspect-"]:not([class$=aspect-]) {
+.aspect, [class^=aspect-], [class*=" aspect-"] {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-.aspect > *, [class^=aspect-]:not([class$=aspect-]) > *, [class*=" aspect-"]:not([class$=aspect-]) > * {
+.aspect > *, [class^=aspect-] > *, [class*=" aspect-"] > * {
   flex: 0 0 auto;
   width: 100%;
 }
-.aspect::before, [class^=aspect-]:not([class$=aspect-])::before, [class*=" aspect-"]:not([class$=aspect-])::before {
+.aspect::before, [class^=aspect-]::before, [class*=" aspect-"]::before {
   content: "";
   display: block;
   width: 0.01px;

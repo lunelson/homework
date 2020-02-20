@@ -1,4 +1,4 @@
-.wrap, [class^=wrap-]:not([class$=wrap-]), [class*=" wrap-"]:not([class$=wrap-]) {
+.wrap, [class^=wrap-], [class*=" wrap-"] {
   margin-right: auto;
   margin-left: auto;
   width: 100%;
@@ -18,217 +18,233 @@
 
 .peel, .peel-right, .peel-left {
   max-width: none !important;
-  width: initial !important;
+  width: 100% !important;
+  width: fill-available !important;
+  width: stretch !important;
 }
 
 .peel, .peel-right {
-  margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2);
+  margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2) !important;
 }
 
 .peel, .peel-left {
-  margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2);
+  margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2) !important;
 }
 
 .frame, .frame-right {
-  padding-right: var(--outer-right);
+  padding-right: var(--outer-right) !important;
 }
 
 .frame, .frame-left {
-  padding-left: var(--outer-left);
+  padding-left: var(--outer-left) !important;
 }
 
 .frame-y, .frame-top {
-  padding-top: var(--outer-top);
+  padding-top: var(--outer-top) !important;
 }
 
 .frame-y, .frame-bottom {
-  padding-bottom: var(--outer-bottom);
+  padding-bottom: var(--outer-bottom) !important;
 }
 
 .bleed, .bleed-right, .bleed-left {
   max-width: none !important;
-  width: initial !important;
+  width: 100% !important;
+  width: fill-available !important;
+  width: stretch !important;
 }
 
 .bleed, .bleed-right {
-  margin-right: calc(var(--outer-right) * -1);
+  margin-right: calc(var(--outer-right) * -1) !important;
 }
 
 .bleed, .bleed-left {
-  margin-left: calc(var(--outer-left) * -1);
+  margin-left: calc(var(--outer-left) * -1) !important;
 }
 
 .bleed-y, .bleed-top {
-  margin-top: calc(var(--outer-top) * -1);
+  margin-top: calc(var(--outer-top) * -1) !important;
 }
 
 .bleed-y, .bleed-bottom {
-  margin-bottom: calc(var(--outer-bottom) * -1);
-}
-
-.wrap-a {
-  max-width: var(--outer-width-a);
+  margin-bottom: calc(var(--outer-bottom) * -1) !important;
 }
 
 @media screen and (min-width: 20em) {
+  .wrap-a {
+    max-width: var(--outer-width-a);
+  }
+
   .a__peel, .a__peel-right, .a__peel-left {
     max-width: none !important;
-    width: initial !important;
+    width: 100% !important;
+    width: fill-available !important;
+    width: stretch !important;
   }
 
   .a__peel, .a__peel-right {
-    margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2);
+    margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2) !important;
   }
 
   .a__peel, .a__peel-left {
-    margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2);
+    margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2) !important;
   }
 
   .a__frame, .a__frame-right {
-    padding-right: var(--outer-right);
+    padding-right: var(--outer-right) !important;
   }
 
   .a__frame, .a__frame-left {
-    padding-left: var(--outer-left);
+    padding-left: var(--outer-left) !important;
   }
 
   .a__frame-y, .a__frame-top {
-    padding-top: var(--outer-top);
+    padding-top: var(--outer-top) !important;
   }
 
   .a__frame-y, .a__frame-bottom {
-    padding-bottom: var(--outer-bottom);
+    padding-bottom: var(--outer-bottom) !important;
   }
 
   .a__bleed, .a__bleed-right, .a__bleed-left {
     max-width: none !important;
-    width: initial !important;
+    width: 100% !important;
+    width: fill-available !important;
+    width: stretch !important;
   }
 
   .a__bleed, .a__bleed-right {
-    margin-right: calc(var(--outer-right) * -1);
+    margin-right: calc(var(--outer-right) * -1) !important;
   }
 
   .a__bleed, .a__bleed-left {
-    margin-left: calc(var(--outer-left) * -1);
+    margin-left: calc(var(--outer-left) * -1) !important;
   }
 
   .a__bleed-y, .a__bleed-top {
-    margin-top: calc(var(--outer-top) * -1);
+    margin-top: calc(var(--outer-top) * -1) !important;
   }
 
   .a__bleed-y, .a__bleed-bottom {
-    margin-bottom: calc(var(--outer-bottom) * -1);
+    margin-bottom: calc(var(--outer-bottom) * -1) !important;
   }
 }
-.wrap-b {
-  max-width: var(--outer-width-b);
-}
-
 @media screen and (min-width: 30em) {
+  .wrap-b {
+    max-width: var(--outer-width-b);
+  }
+
   .b__peel, .b__peel-right, .b__peel-left {
     max-width: none !important;
-    width: initial !important;
+    width: 100% !important;
+    width: fill-available !important;
+    width: stretch !important;
   }
 
   .b__peel, .b__peel-right {
-    margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2);
+    margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2) !important;
   }
 
   .b__peel, .b__peel-left {
-    margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2);
+    margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2) !important;
   }
 
   .b__frame, .b__frame-right {
-    padding-right: var(--outer-right);
+    padding-right: var(--outer-right) !important;
   }
 
   .b__frame, .b__frame-left {
-    padding-left: var(--outer-left);
+    padding-left: var(--outer-left) !important;
   }
 
   .b__frame-y, .b__frame-top {
-    padding-top: var(--outer-top);
+    padding-top: var(--outer-top) !important;
   }
 
   .b__frame-y, .b__frame-bottom {
-    padding-bottom: var(--outer-bottom);
+    padding-bottom: var(--outer-bottom) !important;
   }
 
   .b__bleed, .b__bleed-right, .b__bleed-left {
     max-width: none !important;
-    width: initial !important;
+    width: 100% !important;
+    width: fill-available !important;
+    width: stretch !important;
   }
 
   .b__bleed, .b__bleed-right {
-    margin-right: calc(var(--outer-right) * -1);
+    margin-right: calc(var(--outer-right) * -1) !important;
   }
 
   .b__bleed, .b__bleed-left {
-    margin-left: calc(var(--outer-left) * -1);
+    margin-left: calc(var(--outer-left) * -1) !important;
   }
 
   .b__bleed-y, .b__bleed-top {
-    margin-top: calc(var(--outer-top) * -1);
+    margin-top: calc(var(--outer-top) * -1) !important;
   }
 
   .b__bleed-y, .b__bleed-bottom {
-    margin-bottom: calc(var(--outer-bottom) * -1);
+    margin-bottom: calc(var(--outer-bottom) * -1) !important;
   }
 }
-.wrap-c,
-.wrap-last {
-  max-width: var(--outer-width-c);
-}
-
 @media screen and (min-width: 40em) {
+  .wrap-c,
+.wrap-last {
+    max-width: var(--outer-width-c);
+  }
+
   .c__peel, .c__peel-right, .c__peel-left {
     max-width: none !important;
-    width: initial !important;
+    width: 100% !important;
+    width: fill-available !important;
+    width: stretch !important;
   }
 
   .c__peel, .c__peel-right {
-    margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2);
+    margin-right: calc(((100% - (100vw - var(--scroll-width, 0px))) - (var(--outer-right) - var(--outer-left))) / 2) !important;
   }
 
   .c__peel, .c__peel-left {
-    margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2);
+    margin-left: calc(((100% - (100vw - var(--scroll-width, 0px))) + (var(--outer-right) - var(--outer-left))) / 2) !important;
   }
 
   .c__frame, .c__frame-right {
-    padding-right: var(--outer-right);
+    padding-right: var(--outer-right) !important;
   }
 
   .c__frame, .c__frame-left {
-    padding-left: var(--outer-left);
+    padding-left: var(--outer-left) !important;
   }
 
   .c__frame-y, .c__frame-top {
-    padding-top: var(--outer-top);
+    padding-top: var(--outer-top) !important;
   }
 
   .c__frame-y, .c__frame-bottom {
-    padding-bottom: var(--outer-bottom);
+    padding-bottom: var(--outer-bottom) !important;
   }
 
   .c__bleed, .c__bleed-right, .c__bleed-left {
     max-width: none !important;
-    width: initial !important;
+    width: 100% !important;
+    width: fill-available !important;
+    width: stretch !important;
   }
 
   .c__bleed, .c__bleed-right {
-    margin-right: calc(var(--outer-right) * -1);
+    margin-right: calc(var(--outer-right) * -1) !important;
   }
 
   .c__bleed, .c__bleed-left {
-    margin-left: calc(var(--outer-left) * -1);
+    margin-left: calc(var(--outer-left) * -1) !important;
   }
 
   .c__bleed-y, .c__bleed-top {
-    margin-top: calc(var(--outer-top) * -1);
+    margin-top: calc(var(--outer-top) * -1) !important;
   }
 
   .c__bleed-y, .c__bleed-bottom {
-    margin-bottom: calc(var(--outer-bottom) * -1);
+    margin-bottom: calc(var(--outer-bottom) * -1) !important;
   }
 }
