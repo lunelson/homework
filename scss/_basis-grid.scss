@@ -7,13 +7,13 @@
 //                                | |                                  | |
 //                                |_|                                  |_|
 
-@function flow-span($n: var(--local-columns, var(--global-columns)), $cols: var(--local-columns, var(--global-columns))) {
+@function fgrid-span($n: var(--local-columns, var(--global-columns)), $cols: var(--local-columns, var(--global-columns))) {
   @return calc(99.99999% * #{$n} / #{$cols});
 }
-@function flow-push($n: 1, $cols: var(--local-columns, var(--global-columns))) {
+@function fgrid-push($n: 1, $cols: var(--local-columns, var(--global-columns))) {
   @return calc(99.99999% * #{$n} / #{$cols});
 }
-@function flow-pull($n: 1, $cols: var(--local-columns, var(--global-columns))) {
+@function fgrid-pull($n: 1, $cols: var(--local-columns, var(--global-columns))) {
   @return calc(99.99999% * #{-$n} / #{$cols});
 }
 
@@ -27,16 +27,16 @@
   @return calc((99.99999% + var(--column-gap, var(--inner-x))) * #{-$n} / #{$cols});
 }
 
-@mixin flow-cell($n: null, $l: null, $r: null, $cols: var(--local-columns, var(--global-columns))) {
-  @if $n { width: flow-span($n, $cols); & > * { --col-base: #{$n}; } }
-  @if $l { margin-left: flow-span($l, $cols); }
-  @if $r { margin-right: flow-span($r, $cols); }
+@mixin fgrid-cell($n: null, $l: null, $r: null, $cols: var(--local-columns, var(--global-columns))) {
+  @if $n { width: fgrid-span($n, $cols); & > * { --col-base: #{$n}; } }
+  @if $l { margin-left: fgrid-span($l, $cols); }
+  @if $r { margin-right: fgrid-span($r, $cols); }
 }
 
-@mixin flow-cells($cells) {
+@mixin fgrid-cells($cells) {
   @each $m, $cell in $cells {
     @include m($m) {
-      @include flow-cell($cell...);
+      @include fgrid-cell($cell...);
     }
   }
 }

@@ -8,7 +8,7 @@
 @function m__start-end($pair, $index, $list, $m__, $_...) { @return selector-parse('.#{$m__}start-#{nth($pair, 1)}.end-#{nth($pair, 2)}'); }
 @function m__row-start-row-end($pair, $index, $list, $m__, $_...) { @return selector-parse('.#{$m__}row-start-#{nth($pair, 1)}.row-end-#{nth($pair, 2)}'); }
 
-@mixin homework-setup-columns($max-columns: --max-columns()) {
+@mixin homework-setup-grids($max-columns: --max-columns()) {
 
   // MULTI-COLUMN LAYOUT
   #{base-class('mcol')} {
@@ -35,7 +35,8 @@
     // }
   }
 
-  #{base-class('mcol-flow')} {
+  // MULTI-COLUMN GRID LAYOUT
+  #{base-class('mgrid')} {
     margin-top: calc(var(--row-gap) / -2) !important;
     margin-bottom: calc(var(--row-gap) / -2) !important;
     & > * {
@@ -46,8 +47,8 @@
     }
   }
 
-  // FLEXBOX-FLOW LAYOUT
-  #{base-class('flow')} {
+  // FLEXBOX GRID LAYOUT
+  #{base-class('fgrid')} {
     display: flex !important;
     flex-direction: row;
     flex-wrap: wrap;
@@ -84,10 +85,10 @@
 
   :root { --column-gap: var(--inner-x); }
 
-  .mcol-flow, .flow, .grid { --row-gap: var(--inner-y); }
+  .mgrid, .fgrid, .grid { --row-gap: var(--inner-y); }
 
   @each $y in map-keys(inner-y-mods()) {
-    .mcol-flow-#{$y}, .flow-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
+    .mgrid-#{$y}, .fgrid-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
   }
 
   // make the following props *non-cascading*
@@ -102,8 +103,8 @@
       #{state-base-class('span', false, $m)} {
         // context: solo
         width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap)) !important;
-        @at-root #{selector-insert(base-class('flow'), '>')} {
-          // context: flow
+        @at-root #{selector-insert(base-class('fgrid'), '>')} {
+          // context: fgrid
           width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns))) !important;
         }
         // @at-root #{selector-insert(base-class('mcol'), '>')} {
@@ -116,13 +117,13 @@
         }
       }
 
-      // contexts: solo, flow; reset: grid
+      // contexts: solo, fgrid; reset: grid
       #{state-base-class('pull', false, $m)},
       #{state-base-class('push', false, $m)} {
         // context: solo
         margin-left: calc((99.99999% + var(--column-gap)) * var(--column-push) / var(--local-columns, var(--global-columns)));
-        @at-root #{selector-insert(base-class('flow'), '>')} {
-          // context: flow
+        @at-root #{selector-insert(base-class('fgrid'), '>')} {
+          // context: fgrid
           margin-left: calc(99.99999% * var(--column-push) / var(--local-columns, var(--global-columns)));
         }
         // @at-root #{selector-insert(base-class('grid'), '>')} {
@@ -135,8 +136,8 @@
       #{state-base-class('push-r', false, $m)} {
         // context: solo
         margin-right: calc((99.99999% + var(--column-gap)) * var(--column-push-r) / var(--local-columns, var(--global-columns)));
-        @at-root #{selector-insert(base-class('flow'), '>')} {
-          // context: flow
+        @at-root #{selector-insert(base-class('fgrid'), '>')} {
+          // context: fgrid
           margin-right: calc(99.99999% * var(--column-push-r) / var(--local-columns, var(--global-columns)));
         }
         // @at-root #{selector-insert(base-class('grid'), '>')} {
@@ -154,8 +155,8 @@
       //   }
       // }
 
-      // context: flow-only
-      #{base-class('flow')} {
+      // context: fgrid-only
+      #{base-class('fgrid')} {
         & > .#{$m__}span-auto {
           flex: 1 1 auto;
           --column-span: 0;

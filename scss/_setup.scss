@@ -11,11 +11,10 @@
 @import "setup-root";
 @import "setup-outer";
 @import "setup-inner";
-@import "setup-columns";
+@import "setup-grids";
 @import "setup-stack";
 @import "setup-typo";
 @import "setup-theme";
-@import "setup-debug";
 @import "setup-utilities";
 @import "setup-utilities-m";
 
@@ -26,11 +25,10 @@ $homework-setup-done: false;
   @include homework-setup-root;
   @include homework-setup-outer;
   @include homework-setup-inner;
-  @include homework-setup-columns;
+  @include homework-setup-grids;
   @include homework-setup-stack;
   @include homework-setup-typo;
   @include homework-setup-theme;
-  @include homework-setup-debug;
   @include homework-setup-utilities;
   @include homework-setup-utilities-m;
   $homework-setup-done: true !global;

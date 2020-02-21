@@ -14,7 +14,7 @@
 // TODO II
 // supply the selector (default: body) as an argument here, in case the document is constructed differently?
 
-@mixin homework-setup-debug($modern: true, $wrap-last: true, $color: rgba(200,200,200,0.2)) {
+@mixin homework-debug($modern: true, $wrap-last: true, $color: rgba(200,200,200,0.2)) {
 
   $media-keys: join(null, map-keys($media));
   $last-m: last($media-keys);

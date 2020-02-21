@@ -10,12 +10,13 @@
 // $non-trim-elements: div table figure img svg video iframe object section aside header footer article;
 $non-trim-elements: div table figure img svg video iframe object;
 
-@function normalize-unit($n, $unit) { @return if(type-of($n) == number and unitless($n), $n * $unit, $n); }
+@function normalize-unit($n, $unit) { @return if((type-of($n) == number) and unitless($n), $n * $unit, $n); }
 
 @mixin homework-setup-typo( $trim: true, $trim-excl: $non-trim-elements ) {
 
   // normalize $fonts
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
+
   @each $f, $font in $fonts {
     $font: map-merge($font-default, $font);
     $fonts: map-merge($fonts, ($f: $font)) !global;
