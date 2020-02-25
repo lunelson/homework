@@ -46,6 +46,23 @@
       .#{$m__}d-iblock { display: inline-block !important; vertical-align: baseline; }
       .#{$m__}d-inline { display: inline !important; vertical-align: baseline; }
 
+      // display sans prefixes, with options
+      .#{$m__}none { display: none !important; }
+      .#{$m__}block { display: block !important; }
+      .#{$m__}iblock { display: inline-block !important; vertical-align: baseline; }
+      .#{$m__}inline { display: inline !important; vertical-align: baseline; }
+
+      .#{$m__}flex { display: flex !important; }
+      .#{$m__}flex-row { display: flex !important; flex-direction: row; }
+      .#{$m__}flex-col { display: flex !important; flex-direction: column; }
+      .#{$m__}flex-row-reverse { display: flex !important; flex-direction: row-reverse; }
+      .#{$m__}flex-col-reverse { display: flex !important; flex-direction: column-reverse; }
+      .#{$m__}grid { display: grid !important; }
+      .#{$m__}grid-row { display: grid !important; grid-auto-flow: row; }
+      .#{$m__}grid-col { display: grid !important; grid-auto-flow: column; }
+      .#{$m__}grid-row-reverse { display: grid !important; grid-auto-flow: row-reverse; }
+      .#{$m__}grid-col-reverse { display: grid !important; grid-auto-flow: column-reverse; }
+
       /////////////////////////////////////////////
       ////////////////// z-index //////////////////
       /////////////////////////////////////////////

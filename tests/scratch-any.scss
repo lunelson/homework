@@ -1,0 +1,17 @@
+@import 'index';
+
+.hello {
+  content: 'world'
+}
+
+:any(#{base-class('font')}) {
+  :any(#{base-class('trim')}) {
+    color: red;
+  }
+}
+
+#{base-class('font')} {
+  #{base-class('trim')} {
+    color: red;
+  }
+}

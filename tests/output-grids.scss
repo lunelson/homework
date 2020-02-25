@@ -23,5 +23,4 @@ $media: (
 );
 
 @include homework-setup-core;
-// @include homework-setup-root;
-@include homework-setup-columns;
+@include homework-setup-grids;

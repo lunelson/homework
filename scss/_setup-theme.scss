@@ -8,6 +8,32 @@
 
 $colors: () !default;
 
+// $themes: (
+//   root: (
+//     fg: '', // --base-fg
+//     bg: '', // --base-bg
+//     pippin: #FFDFDF,
+//     blue: #ADDDFF,
+//     green: #10ce00,
+//     dark: #141414,
+//     lite: #f5f5f5,
+//     rose: #EBD8D9,
+//     gray: (
+//       darker: #222222,
+//       dark: #545454,
+//       mid: #858585,
+//       light: #B7B7B7,
+//       lighter: #E9E9E9,
+//     ),
+//   ),
+//   foo: (
+//     fg: '', // --base-fg
+//     bg: '', // --base-bg
+//   )
+// );
+
+
+
 // themes
 //   alpha
 //     base
@@ -25,7 +51,7 @@ $colors: () !default;
 //   --color-primary
 //   --color-secondary
 
-@mixin homework-setup-theme($type: lite) {
+@mixin homework-setup-theme($type: 'lite') {
 
   $colors: map-merge((
     dark: #141414,
@@ -52,13 +78,15 @@ $colors: () !default;
       }
     }
 
-    --fg-default: #{if($type == 'lite', --color-dark, --color-lite)};
-    --bg-default: #{if($type == 'lite', --color-lite, --color-dark)};
+    --fg-color: var(#{if($type == 'lite', --color-dark, --color-lite)});
+    --fg-contrast: var(#{if($type == 'lite', --color-lite, --color-dark)});
+    --bg-color: var(#{if($type == 'lite', --color-lite, --color-dark)});
+    --bg-contrast: var(#{if($type == 'lite', --color-dark, --color-lite)});
   }
 
   body {
-    color: hsla(var(--fg-default), var(--fg-opacity, 1));
-    background-color: hsla(var(--bg-default), var(--bg-opacity, 1));
+    color: hsla(var(--fg-color), var(--fg-opacity, 1));
+    background-color: hsla(var(--bg-color), var(--bg-opacity, 1));
   }
 
   // STATEFUL THEME PROPERTIES
@@ -74,15 +102,15 @@ $colors: () !default;
       '&');
 
     #{state-base-class('fg', false, $pseudo)} { #{$sel} {
-      color: hsla(var(--fg-color, var(--fg-default)), var(--fg-opacity, 1));
+      color: hsla(var(--fg-color), var(--fg-opacity, 1));
     } }
 
     #{state-base-class('bg', false, $pseudo)} { #{$sel} {
-      background-color: hsla(var(--bg-color, var(--bg-default)), var(--bg-opacity, 1));
+      background-color: hsla(var(--bg-color), var(--bg-opacity, 1));
     } }
 
     #{state-base-class('bd', false, $pseudo)} { #{$sel} {
-      border-color: hsla(var(--bd-color, var(--fg-color, var(--fg-default))), var(--bd-opacity, 1));
+      border-color: hsla(var(--bd-color, var(--fg-color)), var(--bd-opacity, 1));
       border-style: var(--bd-style, solid);
       border-top-width: var(--bd-top-width, 0);
       border-right-width: var(--bd-right-width, 0);
@@ -91,7 +119,7 @@ $colors: () !default;
     } }
 
     #{state-base-class('ol', false, $pseudo)} { #{$sel} {
-      outline-color: hsla(var(--ol-color, var(--fg-color, var(--fg-default))), var(--ol-opacity, 1));
+      outline-color: hsla(var(--ol-color, var(--fg-color)), var(--ol-opacity, 1));
       outline-width: var(--ol-width);
     } }
 

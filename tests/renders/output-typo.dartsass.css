@@ -1,5 +1,5 @@
 body,
-[class^=f-], [class*=" f-"],
+[class^=font-], [class*=" font-"],
 .plain > *, [class^=plain-] > *, [class*=" plain-"] > * {
   font-family: var(--font-family);
   font-size: var(--font-size);
@@ -23,9 +23,7 @@ body,
   letter-spacing: calc(var(--letter-spacing) * 0.9);
 }
 
-.trim > [class^=f-], .trim > [class*=" f-"],
-.stack > [class^=f-], .stack > [class*=" f-"], [class^=stack-] > [class^=f-], [class^=stack-] > [class*=" f-"], [class*=" stack-"] > [class^=f-], [class*=" stack-"] > [class*=" f-"],
-.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^=plain-] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
+.stack > .trim, [class^=stack-] > .trim, [class*=" stack-"] > .trim {
   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
   margin-top: calc(0em - var(--trim-top));
@@ -34,13 +32,45 @@ body,
   margin-left: var(--trim-sides);
 }
 
-.stack > * + [class^=f-], .stack > * + [class*=" f-"], [class^=stack-] > * + [class^=f-], [class^=stack-] > * + [class*=" f-"], [class*=" stack-"] > * + [class^=f-], [class*=" stack-"] > * + [class*=" f-"],
-.plain > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^=plain-] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > * + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
+.stack > * + .trim, [class^=stack-] > * + .trim, [class*=" stack-"] > * + .trim {
   margin-top: calc(var(--stack-gap) - var(--trim-top));
 }
 
-[class^=f-] + [class^=f-], [class^=f-] + [class*=" f-"], [class*=" f-"] + [class^=f-], [class*=" f-"] + [class*=" f-"],
-.plain > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class^=plain-] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object), [class*=" plain-"] > *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) + *:not(div):not(table):not(figure):not(img):not(svg):not(video):not(iframe):not(object) {
+.trim + .trim {
+  --trim-top-adjust: var(--trim-adjacent);
+}
+
+.plain > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+  margin-top: calc(0em - var(--trim-top));
+  margin-bottom: calc(0em - var(--trim-bottom));
+  margin-right: var(--trim-sides);
+  margin-left: var(--trim-sides);
+}
+
+.plain > * + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > * + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > * + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  margin-top: calc(var(--stack-gap) - var(--trim-top));
+}
+
+.plain > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --trim-top-adjust: var(--trim-adjacent);
+}
+
+.plain > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+  --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+  margin-top: calc(0em - var(--trim-top));
+  margin-bottom: calc(0em - var(--trim-bottom));
+  margin-right: var(--trim-sides);
+  margin-left: var(--trim-sides);
+}
+
+.plain > * + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > * + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > * + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  margin-top: calc(var(--stack-gap) - var(--trim-top));
+}
+
+.plain > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
   --trim-top-adjust: var(--trim-adjacent);
 }
 
@@ -54,10 +84,7 @@ body,
   --trim-adjacent-sans: 0.125em;
 }
 
-.plain-sans > *, [class^=plain-sans-] > *, [class*=" plain-sans-"] > *,
-.plain > *, [class^=plain-] > *, [class*=" plain-"] > *,
-.f-sans, [class^=f-sans-], [class*=" f-sans-"],
-body {
+.font-sans, [class^=font-sans-], [class*=" font-sans-"], body {
   --font-family: var(--font-family-sans);
   --line-height: var(--line-height-sans);
   --letter-spacing: var(--letter-spacing-sans);
@@ -77,8 +104,7 @@ body {
   --trim-adjacent-serif: 0.125em;
 }
 
-.plain-serif > *, [class^=plain-serif-] > *, [class*=" plain-serif-"] > *,
-.f-serif, [class^=f-serif-], [class*=" f-serif-"] {
+.font-serif, [class^=font-serif-], [class*=" font-serif-"] {
   --font-family: var(--font-family-serif);
   --line-height: var(--line-height-serif);
   --letter-spacing: var(--letter-spacing-serif);
@@ -98,8 +124,7 @@ body {
   --trim-adjacent-modern: 0.125em;
 }
 
-.plain-modern > *, [class^=plain-modern-] > *, [class*=" plain-modern-"] > *,
-.f-modern, [class^=f-modern-], [class*=" f-modern-"] {
+.font-modern, [class^=font-modern-], [class*=" font-modern-"] {
   --font-family: var(--font-family-modern);
   --line-height: var(--line-height-modern);
   --letter-spacing: var(--letter-spacing-modern);
@@ -115,26 +140,22 @@ body {
   --font-size-sans-m: 32rem;
   --font-size-sans-l: 48rem;
 }
-.plain-sans-xs > *,
-.f-sans-xs {
+.font-sans-xs {
   --font-size: var(--font-size-sans-xs);
   --line-height: var(--line-height-sans-xs, var(--line-height-sans));
 }
 
-.plain-sans-s > *,
-.f-sans-s {
+.font-sans-s {
   --font-size: var(--font-size-sans-s);
   --line-height: var(--line-height-sans-s, var(--line-height-sans));
 }
 
-.plain-sans-m > *,
-.f-sans-m {
+.font-sans-m {
   --font-size: var(--font-size-sans-m);
   --line-height: var(--line-height-sans-m, var(--line-height-sans));
 }
 
-.plain-sans-l > *,
-.f-sans-l {
+.font-sans-l {
   --font-size: var(--font-size-sans-l);
   --line-height: var(--line-height-sans-l, var(--line-height-sans));
 }
@@ -149,26 +170,22 @@ body {
   --font-size-serif-l: 48rem;
   --line-height-serif-l: 1.1em;
 }
-.plain-serif-xs > *,
-.f-serif-xs {
+.font-serif-xs {
   --font-size: var(--font-size-serif-xs);
   --line-height: var(--line-height-serif-xs, var(--line-height-serif));
 }
 
-.plain-serif-s > *,
-.f-serif-s {
+.font-serif-s {
   --font-size: var(--font-size-serif-s);
   --line-height: var(--line-height-serif-s, var(--line-height-serif));
 }
 
-.plain-serif-m > *,
-.f-serif-m {
+.font-serif-m {
   --font-size: var(--font-size-serif-m);
   --line-height: var(--line-height-serif-m, var(--line-height-serif));
 }
 
-.plain-serif-l > *,
-.f-serif-l {
+.font-serif-l {
   --font-size: var(--font-size-serif-l);
   --line-height: var(--line-height-serif-l, var(--line-height-serif));
 }
@@ -183,26 +200,22 @@ body {
   --font-size-modern-l: 48rem;
   --line-height-modern-l: 1.1em;
 }
-.plain-modern-xs > *,
-.f-modern-xs {
+.font-modern-xs {
   --font-size: var(--font-size-modern-xs);
   --line-height: var(--line-height-modern-xs, var(--line-height-modern));
 }
 
-.plain-modern-s > *,
-.f-modern-s {
+.font-modern-s {
   --font-size: var(--font-size-modern-s);
   --line-height: var(--line-height-modern-s, var(--line-height-modern));
 }
 
-.plain-modern-m > *,
-.f-modern-m {
+.font-modern-m {
   --font-size: var(--font-size-modern-m);
   --line-height: var(--line-height-modern-m, var(--line-height-modern));
 }
 
-.plain-modern-l > *,
-.f-modern-l {
+.font-modern-l {
   --font-size: var(--font-size-modern-l);
   --line-height: var(--line-height-modern-l, var(--line-height-modern));
 }
@@ -214,29 +227,4 @@ body {
     --font-size-serif-m: 36rem;
     --font-size-serif-l: 64rem;
   }
-}
-.plain > h2, .plain > h3, .plain > h4, .plain > h5, .plain > h6, .plain > p, .plain > ul, .plain > ol, .plain > dl {
-  --font-family: var(--font-family-sans);
-  --line-height: var(--line-height-sans);
-  --letter-spacing: var(--letter-spacing-sans);
-  --trim-sides: var(--trim-sides-sans);
-  --dist-capline: var(--dist-capline-sans);
-  --dist-baseline: var(--dist-baseline-sans);
-  --trim-adjacent: var(--trim-adjacent-sans);
-}
-.plain > h6 {
-  font-size: var(--font-size-sans-xs);
-  --line-height: var(--line-height-sans-xs, var(--line-height-sans));
-}
-.plain > h5, .plain > blockquote {
-  font-size: var(--font-size-sans-s);
-  --line-height: var(--line-height-sans-s, var(--line-height-sans));
-}
-.plain > h4, .plain > p, .plain > ul, .plain > ol, .plain > dl {
-  font-size: var(--font-size-sans-m);
-  --line-height: var(--line-height-sans-m, var(--line-height-sans));
-}
-.plain > h3 {
-  font-size: var(--font-size-sans-l);
-  --line-height: var(--line-height-sans-l, var(--line-height-sans));
 }

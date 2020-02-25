@@ -48,6 +48,18 @@
   @return selector-parse($out);
 }
 
+@function selector-any($anys, $sel: '') {
+  @return selector-parse('#{$sel}:-moz-any(#{join((), $anys, comma)}), #{$sel}:-webkit-any(#{join((), $anys, comma)})');
+}
+
+@function webkit-any($anys, $sel: '') {
+  @return selector-parse('#{$sel}:-webkit-any(#{join((), $anys, comma)})');
+}
+
+@function moz-any($anys, $sel: '') {
+  @return selector-parse('#{$sel}:-moz-any(#{join((), $anys, comma)})');
+}
+
 @function selector-not($sel, $nots) {
   @each $not in $nots { $sel: '#{$sel}:not(#{$not})' }
   @return selector-parse($sel);

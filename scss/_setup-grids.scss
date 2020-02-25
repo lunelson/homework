@@ -36,6 +36,7 @@
   }
 
   // MULTI-COLUMN GRID LAYOUT
+  // #{base-class('mcol-grid')},
   #{base-class('mgrid')} {
     margin-top: calc(var(--row-gap) / -2) !important;
     margin-bottom: calc(var(--row-gap) / -2) !important;
@@ -47,7 +48,20 @@
     }
   }
 
+  #{base-class('flex')} {
+    display: flex !important;
+    flex-direction: row;
+    &.row { flex-direction: row; }
+    &.col { flex-direction: column; }
+    &.row-reverse { flex-direction: row-reverse; }
+    &.col-reverse { flex-direction: column-reverse; }
+  }
+  .flex-col { flex-direction: column;}
+  .flex-row { flex-direction: row;}
+  .flex-flow { flex-flow: wrap;}
+
   // FLEXBOX GRID LAYOUT
+  // #{base-class('flex-grid')},
   #{base-class('fgrid')} {
     display: flex !important;
     flex-direction: row;
@@ -57,6 +71,10 @@
     margin-right: calc(var(--column-gap) / -2) !important;
     margin-top: calc(var(--row-gap) / -2) !important;
     margin-bottom: calc(var(--row-gap) / -2) !important;
+    &.row { flex-direction: row; }
+    &.col { flex-direction: column; }
+    &.row-reverse { flex-direction: row-reverse; }
+    &.col-reverse { flex-direction: column-reverse; }
     & > * {
       flex: 0 0 auto;
       width: 100%;
@@ -77,6 +95,10 @@
     grid-gap: var(--row-gap) var(--column-gap);
     grid-template-columns: repeat(var(--column-span, var(--global-columns)), minmax(0%, 1fr)); // ~= 'min-width: 0%' rule above https://css-tricks.com/flexbox-truncated-text/
     grid-template-rows: repeat(var(--row-span, var(--global-rows, 1)), max-content);
+    &.row { grid-auto-flow: row; }
+    &.col { grid-auto-flow: column; }
+    &.row-reverse { grid-auto-flow: row-reverse; }
+    &.col-reverse { grid-auto-flow: column-reverse; }
     & > * {
       grid-column: span var(--column-span, var(--global-columns)) / span var(--column-span, var(--global-columns));
       grid-row: span var(--row-span, 1) / span var(--row-span, 1);
@@ -148,12 +170,12 @@
 
       $m__: state-prefix();
 
-      // // context: mcol-only (doesn't work in FF)
-      // #{base-class('mcol')} {
-      //   & > .#{$m__}span-all {
-      //     column-span: all;
-      //   }
-      // }
+      // context: mcol-only (doesn't work in FF)
+      #{base-class('mcol')} {
+        & > .#{$m__}span-all {
+          column-span: all;
+        }
+      }
 
       // context: fgrid-only
       #{base-class('fgrid')} {

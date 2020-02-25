@@ -1,0 +1,11 @@
+.hello {
+  content: "world";
+}
+
+:any(.font, [class^=font-], [class*=" font-"]) :any(.trim, [class^=trim-], [class*=" trim-"]) {
+  color: red;
+}
+
+.font .trim, .font [class^=trim-], .font [class*=" trim-"], [class^=font-] .trim, [class^=font-] [class^=trim-], [class^=font-] [class*=" trim-"], [class*=" font-"] .trim, [class*=" font-"] [class^=trim-], [class*=" font-"] [class*=" trim-"] {
+  color: red;
+}

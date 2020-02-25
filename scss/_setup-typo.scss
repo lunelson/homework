@@ -7,14 +7,13 @@
 //       __/ | |
 //      |___/|_|
 
-// $non-trim-elements: div table figure img svg video iframe object section aside header footer article;
-$non-trim-elements: div table figure img svg video iframe object;
+$typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
 
 @function normalize-unit($n, $unit) { @return if((type-of($n) == number) and unitless($n), $n * $unit, $n); }
 
-@mixin homework-setup-typo( $trim: true, $trim-excl: $non-trim-elements ) {
+@mixin homework-setup-typo( $trim: true, $trim-elements: $typo-elements ) {
 
-  // normalize $fonts
+  // normalize $fonts map
   $fonts: if(length($fonts) > 0, $fonts, $fonts-defaults) !global;
 
   @each $f, $font in $fonts {
@@ -23,7 +22,7 @@ $non-trim-elements: div table figure img svg video iframe object;
   }
 
   body,
-  #{base-class('f', false)},
+  #{base-class('font', false)},
   #{selector-combine(base-class('plain'), '*', '>')} {
     font-family: var(--font-family);
     font-size: var(--font-size);
@@ -39,23 +38,51 @@ $non-trim-elements: div table figure img svg video iframe object;
 
   @if $trim {
 
-    #{selector-combine('.trim', base-class('f', false), '>')},
-    #{selector-combine(base-class('stack'), base-class('f', false), '>')},
-    #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '>')} {
+    // stack > trim
+    #{selector-combine(base-class('stack'), '.trim', '>')} {
       --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
       --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
-
       margin-top: calc(0em - var(--trim-top));
       margin-bottom: calc(0em - var(--trim-bottom));
       margin-right: var(--trim-sides);
       margin-left: var(--trim-sides);
     }
-    #{selector-combine(base-class('stack'), base-class('f', false), '> * +')},
-    #{selector-combine(base-class('plain'), selector-not('*', $trim-excl), '> * +')} {
+    #{selector-combine(base-class('stack'), '.trim', '> * +')} {
       margin-top: subtract(var(--stack-gap), var(--trim-top));
     }
-    #{selector-combine(base-class('f', false), base-class('f', false), '+')},
-    #{selector-combine(base-class('plain'), selector-combine(selector-not('*', $trim-excl), selector-not('*', $trim-excl), '+'), '>')} {
+    #{selector-combine('.trim', '.trim', '+')} {
+      --trim-top-adjust: var(--trim-adjacent);
+    }
+
+    // plain > :-webkit-any (MUST BE DECLARED SEPARATELY!)
+    #{selector-combine(base-class('plain'), webkit-any($trim-elements), '>')} {
+      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+      margin-top: calc(0em - var(--trim-top));
+      margin-bottom: calc(0em - var(--trim-bottom));
+      margin-right: var(--trim-sides);
+      margin-left: var(--trim-sides);
+    }
+    #{selector-combine(base-class('plain'), webkit-any($trim-elements), '> * +')} {
+      margin-top: subtract(var(--stack-gap), var(--trim-top));
+    }
+    #{selector-combine(base-class('plain'), selector-combine(webkit-any($trim-elements), webkit-any($trim-elements), '+'), '>')} {
+      --trim-top-adjust: var(--trim-adjacent);
+    }
+
+    // plain > :-moz-any (MUST BE DECLARED SEPARATELY!)
+    #{selector-combine(base-class('plain'), moz-any($trim-elements), '>')} {
+      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+      margin-top: calc(0em - var(--trim-top));
+      margin-bottom: calc(0em - var(--trim-bottom));
+      margin-right: var(--trim-sides);
+      margin-left: var(--trim-sides);
+    }
+    #{selector-combine(base-class('plain'), moz-any($trim-elements), '> * +')} {
+      margin-top: subtract(var(--stack-gap), var(--trim-top));
+    }
+    #{selector-combine(base-class('plain'), selector-combine(moz-any($trim-elements), moz-any($trim-elements), '+'), '>')} {
       --trim-top-adjust: var(--trim-adjacent);
     }
 
@@ -82,10 +109,7 @@ $non-trim-elements: div table figure img svg video iframe object;
       }
     }
 
-    #{selector-combine(base-class('plain-#{$f}'), '*', '>')},
-    #{if($f == nth(map-keys($fonts), 1), selector-combine(base-class('plain'), '*', '>'), '')},
-    #{base-class('f-#{$f}')},
-    #{if($f == nth(map-keys($fonts), 1), 'body', '')} {
+    #{base-class('font-#{$f}')}, #{if($f == nth(map-keys($fonts), 1), 'body', '')} {
       --font-family: var(--font-family-#{$f});
       --line-height: var(--line-height-#{$f});
       --letter-spacing: var(--letter-spacing-#{$f});
@@ -108,18 +132,17 @@ $non-trim-elements: div table figure img svg video iframe object;
             // (A) output the custom properties
             $fz: __nth($set, 1); $lh: __nth($set, 2);
 
-            // TODO: proof whether it's possible to use lerp expressions here
+            // TODO: TEST whether it's possible to use lerp expressions here !!
             --font-size-#{$f}-#{$s}: #{decalc(normalize-unit($fz, 1rem))};
 
             @if $lh != () {
-              // TODO: proof whether it's possible to use lerp expressions here
+              // TODO: TEST whether it's possible to use lerp expressions here !!
               --line-height-#{$f}-#{$s}: #{decalc(normalize-unit($lh, 1em))};
             }
 
-            // (B) if on $root, output the .f-(f)-(s) assignment
+            // (B) if on $root, output the .font-(f)-(s) assignment
             @if not $m {
-              @at-root .plain-#{$f}-#{$s} > *,
-              .f-#{$f}-#{$s} {
+              @at-root .font-#{$f}-#{$s} {
                 --font-size: var(--font-size-#{$f}-#{$s});
                 --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
               }
