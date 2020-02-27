@@ -31,13 +31,10 @@
       --column-span: calc(var(--column-span-proxy, var(--global-columns)) / var(--multi-columns, 1));
       --local-columns: calc(var(--local-columns-proxy, var(--global-columns)) / var(--multi-columns, 1));
     }
-    // & > * > * {
-    // }
   }
 
   // MULTI-COLUMN GRID LAYOUT
-  // #{base-class('mcol-grid')},
-  #{base-class('mgrid')} {
+  #{base-class('mcol-grid')} {
     margin-top: calc(var(--row-gap) / -2) !important;
     margin-bottom: calc(var(--row-gap) / -2) !important;
     & > * {
@@ -47,34 +44,41 @@
       padding-bottom: calc(var(--row-gap) / 2) !important;
     }
   }
+  /*
+    base-class(flow)
+      &.row
+      &.col
+      &.row-reverse
+      &.col-reverse
 
-  #{base-class('flex')} {
+    base-class(flow-grid)
+
+    :root
+      --column-gap: 0;
+      --row-gap: 0;
+
+    base-class(mcol-grid)
+    base-class(flow-grid)
+    base-class(grid)
+      --column-gap: var(--inner-x)
+   */
+
+  #{base-class('flow')} {
     display: flex !important;
-    flex-direction: row;
+    flex-flow: row wrap;
     &.row { flex-direction: row; }
     &.col { flex-direction: column; }
     &.row-reverse { flex-direction: row-reverse; }
     &.col-reverse { flex-direction: column-reverse; }
   }
-  .flex-col { flex-direction: column;}
-  .flex-row { flex-direction: row;}
-  .flex-flow { flex-flow: wrap;}
 
   // FLEXBOX GRID LAYOUT
-  // #{base-class('flex-grid')},
-  #{base-class('fgrid')} {
-    display: flex !important;
-    flex-direction: row;
-    flex-wrap: wrap;
+  #{base-class('flow-grid')} {
     width: calc(100% + var(--column-gap)) !important;
     margin-left: calc(var(--column-gap) / -2) !important;
     margin-right: calc(var(--column-gap) / -2) !important;
     margin-top: calc(var(--row-gap) / -2) !important;
     margin-bottom: calc(var(--row-gap) / -2) !important;
-    &.row { flex-direction: row; }
-    &.col { flex-direction: column; }
-    &.row-reverse { flex-direction: row-reverse; }
-    &.col-reverse { flex-direction: column-reverse; }
     & > * {
       flex: 0 0 auto;
       width: 100%;
@@ -107,10 +111,10 @@
 
   :root { --column-gap: var(--inner-x); }
 
-  .mgrid, .fgrid, .grid { --row-gap: var(--inner-y); }
+  .mcol-grid, .flow-grid, .grid { --row-gap: var(--inner-y); }
 
   @each $y in map-keys(inner-y-mods()) {
-    .mgrid-#{$y}, .fgrid-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
+    .mcol-grid-#{$y}, .flow-grid-#{$y}, .grid-#{$y} { --row-gap: var(--inner-y-#{$y}); }
   }
 
   // make the following props *non-cascading*
@@ -125,8 +129,8 @@
       #{state-base-class('span', false, $m)} {
         // context: solo
         width: calc((99.99999% + var(--column-gap)) * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns)) - var(--column-gap)) !important;
-        @at-root #{selector-insert(base-class('fgrid'), '>')} {
-          // context: fgrid
+        @at-root #{selector-insert(base-class('flow-grid'), '>')} {
+          // context: flow-grid
           width: calc(99.99999% * var(--column-span, var(--global-columns)) / var(--local-columns, var(--global-columns))) !important;
         }
         // @at-root #{selector-insert(base-class('mcol'), '>')} {
@@ -139,13 +143,13 @@
         }
       }
 
-      // contexts: solo, fgrid; reset: grid
+      // contexts: solo, flow-grid; reset: grid
       #{state-base-class('pull', false, $m)},
       #{state-base-class('push', false, $m)} {
         // context: solo
         margin-left: calc((99.99999% + var(--column-gap)) * var(--column-push) / var(--local-columns, var(--global-columns)));
-        @at-root #{selector-insert(base-class('fgrid'), '>')} {
-          // context: fgrid
+        @at-root #{selector-insert(base-class('flow-grid'), '>')} {
+          // context: flow-grid
           margin-left: calc(99.99999% * var(--column-push) / var(--local-columns, var(--global-columns)));
         }
         // @at-root #{selector-insert(base-class('grid'), '>')} {
@@ -158,8 +162,8 @@
       #{state-base-class('push-r', false, $m)} {
         // context: solo
         margin-right: calc((99.99999% + var(--column-gap)) * var(--column-push-r) / var(--local-columns, var(--global-columns)));
-        @at-root #{selector-insert(base-class('fgrid'), '>')} {
-          // context: fgrid
+        @at-root #{selector-insert(base-class('flow-grid'), '>')} {
+          // context: flow-grid
           margin-right: calc(99.99999% * var(--column-push-r) / var(--local-columns, var(--global-columns)));
         }
         // @at-root #{selector-insert(base-class('grid'), '>')} {
@@ -177,8 +181,8 @@
         }
       }
 
-      // context: fgrid-only
-      #{base-class('fgrid')} {
+      // context: flow-grid-only
+      #{base-class('flow-grid')} {
         & > .#{$m__}span-auto {
           flex: 1 1 auto;
           --column-span: 0;
