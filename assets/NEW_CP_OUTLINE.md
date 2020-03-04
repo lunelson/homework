@@ -64,8 +64,8 @@
   --trim-top
   --trim-bottom
   --trim-top-adjust
-    --dist-capline
-    --dist-baseline
+    --trim-capline
+    --trim-baseline
     --diff-ascender
 
 (theme)

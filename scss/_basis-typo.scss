@@ -16,8 +16,8 @@ $fonts-defaults: (
 $font-default: (
   line-height: 1.25em, // MUST HAVE A UNIT
   letter-spacing: 0, // calc(1px - 0.025em),
-  dist-capline: 0em,
-  dist-baseline: 0em,
+  trim-capline: 0em,
+  trim-baseline: 0em,
   trim-adjacent: (1em/8), // calc((1em - 1ex)/2),
   trim-sides: 0, // calc(1px - 0.1em),
 );
@@ -39,8 +39,8 @@ $font-default: (
 
   @if $trim {
     --trim-sides: var(--trim-sides-#{$f});
-    --dist-capline: var(--dist-capline-#{$f});
-    --dist-baseline: var(--dist-baseline-#{$f});
+    --trim-capline: var(--trim-capline-#{$f});
+    --trim-baseline: var(--trim-baseline-#{$f});
     --trim-adjacent: var(--trim-adjacent-#{$f});
   }
 }

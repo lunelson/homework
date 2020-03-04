@@ -57,16 +57,16 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
     // stack > trim
     // #{selector-combine(base-class('stack'), '.trim', '>')} {
     .trim {
-      // --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
-      // --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+      // --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline, 0em) + var(--trim-top-adjust, 0em));
+      // --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline, 0em));
       // --trim-both: calc(var(--trim-top) + var(--trim-bottom));
-      --dist-sum: calc(var(--dist-capline, 0em) + var(--dist-baseline, 0em));
+      --dist-sum: calc(var(--trim-capline, 0em) + var(--trim-baseline, 0em));
       // margin-top: calc(0em - var(--trim-top));
       // margin-bottom: calc(0em - var(--trim-bottom));
       margin-right: var(--trim-sides);
       margin-left: var(--trim-sides);
       // margin: 0 var(--trim-sides);
-      transform: translatey(calc((1em - var(--line-height))/2 - var(--dist-capline, 0em)));
+      transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-capline, 0em)));
       &:after {
         content: '';
         display: block;
@@ -86,8 +86,8 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
 
     // // plain > :-webkit-any (MUST BE DECLARED SEPARATELY!)
     // #{selector-combine(base-class('plain'), webkit-any($trim-elements), '>')} {
-    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
-    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline, 0em) + var(--trim-top-adjust, 0em));
+    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline, 0em));
     //   margin-top: calc(0em - var(--trim-top));
     //   margin-bottom: calc(0em - var(--trim-bottom));
     //   margin-right: var(--trim-sides);
@@ -102,8 +102,8 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
 
     // // plain > :-moz-any (MUST BE DECLARED SEPARATELY!)
     // #{selector-combine(base-class('plain'), moz-any($trim-elements), '>')} {
-    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
-    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline, 0em) + var(--trim-top-adjust, 0em));
+    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline, 0em));
     //   margin-top: calc(0em - var(--trim-top));
     //   margin-bottom: calc(0em - var(--trim-bottom));
     //   margin-right: var(--trim-sides);
@@ -128,12 +128,12 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
       --letter-spacing-#{$f}: #{decalc($ls)}; // normalize this too ?
 
       @if $trim {
-        $dc: map-get($font, 'dist-capline');
-        $db: map-get($font, 'dist-baseline');
+        $dc: map-get($font, 'trim-capline');
+        $db: map-get($font, 'trim-baseline');
         $ts: map-get($font, 'trim-sides');
         $ta: map-get($font, 'trim-adjacent');
-        --dist-capline-#{$f}: #{if(unitless($dc), $dc*1em, $dc)};
-        --dist-baseline-#{$f}: #{if(unitless($db), $db*1em, $db)};
+        --trim-capline-#{$f}: #{if(unitless($dc), $dc*1em, $dc)};
+        --trim-baseline-#{$f}: #{if(unitless($db), $db*1em, $db)};
         --trim-sides-#{$f}: #{$ts};
         --trim-adjacent-#{$f}: #{decalc($ta)};
       }
@@ -145,8 +145,8 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
       --letter-spacing: var(--letter-spacing-#{$f});
 
       @if $trim {
-        --dist-capline: var(--dist-capline-#{$f});
-        --dist-baseline: var(--dist-baseline-#{$f});
+        --trim-capline: var(--trim-capline-#{$f});
+        --trim-baseline: var(--trim-baseline-#{$f});
         --trim-sides: var(--trim-sides-#{$f});
         --trim-adjacent: var(--trim-adjacent-#{$f});
       }
