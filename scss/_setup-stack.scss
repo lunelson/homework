@@ -15,8 +15,8 @@
 
 @mixin homework-setup-stack() {
 
-  // NB: base-class plain connects to TYPO
-  #{base-class('stack')}, #{base-class('plain')} {
+  #{base-class('stack')},
+  #{base-class('plain')} {
     padding-top: 0.1px;
     padding-bottom: 0.1px;
     & > * {
@@ -24,7 +24,7 @@
       margin-bottom: 0;
     }
     & > * + * {
-      margin-top: var(--stack-gap);
+      margin-top: calc(var(--stack-gap) - var(--stack-gap-adjust, 0px));
     }
   }
 
@@ -36,8 +36,7 @@
       flex: 0 0 auto;
       width: 100%;
       height: auto;
-      // TODO: use this, or lose it
-      // width: fill-available;
+      width: stretch; // ? is this good ?
     }
   }
 
@@ -49,10 +48,10 @@
       flex: 0 0 auto;
       margin-right: 0;
       margin-left: 0;
-      width: max-content;
+      width: max-content; // ? is this good ?
     }
     & > * + * {
-      margin-left: var(--chain-gap);
+      margin-left: calc(var(--chain-gap) - var(--chain-gap-adjust, 0px));
     }
   }
 

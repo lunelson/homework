@@ -21,9 +21,7 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
     $fonts: map-merge($fonts, ($f: $font)) !global;
   }
 
-  body,
-  #{base-class('font', false)},
-  #{selector-combine(base-class('plain'), '*', '>')} {
+  body {
     font-family: var(--font-family);
     font-size: var(--font-size);
     line-height: calc(var(--line-height)); // can be raw calc values !!
@@ -38,53 +36,85 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
 
   @if $trim {
 
+    /*
+    .trim-c {
+      --line-height: 1.4em;
+      --trim-top: 0.14em;
+      --trim-bottom: 0.12em;
+      --trim-both: calc(var(--trim-top) + var(--trim-bottom));
+      line-height: var(--line-height);
+      transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-top)));
+      &:after {
+        content: '';
+        display: block;
+        height: 0.1px;
+        margin-top: calc((1em - var(--line-height)) - var(--trim-both));
+      }
+    }
+
+    */
+
     // stack > trim
-    #{selector-combine(base-class('stack'), '.trim', '>')} {
-      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
-      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
-      margin-top: calc(0em - var(--trim-top));
-      margin-bottom: calc(0em - var(--trim-bottom));
+    // #{selector-combine(base-class('stack'), '.trim', '>')} {
+    .trim {
+      // --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+      // --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+      // --trim-both: calc(var(--trim-top) + var(--trim-bottom));
+      --dist-sum: calc(var(--dist-capline, 0em) + var(--dist-baseline, 0em));
+      // margin-top: calc(0em - var(--trim-top));
+      // margin-bottom: calc(0em - var(--trim-bottom));
       margin-right: var(--trim-sides);
       margin-left: var(--trim-sides);
+      // margin: 0 var(--trim-sides);
+      transform: translatey(calc((1em - var(--line-height))/2 - var(--dist-capline, 0em)));
+      &:after {
+        content: '';
+        display: block;
+        height: 0.1px;
+        margin-top: calc((1em - var(--line-height)) - var(--dist-sum));
+      }
     }
-    #{selector-combine(base-class('stack'), '.trim', '> * +')} {
-      margin-top: subtract(var(--stack-gap), var(--trim-top));
-    }
-    #{selector-combine('.trim', '.trim', '+')} {
-      --trim-top-adjust: var(--trim-adjacent);
-    }
-
-    // plain > :-webkit-any (MUST BE DECLARED SEPARATELY!)
-    #{selector-combine(base-class('plain'), webkit-any($trim-elements), '>')} {
-      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
-      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
-      margin-top: calc(0em - var(--trim-top));
-      margin-bottom: calc(0em - var(--trim-bottom));
-      margin-right: var(--trim-sides);
-      margin-left: var(--trim-sides);
-    }
-    #{selector-combine(base-class('plain'), webkit-any($trim-elements), '> * +')} {
-      margin-top: subtract(var(--stack-gap), var(--trim-top));
-    }
+    $elems: join((), $trim-elements, comma);
+    #{selector-combine(base-class('stack'), '.trim + .trim', '>')},
     #{selector-combine(base-class('plain'), selector-combine(webkit-any($trim-elements), webkit-any($trim-elements), '+'), '>')} {
-      --trim-top-adjust: var(--trim-adjacent);
+      --stack-gap-adjust: var(--trim-adjacent);
+      // margin-top: subtract(var(--stack-gap), var(--trim-top));
     }
+    // #{selector-combine('.trim', '.trim', '+')} {
+    //   --trim-top-adjust: var(--trim-adjacent);
+    // }
 
-    // plain > :-moz-any (MUST BE DECLARED SEPARATELY!)
-    #{selector-combine(base-class('plain'), moz-any($trim-elements), '>')} {
-      --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
-      --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
-      margin-top: calc(0em - var(--trim-top));
-      margin-bottom: calc(0em - var(--trim-bottom));
-      margin-right: var(--trim-sides);
-      margin-left: var(--trim-sides);
-    }
-    #{selector-combine(base-class('plain'), moz-any($trim-elements), '> * +')} {
-      margin-top: subtract(var(--stack-gap), var(--trim-top));
-    }
-    #{selector-combine(base-class('plain'), selector-combine(moz-any($trim-elements), moz-any($trim-elements), '+'), '>')} {
-      --trim-top-adjust: var(--trim-adjacent);
-    }
+    // // plain > :-webkit-any (MUST BE DECLARED SEPARATELY!)
+    // #{selector-combine(base-class('plain'), webkit-any($trim-elements), '>')} {
+    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+    //   margin-top: calc(0em - var(--trim-top));
+    //   margin-bottom: calc(0em - var(--trim-bottom));
+    //   margin-right: var(--trim-sides);
+    //   margin-left: var(--trim-sides);
+    // }
+    // #{selector-combine(base-class('plain'), webkit-any($trim-elements), '> * +')} {
+    //   margin-top: subtract(var(--stack-gap), var(--trim-top));
+    // }
+    // #{selector-combine(base-class('plain'), selector-combine(webkit-any($trim-elements), webkit-any($trim-elements), '+'), '>')} {
+    //   --trim-top-adjust: var(--trim-adjacent);
+    // }
+
+    // // plain > :-moz-any (MUST BE DECLARED SEPARATELY!)
+    // #{selector-combine(base-class('plain'), moz-any($trim-elements), '>')} {
+    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--dist-capline, 0em) + var(--trim-top-adjust, 0em));
+    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--dist-baseline, 0em));
+    //   margin-top: calc(0em - var(--trim-top));
+    //   margin-bottom: calc(0em - var(--trim-bottom));
+    //   margin-right: var(--trim-sides);
+    //   margin-left: var(--trim-sides);
+    // }
+    // #{selector-combine(base-class('plain'), moz-any($trim-elements), '> * +')} {
+    //   margin-top: subtract(var(--stack-gap), var(--trim-top));
+    // }
+    // #{selector-combine(base-class('plain'), selector-combine(moz-any($trim-elements), moz-any($trim-elements), '+'), '>')} {
+    //   --trim-top-adjust: var(--trim-adjacent);
+    // }
 
   }
 
