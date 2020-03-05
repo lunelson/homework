@@ -1,3 +1,17 @@
+## NEW NEW
+
+mcol-(gap)
+mcol-grid-(row-gap)
+flow-(gap)
+flow-(col-gap)-(row-gap)
+flow-grid-(row-gap)
+
+- mcol-grid should default to span the number of local grid columns at that point
+- base flow-grid child should default to span one column, like grid and mcol-grid
+
+### questions
+- can flow and mcol classes self-trim ? NO because their margins are on the outside
+-
 ## new naming structure
 
 --root-columns
