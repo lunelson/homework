@@ -35,7 +35,7 @@
   $glin: de-gamma(green($c)/255);
   $blin: de-gamma(blue($c)/255);
   $luma: re-gamma(0.2126 * $rlin + 0.7152 * $glin + 0.0722 * $blin);
-  @return map-get($colors, if($luma >= 0.5, 'dark', 'lite'));
+  @return map-get($colors, if($luma >= 0.5, 'base-black', 'base-white'));
 }
 
 @function overlay-color($c) {
@@ -65,3 +65,23 @@ $fn-hsla: get-function('hsla');
 
 @function shade($color, $percent){ @return mix(black, $color, $percent); }
 @function tint($color, $percent){ @return mix(white, $color, $percent); }
+
+@function __prop-color-name($var) {
+  @return --#{nth($var, 1)}-color;
+}
+
+@function __theme-prop-color-var($vars...) {
+  @return var(--theme-#{nth($vars, 1)}-color#{if(length($vars)>1,', #{__theme-prop-color-var(__slice($vars, 2)...)}','')});
+}
+
+@function __prop-color-var($vars...) {
+  @return var(--#{nth($vars, 1)}-color#{if(length($vars)>1,', #{__prop-color-var(__slice($vars, 2)...)}','')});
+}
+
+@function __prop-contrast-name($var) {
+  @return --#{nth($var, 1)}-contrast;
+}
+
+@function __theme-prop-contrast-var($vars...) {
+  @return var(--theme-#{nth($vars, 1)}-contrast#{if(length($vars)>1,', #{__theme-prop-contrast-var(__slice($vars, 2)...)}','')});
+}

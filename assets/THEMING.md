@@ -1,3 +1,109 @@
+/*
+
+ui props:
+  fg, bg,
+    border -> fg
+    outline -> fg
+    rule -> fg
+    fill -> fg
+    stroke -> fg
+  link,
+    visited -> link
+    hover -> link
+    focus -> hover, link
+    active -> hover, link
+
+
+for each prop-alias in theme (e.g. fg, bg, bd, ol, rule, fill, stroke)
+  set the color to the theme color for that
+  ...with fallbacks to fg-color for all non-bg/fg colors
+
+:root {
+  --#{$prop-alias}-color: var(--theme-#{$prop-alias}-color, var(--fg-color);
+}
+
+// each alias, color in theme
+:root, .theme-lite {
+  --theme-#{$alias}: var(--color-#{$color});
+}
+
+// each alias, color in theme
+.theme-dark {
+  --theme-#{$alias}: var(--color-#{$color});
+}
+
+NAMING
+
+--color-(color)
+--contrast-(color)
+
+--(prop)-color
+--(prop)-contrast
+
+--theme-(prop)-color
+--theme-(prop)-contrast
+
+*/
+
+:root {
+  // --#{$alias}-color: var(--theme-#{$alias}-color);
+}
+/*
+// each alias, color in theme
+:root, .theme-lite {
+  --theme-#{$alias}-color: var(--color-#{$color});
+}
+
+// each alias, color in theme
+.theme-dark {
+  --theme-#{$alias}-color: var(--color-#{$color});
+}
+
+ */// $themes: (
+//   root: (
+//     fg: '', // --base-fg
+//     bg: '', // --base-bg
+//     pippin: #FFDFDF,
+//     blue: #ADDDFF,
+//     green: #10ce00,
+//     dark: #141414,
+//     lite: #f5f5f5,
+//     rose: #EBD8D9,
+//     gray: (
+//       darker: #222222,
+//       dark: #545454,
+//       mid: #858585,
+//       light: #B7B7B7,
+//       lighter: #E9E9E9,
+//     ),
+//   ),
+//   foo: (
+//     fg: '', // --base-fg
+//     bg: '', // --base-bg
+//   )
+// );
+
+
+
+// themes
+//   alpha
+//     base
+//     primary
+//     secondary
+//   bravo
+//     base
+//     primary
+//     secondary
+
+// --base-alpha
+
+// .theme-alpha
+//   --color-base
+//   --color-primary
+//   --color-secondary
+
+---
+
 ## rules
 
 1. all colors should be named with `--color-#{$name}` pattern

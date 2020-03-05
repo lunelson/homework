@@ -5,93 +5,90 @@
 // | |_| | | |  __/ | | | | |  __/
 //  \__|_| |_|\___|_| |_| |_|\___|
 
-
 $colors: () !default;
+$themes: () !default;
 
-// $themes: (
-//   root: (
-//     fg: '', // --base-fg
-//     bg: '', // --base-bg
-//     pippin: #FFDFDF,
-//     blue: #ADDDFF,
-//     green: #10ce00,
-//     dark: #141414,
-//     lite: #f5f5f5,
-//     rose: #EBD8D9,
-//     gray: (
-//       darker: #222222,
-//       dark: #545454,
-//       mid: #858585,
-//       light: #B7B7B7,
-//       lighter: #E9E9E9,
-//     ),
-//   ),
-//   foo: (
-//     fg: '', // --base-fg
-//     bg: '', // --base-bg
-//   )
-// );
+$all-pseudos: 'hover', 'focus', 'active', 'target', 'disabled', 'focus-within', 'parent-hover', 'parent-focus';
 
+@function __var($vars, $suffix: '', $prefix: '') {
+  @return var(--#{$prefix}#{nth($vars, 1)}#{$suffix}#{if(length($vars)>1,', #{__var(__slice($vars, 2), $suffix, $prefix)}','')});
+}
 
+$prop-var-fallbacks: (
+  fg: fg,
+  bg: bg,
+  bd: bd fg,
+  ol: ol fg,
+  fill: fill fg,
+  stroke: stroke fg,
+  link: link fg,
+  visited: visited link fg,
+  hover: hover link fg,
+  focus: focus hover link fg,
+  active: active hover link fg,
+);
 
-// themes
-//   alpha
-//     base
-//     primary
-//     secondary
-//   bravo
-//     base
-//     primary
-//     secondary
-
-// --base-alpha
-
-// .theme-alpha
-//   --color-base
-//   --color-primary
-//   --color-secondary
-
-@mixin homework-setup-theme($type: 'lite') {
+@mixin homework-setup-theme( $black: #000, $white: #FFF, $pseudos: () ) {
 
   $colors: map-merge((
-    dark: #141414,
-    lite: #F5F5F5,
+    'base-black': $black,
+    'base-white': $white,
   ), $colors) !global;
 
   $color-names: ();
 
   :root {
 
+    @each $prop, $vars in $prop-var-fallbacks {
+      --#{$prop}-color: #{__var($vars, '-color', 'theme-')};
+      @if index(fg bg, $prop) {
+        --#{$prop}-contrast: #{__var($vars, '-contrast', 'theme-')};
+      }
+    }
+
     // NB: color custom props stored as RGB number list!!!!
     // original idea --> https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable/41265350#41265350
     @each $c, $color in $colors {
       @if length($color) > 1 {
         @each $n, $subcolor in __list-to-index-map($color) {
-          --color-#{$c}-#{$n}: #{hslify($subcolor)};
-          --contrast-#{$c}-#{$n}: #{hslify(contrast-color($subcolor))};
+          --color-#{$c}-#{$n}: #{rgbify($subcolor)};
+          --contrast-#{$c}-#{$n}: #{rgbify(contrast-color($subcolor))};
           $color-names: append($color-names, #{$c}-#{$n});
         }
       } @else {
-        --color-#{$c}: #{hslify($color)};
-        --contrast-#{$c}: #{hslify(contrast-color($color))};
+        --color-#{$c}: #{rgbify($color)};
+        --contrast-#{$c}: #{if($c=='base-white','var(--color-base-black)',if($c=='base-black','var(--color-base-white)',rgbify(contrast-color($color))))};
         $color-names: append($color-names, $c);
       }
     }
+  }
 
-    --fg-color: var(#{if($type == 'lite', --color-dark, --color-lite)});
-    --fg-contrast: var(#{if($type == 'lite', --color-lite, --color-dark)});
-    --bg-color: var(#{if($type == 'lite', --color-lite, --color-dark)});
-    --bg-contrast: var(#{if($type == 'lite', --color-dark, --color-lite)});
+  $i: 1;
+  @each $t, $theme in $themes {
+    .theme-#{$t},
+    #{if($i == 1, ':root', '')} {
+      @each $prop, $color in $theme {
+        --theme-#{$prop}-color: var(--color-#{$color});
+        @if index(fg bg, $prop) {
+          --theme-#{$prop}-contrast: var(--contrast-#{$color});
+        }
+      }
+    }
+    $i: $i + 1;
   }
 
   body {
-    color: hsla(var(--fg-color), var(--fg-opacity, 1));
-    background-color: hsla(var(--bg-color), var(--bg-opacity, 1));
+    color: rgba(var(--fg-color), var(--fg-opacity, 1));
+    background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
   }
 
-  // STATEFUL THEME PROPERTIES
+  @each $state in (link, visited, hover, focus, active) {
+    a:#{$state} {
+      color: rgba(#{__var($state, '-color')}, var(--fg-opacity, 1));
+    }
+  }
 
-  @each $pseudo in ( '', 'hover', 'focus', 'active', 'target', 'disabled', 'focus-within', 'parent-hover', 'parent-focus' ) {
+  @each $pseudo in join('', $pseudos) {
 
     $p__: state-prefix($pseudo);
 
@@ -102,15 +99,15 @@ $colors: () !default;
       '&');
 
     #{state-base-class('fg', false, $pseudo)} { #{$sel} {
-      color: hsla(var(--fg-color), var(--fg-opacity, 1));
+      color: rgba(var(--fg-color), var(--fg-opacity, 1));
     } }
 
     #{state-base-class('bg', false, $pseudo)} { #{$sel} {
-      background-color: hsla(var(--bg-color), var(--bg-opacity, 1));
+      background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
     } }
 
     #{state-base-class('bd', false, $pseudo)} { #{$sel} {
-      border-color: hsla(var(--bd-color, var(--fg-color)), var(--bd-opacity, 1));
+      border-color: rgba(__prop-color-var(bd, fg), var(--bd-opacity, 1));
       border-style: var(--bd-style, solid);
       border-top-width: var(--bd-top-width, 0);
       border-right-width: var(--bd-right-width, 0);
@@ -119,23 +116,17 @@ $colors: () !default;
     } }
 
     #{state-base-class('ol', false, $pseudo)} { #{$sel} {
-      outline-color: hsla(var(--ol-color, var(--fg-color)), var(--ol-opacity, 1));
+      outline-color: rgba(__prop-color-var(ol, fg), var(--ol-opacity, 1));
       outline-width: var(--ol-width);
     } }
 
-
-    // #{state-base-class('rule', false, $pseudo)} { #{$sel} {
-    //   rule: rgb(var(--rule-color));
-    //   rule-opacity: var(--rule-opacity, 1);
-    // } }
-
     #{state-base-class('fill', false, $pseudo)} { #{$sel} {
-      fill: rgb(var(--fill-color));
+      fill: rgb(__prop-color-var(fill, fg));
       fill-opacity: var(--fill-opacity, 1);
     } }
 
     #{state-base-class('stroke', false, $pseudo)} { #{$sel} {
-      stroke: rgb(var(--stroke-color));
+      stroke: rgb(__prop-color-var(stroke, fg));
       stroke-opacity: var(--stroke-opacity, 1);
       stroke-width: var(--stroke-width);
     } }
@@ -146,17 +137,15 @@ $colors: () !default;
     .#{$p__}fg-contrast { #{$sel} { --fg-color: var(--bg-contrast); } }
     .#{$p__}bd-contrast { #{$sel} { --bd-color: var(--bg-contrast); } }
     .#{$p__}ol-contrast { #{$sel} { --ol-color: var(--bg-contrast); } }
-    // .#{$p__}rule-contrast { #{$sel} { --rule-color: var(--bg-contrast); } }
     .#{$p__}fill-contrast { #{$sel} { --fill-color: var(--bg-contrast); } }
     .#{$p__}stroke-contrast { #{$sel} { --stroke-color: var(--bg-contrast); } }
 
-    // THEME CLASSES
+    // Key CLASSES
 
     .#{$p__}fg-key { #{$sel} { --fg-color: var(--key-color); --fg-contrast: var(--key-contrast); } }
     .#{$p__}bg-key { #{$sel} { --bg-color: var(--key-color); --bg-contrast: var(--key-contrast); } }
     .#{$p__}bd-key { #{$sel} { --bd-color: var(--key-color); } }
     .#{$p__}ol-key { #{$sel} { --ol-color: var(--key-color); } }
-    // .#{$p__}rule-key { #{$sel} { --rule-color: var(--key-color); } }
     .#{$p__}fill-key { #{$sel} { --fill-color: var(--key-color); } }
     .#{$p__}stroke-key { #{$sel} { --stroke-color: var(--key-color); } }
 
@@ -167,20 +156,16 @@ $colors: () !default;
       .#{$p__}bg-#{$c} { #{$sel} { --bg-color: var(--color-#{$c}); --bg-contrast: var(--contrast-#{$c}); } }
       .#{$p__}bd-#{$c} { #{$sel} { --bd-color: var(--color-#{$c}); } }
       .#{$p__}ol-#{$c} { #{$sel} { --ol-color: var(--color-#{$c}); } }
-      // .#{$p__}rule-#{$c} { #{$sel} { --rule-color: var(--color-#{$c}); } }
       .#{$p__}fill-#{$c} { #{$sel} { --fill-color: var(--color-#{$c}); } }
       .#{$p__}stroke-#{$c} { #{$sel} { --stroke-color: var(--color-#{$c}); } }
 
     }
 
     // CURRENT COLOR FILL/STROKE
-
-    // .#{$p__}rule-current { #{$sel} { --rule-color: currentColor; } }
     .#{$p__}fill-current { #{$sel} { --fill-color: currentColor; } }
     .#{$p__}stroke-current { #{$sel} { --stroke-color: currentColor; } }
 
     // OPACITY
-
     .#{$p__}o-100 { #{$sel} { opacity: 1; } } // no need?
     @for $n from 0 through 9 { .#{$p__}o-#{$n}0 { #{$sel} { opacity: $n/10; } } }
 
@@ -189,7 +174,6 @@ $colors: () !default;
       .#{$p__}bg-o-#{$n}0 { #{$sel} { --bg-opacity: #{$n/10}; } }
       .#{$p__}bd-o-#{$n}0 { #{$sel} { --bd-opacity: #{$n/10}; } }
       .#{$p__}ol-o-#{$n}0 { #{$sel} { --ol-opacity: #{$n/10}; } }
-      // .#{$p__}rule-o-#{$n}0 { #{$sel} { --rule-opacity: #{$n/10}; } }
       .#{$p__}fill-o-#{$n}0 { #{$sel} { --fill-opacity: #{$n/10}; } }
       .#{$p__}stroke-o-#{$n}0 { #{$sel} { --stroke-opacity: #{$n/10}; } }
     }

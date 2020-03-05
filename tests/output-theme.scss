@@ -1,8 +1,6 @@
 @import 'index';
 
 $colors: (
-  'dark': #0a0a0a,
-  'lite': #f0f0f0,
   'gray': (
     #222222,
     #545454,
@@ -30,5 +28,18 @@ $colors: (
   ),
 );
 
+$themes: (
+  lite: (
+    fg: base-black,
+    bg: base-white,
+    link: baz,
+  ),
+  dark: (
+    fg: base-white,
+    bg: base-black,
+    link: fiz,
+  ),
+);
+
 @include homework-setup-core;
-@include homework-setup-theme;
+@include homework-setup-theme($pseudos: ());
