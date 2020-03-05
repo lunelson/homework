@@ -1,59 +1,25 @@
 body {
   font-family: var(--font-family);
-  font-size: var(--font-size);
+  font-size: calc(var(--font-size));
   line-height: calc(var(--line-height));
   letter-spacing: calc(var(--letter-spacing));
 }
 
-.lh-loose {
-  line-height: calc(var(--line-height) * 1.1);
-}
-
-.lh-tight {
-  line-height: calc(var(--line-height) * 0.9);
-}
-
-.ls-loose {
-  letter-spacing: calc(var(--letter-spacing) * 1.1);
-}
-
-.ls-tight {
-  letter-spacing: calc(var(--letter-spacing) * 0.9);
-}
-
-/*
-    .trim-c {
-      --line-height: 1.4em;
-      --trim-top: 0.14em;
-      --trim-bottom: 0.12em;
-      --trim-both: calc(var(--trim-top) + var(--trim-bottom));
-      line-height: var(--line-height);
-      transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-top)));
-      &:after {
-        content: '';
-        display: block;
-        height: 0.1px;
-        margin-top: calc((1em - var(--line-height)) - var(--trim-both));
-      }
-    }
-
-    */
 .trim {
-  --dist-sum: calc(var(--trim-capline, 0em) + var(--trim-baseline, 0em));
+  --trim-vertical: calc(var(--trim-capline, 0em) + var(--trim-baseline, 0em));
   margin-right: var(--trim-sides);
   margin-left: var(--trim-sides);
   transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-capline, 0em)));
 }
 
-.trim:after {
+.trim::after {
   content: '';
   display: block;
   height: 0.1px;
-  margin-top: calc((1em - var(--line-height)) - var(--dist-sum));
+  margin-top: calc((1em - var(--line-height)) - var(--trim-vertical));
 }
 
-.stack > .trim + .trim, [class^="stack-"] > .trim + .trim, [class*=" stack-"] > .trim + .trim,
-.plain > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^="plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+.stack > .trim + .trim, [class^="stack-"] > .trim + .trim, [class*=" stack-"] > .trim + .trim {
   --stack-gap-adjust: var(--trim-adjacent);
 }
 
