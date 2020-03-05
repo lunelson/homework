@@ -131,16 +131,12 @@ $prop-var-fallbacks: (
       stroke-width: var(--stroke-width);
     } }
 
-    // CONTRAST CLASSES
-
     .#{$p__}bg-contrast { #{$sel} { --bg-color: var(--fg-contrast); } } // rare case! - contrast vs foreground
     .#{$p__}fg-contrast { #{$sel} { --fg-color: var(--bg-contrast); } }
     .#{$p__}bd-contrast { #{$sel} { --bd-color: var(--bg-contrast); } }
     .#{$p__}ol-contrast { #{$sel} { --ol-color: var(--bg-contrast); } }
     .#{$p__}fill-contrast { #{$sel} { --fill-color: var(--bg-contrast); } }
     .#{$p__}stroke-contrast { #{$sel} { --stroke-color: var(--bg-contrast); } }
-
-    // Key CLASSES
 
     .#{$p__}fg-key { #{$sel} { --fg-color: var(--key-color); --fg-contrast: var(--key-contrast); } }
     .#{$p__}bg-key { #{$sel} { --bg-color: var(--key-color); --bg-contrast: var(--key-contrast); } }
@@ -149,8 +145,18 @@ $prop-var-fallbacks: (
     .#{$p__}fill-key { #{$sel} { --fill-color: var(--key-color); } }
     .#{$p__}stroke-key { #{$sel} { --stroke-color: var(--key-color); } }
 
-    @each $c in $color-names {
 
+    @each $prop in map-keys(map-get($themes, nth(map-keys($themes), 1))) {
+      @if $prop != 'key' { .#{$p__}key-theme-#{$prop} { #{$sel} { --key-color: var(--theme-#{$prop}-color); --key-contrast: var(--theme-#{$prop}-contrast); } } }
+      @if $prop != 'fg' { .#{$p__}fg-theme-#{$prop} { #{$sel} { --fg-color: var(--theme-#{$prop}-color); --fg-contrast: var(--theme-#{$prop}-contrast); } } }
+      @if $prop != 'bg' { .#{$p__}bg-theme-#{$prop} { #{$sel} { --bg-color: var(--theme-#{$prop}-color); --bg-contrast: var(--theme-#{$prop}-contrast); } } }
+      @if $prop != 'bd' { .#{$p__}bd-theme-#{$prop} { #{$sel} { --bd-color: var(--theme-#{$prop}-color); } } }
+      @if $prop != 'ol' { .#{$p__}ol-theme-#{$prop} { #{$sel} { --ol-color: var(--theme-#{$prop}-color); } } }
+      @if $prop != 'fill' { .#{$p__}fill-theme-#{$prop} { #{$sel} { --fill-color: var(--theme-#{$prop}-color); } } }
+      @if $prop != 'stroke' { .#{$p__}stroke-theme-#{$prop} { #{$sel} { --stroke-color: var(--theme-#{$prop}-color); } } }
+    }
+
+    @each $c in $color-names {
       .#{$p__}key-#{$c} { #{$sel} { --key-color: var(--color-#{$c}); --key-contrast: var(--contrast-#{$c}); } }
       .#{$p__}fg-#{$c} { #{$sel} { --fg-color: var(--color-#{$c}); --fg-contrast: var(--contrast-#{$c}); } }
       .#{$p__}bg-#{$c} { #{$sel} { --bg-color: var(--color-#{$c}); --bg-contrast: var(--contrast-#{$c}); } }
@@ -158,14 +164,11 @@ $prop-var-fallbacks: (
       .#{$p__}ol-#{$c} { #{$sel} { --ol-color: var(--color-#{$c}); } }
       .#{$p__}fill-#{$c} { #{$sel} { --fill-color: var(--color-#{$c}); } }
       .#{$p__}stroke-#{$c} { #{$sel} { --stroke-color: var(--color-#{$c}); } }
-
     }
 
-    // CURRENT COLOR FILL/STROKE
     .#{$p__}fill-current { #{$sel} { --fill-color: currentColor; } }
     .#{$p__}stroke-current { #{$sel} { --stroke-color: currentColor; } }
 
-    // OPACITY
     .#{$p__}o-100 { #{$sel} { opacity: 1; } } // no need?
     @for $n from 0 through 9 { .#{$p__}o-#{$n}0 { #{$sel} { opacity: $n/10; } } }
 
