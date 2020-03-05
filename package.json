@@ -22,7 +22,7 @@
     "links": "npm link @lunelson/sass-calc @lunelson/sass-maps-plus @lunelson/sass-throw @lunelson/sass-u",
     "start": "ava --watch",
     "test": "ava",
-    "test:scratch": "npm t -- --watch --match *scratch*",
+    "test:scratch": "npm t -- --watch --match='*scratch*'",
     "test:www": "penny serve tests/www"
   },
   "devDependencies": {
