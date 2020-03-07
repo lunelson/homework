@@ -1,4 +1,4 @@
-body {
+body * {
   font-family: var(--font-family);
   font-size: calc(var(--font-size));
   line-height: calc(var(--line-height));

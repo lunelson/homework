@@ -77,14 +77,14 @@ $prop-var-fallbacks: (
     $i: $i + 1;
   }
 
-  body {
+  body * {
     color: rgba(var(--fg-color), var(--fg-opacity, 1));
     background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
   }
 
   @each $state in (link, visited, hover, focus, active) {
     a:#{$state} {
-      color: rgba(#{__var($state, '-color')}, var(--fg-opacity, 1));
+      --fg-color: rgba(#{__var($state, '-color')}, var(--fg-opacity, 1));
     }
   }
 
@@ -146,14 +146,14 @@ $prop-var-fallbacks: (
     .#{$p__}stroke-key { #{$sel} { --stroke-color: var(--key-color); } }
 
 
-    @each $prop in map-keys(map-get($themes, nth(map-keys($themes), 1))) {
-      @if $prop != 'key' { .#{$p__}key-theme-#{$prop} { #{$sel} { --key-color: var(--theme-#{$prop}-color); --key-contrast: var(--theme-#{$prop}-contrast); } } }
-      @if $prop != 'fg' { .#{$p__}fg-theme-#{$prop} { #{$sel} { --fg-color: var(--theme-#{$prop}-color); --fg-contrast: var(--theme-#{$prop}-contrast); } } }
-      @if $prop != 'bg' { .#{$p__}bg-theme-#{$prop} { #{$sel} { --bg-color: var(--theme-#{$prop}-color); --bg-contrast: var(--theme-#{$prop}-contrast); } } }
-      @if $prop != 'bd' { .#{$p__}bd-theme-#{$prop} { #{$sel} { --bd-color: var(--theme-#{$prop}-color); } } }
-      @if $prop != 'ol' { .#{$p__}ol-theme-#{$prop} { #{$sel} { --ol-color: var(--theme-#{$prop}-color); } } }
-      @if $prop != 'fill' { .#{$p__}fill-theme-#{$prop} { #{$sel} { --fill-color: var(--theme-#{$prop}-color); } } }
-      @if $prop != 'stroke' { .#{$p__}stroke-theme-#{$prop} { #{$sel} { --stroke-color: var(--theme-#{$prop}-color); } } }
+    @each $tp in map-keys(map-get($themes, nth(map-keys($themes), 1))) {
+      @each $pp in (key fg bg bd ol fill stroke) {
+        $__s: if($pp == $tp, '', '-#{$tp}');
+        .#{$p__}#{$pp}-theme#{$__s} { #{$sel} {
+          --#{$pp}-color: var(--theme-#{$tp}-color);
+          @if index(key fg bg, $pp) { --#{$pp}-contrast: var(--theme-#{$tp}-contrast); }
+        } }
+      }
     }
 
     @each $c in $color-names {

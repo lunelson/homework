@@ -1,15 +1,18 @@
-.stack, [class^="stack-"], [class*=" stack-"], .plain, [class^="plain-"], [class*=" plain-"] {
+.stack, [class^="stack-"], [class*=" stack-"],
+.plain, [class^="plain-"], [class*=" plain-"] {
   padding-top: 0.1px;
   padding-bottom: 0.1px;
 }
 
-.stack > *, [class^="stack-"] > *, [class*=" stack-"] > *, .plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
+.stack > *, [class^="stack-"] > *, [class*=" stack-"] > *,
+.plain > *, [class^="plain-"] > *, [class*=" plain-"] > * {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.stack > * + *, [class^="stack-"] > * + *, [class*=" stack-"] > * + *, .plain > * + *, [class^="plain-"] > * + *, [class*=" plain-"] > * + * {
-  margin-top: var(--stack-gap);
+.stack > * + *, [class^="stack-"] > * + *, [class*=" stack-"] > * + *,
+.plain > * + *, [class^="plain-"] > * + *, [class*=" plain-"] > * + * {
+  margin-top: calc(var(--stack-gap) - var(--stack-gap-adjust, 0px));
 }
 
 .stack, [class^="stack-"], [class*=" stack-"] {
@@ -22,6 +25,7 @@
   flex: 0 0 auto;
   width: 100%;
   height: auto;
+  width: stretch;
 }
 
 .chain, [class^="chain-"], [class*=" chain-"] {
@@ -38,7 +42,7 @@
 }
 
 .chain > * + *, [class^="chain-"] > * + *, [class*=" chain-"] > * + * {
-  margin-left: var(--chain-gap);
+  margin-left: calc(var(--chain-gap) - var(--chain-gap-adjust, 0px));
 }
 
 .stack > *, .plain > * {

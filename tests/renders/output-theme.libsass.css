@@ -1,3 +1,42 @@
+/*
+  TODO: theme spec v3
+
+  1.contrast-color should work in terms of base-lite & base-dark, or fg and bg colors of the theme
+  2.theme processing should build color names within the ui key expecting either a map or map of maps or list of maps
+  3.theme-color names must be built up progressively, e.g. theme-ui-link-color or theme-ui-hover-color
+
+  STANDARD KEYS: fg bg bd ol fill stroke
+  .fg-theme -- use theme FG color as FG
+  .fg-theme-bg -- use theme BG color as FG
+
+  DYNAMIC KEYS: any non-standard key names, [ui], e.g. primary, secondary
+  .bg-theme-[ui]-link -- use theme [ui] link color as BG
+  .bg-theme-[ui] -- use dynamic state colors on background
+  .bd-theme-ui -- use dynamic state colors on border
+  .fg-contrast -- !! should dynamically change, as bg UI colors change with state
+
+  TYPICAL base spec of a theme is as follows:
+
+  $themes: (
+    lite: (
+      fg: base-black,
+      bg: base-white,
+      ui: (
+        link: baz,
+        hover: bar,
+      ),
+    ),
+    dark: (
+      fg: base-white,
+      bg: base-black,
+      ui: (
+        link: fiz,
+        hover: foo,
+      ),
+    ),
+  );
+
+ */
 :root {
   --fg-color: var(--theme-fg-color);
   --fg-contrast: var(--theme-fg-contrast);
@@ -73,29 +112,29 @@
   --theme-link-color: var(--color-fiz);
 }
 
-body {
+body * {
   color: rgba(var(--fg-color), var(--fg-opacity, 1));
   background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
 }
 
 a:link {
-  color: rgba(var(--link-color), var(--fg-opacity, 1));
+  --fg-color: rgba(var(--link-color), var(--fg-opacity, 1));
 }
 
 a:visited {
-  color: rgba(var(--visited-color), var(--fg-opacity, 1));
+  --fg-color: rgba(var(--visited-color), var(--fg-opacity, 1));
 }
 
 a:hover {
-  color: rgba(var(--hover-color), var(--fg-opacity, 1));
+  --fg-color: rgba(var(--hover-color), var(--fg-opacity, 1));
 }
 
 a:focus {
-  color: rgba(var(--focus-color), var(--fg-opacity, 1));
+  --fg-color: rgba(var(--focus-color), var(--fg-opacity, 1));
 }
 
 a:active {
-  color: rgba(var(--active-color), var(--fg-opacity, 1));
+  --fg-color: rgba(var(--active-color), var(--fg-opacity, 1));
 }
 
 [class^="fg-"], [class*=" fg-"] {
@@ -186,6 +225,11 @@ a:active {
   --key-contrast: var(--theme-fg-contrast);
 }
 
+.fg-theme {
+  --fg-color: var(--theme-fg-color);
+  --fg-contrast: var(--theme-fg-contrast);
+}
+
 .bg-theme-fg {
   --bg-color: var(--theme-fg-color);
   --bg-contrast: var(--theme-fg-contrast);
@@ -215,6 +259,11 @@ a:active {
 .fg-theme-bg {
   --fg-color: var(--theme-bg-color);
   --fg-contrast: var(--theme-bg-contrast);
+}
+
+.bg-theme {
+  --bg-color: var(--theme-bg-color);
+  --bg-contrast: var(--theme-bg-contrast);
 }
 
 .bd-theme-bg {

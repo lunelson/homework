@@ -41,5 +41,45 @@ $themes: (
   ),
 );
 
+/*
+  TODO: theme spec v3
+
+  1.contrast-color should work in terms of base-lite & base-dark, or fg and bg colors of the theme
+  2.theme processing should build color names within the ui key expecting either a map or map of maps or list of maps
+  3.theme-color names must be built up progressively, e.g. theme-ui-link-color or theme-ui-hover-color
+
+  STANDARD KEYS: fg bg bd ol fill stroke
+  .fg-theme -- use theme FG color as FG
+  .fg-theme-bg -- use theme BG color as FG
+
+  DYNAMIC KEYS: any non-standard key names, [ui], e.g. primary, secondary
+  .bg-theme-[ui]-link -- use theme [ui] link color as BG
+  .bg-theme-[ui] -- use dynamic state colors on background
+  .bd-theme-ui -- use dynamic state colors on border
+  .fg-contrast -- !! should dynamically change, as bg UI colors change with state
+
+  TYPICAL base spec of a theme is as follows:
+
+  $themes: (
+    lite: (
+      fg: base-black,
+      bg: base-white,
+      ui: (
+        link: baz,
+        hover: bar,
+      ),
+    ),
+    dark: (
+      fg: base-white,
+      bg: base-black,
+      ui: (
+        link: fiz,
+        hover: foo,
+      ),
+    ),
+  );
+
+ */
+
 @include homework-setup-core;
 @include homework-setup-theme($pseudos: ());

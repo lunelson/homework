@@ -202,7 +202,7 @@
   position: relative;
 }
 
-.stop, .trap, .trim {
+.stop, .trap {
   padding-top: 0.1px;
   padding-bottom: 0.1px;
 }
