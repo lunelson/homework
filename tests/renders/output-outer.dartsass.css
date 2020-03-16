@@ -19,7 +19,7 @@
 .peel, .peel-right, .peel-left {
   max-width: none !important;
   width: 100% !important;
-  width: fill-available !important;
+  width: stretch !important;
   width: stretch !important;
 }
 
@@ -50,7 +50,7 @@
 .bleed, .bleed-right, .bleed-left {
   max-width: none !important;
   width: 100% !important;
-  width: fill-available !important;
+  width: stretch !important;
   width: stretch !important;
 }
 
@@ -78,7 +78,7 @@
   .a__peel, .a__peel-right, .a__peel-left {
     max-width: none !important;
     width: 100% !important;
-    width: fill-available !important;
+    width: stretch !important;
     width: stretch !important;
   }
 
@@ -109,7 +109,7 @@
   .a__bleed, .a__bleed-right, .a__bleed-left {
     max-width: none !important;
     width: 100% !important;
-    width: fill-available !important;
+    width: stretch !important;
     width: stretch !important;
   }
 
@@ -137,7 +137,7 @@
   .b__peel, .b__peel-right, .b__peel-left {
     max-width: none !important;
     width: 100% !important;
-    width: fill-available !important;
+    width: stretch !important;
     width: stretch !important;
   }
 
@@ -168,7 +168,7 @@
   .b__bleed, .b__bleed-right, .b__bleed-left {
     max-width: none !important;
     width: 100% !important;
-    width: fill-available !important;
+    width: stretch !important;
     width: stretch !important;
   }
 
@@ -197,7 +197,7 @@
   .c__peel, .c__peel-right, .c__peel-left {
     max-width: none !important;
     width: 100% !important;
-    width: fill-available !important;
+    width: stretch !important;
     width: stretch !important;
   }
 
@@ -228,7 +228,7 @@
   .c__bleed, .c__bleed-right, .c__bleed-left {
     max-width: none !important;
     width: 100% !important;
-    width: fill-available !important;
+    width: stretch !important;
     width: stretch !important;
   }
 

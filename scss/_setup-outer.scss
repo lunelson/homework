@@ -45,7 +45,7 @@
       .#{$m__}peel, .#{$m__}peel-right, .#{$m__}peel-left {
         max-width: none !important;
         width: 100% !important;
-        width: fill-available !important;
+        width: stretch !important;
         // width: available !important;
         width: stretch !important;
       }
@@ -64,7 +64,7 @@
       .#{$m__}bleed, .#{$m__}bleed-right, .#{$m__}bleed-left {
         max-width: none !important;
         width: 100% !important;
-        width: fill-available !important;
+        width: stretch !important;
         // width: available !important;
         width: stretch !important;
       }
