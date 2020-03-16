@@ -14,7 +14,7 @@
     word-break: keep-all;
     // word-wrap: anywhere; // ms version of following
     overflow-wrap: break-word;
-    white-space: initial;
+    // white-space: initial;
     hyphens: manual;
 
     font-family: inherit;
@@ -49,7 +49,7 @@
   abbr, acronym, b, bdo, big, br, cite, code, dfn, em, i, kbd, q, samp, small, span, strong, sub, sup, time, tt, var {
     display: inline;
     vertical-align: baseline;
-    white-space: normal;
+    // white-space: normal;
   }
 
   strong, b, h1, h2, h3, h4, h5, h6 { font-weight: 700; }
