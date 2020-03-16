@@ -63,6 +63,7 @@ $prop-var-fallbacks: (
     }
   }
 
+  // TODO: add fault-tolerance if $themes doesn't exist and if any them doesn't specify the base values
   $i: 1;
   @each $t, $theme in $themes {
     .theme-#{$t},
@@ -79,7 +80,7 @@ $prop-var-fallbacks: (
 
   body * {
     color: rgba(var(--fg-color), var(--fg-opacity, 1));
-    background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
+    // background-color: rgba(var(--bg-color), var(--bg-opacity, 1));
   }
 
   @each $state in (link, visited, hover, focus, active) {
