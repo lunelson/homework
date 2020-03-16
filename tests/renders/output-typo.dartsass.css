@@ -1,3 +1,4 @@
+/* ( inner-x: 2rem, inner-y-mods: ( s: 1rem, m: 2rem ), font-mods: ( sans: ( xs: 16, s: 16, m: calc(3.125vw + 0.625rem), l: 48 ), serif: ( xs: 16 1.3, s: 16 1.3, m: 32 1.2, l: 48 1.1 ), modern: ( xs: 16 1.3, s: 16 1.3, m: 32 1.2, l: 48 1.1 ) ) ) */
 body * {
   font-family: var(--font-family);
   font-size: calc(var(--font-size));
@@ -32,7 +33,7 @@ body * {
   --trim-adjacent-sans: 0.125em;
 }
 
-.font-sans, [class^=font-sans-], [class*=" font-sans-"], body {
+.f-sans, [class^=f-sans-], [class*=" f-sans-"], body {
   --font-family: var(--font-family-sans);
   --line-height: var(--line-height-sans);
   --letter-spacing: var(--letter-spacing-sans);
@@ -52,7 +53,7 @@ body * {
   --trim-adjacent-serif: 0.125em;
 }
 
-.font-serif, [class^=font-serif-], [class*=" font-serif-"] {
+.f-serif, [class^=f-serif-], [class*=" f-serif-"] {
   --font-family: var(--font-family-serif);
   --line-height: var(--line-height-serif);
   --letter-spacing: var(--letter-spacing-serif);
@@ -72,7 +73,7 @@ body * {
   --trim-adjacent-modern: 0.125em;
 }
 
-.font-modern, [class^=font-modern-], [class*=" font-modern-"] {
+.f-modern, [class^=f-modern-], [class*=" f-modern-"] {
   --font-family: var(--font-family-modern);
   --line-height: var(--line-height-modern);
   --letter-spacing: var(--letter-spacing-modern);
@@ -85,25 +86,26 @@ body * {
 :root {
   --font-size-sans-xs: 16rem;
   --font-size-sans-s: 16rem;
-  --font-size-sans-m: 32rem;
+  --font-size-sans-m: (3.125vw + 0.625rem);
+  --line-height-sans-m: ;
   --font-size-sans-l: 48rem;
 }
-.font-sans-xs {
+.f-sans-xs {
   --font-size: var(--font-size-sans-xs);
   --line-height: var(--line-height-sans-xs, var(--line-height-sans));
 }
 
-.font-sans-s {
+.f-sans-s {
   --font-size: var(--font-size-sans-s);
   --line-height: var(--line-height-sans-s, var(--line-height-sans));
 }
 
-.font-sans-m {
+.f-sans-m {
   --font-size: var(--font-size-sans-m);
   --line-height: var(--line-height-sans-m, var(--line-height-sans));
 }
 
-.font-sans-l {
+.f-sans-l {
   --font-size: var(--font-size-sans-l);
   --line-height: var(--line-height-sans-l, var(--line-height-sans));
 }
@@ -118,22 +120,22 @@ body * {
   --font-size-serif-l: 48rem;
   --line-height-serif-l: 1.1em;
 }
-.font-serif-xs {
+.f-serif-xs {
   --font-size: var(--font-size-serif-xs);
   --line-height: var(--line-height-serif-xs, var(--line-height-serif));
 }
 
-.font-serif-s {
+.f-serif-s {
   --font-size: var(--font-size-serif-s);
   --line-height: var(--line-height-serif-s, var(--line-height-serif));
 }
 
-.font-serif-m {
+.f-serif-m {
   --font-size: var(--font-size-serif-m);
   --line-height: var(--line-height-serif-m, var(--line-height-serif));
 }
 
-.font-serif-l {
+.f-serif-l {
   --font-size: var(--font-size-serif-l);
   --line-height: var(--line-height-serif-l, var(--line-height-serif));
 }
@@ -148,22 +150,22 @@ body * {
   --font-size-modern-l: 48rem;
   --line-height-modern-l: 1.1em;
 }
-.font-modern-xs {
+.f-modern-xs {
   --font-size: var(--font-size-modern-xs);
   --line-height: var(--line-height-modern-xs, var(--line-height-modern));
 }
 
-.font-modern-s {
+.f-modern-s {
   --font-size: var(--font-size-modern-s);
   --line-height: var(--line-height-modern-s, var(--line-height-modern));
 }
 
-.font-modern-m {
+.f-modern-m {
   --font-size: var(--font-size-modern-m);
   --line-height: var(--line-height-modern-m, var(--line-height-modern));
 }
 
-.font-modern-l {
+.f-modern-l {
   --font-size: var(--font-size-modern-l);
   --line-height: var(--line-height-modern-l, var(--line-height-modern));
 }

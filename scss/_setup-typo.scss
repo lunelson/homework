@@ -52,46 +52,6 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
     }
 
     #{base-class('stack')} { > .trim + .trim { --stack-gap-adjust: var(--trim-adjacent); } }
-    // $elems: join((), $trim-elements, comma);
-    // #{selector-combine(base-class('stack'), '.trim + .trim', '>')},
-    // #{selector-combine(base-class('plain'), selector-combine(webkit-any($trim-elements), webkit-any($trim-elements), '+'), '>')} {
-    //   --stack-gap-adjust: var(--trim-adjacent);
-    // }
-    // #{selector-combine('.trim', '.trim', '+')} {
-    //   --trim-top-adjust: var(--trim-adjacent);
-    // }
-
-    // // plain > :-webkit-any (MUST BE DECLARED SEPARATELY!)
-    // #{selector-combine(base-class('plain'), webkit-any($trim-elements), '>')} {
-    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline, 0em) + var(--trim-top-adjust, 0em));
-    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline, 0em));
-    //   margin-top: calc(0em - var(--trim-top));
-    //   margin-bottom: calc(0em - var(--trim-bottom));
-    //   margin-right: var(--trim-sides);
-    //   margin-left: var(--trim-sides);
-    // }
-    // #{selector-combine(base-class('plain'), webkit-any($trim-elements), '> * +')} {
-    //   margin-top: subtract(var(--stack-gap), var(--trim-top));
-    // }
-    // #{selector-combine(base-class('plain'), selector-combine(webkit-any($trim-elements), webkit-any($trim-elements), '+'), '>')} {
-    //   --trim-top-adjust: var(--trim-adjacent);
-    // }
-
-    // // plain > :-moz-any (MUST BE DECLARED SEPARATELY!)
-    // #{selector-combine(base-class('plain'), moz-any($trim-elements), '>')} {
-    //   --trim-top: calc((var(--line-height) - 1em) / 2 + var(--trim-capline, 0em) + var(--trim-top-adjust, 0em));
-    //   --trim-bottom: calc((var(--line-height) - 1em) / 2 + var(--trim-baseline, 0em));
-    //   margin-top: calc(0em - var(--trim-top));
-    //   margin-bottom: calc(0em - var(--trim-bottom));
-    //   margin-right: var(--trim-sides);
-    //   margin-left: var(--trim-sides);
-    // }
-    // #{selector-combine(base-class('plain'), moz-any($trim-elements), '> * +')} {
-    //   margin-top: subtract(var(--stack-gap), var(--trim-top));
-    // }
-    // #{selector-combine(base-class('plain'), selector-combine(moz-any($trim-elements), moz-any($trim-elements), '+'), '>')} {
-    //   --trim-top-adjust: var(--trim-adjacent);
-    // }
 
   }
 
@@ -116,7 +76,7 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
       }
     }
 
-    #{base-class('font-#{$f}')}, #{if($f == nth(map-keys($fonts), 1), 'body', '')} {
+    #{base-class('f-#{$f}')}, #{if($f == nth(map-keys($fonts), 1), 'body', '')} {
       --font-family: var(--font-family-#{$f});
       --line-height: var(--line-height-#{$f});
       --letter-spacing: var(--letter-spacing-#{$f});
@@ -137,7 +97,12 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
           @each $s, $set in $mod or () {
 
             // (A) output the custom properties
-            $fz: __nth($set, 1); $lh: __nth($set, 2);
+            $fz: null; $lh: null;
+            @if type-of($set) == 'string' {
+              $fz: $set;
+            } @else {
+              $fz: __nth($set, 1); $lh: __nth($set, 2);
+            }
 
             // TODO: TEST whether it's possible to use lerp expressions here !!
             --font-size-#{$f}-#{$s}: #{decalc(normalize-unit($fz, 1rem))};
@@ -147,9 +112,9 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
               --line-height-#{$f}-#{$s}: #{decalc(normalize-unit($lh, 1em))};
             }
 
-            // (B) if on $root, output the .font-(f)-(s) assignment
+            // (B) if on $root, output the .f-(f)-(s) assignment
             @if not $m {
-              @at-root .font-#{$f}-#{$s} {
+              @at-root .f-#{$f}-#{$s} {
                 --font-size: var(--font-size-#{$f}-#{$s});
                 --line-height: var(--line-height-#{$f}-#{$s}, var(--line-height-#{$f}));
               }
