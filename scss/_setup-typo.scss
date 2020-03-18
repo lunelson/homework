@@ -53,6 +53,55 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
 
     #{base-class('stack')} { > .trim + .trim { --stack-gap-adjust: var(--trim-adjacent); } }
 
+    $elems: join((), $trim-elements, comma);
+
+    #{selector-combine(base-class('stack'), '.trim + .trim', '>')},
+    #{selector-combine(base-class('plain'), selector-combine(webkit-any($trim-elements), webkit-any($trim-elements), '+'), '>')} {
+      --stack-gap-adjust: var(--trim-adjacent);
+    }
+    #{selector-combine('.trim', '.trim', '+')} {
+      --trim-top-adjust: var(--trim-adjacent);
+    }
+
+    // plain > :-webkit-any (MUST BE DECLARED SEPARATELY!)
+    #{selector-combine(base-class('plain'), webkit-any($trim-elements), '>')} {
+      --trim-vertical: calc(var(--trim-capline, 0em) + var(--trim-baseline, 0em));
+      margin-right: var(--trim-sides);
+      margin-left: var(--trim-sides);
+      transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-capline, 0em)));
+      &::after {
+        content: '';
+        display: block;
+        height: 0.1px;
+        margin-top: calc((1em - var(--line-height)) - var(--trim-vertical));
+      }
+    }
+    // #{selector-combine(base-class('plain'), webkit-any($trim-elements), '> * +')} {
+    //   margin-top: subtract(var(--stack-gap), var(--trim-top));
+    // }
+    #{selector-combine(base-class('plain'), selector-combine(webkit-any($trim-elements), webkit-any($trim-elements), '+'), '>')} {
+      --trim-top-adjust: var(--trim-adjacent);
+    }
+
+    // plain > :-moz-any (MUST BE DECLARED SEPARATELY!)
+    #{selector-combine(base-class('plain'), moz-any($trim-elements), '>')} {
+      --trim-vertical: calc(var(--trim-capline, 0em) + var(--trim-baseline, 0em));
+      margin-right: var(--trim-sides);
+      margin-left: var(--trim-sides);
+      transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-capline, 0em)));
+      &::after {
+        content: '';
+        display: block;
+        height: 0.1px;
+        margin-top: calc((1em - var(--line-height)) - var(--trim-vertical));
+      }
+    }
+    // #{selector-combine(base-class('plain'), moz-any($trim-elements), '> * +')} {
+    //   margin-top: subtract(var(--stack-gap), var(--trim-top));
+    // }
+    #{selector-combine(base-class('plain'), selector-combine(moz-any($trim-elements), moz-any($trim-elements), '+'), '>')} {
+      --trim-top-adjust: var(--trim-adjacent);
+    }
   }
 
   @each $f, $font in $fonts {
@@ -97,7 +146,7 @@ $typo-elements: (h1 h2 h3 h4 h5 h6 p ul ol blockquote) !default;
           @each $s, $set in $mod or () {
 
             // (A) output the custom properties
-            $fz: null; $lh: null;
+            $fz: null; $lh: ();
             @if type-of($set) == 'string' {
               $fz: $set;
             } @else {

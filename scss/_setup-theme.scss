@@ -85,7 +85,7 @@ $prop-var-fallbacks: (
 
   @each $state in (link, visited, hover, focus, active) {
     a:#{$state} {
-      --fg-color: rgba(#{__var($state, '-color')}, var(--fg-opacity, 1));
+      --fg-color: #{__var($state, '-color')};
     }
   }
 

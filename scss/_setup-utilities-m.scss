@@ -12,12 +12,24 @@
 
       // NOTE: add minh, maxh, minw, maxw ?
 
+      .#{$m__}w-stretch {
+        width: -webkit-fill-available;
+        width: -webkit-stretch;
+        width: -moz-available;
+        // width: stretch;
+      }
       .#{$m__}w-viewport { width: 100vw; }
       .#{$m__}w-unset { width: unset; }
       .#{$m__}w-auto { width: auto; }
       .#{$m__}w-100 { width: 100%; }
       .#{$m__}w-0 { width: 0; }
 
+      .#{$m__}h-stretch {
+        height: -webkit-fill-available;
+        height: -webkit-stretch;
+        height: -moz-available;
+        // height: stretch;
+      }
       .#{$m__}h-viewport { height: 100vh; }
       .#{$m__}h-unset { height: unset; }
       .#{$m__}h-auto { height: auto; }

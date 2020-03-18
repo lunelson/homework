@@ -23,6 +23,49 @@ body * {
   --stack-gap-adjust: var(--trim-adjacent);
 }
 
+.stack > .trim + .trim, [class^=stack-] > .trim + .trim, [class*=" stack-"] > .trim + .trim,
+.plain > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --stack-gap-adjust: var(--trim-adjacent);
+}
+
+.trim + .trim {
+  --trim-top-adjust: var(--trim-adjacent);
+}
+
+.plain > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --trim-vertical: calc(var(--trim-capline, 0em) + var(--trim-baseline, 0em));
+  margin-right: var(--trim-sides);
+  margin-left: var(--trim-sides);
+  transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-capline, 0em)));
+}
+.plain > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote)::after, [class^=plain-] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote)::after, [class*=" plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote)::after {
+  content: "";
+  display: block;
+  height: 0.1px;
+  margin-top: calc((1em - var(--line-height)) - var(--trim-vertical));
+}
+
+.plain > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-webkit-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --trim-top-adjust: var(--trim-adjacent);
+}
+
+.plain > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --trim-vertical: calc(var(--trim-capline, 0em) + var(--trim-baseline, 0em));
+  margin-right: var(--trim-sides);
+  margin-left: var(--trim-sides);
+  transform: translatey(calc((1em - var(--line-height))/2 - var(--trim-capline, 0em)));
+}
+.plain > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote)::after, [class^=plain-] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote)::after, [class*=" plain-"] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote)::after {
+  content: "";
+  display: block;
+  height: 0.1px;
+  margin-top: calc((1em - var(--line-height)) - var(--trim-vertical));
+}
+
+.plain > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class^=plain-] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote), [class*=" plain-"] > :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) + :-moz-any(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote) {
+  --trim-top-adjust: var(--trim-adjacent);
+}
+
 :root {
   --font-family-sans: MessinaSans;
   --line-height-sans: 1.25em;
@@ -87,7 +130,6 @@ body * {
   --font-size-sans-xs: 16rem;
   --font-size-sans-s: 16rem;
   --font-size-sans-m: (3.125vw + 0.625rem);
-  --line-height-sans-m: ;
   --font-size-sans-l: 48rem;
 }
 .f-sans-xs {
